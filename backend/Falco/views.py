@@ -1,5 +1,3 @@
-import os
-
 from django.http import HttpResponse, JsonResponse
 from rest_framework.views import APIView
 
