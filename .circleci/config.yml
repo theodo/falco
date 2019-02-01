@@ -92,10 +92,10 @@ jobs:
           working_directory: backend
           command: flake8 .
 
-      - run:
-          name: Check imports order
-          working_directory: backend
-          command: isort --check-only --recursive --diff .
+      #   - run:
+      #       name: Check imports order
+      #       working_directory: backend
+      #       command: isort --check-only --recursive --diff .
 
       - run:
           name: Check Django install
@@ -143,8 +143,8 @@ jobs:
           name: Install dependencies
           working_directory: frontend
           command: |
-              [ -d node_modules ] ||
-              yarn
+            [ -d node_modules ] ||
+            yarn
 
       - run:
           name: Run tests
@@ -180,7 +180,6 @@ jobs:
       ENV: production
 
     steps: *deploy_steps
-
 
 workflows:
   version: 2
