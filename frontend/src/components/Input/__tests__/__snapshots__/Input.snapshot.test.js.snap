@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Input> should render correctly 1`] = `
+<TextField
+  error={false}
+  helperText={null}
+  label="French atomic bomb passphrase"
+  margin="normal"
+  name="Passphrase"
+  onChange={[Function]}
+  required={false}
+  select={false}
+  type="password"
+  value="La barbe de la femme à Georges Moustaki"
+  variant="outlined"
+/>
+`;
+
+exports[`<Input> should render correctly with an error provided 1`] = `
+<TextField
+  error={true}
+  helperText="Password seems too long to be true"
+  label="French atomic bomb passphrase"
+  margin="normal"
+  name="Passphrase"
+  onChange={[Function]}
+  required={false}
+  select={false}
+  type="password"
+  value="La barbe de la femme à Georges Moustaki"
+  variant="outlined"
+/>
+`;

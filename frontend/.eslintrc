@@ -1,0 +1,56 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "prettier",
+    "prettier/react",
+    "react-app"
+  ],
+  "plugins": [
+    "import",
+    "jest",
+    "jsx-a11y",
+    "mysticatea",
+    "prefer-object-spread",
+    "prettier",
+    "react"
+  ],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true,
+    "jest/globals": true,
+    "mocha": true,
+    "node": true
+  },
+  "globals": {
+    "alert": true,
+    "document": true,
+    "localStorage": true,
+    "navigator": true,
+    "window": true,
+    "HTMLElement": true
+  },
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "trailingComma": "all",
+        "bracketSpacing": true,
+        "jsxBracketSameLine": false
+      }
+    ],
+    "import/extensions": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/no-unresolved": 0,
+    "import/prefer-default-export": 0,
+    "mysticatea/no-useless-rest-spread": "error",
+    "prefer-object-spread/prefer-object-spread": 2,
+    "react/destructuring-assignment": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/no-array-index-key": 2,
+    "react/prefer-stateless-function": 0,
+    "react/prop-types": 0,
+    "react/require-default-props": 0
+  }
+}

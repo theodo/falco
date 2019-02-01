@@ -1,0 +1,206 @@
+version: 2
+
+parameters:
+  deploy_steps: &deploy_steps
+    - setup_remote_docker:
+        docker_layer_caching: true
+
+    - run:
+        name: Install system dependencies
+        command: apk add git make openssh python py-pip rsync zip
+
+    - checkout
+
+    - run:
+        name: Install AWS CLI
+        command: pip install awsebcli awscli
+
+    - run:
+        name: Build images
+        working_directory: devops/deployment
+        command: make images
+
+    - run:
+        name: Tag images for deployment
+        command: |
+          docker tag falco/backend:latest $BACKEND_REPO_URL:$CIRCLE_SHA1 &&
+          docker tag falco/static:latest $STATIC_REPO_URL:$CIRCLE_SHA1
+
+    - run:
+        name: Authenticate with registry
+        command: $(aws ecr get-login --no-include-email --region eu-west-3)
+
+    - run:
+        name: Push docker images to registry
+        command: |
+          docker push $BACKEND_REPO_URL:$CIRCLE_SHA1 &&
+          docker push $STATIC_REPO_URL:$CIRCLE_SHA1
+
+    - run:
+        name: Build EB archive
+        working_directory: devops/deployment
+        command: make archive.zip tag=$CIRCLE_SHA1
+
+    - run:
+        name: Deploy to EB
+        working_directory: devops/deployment
+        command: eb deploy
+
+jobs:
+  backend:
+    working_directory: ~/Falco
+
+    docker:
+      - image: python:3.7
+      - image: postgres:10
+
+    environment:
+      DATABASE_URL: postgres://postgres@localhost:5432/postgres
+      DJANGO_SETTINGS_MODULE: Falco.settings.dev
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - backend-{% templatetag openvariable %} .Branch {% templatetag closevariable %}-{% templatetag openvariable %} checksum "backend/Pipfile.lock" {% templatetag closevariable %}
+            - backend-{% templatetag openvariable %} .Branch {% templatetag closevariable %}
+            - backend-master-{% templatetag openvariable %} checksum "backend/Pipfile.lock" {% templatetag closevariable %}
+            - backend-master
+
+      - run:
+          name: Install pipenv
+          command: pip install pipenv
+
+      - run:
+          name: Install python dependencies
+          working_directory: backend
+          command: pipenv install --dev --system
+
+      - run:
+          name: Check for security vulnerabilities
+          working_directory: backend
+          command: pipenv check
+
+      - run:
+          name: Check format
+          working_directory: backend
+          command: black --diff --check .
+
+      - run:
+          name: Check code style
+          working_directory: backend
+          command: flake8 .
+
+      - run:
+          name: Check imports order
+          working_directory: backend
+          command: isort --check-only --recursive --diff .
+
+      - run:
+          name: Check Django install
+          working_directory: backend
+          command: ./manage.py check
+
+      - run:
+          name: Migrate database
+          working_directory: backend
+          command: ./manage.py migrate
+
+      - run:
+          name: Run tests
+          working_directory: backend
+          command: coverage run manage.py test
+
+      - run:
+          name: Check coverage
+          working_directory: backend
+          command: coverage report
+
+      - save_cache:
+          key: backend-{% templatetag openvariable %} .Branch {% templatetag closevariable %}-{% templatetag openvariable %} checksum "backend/Pipfile.lock" {% templatetag closevariable %}
+          paths:
+            - ~/.cache/pip
+
+  frontend:
+    working_directory: ~/Falco
+
+    docker:
+      - image: circleci/node:11.3.0
+
+    environment:
+      NODE_ENV: test
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v2-{% templatetag openvariable %} checksum "frontend/package.json" {% templatetag closevariable %}
+
+      # Only install deps if cache hasn't done it for us already
+      - run:
+          name: Install dependencies
+          working_directory: frontend
+          command: |
+              [ -d node_modules ] ||
+              yarn
+
+      - run:
+          name: Run tests
+          working_directory: frontend
+          command: yarn test
+
+      - save_cache:
+          key: v2-{% templatetag openvariable %} checksum "frontend/package.json" {% templatetag closevariable %}
+          paths:
+            - ~/.yarn
+            - ~/project/node_modules
+
+  deploy-staging:
+    working_directory: ~/Falco
+
+    docker:
+      - image: docker:latest
+
+    environment:
+      AWS_DEFAULT_REGION: eu-west-3
+      ENV: staging
+
+    steps: *deploy_steps
+
+  deploy-production:
+    working_directory: ~/Falco
+
+    docker:
+      - image: docker:latest
+
+    environment:
+      AWS_DEFAULT_REGION: eu-west-3
+      ENV: production
+
+    steps: *deploy_steps
+
+
+workflows:
+  version: 2
+  stack:
+    jobs:
+      - backend
+      - frontend
+      - deploy-staging:
+          requires:
+            - frontend
+            - backend
+          filters:
+            branches:
+              only:
+                - master
+      - deploy-production:
+          requires:
+            - frontend
+            - backend
+          filters:
+            branches:
+              only:
+                - production

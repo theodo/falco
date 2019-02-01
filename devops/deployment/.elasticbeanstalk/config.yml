@@ -1,0 +1,12 @@
+branch-defaults:
+  master:
+    environment: staging
+  production:
+    environment: production
+global:
+  application_name: falco
+  default_region: eu-west-3
+  sc: git
+  workspace_type: Application
+deploy:
+  artifact: archive.zip

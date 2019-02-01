@@ -1,0 +1,312 @@
+swagger: "2.0"
+info:
+  description: "API docs for Falco"
+  version: "0.0.1"
+  title: "Swagger Falco API"
+  contact:
+    email: "nicolasgo@getfal.co"
+host: "getfal.co"
+basePath: "/api/v1"
+tags:
+- name: "audits"
+  description: "Run audits, consult audits status or results"
+- name: "projects"
+  description: "See projects details"
+schemes:
+- "https"
+paths:
+  /audits:
+    post:
+      tags:
+      - "audits"
+      summary: "Run a new audit"
+      description: "Starts a new audit on the provided URL, for the given parameters"
+      operationId: "startAudit"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Parameters to run the audit against"
+        required: true
+        schema:
+          $ref: "#/definitions/AuditParameters"
+      responses:
+        405:
+          description: "Invalid input"
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/AuditStatus"
+  /audits/status/{auditId}:
+    get:
+      tags:
+      - "audits"
+      summary: "Get an audit status"
+      operationId: "getAuditStatus"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "auditId"
+        required: true
+        in: "path"
+        type: "integer"
+        format: "int64"
+        description: "The id of the audit you want to get the status for"
+      responses:
+        404:
+          description: "Audit not found"
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/AuditStatus"
+  /audits/results/{auditId}:
+    get:
+      tags:
+      - "audits"
+      summary: "Get an audit result"
+      operationId: "getAuditResults"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "auditId"
+        required: true
+        in: "path"
+        type: "integer"
+        format: "int64"
+        description: "The id of the audit you want to get the results for"
+      responses:
+        404:
+          description: "Results not found"
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/AuditResults"
+  /projects:
+    post:
+      tags:
+        - "projects"
+      summary: "Create a new project"
+      operationId: "createProject"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Projects properties"
+        required: true
+        schema:
+          $ref: "#/definitions/Project"
+      responses:
+        405:
+          description: "Invalid input"
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Project"
+    get:
+      tags:
+        - "projects"
+      summary: "Get all projects"
+      operationId: "getAllProject"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Project"
+  /projects/{projectId}:
+    get:
+      tags:
+        - "projects"
+      summary: "Get one project"
+      operationId: "getProject"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "projectId"
+        required: true
+        in: "path"
+        type: "integer"
+        format: "int64"
+        description: "The id of the project you want to get info for"
+      responses:
+        404:
+          description: "Project not found"
+        200:
+          description: "successful operation"
+          schema:
+              $ref: "#/definitions/Project"
+    put:
+      tags:
+        - "projects"
+      summary: "Update one project"
+      operationId: "updateProject"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "projectId"
+        required: true
+        in: "path"
+        type: "integer"
+        format: "int64"
+        description: "The id of the project you want to get info for"
+      - name: "body"
+        required: true
+        in: "body"
+        schema: 
+          $ref: "#/definitions/Project"
+        description: "The properties to update for the project"
+      responses:
+        404:
+          description: "Project not found"
+        200:
+          description: "successful operation"
+          schema:
+              $ref: "#/definitions/Project"
+    delete:
+      tags:
+        - "projects"
+      summary: "Delete one project"
+      operationId: "deleteProject"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "projectId"
+        required: true
+        in: "path"
+        type: "integer"
+        format: "int64"
+        description: "The id of the project you want to get info for"
+      responses:
+        404:
+          description: "Project not found"
+        204:
+          description: "Project deleted"
+securityDefinitions:
+  petstore_auth:
+    type: "oauth2"
+    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
+    flow: "implicit"
+    scopes:
+      write:pets: "modify pets in your account"
+      read:pets: "read your pets"
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  AuditParameters:
+    type: "object"
+    required:
+    - "page_id"
+    - "project_id"
+    properties:
+      project_id:
+        type: "integer"
+        format: "int64"
+        example: 1
+      page_id:
+        type: "integer"
+        format: "int64"
+  AuditStatus:
+    type: "object"
+    properties:
+      status:
+        type: "string"
+        enum: ["pending", "complete", "error"]
+      project_id:
+        type: "integer"
+        format: "int64"
+        example: 1
+      audit_results_id:
+        type: "string"
+        format: "uuid"
+        example: "d54f0264-1fc4-11e9-ab14-d663bd873d93"
+      details:
+        type: "string"
+        example: "Audit results are pending…"
+  AuditResults:
+    type: "object"
+    properties:
+      audit_id:
+        type: "string"
+        format: "uuid"
+        example: "d54f0264-1fc4-11e9-ab14-d663bd873d93"
+      parameters:
+        $ref: "#/definitions/AuditParameters"
+      results:
+        type: "object"
+        properties:
+          time_to_interactive:
+            type: "number"
+            example: 3.45
+          visually_complete:
+            type: "number"
+            example: 3.23
+  Project:
+    type: "object"
+    required: [name]
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+        example: 1
+      name:
+        type: "string"
+        example: "MyClubs Web"
+      audit_parameters:
+        $ref: "#/definitions/AuditParameters"
+      pages:
+        type: "array"
+        items:
+          $ref: "#/definitions/Page"
+  PagePerformanceOverview:
+    type: "object"
+    properties:
+      page_id:
+        type: "integer"
+        format: "int64"
+        example: 1
+      latest_audit:
+        type: "object"
+        properties:
+          schema:
+            $ref: "#/definitions/AuditParameters"
+      all_audits:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            date:
+              type: "string"
+              format: "date-time"
+            audit_id:
+              type: "string"
+              format: "uuid"
+              example: "d54f0264-1fc4-11e9-ab14-d663bd873d93"
+  Page:
+    allOf:
+      - $ref: "#/definitions/PagePerformanceOverview"
+      - type: "object"
+        required: [name, url]
+        properties:
+          id:
+            type: "integer"
+            format: "int64"
+            example: 1
+          project_id:
+            type: "integer"
+            format: "int64"
+            example: 1
+          name:
+            type: "string"
+            example: "Home Page"
+          url:
+            type: "string"
+            example: "https://getfal.co"

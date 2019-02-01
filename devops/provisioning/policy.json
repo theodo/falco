@@ -1,0 +1,90 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "autoscaling:*",
+        "cloudformation:*",
+        "ec2:*",
+        "ecr:GetAuthorizationToken",
+        "ecs:RegisterTaskDefinition",
+        "elasticbeanstalk:CreateStorageLocation",
+        "elasticloadbalancing:DescribeLoadBalancers",
+        "elasticloadbalancing:DescribeTargetGroups",
+        "elasticloadbalancing:DescribeTargetHealth",
+        "elasticloadbalancing:DeregisterTargets"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+        "*"
+      ]
+    },
+    {
+      "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:CompleteLayerUpload",
+        "ecr:InitiateLayerUpload",
+        "ecr:PutImage",
+        "ecr:UploadLayerPart"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:ecr:${region}:${account_id}:repository/${application_name}/*"
+      ]
+    },
+    {
+      "Action": [
+        "elasticbeanstalk:*"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:elasticbeanstalk:*::solutionstack/*",
+        "arn:aws:elasticbeanstalk:${region}:${account_id}:application/${application_name}",
+        "arn:aws:elasticbeanstalk:${region}:${account_id}:applicationversion/${application_name}/*",
+        "arn:aws:elasticbeanstalk:${region}:${account_id}:environment/${application_name}/*",
+        "arn:aws:elasticbeanstalk:${region}:${account_id}:template/${application_name}/*"
+      ]
+    },
+    {
+      "Action": [
+        "elasticloadbalancing:RegisterInstancesWithLoadBalancer",
+        "elasticloadbalancing:RegisterTargets"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:elasticloadbalancing:${region}:${account_id}:loadbalancer/awseb-*",
+        "arn:aws:elasticloadbalancing:${region}:${account_id}:targetgroup/awseb-*"
+      ]
+    },
+    {
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:PutRetentionPolicy"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:logs:${region}:${account_id}:log-group:/aws/elasticbeanstalk/*"
+      ]
+    },
+    {
+      "Action": [
+        "s3:*"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:s3:::elasticbeanstalk-*/*",
+        "arn:aws:s3:::elasticbeanstalk-${region}-${account_id}",
+        "arn:aws:s3:::elasticbeanstalk-${region}-${account_id}/*"
+      ]
+    },
+    {
+      "Action": [
+        "iam:PassRole"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:iam::${account_id}:role/${role}"
+      ]
+    }
+  ]
+}

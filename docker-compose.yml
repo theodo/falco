@@ -1,0 +1,28 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres:10
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend
+    command: python /code/manage.py rundebugserver 0.0.0.0:8000
+    volumes:
+      - ./backend:/code
+    ports:
+      - "8000:8000"
+      - "9000:9000"
+    links:
+      - db
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: 'postgres://postgres@db:5432/postgres'
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.16.253.0/24
