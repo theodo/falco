@@ -21,6 +21,10 @@ resource "aws_ecr_repository" "backend" {
   name = "${var.project_name}/backend"
 }
 
+resource "aws_ecr_repository" "celery_worker" {
+  name = "${var.project_name}/celery_worker"
+}
+
 resource "aws_ecr_repository" "static" {
   name = "${var.project_name}/static"
 }

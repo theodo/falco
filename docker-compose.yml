@@ -40,7 +40,7 @@ services:
       - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
 
-  celeryworker:
+  celery_worker:
     build: ./backend
     volumes:
       - ./backend:/code

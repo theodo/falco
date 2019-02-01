@@ -1,5 +1,6 @@
 BASE_IMAGE_TAG="falco/base:latest"
 BACKEND_IMAGE_TAG="falco/backend:latest"
+CELERY_WORKER_IMAGE_TAG="falco/celery_worker:latest"
 STATIC_IMAGE_TAG="falco/static:latest"
 TMP_SRC=.src/
 
@@ -26,6 +27,9 @@ base: $(TMP_SRC)
 backend_image: base
 	$(call docker_build,backend/Dockerfile,$(BACKEND_IMAGE_TAG))
 
+celery_worker_image: base
+	$(call docker_build,celery_worker/Dockerfile,$(CELERY_WORKER_IMAGE_TAG))
+
 static_image: base
 	$(call docker_build,static/Dockerfile,$(STATIC_IMAGE_TAG))
 
@@ -38,7 +42,7 @@ $(ARCHIVE_TARGET): $(TMP_ARCHIVE_DIR)
 
 $(TMP_ARCHIVE_DIR):
 	mkdir -p $(TMP_ARCHIVE_DIR)
-	sed 's:BACKEND_REPO_URL:$(BACKEND_REPO_URL):; s:STATIC_REPO_URL:$(STATIC_REPO_URL):; s:TAG:$(tag):' Dockerrun.aws.json > $(TMP_ARCHIVE_DIR)/Dockerrun.aws.json
+	sed 's:BACKEND_REPO_URL:$(BACKEND_REPO_URL):; s:CELERY_WORKER_REPO_URL:$(CELERY_WORKER_REPO_URL):; s:STATIC_REPO_URL:$(STATIC_REPO_URL):; s:TAG:$(tag):' Dockerrun.aws.json > $(TMP_ARCHIVE_DIR)/Dockerrun.aws.json
 	cp -r .ebextensions $(TMP_ARCHIVE_DIR)
 
 clean:

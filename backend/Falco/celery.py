@@ -5,7 +5,7 @@ import os
 from celery import Celery
 
 # set the default Django settings module for the 'celery' program.
-broker_url = "sqs://foo:bar@localstack:4576"
+broker_url = os.environ["CELERY_BROKER_URL"]
 
 app = Celery("Falco", broker=broker_url)
 # Using a string here means the worker doesn't have to serialize

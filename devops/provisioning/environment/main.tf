@@ -26,6 +26,13 @@ module "s3" {
   environment  = "${var.environment}"
 }
 
+module "sqs" {
+  source = "sqs"
+
+  project_name = "${var.project_name}"
+  environment  = "${var.environment}"
+}
+
 resource "aws_elastic_beanstalk_environment" "main" {
   name                = "${var.environment}"
   application         = "${var.eb_application}"

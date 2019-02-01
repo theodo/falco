@@ -10,6 +10,10 @@ output "BACKEND_REPO_URL" {
   value = "${aws_ecr_repository.backend.repository_url}"
 }
 
+output "CELERY_WORKER_REPO_URL" {
+  value = "${aws_ecr_repository.celery_worker.repository_url}"
+}
+
 output "STATIC_REPO_URL" {
   value = "${aws_ecr_repository.static.repository_url}"
 }

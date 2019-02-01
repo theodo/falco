@@ -20,6 +20,18 @@
       ]
     },
     {
+      "name": "celery_worker",
+      "image": "CELEREY_WORKER_REPO_URL:TAG",
+      "essential": true,
+      "memory": 1024,
+      "mountPoints": [
+        {
+          "sourceVolume": "awseb-logs-celery-worker",
+          "containerPath": "/var/log/falco-celery-worker"
+        }
+      ]
+    },
+    {
       "name": "static",
       "image": "STATIC_REPO_URL:TAG",
       "essential": true,
