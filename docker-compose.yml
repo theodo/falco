@@ -1,4 +1,4 @@
-version: '3.1'
+version: "3.1"
 
 services:
   db:
@@ -16,13 +16,43 @@ services:
       - "9000:9000"
     links:
       - db
+      - localstack
     env_file:
       - .env
     environment:
-      DATABASE_URL: 'postgres://postgres@db:5432/postgres'
+      DATABASE_URL: "postgres://postgres@db:5432/postgres"
+
+  localstack:
+    image: localstack/localstack
+    ports:
+      - "4567-4584:4567-4584"
+      - "${PORT_WEB_UI-8080}:${PORT_WEB_UI-8080}"
+    environment:
+      - SERVICES=sqs
+      - DEBUG=${DEBUG- }
+      - DATA_DIR=${DATA_DIR- }
+      - PORT_WEB_UI=${PORT_WEB_UI- }
+      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR- }
+      - KINESIS_ERROR_PROBABILITY=${KINESIS_ERROR_PROBABILITY- }
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - HOSTNAME_EXTERNAL=localstack
+    volumes:
+      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+  celeryworker:
+    build: ./backend
+    volumes:
+      - ./backend:/code
+    links:
+      - db
+      - localstack
+    env_file:
+      - .env
+    command: celery -A Falco.celery worker -l INFO
 
 networks:
   default:
     ipam:
       config:
-        - subnet: 172.16.253.0/24
+        - subnet: 172.16.210.0/24

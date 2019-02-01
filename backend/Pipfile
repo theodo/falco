@@ -15,6 +15,7 @@ ptvsd = "*"
 pytz = "*"
 requests = "*"
 djangorestframework = "*"
+celery = {extras = ["sqs"],version = "*"}
 
 [dev-packages]
 "flake8" = "*"

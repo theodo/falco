@@ -1,3 +1,5 @@
+import os
+
 from django.http import HttpResponse, JsonResponse
 from rest_framework.views import APIView
 
@@ -12,4 +14,7 @@ class TestCeleryView(APIView):
     """
 
     def get(self, request, format=None):
+        from .celery import add
+
+        add.delay(4, 4)
         return JsonResponse({"status": "OK"})
