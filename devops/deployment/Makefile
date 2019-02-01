@@ -19,7 +19,7 @@ endef
 
 .PHONY: images base backend_image clean
 
-images: clean backend_image static_image clean
+images: clean backend_image celery_worker_image static_image clean
 
 base: $(TMP_SRC)
 	$(call docker_build,base/Dockerfile,$(BASE_IMAGE_TAG))

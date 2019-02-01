@@ -24,6 +24,7 @@ parameters:
         name: Tag images for deployment
         command: |
           docker tag falco/backend:latest $BACKEND_REPO_URL:$CIRCLE_SHA1 &&
+          docker tag falco/celery_worker:latest $CELERY_WORKER_REPO_URL:$CIRCLE_SHA1 &&
           docker tag falco/static:latest $STATIC_REPO_URL:$CIRCLE_SHA1
 
     - run:
@@ -34,6 +35,7 @@ parameters:
         name: Push docker images to registry
         command: |
           docker push $BACKEND_REPO_URL:$CIRCLE_SHA1 &&
+          docker push $CELERY_WORKER_REPO_URL:$CIRCLE_SHA1 &&
           docker push $STATIC_REPO_URL:$CIRCLE_SHA1
 
     - run:

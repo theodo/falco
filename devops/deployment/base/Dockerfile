@@ -1,8 +1,11 @@
 # First stage: build front app
 FROM node:8.12 AS node
+
+
 WORKDIR /code
 
 COPY .src/frontend /code/
+ENV NODE_PATH /code/src
 RUN yarn
 RUN yarn build
 
@@ -12,6 +15,7 @@ FROM python:3.7
 
 ENV DJANGO_SETTINGS_MODULE Falco.settings.prod
 ENV PYTHONPATH /code
+ENV CELERY_BROKER_URL sqs://
 
 WORKDIR /code
 
