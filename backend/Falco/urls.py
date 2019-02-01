@@ -16,15 +16,16 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
-
-from Falco.views import health
+from Falco import views
 
 admin.site.site_title = "Falco Site Admin"
 admin.site.site_header = "Falco Administration"
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("health", health, name="health"),
+    path("health", views.health, name="health"),
+    path("health", views.health, name="health"),
+    path("celery", views.TestCeleryView.as_view(), name="test_celery"),
     path("", include("front.urls")),  # Keep this line last
 ]
 

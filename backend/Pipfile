@@ -14,6 +14,7 @@ django-storages = "*"
 ptvsd = "*"
 pytz = "*"
 requests = "*"
+djangorestframework = "*"
 
 [dev-packages]
 "flake8" = "*"
