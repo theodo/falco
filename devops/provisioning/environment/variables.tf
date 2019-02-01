@@ -35,3 +35,7 @@ variable "vpc" {}
 variable "vpc_subnets" {
   type = "list"
 }
+
+variable "sqs_user_aws_iam_access_key_id" {}
+
+variable "sqs_user_aws_iam_secret_access_key" {}

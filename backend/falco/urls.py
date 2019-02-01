@@ -1,4 +1,4 @@
-"""Falco URL Configuration
+"""falco URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.1/topics/http/urls/
@@ -16,10 +16,10 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
-from Falco import views
+from falco import views
 
-admin.site.site_title = "Falco Site Admin"
-admin.site.site_header = "Falco Administration"
+admin.site.site_title = "falco Site Admin"
+admin.site.site_header = "falco Administration"
 
 urlpatterns = [
     path("admin/", admin.site.urls),

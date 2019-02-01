@@ -24,7 +24,7 @@ parameters:
         name: Tag images for deployment
         command: |
           docker tag falco/backend:latest $BACKEND_REPO_URL:$CIRCLE_SHA1 &&
-          docker tag falco/celery_worker:latest $CELERY_WORKER_REPO_URL:$CIRCLE_SHA1 &&
+          docker tag falco/celeryworker:latest $CELERY_WORKER_REPO_URL:$CIRCLE_SHA1 &&
           docker tag falco/static:latest $STATIC_REPO_URL:$CIRCLE_SHA1
 
     - run:
@@ -50,7 +50,7 @@ parameters:
 
 jobs:
   backend:
-    working_directory: ~/Falco
+    working_directory: ~/falco
 
     docker:
       - image: python:3.7
@@ -58,7 +58,7 @@ jobs:
 
     environment:
       DATABASE_URL: postgres://postgres@localhost:5432/postgres
-      DJANGO_SETTINGS_MODULE: Falco.settings.dev
+      DJANGO_SETTINGS_MODULE: falco.settings.dev
 
     steps:
       - checkout
@@ -125,7 +125,7 @@ jobs:
             - ~/.cache/pip
 
   frontend:
-    working_directory: ~/Falco
+    working_directory: ~/falco
 
     docker:
       - image: circleci/node:11.3.0
@@ -160,7 +160,7 @@ jobs:
             - ~/project/node_modules
 
   deploy-staging:
-    working_directory: ~/Falco
+    working_directory: ~/falco
 
     docker:
       - image: docker:latest
@@ -172,7 +172,7 @@ jobs:
     steps: *deploy_steps
 
   deploy-production:
-    working_directory: ~/Falco
+    working_directory: ~/falco
 
     docker:
       - image: docker:latest

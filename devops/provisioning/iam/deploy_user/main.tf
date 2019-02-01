@@ -9,11 +9,11 @@ resource "aws_iam_access_key" "deploy" {
 }
 
 data "template_file" "deploy_policy" {
-  template = "${file("policy.json")}"
+  template = "${file("${path.module}/policy.json")}"
 
   vars {
     account_id       = "${data.aws_caller_identity.current.account_id}"
-    application_name = "${aws_elastic_beanstalk_application.main.name}"
+    application_name = "${var.eb_application}"
     region           = "${var.region}"
     role             = "${aws_iam_instance_profile.main.name}"
   }

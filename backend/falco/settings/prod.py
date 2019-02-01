@@ -10,7 +10,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     # Change me!
-    "Falco.com"
+    "getfal.co"
 ]
 
 if "ALLOWED_HOST" in os.environ:
@@ -58,3 +58,8 @@ CACHES = {
 
 # Static files
 STATICFILES_STORAGE = "core.storage.ManifestStorage"
+
+# Celery configuration
+
+CELERY_BROKER_TRANSPORT_OPTIONS = {"region": "eu-west-3"}
+CELERY_TASK_DEFAULT_QUEUE = os.environ.get("CELERY_TASK_DEFAULT_QUEUE", "celery")

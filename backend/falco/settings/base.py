@@ -1,5 +1,5 @@
 """
-Django settings for Falco project.
+Django settings for falco project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/2.1/topics/settings/
@@ -42,7 +42,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "Falco.urls"
+ROOT_URLCONF = "falco.urls"
 
 AUTH_USER_MODEL = "core.User"
 
@@ -62,7 +62,7 @@ TEMPLATES = [
     }
 ]
 
-WSGI_APPLICATION = "Falco.wsgi.application"
+WSGI_APPLICATION = "falco.wsgi.application"
 
 
 # Database

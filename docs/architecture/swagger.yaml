@@ -1,38 +1,38 @@
 swagger: "2.0"
 info:
-  description: "API docs for Falco"
+  description: "API docs for falco"
   version: "0.0.1"
-  title: "Swagger Falco API"
+  title: "Swagger falco API"
   contact:
     email: "nicolasgo@getfal.co"
 host: "getfal.co"
 basePath: "/api/v1"
 tags:
-- name: "audits"
-  description: "Run audits, consult audits status or results"
-- name: "projects"
-  description: "See projects details"
+  - name: "audits"
+    description: "Run audits, consult audits status or results"
+  - name: "projects"
+    description: "See projects details"
 schemes:
-- "https"
+  - "https"
 paths:
   /audits:
     post:
       tags:
-      - "audits"
+        - "audits"
       summary: "Run a new audit"
       description: "Starts a new audit on the provided URL, for the given parameters"
       operationId: "startAudit"
       consumes:
-      - "application/json"
+        - "application/json"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Parameters to run the audit against"
-        required: true
-        schema:
-          $ref: "#/definitions/AuditParameters"
+        - in: "body"
+          name: "body"
+          description: "Parameters to run the audit against"
+          required: true
+          schema:
+            $ref: "#/definitions/AuditParameters"
       responses:
         405:
           description: "Invalid input"
@@ -43,18 +43,18 @@ paths:
   /audits/status/{auditId}:
     get:
       tags:
-      - "audits"
+        - "audits"
       summary: "Get an audit status"
       operationId: "getAuditStatus"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "auditId"
-        required: true
-        in: "path"
-        type: "integer"
-        format: "int64"
-        description: "The id of the audit you want to get the status for"
+        - name: "auditId"
+          required: true
+          in: "path"
+          type: "integer"
+          format: "int64"
+          description: "The id of the audit you want to get the status for"
       responses:
         404:
           description: "Audit not found"
@@ -65,18 +65,18 @@ paths:
   /audits/results/{auditId}:
     get:
       tags:
-      - "audits"
+        - "audits"
       summary: "Get an audit result"
       operationId: "getAuditResults"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "auditId"
-        required: true
-        in: "path"
-        type: "integer"
-        format: "int64"
-        description: "The id of the audit you want to get the results for"
+        - name: "auditId"
+          required: true
+          in: "path"
+          type: "integer"
+          format: "int64"
+          description: "The id of the audit you want to get the results for"
       responses:
         404:
           description: "Results not found"
@@ -91,14 +91,14 @@ paths:
       summary: "Create a new project"
       operationId: "createProject"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Projects properties"
-        required: true
-        schema:
-          $ref: "#/definitions/Project"
+        - in: "body"
+          name: "body"
+          description: "Projects properties"
+          required: true
+          schema:
+            $ref: "#/definitions/Project"
       responses:
         405:
           description: "Invalid input"
@@ -112,7 +112,7 @@ paths:
       summary: "Get all projects"
       operationId: "getAllProject"
       produces:
-      - "application/json"
+        - "application/json"
       responses:
         200:
           description: "successful operation"
@@ -127,62 +127,62 @@ paths:
       summary: "Get one project"
       operationId: "getProject"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "projectId"
-        required: true
-        in: "path"
-        type: "integer"
-        format: "int64"
-        description: "The id of the project you want to get info for"
+        - name: "projectId"
+          required: true
+          in: "path"
+          type: "integer"
+          format: "int64"
+          description: "The id of the project you want to get info for"
       responses:
         404:
           description: "Project not found"
         200:
           description: "successful operation"
           schema:
-              $ref: "#/definitions/Project"
+            $ref: "#/definitions/Project"
     put:
       tags:
         - "projects"
       summary: "Update one project"
       operationId: "updateProject"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "projectId"
-        required: true
-        in: "path"
-        type: "integer"
-        format: "int64"
-        description: "The id of the project you want to get info for"
-      - name: "body"
-        required: true
-        in: "body"
-        schema: 
-          $ref: "#/definitions/Project"
-        description: "The properties to update for the project"
+        - name: "projectId"
+          required: true
+          in: "path"
+          type: "integer"
+          format: "int64"
+          description: "The id of the project you want to get info for"
+        - name: "body"
+          required: true
+          in: "body"
+          schema:
+            $ref: "#/definitions/Project"
+          description: "The properties to update for the project"
       responses:
         404:
           description: "Project not found"
         200:
           description: "successful operation"
           schema:
-              $ref: "#/definitions/Project"
+            $ref: "#/definitions/Project"
     delete:
       tags:
         - "projects"
       summary: "Delete one project"
       operationId: "deleteProject"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "projectId"
-        required: true
-        in: "path"
-        type: "integer"
-        format: "int64"
-        description: "The id of the project you want to get info for"
+        - name: "projectId"
+          required: true
+          in: "path"
+          type: "integer"
+          format: "int64"
+          description: "The id of the project you want to get info for"
       responses:
         404:
           description: "Project not found"
@@ -204,8 +204,8 @@ definitions:
   AuditParameters:
     type: "object"
     required:
-    - "page_id"
-    - "project_id"
+      - "page_id"
+      - "project_id"
     properties:
       project_id:
         type: "integer"

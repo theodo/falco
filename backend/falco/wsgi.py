@@ -1,5 +1,5 @@
 """
-WSGI config for Falco project.
+WSGI config for falco project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Falco.settings.prod")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "falco.settings.prod")
 
 application = get_wsgi_application()

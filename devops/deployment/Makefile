@@ -1,6 +1,6 @@
 BASE_IMAGE_TAG="falco/base:latest"
 BACKEND_IMAGE_TAG="falco/backend:latest"
-CELERY_WORKER_IMAGE_TAG="falco/celery_worker:latest"
+CELERY_WORKER_IMAGE_TAG="falco/celeryworker:latest"
 STATIC_IMAGE_TAG="falco/static:latest"
 TMP_SRC=.src/
 
@@ -19,7 +19,7 @@ endef
 
 .PHONY: images base backend_image clean
 
-images: clean backend_image celery_worker_image static_image clean
+images: clean backend_image celeryworker_image static_image clean
 
 base: $(TMP_SRC)
 	$(call docker_build,base/Dockerfile,$(BASE_IMAGE_TAG))
@@ -27,8 +27,8 @@ base: $(TMP_SRC)
 backend_image: base
 	$(call docker_build,backend/Dockerfile,$(BACKEND_IMAGE_TAG))
 
-celery_worker_image: base
-	$(call docker_build,celery_worker/Dockerfile,$(CELERY_WORKER_IMAGE_TAG))
+celeryworker_image: base
+	$(call docker_build,celeryworker/Dockerfile,$(CELERY_WORKER_IMAGE_TAG))
 
 static_image: base
 	$(call docker_build,static/Dockerfile,$(STATIC_IMAGE_TAG))

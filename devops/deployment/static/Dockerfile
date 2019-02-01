@@ -6,6 +6,6 @@ FROM nginx:1.15
 
 # Custom config
 RUN rm /etc/nginx/conf.d/default.conf
-COPY ./static/nginx.conf /etc/nginx/conf.d/Falco.conf
+COPY ./static/nginx.conf /etc/nginx/conf.d/falco.conf
 
 COPY --from=python /code/static /static
