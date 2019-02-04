@@ -26,8 +26,8 @@
       "memory": 1024,
       "mountPoints": [
         {
-          "sourceVolume": "awseb-logs-backend",
-          "containerPath": "/var/log/falco-celery-worker"
+          "sourceVolume": "awseb-logs-celeryworker",
+          "containerPath": "/var/log/falco-celeryworker"
         }
       ]
     },
