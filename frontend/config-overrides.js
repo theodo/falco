@@ -24,9 +24,9 @@ module.exports = {
         publicPath: '',
         generate: (seed, files) =>
           files.reduce(
-            (manifest, {name, path, isInitial}) => ({
+            (manifest, { name, path, isInitial }) => ({
               ...manifest,
-              [name]: {path, isInitial},
+              [name]: { path, isInitial },
             }),
             seed,
           ),
@@ -36,6 +36,9 @@ module.exports = {
     switch (env) {
       case 'development':
         config.output.publicPath = 'http://localhost:3000/';
+        break;
+      case 'production':
+        config.output.publicPath = '/static/front/';
         break;
       default:
         break;
@@ -48,7 +51,7 @@ module.exports = {
     // Development Server config. "configFunction" is the function that would normally have
     // been used to generate the Webpack Development server config - you can use it to create
     // a starting configuration to then modify instead of having to create a config from scratch.
-    return function (proxy, allowedHost) {
+    return function(proxy, allowedHost) {
       // Create the default config by calling configFunction with the proxy/allowedHost parameters
       const defaultConfig = configFunction(proxy, allowedHost);
       return {
@@ -63,5 +66,5 @@ module.exports = {
         },
       };
     };
-  }
+  },
 };

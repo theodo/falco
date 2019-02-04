@@ -42,5 +42,5 @@ class ManifestStorage(StaticFilesStorage):
         return [
             f"{self.prefix}{key}"
             for key, value in self.manifest.items()
-            if value["isInitial"]
+            if value["isInitial"] and value["path"].endswith(".js")
         ]
