@@ -49,7 +49,7 @@ services:
       - localstack
     env_file:
       - .env
-    command: celery -A falco.celery worker -l INFO
+    command: celery -A root.celery worker -l INFO
 
 networks:
   default:

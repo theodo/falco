@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     # Our apps
     "front",
     "core",
+    "projects.apps.ProjectsConfig",
 ]
 
 MIDDLEWARE = [
@@ -42,7 +43,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "falco.urls"
+ROOT_URLCONF = "root.urls"
 
 AUTH_USER_MODEL = "core.User"
 
@@ -62,7 +63,7 @@ TEMPLATES = [
     }
 ]
 
-WSGI_APPLICATION = "falco.wsgi.application"
+WSGI_APPLICATION = "root.wsgi.application"
 
 
 # Database

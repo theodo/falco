@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
-from falco import views
+from root import views
 
 admin.site.site_title = "falco Site Admin"
 admin.site.site_header = "falco Administration"
@@ -26,6 +26,7 @@ urlpatterns = [
     path("health", views.health, name="health"),
     path("health", views.health, name="health"),
     path("celery", views.TestCeleryView.as_view(), name="test_celery"),
+    path("projects/", include("projects.urls", namespace="projects")),
     path("", include("front.urls")),  # Keep this line last
 ]
 

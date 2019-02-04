@@ -1,7 +1,6 @@
 from django.test import Client, TestCase
 from django.urls import reverse
-
-from falco.views import health
+from root.views import health
 
 
 class HealthViewTestCase(TestCase):
