@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     # Our apps
     "front",
     "core",
+    "audits.apps.AuditsConfig",
     "projects.apps.ProjectsConfig",
 ]
 

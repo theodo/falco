@@ -27,6 +27,7 @@ urlpatterns = [
     path("health", views.health, name="health"),
     path("celery", views.TestCeleryView.as_view(), name="test_celery"),
     path("projects/", include("projects.urls", namespace="projects")),
+    path("audits/", include("audits.urls", namespace="audits")),
     path("", include("front.urls")),  # Keep this line last
 ]
 
