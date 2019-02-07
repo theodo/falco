@@ -58,7 +58,7 @@ jobs:
 
     environment:
       DATABASE_URL: postgres://postgres@localhost:5432/postgres
-      DJANGO_SETTINGS_MODULE: falco.settings.dev
+      DJANGO_SETTINGS_MODULE: root.settings.dev
 
     steps:
       - checkout

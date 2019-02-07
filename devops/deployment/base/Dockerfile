@@ -13,7 +13,7 @@ RUN yarn build
 # Second stage: build base backend
 FROM python:3.7
 
-ENV DJANGO_SETTINGS_MODULE falco.settings.prod
+ENV DJANGO_SETTINGS_MODULE root.settings.prod
 ENV PYTHONPATH /code
 ENV CELERY_BROKER_URL sqs://
 
