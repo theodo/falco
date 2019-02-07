@@ -16,7 +16,6 @@ module "rds" {
   allocated_storage = "${var.db_allocated_storage}"
   instance_class    = "${var.db_instance_class}"
   ingress_sg        = "${aws_security_group.instances.id}"
-  kms_key_id        = "${var.kms_key_id}"
 }
 
 module "s3" {

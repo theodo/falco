@@ -24,8 +24,6 @@ variable "db_allocated_storage" {}
 
 variable "db_instance_class" {}
 
-variable "kms_key_id" {}
-
 variable "https_domain" {
   default = ""
 }

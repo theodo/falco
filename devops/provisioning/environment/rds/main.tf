@@ -29,11 +29,10 @@ resource "aws_db_instance" "main" {
   backup_retention_period     = 7
   final_snapshot_identifier   = "${var.project_name}-${var.environment}-${md5(timestamp())}"
   instance_class              = "${var.instance_class}"
-  kms_key_id                  = "${var.kms_key_id}"
   multi_az                    = "${var.environment == "production"}"
   publicly_accessible         = false
   skip_final_snapshot         = false
-  storage_encrypted           = true
+  storage_encrypted           = false
   storage_type                = "gp2"
   vpc_security_group_ids      = ["${aws_security_group.db.id}"]
 }

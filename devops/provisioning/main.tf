@@ -8,11 +8,6 @@ resource "aws_key_pair" "main" {
   public_key = "${file("../eb.pem.pub")}"
 }
 
-resource "aws_kms_key" "main" {
-  description         = "${var.project_name}"
-  enable_key_rotation = true
-}
-
 resource "aws_elastic_beanstalk_application" "main" {
   name = "${var.project_name}"
 }
@@ -46,8 +41,7 @@ module "env_staging" {
   eb_instance_profile                = "${module.iam.deploy_user_aws_iam_instance_profile_name}"
   eb_key_pair                        = "${aws_key_pair.main.key_name}"
   db_allocated_storage               = 5
-  db_instance_class                  = "db.t2.small"
-  kms_key_id                         = "${aws_kms_key.main.arn}"
+  db_instance_class                  = "db.t2.micro"
   vpc                                = "${data.aws_vpc.default.id}"
   vpc_subnets                        = "${data.aws_subnet_ids.default.ids}"
   sqs_user_aws_iam_access_key_id     = "${module.iam.sqs_user_aws_iam_access_key_id}"
@@ -65,8 +59,7 @@ module "env_staging" {
 #   eb_instance_profile                = "${module.iam.deploy_user_aws_iam_instance_profile_name}"
 #   eb_key_pair                        = "${aws_key_pair.main.key_name}"
 #   db_allocated_storage               = 20
-#   db_instance_class                  = "db.t2.medium"
-#   kms_key_id                         = "${aws_kms_key.main.arn}"
+#   db_instance_class                  = "db.t2.micro"
 #   vpc                                = "${data.aws_vpc.default.id}"
 #   vpc_subnets                        = "${data.aws_subnet_ids.default.ids}"
 #   sqs_user_aws_iam_access_key_id     = "${module.iam.sqs_user_aws_iam_access_key_id}"
