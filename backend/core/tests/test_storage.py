@@ -1,10 +1,9 @@
 import json
 import os
 
+from core.storage import ManifestStorage
 from django.conf import settings
 from django.test import TestCase
-
-from core.storage import ManifestStorage
 
 
 class ManifestStorageTestCase(TestCase):
@@ -57,4 +56,4 @@ class ManifestStorageTestCase(TestCase):
 
     def test_initial_scripts(self):
         storage = ManifestStorage()
-        self.assertEqual(storage.initial_scripts(), ["front/a"])
+        self.assertEqual(storage.initial_scripts(), [])
