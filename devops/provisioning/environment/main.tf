@@ -119,7 +119,7 @@ resource "aws_elastic_beanstalk_environment" "main" {
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "DJANGO_SETTINGS_MODULE"
-    value     = "${var.project_name}.settings.prod"
+    value     = "root.settings.prod"
   }
 
   setting {

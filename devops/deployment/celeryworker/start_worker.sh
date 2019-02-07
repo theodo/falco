@@ -1,3 +1,3 @@
 cd /code
 
-celery -A falco.celery worker -l INFO
+celery -A root.celery worker -l INFO
