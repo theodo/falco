@@ -143,7 +143,7 @@ resource "aws_elastic_beanstalk_environment" "main" {
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "AWS_SECRET_ACCESS_KEY"
-    value     = "${urlencode(var.sqs_user_aws_iam_secret_access_key)}"
+    value     = "${urlencode(var.sqs_user_aws_iam_secret_access_key)}@"
   }
 
   setting {
