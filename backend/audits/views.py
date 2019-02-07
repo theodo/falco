@@ -1,11 +1,8 @@
 from audits.models import AuditResults, AuditStatusHistory
 from audits.serializers import AuditResultsSerializer, AuditStatusHistorySerializer
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import ensure_csrf_cookie
-from rest_framework import status
 from rest_framework.decorators import api_view
-from rest_framework.parsers import JSONParser
 
 
 @ensure_csrf_cookie
