@@ -2,9 +2,9 @@ output "staging_url" {
   value = "${module.env_staging.url}"
 }
 
-# output "production_url" {
-#   value = "${module.env_production.url}"
-# }
+output "production_url" {
+  value = "${module.env_production.url}"
+}
 
 output "BACKEND_REPO_URL" {
   value = "${aws_ecr_repository.backend.repository_url}"

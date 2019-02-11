@@ -125,25 +125,13 @@ resource "aws_elastic_beanstalk_environment" "main" {
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "CELERY_BROKER_URL"
-    value     = "sqs://"
+    value     = "sqs://${var.sqs_user_aws_iam_access_key_id}:${urlencode(var.sqs_user_aws_iam_secret_access_key)}@"
   }
 
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "CELERY_TASK_DEFAULT_QUEUE"
     value     = "${module.sqs.sqs_queue_name}"
-  }
-
-  setting {
-    namespace = "aws:elasticbeanstalk:application:environment"
-    name      = "AWS_ACCESS_KEY_ID"
-    value     = "${var.sqs_user_aws_iam_access_key_id}"
-  }
-
-  setting {
-    namespace = "aws:elasticbeanstalk:application:environment"
-    name      = "AWS_SECRET_ACCESS_KEY"
-    value     = "${urlencode(var.sqs_user_aws_iam_secret_access_key)}@"
   }
 
   setting {
