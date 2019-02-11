@@ -5,7 +5,7 @@ from rest_framework import serializers
 class PageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Page
-        fields = ("uuid", "name", "url")
+        fields = ("uuid", "name", "url", "audits")
 
 
 class ProjectSerializer(serializers.ModelSerializer):
