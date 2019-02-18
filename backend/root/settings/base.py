@@ -97,7 +97,7 @@ PASSWORD_HASHERS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "Europe/London"
+TIME_ZONE = "Europe/Paris"
 
 USE_I18N = True
 
