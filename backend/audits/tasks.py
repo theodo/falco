@@ -54,7 +54,7 @@ def format_wpt_json_results(data):
 @shared_task
 def request_audit(audit_uuid):
     webpagetest_api_key = os.environ.get("WEBPAGETEST_API_KEY")
-    if webpagetest_api_key == None:
+    if webpagetest_api_key is None:
         raise (
             ImproperlyConfigured(
                 """

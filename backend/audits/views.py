@@ -1,4 +1,4 @@
-from audits.models import Audit, AuditResults, AuditStatusHistory
+from audits.models import AuditResults, AuditStatusHistory
 from audits.serializers import (
     AuditResultsSerializer,
     AuditSerializer,
