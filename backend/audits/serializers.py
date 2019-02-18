@@ -4,7 +4,7 @@ from rest_framework import serializers
 
 
 class AuditSerializer(serializers.ModelSerializer):
-    page = PageSerializer()
+    page = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Audit

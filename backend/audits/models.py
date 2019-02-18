@@ -6,6 +6,7 @@ from projects.models import Page
 
 
 class AvailableStatuses(Enum):  # A subclass of Enum
+    REQUESTED = "REQUESTED"
     PENDING = "PENDING"
     ERROR = "ERROR"
     SUCCESS = "SUCCESS"

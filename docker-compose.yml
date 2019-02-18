@@ -50,6 +50,8 @@ services:
       - localstack
     env_file:
       - .env
+    environment:
+      DATABASE_URL: "postgres://postgres@db:5432/postgres"
     command: celery -A root.celery worker -l INFO
 
 networks:
