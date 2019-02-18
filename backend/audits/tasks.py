@@ -7,6 +7,50 @@ from celery import shared_task
 from django.core.exceptions import ImproperlyConfigured
 
 
+def format_wpt_json_results(data):
+    return {
+        "wpt_metric_first_view_tti": data["average"]["firstView"].get(
+            "FirstInteractive"
+        )
+        or data["average"]["firstView"].get("LastInteractive"),
+        "wpt_metric_repeat_view_tti": data["average"]["repeatView"].get(
+            "FirstInteractive"
+        )
+        or data["average"]["repeatView"].get("LastInteractive"),
+        "wpt_metric_first_view_speed_index": data["average"]["firstView"]["SpeedIndex"],
+        "wpt_metric_repeat_view_speed_index": data["average"]["repeatView"][
+            "SpeedIndex"
+        ],
+        "wpt_metric_first_view_first_paint": data["average"]["firstView"]["firstPaint"],
+        "wpt_metric_repeat_view_first_paint": data["average"]["repeatView"][
+            "firstPaint"
+        ],
+        "wpt_metric_first_view_first_meaningful_paint": data["average"]["firstView"][
+            "firstMeaningfulPaint"
+        ],
+        "wpt_metric_repeat_view_first_meaningful_paint": data["average"]["repeatView"][
+            "firstMeaningfulPaint"
+        ],
+        "wpt_metric_first_view_first_contentful_paint": data["average"]["firstView"][
+            "firstContentfulPaint"
+        ],
+        "wpt_metric_repeat_view_first_contentful_paint": data["average"]["repeatView"][
+            "firstContentfulPaint"
+        ],
+        "wpt_metric_first_view_load_time": data["average"]["firstView"]["loadTime"],
+        "wpt_metric_repeat_view_load_time": data["average"]["repeatView"]["loadTime"],
+        "wpt_metric_first_view_time_to_first_byte": data["average"]["firstView"][
+            "TTFB"
+        ],
+        "wpt_metric_repeat_view_time_to_first_byte": data["average"]["repeatView"][
+            "TTFB"
+        ],
+        "wpt_metric_lighthouse_performance": data["average"]["firstView"][
+            "lighthouse.Performance"
+        ],
+    }
+
+
 @shared_task
 def request_audit(audit_uuid):
     webpagetest_api_key = os.environ.get("WEBPAGETEST_API_KEY")
@@ -67,13 +111,51 @@ def poll_audit_results(audit_uuid, json_url):
         audit_status_pending.save()
         poll_audit_results.apply_async((audit_uuid, json_url), countdown=15)
     elif status_code == 200:
+        formatted_results = format_wpt_json_results(response["data"])
         audit_results = AuditResults(
             audit=audit,
             wpt_results_json_url=json_url,
-            wpt_metric_tti=response["data"]["average"]["firstView"].get(
-                "FirstInteractive"
-            )
-            or response["data"]["average"]["firstView"].get("LastInteractive"),
+            wpt_metric_first_view_tti=formatted_results["wpt_metric_first_view_tti"],
+            wpt_metric_repeat_view_tti=formatted_results["wpt_metric_repeat_view_tti"],
+            wpt_metric_first_view_speed_index=formatted_results[
+                "wpt_metric_first_view_speed_index"
+            ],
+            wpt_metric_repeat_view_speed_index=formatted_results[
+                "wpt_metric_repeat_view_speed_index"
+            ],
+            wpt_metric_first_view_first_paint=formatted_results[
+                "wpt_metric_first_view_first_paint"
+            ],
+            wpt_metric_repeat_view_first_paint=formatted_results[
+                "wpt_metric_repeat_view_first_paint"
+            ],
+            wpt_metric_first_view_first_meaningful_paint=formatted_results[
+                "wpt_metric_first_view_first_meaningful_paint"
+            ],
+            wpt_metric_repeat_view_first_meaningful_paint=formatted_results[
+                "wpt_metric_repeat_view_first_meaningful_paint"
+            ],
+            wpt_metric_first_view_load_time=formatted_results[
+                "wpt_metric_first_view_load_time"
+            ],
+            wpt_metric_repeat_view_load_time=formatted_results[
+                "wpt_metric_repeat_view_load_time"
+            ],
+            wpt_metric_first_view_first_contentful_paint=formatted_results[
+                "wpt_metric_first_view_first_contentful_paint"
+            ],
+            wpt_metric_repeat_view_first_contentful_paint=formatted_results[
+                "wpt_metric_repeat_view_first_contentful_paint"
+            ],
+            wpt_metric_first_view_time_to_first_byte=formatted_results[
+                "wpt_metric_first_view_time_to_first_byte"
+            ],
+            wpt_metric_repeat_view_time_to_first_byte=formatted_results[
+                "wpt_metric_repeat_view_time_to_first_byte"
+            ],
+            wpt_metric_lighthouse_performance=formatted_results[
+                "wpt_metric_lighthouse_performance"
+            ],
         )
         audit_results.save()
         audit_status_success = AuditStatusHistory(
