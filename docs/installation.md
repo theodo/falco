@@ -16,10 +16,10 @@ Go through this once when you install the project, you shouldn't need to do that
 
 - Create a WebPageTest API Key on the following page: https://www.webpagetest.org/getkey.php
 - Create a `.env` file at the root of the project, containing the following keys:
-  - DJANGO_SETTINGS_MODULE=root.settings.dev
-  - CELERY_BROKER_URL=sqs://foo:bar@localstack:4576
-  - SECRET_KEY=doesntreallymatter
-  - WEBPAGETEST_API_KEY=<your WPT API key>
+  - `DJANGO_SETTINGS_MODULE=root.settings.dev`
+  - `CELERY_BROKER_URL=sqs://foo:bar@localstack:4576`
+  - `SECRET_KEY=doesntreallymatter`
+  - `WEBPAGETEST_API_KEY=<your WPT API key>`
 - start the backend:
   ```bash
   TMPDIR=/private$TMPDIR docker-compose up
