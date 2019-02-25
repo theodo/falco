@@ -21,4 +21,22 @@ class AuditResultsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AuditResults
-        fields = ("audit", "wpt_metric_tti")
+        fields = (
+            "audit",
+            "wpt_results_json_url",
+            "wpt_metric_first_view_tti",
+            "wpt_metric_repeat_view_tti",
+            "wpt_metric_first_view_speed_index",
+            "wpt_metric_repeat_view_speed_index",
+            "wpt_metric_first_view_first_paint",
+            "wpt_metric_repeat_view_first_paint",
+            "wpt_metric_first_view_first_meaningful_paint",
+            "wpt_metric_repeat_view_first_meaningful_paint",
+            "wpt_metric_first_view_load_time",
+            "wpt_metric_repeat_view_load_time",
+            "wpt_metric_first_view_first_contentful_paint",
+            "wpt_metric_repeat_view_first_contentful_paint",
+            "wpt_metric_first_view_time_to_first_byte",
+            "wpt_metric_repeat_view_time_to_first_byte",
+            "wpt_metric_lighthouse_performance",
+        )
