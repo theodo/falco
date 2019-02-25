@@ -30,6 +30,9 @@ backend_image: base
 celeryworker_image: base
 	$(call docker_build,celeryworker/Dockerfile,$(CELERY_WORKER_IMAGE_TAG))
 
+celerybeat_image: base
+	$(call docker_build,celerybeat/Dockerfile,$(CELERY_BEAT_IMAGE_TAG))
+
 static_image: base
 	$(call docker_build,static/Dockerfile,$(STATIC_IMAGE_TAG))
 
@@ -42,7 +45,7 @@ $(ARCHIVE_TARGET): $(TMP_ARCHIVE_DIR)
 
 $(TMP_ARCHIVE_DIR):
 	mkdir -p $(TMP_ARCHIVE_DIR)
-	sed 's:BACKEND_REPO_URL:$(BACKEND_REPO_URL):; s:CELERY_WORKER_REPO_URL:$(CELERY_WORKER_REPO_URL):; s:STATIC_REPO_URL:$(STATIC_REPO_URL):; s:TAG:$(tag):' Dockerrun.aws.json > $(TMP_ARCHIVE_DIR)/Dockerrun.aws.json
+	sed 's:BACKEND_REPO_URL:$(BACKEND_REPO_URL):; s:CELERY_WORKER_REPO_URL:$(CELERY_WORKER_REPO_URL):; s:CELERY_BEAT_REPO_URL:$(CELERY_BEAT_REPO_URL):; s:STATIC_REPO_URL:$(STATIC_REPO_URL):; s:TAG:$(tag):' Dockerrun.aws.json > $(TMP_ARCHIVE_DIR)/Dockerrun.aws.json
 	cp -r .ebextensions $(TMP_ARCHIVE_DIR)
 
 clean:

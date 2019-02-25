@@ -32,6 +32,18 @@
       ]
     },
     {
+      "name": "celerybeat",
+      "image": "CELERY_BEAT_REPO_URL:TAG",
+      "essential": true,
+      "memory": 256,
+      "mountPoints": [
+        {
+          "sourceVolume": "awseb-logs-celerybeat",
+          "containerPath": "/var/log/falco-celerybeat"
+        }
+      ]
+    },
+    {
       "name": "static",
       "image": "STATIC_REPO_URL:TAG",
       "essential": true,
