@@ -15,39 +15,32 @@ In development:
 Go through this once when you install the project, you shouldn't need to do that again.
 
 - Create a WebPageTest API Key on the following page: https://www.webpagetest.org/getkey.php
-- Create a `.env` file at the root of the project, containing the following keys:
-  - `DJANGO_SETTINGS_MODULE=root.settings.dev`
-  - `CELERY_BROKER_URL=sqs://foo:bar@localstack:4576`
-  - `SECRET_KEY=doesntreallymatter`
-  - `WEBPAGETEST_API_KEY=<your WPT API key>`
-- start the backend:
+- Install the backend:
   ```bash
-  TMPDIR=/private$TMPDIR docker-compose up
+  make backend/install
   ```
-- setup the development database:
+- Copy the WebPageTest API Key in the .env at the root of your project
+- Install the frontend:
   ```bash
-  # Migrate
-  docker-compose exec backend ./manage.py migrate
-  # Create cache table
-  docker-compose exec backend ./manage.py createcachetable
-  # Create an admin account
-  docker-compose exec backend ./manage.py createsuperuser
+  make frontend/install
+  ```
+- Create an admin account:
+  ```bash
+  make createsuperuser:
   ```
 
 ## Start the app
 
 What you need to do to (re)start the project:
 
-- start the backend:
+- Start the backend:
   ```bash
-  TMPDIR=/private$TMPDIR docker-compose up
+  make backend/start
   ```
-- start the frontend:
+- Start the frontend:
 
   ```bash
-  cd frontend
-  yarn install
-  yarn start
+  make frontend/start
   ```
 
   The project should now be running at [localhost:8000](http://localhost:8000).
