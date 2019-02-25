@@ -1,4 +1,4 @@
-from audits.models import AuditResults, AuditStatusHistory
+from audits.models import Audit, AuditResults, AuditStatusHistory
 from audits.serializers import (
     AuditResultsSerializer,
     AuditSerializer,
@@ -47,4 +47,17 @@ def audit_results(request, audit_uuid):
     if request.method == "GET":
         audit_results = AuditResults.objects.get(audit=audit_uuid)
         serializer = AuditResultsSerializer(audit_results)
+        return JsonResponse(serializer.data, safe=False)
+
+
+@ensure_csrf_cookie
+@api_view(["GET"])
+def audits_results(request):
+    """ Returns every audit result for a given page """
+    if request.method == "GET":
+        page_uuid = request.GET.get("page")
+        get_object_or_404(Page, pk=page_uuid)
+        audits = Audit.objects.filter(page=page_uuid)
+        audits_results = AuditResults.objects.filter(audit__in=audits)
+        serializer = AuditResultsSerializer(audits_results, many=True)
         return JsonResponse(serializer.data, safe=False)
