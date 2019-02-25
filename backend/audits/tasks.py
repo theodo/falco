@@ -5,6 +5,7 @@ import requests
 from audits.models import Audit, AuditResults, AuditStatusHistory, AvailableStatuses
 from celery import shared_task
 from django.core.exceptions import ImproperlyConfigured
+from projects.models import Page
 
 
 def format_wpt_json_results(data):
@@ -75,7 +76,6 @@ def request_audit(audit_uuid):
         "lighthouse": 1,
         "k": webpagetest_api_key,
         "runs": 5,
-        "location": "London:Chrome.Native",
     }
     r = requests.post("http://www.webpagetest.org/runtest.php", params=payload)
     response = r.json()
@@ -168,3 +168,12 @@ def poll_audit_results(audit_uuid, json_url):
             ),
         )
         audit_status_success.save()
+
+
+@shared_task
+def request_all_audits():
+    pages = Page.objects.all().iterator()
+    for page in pages:
+        audit = Audit(page=page)
+        audit.save()
+        request_audit.delay(audit.uuid)

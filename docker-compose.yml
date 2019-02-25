@@ -54,6 +54,19 @@ services:
       DATABASE_URL: "postgres://postgres@db:5432/postgres"
     command: celery -A root.celery worker -l INFO
 
+  celerybeat:
+    build: ./backend
+    volumes:
+      - ./backend:/code
+    links:
+      - db
+      - localstack
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: "postgres://postgres@db:5432/postgres"
+    command: celery -A root.celery beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
+
 networks:
   default:
     ipam:

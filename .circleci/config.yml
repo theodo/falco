@@ -25,6 +25,7 @@ parameters:
         command: |
           docker tag falco/backend:latest $BACKEND_REPO_URL:$CIRCLE_SHA1 &&
           docker tag falco/celeryworker:latest $CELERY_WORKER_REPO_URL:$CIRCLE_SHA1 &&
+          docker tag falco/celerybeat:latest $CELERY_BEAT_REPO_URL:$CIRCLE_SHA1 &&
           docker tag falco/static:latest $STATIC_REPO_URL:$CIRCLE_SHA1
 
     - run:
@@ -36,6 +37,7 @@ parameters:
         command: |
           docker push $BACKEND_REPO_URL:$CIRCLE_SHA1 &&
           docker push $CELERY_WORKER_REPO_URL:$CIRCLE_SHA1 &&
+          docker push $CELERY_BEAT_REPO_URL:$CIRCLE_SHA1 &&
           docker push $STATIC_REPO_URL:$CIRCLE_SHA1
 
     - run:
