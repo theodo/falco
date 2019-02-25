@@ -17,7 +17,7 @@ resource "aws_security_group" "db" {
 resource "aws_db_instance" "main" {
   identifier     = "${var.project_name}-${var.environment}"
   engine         = "postgres"
-  engine_version = 10.3
+  engine_version = 10.6
 
   name     = "${var.project_name}"
   username = "${var.project_name}"
