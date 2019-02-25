@@ -76,7 +76,6 @@ def request_audit(audit_uuid):
         "lighthouse": 1,
         "k": webpagetest_api_key,
         "runs": 5,
-        "location": "London:Chrome.Native",
     }
     r = requests.post("http://www.webpagetest.org/runtest.php", params=payload)
     response = r.json()
