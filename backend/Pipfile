@@ -16,6 +16,7 @@ pytz = "*"
 requests = "*"
 djangorestframework = "*"
 celery = {extras = ["sqs"],version = "*"}
+django-celery-beat = "*"
 
 [dev-packages]
 "flake8" = "*"
