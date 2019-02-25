@@ -14,6 +14,10 @@ output "CELERY_WORKER_REPO_URL" {
   value = "${aws_ecr_repository.celeryworker.repository_url}"
 }
 
+output "CELERY_BEAT_REPO_URL" {
+  value = "${aws_ecr_repository.celerybeat.repository_url}"
+}
+
 output "STATIC_REPO_URL" {
   value = "${aws_ecr_repository.static.repository_url}"
 }
