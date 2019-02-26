@@ -10,6 +10,7 @@ import { AnyAction, combineReducers, Reducer } from 'redux';
 import { reducer as avatar } from './Avatar';
 import { reducer as login } from './Login';
 import { reducer as projects } from './projects';
+import { reducer as pages } from './pages';
 import { RootAction, RootState } from './types';
 
 /**
@@ -27,5 +28,6 @@ export default function createReducer(asyncReducers: {
     login,
     avatar,
     projects,
+    pages,
   });
 }

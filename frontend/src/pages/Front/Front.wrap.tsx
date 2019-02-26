@@ -3,7 +3,7 @@ import { Dispatch } from 'redux';
 import Front from './Front';
 import { fetchProjectRequest } from 'redux/projects';
 
-const mapStateToProps = () => {};
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   fetchProjectRequest: (projectId: string) => dispatch(fetchProjectRequest({ projectId })),
