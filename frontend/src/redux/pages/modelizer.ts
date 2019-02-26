@@ -4,7 +4,12 @@ export const modelizePages = (pages: PageType[]) => {
   return pages.reduce((pagesById, page) => {
     return {
       ...pagesById,
-      [page.uuid]: page,
+      [page.uuid]: {
+        uuid: page.uuid,
+        name: page.name,
+        url: page.url,
+        audits: page.audits,
+      },
     };
   }, {});
 };

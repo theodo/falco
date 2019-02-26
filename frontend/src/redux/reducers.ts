@@ -11,6 +11,7 @@ import { reducer as avatar } from './Avatar';
 import { reducer as login } from './Login';
 import { reducer as projects } from './projects';
 import { reducer as pages } from './pages';
+import { reducer as auditResults } from './auditResults';
 import { RootAction, RootState } from './types';
 
 /**
@@ -29,5 +30,6 @@ export default function createReducer(asyncReducers: {
     avatar,
     projects,
     pages,
+    auditResults,
   });
 }

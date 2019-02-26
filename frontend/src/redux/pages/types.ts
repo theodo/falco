@@ -1,5 +1,6 @@
 export type PageType = {
-  uuid: string;
+  audits: string[];
   name: string;
   url: string;
+  uuid: string;
 };

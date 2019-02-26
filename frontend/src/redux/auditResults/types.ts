@@ -1,0 +1,42 @@
+export type AuditResultType = {
+  auditId: string;
+  wptResultsJsonUrl: string;
+  wptMetricFirstViewTti: number;
+  wptMetricRepeatViewTti: number;
+  wptMetricFirstViewSpeedIndex: number;
+  wptMetricRepeatViewSpeedIndex: number;
+  wptMetricFirstViewFirstPaint: number;
+  wptMetricRepeatViewFirstPaint: number;
+  wptMetricFirstViewFirstMeaningfulPaint: number;
+  wptMetricRepeatViewFirstMeaningfulPaint: number;
+  wptMetricFirstViewLoadTime: number;
+  wptMetricRepeatViewLoadTime: number;
+  wptMetricFirstViewFirstContentfulPaint: number;
+  wptMetricRepeatViewFirstContentfulPaint: number;
+  wptMetricFirstViewTimeToFirstByte: number;
+  wptMetricRepeatViewTimeToFirstByte: number;
+  wptMetricLighthousePerformance: number;
+};
+
+export type ApiAuditResultType = {
+  audit: {
+    uuid: string;
+    page: string;
+  };
+  wpt_results_json_url: string;
+  wpt_metric_first_view_tti: number;
+  wpt_metric_repeat_view_tti: number;
+  wpt_metric_first_view_speed_index: number;
+  wpt_metric_repeat_view_speed_index: number;
+  wpt_metric_first_view_first_paint: number;
+  wpt_metric_repeat_view_first_paint: number;
+  wpt_metric_first_view_first_meaningful_paint: number;
+  wpt_metric_repeat_view_first_meaningful_paint: number;
+  wpt_metric_first_view_load_time: number;
+  wpt_metric_repeat_view_load_time: number;
+  wpt_metric_first_view_first_contentful_paint: number;
+  wpt_metric_repeat_view_first_contentful_paint: number;
+  wpt_metric_first_view_time_to_first_byte: number;
+  wpt_metric_repeat_view_time_to_first_byte: number;
+  wpt_metric_lighthouse_performance: number;
+};
