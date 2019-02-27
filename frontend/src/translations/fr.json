@@ -1,18 +1,5 @@
 {
   "home": {
-    "use-a-link": "Ou utilise un lien",
-    "get-started": "Pour commencer, modifie",
-    "save-to-reload": "et sauvegarde pour recharger.",
-    "create-route": "Pour créer une route, modifie routes.js et associe une page",
-    "generate-component": "Pour créer une page ou un simple composant, lance: ",
-    "generate-module": "Pour ajouter de la logique métier, créer un dossier dans redux avec tes reducers/actions/sagas/selectors/constants/...",
-    "click-me": "Click sur moi",
-    "readme": "Lis le README.md pour découvrir les super commandes npm que nous avons ajouté"
-  },
-    "page": {
-      "back": "Retour",
-      "api-to-translate-example": "Ce message est traduit en utilisant directement l'API react-intl",
-      "fetch-github-avatar": "Affiche l'avatar github",
-      "add-github-username": "Entrer un username github"
-    }
+    "welcome": "Bienvenue sur Falco !"
+  }
 }
