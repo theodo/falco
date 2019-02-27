@@ -1,6 +1,10 @@
 import * as React from 'react';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { PageType } from 'redux/pages/types';
-import AuditResult from 'components/AuditResult';
+import Style from './PageMetric.style';
+import AuditResultsContainer from './AuditResultsContainer';
 
 export type OwnProps = {
   pageId: string;
@@ -8,31 +12,29 @@ export type OwnProps = {
 
 type Props = {
   page?: PageType;
-  fetchAuditResultsRequest: (pageId: string) => void;
 } & OwnProps;
 
-class PageMetric extends React.PureComponent<Props> {
-  componentDidMount() {
-    this.props.fetchAuditResultsRequest(this.props.pageId);
-  }
-
-  render() {
-    const { page } = this.props;
-    if (!page) return null;
-    return (
-      <React.Fragment>
-        <div>
-          {page.name}{' '}
-          <a href={page.url} target="_blank">
-            Link
-          </a>
-        </div>
-        {page.audits.map(auditId => (
-          <AuditResult key={auditId} auditId={auditId} />
-        ))}
-      </React.Fragment>
-    );
-  }
-}
+const PageMetric: React.FunctionComponent<Props> = ({ page, pageId }) => {
+  const [isExpanded, setIsExpanded] = React.useState(false);
+  if (!page) return null;
+  return (
+    <Style.Container>
+      <Style.Title isExpanded={isExpanded}>
+        {page.name}
+        <Style.PageLink href={page.url} target="_blank">
+          <OpenInNewIcon />
+        </Style.PageLink>
+        <Style.TitleExpander>
+          {isExpanded ? (
+            <KeyboardArrowDownIcon onClick={() => setIsExpanded(!isExpanded)} />
+          ) : (
+            <KeyboardArrowRightIcon onClick={() => setIsExpanded(!isExpanded)} />
+          )}
+        </Style.TitleExpander>
+      </Style.Title>
+      {isExpanded && <AuditResultsContainer pageId={pageId} />}
+    </Style.Container>
+  );
+};
 
 export default PageMetric;
