@@ -1,4 +1,3 @@
-// @flow
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { makeGetRequest } from 'services/networking/request';
 import { ActionType, getType } from 'typesafe-actions';
