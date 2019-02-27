@@ -2,42 +2,38 @@
 
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <base href="/" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>falco</title>
+  </head>
 
-<head>
-  <base href="/">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>falco</title>
-</head>
-
-<body>
-  <div id="root"></div>
-  {% if debug %}
-  <script type="text/javascript">
+  <body style="margin: 0;">
+    <div id="root"></div>
+    {% if debug %}
+    <script type="text/javascript">
       // In development, we dynamically load the entry chunks into the dom.
       // To do so, we load the webpack-generated manifest, filter it to only
       // keep the initial chunks, and insert them in the dom.
       fetch("http://localhost:3000/static-manifest.json")
-          .then(function(response) {
-              return response.json();
-          })
-          .then(function(manifest) {
-              for (var chunkName in manifest) {
-                  var chunk = manifest[chunkName];
-                  if (chunk.isInitial && chunk.path.match(/.*\.js$/)) {
-                      var script = document.createElement('script');
-                      script.type = 'text/javascript';
-                      script.src = 'http://localhost:3000/' + chunk.path;
-                      document.getElementsByTagName('head')[0].appendChild(script);
-                  }
-              }
-          });
-  </script>
-  {% else %}
-  {% for script in initial_scripts %}
-  <script src="{% static script %}"></script>
-  {% endfor %}
-  {% endif %}
-</body>
-
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(manifest) {
+          for (var chunkName in manifest) {
+            var chunk = manifest[chunkName];
+            if (chunk.isInitial && chunk.path.match(/.*\.js$/)) {
+              var script = document.createElement("script");
+              script.type = "text/javascript";
+              script.src = "http://localhost:3000/" + chunk.path;
+              document.getElementsByTagName("head")[0].appendChild(script);
+            }
+          }
+        });
+    </script>
+    {% else %} {% for script in initial_scripts %}
+    <script src="{% static script %}"></script>
+    {% endfor %} {% endif %}
+  </body>
 </html>
