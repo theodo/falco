@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import PageMetric, { Props } from './PageMetric';
+import PageMetric, { OwnProps } from './PageMetric';
 import { RootState } from 'redux/types';
 import { fetchAuditResultsRequest } from 'redux/auditResults';
 
-const mapStateToProps = (state: RootState, props: Props) => ({
+const mapStateToProps = (state: RootState, props: OwnProps) => ({
   page: state.pages.byId[props.pageId],
 });
 

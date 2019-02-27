@@ -2,11 +2,14 @@ import * as React from 'react';
 import { PageType } from 'redux/pages/types';
 import AuditResult from 'components/AuditResult';
 
-export type Props = {
+export type OwnProps = {
   pageId: string;
+};
+
+type Props = {
   page?: PageType;
   fetchAuditResultsRequest: (pageId: string) => void;
-};
+} & OwnProps;
 
 class PageMetric extends React.Component<Props> {
   componentDidMount() {

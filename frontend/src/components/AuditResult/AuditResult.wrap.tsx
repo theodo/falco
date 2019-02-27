@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import AuditResult, { Props } from './AuditResult';
+import AuditResult, { OwnProps } from './AuditResult';
 import { RootState } from 'redux/types';
 
-const mapStateToProps = (state: RootState, props: Props) => ({
+const mapStateToProps = (state: RootState, props: OwnProps) => ({
   auditResult: state.auditResults.byAuditId[props.auditId],
 });
 

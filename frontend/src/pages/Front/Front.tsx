@@ -3,14 +3,14 @@ import { RouteComponentProps } from 'react-router';
 import { ProjectType } from 'redux/projects/types';
 import PageMetric from 'components/PageMetric';
 
-type Params = {
+export type OwnProps = {} & RouteComponentProps<{
   projectId: string;
-};
+}>;
 
-export type Props = {
+type Props = {
   fetchProjectRequest: (projectId: string) => void;
   project?: ProjectType;
-} & RouteComponentProps<Params>;
+} & OwnProps;
 
 class Front extends React.Component<Props> {
   componentDidMount() {
