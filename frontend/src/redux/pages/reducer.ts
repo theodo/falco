@@ -7,7 +7,7 @@ import { PageType } from './types';
 export type pagesAction = ActionType<typeof fetchPagesSuccess>;
 
 export type pagesState = Readonly<{
-  byId: Record<string, PageType>;
+  byId: Readonly<Record<string, PageType>>;
 }>;
 
 const initialState: pagesState = { byId: {} };

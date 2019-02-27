@@ -7,7 +7,7 @@ import { AuditResultType } from './types';
 export type auditResultsAction = ActionType<typeof fetchAuditResultsSuccess>;
 
 export type auditResultsState = Readonly<{
-  byAuditId: Record<string, AuditResultType>;
+  byAuditId: Readonly<Record<string, AuditResultType>>;
 }>;
 
 const initialState: auditResultsState = { byAuditId: {} };

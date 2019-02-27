@@ -7,7 +7,7 @@ import { ProjectType } from './types';
 export type projectsAction = ActionType<typeof fetchProjectSuccess>;
 
 export type projectsState = Readonly<{
-  byId: Record<string, ProjectType>;
+  byId: Readonly<Record<string, ProjectType>>;
 }>;
 
 const initialState: projectsState = { byId: {} };
