@@ -23,6 +23,7 @@ class AuditResultsSerializer(serializers.ModelSerializer):
         model = AuditResults
         fields = (
             "audit",
+            "created_at",
             "wpt_results_json_url",
             "wpt_metric_first_view_tti",
             "wpt_metric_repeat_view_tti",

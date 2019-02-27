@@ -1,4 +1,5 @@
 import { ApiAuditResultType } from './types';
+import dayjs from 'dayjs';
 
 export const modelizeAuditResults = (auditResults: ApiAuditResultType[]) => {
   return auditResults.reduce((auditResultsById, auditResult) => {
@@ -6,6 +7,7 @@ export const modelizeAuditResults = (auditResults: ApiAuditResultType[]) => {
       ...auditResultsById,
       [auditResult.audit.uuid]: {
         auditId: auditResult.audit.uuid,
+        createdAt: dayjs(auditResult.created_at),
         wptResultsJsonUrl: auditResult.wpt_results_json_url,
         wptMetricFirstViewTti: auditResult.wpt_metric_first_view_tti,
         wptMetricRepeatViewTti: auditResult.wpt_metric_repeat_view_tti,

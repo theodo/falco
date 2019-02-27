@@ -1,5 +1,8 @@
+import dayjs from 'dayjs';
+
 export type AuditResultType = {
   auditId: string;
+  createdAt: dayjs.Dayjs;
   wptResultsJsonUrl: string;
   wptMetricFirstViewTti: number;
   wptMetricRepeatViewTti: number;
@@ -23,6 +26,7 @@ export type ApiAuditResultType = {
     uuid: string;
     page: string;
   };
+  created_at: string;
   wpt_results_json_url: string;
   wpt_metric_first_view_tti: number;
   wpt_metric_repeat_view_tti: number;

@@ -1,5 +1,10 @@
 {
   "home": {
     "welcome": "Bienvenue sur Falco !"
+  },
+  "components": {
+    "AuditResult": {
+      "tti": "<b>TTI</b> du {date} = {time} sec."
+    }
   }
 }
