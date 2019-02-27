@@ -12,22 +12,23 @@ type Props = {
   fetchAuditResultsRequest: (pageId: string) => void;
 } & OwnProps;
 
-class AuditResultsContainer extends React.PureComponent<Props> {
-  componentDidMount() {
-    this.props.fetchAuditResultsRequest(this.props.pageId);
-  }
+const AuditResultsContainer: React.FunctionComponent<Props> = props => {
+  const { fetchAuditResultsRequest, page, pageId } = props;
+  React.useEffect(
+    () => {
+      fetchAuditResultsRequest(pageId);
+    },
+    [pageId],
+  );
 
-  render() {
-    const { page } = this.props;
-    if (!page) return <div>Loading...</div>;
-    return (
-      <Style.Container>
-        {page.audits.map(auditId => (
-          <AuditResult key={auditId} auditId={auditId} />
-        ))}
-      </Style.Container>
-    );
-  }
-}
+  if (!page) return <div>Loading...</div>;
+  return (
+    <Style.Container>
+      {page.audits.map(auditId => (
+        <AuditResult key={auditId} auditId={auditId} />
+      ))}
+    </Style.Container>
+  );
+};
 
 export default AuditResultsContainer;
