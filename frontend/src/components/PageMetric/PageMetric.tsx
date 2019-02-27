@@ -11,7 +11,7 @@ type Props = {
   fetchAuditResultsRequest: (pageId: string) => void;
 } & OwnProps;
 
-class PageMetric extends React.Component<Props> {
+class PageMetric extends React.PureComponent<Props> {
   componentDidMount() {
     this.props.fetchAuditResultsRequest(this.props.pageId);
   }

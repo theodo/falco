@@ -9,7 +9,7 @@ type Props = {
   auditResult?: AuditResultType;
 } & OwnProps;
 
-class AuditResult extends React.Component<Props> {
+class AuditResult extends React.PureComponent<Props> {
   render() {
     const { auditResult } = this.props;
     if (!auditResult) return null;

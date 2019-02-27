@@ -12,7 +12,7 @@ type Props = {
   project?: ProjectType;
 } & OwnProps;
 
-class Front extends React.Component<Props> {
+class Front extends React.PureComponent<Props> {
   componentDidMount() {
     this.props.fetchProjectRequest(this.props.match.params.projectId);
   }
