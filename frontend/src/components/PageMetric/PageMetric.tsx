@@ -4,7 +4,8 @@ import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { PageType } from 'redux/pages/types';
 import Style from './PageMetric.style';
-import AuditResultsContainer from './AuditResultsContainer';
+
+const AuditResultsContainer = React.lazy(() => import('./AuditResultsContainer'));
 
 export type OwnProps = {
   pageId: string;
@@ -32,7 +33,9 @@ const PageMetric: React.FunctionComponent<Props> = ({ page, pageId }) => {
           )}
         </Style.TitleExpander>
       </Style.Title>
-      {isExpanded && <AuditResultsContainer pageId={pageId} />}
+      <React.Suspense fallback={null}>
+        {isExpanded && <AuditResultsContainer pageId={pageId} />}
+      </React.Suspense>
     </Style.Container>
   );
 };

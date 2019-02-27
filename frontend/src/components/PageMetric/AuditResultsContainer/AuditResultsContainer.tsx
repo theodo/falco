@@ -2,6 +2,7 @@ import * as React from 'react';
 import { PageType } from 'redux/pages/types';
 import AuditResult from 'components/AuditResult';
 import Style from './AuditResultsContainer.style';
+import AuditResultsGraph from '../AuditResultsGraph';
 
 export type OwnProps = {
   pageId: string;
@@ -24,6 +25,7 @@ const AuditResultsContainer: React.FunctionComponent<Props> = props => {
   if (!page) return <div>Loading...</div>;
   return (
     <Style.Container>
+      <AuditResultsGraph auditResultIds={page.audits} />
       {page.audits.map(auditId => (
         <AuditResult key={auditId} auditId={auditId} />
       ))}
