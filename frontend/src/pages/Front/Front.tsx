@@ -14,25 +14,26 @@ type Props = {
   project?: ProjectType;
 } & OwnProps;
 
-class Front extends React.PureComponent<Props> {
-  componentDidMount() {
-    this.props.fetchProjectRequest(this.props.match.params.projectId);
-  }
+const Front: React.FunctionComponent<Props> = props => {
+  const { fetchProjectRequest, project, match } = props;
+  React.useEffect(
+    () => {
+      fetchProjectRequest(match.params.projectId);
+    },
+    [match.params.projectId],
+  );
 
-  render() {
-    const { project } = this.props;
-    if (!project) return <div>Loading...</div>;
-    return (
-      <Style.Container>
-        <Style.ProjectTitle>
-          <Typography variant="h4">{project.name}</Typography>
-        </Style.ProjectTitle>
-        {project.pages.map(pageId => (
-          <PageMetric key={pageId} pageId={pageId} />
-        ))}
-      </Style.Container>
-    );
-  }
-}
+  if (!project) return <div>Loading...</div>;
+  return (
+    <Style.Container>
+      <Style.ProjectTitle>
+        <Typography variant="h4">{project.name}</Typography>
+      </Style.ProjectTitle>
+      {project.pages.map(pageId => (
+        <PageMetric key={pageId} pageId={pageId} />
+      ))}
+    </Style.Container>
+  );
+};
 
 export default Front;
