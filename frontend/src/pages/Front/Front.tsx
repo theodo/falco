@@ -1,7 +1,9 @@
+import Typography from '@material-ui/core/Typography';
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { ProjectType } from 'redux/projects/types';
 import PageMetric from 'components/PageMetric';
+import Style from './Front.style';
 
 export type OwnProps = {} & RouteComponentProps<{
   projectId: string;
@@ -21,14 +23,14 @@ class Front extends React.PureComponent<Props> {
     const { project } = this.props;
     if (!project) return <div>Loading...</div>;
     return (
-      <React.Fragment>
-        <div>{project.name}</div>
-        <div>
-          {project.pages.map(pageId => (
-            <PageMetric key={pageId} pageId={pageId} />
-          ))}
-        </div>
-      </React.Fragment>
+      <Style.Container>
+        <Style.ProjectTitle>
+          <Typography variant="h4">{project.name}</Typography>
+        </Style.ProjectTitle>
+        {project.pages.map(pageId => (
+          <PageMetric key={pageId} pageId={pageId} />
+        ))}
+      </Style.Container>
     );
   }
 }

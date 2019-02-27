@@ -1,7 +1,14 @@
 import styled from 'styled-components';
 
-const StyledIntro = styled.div`
-  font-size: large;
-`;
+const Style = {
+  Container: styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  `,
+  ProjectTitle: styled.div`
+    margin: 20px;
+  `,
+};
 
-export default StyledIntro;
+export default Style;
