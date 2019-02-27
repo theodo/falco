@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "3.5.1",
     "@material-ui/icons": "^3.0.2",
+    "@types/victory": "^31.0.9",
     "babel-polyfill": "6.26.0",
     "connected-react-router": "5.0.1",
     "dayjs": "^1.8.8",
@@ -24,7 +25,8 @@
     "redux-saga": "0.16.2",
     "styled-components": "4.1.1",
     "superagent": "4.0.0",
-    "typesafe-actions": "^3.0.0"
+    "typesafe-actions": "^3.0.0",
+    "victory": "^31.3.0"
   },
   "scripts": {
     "start": "react-app-rewired start",
