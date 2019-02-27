@@ -75,7 +75,7 @@ def request_audit(audit_uuid):
         "f": "json",
         "lighthouse": 1,
         "k": webpagetest_api_key,
-        "runs": 5,
+        "runs": 10,
     }
     r = requests.post("http://www.webpagetest.org/runtest.php", params=payload)
     response = r.json()
