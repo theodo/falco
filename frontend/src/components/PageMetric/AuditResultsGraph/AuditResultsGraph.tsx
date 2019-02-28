@@ -25,11 +25,10 @@ const AuditResultsGraph: React.FunctionComponent<Props> = props => {
 
   return (
     <Style.Container>
-      <VictoryChart>
+      <VictoryChart height={250} padding={{ top: 10, bottom: 20, left: 40, right: 20 }}>
         <VictoryLine
           style={{
             data: { stroke: '#c43a31' },
-            parent: { border: '1px solid #ccc' },
           }}
           data={auditResults}
         />

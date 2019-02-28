@@ -4,6 +4,7 @@ import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { PageType } from 'redux/pages/types';
 import Style from './PageMetric.style';
+import { Typography } from '@material-ui/core';
 
 const AuditResultsContainer = React.lazy(() => import('./AuditResultsContainer'));
 
@@ -21,7 +22,7 @@ const PageMetric: React.FunctionComponent<Props> = ({ page, pageId }) => {
   return (
     <Style.Container>
       <Style.Title isExpanded={isExpanded}>
-        {page.name}
+        <Typography color="inherit">{page.name}</Typography>
         <Style.PageLink href={page.url} target="_blank">
           <OpenInNewIcon />
         </Style.PageLink>
