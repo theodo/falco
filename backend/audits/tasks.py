@@ -1,10 +1,7 @@
-import os
-
 import requests
 
 from audits.models import Audit, AuditResults, AuditStatusHistory, AvailableStatuses
 from celery import shared_task
-from django.core.exceptions import ImproperlyConfigured
 from projects.models import Page
 
 
@@ -54,18 +51,8 @@ def format_wpt_json_results(data):
 
 @shared_task
 def request_audit(audit_uuid):
-    webpagetest_api_key = os.environ.get("WEBPAGETEST_API_KEY")
-    if webpagetest_api_key is None:
-        raise (
-            ImproperlyConfigured(
-                """
-            Please provide a WebPageTest API Key under
-            the WEBPAGETEST_API_KEY environment variable
-        """
-            )
-        )
-
     audit = Audit.objects.get(uuid=audit_uuid)
+    webpagetest_api_key = audit.page.project.wpt_api_key
     audit_status_requested = AuditStatusHistory(
         audit=audit, status=AvailableStatuses.REQUESTED.value
     )
