@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { shallow } from 'enzyme';
 
@@ -13,7 +12,7 @@ describe('<Input>', () => {
       field: {
         value: 'La barbe de la femme à Georges Moustaki',
         onChange: value => null,
-      }
+      },
     };
     const tree = shallow(<Input {...props} />);
     expect(tree).toMatchSnapshot();
@@ -28,7 +27,7 @@ describe('<Input>', () => {
       field: {
         value: 'La barbe de la femme à Georges Moustaki',
         onChange: value => null,
-      }
+      },
     };
     const tree = shallow(<Input {...props} />);
     expect(tree).toMatchSnapshot();

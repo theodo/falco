@@ -7,8 +7,7 @@ import fr from 'react-intl/locale-data/fr';
 import { flattenMessages } from 'services/i18n/intl';
 import enMessages from 'translations/en.json';
 import frMessages from 'translations/fr.json';
-import logo from './pudding.png';
-import StyledRoot from './Root.style';
+import Style from './Root.style';
 
 const locales = {
   fr: flattenMessages(frMessages),
@@ -23,15 +22,14 @@ interface Props {
 
 const Root: React.SFC<Props> = ({ children }) => (
   <IntlProvider locale="fr" messages={locales.fr}>
-    <StyledRoot>
-      <div className="header">
-        <img src={logo} className="logo" alt="logo" />
-        <Typography variant="h2" color="primary">
-          Welcome to Seed
+    <Style.Container>
+      <Style.Header>
+        <Typography variant="subtitle1" color="inherit">
+          FALCO
         </Typography>
-      </div>
+      </Style.Header>
       {children}
-    </StyledRoot>
+    </Style.Container>
   </IntlProvider>
 );
 
