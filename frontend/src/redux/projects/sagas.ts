@@ -6,18 +6,22 @@ import { fetchPagesSuccess } from 'redux/pages';
 import { modelizePages } from 'redux/pages/modelizer';
 import { ApiProjectType } from './types';
 import { modelizeProject } from './modelizer';
+import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
+
+function* fetchProjectFailedHandler(error: Error) {
+  yield put(fetchProjectError({ errorMessage: error.message }));
+}
 
 export function* fetchProject(action: ActionType<typeof fetchProjectRequest>) {
   const endpoint = `/projects/${action.payload.projectId}/`;
-  try {
-    const { body: project }: { body: ApiProjectType } = yield call(makeGetRequest, endpoint);
-    yield put(fetchProjectSuccess({ byId: modelizeProject(project) }));
-    yield put(fetchPagesSuccess({ byId: modelizePages(project.pages) }));
-  } catch (error) {
-    yield put(fetchProjectError({ errorMessage: error.message }));
-  }
+  const { body: project }: { body: ApiProjectType } = yield call(makeGetRequest, endpoint);
+  yield put(fetchProjectSuccess({ byId: modelizeProject(project) }));
+  yield put(fetchPagesSuccess({ byId: modelizePages(project.pages) }));
 }
 
 export default function* projectsSaga() {
-  yield takeEvery(getType(fetchProjectRequest), fetchProject);
+  yield takeEvery(
+    getType(fetchProjectRequest),
+    handleAPIExceptions(fetchProject, fetchProjectFailedHandler),
+  );
 }

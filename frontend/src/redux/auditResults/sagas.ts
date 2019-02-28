@@ -8,24 +8,28 @@ import {
 } from './actions';
 import { modelizeAuditResults } from './modelizer';
 import { ApiAuditResultType } from './types';
+import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
+
+function* fetchAuditResultsFailedHandler(error: Error) {
+  yield put(fetchAuditResultsError({ errorMessage: error.message }));
+}
 
 export function* fetchAuditResults(action: ActionType<typeof fetchAuditResultsRequest>) {
   const endpoint = `/audits/results`;
   const { pageId } = action.payload;
-  try {
-    const { body: auditResults }: { body: ApiAuditResultType[] } = yield call(
-      makeGetRequest,
-      endpoint,
-      {
-        page: pageId,
-      },
-    );
-    yield put(fetchAuditResultsSuccess({ byAuditId: modelizeAuditResults(auditResults) }));
-  } catch (error) {
-    yield put(fetchAuditResultsError({ errorMessage: error.message }));
-  }
+  const { body: auditResults }: { body: ApiAuditResultType[] } = yield call(
+    makeGetRequest,
+    endpoint,
+    {
+      page: pageId,
+    },
+  );
+  yield put(fetchAuditResultsSuccess({ byAuditId: modelizeAuditResults(auditResults) }));
 }
 
 export default function* projectsSaga() {
-  yield takeEvery(getType(fetchAuditResultsRequest), fetchAuditResults);
+  yield takeEvery(
+    getType(fetchAuditResultsRequest),
+    handleAPIExceptions(fetchAuditResults, fetchAuditResultsFailedHandler),
+  );
 }
