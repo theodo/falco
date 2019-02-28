@@ -18,13 +18,13 @@ const AuditResult: React.FunctionComponent<Props> = props => {
   const { auditResult } = props;
   if (!auditResult) return null;
   return (
-    <Style.Container isOk={auditResult.wptMetricRepeatViewTti < STANDARD_TIME}>
+    <Style.Container isOk={auditResult.WPTMetricRepeatViewTTI < STANDARD_TIME}>
       <Typography color="inherit">
         <FormattedHTMLMessage
-          id="components.AuditResult.tti"
+          id="components.AuditResult.TTI"
           values={{
             date: auditResult.createdAt.format('DD/MM/YYYY'),
-            time: auditResult.wptMetricRepeatViewTti / 1000,
+            time: auditResult.WPTMetricRepeatViewTTI / 1000,
           }}
         />
       </Typography>

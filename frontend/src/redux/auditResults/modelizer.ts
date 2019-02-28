@@ -10,26 +10,26 @@ export const modelizeAuditResults = (
       [auditResult.audit.uuid]: {
         auditId: auditResult.audit.uuid,
         createdAt: dayjs(auditResult.created_at),
-        wptResultsJsonUrl: auditResult.wpt_results_json_url,
-        wptMetricFirstViewTti: auditResult.wpt_metric_first_view_tti,
-        wptMetricRepeatViewTti: auditResult.wpt_metric_repeat_view_tti,
-        wptMetricFirstViewSpeedIndex: auditResult.wpt_metric_first_view_speed_index,
-        wptMetricRepeatViewSpeedIndex: auditResult.wpt_metric_repeat_view_speed_index,
-        wptMetricFirstViewFirstPaint: auditResult.wpt_metric_first_view_first_paint,
-        wptMetricRepeatViewFirstPaint: auditResult.wpt_metric_repeat_view_first_paint,
-        wptMetricFirstViewFirstMeaningfulPaint:
+        WPTResultsJsonUrl: auditResult.wpt_results_json_url,
+        WPTMetricFirstViewTTI: auditResult.wpt_metric_first_view_tti,
+        WPTMetricRepeatViewTTI: auditResult.wpt_metric_repeat_view_tti,
+        WPTMetricFirstViewSpeedIndex: auditResult.wpt_metric_first_view_speed_index,
+        WPTMetricRepeatViewSpeedIndex: auditResult.wpt_metric_repeat_view_speed_index,
+        WPTMetricFirstViewFirstPaint: auditResult.wpt_metric_first_view_first_paint,
+        WPTMetricRepeatViewFirstPaint: auditResult.wpt_metric_repeat_view_first_paint,
+        WPTMetricFirstViewFirstMeaningfulPaint:
           auditResult.wpt_metric_first_view_first_meaningful_paint,
-        wptMetricRepeatViewFirstMeaningfulPaint:
+        WPTMetricRepeatViewFirstMeaningfulPaint:
           auditResult.wpt_metric_repeat_view_first_meaningful_paint,
-        wptMetricFirstViewLoadTime: auditResult.wpt_metric_first_view_load_time,
-        wptMetricRepeatViewLoadTime: auditResult.wpt_metric_repeat_view_load_time,
-        wptMetricFirstViewFirstContentfulPaint:
+        WPTMetricFirstViewLoadTime: auditResult.wpt_metric_first_view_load_time,
+        WPTMetricRepeatViewLoadTime: auditResult.wpt_metric_repeat_view_load_time,
+        WPTMetricFirstViewFirstContentfulPaint:
           auditResult.wpt_metric_first_view_first_contentful_paint,
-        wptMetricRepeatViewFirstContentfulPaint:
+        WPTMetricRepeatViewFirstContentfulPaint:
           auditResult.wpt_metric_repeat_view_first_contentful_paint,
-        wptMetricFirstViewTimeToFirstByte: auditResult.wpt_metric_first_view_time_to_first_byte,
-        wptMetricRepeatViewTimeToFirstByte: auditResult.wpt_metric_repeat_view_time_to_first_byte,
-        wptMetricLighthousePerformance: auditResult.wpt_metric_lighthouse_performance,
+        WPTMetricFirstViewTimeToFirstByte: auditResult.wpt_metric_first_view_time_to_first_byte,
+        WPTMetricRepeatViewTimeToFirstByte: auditResult.wpt_metric_repeat_view_time_to_first_byte,
+        WPTMetricLighthousePerformance: auditResult.wpt_metric_lighthouse_performance,
       },
     };
   }, {});

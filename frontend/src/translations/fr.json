@@ -7,7 +7,7 @@
   },
   "components": {
     "AuditResult": {
-      "tti": "<b>TTI</b> du {date} = {time} sec."
+      "TTI": "<b>TTI</b> du {date} = {time} sec."
     }
   }
 }

@@ -3,22 +3,22 @@ import dayjs from 'dayjs';
 export type AuditResultType = {
   auditId: string;
   createdAt: dayjs.Dayjs;
-  wptResultsJsonUrl: string;
-  wptMetricFirstViewTti: number;
-  wptMetricRepeatViewTti: number;
-  wptMetricFirstViewSpeedIndex: number;
-  wptMetricRepeatViewSpeedIndex: number;
-  wptMetricFirstViewFirstPaint: number;
-  wptMetricRepeatViewFirstPaint: number;
-  wptMetricFirstViewFirstMeaningfulPaint: number;
-  wptMetricRepeatViewFirstMeaningfulPaint: number;
-  wptMetricFirstViewLoadTime: number;
-  wptMetricRepeatViewLoadTime: number;
-  wptMetricFirstViewFirstContentfulPaint: number;
-  wptMetricRepeatViewFirstContentfulPaint: number;
-  wptMetricFirstViewTimeToFirstByte: number;
-  wptMetricRepeatViewTimeToFirstByte: number;
-  wptMetricLighthousePerformance: number;
+  WPTResultsJsonUrl: string;
+  WPTMetricFirstViewTTI: number;
+  WPTMetricRepeatViewTTI: number;
+  WPTMetricFirstViewSpeedIndex: number;
+  WPTMetricRepeatViewSpeedIndex: number;
+  WPTMetricFirstViewFirstPaint: number;
+  WPTMetricRepeatViewFirstPaint: number;
+  WPTMetricFirstViewFirstMeaningfulPaint: number;
+  WPTMetricRepeatViewFirstMeaningfulPaint: number;
+  WPTMetricFirstViewLoadTime: number;
+  WPTMetricRepeatViewLoadTime: number;
+  WPTMetricFirstViewFirstContentfulPaint: number;
+  WPTMetricRepeatViewFirstContentfulPaint: number;
+  WPTMetricFirstViewTimeToFirstByte: number;
+  WPTMetricRepeatViewTimeToFirstByte: number;
+  WPTMetricLighthousePerformance: number;
 };
 
 export type ApiAuditResultType = {

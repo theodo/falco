@@ -10,7 +10,7 @@ export const selectAuditResultsAsGraphData = (
       return (
         state.auditResults.byAuditId[auditResult] && {
           x: state.auditResults.byAuditId[auditResult].createdAt.toDate(),
-          y: state.auditResults.byAuditId[auditResult].wptMetricRepeatViewTti,
+          y: state.auditResults.byAuditId[auditResult].WPTMetricRepeatViewTTI,
         }
       );
     })
