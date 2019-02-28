@@ -1,4 +1,4 @@
-import { ApiProjectType } from './types';
+import { ApiProjectType, ProjectType } from './types';
 
 export const modelizeProject = (project: ApiProjectType) => ({
   [project.uuid]: {
@@ -7,3 +7,13 @@ export const modelizeProject = (project: ApiProjectType) => ({
     pages: project.pages.map(page => page.uuid),
   },
 });
+
+export const modelizeProjects = (projects: ApiProjectType[]) => {
+  return projects.reduce(
+    (projectsById, project) => ({
+      ...projectsById,
+      ...modelizeProject(project),
+    }),
+    {},
+  );
+};

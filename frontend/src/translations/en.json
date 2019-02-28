@@ -2,6 +2,9 @@
   "home": {
     "welcome": "Welcome to Falco!"
   },
+  "Projects": {
+    "title": "Projects"
+  },
   "components": {
     "AuditResult": {
       "tti": "<b>TTI</b> of the {date} = {time} sec."
