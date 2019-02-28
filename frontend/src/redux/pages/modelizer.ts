@@ -8,7 +8,6 @@ export const modelizePages = (pages: PageType[]) => {
         uuid: page.uuid,
         name: page.name,
         url: page.url,
-        audits: page.audits,
       },
     };
   }, {});

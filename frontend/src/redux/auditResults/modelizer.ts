@@ -1,7 +1,9 @@
-import { ApiAuditResultType } from './types';
+import { ApiAuditResultType, AuditResultType } from './types';
 import dayjs from 'dayjs';
 
-export const modelizeAuditResults = (auditResults: ApiAuditResultType[]) => {
+export const modelizeAuditResults = (
+  auditResults: ApiAuditResultType[],
+): Record<string, AuditResultType> => {
   return auditResults.reduce((auditResultsById, auditResult) => {
     return {
       ...auditResultsById,
@@ -31,4 +33,13 @@ export const modelizeAuditResults = (auditResults: ApiAuditResultType[]) => {
       },
     };
   }, {});
+};
+
+export const getSortAuditResultsId = (auditResults: AuditResultType[]) => {
+  return auditResults
+    .sort(
+      (firstAuditResult, secondAuditResult) =>
+        secondAuditResult.createdAt.valueOf() - firstAuditResult.createdAt.valueOf(),
+    )
+    .map(auditResult => auditResult.auditId);
 };

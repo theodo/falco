@@ -6,7 +6,7 @@ import {
   fetchAuditResultsSuccess,
   fetchAuditResultsError,
 } from './actions';
-import { modelizeAuditResults } from './modelizer';
+import { modelizeAuditResults, getSortAuditResultsId } from './modelizer';
 import { ApiAuditResultType } from './types';
 import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
 
@@ -24,7 +24,16 @@ export function* fetchAuditResults(action: ActionType<typeof fetchAuditResultsRe
       page: pageId,
     },
   );
-  yield put(fetchAuditResultsSuccess({ byAuditId: modelizeAuditResults(auditResults) }));
+  const modelizedAuditResults = modelizeAuditResults(auditResults);
+  const sortedAuditResultsIds = getSortAuditResultsId(
+    Object.keys(modelizedAuditResults).map(auditId => modelizedAuditResults[auditId]),
+  );
+  yield put(
+    fetchAuditResultsSuccess({
+      byAuditId: modelizedAuditResults,
+      sortedByPageId: { [pageId]: sortedAuditResultsIds },
+    }),
+  );
 }
 
 export default function* projectsSaga() {

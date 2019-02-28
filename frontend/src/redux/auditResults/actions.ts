@@ -10,6 +10,7 @@ export const fetchAuditResultsSuccess = createStandardAction(
   'auditResults/FETCH_AUDIT_RESULTS_SUCCESS',
 )<{
   byAuditId: Record<string, AuditResultType>;
+  sortedByPageId: Record<string, string[]>;
 }>();
 export const fetchAuditResultsError = createStandardAction(
   'auditResults/FETCH_AUDIT_RESULTS_ERROR',

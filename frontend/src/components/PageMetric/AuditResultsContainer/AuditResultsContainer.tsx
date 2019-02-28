@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { PageType } from 'redux/pages/types';
 import AuditResult from 'components/AuditResult';
 import Style from './AuditResultsContainer.style';
 import AuditResultsGraph from '../AuditResultsGraph';
@@ -9,12 +8,12 @@ export type OwnProps = {
 };
 
 type Props = {
-  page?: PageType;
+  sortedAuditResultsIds?: string[];
   fetchAuditResultsRequest: (pageId: string) => void;
 } & OwnProps;
 
 const AuditResultsContainer: React.FunctionComponent<Props> = props => {
-  const { fetchAuditResultsRequest, page, pageId } = props;
+  const { fetchAuditResultsRequest, sortedAuditResultsIds, pageId } = props;
   React.useEffect(
     () => {
       fetchAuditResultsRequest(pageId);
@@ -22,11 +21,11 @@ const AuditResultsContainer: React.FunctionComponent<Props> = props => {
     [pageId],
   );
 
-  if (!page) return <div>Loading...</div>;
+  if (!sortedAuditResultsIds || sortedAuditResultsIds.length === 0) return <div>Loading...</div>;
   return (
     <Style.Container>
-      <AuditResultsGraph auditResultIds={page.audits} />
-      {page.audits.map(auditId => (
+      <AuditResultsGraph auditResultIds={sortedAuditResultsIds} />
+      {sortedAuditResultsIds.map(auditId => (
         <AuditResult key={auditId} auditId={auditId} />
       ))}
     </Style.Container>
