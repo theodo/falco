@@ -1,8 +1,9 @@
 import * as React from 'react';
 import Style from './AuditResultsGraph.style';
 import dayjs from 'dayjs';
-import { VictoryChart, VictoryAxis, VictoryLine } from 'victory';
+import { VictoryChart, VictoryAxis, VictoryLine, VictoryTheme } from 'victory';
 import { MetricType } from 'redux/auditResults/types';
+import { METRICS } from 'redux/auditResults/constants';
 
 export type OwnProps = {
   auditResultIds: string[];
@@ -19,24 +20,19 @@ type Props = {
 } & OwnProps;
 
 const AuditResultsGraph: React.FunctionComponent<Props> = props => {
-  const { auditResults } = props;
-  if (!auditResults || auditResults.length === 0) return <div>Loading...</div>;
+  const { auditResults, metric } = props;
+  if (!auditResults || auditResults.length === 0) {
+    return <div>Loading...</div>;
+  }
+  const maxValue = Math.max(...auditResults.map(result => result.y));
+  const maxDomain = maxValue + 0.2 * maxValue;
 
   return (
     <Style.Container>
-      <VictoryChart height={250} padding={{ top: 10, bottom: 20, left: 40, right: 20 }}>
-        <VictoryLine
-          style={{
-            data: { stroke: '#c43a31' },
-          }}
-          data={auditResults}
-        />
-        <VictoryAxis dependentAxis style={{ tickLabels: { fontSize: '10px' } }} />
-        <VictoryAxis
-          tickFormat={tick => dayjs(tick).format('DD/MM')}
-          scale={{ x: 'time' }}
-          style={{ tickLabels: { fontSize: '10px' } }}
-        />
+      <VictoryChart theme={VictoryTheme.material} domain={{ y: [0, maxDomain] }}>
+        <VictoryLine data={auditResults} />
+        <VictoryAxis dependentAxis />
+        <VictoryAxis tickFormat={tick => dayjs(tick).format('DD/MM')} scale={{ x: 'time' }} />
       </VictoryChart>
     </Style.Container>
   );

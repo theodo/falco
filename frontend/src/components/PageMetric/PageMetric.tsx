@@ -21,7 +21,9 @@ type Props = {
 const PageMetric: React.FunctionComponent<Props> = props => {
   const { page, pageId, metric } = props;
   const [isExpanded, setIsExpanded] = React.useState(false);
-  if (!page) return null;
+  if (!page) {
+    return null;
+  }
   return (
     <Style.Container>
       <Style.Title isExpanded={isExpanded}>

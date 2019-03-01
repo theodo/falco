@@ -34,7 +34,9 @@ const getDisplayMetricComponent = (auditResult: AuditResultType, metric: MetricT
 
 const AuditResult: React.FunctionComponent<Props> = props => {
   const { auditResult, metric } = props;
-  if (!auditResult) return null;
+  if (!auditResult) {
+    return null;
+  }
   return (
     <Style.Container>
       <Typography color="inherit">
