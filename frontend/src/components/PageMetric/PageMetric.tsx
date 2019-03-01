@@ -5,18 +5,21 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { PageType } from 'redux/pages/types';
 import Style from './PageMetric.style';
 import { Typography } from '@material-ui/core';
+import { MetricType } from 'redux/auditResults/types';
 
 const AuditResultsContainer = React.lazy(() => import('./AuditResultsContainer'));
 
 export type OwnProps = {
   pageId: string;
+  metric: MetricType;
 };
 
 type Props = {
   page?: PageType;
 } & OwnProps;
 
-const PageMetric: React.FunctionComponent<Props> = ({ page, pageId }) => {
+const PageMetric: React.FunctionComponent<Props> = props => {
+  const { page, pageId, metric } = props;
   const [isExpanded, setIsExpanded] = React.useState(false);
   if (!page) return null;
   return (
@@ -35,7 +38,7 @@ const PageMetric: React.FunctionComponent<Props> = ({ page, pageId }) => {
         </Style.TitleExpander>
       </Style.Title>
       <React.Suspense fallback={null}>
-        {isExpanded && <AuditResultsContainer pageId={pageId} />}
+        {isExpanded && <AuditResultsContainer pageId={pageId} metric={metric} />}
       </React.Suspense>
     </Style.Container>
   );

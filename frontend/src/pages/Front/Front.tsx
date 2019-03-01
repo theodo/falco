@@ -4,6 +4,9 @@ import { RouteComponentProps } from 'react-router';
 import { ProjectType } from 'redux/projects/types';
 import PageMetric from 'components/PageMetric';
 import Style from './Front.style';
+import { MetricType } from 'redux/auditResults/types';
+import { METRICS } from 'redux/auditResults/constants';
+import { FormattedMessage } from 'react-intl';
 
 export type OwnProps = {} & RouteComponentProps<{
   projectId: string;
@@ -22,6 +25,7 @@ const Front: React.FunctionComponent<Props> = props => {
     },
     [match.params.projectId],
   );
+  const [metric, setMetric] = React.useState<MetricType>('WPTMetricRepeatViewTTI');
 
   if (!project) return <div>Loading...</div>;
   return (
@@ -29,8 +33,19 @@ const Front: React.FunctionComponent<Props> = props => {
       <Style.ProjectTitle>
         <Typography variant="h4">{project.name}</Typography>
       </Style.ProjectTitle>
+      <select value={metric} onChange={event => setMetric(event.target.value as MetricType)}>
+        {Object.keys(METRICS).map(METRIC => (
+          <FormattedMessage id={`Front.${METRIC}`} key={METRIC}>
+            {text => (
+              <option value={METRIC} key={METRIC}>
+                {text}
+              </option>
+            )}
+          </FormattedMessage>
+        ))}
+      </select>
       {project.pages.map(pageId => (
-        <PageMetric key={pageId} pageId={pageId} />
+        <PageMetric key={pageId} pageId={pageId} metric={metric} />
       ))}
     </Style.Container>
   );

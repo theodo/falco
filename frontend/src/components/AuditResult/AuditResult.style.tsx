@@ -6,7 +6,6 @@ const Style = {
     border-radius: 5px;
     margin: 10px 0;
     padding: 5px;
-    color: ${({ isOk }: { isOk: boolean }) => (isOk ? '#08A491' : '#EA7272')};
   `,
 };
 

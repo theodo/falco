@@ -1,8 +1,9 @@
 import { RootState } from 'redux/types';
+import { MetricType } from './types';
 
 export const selectAuditResultsAsGraphData = (
   state: RootState,
-  props: { auditResultIds: string[] },
+  props: { auditResultIds: string[]; metric: MetricType },
 ) =>
   props.auditResultIds &&
   props.auditResultIds
@@ -10,7 +11,7 @@ export const selectAuditResultsAsGraphData = (
       return (
         state.auditResults.byAuditId[auditResult] && {
           x: state.auditResults.byAuditId[auditResult].createdAt.toDate(),
-          y: state.auditResults.byAuditId[auditResult].WPTMetricRepeatViewTTI,
+          y: state.auditResults.byAuditId[auditResult][props.metric],
         }
       );
     })
