@@ -1,8 +1,10 @@
 import * as React from 'react';
+
 import AuditResult from 'components/AuditResult';
-import Style from './AuditResultsContainer.style';
-import AuditResultsGraph from '../AuditResultsGraph';
 import { MetricType } from 'redux/auditResults/types';
+
+import AuditResultsGraph from '../AuditResultsGraph';
+import Style from './AuditResultsContainer.style';
 
 export type OwnProps = {
   pageId: string;
@@ -23,11 +25,13 @@ const AuditResultsContainer: React.FunctionComponent<Props> = props => {
     [pageId],
   );
 
-  if (!sortedAuditResultsIds || sortedAuditResultsIds.length === 0) return <div>Loading...</div>;
+  if (!sortedAuditResultsIds || sortedAuditResultsIds.length === 0) {
+    return <div>Loading...</div>;
+  }
   return (
     <Style.Container>
       <AuditResultsGraph auditResultIds={sortedAuditResultsIds} metric={metric} />
-      {sortedAuditResultsIds.map(auditId => (
+      {sortedAuditResultsIds.slice(0, 3).map(auditId => (
         <AuditResult key={auditId} auditId={auditId} metric={metric} />
       ))}
     </Style.Container>

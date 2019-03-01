@@ -1,7 +1,7 @@
-import { LoginAction, LoginState } from './Login';
-import { projectsAction, projectsState } from './projects';
+import { auditResultsAction, auditResultsState } from './auditResults';
+import { LoginAction, LoginState } from './login';
 import { pagesAction, pagesState } from './pages';
-import { auditResultsState, auditResultsAction } from './auditResults';
+import { projectsAction, projectsState } from './projects';
 
 export type RootState = Readonly<{
   login: LoginState;

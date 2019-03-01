@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { LoginAction } from 'redux/Login';
+import { LoginAction } from 'redux/login';
 
 export interface FormValues {
   username: string;

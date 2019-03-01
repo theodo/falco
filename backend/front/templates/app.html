@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: 100%;">
 
 <head>
   <base href="/">
@@ -13,9 +13,12 @@
       <link href="{% static style %}" rel="stylesheet">
     {% endfor %}
   {% endif %}
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Sans:400,400i,600,600i');
+  </style>
 </head>
 
-<body>
+<body style="margin: 0; height: 100%; background-color: #f0f4fe;">
   <div id="root"></div>
   {% if debug %}
   <script type="text/javascript">

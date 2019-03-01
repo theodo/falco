@@ -1,7 +1,7 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { ActionType, getType } from 'typesafe-actions';
 
-import { getUserToken } from 'redux/Login/selectors';
+import { getUserToken } from 'redux/login/selectors';
 import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
 import { makeGetRequest } from 'services/networking/request';
 
@@ -18,7 +18,7 @@ function* fetchAuditResultsFailedHandler(error: Error) {
 }
 
 export function* fetchAuditResults(action: ActionType<typeof fetchAuditResultsRequest>) {
-  const endpoint = `/audits/results`;
+  const endpoint = `/api/audits/results`;
   const { pageId } = action.payload;
   const token = yield select(getUserToken);
   const { body: auditResults }: { body: ApiAuditResultType[] } = yield call(
