@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { makeGetRequest } from 'services/networking/request';
 import { ActionType, getType } from 'typesafe-actions';
 import {
@@ -8,6 +8,7 @@ import {
   fetchProjectsRequest,
 } from './actions';
 import { fetchPagesSuccess } from 'redux/pages';
+import { getUserToken } from 'redux/Login/selectors';
 import { modelizePages } from 'redux/pages/modelizer';
 import { ApiProjectType } from './types';
 import { modelizeProject, modelizeProjects } from './modelizer';
@@ -19,13 +20,25 @@ function* fetchProjectFailedHandler(error: Error) {
 
 export function* fetchProjects(action: ActionType<typeof fetchProjectsRequest>) {
   const endpoint = '/projects/';
-  const { body: projects }: { body: ApiProjectType[] } = yield call(makeGetRequest, endpoint);
+  const token = yield select(getUserToken);
+  const { body: projects }: { body: ApiProjectType[] } = yield call(
+    makeGetRequest,
+    endpoint,
+    null,
+    token,
+  );
   yield put(fetchProjectSuccess({ byId: modelizeProjects(projects) }));
 }
 
 export function* fetchProject(action: ActionType<typeof fetchProjectRequest>) {
   const endpoint = `/projects/${action.payload.projectId}/`;
-  const { body: project }: { body: ApiProjectType } = yield call(makeGetRequest, endpoint);
+  const token = yield select(getUserToken);
+  const { body: project }: { body: ApiProjectType } = yield call(
+    makeGetRequest,
+    endpoint,
+    null,
+    token,
+  );
   yield put(fetchProjectSuccess({ byId: modelizeProject(project) }));
   yield put(fetchPagesSuccess({ byId: modelizePages(project.pages) }));
 }

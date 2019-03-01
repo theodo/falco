@@ -3,22 +3,35 @@ import request from 'superagent';
 const baseUrl = 'https://api.github.com';
 const backendBaseUrl = process.env.REACT_APP_API_BASE_URL || '';
 
-export const makeGetRequest = async (endpoint: string, data: {} | null = null) => {
-  if (data === null) {
-    return request.get(`${backendBaseUrl}${endpoint}`).set('Accept', 'application/json');
+export const makeGetRequest = async (
+  endpoint: string,
+  data: {} | null = null,
+  token: string | null = null,
+) => {
+  const req = request.get(`${backendBaseUrl}${endpoint}`).set('Accept', 'application/json');
+
+  if (token !== null) {
+    req.set('Authorization', `Bearer ${token}`);
   }
 
-  return request
-    .get(`${backendBaseUrl}${endpoint}`)
-    .query(data)
-    .set('Accept', 'application/json');
+  if (data !== null) {
+    req.query(data);
+  }
+  return req;
 };
 
-export const makePostRequest = (endpoint: string, data: {}) =>
-  request
+export const makePostRequest = (endpoint: string, data: {}, token: string | null = null) => {
+  const req = request
     .post(`${backendBaseUrl}${endpoint}`)
     .send(data)
     .set('Accept', 'application/json');
+
+  if (token !== null) {
+    req.set('Authorization', `Bearer ${token}`);
+  }
+
+  return req;
+};
 
 export const makeLoginRequest = (endpoint: string, data: {}) =>
   request.post(`${backendBaseUrl}${endpoint}`).send(data);
