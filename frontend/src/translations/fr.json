@@ -6,21 +6,21 @@
     "title": "Projets"
   },
   "Front": {
-    "WPTMetricFirstViewTTI": "First view TTI",
-    "WPTMetricRepeatViewTTI": "Repeat view TTI",
-    "WPTMetricFirstViewSpeedIndex": "First view speed index",
-    "WPTMetricRepeatViewSpeedIndex": "Repeat view speed index",
-    "WPTMetricFirstViewFirstPaint": "First view first paint",
-    "WPTMetricRepeatViewFirstPaint": "Repeat view first paint",
-    "WPTMetricFirstViewFirstMeaningfulPaint": "First view first meaningful paint",
-    "WPTMetricRepeatViewFirstMeaningfulPaint": "Repeat view first meaningful paint",
-    "WPTMetricFirstViewLoadTime": "First view load time",
-    "WPTMetricRepeatViewLoadTime": "Repeat view load time",
-    "WPTMetricFirstViewFirstContentfulPaint": "First view first contentful paint",
-    "WPTMetricRepeatViewFirstContentfulPaint": "Repeat view first contentful paint",
-    "WPTMetricFirstViewTimeToFirstByte": "First view time to first byte",
-    "WPTMetricRepeatViewTimeToFirstByte": "Repeat view time to first byte",
-    "WPTMetricLighthousePerformance": "Lighthouse performance"
+    "WPTMetricFirstViewTTI": "1️⃣ TTI",
+    "WPTMetricRepeatViewTTI": "🔄 TTI",
+    "WPTMetricFirstViewSpeedIndex": "1️⃣ Speed Index",
+    "WPTMetricRepeatViewSpeedIndex": "🔄 Speed Index",
+    "WPTMetricFirstViewFirstPaint": "1️⃣ First Paint",
+    "WPTMetricRepeatViewFirstPaint": "🔄 First Paint",
+    "WPTMetricFirstViewFirstMeaningfulPaint": "1️⃣ First Meaningful Paint",
+    "WPTMetricRepeatViewFirstMeaningfulPaint": "🔄 First Meaningful Paint",
+    "WPTMetricFirstViewLoadTime": "1️⃣ Load Time",
+    "WPTMetricRepeatViewLoadTime": "🔄 Load Time",
+    "WPTMetricFirstViewFirstContentfulPaint": "1️⃣ First Contentful Paint",
+    "WPTMetricRepeatViewFirstContentfulPaint": "🔄 First Contentful Paint",
+    "WPTMetricFirstViewTimeToFirstByte": "1️⃣ Time to First Byte",
+    "WPTMetricRepeatViewTimeToFirstByte": "🔄 Time to First Byte",
+    "WPTMetricLighthousePerformance": "📶 Lighthouse Performance Score"
   },
   "components": {
     "AuditResult": {
