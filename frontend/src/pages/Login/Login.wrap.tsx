@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 
 import { Dispatch } from 'redux';
-import { getLoginError, getUserToken } from 'redux/Login';
-import { loginUserRequest } from 'redux/Login/actions';
+import { getLoginError, getUserToken } from 'redux/login';
+import { loginUserRequest } from 'redux/login/actions';
 import { RootState } from 'redux/types';
 
 import LoginFormContainer from './Login';

@@ -2,7 +2,7 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { makeGetRequest } from 'services/networking/request';
 import { ActionType, getType } from 'typesafe-actions';
 
-import { getUserToken } from 'redux/Login/selectors';
+import { getUserToken } from 'redux/login/selectors';
 import { fetchPagesSuccess } from 'redux/pages';
 import { modelizePages } from 'redux/pages/modelizer';
 import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';

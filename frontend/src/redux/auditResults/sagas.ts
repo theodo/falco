@@ -1,7 +1,7 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { ActionType, getType } from 'typesafe-actions';
 
-import { getUserToken } from 'redux/Login/selectors';
+import { getUserToken } from 'redux/login/selectors';
 import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
 import { makeGetRequest } from 'services/networking/request';
 
