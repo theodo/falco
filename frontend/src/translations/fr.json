@@ -5,9 +5,29 @@
   "Projects": {
     "title": "Projets"
   },
+  "Front": {
+    "WPTMetricFirstViewTTI": "First view TTI",
+    "WPTMetricRepeatViewTTI": "Repeat view TTI",
+    "WPTMetricFirstViewSpeedIndex": "First view speed index",
+    "WPTMetricRepeatViewSpeedIndex": "Repeat view speed index",
+    "WPTMetricFirstViewFirstPaint": "First view first paint",
+    "WPTMetricRepeatViewFirstPaint": "Repeat view first paint",
+    "WPTMetricFirstViewFirstMeaningfulPaint": "First view first meaningful paint",
+    "WPTMetricRepeatViewFirstMeaningfulPaint": "Repeat view first meaningful paint",
+    "WPTMetricFirstViewLoadTime": "First view load time",
+    "WPTMetricRepeatViewLoadTime": "Repeat view load time",
+    "WPTMetricFirstViewFirstContentfulPaint": "First view first contentful paint",
+    "WPTMetricRepeatViewFirstContentfulPaint": "Repeat view first contentful paint",
+    "WPTMetricFirstViewTimeToFirstByte": "First view time to first byte",
+    "WPTMetricRepeatViewTimeToFirstByte": "Repeat view time to first byte",
+    "WPTMetricLighthousePerformance": "Lighthouse performance"
+  },
   "components": {
     "AuditResult": {
-      "TTI": "<b>TTI</b> du {date} = {time} sec."
+      "ofdate": "du {date}",
+      "number": "{number}",
+      "percent": "{percent} %",
+      "time": "{time} sec."
     }
   }
 }

@@ -21,6 +21,23 @@ export type AuditResultType = {
   WPTMetricLighthousePerformance: number;
 };
 
+export type MetricType =
+  | 'WPTMetricFirstViewTTI'
+  | 'WPTMetricRepeatViewTTI'
+  | 'WPTMetricFirstViewSpeedIndex'
+  | 'WPTMetricRepeatViewSpeedIndex'
+  | 'WPTMetricFirstViewFirstPaint'
+  | 'WPTMetricRepeatViewFirstPaint'
+  | 'WPTMetricFirstViewFirstMeaningfulPaint'
+  | 'WPTMetricRepeatViewFirstMeaningfulPaint'
+  | 'WPTMetricFirstViewLoadTime'
+  | 'WPTMetricRepeatViewLoadTime'
+  | 'WPTMetricFirstViewFirstContentfulPaint'
+  | 'WPTMetricRepeatViewFirstContentfulPaint'
+  | 'WPTMetricFirstViewTimeToFirstByte'
+  | 'WPTMetricRepeatViewTimeToFirstByte'
+  | 'WPTMetricLighthousePerformance';
+
 export type ApiAuditResultType = {
   audit: {
     uuid: string;
