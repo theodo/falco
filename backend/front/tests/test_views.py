@@ -2,7 +2,6 @@ from unittest.mock import patch
 
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
-
 from front.views import FrontendView
 
 

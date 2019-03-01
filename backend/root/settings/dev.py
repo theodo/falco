@@ -3,7 +3,7 @@ from .base import *
 
 SECRET_KEY = "f0de227df9c0c14f1d4d07bbf878846de538fc21cf3150bf14"
 DEBUG = True
-INTERNAL_IPS = ["127.0.0.1", "172.16.253.1"]
+INTERNAL_IPS = ["127.0.0.1", "172.16.210.1"]
 
 INSTALLED_APPS = INSTALLED_APPS + ["debug_toolbar", "django_extensions"]
 

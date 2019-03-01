@@ -4,14 +4,14 @@ context('Login', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/login');
     cy.server();
-    cy.route({ method: 'POST', url: 'http://localhost:8080/login_check' }).as('login_check');
+    cy.route({ method: 'POST', url: 'http://localhost:8000/auth/jwt/create' }).as('auth');
   });
 
   it('should display the authentication token if login is successfull', () => {
     cy.get("input[name='username']").type('jean_moust');
     cy.get("input[name='password']").type('lolilol');
     cy.get("button[type='submit']").click();
-    cy.wait('@login_check')
+    cy.wait('@auth')
       .its('status')
       .should('be', 200);
     cy.get('pre')
@@ -25,7 +25,7 @@ context('Login', () => {
     cy.get("input[name='username']").type('some_random_dude');
     cy.get("input[name='password']").type('some_random_password');
     cy.get("button[type='submit']").click();
-    cy.wait('@login_check')
+    cy.wait('@auth')
       .its('status')
       .should('be', 401);
   });

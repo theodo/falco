@@ -1,5 +1,6 @@
-import { ApiAuditResultType, AuditResultType } from './types';
 import dayjs from 'dayjs';
+
+import { ApiAuditResultType, AuditResultType } from './types';
 
 export const modelizeAuditResults = (
   auditResults: ApiAuditResultType[],

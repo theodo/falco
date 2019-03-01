@@ -1,4 +1,5 @@
 import { createStandardAction } from 'typesafe-actions';
+
 import { AuditResultType } from './types';
 
 export const fetchAuditResultsRequest = createStandardAction(

@@ -1,15 +1,14 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-from django.views.decorators.csrf import ensure_csrf_cookie
 from projects.models import Page, Project
 from projects.serializers import PageSerializer, ProjectSerializer
-from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework import permissions, status
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.parsers import JSONParser
 
 
-@ensure_csrf_cookie
 @api_view(["GET", "POST"])
+@permission_classes([permissions.IsAuthenticated])
 def project_list(request):
     if request.method == "GET":
         projects = Project.objects.all()
@@ -28,7 +27,6 @@ def project_list(request):
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@ensure_csrf_cookie
 @api_view(["GET", "PUT", "DELETE"])
 def project_detail(request, project_uuid):
     project = get_object_or_404(Project, pk=project_uuid)
@@ -50,7 +48,6 @@ def project_detail(request, project_uuid):
         return JsonResponse(status=status.HTTP_204_NO_CONTENT)
 
 
-@ensure_csrf_cookie
 @api_view(["GET", "POST"])
 def project_page_list(request, project_uuid):
     if request.method == "GET":
@@ -71,7 +68,6 @@ def project_page_list(request, project_uuid):
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@ensure_csrf_cookie
 @api_view(["GET", "PUT", "DELETE"])
 def project_page_detail(request, project_uuid, page_uuid):
     project = get_object_or_404(Project, pk=project_uuid)

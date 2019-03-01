@@ -1,4 +1,5 @@
 import { createStandardAction } from 'typesafe-actions';
+
 import { ProjectType } from './types';
 
 export const fetchProjectsRequest = createStandardAction('projects/FETCH_PROJECTS_REQUEST')<{}>();

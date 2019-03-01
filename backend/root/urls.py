@@ -23,6 +23,8 @@ admin.site.site_header = "falco Administration"
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("auth/", include("djoser.urls")),
+    path("auth/", include("djoser.urls.jwt")),
     path("health", views.health, name="health"),
     path("health", views.health, name="health"),
     path("projects/", include("projects.urls", namespace="projects")),

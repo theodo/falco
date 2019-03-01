@@ -1,6 +1,6 @@
+import { AnyAction } from 'redux';
 import { ActionType, getType } from 'typesafe-actions';
 
-import { AnyAction } from 'redux';
 import { fetchProjectSuccess } from './actions';
 import { ProjectType } from './types';
 
