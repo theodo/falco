@@ -21,7 +21,7 @@ function* fetchProjectFailedHandler(error: Error) {
 }
 
 export function* fetchProjects(action: ActionType<typeof fetchProjectsRequest>) {
-  const endpoint = '/projects/';
+  const endpoint = '/api/projects/';
   const token = yield select(getUserToken);
   const { body: projects }: { body: ApiProjectType[] } = yield call(
     makeGetRequest,
@@ -33,7 +33,7 @@ export function* fetchProjects(action: ActionType<typeof fetchProjectsRequest>) 
 }
 
 export function* fetchProject(action: ActionType<typeof fetchProjectRequest>) {
-  const endpoint = `/projects/${action.payload.projectId}/`;
+  const endpoint = `/api/projects/${action.payload.projectId}/`;
   const token = yield select(getUserToken);
   const { body: project }: { body: ApiProjectType } = yield call(
     makeGetRequest,

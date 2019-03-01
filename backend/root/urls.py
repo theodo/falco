@@ -27,8 +27,8 @@ urlpatterns = [
     path("auth/", include("djoser.urls.jwt")),
     path("health", views.health, name="health"),
     path("health", views.health, name="health"),
-    path("projects/", include("projects.urls", namespace="projects")),
-    path("audits/", include("audits.urls", namespace="audits")),
+    path("api/projects/", include("projects.urls", namespace="projects")),
+    path("api/audits/", include("audits.urls", namespace="audits")),
     path("", include("front.urls")),  # Keep this line last
 ]
 

@@ -18,7 +18,7 @@ function* fetchAuditResultsFailedHandler(error: Error) {
 }
 
 export function* fetchAuditResults(action: ActionType<typeof fetchAuditResultsRequest>) {
-  const endpoint = `/audits/results`;
+  const endpoint = `/api/audits/results`;
   const { pageId } = action.payload;
   const token = yield select(getUserToken);
   const { body: auditResults }: { body: ApiAuditResultType[] } = yield call(
