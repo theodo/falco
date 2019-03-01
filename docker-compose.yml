@@ -9,11 +9,11 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
   backend:
     build: ./backend
-    command: python /code/manage.py rundebugserver 0.0.0.0:8000
+    command: python /code/manage.py rundebugserver 0.0.0.0:80
     volumes:
       - ./backend:/code
     ports:
-      - "8000:8000"
+      - "8000:80"
       - "9000:9000"
     links:
       - db

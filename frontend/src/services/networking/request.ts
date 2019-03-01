@@ -25,7 +25,7 @@ export const makeLoginRequest = (endpoint: string, data: {}) =>
 
 export const login = async (endpoint: string, data: {}) => {
   const response = await makeLoginRequest(endpoint, data);
-  const token: string | undefined = response.body.token;
+  const token: string | undefined = response.body.token || response.body.access;
   if (token) {
     localStorage.setItem('token', token);
   }

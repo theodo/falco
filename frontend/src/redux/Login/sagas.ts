@@ -4,7 +4,7 @@ import { ActionType, getType } from 'typesafe-actions';
 import { loginUserError, loginUserRequest, loginUserSuccess } from './actions';
 
 export function* loginUser(action: ActionType<typeof loginUserRequest>) {
-  const endpoint = `/login_check`;
+  const endpoint = `/auth/jwt/create`;
   try {
     const token: string | undefined = yield call(login, endpoint, action.payload);
     if (token) {

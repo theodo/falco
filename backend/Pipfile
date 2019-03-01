@@ -17,6 +17,8 @@ requests = "*"
 djangorestframework = "*"
 celery = {extras = ["sqs"],version = "*"}
 django-celery-beat = "*"
+djangorestframework-simplejwt = "*"
+djoser = "*"
 
 [dev-packages]
 "flake8" = "*"

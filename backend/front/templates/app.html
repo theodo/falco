@@ -11,7 +11,7 @@
 
   <body style="margin: 0; height: 100%;">
     <div id="root"></div>
-    {% if debug %}
+    {% if not debug %}
     <script type="text/javascript">
       // In development, we dynamically load the entry chunks into the dom.
       // To do so, we load the webpack-generated manifest, filter it to only
