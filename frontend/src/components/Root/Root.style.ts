@@ -7,7 +7,6 @@ const StyledRoot = {
       color: inherit;
     }
     height: 100%;
-    background-color: #f0f4fe;
     font-family: 'IBM Plex Sans', sans-serif;
   `,
   Header: styled.div`
