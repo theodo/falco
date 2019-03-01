@@ -1,6 +1,6 @@
+import { AnyAction, Reducer } from 'redux';
 import { ActionType, getType } from 'typesafe-actions';
 
-import { AnyAction, Reducer } from 'redux';
 import { loginUserError, loginUserSuccess } from './actions';
 
 export type LoginAction = ActionType<typeof loginUserSuccess | typeof loginUserError>;

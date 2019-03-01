@@ -1,6 +1,8 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { login } from 'services/networking/request';
 import { ActionType, getType } from 'typesafe-actions';
+
+import { login } from 'services/networking/request';
+
 import { loginUserError, loginUserRequest, loginUserSuccess } from './actions';
 
 export function* loginUser(action: ActionType<typeof loginUserRequest>) {

@@ -6,10 +6,10 @@
 import { LocationChangeAction, RouterState } from 'connected-react-router';
 import { AnyAction, combineReducers, Reducer } from 'redux';
 
-import { reducer as login } from './Login';
-import { reducer as projects } from './projects';
-import { reducer as pages } from './pages';
 import { reducer as auditResults } from './auditResults';
+import { reducer as login } from './Login';
+import { reducer as pages } from './pages';
+import { reducer as projects } from './projects';
 import { RootAction, RootState } from './types';
 
 /**

@@ -1,18 +1,20 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { makeGetRequest } from 'services/networking/request';
 import { ActionType, getType } from 'typesafe-actions';
+
+import { getUserToken } from 'redux/Login/selectors';
+import { fetchPagesSuccess } from 'redux/pages';
+import { modelizePages } from 'redux/pages/modelizer';
+import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
+
 import {
   fetchProjectError,
   fetchProjectRequest,
-  fetchProjectSuccess,
   fetchProjectsRequest,
+  fetchProjectSuccess,
 } from './actions';
-import { fetchPagesSuccess } from 'redux/pages';
-import { getUserToken } from 'redux/Login/selectors';
-import { modelizePages } from 'redux/pages/modelizer';
-import { ApiProjectType } from './types';
 import { modelizeProject, modelizeProjects } from './modelizer';
-import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
+import { ApiProjectType } from './types';
 
 function* fetchProjectFailedHandler(error: Error) {
   yield put(fetchProjectError({ errorMessage: error.message }));

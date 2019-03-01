@@ -1,14 +1,16 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
-import { makeGetRequest } from 'services/networking/request';
 import { ActionType, getType } from 'typesafe-actions';
+
+import { getUserToken } from 'redux/Login/selectors';
+import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
+import { makeGetRequest } from 'services/networking/request';
+
 import {
   fetchAuditResultsError,
   fetchAuditResultsRequest,
   fetchAuditResultsSuccess,
 } from './actions';
 import { getSortAuditResultsId, modelizeAuditResults } from './modelizer';
-import { getUserToken } from 'redux/Login/selectors';
-import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
 import { ApiAuditResultType } from './types';
 
 function* fetchAuditResultsFailedHandler(error: Error) {
