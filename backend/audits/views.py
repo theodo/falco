@@ -7,15 +7,14 @@ from audits.serializers import (
 from audits.tasks import request_audit as task_request_audit
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from projects.models import Page
-from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework import permissions, status
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.parsers import JSONParser
 
 
-@csrf_exempt
 @api_view(["POST"])
+@permission_classes([permissions.IsAuthenticated])
 def request_audit(request):
     if request.method == "POST":
         data = JSONParser().parse(request)
@@ -30,8 +29,8 @@ def request_audit(request):
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@ensure_csrf_cookie
 @api_view(["GET"])
+@permission_classes([permissions.IsAuthenticated])
 def audit_status(request, audit_uuid):
     if request.method == "GET":
         latest_audit_status = AuditStatusHistory.objects.filter(
@@ -41,8 +40,8 @@ def audit_status(request, audit_uuid):
         return JsonResponse(serializer.data, safe=False)
 
 
-@ensure_csrf_cookie
 @api_view(["GET"])
+@permission_classes([permissions.IsAuthenticated])
 def audit_results(request, audit_uuid):
     if request.method == "GET":
         audit_results = AuditResults.objects.get(audit=audit_uuid)
@@ -50,8 +49,8 @@ def audit_results(request, audit_uuid):
         return JsonResponse(serializer.data, safe=False)
 
 
-@ensure_csrf_cookie
 @api_view(["GET"])
+@permission_classes([permissions.IsAuthenticated])
 def audits_results(request):
     """ Returns every audit result for a given page """
     if request.method == "GET":
