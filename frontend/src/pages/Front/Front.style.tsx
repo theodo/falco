@@ -12,6 +12,9 @@ const Style = {
   ProjectTitle: styled.div`
     margin: 20px;
   `,
+  SelectWrapper: styled.div`
+    width: 300px;
+  `,
 };
 
 export default Style;

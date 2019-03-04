@@ -1,9 +1,11 @@
-import * as React from 'react';
-import { AuditResultType, MetricType } from 'redux/auditResults/types';
-import { FormattedMessage } from 'react-intl';
-import Style from './AuditResult.style';
 import { Typography } from '@material-ui/core';
+import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
+
 import { METRICS } from 'redux/auditResults/constants';
+import { AuditResultType, MetricType } from 'redux/auditResults/types';
+
+import Style from './AuditResult.style';
 
 export type OwnProps = {
   auditId: string;
@@ -50,7 +52,7 @@ const AuditResult: React.FunctionComponent<Props> = props => {
         {' = '}
         {getDisplayMetricComponent(auditResult, metric)[METRICS[metric].type]}
       </Typography>
-      <Style.LinkToWPT href={auditResult.WPTResultsUserUrl}>
+      <Style.LinkToWPT href={auditResult.WPTResultsUserUrl} target="_blank">
         <FormattedMessage id={`components.AuditResult.seeOnWPT`} />
       </Style.LinkToWPT>
     </Style.Container>
