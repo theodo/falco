@@ -28,7 +28,7 @@
       "number": "{number}",
       "percent": "{percent} %",
       "time": "{time} sec.",
-      "seeOnWPT": "See detailed audit results on WebPageTest"
+      "seeOnWPT": "See on WebPageTest"
     }
   }
 }
