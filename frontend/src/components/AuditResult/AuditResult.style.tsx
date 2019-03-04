@@ -6,6 +6,12 @@ const Style = {
     border-radius: 5px;
     margin: 10px 0;
     padding: 5px;
+    display: flex;
+    justify-content: space-between;
+  `,
+  LinkToWPT: styled.a`
+    color: #6175de;
+    text-decoration: underline;
   `,
 };
 

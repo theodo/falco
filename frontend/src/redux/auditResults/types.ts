@@ -4,6 +4,7 @@ export type AuditResultType = {
   auditId: string;
   createdAt: dayjs.Dayjs;
   WPTResultsJsonUrl: string;
+  WPTResultsUserUrl: string;
   WPTMetricFirstViewTTI: number;
   WPTMetricRepeatViewTTI: number;
   WPTMetricFirstViewSpeedIndex: number;
@@ -45,6 +46,7 @@ export type ApiAuditResultType = {
   };
   created_at: string;
   wpt_results_json_url: string;
+  wpt_results_user_url: string;
   wpt_metric_first_view_tti: number;
   wpt_metric_repeat_view_tti: number;
   wpt_metric_first_view_speed_index: number;
