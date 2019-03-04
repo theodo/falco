@@ -63,7 +63,12 @@ const Front: React.FunctionComponent<Props> = props => {
         <Select
           options={groupedOptions}
           defaultValue={options[0]}
-          onChange={option => setMetric(option.value as MetricType)}
+          onChange={selected => {
+            if (Array.isArray(selected) || !selected) {
+              throw new Error('Unexpected type passed to ReactSelect onChange handler');
+            }
+            setMetric(selected.value as MetricType);
+          }}
         />
       </Style.SelectWrapper>
       {project.pages.map(pageId => (
