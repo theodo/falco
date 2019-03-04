@@ -15,6 +15,10 @@ In development:
 Go through this once when you install the project, you shouldn't need to do that again.
 
 - Create a WebPageTest API Key on the following page: https://www.webpagetest.org/getkey.php
+- Check that you have the right dependencies installed:
+  ```bash
+  make check-dependencies
+  ```
 - Install the backend:
   ```bash
   make backend/install
