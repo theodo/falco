@@ -25,6 +25,7 @@ class AuditResultsSerializer(serializers.ModelSerializer):
             "audit",
             "created_at",
             "wpt_results_json_url",
+            "wpt_results_user_url",
             "wpt_metric_first_view_tti",
             "wpt_metric_repeat_view_tti",
             "wpt_metric_first_view_speed_index",

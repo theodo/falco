@@ -1,3 +1,5 @@
+from urllib.parse import parse_qs, urlparse
+
 import requests
 
 from audits.models import Audit, AuditResults, AuditStatusHistory, AvailableStatuses
@@ -108,10 +110,14 @@ def poll_audit_results(audit_uuid, json_url):
         audit_status_pending.save()
         poll_audit_results.apply_async((audit_uuid, json_url), countdown=15)
     elif status_code == 200:
+        parsed_url = urlparse(json_url)
+        test_id = parse_qs(parsed_url.query)["test"][0]
+        wpt_results_user_url = f"http://www.webpagetest.org/result/{test_id}"
         formatted_results = format_wpt_json_results(response["data"])
         audit_results = AuditResults(
             audit=audit,
             wpt_results_json_url=json_url,
+            wpt_results_user_url=wpt_results_user_url,
             wpt_metric_first_view_tti=formatted_results["wpt_metric_first_view_tti"],
             wpt_metric_repeat_view_tti=formatted_results["wpt_metric_repeat_view_tti"],
             wpt_metric_first_view_speed_index=formatted_results[
