@@ -1,3 +1,5 @@
+from urllib.parse import parse_qs, urlparse
+
 import requests
 
 from audits.models import Audit, AuditResults, AuditStatusHistory, AvailableStatuses
@@ -66,7 +68,7 @@ def request_audit(audit_uuid):
     }
     r = requests.post("http://www.webpagetest.org/runtest.php", params=payload)
     response = r.json()
-    if r.status_code == requests.codes.ok:
+    if response["statusCode"] == 200:
         audit_status_pending = AuditStatusHistory(
             audit=audit,
             status=AvailableStatuses.PENDING.value,
@@ -76,11 +78,19 @@ def request_audit(audit_uuid):
         poll_audit_results.apply_async(
             (audit_uuid, response["data"]["jsonUrl"]), countdown=15
         )
+    elif response["statusCode"] == 400:
+        # Usually 400 errors come from exceeding the daily limit
+        audit_status_error = AuditStatusHistory(
+            audit=audit,
+            status=AvailableStatuses.ERROR.value,
+            details=str(response["statusText"]),
+        )
+        audit_status_error.save()
     else:
         audit_status_error = AuditStatusHistory(
             audit=audit,
             status=AvailableStatuses.ERROR.value,
-            details=str(response["data"]),
+            details=str(response.dumps()),
         )
         audit_status_error.save()
 
@@ -100,10 +110,14 @@ def poll_audit_results(audit_uuid, json_url):
         audit_status_pending.save()
         poll_audit_results.apply_async((audit_uuid, json_url), countdown=15)
     elif status_code == 200:
+        parsed_url = urlparse(json_url)
+        test_id = parse_qs(parsed_url.query)["test"][0]
+        wpt_results_user_url = f"http://www.webpagetest.org/result/{test_id}"
         formatted_results = format_wpt_json_results(response["data"])
         audit_results = AuditResults(
             audit=audit,
             wpt_results_json_url=json_url,
+            wpt_results_user_url=wpt_results_user_url,
             wpt_metric_first_view_tti=formatted_results["wpt_metric_first_view_tti"],
             wpt_metric_repeat_view_tti=formatted_results["wpt_metric_repeat_view_tti"],
             wpt_metric_first_view_speed_index=formatted_results[

@@ -37,6 +37,7 @@ class AuditStatusHistory(BaseModel):
 class AuditResults(BaseModel):
     audit = models.OneToOneField(Audit, on_delete=models.CASCADE)
     wpt_results_json_url = models.CharField(max_length=1000)
+    wpt_results_user_url = models.CharField(max_length=1000)
     wpt_metric_first_view_tti = models.IntegerField(blank=True, null=True)
     wpt_metric_repeat_view_tti = models.IntegerField(blank=True, null=True)
     wpt_metric_first_view_speed_index = models.IntegerField(blank=True, null=True)

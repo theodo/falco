@@ -50,6 +50,9 @@ const AuditResult: React.FunctionComponent<Props> = props => {
         {' = '}
         {getDisplayMetricComponent(auditResult, metric)[METRICS[metric].type]}
       </Typography>
+      <Style.LinkToWPT href={auditResult.WPTResultsUserUrl}>
+        <FormattedMessage id={`components.AuditResult.seeOnWPT`} />
+      </Style.LinkToWPT>
     </Style.Container>
   );
 };

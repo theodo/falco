@@ -12,6 +12,7 @@ export const modelizeAuditResults = (
         auditId: auditResult.audit.uuid,
         createdAt: dayjs(auditResult.created_at),
         WPTResultsJsonUrl: auditResult.wpt_results_json_url,
+        WPTResultsUserUrl: auditResult.wpt_results_user_url,
         WPTMetricFirstViewTTI: auditResult.wpt_metric_first_view_tti,
         WPTMetricRepeatViewTTI: auditResult.wpt_metric_repeat_view_tti,
         WPTMetricFirstViewSpeedIndex: auditResult.wpt_metric_first_view_speed_index,

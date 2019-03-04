@@ -27,7 +27,8 @@
       "ofdate": "of {date}",
       "number": "{number}",
       "percent": "{percent} %",
-      "time": "{time} sec."
+      "time": "{time} sec.",
+      "seeOnWPT": "See detailed audit results on WebPageTest"
     }
   }
 }

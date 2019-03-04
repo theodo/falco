@@ -2,14 +2,14 @@ import styled from 'styled-components';
 
 const StyledRoot = {
   Container: styled.div`
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
     height: 100%;
     font-family: 'IBM Plex Sans', sans-serif;
   `,
   Header: styled.div`
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
     align-items: center;
     background-color: #374894;
     color: #f8f9fa;
