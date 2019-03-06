@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-export type AuditResultType = {
+export interface AuditResultType {
   auditId: string;
   createdAt: dayjs.Dayjs;
   WPTResultsJsonUrl: string;
@@ -20,7 +20,7 @@ export type AuditResultType = {
   WPTMetricFirstViewTimeToFirstByte: number;
   WPTMetricRepeatViewTimeToFirstByte: number;
   WPTMetricLighthousePerformance: number;
-};
+}
 
 export type MetricType =
   | 'WPTMetricFirstViewTTI'
@@ -39,7 +39,7 @@ export type MetricType =
   | 'WPTMetricRepeatViewTimeToFirstByte'
   | 'WPTMetricLighthousePerformance';
 
-export type ApiAuditResultType = {
+export interface ApiAuditResultType {
   audit: {
     uuid: string;
     page: string;
@@ -62,4 +62,4 @@ export type ApiAuditResultType = {
   wpt_metric_first_view_time_to_first_byte: number;
   wpt_metric_repeat_view_time_to_first_byte: number;
   wpt_metric_lighthouse_performance: number;
-};
+}

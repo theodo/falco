@@ -6,10 +6,10 @@ import { MetricType } from 'redux/auditResults/types';
 import AuditResultsGraph from '../AuditResultsGraph';
 import Style from './AuditResultsContainer.style';
 
-export type OwnProps = {
+export interface OwnProps {
   pageId: string;
   metric: MetricType;
-};
+}
 
 type Props = {
   sortedAuditResultsIds?: string[];

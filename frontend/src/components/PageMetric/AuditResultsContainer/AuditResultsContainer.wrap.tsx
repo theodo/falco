@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import AuditResultsContainer, { OwnProps } from './AuditResultsContainer';
-import { RootState } from 'redux/types';
 import { fetchAuditResultsRequest } from 'redux/auditResults';
+import { RootState } from 'redux/types';
+import AuditResultsContainer, { OwnProps } from './AuditResultsContainer';
 
 const mapStateToProps = (state: RootState, props: OwnProps) => ({
   sortedAuditResultsIds: state.auditResults.sortedByPageId[props.pageId],

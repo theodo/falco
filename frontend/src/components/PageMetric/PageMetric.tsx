@@ -1,18 +1,18 @@
-import * as React from 'react';
-import OpenInNewIcon from '@material-ui/icons/OpenInNew';
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import { Typography } from '@material-ui/core';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
+import * as React from 'react';
+import { MetricType } from 'redux/auditResults/types';
 import { PageType } from 'redux/pages/types';
 import Style from './PageMetric.style';
-import { Typography } from '@material-ui/core';
-import { MetricType } from 'redux/auditResults/types';
 
 const AuditResultsContainer = React.lazy(() => import('./AuditResultsContainer'));
 
-export type OwnProps = {
+export interface OwnProps {
   pageId: string;
   metric: MetricType;
-};
+}
 
 type Props = {
   page?: PageType;

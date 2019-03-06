@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import Projects from './Projects';
 import { fetchProjectsRequest } from 'redux/projects';
 import { RootState } from 'redux/types';
+import Projects from './Projects';
 
 const mapStateToProps = (state: RootState) => ({
   projects: Object.keys(state.projects.byId).map(projectId => state.projects.byId[projectId]),
