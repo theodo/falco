@@ -35,6 +35,7 @@ const Front: React.FunctionComponent<Props> = props => {
     value: METRIC,
     label: intl.formatMessage({ id: `Front.${METRIC}` }),
   }));
+  const selectedOptionIndex = options.findIndex(metricOption => metricOption.value === metric);
 
   const firstViewOptions = options.filter(option => option.value.includes('FirstView'));
   const repeatViewOptions = options.filter(option => option.value.includes('RepeatView'));
@@ -62,7 +63,7 @@ const Front: React.FunctionComponent<Props> = props => {
       <Style.SelectWrapper>
         <Select
           options={groupedOptions}
-          defaultValue={options[0]}
+          defaultValue={options[selectedOptionIndex]}
           onChange={selected => {
             if (Array.isArray(selected) || !selected) {
               throw new Error('Unexpected type passed to ReactSelect onChange handler');
