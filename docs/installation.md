@@ -28,9 +28,13 @@ Go through this once when you install the project, you shouldn't need to do that
   ```bash
   make frontend/install
   ```
+- Apply all migrations:
+  ```bash
+    make backend/migrate
+    ```
 - Create an admin account:
   ```bash
-  make createsuperuser:
+  make createsuperuser
   ```
 
 ## Start the app

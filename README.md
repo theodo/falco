@@ -28,4 +28,5 @@ Product Manager:
 
 Developers (see [contributors](../../graphs/contributors)):
   - **Nicolas Goutay** (nicolasgo@theodo.fr)
+  - **Jérémy Dardour** (jeremyd@theodo.fr)
 
