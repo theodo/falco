@@ -7,10 +7,10 @@ import { AuditResultType, MetricType } from 'redux/auditResults/types';
 
 import Style from './AuditResult.style';
 
-export type OwnProps = {
+export interface OwnProps {
   auditId: string;
   metric: MetricType;
-};
+}
 
 type Props = {
   auditResult?: AuditResultType;

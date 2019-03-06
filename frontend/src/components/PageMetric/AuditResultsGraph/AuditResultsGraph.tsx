@@ -1,19 +1,19 @@
-import * as React from 'react';
-import Style from './AuditResultsGraph.style';
 import dayjs from 'dayjs';
-import { VictoryChart, VictoryAxis, VictoryLine, VictoryTheme } from 'victory';
-import { MetricType } from 'redux/auditResults/types';
+import * as React from 'react';
 import { METRICS } from 'redux/auditResults/constants';
+import { MetricType } from 'redux/auditResults/types';
+import { VictoryAxis, VictoryChart, VictoryLine, VictoryTheme } from 'victory';
+import Style from './AuditResultsGraph.style';
 
-export type OwnProps = {
+export interface OwnProps {
   auditResultIds: string[];
   metric: MetricType;
-};
+}
 
-type DataType = {
+interface DataType {
   x: Date;
   y: number;
-};
+}
 
 type Props = {
   auditResults?: DataType[];

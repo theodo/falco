@@ -1,11 +1,11 @@
 import Typography from '@material-ui/core/Typography';
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
+import { Link } from 'react-router-dom';
 import { ProjectType } from 'redux/projects/types';
 import Style from './Projects.style';
-import { Link } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
 
-export type OwnProps = {};
+export interface OwnProps {}
 
 type Props = {
   fetchProjectsRequest: () => void;
@@ -21,7 +21,7 @@ const Projects: React.FunctionComponent<Props> = props => {
     [projects.length],
   );
 
-  if (!projects || projects.length === 0) return <div>Loading...</div>;
+  if (!projects || projects.length === 0) { return <div>Loading...</div>; }
   return (
     <Style.Container>
       <Style.ProjectTitle>
