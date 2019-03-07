@@ -5,12 +5,10 @@ import { Link } from 'react-router-dom';
 import { ProjectType } from 'redux/projects/types';
 import Style from './Projects.style';
 
-export interface OwnProps {}
-
-type Props = {
+interface Props {
   fetchProjectsRequest: () => void;
   projects: ProjectType[];
-} & OwnProps;
+};
 
 const Projects: React.FunctionComponent<Props> = props => {
   const { fetchProjectsRequest, projects } = props;
