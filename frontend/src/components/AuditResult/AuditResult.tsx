@@ -4,17 +4,16 @@ import { FormattedMessage } from 'react-intl';
 
 import { METRICS } from 'redux/auditResults/constants';
 import { AuditResultType, MetricType } from 'redux/auditResults/types';
-
 import Style from './AuditResult.style';
 
 export interface OwnProps {
   auditId: string;
-  metric: MetricType;
+  metrics: MetricType[];
 }
 
-type Props = {
+interface Props extends OwnProps {
   auditResult?: AuditResultType;
-} & OwnProps;
+};
 
 const getDisplayMetricComponent = (auditResult: AuditResultType, metric: MetricType) => ({
   time: (
@@ -35,23 +34,32 @@ const getDisplayMetricComponent = (auditResult: AuditResultType, metric: MetricT
 });
 
 const AuditResult: React.FunctionComponent<Props> = props => {
-  const { auditResult, metric } = props;
+  const { auditResult, metrics } = props;
+
   if (!auditResult) {
     return null;
   }
+
   return (
     <Style.Container>
-      <Typography color="inherit">
-        <b>
-          <FormattedMessage id={`Front.${metric}`} />
-        </b>{' '}
-        <FormattedMessage
-          id="components.AuditResult.ofdate"
-          values={{ date: auditResult.createdAt.format('DD/MM/YYYY') }}
-        />
-        {' = '}
-        {getDisplayMetricComponent(auditResult, metric)[METRICS[metric].type]}
-      </Typography>
+      <Style.TypographyContainer>
+        {metrics && metrics.map((metric: MetricType) => (
+          <Style.AuditResultValue key={`auditResultValue.${metric}`}>
+            <Style.ColorReminder color={METRICS[metric].colorDark}/>
+            <Typography color="inherit">
+              <b>
+                <FormattedMessage id={`Front.${metric}`} />
+              </b>{' '}
+              <FormattedMessage
+                id="components.AuditResult.ofdate"
+                values={{ date: auditResult.createdAt.format('DD/MM/YYYY') }}
+              />
+              {' = '}
+              {getDisplayMetricComponent(auditResult, metric)[METRICS[metric].type]}
+            </Typography>
+          </Style.AuditResultValue>
+        ))}
+      </Style.TypographyContainer>
       <Style.LinkToWPT href={auditResult.WPTResultsUserUrl} target="_blank">
         <FormattedMessage id={`components.AuditResult.seeOnWPT`} />
       </Style.LinkToWPT>

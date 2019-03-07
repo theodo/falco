@@ -1,3 +1,4 @@
+import * as colors from '@material-ui/core/colors';
 import Typography from '@material-ui/core/Typography';
 import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
@@ -11,6 +12,11 @@ import { ProjectType } from 'redux/projects/types';
 
 import Style from './Front.style';
 
+interface MetricOption {
+  value: string,
+  label: string,
+}
+
 export type OwnProps = {} & RouteComponentProps<{
   projectId: string;
 }>;
@@ -21,6 +27,25 @@ type Props = {
 } & OwnProps &
   InjectedIntlProps;
 
+const selectStyles = {
+  multiValueLabel: (styles: any, { data }: any) => ({
+    ...styles,
+    color: data.colorDark,
+  }),
+  multiValue: (styles: any, { data }: any) => ({
+      ...styles,
+      backgroundColor: data.colorLight,
+      borderWidth: 2,
+      borderStyle: 'solid',
+      borderColor: data.colorDark,
+      borderRadius: 5,
+  }),
+  multiValueRemove: (styles: any, { data }: any) => ({
+    ...styles,
+    color: data.colorDark,
+  }),
+};
+
 const Front: React.FunctionComponent<Props> = props => {
   const { fetchProjectRequest, project, match, intl } = props;
   React.useEffect(
@@ -29,13 +54,19 @@ const Front: React.FunctionComponent<Props> = props => {
     },
     [match.params.projectId],
   );
-  const [metric, setMetric] = React.useState<MetricType>('WPTMetricRepeatViewTTI');
+  const defaultMetric = 'WPTMetricRepeatViewTTI';
+  const [metrics, setMetrics] = React.useState<MetricType[]>([defaultMetric]);
 
-  const options = Object.keys(METRICS).map(METRIC => ({
-    value: METRIC,
-    label: intl.formatMessage({ id: `Front.${METRIC}` }),
+  const allMetrics = Object.keys(METRICS) as MetricType[];
+
+  const options = allMetrics.map((metric) => ({
+    value: metric,
+    label: intl.formatMessage({ id: `Front.${metric}` }),
+    colorDark: METRICS[metric].colorDark,
+    colorLight: METRICS[metric].colorLight,
   }));
-  const selectedOptionIndex = options.findIndex(metricOption => metricOption.value === metric);
+
+  const selectedOptionIndex = options.findIndex(metricOption => metricOption.value === defaultMetric);
 
   const firstViewOptions = options.filter(option => option.value.includes('FirstView'));
   const repeatViewOptions = options.filter(option => option.value.includes('RepeatView'));
@@ -55,6 +86,15 @@ const Front: React.FunctionComponent<Props> = props => {
     return <div>Loading...</div>;
   }
 
+  // react-select has a particular type for onChange method
+  const handleMetricSelectChange = (selectedMetricOptions: MetricOption[] | MetricOption | null | undefined) => {
+    if (!Array.isArray(selectedMetricOptions)) {
+      throw new Error("Unexpected type passed to ReactSelect onChange handler");
+    }
+
+    setMetrics(selectedMetricOptions.map(option => option.value) as MetricType[]);
+  };
+
   return (
     <Style.Container>
       <Style.ProjectTitle>
@@ -62,18 +102,15 @@ const Front: React.FunctionComponent<Props> = props => {
       </Style.ProjectTitle>
       <Style.SelectWrapper>
         <Select
+          isMulti
+          styles={selectStyles}
           options={groupedOptions}
-          defaultValue={options[selectedOptionIndex]}
-          onChange={selected => {
-            if (Array.isArray(selected) || !selected) {
-              throw new Error('Unexpected type passed to ReactSelect onChange handler');
-            }
-            setMetric(selected.value as MetricType);
-          }}
+          defaultValue={[options[selectedOptionIndex]]}
+          onChange={handleMetricSelectChange}
         />
       </Style.SelectWrapper>
       {project.pages.map(pageId => (
-        <PageMetric key={pageId} pageId={pageId} metric={metric} />
+        <PageMetric key={pageId} pageId={pageId} metrics={metrics} />
       ))}
     </Style.Container>
   );

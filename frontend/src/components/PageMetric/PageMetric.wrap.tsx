@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { fetchAuditResultsRequest } from 'redux/auditResults';
 import { RootState } from 'redux/types';
 import PageMetric, { OwnProps } from './PageMetric';
 

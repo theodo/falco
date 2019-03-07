@@ -63,3 +63,14 @@ export interface ApiAuditResultType {
   wpt_metric_repeat_view_time_to_first_byte: number;
   wpt_metric_lighthouse_performance: number;
 }
+
+export interface DataType {
+  x: Date;
+  y: number;
+}
+interface AuditResultsAsGraphDataPerMetric {
+  metric: MetricType;
+  auditResults: DataType[];
+}
+
+export type AuditResultsAsGraphData = AuditResultsAsGraphDataPerMetric[];

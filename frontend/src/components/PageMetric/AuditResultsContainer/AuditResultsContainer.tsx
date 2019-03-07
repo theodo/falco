@@ -8,16 +8,16 @@ import Style from './AuditResultsContainer.style';
 
 export interface OwnProps {
   pageId: string;
-  metric: MetricType;
+  metrics: MetricType[];
 }
 
-type Props = {
+interface Props extends OwnProps {
   sortedAuditResultsIds?: string[];
   fetchAuditResultsRequest: (pageId: string) => void;
-} & OwnProps;
+};
 
 const AuditResultsContainer: React.FunctionComponent<Props> = props => {
-  const { fetchAuditResultsRequest, sortedAuditResultsIds, pageId, metric } = props;
+  const { fetchAuditResultsRequest, sortedAuditResultsIds, pageId, metrics } = props;
   React.useEffect(
     () => {
       fetchAuditResultsRequest(pageId);
@@ -30,9 +30,9 @@ const AuditResultsContainer: React.FunctionComponent<Props> = props => {
   }
   return (
     <Style.Container>
-      <AuditResultsGraph auditResultIds={sortedAuditResultsIds} metric={metric} />
+      <AuditResultsGraph auditResultIds={sortedAuditResultsIds} metrics={metrics} />
       {sortedAuditResultsIds.slice(0, 3).map(auditId => (
-        <AuditResult key={auditId} auditId={auditId} metric={metric} />
+        <AuditResult key={auditId} auditId={auditId} metrics={metrics} />
       ))}
     </Style.Container>
   );
