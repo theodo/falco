@@ -155,6 +155,11 @@ jobs:
           working_directory: frontend
           command: yarn test
 
+      - run:
+          name: Run lint
+          working_directory: frontend
+          command: yarn lint
+
       - save_cache:
           key: v2-{% templatetag openvariable %} checksum "frontend/package.json" {% templatetag closevariable %}
           paths:
