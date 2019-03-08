@@ -21,10 +21,11 @@ const AuditResultsGraph: React.FunctionComponent<Props> = props => {
     return <div>Loading...</div>;
   }
 
-  const maxValue = Math.max(...auditResults.map(resultsPerMetric =>
+  const maxValueOfAllAuditsForAllMetrics = Math.max(...auditResults.map(resultsPerMetric =>
     Math.max(...resultsPerMetric.auditResults.map(result => result.y))
   ));
-  const maxDomain = maxValue + 0.2 * maxValue;
+
+  const maxDomain = maxValueOfAllAuditsForAllMetrics + 0.2 * maxValueOfAllAuditsForAllMetrics;
 
   return (
     <Style.Container>

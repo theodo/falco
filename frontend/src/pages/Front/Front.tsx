@@ -7,7 +7,7 @@ import Select from 'react-select';
 
 import PageMetric from 'components/PageMetric';
 import { METRICS } from 'redux/auditResults/constants';
-import { MetricType } from 'redux/auditResults/types';
+import { MetricConstantForGraph, MetricType, } from 'redux/auditResults/types';
 import { ProjectType } from 'redux/projects/types';
 
 import Style from './Front.style';
@@ -28,11 +28,11 @@ type Props = {
   InjectedIntlProps;
 
 const selectStyles = {
-  multiValueLabel: (styles: any, { data }: any) => ({
+  multiValueLabel: (styles: any, { data }: { data: MetricConstantForGraph }) => ({
     ...styles,
     color: data.colorDark,
   }),
-  multiValue: (styles: any, { data }: any) => ({
+  multiValue: (styles: any, { data }: { data: MetricConstantForGraph }) => ({
       ...styles,
       backgroundColor: data.colorLight,
       borderWidth: 2,
@@ -40,7 +40,7 @@ const selectStyles = {
       borderColor: data.colorDark,
       borderRadius: 5,
   }),
-  multiValueRemove: (styles: any, { data }: any) => ({
+  multiValueRemove: (styles: any, { data }: { data: MetricConstantForGraph }) => ({
     ...styles,
     color: data.colorDark,
   }),
@@ -54,7 +54,7 @@ const Front: React.FunctionComponent<Props> = props => {
     },
     [match.params.projectId],
   );
-  const defaultMetric = 'WPTMetricRepeatViewTTI';
+  const defaultMetric = 'WPTMetricFirstViewSpeedIndex';
   const [metrics, setMetrics] = React.useState<MetricType[]>([defaultMetric]);
 
   const allMetrics = Object.keys(METRICS) as MetricType[];
@@ -87,6 +87,7 @@ const Front: React.FunctionComponent<Props> = props => {
   }
 
   // react-select has a particular type for onChange method
+  // see https://github.com/JedWatson/react-select/issues/2902#issuecomment-463128093
   const handleMetricSelectChange = (selectedMetricOptions: MetricOption[] | MetricOption | null | undefined) => {
     if (!Array.isArray(selectedMetricOptions)) {
       throw new Error("Unexpected type passed to ReactSelect onChange handler");

@@ -39,6 +39,8 @@ export type MetricType =
   | 'WPTMetricRepeatViewTimeToFirstByte'
   | 'WPTMetricLighthousePerformance';
 
+export interface MetricConstantForGraph { type: 'time' | 'number' | 'percent', colorDark: string, colorLight: string };
+
 export interface ApiAuditResultType {
   audit: {
     uuid: string;
