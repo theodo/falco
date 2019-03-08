@@ -3,11 +3,12 @@ from rest_framework import serializers
 
 
 class AuditSerializer(serializers.ModelSerializer):
+    parameters = serializers.PrimaryKeyRelatedField(read_only=True)
     page = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Audit
-        fields = ("uuid", "page")
+        fields = ("uuid", "parameters", "page")
 
 
 class AuditStatusHistorySerializer(serializers.ModelSerializer):
