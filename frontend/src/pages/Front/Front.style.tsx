@@ -13,7 +13,7 @@ const Style = {
     margin: 20px;
   `,
   SelectWrapper: styled.div`
-    width: 300px;
+    width: 500px;
   `,
 };
 

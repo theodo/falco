@@ -11,19 +11,21 @@ const AuditResultsContainer = React.lazy(() => import('./AuditResultsContainer')
 
 export interface OwnProps {
   pageId: string;
-  metric: MetricType;
+  metrics: MetricType[];
 }
 
-type Props = {
+interface Props extends OwnProps {
   page?: PageType;
-} & OwnProps;
+}
 
 const PageMetric: React.FunctionComponent<Props> = props => {
-  const { page, pageId, metric } = props;
+  const { page, pageId, metrics } = props;
   const [isExpanded, setIsExpanded] = React.useState(false);
+
   if (!page) {
     return null;
   }
+
   return (
     <Style.Container>
       <Style.Title isExpanded={isExpanded}>
@@ -40,7 +42,7 @@ const PageMetric: React.FunctionComponent<Props> = props => {
         </Style.TitleExpander>
       </Style.Title>
       <React.Suspense fallback={null}>
-        {isExpanded && <AuditResultsContainer pageId={pageId} metric={metric} />}
+        {isExpanded && <AuditResultsContainer pageId={pageId} metrics={metrics} />}
       </React.Suspense>
     </Style.Container>
   );
