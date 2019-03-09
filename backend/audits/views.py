@@ -27,7 +27,9 @@ def request_audit(request):
             if serializer.is_valid():
                 audit = serializer.save(page=page)
                 task_request_audit.delay(audit.uuid)
-                return JsonResponse([serializer.data], status=status.HTTP_201_CREATED, safe=False)
+                return JsonResponse(
+                    [serializer.data], status=status.HTTP_201_CREATED, safe=False
+                )
             return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         created_audits = []
@@ -41,7 +43,9 @@ def request_audit(request):
 
         created_audit_serializers = AuditSerializer(created_audits, many=True)
 
-        return JsonResponse(created_audit_serializers.data, status=status.HTTP_201_CREATED, safe=False)
+        return JsonResponse(
+            created_audit_serializers.data, status=status.HTTP_201_CREATED, safe=False
+        )
 
 
 @api_view(["GET"])

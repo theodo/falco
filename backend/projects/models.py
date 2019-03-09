@@ -1,4 +1,5 @@
 from enum import Enum
+
 from core.models import BaseModel
 from django.db import models
 
@@ -44,6 +45,11 @@ class ProjectAuditParameters(BaseModel):
     location = models.CharField(max_length=100)
     network_shape = models.CharField(
         max_length=20,
-        choices=[(network_shape.value, network_shape.value) for network_shape in NetworkShapeOptions],
+        choices=[
+            (network_shape.value, network_shape.value)
+            for network_shape in NetworkShapeOptions
+        ],
     )
-    project = models.ForeignKey(Project, related_name="audit_parameters_list", on_delete=models.CASCADE)
+    project = models.ForeignKey(
+        Project, related_name="audit_parameters_list", on_delete=models.CASCADE
+    )

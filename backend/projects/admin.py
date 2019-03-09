@@ -13,4 +13,5 @@ class ProjectAuditParametersInline(admin.TabularInline):
 class ProjectAdmin(admin.ModelAdmin):
     inlines = [PageInline, ProjectAuditParametersInline]
 
+
 admin.site.register(Project, ProjectAdmin)

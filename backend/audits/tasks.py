@@ -69,7 +69,9 @@ def request_audit(audit_uuid):
         "runs": 10,
     }
     if parameters:
-        payload['location'] = f'{parameters.location}_{parameters.browser}.{parameters.network_shape}'
+        payload[
+            "location"
+        ] = f"{parameters.location}_{parameters.browser}.{parameters.network_shape}"
 
     r = requests.post("http://www.webpagetest.org/runtest.php", params=payload)
     response = r.json()
