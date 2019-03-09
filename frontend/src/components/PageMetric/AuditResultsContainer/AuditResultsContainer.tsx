@@ -1,9 +1,10 @@
 import * as React from 'react';
 
-import AuditResult from 'components/AuditResult';
 import { MetricType } from 'redux/auditResults/types';
 
-import AuditResultsGraph from '../AuditResultsGraph';
+import AuditResult from './AuditResult';
+import AuditResultsGraph from './AuditResultsGraph';
+
 import Style from './AuditResultsContainer.style';
 
 export interface OwnProps {
@@ -14,7 +15,7 @@ export interface OwnProps {
 interface Props extends OwnProps {
   sortedAuditResultsIds?: string[];
   fetchAuditResultsRequest: (pageId: string) => void;
-};
+}
 
 const AuditResultsContainer: React.FunctionComponent<Props> = props => {
   const { fetchAuditResultsRequest, sortedAuditResultsIds, pageId, metrics } = props;
