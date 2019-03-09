@@ -4,7 +4,7 @@ import requests
 
 from audits.models import Audit, AuditResults, AuditStatusHistory, AvailableStatuses
 from celery import shared_task
-from projects.models import Page
+from projects.models import NetworkShapeOptions, Page
 
 
 def format_wpt_json_results(data):
@@ -67,7 +67,7 @@ def request_audit(audit_uuid):
         "lighthouse": 1,
         "k": webpagetest_api_key,
         "runs": 10,
-        "location": f"{parameters.location}_{parameters.browser}.{parameters.network_shape}",
+        "location": f"{parameters.location}:{parameters.browser}.{NetworkShapeOptions[parameters.network_shape].value}",
     }
 
     r = requests.post("http://www.webpagetest.org/runtest.php", params=payload)

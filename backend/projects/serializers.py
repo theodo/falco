@@ -1,4 +1,4 @@
-from projects.models import Page, Project, ProjectAuditParameters
+from projects.models import NetworkShapeOptions, Page, Project, ProjectAuditParameters
 from rest_framework import serializers
 
 
@@ -9,6 +9,11 @@ class PageSerializer(serializers.ModelSerializer):
 
 
 class ProjectAuditParametersSerializer(serializers.ModelSerializer):
+    network_shape = serializers.SerializerMethodField("resolve_network_shape")
+
+    def resolve_network_shape(self, obj):
+        return NetworkShapeOptions[obj.network_shape].value
+
     class Meta:
         model = ProjectAuditParameters
         fields = ("uuid", "location", "browser", "network_shape")
