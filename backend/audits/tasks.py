@@ -67,11 +67,8 @@ def request_audit(audit_uuid):
         "lighthouse": 1,
         "k": webpagetest_api_key,
         "runs": 10,
+        "location": f"{parameters.location}_{parameters.browser}.{parameters.network_shape}",
     }
-    if parameters:
-        payload[
-            "location"
-        ] = f"{parameters.location}_{parameters.browser}.{parameters.network_shape}"
 
     r = requests.post("http://www.webpagetest.org/runtest.php", params=payload)
     response = r.json()
@@ -184,10 +181,6 @@ def request_all_audits():
 
     for page in pages:
         audit_parameters_list = page.project.audit_parameters.objects.all()
-        if len(audit_parameters_list) == 0:
-            audit = Audit(page=page)
-            audit.save()
-            request_audit.delay(audit.uuid)
         for audit_parameters in audit_parameters_list:
             audit = Audit(page=page, parameters=audit_parameters)
             audit.save()
