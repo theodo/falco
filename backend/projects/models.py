@@ -46,7 +46,7 @@ class ProjectAuditParameters(BaseModel):
     network_shape = models.CharField(
         max_length=20,
         choices=[
-            (network_shape.value, network_shape.value)
+            (network_shape.name, network_shape.value)
             for network_shape in NetworkShapeOptions
         ],
     )
