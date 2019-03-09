@@ -4,7 +4,7 @@ import requests
 
 from audits.models import Audit, AuditResults, AuditStatusHistory, AvailableStatuses
 from celery import shared_task
-from projects.models import Page
+from projects.models import NetworkShapeOptions, Page
 
 
 def format_wpt_json_results(data):
@@ -54,10 +54,12 @@ def format_wpt_json_results(data):
 @shared_task
 def request_audit(audit_uuid):
     audit = Audit.objects.get(uuid=audit_uuid)
+    parameters = audit.parameters
     webpagetest_api_key = audit.page.project.wpt_api_key
     audit_status_requested = AuditStatusHistory(
         audit=audit, status=AvailableStatuses.REQUESTED.value
     )
+
     audit_status_requested.save()
     payload = {
         "url": audit.page.url,
@@ -65,7 +67,9 @@ def request_audit(audit_uuid):
         "lighthouse": 1,
         "k": webpagetest_api_key,
         "runs": 10,
+        "location": f"{parameters.location}:{parameters.browser}.{NetworkShapeOptions[parameters.network_shape].value}",
     }
+
     r = requests.post("http://www.webpagetest.org/runtest.php", params=payload)
     response = r.json()
     if response["statusCode"] == 200:
@@ -174,7 +178,10 @@ def poll_audit_results(audit_uuid, json_url):
 @shared_task
 def request_all_audits():
     pages = Page.objects.all().iterator()
+
     for page in pages:
-        audit = Audit(page=page)
-        audit.save()
-        request_audit.delay(audit.uuid)
+        audit_parameters_list = page.project.audit_parameters.objects.all()
+        for audit_parameters in audit_parameters_list:
+            audit = Audit(page=page, parameters=audit_parameters)
+            audit.save()
+            request_audit.delay(audit.uuid)

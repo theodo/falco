@@ -5,6 +5,11 @@ export const modelizeProject = (project: ApiProjectType) => ({
     uuid: project.uuid,
     name: project.name,
     pages: project.pages.map(page => page.uuid),
+    auditParametersList: project.audit_parameters_list.map(auditParameters => ({
+      location: auditParameters.location,
+      browser: auditParameters.browser,
+      networkShape: auditParameters.network_shape,
+    })),
   },
 });
 

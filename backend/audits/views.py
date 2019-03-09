@@ -20,13 +20,25 @@ def request_audit(request):
         data = JSONParser().parse(request)
         page_uuid = data["page"]
         page = get_object_or_404(Page, pk=page_uuid)
+        audit_parameters_list = page.project.audit_parameters_list.all()
 
-        serializer = AuditSerializer(data=data)
-        if serializer.is_valid():
-            audit = serializer.save(page=page)
-            task_request_audit.delay(audit.uuid)
-            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        created_audits = []
+        for audit_parameters in audit_parameters_list:
+            serializer = AuditSerializer(data=data)
+            if serializer.is_valid():
+                audit = serializer.save(page=page, parameters=audit_parameters)
+                task_request_audit.delay(audit.uuid)
+                created_audits.append(audit)
+            else:
+                return JsonResponse(
+                    serializer.errors, status=status.HTTP_400_BAD_REQUEST
+                )
+
+        created_audit_serializers = AuditSerializer(created_audits, many=True)
+
+        return JsonResponse(
+            created_audit_serializers.data, status=status.HTTP_201_CREATED, safe=False
+        )
 
 
 @api_view(["GET"])

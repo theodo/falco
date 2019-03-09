@@ -1,8 +1,7 @@
 from enum import Enum
-
 from core.models import BaseModel
 from django.db import models
-from projects.models import Page
+from projects.models import Page, ProjectAuditParameters
 
 
 class AvailableStatuses(Enum):  # A subclass of Enum
@@ -14,6 +13,12 @@ class AvailableStatuses(Enum):  # A subclass of Enum
 
 class Audit(BaseModel):
     page = models.ForeignKey(Page, related_name="audits", on_delete=models.CASCADE)
+    parameters = models.ForeignKey(
+        ProjectAuditParameters,
+        related_name="audits",
+        on_delete=models.CASCADE,
+        null=True,
+    )
 
     def __str__(self):
         return "%s — %s | % s" % (
