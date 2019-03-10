@@ -25,4 +25,4 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Project
-        fields = ("uuid", "name", "pages", "audit_parameters_list")
+        fields = ("uuid", "name", "pages", "audit_parameters_list", "screenshot_url")

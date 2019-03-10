@@ -18,4 +18,5 @@ export interface ApiProjectType {
   name: string;
   pages: PageType[];
   audit_parameters_list: AuditParametersType[];
+  screenshot_url: string;
 }
