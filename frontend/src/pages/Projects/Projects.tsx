@@ -8,18 +8,17 @@ import Style from './Projects.style';
 interface Props {
   fetchProjectsRequest: () => void;
   projects: ProjectType[];
-};
+}
 
 const Projects: React.FunctionComponent<Props> = props => {
   const { fetchProjectsRequest, projects } = props;
-  React.useEffect(
-    () => {
-      fetchProjectsRequest();
-    },
-    [projects.length],
-  );
+  React.useEffect(() => {
+    fetchProjectsRequest();
+  }, []);
 
-  if (!projects || projects.length === 0) { return <div>Loading...</div>; }
+  if (!projects || projects.length === 0) {
+    return <div>Loading...</div>;
+  }
   return (
     <Style.Container>
       <Style.ProjectTitle>
