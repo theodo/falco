@@ -28,9 +28,11 @@ const Projects: React.FunctionComponent<Props> = props => {
           <FormattedMessage id="Projects.title" />
         </Typography>
       </Style.ProjectTitle>
-      {projects.map(project => (
-        <ProjectTile project={project} />
-      ))}
+      <Style.ProjectTiles>
+        {projects.map(project => (
+          <ProjectTile project={project} />
+        ))}
+      </Style.ProjectTiles>
     </Style.Container>
   );
 };

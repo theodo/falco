@@ -4,7 +4,8 @@ const Style = {
   Container: styled.div`
     border: 3px solid #212934;
     border-radius: 8px;
-    width: 400px;
+    width: 330px;
+    margin-bottom: 30px;
   `,
   ProjectScreenshot: styled.img`
     width: 100%;
@@ -13,14 +14,14 @@ const Style = {
     color: #6175de;
     text-align: center;
     font-size: 20px;
-    margin-bottom: 20px;
+    margin: 10px auto;
   `,
   LastAudit: styled.p`
     color: #6e7a8b;
     font-size: 16px;
     text-align: center;
     font-family: 'IBM Plex Mono';
-    margin: 0 auto 20px;
+    margin: 0 auto 10px;
   `,
   PagesWrapper: styled.div`
     display: flex;
@@ -32,8 +33,9 @@ const Style = {
     font-size: 16px;
     margin-bottom: 0px;
     margin-top: 5px;
-    width: 50%;
-    text-align: center;
+    flex-basis: 40%;
+    text-align: left;
+    padding-left: 20px;
     font-family: 'IBM Plex Mono';
   `,
   LinkWrapper: styled.div`
