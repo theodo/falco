@@ -1,4 +1,4 @@
-import { ApiProjectType, ProjectType } from './types';
+import { ApiProjectType } from './types';
 
 export const modelizeProject = (project: ApiProjectType) => ({
   [project.uuid]: {
@@ -14,6 +14,7 @@ export const modelizeProject = (project: ApiProjectType) => ({
       networkShape: auditParameters.network_shape,
     })),
     screenshotUrl: project.screenshot_url,
+    latestAuditAt: project.latest_audit_at,
   },
 });
 

@@ -1,6 +1,9 @@
+import dayjs from 'dayjs';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+
 import { ProjectType } from 'redux/projects/types';
+
 import Style from './ProjectTile.style';
 
 interface Props {
@@ -14,14 +17,10 @@ const Projects: React.FunctionComponent<Props> = props => {
     <Style.Container>
       <Style.ProjectScreenshot src={project.screenshotUrl} />
       <Style.ProjectTitle>{project.name}</Style.ProjectTitle>
-      <Style.LastAudit>Dernier audit aujourd'hui à 08:02</Style.LastAudit>
+      <Style.LastAudit>{`Dernier audit ${dayjs(project.latestAuditAt).fromNow()}`}</Style.LastAudit>
       <Style.PagesWrapper>
         {project.pages.map(page => (
-          <>
-            <Style.Page key={page.uuid}>📄{page.name}</Style.Page>
-            <Style.Page key={1}>📄{page.name}</Style.Page>
-            <Style.Page key={2}>📄{page.name}</Style.Page>
-          </>
+          <Style.Page key={page.uuid}>📄{page.name}</Style.Page>
         ))}
       </Style.PagesWrapper>
       <Style.LinkWrapper>

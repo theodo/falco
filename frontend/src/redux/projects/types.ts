@@ -5,6 +5,7 @@ export interface ProjectType {
   name: string;
   pages: PageType[];
   screenshotUrl: string;
+  latestAuditAt: string;
 }
 
 export interface AuditParametersType {
@@ -20,4 +21,5 @@ export interface ApiProjectType {
   pages: PageType[];
   audit_parameters_list: AuditParametersType[];
   screenshot_url: string;
+  latest_audit_at: string;
 }

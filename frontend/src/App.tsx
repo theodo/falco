@@ -5,7 +5,6 @@ import { ConnectedRouter } from 'connected-react-router';
 import { History } from 'history';
 import { Provider } from 'react-redux';
 import { Route } from 'react-router';
-import { RouteComponentProps } from 'react-router-dom';
 import { Store } from 'redux';
 import { Persistor } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
