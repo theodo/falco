@@ -7,14 +7,14 @@ import Select from 'react-select';
 
 import PageMetric from 'components/PageMetric';
 import { METRICS } from 'redux/auditResults/constants';
-import { MetricConstantForGraph, MetricType, } from 'redux/auditResults/types';
+import { MetricConstantForGraph, MetricType } from 'redux/auditResults/types';
 import { ProjectType } from 'redux/projects/types';
 
 import Style from './Front.style';
 
 interface MetricOption {
-  value: string,
-  label: string,
+  value: string;
+  label: string;
 }
 
 export type OwnProps = {} & RouteComponentProps<{
@@ -33,12 +33,12 @@ const selectStyles = {
     color: data.colorDark,
   }),
   multiValue: (styles: any, { data }: { data: MetricConstantForGraph }) => ({
-      ...styles,
-      backgroundColor: data.colorLight,
-      borderWidth: 2,
-      borderStyle: 'solid',
-      borderColor: data.colorDark,
-      borderRadius: 5,
+    ...styles,
+    backgroundColor: data.colorLight,
+    borderWidth: 2,
+    borderStyle: 'solid',
+    borderColor: data.colorDark,
+    borderRadius: 5,
   }),
   multiValueRemove: (styles: any, { data }: { data: MetricConstantForGraph }) => ({
     ...styles,
@@ -59,14 +59,16 @@ const Front: React.FunctionComponent<Props> = props => {
 
   const allMetrics = Object.keys(METRICS) as MetricType[];
 
-  const options = allMetrics.map((metric) => ({
+  const options = allMetrics.map(metric => ({
     value: metric,
     label: intl.formatMessage({ id: `Front.${metric}` }),
     colorDark: METRICS[metric].colorDark,
     colorLight: METRICS[metric].colorLight,
   }));
 
-  const selectedOptionIndex = options.findIndex(metricOption => metricOption.value === defaultMetric);
+  const selectedOptionIndex = options.findIndex(
+    metricOption => metricOption.value === defaultMetric,
+  );
 
   const firstViewOptions = options.filter(option => option.value.includes('FirstView'));
   const repeatViewOptions = options.filter(option => option.value.includes('RepeatView'));
@@ -88,9 +90,11 @@ const Front: React.FunctionComponent<Props> = props => {
 
   // react-select has a particular type for onChange method
   // see https://github.com/JedWatson/react-select/issues/2902#issuecomment-463128093
-  const handleMetricSelectChange = (selectedMetricOptions: MetricOption[] | MetricOption | null | undefined) => {
+  const handleMetricSelectChange = (
+    selectedMetricOptions: MetricOption[] | MetricOption | null | undefined,
+  ) => {
     if (!Array.isArray(selectedMetricOptions)) {
-      throw new Error("Unexpected type passed to ReactSelect onChange handler");
+      throw new Error('Unexpected type passed to ReactSelect onChange handler');
     }
 
     setMetrics(selectedMetricOptions.map(option => option.value) as MetricType[]);
