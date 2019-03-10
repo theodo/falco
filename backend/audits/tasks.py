@@ -168,7 +168,7 @@ def poll_audit_results(audit_uuid, json_url):
         audit_results.save()
 
         project = audit.page.project
-        if project.screenshot_url == None:
+        if project.screenshot_url is None or project.screenshot_url == "":
             project.screenshot_url = formatted_results["screenshot_url"]
             project.save()
 
