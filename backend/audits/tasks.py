@@ -187,7 +187,7 @@ def request_all_audits():
     pages = Page.objects.all().iterator()
 
     for page in pages:
-        audit_parameters_list = page.project.audit_parameters.objects.all()
+        audit_parameters_list = page.project.audit_parameters_list.all()
         for audit_parameters in audit_parameters_list:
             audit = Audit(page=page, parameters=audit_parameters)
             audit.save()
