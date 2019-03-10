@@ -48,6 +48,7 @@ def format_wpt_json_results(data):
         "wpt_metric_lighthouse_performance": data["average"]["firstView"][
             "lighthouse.Performance"
         ],
+        "screenshot_url": data["median"]["firstView"]["images"]["screenShot"],
     }
 
 
@@ -165,6 +166,12 @@ def poll_audit_results(audit_uuid, json_url):
             ],
         )
         audit_results.save()
+
+        project = audit.page.project
+        if project.screenshot_url is None or project.screenshot_url == "":
+            project.screenshot_url = formatted_results["screenshot_url"]
+            project.save()
+
         audit_status_success = AuditStatusHistory(
             audit=audit,
             status=AvailableStatuses.SUCCESS.value,

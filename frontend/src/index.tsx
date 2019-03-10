@@ -1,4 +1,7 @@
 import 'babel-polyfill';
+import dayjs from 'dayjs';
+import 'dayjs/locale/fr';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import createBrowserHistory from 'history/createBrowserHistory';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -11,6 +14,9 @@ const history = createBrowserHistory();
 const { store, persistor } = configureStore(history);
 
 const rootEl = document.getElementById('root');
+
+dayjs.locale('fr');
+dayjs.extend(relativeTime);
 
 if (rootEl) {
   ReactDOM.render(<App history={history} store={store} persistor={persistor} />, rootEl);
