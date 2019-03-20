@@ -63,6 +63,7 @@ module "env_production" {
   eb_key_pair                        = "${aws_key_pair.main.key_name}"
   db_allocated_storage               = 5
   db_instance_class                  = "db.t2.micro"
+  https_domain                       = "getfal.co"
   vpc                                = "${data.aws_vpc.default.id}"
   vpc_subnets                        = "${data.aws_subnet_ids.default.ids}"
   sqs_user_aws_iam_access_key_id     = "${module.iam.sqs_user_aws_iam_access_key_id}"
