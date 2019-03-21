@@ -114,8 +114,13 @@ const Front: React.FunctionComponent<Props> = props => {
           onChange={handleMetricSelectChange}
         />
       </Style.SelectWrapper>
-      {project.pages.map(page => (
-        <PageMetric key={page.uuid} pageId={page.uuid} metrics={metrics} />
+      {project.pages.map((page, index) => (
+        <PageMetric
+          defaultIsExpanded={index === 0}
+          key={page.uuid}
+          pageId={page.uuid}
+          metrics={metrics}
+        />
       ))}
     </Style.Container>
   );

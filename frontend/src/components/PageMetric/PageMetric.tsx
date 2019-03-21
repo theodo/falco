@@ -12,6 +12,7 @@ const AuditResultsContainer = React.lazy(() => import('./AuditResultsContainer')
 export interface OwnProps {
   pageId: string;
   metrics: MetricType[];
+  defaultIsExpanded: boolean;
 }
 
 interface Props extends OwnProps {
@@ -19,8 +20,8 @@ interface Props extends OwnProps {
 }
 
 const PageMetric: React.FunctionComponent<Props> = props => {
-  const { page, pageId, metrics } = props;
-  const [isExpanded, setIsExpanded] = React.useState(false);
+  const { defaultIsExpanded, page, pageId, metrics } = props;
+  const [isExpanded, setIsExpanded] = React.useState(defaultIsExpanded);
 
   if (!page) {
     return null;
