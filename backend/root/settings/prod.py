@@ -8,10 +8,7 @@ from .base import *
 SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    # Change me!
-    "getfal.co"
-]
+ALLOWED_HOSTS = ["getfal.co", "staging.getfal.co"]
 
 if "ALLOWED_HOST" in os.environ:
     ALLOWED_HOSTS.append(os.environ.get("ALLOWED_HOST"))
