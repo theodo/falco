@@ -25,18 +25,18 @@ def format_wpt_json_results(data):
         "wpt_metric_repeat_view_first_paint": data["average"]["repeatView"][
             "firstPaint"
         ],
-        "wpt_metric_first_view_first_meaningful_paint": data["average"]["firstView"][
-            "firstMeaningfulPaint"
-        ],
-        "wpt_metric_repeat_view_first_meaningful_paint": data["average"]["repeatView"][
-            "firstMeaningfulPaint"
-        ],
-        "wpt_metric_first_view_first_contentful_paint": data["average"]["firstView"][
-            "firstContentfulPaint"
-        ],
-        "wpt_metric_repeat_view_first_contentful_paint": data["average"]["repeatView"][
-            "firstContentfulPaint"
-        ],
+        "wpt_metric_first_view_first_meaningful_paint": data["average"][
+            "firstView"
+        ].get("firstMeaningfulPaint"),
+        "wpt_metric_repeat_view_first_meaningful_paint": data["average"][
+            "repeatView"
+        ].get("firstMeaningfulPaint"),
+        "wpt_metric_first_view_first_contentful_paint": data["average"][
+            "firstView"
+        ].get("firstContentfulPaint"),
+        "wpt_metric_repeat_view_first_contentful_paint": data["average"][
+            "repeatView"
+        ].get("firstContentfulPaint"),
         "wpt_metric_first_view_load_time": data["average"]["firstView"]["loadTime"],
         "wpt_metric_repeat_view_load_time": data["average"]["repeatView"]["loadTime"],
         "wpt_metric_first_view_time_to_first_byte": data["average"]["firstView"][
@@ -45,9 +45,9 @@ def format_wpt_json_results(data):
         "wpt_metric_repeat_view_time_to_first_byte": data["average"]["repeatView"][
             "TTFB"
         ],
-        "wpt_metric_lighthouse_performance": data["average"]["firstView"][
+        "wpt_metric_lighthouse_performance": data["average"]["firstView"].get(
             "lighthouse.Performance"
-        ],
+        ),
         "screenshot_url": data["median"]["firstView"]["images"]["screenShot"],
     }
 
