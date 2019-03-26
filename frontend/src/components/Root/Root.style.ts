@@ -47,10 +47,12 @@ const StyledRoot = {
       line-height: 70px;
       font-weight: 600;
       letter-spacing: 1px;
-      box-shadow: inset 0 -6px #f8f9fa;
     }
     li:first-of-type {
       margin-left: 0;
+    }
+    li.active {
+      box-shadow: inset 0 -6px #f8f9fa;
     }
   `,
 };
