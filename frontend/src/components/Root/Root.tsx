@@ -1,8 +1,8 @@
-import Typography from '@material-ui/core/Typography';
 import React, { ReactNode } from 'react';
 import { addLocaleData, IntlProvider } from 'react-intl';
 import en from 'react-intl/locale-data/en';
 import fr from 'react-intl/locale-data/fr';
+import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 
 import { flattenMessages } from 'services/i18n/intl';
@@ -18,11 +18,12 @@ const locales = {
 
 addLocaleData([...fr, ...en]);
 
-interface Props {
+// Your component own properties
+interface Props extends RouteComponentProps<any> {
   children: ReactNode;
 }
 
-const Root: React.SFC<Props> = ({ children }) => (
+const Root: React.SFC<Props> = ({ children, location }) => (
   <IntlProvider locale="fr" messages={locales.fr}>
     <Style.Container>
       <Style.Header>
@@ -34,9 +35,14 @@ const Root: React.SFC<Props> = ({ children }) => (
         </Link>
         <Style.Nav>
           <ul>
-            <li>
+            <li className={location.pathname === `/projects` ? `active` : ``}>
               <Link key={'navProjects'} to={`/projects`}>
                 MES PROJETS
+              </Link>
+            </li>
+            <li className={location.pathname === `/login` ? `active` : ``}>
+              <Link key={'navLogin'} to={`/login`}>
+                SE CONNECTER
               </Link>
             </li>
           </ul>
