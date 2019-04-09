@@ -201,11 +201,11 @@
         },
         "djoser": {
             "hashes": [
-                "sha256:347451dd7a59687ef016bca4dcd13da73b84f29ffa4aaba9bda8a0460f3ef522",
+                "sha256:f1dd802d0bd16eba5c47035cfe14d9879800623fb02573a1ef6a0d1416d7d85b",
                 "sha256:4c5eff3e1c1531617aac8e78a0219138a4aef6d1967a69675f2eac7b7df93e65"
             ],
             "index": "pypi",
-            "version": "==1.4.0"
+            "version": "==1.4.1"
         },
         "docutils": {
             "hashes": [
