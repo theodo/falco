@@ -5,6 +5,8 @@ import { ActionType, getType } from 'typesafe-actions';
 import { getUserToken } from 'redux/login/selectors';
 import { fetchPagesSuccess } from 'redux/pages';
 import { modelizePages } from 'redux/pages/modelizer';
+import { fetchScriptsSuccess } from 'redux/scripts';
+import { modelizeScripts } from 'redux/scripts/modelizer';
 import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
 
 import {
@@ -43,6 +45,7 @@ export function* fetchProject(action: ActionType<typeof fetchProjectRequest>) {
   );
   yield put(fetchProjectSuccess({ byId: modelizeProject(project) }));
   yield put(fetchPagesSuccess({ byId: modelizePages(project.pages) }));
+  yield put(fetchScriptsSuccess({ byId: modelizeScripts(project.scripts) }));
 }
 
 export default function* projectsSaga() {

@@ -20,6 +20,8 @@ export interface AuditResultType {
   WPTMetricFirstViewTimeToFirstByte: number;
   WPTMetricRepeatViewTimeToFirstByte: number;
   WPTMetricLighthousePerformance: number;
+  scriptStepName: string;
+  scriptStepNumber: string;
 }
 
 export type MetricType =
@@ -46,6 +48,7 @@ export interface ApiAuditResultType {
     uuid: string;
     page: string;
   };
+  uuid: string,
   created_at: string;
   wpt_results_json_url: string;
   wpt_results_user_url: string;
@@ -64,6 +67,8 @@ export interface ApiAuditResultType {
   wpt_metric_first_view_time_to_first_byte: number;
   wpt_metric_repeat_view_time_to_first_byte: number;
   wpt_metric_lighthouse_performance: number;
+  script_step_name: string;
+  script_step_number: number;
 }
 
 export interface DataType {
@@ -71,6 +76,7 @@ export interface DataType {
   y: number;
 }
 interface AuditResultsAsGraphDataPerMetric {
+  scriptStepName?: string;
   metric: MetricType;
   auditResults: DataType[];
 }

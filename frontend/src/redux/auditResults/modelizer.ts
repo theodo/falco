@@ -2,14 +2,14 @@ import dayjs from 'dayjs';
 
 import { ApiAuditResultType, AuditResultType } from './types';
 
-export const modelizeAuditResults = (
+export const modelizeAuditResultsForPage = (
   auditResults: ApiAuditResultType[],
 ): Record<string, AuditResultType> => {
   return auditResults.reduce((auditResultsById, auditResult) => {
     return {
       ...auditResultsById,
-      [auditResult.audit.uuid]: {
-        auditId: auditResult.audit.uuid,
+      [auditResult.uuid]: {
+        auditId: auditResult.uuid,
         createdAt: dayjs(auditResult.created_at),
         WPTResultsJsonUrl: auditResult.wpt_results_json_url,
         WPTResultsUserUrl: auditResult.wpt_results_user_url,
@@ -32,6 +32,8 @@ export const modelizeAuditResults = (
         WPTMetricFirstViewTimeToFirstByte: auditResult.wpt_metric_first_view_time_to_first_byte,
         WPTMetricRepeatViewTimeToFirstByte: auditResult.wpt_metric_repeat_view_time_to_first_byte,
         WPTMetricLighthousePerformance: auditResult.wpt_metric_lighthouse_performance,
+        scriptStepName: auditResult.script_step_name,
+        scriptStepNumber: auditResult.script_step_number,
       },
     };
   }, {});

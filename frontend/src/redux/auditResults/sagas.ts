@@ -1,3 +1,5 @@
+import forEach from 'lodash/forEach';
+import groupBy from 'lodash/groupBy';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { ActionType, getType } from 'typesafe-actions';
 
@@ -10,7 +12,7 @@ import {
   fetchAuditResultsRequest,
   fetchAuditResultsSuccess,
 } from './actions';
-import { getSortAuditResultsId, modelizeAuditResults } from './modelizer';
+import { getSortAuditResultsId, modelizeAuditResultsForPage } from './modelizer';
 import { ApiAuditResultType } from './types';
 
 function* fetchAuditResultsFailedHandler(error: Error) {
@@ -19,24 +21,42 @@ function* fetchAuditResultsFailedHandler(error: Error) {
 
 export function* fetchAuditResults(action: ActionType<typeof fetchAuditResultsRequest>) {
   const endpoint = `/api/audits/results`;
-  const { pageId } = action.payload;
+  const { id, type } = action.payload;
   const token = yield select(getUserToken);
+  const payload: {page?: string; script?: string;} = {
+  }
+  switch (type) {
+    case "page":
+      payload.page = action.payload.id
+      break;
+    case "script":
+      payload.script = action.payload.id
+    default:
+      break;
+  }
   const { body: auditResults }: { body: ApiAuditResultType[] } = yield call(
     makeGetRequest,
     endpoint,
-    {
-      page: pageId,
-    },
+    payload,
     token,
   );
-  const modelizedAuditResults = modelizeAuditResults(auditResults);
+  const modelizedAuditResults = modelizeAuditResultsForPage(auditResults);
   const sortedAuditResultsIds = getSortAuditResultsId(
-    Object.keys(modelizedAuditResults).map(auditId => modelizedAuditResults[auditId]),
-  );
+    Object.keys(modelizedAuditResults).map(auditId => modelizedAuditResults[auditId])
+  )
+  let sortedByPageId;
+  let sortedByScriptId;
+  if (type === "page") {
+    sortedByPageId = { [id]: sortedAuditResultsIds }
+  }
+  if (type === "script") {
+    sortedByScriptId = { [id]: groupBy(sortedAuditResultsIds, (auditId) => modelizedAuditResults[auditId].scriptStepNumber) }
+  }
   yield put(
     fetchAuditResultsSuccess({
       byAuditId: modelizedAuditResults,
-      sortedByPageId: { [pageId]: sortedAuditResultsIds },
+      sortedByPageId,
+      sortedByScriptId,
     }),
   );
 }

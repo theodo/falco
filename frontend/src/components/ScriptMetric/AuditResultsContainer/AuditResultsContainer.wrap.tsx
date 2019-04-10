@@ -5,11 +5,11 @@ import { RootState } from 'redux/types';
 import AuditResultsContainer, { OwnProps } from './AuditResultsContainer';
 
 const mapStateToProps = (state: RootState, props: OwnProps) => ({
-  sortedAuditResultsIds: state.auditResults.sortedByPageId[props.pageId],
+  sortedAuditResultsIds: state.auditResults.sortedByScriptId[props.scriptId],
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  fetchAuditResultsRequest: (pageId: string) => dispatch(fetchAuditResultsRequest({ id: pageId, type: "page" })),
+  fetchAuditResultsRequest: (scriptId: string) => dispatch(fetchAuditResultsRequest({ id: scriptId, type: "script" })),
 });
 
 export default connect(

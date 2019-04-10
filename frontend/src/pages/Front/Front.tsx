@@ -6,6 +6,7 @@ import { RouteComponentProps } from 'react-router';
 import Select from 'react-select';
 
 import PageMetric from 'components/PageMetric';
+import ScriptMetric from 'components/ScriptMetric';
 import { METRICS } from 'redux/auditResults/constants';
 import { MetricConstantForGraph, MetricType } from 'redux/auditResults/types';
 import { ProjectType } from 'redux/projects/types';
@@ -119,6 +120,14 @@ const Front: React.FunctionComponent<Props> = props => {
           defaultIsExpanded={index === 0}
           key={page.uuid}
           pageId={page.uuid}
+          metrics={metrics}
+        />
+      ))}
+      {project.scripts.map((script, index) => (
+        <ScriptMetric
+          defaultIsExpanded={index === 0}
+          key={script.uuid}
+          scriptId={script.uuid}
           metrics={metrics}
         />
       ))}
