@@ -24,6 +24,7 @@ class AuditResultsSerializer(serializers.ModelSerializer):
     class Meta:
         model = AuditResults
         fields = (
+            "uuid",
             "audit",
             "created_at",
             "wpt_results_json_url",
