@@ -43,4 +43,6 @@ class AuditResultsSerializer(serializers.ModelSerializer):
             "wpt_metric_first_view_time_to_first_byte",
             "wpt_metric_repeat_view_time_to_first_byte",
             "wpt_metric_lighthouse_performance",
+            "script_step_name",
+            "script_step_number",
         )

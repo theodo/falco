@@ -77,3 +77,5 @@ class AuditResults(BaseModel):
         blank=True, null=True
     )
     wpt_metric_lighthouse_performance = models.FloatField(blank=True, null=True)
+    script_step_name = models.CharField(max_length=100, blank=True, null=True)
+    script_step_number = models.IntegerField(blank=True, null=True)

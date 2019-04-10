@@ -93,6 +93,8 @@ def format_wpt_json_results_for_script(data):
                     "lighthouse.Performance"
                 ),
                 "screenshot_url": first_view_step_data["images"]["screenShot"],
+                "step_name": first_view_step_data["eventName"],
+                "step_number": first_view_step_data["step"],
             }
         )
 

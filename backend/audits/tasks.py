@@ -136,6 +136,8 @@ def poll_audit_results(audit_uuid, json_url):
                 wpt_metric_lighthouse_performance=formatted_results[
                     "wpt_metric_lighthouse_performance"
                 ],
+                script_step_name=formatted_results.get("step_name"),
+                script_step_number=formatted_results.get("step_number"),
             )
             audit_results.save()
 
