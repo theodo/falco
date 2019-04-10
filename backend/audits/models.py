@@ -1,7 +1,7 @@
 from enum import Enum
 from core.models import BaseModel
 from django.db import models
-from projects.models import Page, ProjectAuditParameters
+from projects.models import Page, ProjectAuditParameters, Script
 
 
 class AvailableStatuses(Enum):  # A subclass of Enum
@@ -12,7 +12,8 @@ class AvailableStatuses(Enum):  # A subclass of Enum
 
 
 class Audit(BaseModel):
-    page = models.ForeignKey(Page, related_name="audits", on_delete=models.CASCADE)
+    page = models.ForeignKey(Page, related_name="audits", on_delete=models.CASCADE, blank=True, null=True)
+    script = models.ForeignKey(Script, related_name="audits", on_delete=models.CASCADE, blank=True, null=True)
     parameters = models.ForeignKey(
         ProjectAuditParameters,
         related_name="audits",

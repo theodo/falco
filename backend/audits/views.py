@@ -19,6 +19,7 @@ def request_audit(request):
     if request.method == "POST":
         data = JSONParser().parse(request)
         page_uuid = data["page"]
+        script_uuid = data["script"]
         page = get_object_or_404(Page, pk=page_uuid)
         audit_parameters_list = page.project.audit_parameters_list.all()
 

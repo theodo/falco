@@ -61,3 +61,9 @@ class ProjectAuditParameters(BaseModel):
     project = models.ForeignKey(
         Project, related_name="audit_parameters_list", on_delete=models.CASCADE
     )
+
+
+class Script(BaseModel):
+    name = models.CharField(max_length=100)
+    script = models.TextField()
+    project = models.ForeignKey(Project, related_name="scripts", on_delete=models.CASCADE)
