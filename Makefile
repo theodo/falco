@@ -9,14 +9,17 @@ backend/start:
 backend/migrate:
 	docker-compose exec backend ./manage.py migrate
 
+backend/createsuperuser:
+	docker-compose exec backend ./manage.py createsuperuser
+
+backend/makemigrations:
+	docker-compose exec backend ./manage.py makemigrations
+
 frontend/install: frontend/.env
 	yarn --cwd frontend install
 
 frontend/start:
 	yarn --cwd frontend start
-
-createsuperuser:
-	docker-compose exec backend ./manage.py createsuperuser
 
 .env: .env.example
 	@if [ -f .env ]; \
