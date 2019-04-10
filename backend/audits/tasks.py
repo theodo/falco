@@ -1,6 +1,7 @@
 from urllib.parse import parse_qs, urlparse
 
 import requests
+import urllib
 
 from audits.models import Audit, AuditResults, AuditStatusHistory, AvailableStatuses
 from celery import shared_task
@@ -56,7 +57,6 @@ def format_wpt_json_results(data):
 def request_audit(audit_uuid):
     audit = Audit.objects.get(uuid=audit_uuid)
     parameters = audit.parameters
-    webpagetest_api_key = audit.page.project.wpt_api_key
     audit_status_requested = AuditStatusHistory(
         audit=audit, status=AvailableStatuses.REQUESTED.value
     )
@@ -67,15 +67,20 @@ def request_audit(audit_uuid):
     for all available parameters in the WebPageTest API
     """
     payload = {
-        "url": audit.page.url,
         "f": "json",
-        "lighthouse": 1,
-        "k": webpagetest_api_key,
         "runs": 3,
         "video": 1,
         "mv": 1,
         "location": f"{parameters.location}:{parameters.browser}.{NetworkShapeOptions[parameters.network_shape].value}",
     }
+
+    if audit.page is not None:
+        payload["url"] = audit.page.url
+        payload["lighthouse"] = 1
+        payload["k"] = audit.page.project.wpt_api_key
+    elif audit.script is not None:
+        payload["script"] = urllib.parse.quote_plus(audit.script.script)
+        payload["k"] = audit.script.project.wpt_api_key
 
     r = requests.post("http://www.webpagetest.org/runtest.php", params=payload)
     response = r.json()
