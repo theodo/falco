@@ -15,6 +15,9 @@ backend/createsuperuser:
 backend/makemigrations:
 	docker-compose exec backend ./manage.py makemigrations
 
+db/connect:
+	docker exec -it falco_db_1 psql -Upostgres postgres
+
 frontend/install: frontend/.env
 	yarn --cwd frontend install
 
