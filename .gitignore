@@ -4,3 +4,4 @@
 postgres-data/
 backend/celerybeat-schedule
 backend/celerybeat.pid
+backend/venv/
