@@ -22,9 +22,15 @@ class Audit(BaseModel):
     )
 
     def __str__(self):
+        if self.page is not None:
+            project_name = self.page.project.name
+            audit_name = self.page.name
+        elif self.script is not None:
+            project_name = self.script.project.name
+            audit_name = self.script.name
         return "%s — %s | % s" % (
-            self.page.project.name,
-            self.page.name,
+            project_name,
+            audit_name,
             self.created_at,
         )
 
