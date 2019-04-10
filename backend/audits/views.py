@@ -75,8 +75,16 @@ def audits_results(request):
     """ Returns every audit result for a given page """
     if request.method == "GET":
         page_uuid = request.GET.get("page")
-        get_object_or_404(Page, pk=page_uuid)
-        audits = Audit.objects.filter(page=page_uuid)
-        audits_results = AuditResults.objects.filter(audit__in=audits)
-        serializer = AuditResultsSerializer(audits_results, many=True)
+        script_uuid = request.GET.get("script")
+        if page_uuid is not None:
+            get_object_or_404(Page, pk=page_uuid)
+            audits = Audit.objects.filter(page=page_uuid)
+            audits_results = AuditResults.objects.filter(audit__in=audits)
+            serializer = AuditResultsSerializer(audits_results, many=True)
+        elif script_uuid is not None:
+            get_object_or_404(Script, pk=script_uuid)
+            audits = Audit.objects.filter(script=script_uuid)
+            audits_results = AuditResults.objects.filter(audit__in=audits)
+            serializer = AuditResultsSerializer(audits_results, many=True)
+
         return JsonResponse(serializer.data, safe=False)
