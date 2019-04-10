@@ -1,5 +1,5 @@
 from django.contrib import admin
-from projects.models import Page, Project, ProjectAuditParameters, Script
+from projects.models import Page, Project, ProjectAuditParameters, Script, ScriptForm
 
 
 class PageInline(admin.TabularInline):
@@ -8,6 +8,7 @@ class PageInline(admin.TabularInline):
 
 class ScriptInline(admin.TabularInline):
     model = Script
+    form = ScriptForm
 
 
 class ProjectAuditParametersInline(admin.TabularInline):

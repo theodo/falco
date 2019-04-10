@@ -1,7 +1,6 @@
 from urllib.parse import parse_qs, urlparse
 
 import requests
-import urllib
 
 from audits.models import Audit, AuditResults, AuditStatusHistory, AvailableStatuses
 from celery import shared_task
@@ -79,7 +78,7 @@ def request_audit(audit_uuid):
         payload["lighthouse"] = 1
         payload["k"] = audit.page.project.wpt_api_key
     elif audit.script is not None:
-        payload["script"] = urllib.parse.quote_plus(audit.script.script)
+        payload["script"] = audit.script.script
         payload["k"] = audit.script.project.wpt_api_key
 
     r = requests.post("http://www.webpagetest.org/runtest.php", params=payload)
