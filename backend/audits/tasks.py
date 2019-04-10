@@ -62,12 +62,18 @@ def request_audit(audit_uuid):
     )
 
     audit_status_requested.save()
+    """
+    See https://sites.google.com/a/webpagetest.org/docs/advanced-features/webpagetest-restful-apis
+    for all available parameters in the WebPageTest API
+    """
     payload = {
         "url": audit.page.url,
         "f": "json",
         "lighthouse": 1,
         "k": webpagetest_api_key,
-        "runs": 10,
+        "runs": 3,
+        "video": 1,
+        "mv": 1,
         "location": f"{parameters.location}:{parameters.browser}.{NetworkShapeOptions[parameters.network_shape].value}",
     }
 
