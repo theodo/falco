@@ -10,43 +10,43 @@ from projects.models import NetworkShapeOptions, Page
 
 def format_wpt_json_results(data):
     return {
-        "wpt_metric_first_view_tti": data["average"]["firstView"].get(
+        "wpt_metric_first_view_tti": data["median"]["firstView"].get(
             "FirstInteractive"
         )
-        or data["average"]["firstView"].get("LastInteractive"),
-        "wpt_metric_repeat_view_tti": data["average"]["repeatView"].get(
+        or data["median"]["firstView"].get("LastInteractive"),
+        "wpt_metric_repeat_view_tti": data["median"]["repeatView"].get(
             "FirstInteractive"
         )
-        or data["average"]["repeatView"].get("LastInteractive"),
-        "wpt_metric_first_view_speed_index": data["average"]["firstView"]["SpeedIndex"],
-        "wpt_metric_repeat_view_speed_index": data["average"]["repeatView"][
+        or data["median"]["repeatView"].get("LastInteractive"),
+        "wpt_metric_first_view_speed_index": data["median"]["firstView"]["SpeedIndex"],
+        "wpt_metric_repeat_view_speed_index": data["median"]["repeatView"][
             "SpeedIndex"
         ],
-        "wpt_metric_first_view_first_paint": data["average"]["firstView"]["firstPaint"],
-        "wpt_metric_repeat_view_first_paint": data["average"]["repeatView"][
+        "wpt_metric_first_view_first_paint": data["median"]["firstView"]["firstPaint"],
+        "wpt_metric_repeat_view_first_paint": data["median"]["repeatView"][
             "firstPaint"
         ],
-        "wpt_metric_first_view_first_meaningful_paint": data["average"][
+        "wpt_metric_first_view_first_meaningful_paint": data["median"][
             "firstView"
         ].get("firstMeaningfulPaint"),
-        "wpt_metric_repeat_view_first_meaningful_paint": data["average"][
+        "wpt_metric_repeat_view_first_meaningful_paint": data["median"][
             "repeatView"
         ].get("firstMeaningfulPaint"),
-        "wpt_metric_first_view_first_contentful_paint": data["average"][
+        "wpt_metric_first_view_first_contentful_paint": data["median"][
             "firstView"
         ].get("firstContentfulPaint"),
-        "wpt_metric_repeat_view_first_contentful_paint": data["average"][
+        "wpt_metric_repeat_view_first_contentful_paint": data["median"][
             "repeatView"
         ].get("firstContentfulPaint"),
-        "wpt_metric_first_view_load_time": data["average"]["firstView"]["loadTime"],
-        "wpt_metric_repeat_view_load_time": data["average"]["repeatView"]["loadTime"],
-        "wpt_metric_first_view_time_to_first_byte": data["average"]["firstView"][
+        "wpt_metric_first_view_load_time": data["median"]["firstView"]["loadTime"],
+        "wpt_metric_repeat_view_load_time": data["median"]["repeatView"]["loadTime"],
+        "wpt_metric_first_view_time_to_first_byte": data["median"]["firstView"][
             "TTFB"
         ],
-        "wpt_metric_repeat_view_time_to_first_byte": data["average"]["repeatView"][
+        "wpt_metric_repeat_view_time_to_first_byte": data["median"]["repeatView"][
             "TTFB"
         ],
-        "wpt_metric_lighthouse_performance": data["average"]["firstView"].get(
+        "wpt_metric_lighthouse_performance": data["median"]["firstView"].get(
             "lighthouse.Performance"
         ),
         "screenshot_url": data["median"]["firstView"]["images"]["screenShot"],
