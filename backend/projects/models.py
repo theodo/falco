@@ -67,14 +67,15 @@ class ProjectAuditParameters(BaseModel):
 class Script(BaseModel):
     name = models.CharField(max_length=100)
     script = models.TextField()
-    project = models.ForeignKey(Project, related_name="scripts", on_delete=models.CASCADE)
+    project = models.ForeignKey(
+        Project, related_name="scripts", on_delete=models.CASCADE
+    )
 
 
 class ScriptForm(forms.ModelForm):
-
     def __init__(self, *args, **kwargs):
         super(ScriptForm, self).__init__(*args, **kwargs)
-        self.fields['script'].strip = False
+        self.fields["script"].strip = False
 
     class Meta:
         model = Script

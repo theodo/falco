@@ -5,19 +5,17 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('audits', '0009_auto_20190410_2108'),
-    ]
+    dependencies = [("audits", "0009_auto_20190410_2108")]
 
     operations = [
         migrations.AddField(
-            model_name='auditresults',
-            name='script_step_name',
+            model_name="auditresults",
+            name="script_step_name",
             field=models.CharField(blank=True, max_length=100, null=True),
         ),
         migrations.AddField(
-            model_name='auditresults',
-            name='script_step_number',
+            model_name="auditresults",
+            name="script_step_number",
             field=models.IntegerField(blank=True, null=True),
         ),
     ]

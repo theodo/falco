@@ -1,4 +1,10 @@
-from projects.models import NetworkShapeOptions, Page, Project, ProjectAuditParameters, Script
+from projects.models import (
+    NetworkShapeOptions,
+    Page,
+    Project,
+    ProjectAuditParameters,
+    Script,
+)
 from rest_framework import serializers
 
 

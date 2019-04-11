@@ -12,8 +12,12 @@ class AvailableStatuses(Enum):  # A subclass of Enum
 
 
 class Audit(BaseModel):
-    page = models.ForeignKey(Page, related_name="audits", on_delete=models.CASCADE, blank=True, null=True)
-    script = models.ForeignKey(Script, related_name="audits", on_delete=models.CASCADE, blank=True, null=True)
+    page = models.ForeignKey(
+        Page, related_name="audits", on_delete=models.CASCADE, blank=True, null=True
+    )
+    script = models.ForeignKey(
+        Script, related_name="audits", on_delete=models.CASCADE, blank=True, null=True
+    )
     parameters = models.ForeignKey(
         ProjectAuditParameters,
         related_name="audits",
@@ -28,11 +32,7 @@ class Audit(BaseModel):
         elif self.script is not None:
             project_name = self.script.project.name
             audit_name = self.script.name
-        return "%s — %s | % s" % (
-            project_name,
-            audit_name,
-            self.created_at,
-        )
+        return "%s — %s | % s" % (project_name, audit_name, self.created_at)
 
 
 class AuditStatusHistory(BaseModel):

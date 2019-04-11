@@ -5,7 +5,10 @@ import requests
 from audits.models import Audit, AuditResults, AuditStatusHistory, AvailableStatuses
 from celery import shared_task
 from projects.models import NetworkShapeOptions, Page
-from audits.normalizer import format_wpt_json_results_for_page, format_wpt_json_results_for_script
+from audits.normalizer import (
+    format_wpt_json_results_for_page,
+    format_wpt_json_results_for_script,
+)
 
 
 @shared_task
@@ -89,14 +92,20 @@ def poll_audit_results(audit_uuid, json_url):
             formatted_results_array = format_wpt_json_results_for_page(response["data"])
         elif audit.script is not None:
             project = audit.script.project
-            formatted_results_array = format_wpt_json_results_for_script(response["data"])
+            formatted_results_array = format_wpt_json_results_for_script(
+                response["data"]
+            )
         for formatted_results in formatted_results_array:
             audit_results = AuditResults(
                 audit=audit,
                 wpt_results_json_url=json_url,
                 wpt_results_user_url=wpt_results_user_url,
-                wpt_metric_first_view_tti=formatted_results["wpt_metric_first_view_tti"],
-                wpt_metric_repeat_view_tti=formatted_results["wpt_metric_repeat_view_tti"],
+                wpt_metric_first_view_tti=formatted_results[
+                    "wpt_metric_first_view_tti"
+                ],
+                wpt_metric_repeat_view_tti=formatted_results[
+                    "wpt_metric_repeat_view_tti"
+                ],
                 wpt_metric_first_view_speed_index=formatted_results[
                     "wpt_metric_first_view_speed_index"
                 ],
