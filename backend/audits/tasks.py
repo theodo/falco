@@ -4,7 +4,7 @@ import requests
 
 from audits.models import Audit, AuditResults, AuditStatusHistory, AvailableStatuses
 from celery import shared_task
-from projects.models import NetworkShapeOptions, Page
+from projects.models import NetworkShapeOptions, Page, Script
 from audits.normalizer import (
     format_wpt_json_results_for_page,
     format_wpt_json_results_for_script,
@@ -171,5 +171,14 @@ def request_all_audits():
         audit_parameters_list = page.project.audit_parameters_list.all()
         for audit_parameters in audit_parameters_list:
             audit = Audit(page=page, parameters=audit_parameters)
+            audit.save()
+            request_audit.delay(audit.uuid)
+
+    scripts = Script.objects.all().iterator()
+
+    for script in scripts:
+        audit_parameters_list = script.project.audit_parameters_list.all()
+        for audit_parameters in audit_parameters_list:
+            audit = Audit(script=script, parameters=audit_parameters)
             audit.save()
             request_audit.delay(audit.uuid)
