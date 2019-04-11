@@ -5,10 +5,11 @@ from rest_framework import serializers
 class AuditSerializer(serializers.ModelSerializer):
     parameters = serializers.PrimaryKeyRelatedField(read_only=True)
     page = serializers.PrimaryKeyRelatedField(read_only=True)
+    script = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Audit
-        fields = ("uuid", "parameters", "page")
+        fields = ("uuid", "parameters", "page", "script")
 
 
 class AuditStatusHistorySerializer(serializers.ModelSerializer):
@@ -23,6 +24,7 @@ class AuditResultsSerializer(serializers.ModelSerializer):
     class Meta:
         model = AuditResults
         fields = (
+            "uuid",
             "audit",
             "created_at",
             "wpt_results_json_url",
@@ -42,4 +44,6 @@ class AuditResultsSerializer(serializers.ModelSerializer):
             "wpt_metric_first_view_time_to_first_byte",
             "wpt_metric_repeat_view_time_to_first_byte",
             "wpt_metric_lighthouse_performance",
+            "script_step_name",
+            "script_step_number",
         )

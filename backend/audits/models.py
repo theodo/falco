@@ -1,7 +1,7 @@
 from enum import Enum
 from core.models import BaseModel
 from django.db import models
-from projects.models import Page, ProjectAuditParameters
+from projects.models import Page, ProjectAuditParameters, Script
 
 
 class AvailableStatuses(Enum):  # A subclass of Enum
@@ -12,7 +12,12 @@ class AvailableStatuses(Enum):  # A subclass of Enum
 
 
 class Audit(BaseModel):
-    page = models.ForeignKey(Page, related_name="audits", on_delete=models.CASCADE)
+    page = models.ForeignKey(
+        Page, related_name="audits", on_delete=models.CASCADE, blank=True, null=True
+    )
+    script = models.ForeignKey(
+        Script, related_name="audits", on_delete=models.CASCADE, blank=True, null=True
+    )
     parameters = models.ForeignKey(
         ProjectAuditParameters,
         related_name="audits",
@@ -21,11 +26,13 @@ class Audit(BaseModel):
     )
 
     def __str__(self):
-        return "%s — %s | % s" % (
-            self.page.project.name,
-            self.page.name,
-            self.created_at,
-        )
+        if self.page is not None:
+            project_name = self.page.project.name
+            audit_name = self.page.name
+        elif self.script is not None:
+            project_name = self.script.project.name
+            audit_name = self.script.name
+        return "%s — %s | % s" % (project_name, audit_name, self.created_at)
 
 
 class AuditStatusHistory(BaseModel):
@@ -40,7 +47,7 @@ class AuditStatusHistory(BaseModel):
 
 
 class AuditResults(BaseModel):
-    audit = models.OneToOneField(Audit, on_delete=models.CASCADE)
+    audit = models.ForeignKey(Audit, on_delete=models.CASCADE)
     wpt_results_json_url = models.CharField(max_length=1000)
     wpt_results_user_url = models.CharField(max_length=1000)
     wpt_metric_first_view_tti = models.IntegerField(blank=True, null=True)
@@ -70,3 +77,5 @@ class AuditResults(BaseModel):
         blank=True, null=True
     )
     wpt_metric_lighthouse_performance = models.FloatField(blank=True, null=True)
+    script_step_name = models.CharField(max_length=100, blank=True, null=True)
+    script_step_number = models.IntegerField(blank=True, null=True)

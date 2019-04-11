@@ -4,72 +4,40 @@ import requests
 
 from audits.models import Audit, AuditResults, AuditStatusHistory, AvailableStatuses
 from celery import shared_task
-from projects.models import NetworkShapeOptions, Page
-
-
-def format_wpt_json_results(data):
-    return {
-        "wpt_metric_first_view_tti": data["average"]["firstView"].get(
-            "FirstInteractive"
-        )
-        or data["average"]["firstView"].get("LastInteractive"),
-        "wpt_metric_repeat_view_tti": data["average"]["repeatView"].get(
-            "FirstInteractive"
-        )
-        or data["average"]["repeatView"].get("LastInteractive"),
-        "wpt_metric_first_view_speed_index": data["average"]["firstView"]["SpeedIndex"],
-        "wpt_metric_repeat_view_speed_index": data["average"]["repeatView"][
-            "SpeedIndex"
-        ],
-        "wpt_metric_first_view_first_paint": data["average"]["firstView"]["firstPaint"],
-        "wpt_metric_repeat_view_first_paint": data["average"]["repeatView"][
-            "firstPaint"
-        ],
-        "wpt_metric_first_view_first_meaningful_paint": data["average"][
-            "firstView"
-        ].get("firstMeaningfulPaint"),
-        "wpt_metric_repeat_view_first_meaningful_paint": data["average"][
-            "repeatView"
-        ].get("firstMeaningfulPaint"),
-        "wpt_metric_first_view_first_contentful_paint": data["average"][
-            "firstView"
-        ].get("firstContentfulPaint"),
-        "wpt_metric_repeat_view_first_contentful_paint": data["average"][
-            "repeatView"
-        ].get("firstContentfulPaint"),
-        "wpt_metric_first_view_load_time": data["average"]["firstView"]["loadTime"],
-        "wpt_metric_repeat_view_load_time": data["average"]["repeatView"]["loadTime"],
-        "wpt_metric_first_view_time_to_first_byte": data["average"]["firstView"][
-            "TTFB"
-        ],
-        "wpt_metric_repeat_view_time_to_first_byte": data["average"]["repeatView"][
-            "TTFB"
-        ],
-        "wpt_metric_lighthouse_performance": data["average"]["firstView"].get(
-            "lighthouse.Performance"
-        ),
-        "screenshot_url": data["median"]["firstView"]["images"]["screenShot"],
-    }
+from projects.models import NetworkShapeOptions, Page, Script
+from audits.normalizer import (
+    format_wpt_json_results_for_page,
+    format_wpt_json_results_for_script,
+)
 
 
 @shared_task
 def request_audit(audit_uuid):
     audit = Audit.objects.get(uuid=audit_uuid)
     parameters = audit.parameters
-    webpagetest_api_key = audit.page.project.wpt_api_key
     audit_status_requested = AuditStatusHistory(
         audit=audit, status=AvailableStatuses.REQUESTED.value
     )
 
     audit_status_requested.save()
+    """
+    See https://sites.google.com/a/webpagetest.org/docs/advanced-features/webpagetest-restful-apis
+    for all available parameters in the WebPageTest API
+    """
     payload = {
-        "url": audit.page.url,
         "f": "json",
-        "lighthouse": 1,
-        "k": webpagetest_api_key,
-        "runs": 10,
+        "runs": 3,
+        "video": 1,
         "location": f"{parameters.location}:{parameters.browser}.{NetworkShapeOptions[parameters.network_shape].value}",
     }
+
+    if audit.page is not None:
+        payload["url"] = audit.page.url
+        payload["lighthouse"] = 1
+        payload["k"] = audit.page.project.wpt_api_key
+    elif audit.script is not None:
+        payload["script"] = audit.script.script
+        payload["k"] = audit.script.project.wpt_api_key
 
     r = requests.post("http://www.webpagetest.org/runtest.php", params=payload)
     response = r.json()
@@ -118,56 +86,69 @@ def poll_audit_results(audit_uuid, json_url):
         parsed_url = urlparse(json_url)
         test_id = parse_qs(parsed_url.query)["test"][0]
         wpt_results_user_url = f"http://www.webpagetest.org/result/{test_id}"
-        formatted_results = format_wpt_json_results(response["data"])
-        audit_results = AuditResults(
-            audit=audit,
-            wpt_results_json_url=json_url,
-            wpt_results_user_url=wpt_results_user_url,
-            wpt_metric_first_view_tti=formatted_results["wpt_metric_first_view_tti"],
-            wpt_metric_repeat_view_tti=formatted_results["wpt_metric_repeat_view_tti"],
-            wpt_metric_first_view_speed_index=formatted_results[
-                "wpt_metric_first_view_speed_index"
-            ],
-            wpt_metric_repeat_view_speed_index=formatted_results[
-                "wpt_metric_repeat_view_speed_index"
-            ],
-            wpt_metric_first_view_first_paint=formatted_results[
-                "wpt_metric_first_view_first_paint"
-            ],
-            wpt_metric_repeat_view_first_paint=formatted_results[
-                "wpt_metric_repeat_view_first_paint"
-            ],
-            wpt_metric_first_view_first_meaningful_paint=formatted_results[
-                "wpt_metric_first_view_first_meaningful_paint"
-            ],
-            wpt_metric_repeat_view_first_meaningful_paint=formatted_results[
-                "wpt_metric_repeat_view_first_meaningful_paint"
-            ],
-            wpt_metric_first_view_load_time=formatted_results[
-                "wpt_metric_first_view_load_time"
-            ],
-            wpt_metric_repeat_view_load_time=formatted_results[
-                "wpt_metric_repeat_view_load_time"
-            ],
-            wpt_metric_first_view_first_contentful_paint=formatted_results[
-                "wpt_metric_first_view_first_contentful_paint"
-            ],
-            wpt_metric_repeat_view_first_contentful_paint=formatted_results[
-                "wpt_metric_repeat_view_first_contentful_paint"
-            ],
-            wpt_metric_first_view_time_to_first_byte=formatted_results[
-                "wpt_metric_first_view_time_to_first_byte"
-            ],
-            wpt_metric_repeat_view_time_to_first_byte=formatted_results[
-                "wpt_metric_repeat_view_time_to_first_byte"
-            ],
-            wpt_metric_lighthouse_performance=formatted_results[
-                "wpt_metric_lighthouse_performance"
-            ],
-        )
-        audit_results.save()
+        if audit.page is not None:
+            project = audit.page.project
+            formatted_results_array = format_wpt_json_results_for_page(response["data"])
+        elif audit.script is not None:
+            project = audit.script.project
+            formatted_results_array = format_wpt_json_results_for_script(
+                response["data"]
+            )
+        for formatted_results in formatted_results_array:
+            audit_results = AuditResults(
+                audit=audit,
+                wpt_results_json_url=json_url,
+                wpt_results_user_url=wpt_results_user_url,
+                wpt_metric_first_view_tti=formatted_results[
+                    "wpt_metric_first_view_tti"
+                ],
+                wpt_metric_repeat_view_tti=formatted_results[
+                    "wpt_metric_repeat_view_tti"
+                ],
+                wpt_metric_first_view_speed_index=formatted_results[
+                    "wpt_metric_first_view_speed_index"
+                ],
+                wpt_metric_repeat_view_speed_index=formatted_results[
+                    "wpt_metric_repeat_view_speed_index"
+                ],
+                wpt_metric_first_view_first_paint=formatted_results[
+                    "wpt_metric_first_view_first_paint"
+                ],
+                wpt_metric_repeat_view_first_paint=formatted_results[
+                    "wpt_metric_repeat_view_first_paint"
+                ],
+                wpt_metric_first_view_first_meaningful_paint=formatted_results[
+                    "wpt_metric_first_view_first_meaningful_paint"
+                ],
+                wpt_metric_repeat_view_first_meaningful_paint=formatted_results[
+                    "wpt_metric_repeat_view_first_meaningful_paint"
+                ],
+                wpt_metric_first_view_load_time=formatted_results[
+                    "wpt_metric_first_view_load_time"
+                ],
+                wpt_metric_repeat_view_load_time=formatted_results[
+                    "wpt_metric_repeat_view_load_time"
+                ],
+                wpt_metric_first_view_first_contentful_paint=formatted_results[
+                    "wpt_metric_first_view_first_contentful_paint"
+                ],
+                wpt_metric_repeat_view_first_contentful_paint=formatted_results[
+                    "wpt_metric_repeat_view_first_contentful_paint"
+                ],
+                wpt_metric_first_view_time_to_first_byte=formatted_results[
+                    "wpt_metric_first_view_time_to_first_byte"
+                ],
+                wpt_metric_repeat_view_time_to_first_byte=formatted_results[
+                    "wpt_metric_repeat_view_time_to_first_byte"
+                ],
+                wpt_metric_lighthouse_performance=formatted_results[
+                    "wpt_metric_lighthouse_performance"
+                ],
+                script_step_name=formatted_results.get("step_name"),
+                script_step_number=formatted_results.get("step_number"),
+            )
+            audit_results.save()
 
-        project = audit.page.project
         if project.screenshot_url is None or project.screenshot_url == "":
             project.screenshot_url = formatted_results["screenshot_url"]
             project.save()
@@ -190,5 +171,14 @@ def request_all_audits():
         audit_parameters_list = page.project.audit_parameters_list.all()
         for audit_parameters in audit_parameters_list:
             audit = Audit(page=page, parameters=audit_parameters)
+            audit.save()
+            request_audit.delay(audit.uuid)
+
+    scripts = Script.objects.all().iterator()
+
+    for script in scripts:
+        audit_parameters_list = script.project.audit_parameters_list.all()
+        for audit_parameters in audit_parameters_list:
+            audit = Audit(script=script, parameters=audit_parameters)
             audit.save()
             request_audit.delay(audit.uuid)

@@ -1,4 +1,10 @@
-from projects.models import NetworkShapeOptions, Page, Project, ProjectAuditParameters
+from projects.models import (
+    NetworkShapeOptions,
+    Page,
+    Project,
+    ProjectAuditParameters,
+    Script,
+)
 from rest_framework import serializers
 
 
@@ -6,6 +12,12 @@ class PageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Page
         fields = ("uuid", "name", "url", "audits")
+
+
+class ScriptSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Script
+        fields = ("uuid", "name", "script", "audits")
 
 
 class ProjectAuditParametersSerializer(serializers.ModelSerializer):
@@ -21,6 +33,7 @@ class ProjectAuditParametersSerializer(serializers.ModelSerializer):
 
 class ProjectSerializer(serializers.ModelSerializer):
     pages = PageSerializer(many=True)
+    scripts = ScriptSerializer(many=True)
     audit_parameters_list = ProjectAuditParametersSerializer(many=True)
 
     class Meta:
@@ -29,6 +42,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "uuid",
             "name",
             "pages",
+            "scripts",
             "audit_parameters_list",
             "screenshot_url",
             "latest_audit_at",

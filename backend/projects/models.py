@@ -2,6 +2,7 @@ from enum import Enum
 
 from core.models import BaseModel
 from django.db import models
+from django import forms
 
 
 class Project(BaseModel):
@@ -61,3 +62,21 @@ class ProjectAuditParameters(BaseModel):
     project = models.ForeignKey(
         Project, related_name="audit_parameters_list", on_delete=models.CASCADE
     )
+
+
+class Script(BaseModel):
+    name = models.CharField(max_length=100)
+    script = models.TextField()
+    project = models.ForeignKey(
+        Project, related_name="scripts", on_delete=models.CASCADE
+    )
+
+
+class ScriptForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ScriptForm, self).__init__(*args, **kwargs)
+        self.fields["script"].strip = False
+
+    class Meta:
+        model = Script
+        fields = "__all__"
