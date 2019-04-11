@@ -28,7 +28,6 @@ def request_audit(audit_uuid):
         "f": "json",
         "runs": 3,
         "video": 1,
-        "mv": 1,
         "location": f"{parameters.location}:{parameters.browser}.{NetworkShapeOptions[parameters.network_shape].value}",
     }
 
