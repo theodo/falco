@@ -39,7 +39,7 @@ def request_audit(audit_uuid):
         payload["script"] = audit.script.script
         payload["k"] = audit.script.project.wpt_api_key
 
-    r = requests.post("http://www.webpagetest.org/runtest.php", params=payload)
+    r = requests.post("https://www.webpagetest.org/runtest.php", params=payload)
     response = r.json()
     if response["statusCode"] == 200:
         audit_status_pending = AuditStatusHistory(
@@ -85,7 +85,7 @@ def poll_audit_results(audit_uuid, json_url):
     elif status_code == 200:
         parsed_url = urlparse(json_url)
         test_id = parse_qs(parsed_url.query)["test"][0]
-        wpt_results_user_url = f"http://www.webpagetest.org/result/{test_id}"
+        wpt_results_user_url = f"https://www.webpagetest.org/result/{test_id}"
         if audit.page is not None:
             project = audit.page.project
             formatted_results_array = format_wpt_json_results_for_page(response["data"])
