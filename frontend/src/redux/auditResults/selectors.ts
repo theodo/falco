@@ -14,6 +14,7 @@ export const selectAuditResultsAsGraphData = (
 
   auditResultsAsGraphDataPerMetric = metrics.map((metric: MetricType) => ({
     metric,
+    scriptStepName: state.auditResults.byAuditId[auditResultIds[0]].scriptStepName,
     auditResults: auditResultIds.map(auditResult => state.auditResults.byAuditId[auditResult] && {
       x: state.auditResults.byAuditId[auditResult].createdAt.toDate(),
       y: state.auditResults.byAuditId[auditResult][metric],

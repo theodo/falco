@@ -9,6 +9,10 @@ export const modelizeProject = (project: ApiProjectType): Record<string, Project
       url: page.url,
       name: page.name,
     })),
+    scripts: project.scripts.map(script => ({
+      uuid: script.uuid,
+      name: script.name,
+    })),
     auditParametersList: project.audit_parameters_list.map(auditParameters => ({
       uuid: auditParameters.uuid,
       location: auditParameters.location,

@@ -9,9 +9,10 @@ export type auditResultsAction = ActionType<typeof fetchAuditResultsSuccess>;
 export type auditResultsState = Readonly<{
   byAuditId: Readonly<Record<string, AuditResultType>>;
   sortedByPageId: Record<string, string[]>;
+  sortedByScriptId: Record<string, {[key: string]: string[]}>;
 }>;
 
-const initialState: auditResultsState = { byAuditId: {}, sortedByPageId: {} };
+const initialState: auditResultsState = { byAuditId: {}, sortedByPageId: {}, sortedByScriptId: {} };
 
 const reducer = (state: auditResultsState = initialState, action: AnyAction) => {
   const typedAction = action as auditResultsAction;
@@ -26,6 +27,10 @@ const reducer = (state: auditResultsState = initialState, action: AnyAction) => 
         sortedByPageId: {
           ...state.sortedByPageId,
           ...action.payload.sortedByPageId,
+        },
+        sortedByScriptId: {
+          ...state.sortedByScriptId,
+          ...action.payload.sortedByScriptId,
         },
       };
     default:
