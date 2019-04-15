@@ -5,6 +5,7 @@ import fr from 'react-intl/locale-data/fr';
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 
+import { routeDefinitions } from 'routes';
 import { flattenMessages } from 'services/i18n/intl';
 import enMessages from 'translations/en.json';
 import frMessages from 'translations/fr.json';
@@ -27,7 +28,7 @@ const Root: React.SFC<Props> = ({ children, location }) => (
   <IntlProvider locale="fr" messages={locales.fr}>
     <Style.Container>
       <Style.Header>
-        <Link key={'logo'} to={`/projects`}>
+        <Link key={'logo'} to={routeDefinitions.projectsList.path}>
           <Style.Logo>
             <img src={logo} alt="Falco logo" />
             <h1>FALCO</h1>
@@ -35,13 +36,13 @@ const Root: React.SFC<Props> = ({ children, location }) => (
         </Link>
         <Style.Nav>
           <ul>
-            <li className={location.pathname === `/projects` ? `active` : ``}>
-              <Link key={'navProjects'} to={`/projects`}>
+            <li className={location.pathname === routeDefinitions.projectsList.path ? `active` : ``}>
+              <Link key={'navProjects'} to={routeDefinitions.projectsList.path}>
                 MES PROJETS
               </Link>
             </li>
-            <li className={location.pathname === `/login` ? `active` : ``}>
-              <Link key={'navLogin'} to={`/login`}>
+            <li className={location.pathname === routeDefinitions.login.path ? `active` : ``}>
+              <Link key={'navLogin'} to={routeDefinitions.login.path}>
                 SE CONNECTER
               </Link>
             </li>
