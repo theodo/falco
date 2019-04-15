@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
+import { selectIsAuthenticated } from 'redux/login';
+import { RootState } from 'redux/types';
 import Home from './Home';
 
-function mapStateToProps() {
-  return {};
-}
+const mapStateToProps = (state: RootState) => ({
+  isUserAuthenticated: selectIsAuthenticated(state),
+});
 
 function mapDispatchToProps() {
   return {};
