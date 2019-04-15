@@ -26,11 +26,28 @@ Go through this once when you install the project, you shouldn't need to do that
   ```
 - Apply all migrations:
   ```bash
-    make backend/migrate
+  make backend/migrate
+  ```
+- If you have data that you want to import from PostgreSQL backup file:
+  - Connect to local PostgreSQL server:
+    ```bash
+    make db/connect
+    ```
+  - For each table *<table_name>* within public database, delete all data stored in it:
+    ```sql
+    TRUNCATE TABLE <table_name> CASCADE;
+    ```
+  - Close connection to local PostgreSQL server:
+    ```sql
+    \q
+    ```
+  - Import data from backup file:
+    ```bash
+    docker exec -i falco_db_1 psql -Upostgres < backup_file.sql
     ```
 - Create an admin account:
   ```bash
-  make createsuperuser
+  make backend/createsuperuser
   ```
 
 ## Start the app
