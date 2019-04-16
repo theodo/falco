@@ -11,7 +11,7 @@ from rest_framework.parsers import JSONParser
 @permission_classes([permissions.IsAuthenticated])
 def project_list(request):
     if request.method == "GET":
-        projects = Project.objects.all()
+        projects = Project.objects.filter(members__id=request.user.id)
         serializer = ProjectSerializer(projects, many=True)
         return JsonResponse(serializer.data, safe=False)
     elif request.method == "POST":

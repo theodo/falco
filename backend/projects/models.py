@@ -1,6 +1,6 @@
 from enum import Enum
 
-from core.models import BaseModel
+from core.models import BaseModel, User
 from django.db import models
 from django import forms
 
@@ -9,6 +9,7 @@ class Project(BaseModel):
     name = models.CharField(max_length=100)
     wpt_api_key = models.CharField(max_length=100)
     screenshot_url = models.CharField(max_length=1000, null=True, blank=True)
+    members = models.ManyToManyField(User, blank=True)
 
     @property
     def latest_audit_at(self):

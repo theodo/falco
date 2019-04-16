@@ -17,6 +17,7 @@ class ProjectAuditParametersInline(admin.TabularInline):
 
 class ProjectAdmin(admin.ModelAdmin):
     inlines = [PageInline, ScriptInline, ProjectAuditParametersInline]
+    filter_horizontal = ("members",)
 
 
 admin.site.register(Project, ProjectAdmin)
