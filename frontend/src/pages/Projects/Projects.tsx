@@ -30,7 +30,7 @@ const Projects: React.FunctionComponent<Props> = props => {
       </Style.ProjectTitle>
       <Style.ProjectTiles>
         {projects.map(project => (
-          <ProjectTile project={project} />
+          <ProjectTile project={project} key={project.uuid} />
         ))}
       </Style.ProjectTiles>
     </Style.Container>
