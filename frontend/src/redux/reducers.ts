@@ -4,7 +4,7 @@
  */
 
 import { LocationChangeAction, RouterState } from 'connected-react-router';
-import { AnyAction, combineReducers, Reducer } from 'redux';
+import { combineReducers, Reducer } from 'redux';
 
 import { reducer as auditResults } from './auditResults';
 import { reducer as login } from './login';

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { Dispatch } from 'redux';
-import { getLoginError, getUserToken } from 'redux/login';
+import { getIsSubmitting, getLoginError, getUserToken } from 'redux/login';
 import { loginUserRequest } from 'redux/login/actions';
 import { RootState } from 'redux/types';
 
@@ -10,6 +10,7 @@ import { FormValues } from './service';
 
 const mapStateToProps = (state: RootState) => ({
   loginError: getLoginError(state),
+  isSubmittingFromStore: getIsSubmitting(state),
   token: getUserToken(state),
 });
 

@@ -5,11 +5,12 @@ import { ActionType, getType } from 'typesafe-actions';
 import { routeDefinitions } from 'routes';
 import { login } from 'services/networking/request';
 
-import { loginUserError, loginUserRequest, loginUserSuccess } from './actions';
+import { loginUserClearError, loginUserError, loginUserRequest, loginUserSuccess } from './actions';
 
 export function* loginUser(action: ActionType<typeof loginUserRequest>) {
   const endpoint = `/auth/jwt/create`;
   try {
+    yield put(loginUserClearError());
     const token: string | undefined = yield call(login, endpoint, action.payload);
     if (token) {
       yield put(loginUserSuccess({ token }));

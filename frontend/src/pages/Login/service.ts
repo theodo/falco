@@ -1,13 +1,11 @@
-import { Dispatch } from 'redux';
-import { LoginAction } from 'redux/login';
-
 export interface FormValues {
   username: string;
   password: string;
 }
 
 interface LoginServiceStateProps {
-  loginError?: string | null;
+  loginError: string | null;
+  isSubmittingFromStore: boolean;
 }
 
 interface LoginServiceDispatchProps {
@@ -20,6 +18,9 @@ export const validateForm = (values: FormValues) => {
   const errors: { password?: string; username?: string } = {};
   if (!values.username) {
     errors.username = 'Username required';
+  }
+  if (!values.password) {
+    errors.password = 'Password required';
   }
   return errors;
 };
