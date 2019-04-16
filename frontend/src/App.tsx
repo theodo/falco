@@ -19,18 +19,18 @@ interface Props {
   store: Store;
 }
 
-const RootComponentWithRoutes: React.SFC = () => (
+const RootComponentWithRoutes: React.FunctionComponent<any> = props => (
   <Root>
-    <Routes />
+    <Routes store={props.store} />
   </Root>
 );
 
-const App: React.SFC<Props> = ({ history, persistor, store }) => (
+const App: React.FunctionComponent<Props> = ({ history, persistor, store }) => (
   <Provider store={store}>
     <MuiThemeProvider theme={theme}>
       <PersistGate loading={null} persistor={persistor}>
         <ConnectedRouter history={history}>
-          <Route path="/" component={RootComponentWithRoutes} />
+          <Route path="/" render={() => <RootComponentWithRoutes store={store.getState()} />} />
         </ConnectedRouter>
       </PersistGate>
     </MuiThemeProvider>
