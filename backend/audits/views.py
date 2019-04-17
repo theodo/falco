@@ -5,6 +5,7 @@ from audits.serializers import (
     AuditStatusHistorySerializer,
 )
 from audits.tasks import request_audit as task_request_audit
+from projects.permissions import check_if_member_of_project
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from projects.models import Page, Script
@@ -22,9 +23,11 @@ def request_audit(request):
         script_uuid = data.get("script")
         if page_uuid is not None:
             page = get_object_or_404(Page, pk=page_uuid)
+            check_if_member_of_project(request.user.id, page.project.uuid)
             audit_parameters_list = page.project.audit_parameters_list.all()
         elif script_uuid is not None:
             script = get_object_or_404(Script, pk=script_uuid)
+            check_if_member_of_project(request.user.id, script.project.uuid)
             audit_parameters_list = script.project.audit_parameters_list.all()
 
         created_audits = []
@@ -56,6 +59,17 @@ def audit_status(request, audit_uuid):
         latest_audit_status = AuditStatusHistory.objects.filter(
             audit=audit_uuid
         ).order_by("-created_at")[0]
+
+        if latest_audit_status.audit.page is not None:
+            check_if_member_of_project(
+                request.user.id, latest_audit_status.audit.page.project.uuid
+            )
+
+        if latest_audit_status.audit.script is not None:
+            check_if_member_of_project(
+                request.user.id, latest_audit_status.audit.script.project.uuid
+            )
+
         serializer = AuditStatusHistorySerializer(latest_audit_status)
         return JsonResponse(serializer.data, safe=False)
 
@@ -65,6 +79,17 @@ def audit_status(request, audit_uuid):
 def audit_results(request, audit_uuid):
     if request.method == "GET":
         audit_results = AuditResults.objects.get(audit=audit_uuid)
+
+        if audit_results.audit.page is not None:
+            check_if_member_of_project(
+                request.user.id, audit_results.audit.page.project.uuid
+            )
+
+        if audit_results.audit.script is not None:
+            check_if_member_of_project(
+                request.user.id, audit_results.audit.script.project.uuid
+            )
+
         serializer = AuditResultsSerializer(audit_results)
         return JsonResponse(serializer.data, safe=False)
 
@@ -77,12 +102,14 @@ def audits_results(request):
         page_uuid = request.GET.get("page")
         script_uuid = request.GET.get("script")
         if page_uuid is not None:
-            get_object_or_404(Page, pk=page_uuid)
+            page = get_object_or_404(Page, pk=page_uuid)
+            check_if_member_of_project(request.user.id, page.project.uuid)
             audits = Audit.objects.filter(page=page_uuid)
             audits_results = AuditResults.objects.filter(audit__in=audits)
             serializer = AuditResultsSerializer(audits_results, many=True)
         elif script_uuid is not None:
-            get_object_or_404(Script, pk=script_uuid)
+            script = get_object_or_404(Script, pk=script_uuid)
+            check_if_member_of_project(request.user.id, script.project.uuid)
             audits = Audit.objects.filter(script=script_uuid)
             audits_results = AuditResults.objects.filter(audit__in=audits)
             serializer = AuditResultsSerializer(audits_results, many=True)
