@@ -1,9 +1,5 @@
 import styled from 'styled-components';
 
-interface FormErrorProps {
-  margin?: string;
-}
-
 const Styles = {
   Container: styled.div`
     margin: 100px auto 0;
