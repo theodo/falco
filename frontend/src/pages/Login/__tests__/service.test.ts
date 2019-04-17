@@ -5,18 +5,28 @@ describe('Login form service', () => {
     it('Should return an error "Username required" in username field if username field is empty in values', () => {
       const values = {
         username: '',
-        password: '',
+        password: 'azdaz',
       };
       const errors = validateForm(values);
 
       expect(errors.username).toBe('Username required');
       expect(errors.password).not.toBeDefined();
     });
+    it('Should return an error "Password required" in password field if password field is empty in values', () => {
+      const values = {
+        username: 'gandalf.leblanc@lacontee.co',
+        password: '',
+      };
+      const errors = validateForm(values);
+
+      expect(errors.username).not.toBeDefined();
+      expect(errors.password).toBe('Password required');
+    });
 
     it('Should return an empty object if the username is valid', () => {
       const values = {
-        password: '',
         username: 'gandalf.leblanc@lacontee.co',
+        password: 'azdaz',
       };
       const errors = validateForm(values);
 
