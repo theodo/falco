@@ -1,5 +1,5 @@
 import { RootState } from 'redux/types';
-import { AuditResultsAsGraphData, MetricType } from './types';
+import { AuditResultsAsGraphData, AuditResultsAsGraphDataMetric, MetricType } from './types';
 
 export const selectAuditResultsAsGraphData = (
   state: RootState,
@@ -12,14 +12,20 @@ export const selectAuditResultsAsGraphData = (
     return auditResultsAsGraphDataPerMetric;
   }
 
-  auditResultsAsGraphDataPerMetric = metrics.map((metric: MetricType) => ({
-    metric,
-    scriptStepName: state.auditResults.byAuditId[auditResultIds[0]].scriptStepName,
-    auditResults: auditResultIds.map(auditResult => state.auditResults.byAuditId[auditResult] && {
-      x: state.auditResults.byAuditId[auditResult].createdAt.toDate(),
-      y: state.auditResults.byAuditId[auditResult][metric],
-    }).filter(auditResult => !!auditResult)
-  }));
+  auditResultsAsGraphDataPerMetric = auditResultIds
+    .map(
+      auditResultId =>
+        state.auditResults.byAuditId[auditResultId] && {
+          date: state.auditResults.byAuditId[auditResultId].createdAt.toDate().getTime(),
+          scriptStepName: state.auditResults.byAuditId[auditResultId].scriptStepName,
+          ...metrics.reduce<AuditResultsAsGraphDataMetric>((metricsValues, metric) => {
+            metricsValues[metric] = state.auditResults.byAuditId[auditResultId][metric];
+            return metricsValues;
+          }, {}),
+        },
+    )
+    .filter(auditResultId => !!auditResultId)
+    .sort((a, b) => a.date - b.date);
 
   return auditResultsAsGraphDataPerMetric;
-}
+};

@@ -7,7 +7,7 @@ const mapStateToProps = (state: RootState, props: OwnProps) => ({
   auditResults: selectAuditResultsAsGraphData(state, props.auditResultIds, props.metrics),
 });
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = null;
 
 export default connect(
   mapStateToProps,
