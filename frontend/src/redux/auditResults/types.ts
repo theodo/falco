@@ -41,14 +41,18 @@ export type MetricType =
   | 'WPTMetricRepeatViewTimeToFirstByte'
   | 'WPTMetricLighthousePerformance';
 
-export interface MetricConstantForGraph { type: 'time' | 'number' | 'percent', colorDark: string, colorLight: string };
+export interface MetricConstantForGraph {
+  type: 'time' | 'number' | 'percent';
+  colorDark: string;
+  colorLight: string;
+}
 
 export interface ApiAuditResultType {
   audit: {
     uuid: string;
     page: string;
   };
-  uuid: string,
+  uuid: string;
   created_at: string;
   wpt_results_json_url: string;
   wpt_results_user_url: string;
@@ -71,14 +75,14 @@ export interface ApiAuditResultType {
   script_step_number: number;
 }
 
-export interface DataType {
-  x: Date;
-  y: number;
-}
-interface AuditResultsAsGraphDataPerMetric {
-  scriptStepName?: string;
-  metric: MetricType;
-  auditResults: DataType[];
-}
+export type AuditResultsAsGraphDataDate = Record<'date', number>;
 
-export type AuditResultsAsGraphData = AuditResultsAsGraphDataPerMetric[];
+export type AuditResultsAsGraphDataMetric = Partial<Record<MetricType, number>>;
+
+export type AuditResultsAsGraphDataScript = Record<'scriptStepName', string>;
+
+export type AuditResultsAsGraphDataItem = AuditResultsAsGraphDataDate &
+  AuditResultsAsGraphDataMetric &
+  AuditResultsAsGraphDataScript;
+
+export type AuditResultsAsGraphData = AuditResultsAsGraphDataItem[];
