@@ -19,6 +19,10 @@ This project runs on [AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeans
   ```sh
   cd ./devops/provisioning
   ```
+- Initialize terraform configuration:
+  ```sh
+  terraform init
+  ```
 - Run terraform:
   ```sh
   terraform apply
