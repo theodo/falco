@@ -13,10 +13,25 @@ class Project(BaseModel):
 
     @property
     def latest_audit_at(self):
-        any_page = self.pages.first()
-        latest_audit = any_page.audits.latest("created_at")
+        latest_page_audit_date = None
+        latest_script_audit_date = None
 
-        return latest_audit.created_at
+        any_page = self.pages.first()
+        any_script = self.scripts.first()
+
+        if any_page is not None:
+            latest_page_audit_date = any_page.audits.latest("created_at").created_at
+
+        if any_script is not None:
+            latest_script_audit_date = any_script.audits.latest("created_at").created_at
+
+        if latest_page_audit_date is None:
+            return latest_script_audit_date
+
+        if latest_script_audit_date is None:
+            return latest_page_audit_date
+
+        return max(latest_page_audit_date, latest_script_audit_date)
 
     def __str__(self):
         return self.name
