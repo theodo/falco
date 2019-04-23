@@ -3,6 +3,7 @@ from enum import Enum
 from core.models import BaseModel, User
 from django.db import models
 from django import forms
+from fernet_fields import EncryptedTextField
 
 
 class Project(BaseModel):
@@ -82,7 +83,7 @@ class ProjectAuditParameters(BaseModel):
 
 class Script(BaseModel):
     name = models.CharField(max_length=100)
-    script = models.TextField()
+    script = EncryptedTextField()
     project = models.ForeignKey(
         Project, related_name="scripts", on_delete=models.CASCADE
     )
