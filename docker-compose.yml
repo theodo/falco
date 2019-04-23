@@ -52,7 +52,7 @@ services:
       - .env
     environment:
       DATABASE_URL: "postgres://postgres@db:5432/postgres"
-    command: celery -A root.celery worker -l INFO
+    command: python /code/manage.py celery
 
   celerybeat:
     build: ./backend
