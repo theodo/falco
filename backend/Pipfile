@@ -4,29 +4,30 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-"argon2_cffi" = "*"
-"boto3" = "*"
-dj-database-url = "*"
-django = {extras = ["argon2"]}
-django-memoize = "*"
-django-storages = "*"
-"psycopg2-binary" = "*"
-ptvsd = "*"
-pytz = "*"
-requests = "*"
-djangorestframework = "*"
-celery = {extras = ["sqs"],version = "*"}
-django-celery-beat = "*"
-djangorestframework-simplejwt = "*"
-djoser = "*"
+"argon2_cffi" = "==19.1.0"
+"boto3" = "==1.9.134"
+dj-database-url = "==0.5.0"
+django = {extras = ["argon2"], version = "==2.2"}
+django-memoize = "==2.2.0"
+django-storages = "==1.7.1"
+"psycopg2-binary" = "==2.8.2"
+ptvsd = "==4.2.8"
+pytz = "==2019.1"
+requests = "==2.21.0"
+djangorestframework = "==3.9.2"
+celery = {extras = ["sqs"],version = "==4.3.0"}
+django-celery-beat = "==1.4.0"
+djangorestframework-simplejwt = "==4.3.0"
+djoser = "==1.5.1"
+django-fernet-fields = "==0.5"
 
 [dev-packages]
-"flake8" = "*"
-factory-boy = "*"
-coverage = "*"
-django-debug-toolbar = "*"
-django-extensions = "*"
-isort = "*"
+"flake8" = "==3.7.7"
+factory-boy = "==2.11.1"
+coverage = "==4.5.3"
+django-debug-toolbar = "==1.11"
+django-extensions = "==2.1.6"
+isort = "==4.3.17"
 black = "==18.9b0"
 
 [requires]

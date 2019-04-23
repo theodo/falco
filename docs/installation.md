@@ -14,12 +14,10 @@ In development:
 
 Go through this once when you install the project, you shouldn't need to do that again.
 
-- Create a WebPageTest API Key on the following page: https://www.webpagetest.org/getkey.php
 - Install the backend:
   ```bash
   make backend/install
   ```
-- Copy the WebPageTest API Key in the .env at the root of your project
 - Install the frontend:
   ```bash
   make frontend/install
