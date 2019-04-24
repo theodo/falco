@@ -97,3 +97,7 @@ class ScriptForm(forms.ModelForm):
     class Meta:
         model = Script
         fields = "__all__"
+
+
+class RollbackTest(BaseModel):
+    rollback = models.CharField(max_length=100)
