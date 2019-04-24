@@ -38,7 +38,7 @@ const Root: React.SFC<Props> = ({ children, location }) => (
           <ul>
             <li className={location.pathname === routeDefinitions.projectsList.path ? `active` : ``}>
               <Link key={'navProjects'} to={routeDefinitions.projectsList.path}>
-                MES PROJETS
+                PROJETS
               </Link>
             </li>
             <li className={location.pathname === routeDefinitions.login.path ? `active` : ``}>
