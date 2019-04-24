@@ -1,27 +1,28 @@
 import styled from 'styled-components';
+import { colorUsage, fontFamily, fontSize, getSpacing } from 'stylesheet';
 
 const Style = {
   Container: styled.div`
-    border: 3px solid #212934;
-    border-radius: 8px;
+    border: 3px solid ${colorUsage.tileContainer};
+    border-radius: ${getSpacing(2)};
     width: 330px;
-    margin-bottom: 30px;
+    margin-bottom: ${getSpacing(6)};
   `,
   ProjectScreenshot: styled.img`
     width: 100%;
   `,
   ProjectTitle: styled.h2`
-    color: #6175de;
+    color: ${colorUsage.tileTitle};
     text-align: center;
-    font-size: 20px;
-    margin: 10px auto;
+    font-size: ${fontSize.large};
+    margin: ${getSpacing(2)} auto;
   `,
   LastAudit: styled.p`
-    color: #6e7a8b;
-    font-size: 16px;
+    color: ${colorUsage.tileLastAudit};
+    font-size: ${fontSize.medium};
     text-align: center;
-    font-family: 'IBM Plex Mono', Sans-Serif;
-    margin: 0 auto 10px;
+    font-family: ${fontFamily.mainMono};
+    margin: 0 auto ${getSpacing(2)};
   `,
   PagesWrapper: styled.div`
     display: flex;
@@ -29,29 +30,29 @@ const Style = {
     flex-wrap: wrap;
   `,
   Page: styled.h4`
-    color: #212934;
-    font-size: 16px;
+    color: ${colorUsage.tilePageTitle};
+    font-size: ${fontSize.medium};
     margin-bottom: 0;
-    margin-top: 5px;
+    margin-top: ${getSpacing(1)};
     flex-basis: 40%;
     text-align: left;
-    padding-left: 20px;
-    font-family: 'IBM Plex Mono', Sans-Serif;
+    padding-left: ${getSpacing(4)};
+    font-family: ${fontFamily.mainMono};
   `,
   LinkWrapper: styled.div`
     text-align: center;
-    margin: 20px auto;
+    margin: ${getSpacing(4)} auto;
   `,
   PrimaryButton: styled.button`
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: ${getSpacing(1)};
     height: 50px;
-    background: #6175de;
-    color: #e1e7eb;
-    font-size: 16px;
-    font-family: 'IBM Plex Sans', Sans-Serif;
+    background: ${colorUsage.tileButtonBackground};
+    color: ${colorUsage.tileButtonText};
+    font-size: ${fontSize.medium};
+    font-family: ${fontFamily.mainSans};
     font-weight: 700;
-    padding: 0 20px;
+    padding: 0 ${getSpacing(4)};
   `,
 };
 

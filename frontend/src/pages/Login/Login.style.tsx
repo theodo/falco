@@ -1,17 +1,18 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
+import { colorUsage, getSpacing } from 'stylesheet';
 
 const Styles = {
   Container: styled.div`
-    margin: 100px auto 0;
+    margin: ${getSpacing(20)} auto 0;
     width: 400px;
     text-align: center;
   `,
   FormError: styled.div`
-    padding: 12px;
-    color: #d8000c;
-    background-color: #ffd2d2;
-    border-radius: 5px;
-    margin: 0 0 30px 0;
+    padding: ${getSpacing(3)};
+    color: ${colorUsage.popinErrorText};
+    background-color: ${colorUsage.popinErrorBackground};
+    border-radius: ${getSpacing(1)};
+    margin: 0 0 ${getSpacing(6)} 0;
     white-space: pre-wrap;
   `,
 };

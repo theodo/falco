@@ -8,10 +8,10 @@ import { Route } from 'react-router';
 import { Store } from 'redux';
 import { Persistor } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
+import { muiTheme } from 'stylesheet';
 
 import Root from './components/Root';
 import Routes from './routes';
-import theme from './theme';
 
 interface Props {
   history: History;
@@ -27,7 +27,7 @@ const RootComponentWithRoutes: React.FunctionComponent<any> = props => (
 
 const App: React.FunctionComponent<Props> = ({ history, persistor, store }) => (
   <Provider store={store}>
-    <MuiThemeProvider theme={theme}>
+    <MuiThemeProvider theme={muiTheme}>
       <PersistGate loading={null} persistor={persistor}>
         <ConnectedRouter history={history}>
           <Route path="/" render={() => <RootComponentWithRoutes store={store.getState()} />} />

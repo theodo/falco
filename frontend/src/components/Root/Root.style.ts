@@ -1,24 +1,25 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { colorUsage, fontFamily, fontSize, getSpacing, lineHeight } from 'stylesheet';
 
 const StyledRoot = {
   Container: styled.div`
     height: 100%;
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: ${fontFamily.mainSans};
   `,
   Header: styled.div`
     align-items: center;
-    background-color: #374894;
-    color: #f8f9fa;
+    background-color: ${colorUsage.headerBackground};
+    color: ${colorUsage.headerText};
     display: flex;
     justify-content: space-between;
     height: 70px;
-    padding: 0 20px;
+    padding: 0 ${getSpacing(4)};
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
   `,
   Link: styled(Link)`
     text-decoration: none;
-    color: inherit;
+    color: ${colorUsage.headerText};
   `,
   LogoContainer: styled.div`
     display: flex;
@@ -27,12 +28,12 @@ const StyledRoot = {
   Logo: styled.img`
     width: 50px;
     height: 25px;
-    margin-right: 20px;
+    margin-right: ${getSpacing(4)};
   `,
   LogoTitle: styled.h1`
     letter-spacing: 2px;
     font-weight: 600;
-    font-size: 24px;
+    font-size: ${fontSize.Xlarge};
   `,
   Nav: styled.nav``,
   NavBlock: styled.ul`
@@ -44,8 +45,8 @@ const StyledRoot = {
   `,
   NavItem: styled.li`
     list-style: none;
-    margin-left: 20px;
-    line-height: 70px;
+    margin-left: ${getSpacing(4)};
+    line-height: ${lineHeight.header};
     font-weight: 600;
     letter-spacing: 1px;
 
@@ -54,7 +55,7 @@ const StyledRoot = {
     }
 
     &.active {
-      box-shadow: inset 0 -6px #f8f9fa;
+      box-shadow: inset 0 -6px ${colorUsage.headerText};
     }
   `,
 };
