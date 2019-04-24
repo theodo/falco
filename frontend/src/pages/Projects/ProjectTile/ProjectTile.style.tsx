@@ -20,7 +20,7 @@ const Style = {
     color: #6e7a8b;
     font-size: 16px;
     text-align: center;
-    font-family: 'IBM Plex Mono';
+    font-family: 'IBM Plex Mono', Sans-Serif;
     margin: 0 auto 10px;
   `,
   PagesWrapper: styled.div`
@@ -31,12 +31,12 @@ const Style = {
   Page: styled.h4`
     color: #212934;
     font-size: 16px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     margin-top: 5px;
     flex-basis: 40%;
     text-align: left;
     padding-left: 20px;
-    font-family: 'IBM Plex Mono';
+    font-family: 'IBM Plex Mono', Sans-Serif;
   `,
   LinkWrapper: styled.div`
     text-align: center;
@@ -49,9 +49,9 @@ const Style = {
     background: #6175de;
     color: #e1e7eb;
     font-size: 16px;
-    font-family: 'IBM Plex Sans';
+    font-family: 'IBM Plex Sans', Sans-Serif;
     font-weight: 700;
-    padding: 0px 20px;
+    padding: 0 20px;
   `,
 };
 

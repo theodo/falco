@@ -39,7 +39,8 @@
     "test:coverage": "npm run test -- --coverage",
     "generate": "plop --plopfile scripts/generators/index.js",
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
-    "lint:fix": "tslint -c tslint.json 'src/**/*.{ts,tsx}' --fix"
+    "lint:fix": "tslint -c tslint.json 'src/**/*.{ts,tsx}' --fix",
+    "lint-style": "stylelint 'src/**/*.style.{ts,tsx}' 'src/**/style.{ts,tsx}'"
   },
   "browserslist": [
     ">0.2%",
@@ -116,6 +117,11 @@
     "react-app-rewired": "1.6.2",
     "react-test-renderer": "16.6.3",
     "redux-saga-test-plan": "3.7.0",
+    "stylelint": "^9.10.1",
+    "stylelint-config-prettier": "^4.0.0",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.5.2",
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.17.0",
     "tslint-react": "^3.6.0",
