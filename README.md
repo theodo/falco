@@ -18,6 +18,7 @@ Falco helps you get your Performance Kaizen ready to go, in minutes
 - [Provisioning](./docs/provisioning.md)
 - [Deployment](./docs/deployment.md)
 - [HTTPS](./docs/https.md)
+- [DEV tips](./docs/development_tips.md)
 
 ## Team
 

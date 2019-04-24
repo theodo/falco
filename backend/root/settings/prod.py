@@ -6,6 +6,7 @@ import requests
 from .base import *
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
+FERNET_KEYS = [os.environ.get("DB_CYPHER_KEY")]
 DEBUG = False
 
 ALLOWED_HOSTS = ["getfal.co", "staging.getfal.co"]
