@@ -1,29 +1,30 @@
 import styled from 'styled-components';
+import { colorUsage, getSpacing } from 'stylesheet';
 
 const Style = {
   Container: styled.div`
-    margin: 10px 0;
+    margin: ${getSpacing(2)} 0;
     width: 100%;
   `,
   Title: styled.div`
-    background-color: #9ba3c9;
-    padding: 7px 20px;
+    background-color: ${colorUsage.auditTitleBackground};
+    padding: ${getSpacing(2)} ${getSpacing(4)};
     border-radius: ${({ isExpanded }: { isExpanded: boolean }) =>
-      isExpanded ? '5px 5px 0 0' : '5px'};
-    color: white;
+      isExpanded ? getSpacing(1) + ' ' + getSpacing(1) + ' 0 0' : getSpacing(1)};
+    color: ${colorUsage.auditTitleText};
     display: flex;
     align-items: center;
     position: relative;
   `,
   TitleExpander: styled.div`
     position: absolute;
-    right: 5px;
-    top: 7px;
+    right: ${getSpacing(1)};
+    top: ${getSpacing(2)};
     cursor: pointer;
   `,
   PageLink: styled.a`
-    color: white;
-    margin-left: 5px;
+    color: ${colorUsage.auditTitleText};
+    margin-left: ${getSpacing(1)};
     display: flex;
   `,
 };

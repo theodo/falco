@@ -158,7 +158,7 @@ jobs:
       - run:
           name: Run lint
           working_directory: frontend
-          command: yarn lint
+          command: yarn lint && yarn lint-style
 
       - save_cache:
           key: v2-{% templatetag openvariable %} checksum "frontend/package.json" {% templatetag closevariable %}

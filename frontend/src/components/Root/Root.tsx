@@ -3,7 +3,6 @@ import { addLocaleData, IntlProvider } from 'react-intl';
 import en from 'react-intl/locale-data/en';
 import fr from 'react-intl/locale-data/fr';
 import { RouteComponentProps } from 'react-router';
-import { Link } from 'react-router-dom';
 
 import { routeDefinitions } from 'routes';
 import { flattenMessages } from 'services/i18n/intl';
@@ -28,25 +27,29 @@ const Root: React.SFC<Props> = ({ children, location }) => (
   <IntlProvider locale="fr" messages={locales.fr}>
     <Style.Container>
       <Style.Header>
-        <Link key={'logo'} to={routeDefinitions.projectsList.path}>
-          <Style.Logo>
-            <img src={logo} alt="Falco logo" />
-            <h1>FALCO</h1>
-          </Style.Logo>
-        </Link>
+        <Style.Link key={'logo'} to={routeDefinitions.projectsList.path}>
+          <Style.LogoContainer>
+            <Style.Logo src={logo} alt="Falco logo" />
+            <Style.LogoTitle>FALCO</Style.LogoTitle>
+          </Style.LogoContainer>
+        </Style.Link>
         <Style.Nav>
-          <ul>
-            <li className={location.pathname === routeDefinitions.projectsList.path ? `active` : ``}>
-              <Link key={'navProjects'} to={routeDefinitions.projectsList.path}>
-                PROJETS
-              </Link>
-            </li>
-            <li className={location.pathname === routeDefinitions.login.path ? `active` : ``}>
-              <Link key={'navLogin'} to={routeDefinitions.login.path}>
+          <Style.NavBlock>
+            <Style.NavItem
+              className={location.pathname === routeDefinitions.projectsList.path ? `active` : ``}
+            >
+              <Style.Link key={'navProjects'} to={routeDefinitions.projectsList.path}>
+                MES PROJETS
+              </Style.Link>
+            </Style.NavItem>
+            <Style.NavItem
+              className={location.pathname === routeDefinitions.login.path ? `active` : ``}
+            >
+              <Style.Link key={'navLogin'} to={routeDefinitions.login.path}>
                 SE CONNECTER
-              </Link>
-            </li>
-          </ul>
+              </Style.Link>
+            </Style.NavItem>
+          </Style.NavBlock>
         </Style.Nav>
       </Style.Header>
       {children}
