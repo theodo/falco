@@ -7,7 +7,10 @@ This project runs on [AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeans
 - [Terraform](https://www.terraform.io/downloads.html)
 - A root user on the AWS account you want to deploy to
 
-## Provisioning
+## Provision Terraform remote backend
+
+> You should only need to do the steps in this section *once* for the entire project.
+
 - Get an access key for your AWS user and create a new profile:
   ```ini
   # in ~/.aws/credentials
@@ -15,11 +18,23 @@ This project runs on [AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeans
   aws_access_key_id=<access key id>
   aws_secret_access_key=<secret access key>
   ```
-- Go to the provisioning directory:
+- Go to the remote backend provisioning directory:
+  ```sh
+  cd ./devops/tfbackend
+  ```
+- Run the remote backend provisioning script:
+  ```sh
+  terraform apply
+  ```
+- Once this is done, make sure Terraform's output matches the values for `bucket` and `dynamodb_table` in `devops/provisioning/main.tf` (lines 4 and 5).
+
+## Provision falco
+
+- Go to the main provisioning directory:
   ```sh
   cd ./devops/provisioning
   ```
-- Initialize terraform configuration:
+- Initialise terraform:
   ```sh
   terraform init
   ```
