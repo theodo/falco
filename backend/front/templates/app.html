@@ -9,15 +9,14 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+  <link rel="stylesheet" href="/static/reset.css">
+  <link rel="stylesheet" href="/static/font.css">
   <title>Falco</title>
   {% if not debug %}
     {% for style in initial_stylesheets %}
       <link href="{% static style %}" rel="stylesheet">
     {% endfor %}
   {% endif %}
-  <style>
-    @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i,700,700i|IBM+Plex+Sans:400,400i,700,700i');
-  </style>
 </head>
 
 <body style="margin: 0; height: 100%; background-color: #f0f4fe;">
