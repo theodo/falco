@@ -4,7 +4,7 @@ import { ActionType } from 'typesafe-actions';
 
 export const handleAPIExceptions = (
   saga: (action: ActionType<any>) => SagaIterator,
-  handler: (error: Error) => void,
+  handler: (error: Error, actionPayload: Record<string, any>) => void,
 ) =>
   function* wrappedSaga(...args: any[]) {
     try {
@@ -12,7 +12,7 @@ export const handleAPIExceptions = (
       yield call(saga, ...args);
     } catch (error) {
       if (handler) {
-        yield call(handler, error);
+        yield call(handler, error, args[0].payload);
       } else {
         throw error;
       }

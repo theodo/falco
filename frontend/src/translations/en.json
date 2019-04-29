@@ -5,6 +5,9 @@
   "Login": {
     "login_error": "Those credentials seem incorrect.\nPlease try again."
   },
+  "Project": {
+    "project_error": "It seems that you are not authorized to access this project.\n\nPlease try again or contact your administrator to get granted."
+  },
   "Projects": {
     "title": "Projects"
   },

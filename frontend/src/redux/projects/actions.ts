@@ -10,6 +10,7 @@ export const fetchProjectSuccess = createStandardAction('projects/FETCH_PROJECT_
   byId: Record<string, ProjectType>;
 }>();
 export const fetchProjectError = createStandardAction('projects/FETCH_PROJECT_ERROR')<{
+  projectId: string | null;
   errorMessage: string;
 }>();
 

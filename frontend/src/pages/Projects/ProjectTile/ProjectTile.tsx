@@ -24,7 +24,7 @@ const Projects: React.FunctionComponent<Props> = props => {
         ))}
       </Style.PagesWrapper>
       <Style.LinkWrapper>
-        <Link to={`/project/${project.uuid}/audits`}>
+        <Link to={`/project/${project.uuid}`}>
           <Style.PrimaryButton>VOIR LES AUDITS</Style.PrimaryButton>
         </Link>
       </Style.LinkWrapper>

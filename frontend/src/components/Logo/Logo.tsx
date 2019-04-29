@@ -17,12 +17,12 @@ export default class Logo extends React.Component<Props> {
         xmlns="http://www.w3.org/2000/svg"
       >
         <title>FALCO</title>
-        <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Symbols" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
           <g
             id="Logo"
             transform="translate(0.000000, -5.000000)"
             fill={this.props.color}
-            fill-rule="nonzero"
+            fillRule="nonzero"
           >
             <g id="logo" transform="translate(0.000000, 5.000000)">
               <path

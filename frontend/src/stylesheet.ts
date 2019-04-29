@@ -61,6 +61,7 @@ export const colorUsage = {
   menuBackground: colorPalette.grey200,
   headerLogo: colorPalette.primary500,
   headerFakeBackground: colorPalette.white,
+  loader: colorPalette.primary500,
 
   // Former design
   primary: colorPalette.blueNight,
