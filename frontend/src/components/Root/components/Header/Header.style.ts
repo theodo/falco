@@ -5,7 +5,7 @@ import { colorUsage, fontSize, fontWeight, getSpacing, lineHeight } from 'styles
 const StyledHeader = {
   Header: styled.header`
     position: fixed;
-    z-index: 10;
+    z-index: 1;
     background-color: ${colorUsage.headerFakeBackground};
     height: 100px;
     display: flex;

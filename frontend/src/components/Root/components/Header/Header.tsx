@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Logo from 'components/Logo';
+import { FormattedMessage } from 'react-intl';
 import { routeDefinitions } from 'routes';
 import { colorUsage } from 'stylesheet';
 import Style from './Header.style';
@@ -24,11 +25,11 @@ const Header: React.FunctionComponent<Props> = () => (
       <Style.Nav>
         <Style.HeaderButtonsBlock>
           <Style.HeaderButton>
-            MES PROJETS
+            <FormattedMessage id="Header.projects_button" />
             <Style.HeaderButtonArrow />
           </Style.HeaderButton>
           <Style.HeaderButton>
-            MON COMPTE
+            <FormattedMessage id="Header.login_button" />
             <Style.HeaderButtonArrow />
           </Style.HeaderButton>
         </Style.HeaderButtonsBlock>
