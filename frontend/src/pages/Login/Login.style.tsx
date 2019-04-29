@@ -1,11 +1,15 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 import { colorUsage, getSpacing } from 'stylesheet';
 
 const Styles = {
   Container: styled.div`
-    margin: ${getSpacing(20)} auto 0;
-    width: 400px;
+    width: 100 %;
+    min-height: 400px;
+    height: 100%;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   `,
   FormError: styled.div`
     padding: ${getSpacing(3)};
