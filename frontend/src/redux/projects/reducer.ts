@@ -1,10 +1,10 @@
 import { AnyAction } from 'redux';
 import { ActionType, getType } from 'typesafe-actions';
 
-import { fetchProjectSuccess } from './actions';
+import { fetchProjectError, fetchProjectSuccess } from './actions';
 import { ProjectType } from './types';
 
-export type projectsAction = ActionType<typeof fetchProjectSuccess>;
+export type projectsAction = ActionType<typeof fetchProjectSuccess | typeof fetchProjectError>;
 
 export type projectsState = Readonly<{
   byId: Readonly<Record<string, ProjectType>>;
@@ -21,6 +21,14 @@ const reducer = (state: projectsState = initialState, action: AnyAction) => {
         byId: {
           ...state.byId,
           ...action.payload.byId,
+        },
+      };
+    case getType(fetchProjectError):
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          ...{[action.payload.projectId]: null},
         },
       };
     default:

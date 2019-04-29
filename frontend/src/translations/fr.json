@@ -5,6 +5,9 @@
   "Login": {
     "login_error": "Ces identifiants ne semblent pas corrects.\nVeuillez réessayer."
   },
+  "Project": {
+    "project_error": "Vous ne semblez pas avoir accès à ce projet.\n\nMerci de réessayer ou de vous rapprocher de votre administrateur pour obtenir l'accès."
+  },
   "Projects": {
     "title": "Projets"
   },

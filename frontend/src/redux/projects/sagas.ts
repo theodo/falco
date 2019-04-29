@@ -18,8 +18,12 @@ import {
 import { modelizeProject, modelizeProjects } from './modelizer';
 import { ApiProjectType } from './types';
 
-function* fetchProjectFailedHandler(error: Error) {
-  yield put(fetchProjectError({ errorMessage: error.message }));
+function* fetchProjectsFailedHandler(error: Error) {
+  yield put(fetchProjectError({ projectId: null, errorMessage: error.message }));
+}
+
+function* fetchProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
+  yield put(fetchProjectError({ projectId: actionPayload.projectId, errorMessage: error.message }));
 }
 
 export function* fetchProjects(action: ActionType<typeof fetchProjectsRequest>) {
@@ -55,6 +59,6 @@ export default function* projectsSaga() {
   );
   yield takeEvery(
     getType(fetchProjectsRequest),
-    handleAPIExceptions(fetchProjects, fetchProjectFailedHandler),
+    handleAPIExceptions(fetchProjects, fetchProjectsFailedHandler),
   );
 }
