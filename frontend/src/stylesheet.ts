@@ -23,6 +23,7 @@ const colorPalette = {
   accentGreen200: 'rgba(54,179,126,0.1)',
   accentGreen500: '#36B37E',
   accentYellow500: '#F7B500',
+  white: '#ffffff',
 
   // Former design
   blueNight: '#374894',
@@ -34,7 +35,6 @@ const colorPalette = {
   grey: '#6e7a8b',
   greyLight: '#e1e7eb',
   greyVeryLight: '#f8f9fa',
-  white: '#ffffff',
 };
 
 /**
@@ -58,6 +58,9 @@ export const colorUsage = {
   badgeBackground: colorPalette.accentBlue200,
   quoteText: colorPalette.grey800,
   smallText: colorPalette.grey800,
+  menuBackground: colorPalette.grey200,
+  headerLogo: colorPalette.primary500,
+  headerFakeBackground: colorPalette.white,
 
   // Former design
   primary: colorPalette.blueNight,

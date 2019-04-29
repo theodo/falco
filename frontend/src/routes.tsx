@@ -4,6 +4,7 @@ import { RootState } from 'redux/types';
 
 import { selectIsAuthenticated } from 'redux/login/selectors';
 
+const Audits = lazy(() => import('./pages/Audits'));
 const Home = lazy(() => import('./pages/Home'));
 const Login = lazy(() => import('./pages/Login'));
 const Front = lazy(() => import('./pages/Front'));
@@ -46,6 +47,13 @@ export const routeDefinitions: Record<string, RouteDefinition> = {
   projectDetails: {
     path: '/project/:projectId/front',
     component: Front,
+    exact: false,
+    strict: false,
+    isAuthenticated: true,
+  },
+  auditsDetails: {
+    path: '/project/:projectId/audits',
+    component: Audits,
     exact: false,
     strict: false,
     isAuthenticated: true,
