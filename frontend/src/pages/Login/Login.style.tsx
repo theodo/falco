@@ -3,16 +3,18 @@ import { colorUsage, getSpacing } from 'stylesheet';
 
 const Styles = {
   Container: styled.div`
-    width: 100 %;
+    width: 100%;
     min-height: 400px;
     height: 100%;
     text-align: center;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
   `,
   FormError: styled.div`
     padding: ${getSpacing(3)};
+    width: 80%;
     color: ${colorUsage.popinErrorText};
     background-color: ${colorUsage.popinErrorBackground};
     border-radius: ${getSpacing(1)};
