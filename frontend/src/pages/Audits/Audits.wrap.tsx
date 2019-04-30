@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { RootState } from 'redux/types';
 
+import { injectIntl } from 'react-intl';
 import { Audits, OwnProps } from './Audits';
 
 const mapStateToProps = (state: RootState, props: OwnProps) => ({
@@ -14,4 +15,4 @@ const mapDispatchToProps = null;
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Audits);
+)(injectIntl(Audits));
