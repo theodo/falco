@@ -9,6 +9,7 @@
     "project_error": "Vous ne semblez pas avoir accès à ce projet.\n\nMerci de réessayer ou de vous rapprocher de votre administrateur pour obtenir l'accès."
   },
   "Projects": {
+    "no_project_error": "Vous ne semblez avoir accès à aucun projet.\n\nMerci de réessayer ou de vous rapprocher de votre administrateur pour obtenir l'accès à votre projet.",
     "title": "Projets"
   },
   "Front": {

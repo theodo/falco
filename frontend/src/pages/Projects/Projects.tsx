@@ -1,16 +1,17 @@
-import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
-
+import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { Redirect } from 'react-router';
 import { ProjectType } from 'redux/projects/types';
+import { routeDefinitions } from 'routes';
+import { colorUsage } from 'stylesheet';
 
 import Style from './Projects.style';
-import ProjectTile from './ProjectTile';
 
-interface Props {
+type Props = {
   fetchProjectsRequest: () => void;
-  projects: ProjectType[];
-}
+  projects: Array<ProjectType | null> | null;
+} & InjectedIntlProps;
 
 const Projects: React.FunctionComponent<Props> = props => {
   const { fetchProjectsRequest, projects } = props;
@@ -18,23 +19,31 @@ const Projects: React.FunctionComponent<Props> = props => {
     fetchProjectsRequest();
   }, []);
 
-  if (!projects || projects.length === 0) {
-    return <div>Loading...</div>;
+  if (null === projects) {
+    return (
+      <Style.Container>
+        <Style.LoaderContainer color={colorUsage.loader}>
+          <CircularProgress color={'inherit'} />
+        </Style.LoaderContainer>
+      </Style.Container>
+    );
   }
-  return (
-    <Style.Container>
-      <Style.ProjectTitle>
-        <Typography variant="h4">
-          <FormattedMessage id="Projects.title" />
-        </Typography>
-      </Style.ProjectTitle>
-      <Style.ProjectTiles>
-        {projects.map(project => (
-          <ProjectTile project={project} key={project.uuid} />
-        ))}
-      </Style.ProjectTiles>
-    </Style.Container>
+
+  if (0 === projects.length) {
+    return (
+      <Style.Container>
+        <Style.Error>
+          <FormattedMessage id="Projects.no_project_error" />
+        </Style.Error>
+      </Style.Container>
+    );
+  }
+  const firstProject = projects[0];
+  const firstProjectLocation = routeDefinitions.projectDetails.path.replace(
+    ':projectId',
+    firstProject ? firstProject.uuid : '',
   );
+  return <Redirect to={firstProjectLocation} />;
 };
 
 export default Projects;

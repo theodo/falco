@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Logo from 'components/Logo';
+import { routeDefinitions } from 'routes';
 import { colorUsage } from 'stylesheet';
 import Style from './Header.style';
 
@@ -12,7 +13,7 @@ interface Props {
 const Header: React.FunctionComponent<Props> = () => (
   <Style.Header>
     <Style.HeaderMenu>
-      <Style.LogoContainer>
+      <Style.LogoContainer to={routeDefinitions.projectsList.path}>
         <Style.Logo>
           <Logo color={colorUsage.headerLogo} />
         </Style.Logo>

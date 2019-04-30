@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { colorUsage, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
@@ -15,9 +16,10 @@ const StyledHeader = {
     width: 380px;
     background-color: ${colorUsage.menuBackground};
   `,
-  LogoContainer: styled.div`
+  LogoContainer: styled(Link)`
     display: flex;
     align-items: center;
+    text-decoration: none;
   `,
   Logo: styled.div`
     width: 53px;

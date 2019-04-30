@@ -9,6 +9,7 @@
     "project_error": "It seems that you are not authorized to access this project.\n\nPlease try again or contact your administrator to get granted."
   },
   "Projects": {
+    "no_project_error": "It seems that you have no access to any project.\n\nPlease try again or contact your administrator to get granted.",
     "title": "Projects"
   },
   "Front": {

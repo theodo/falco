@@ -1,24 +1,30 @@
 import styled from 'styled-components';
-import { getSpacing } from 'stylesheet';
+import { colorUsage, getSpacing } from 'stylesheet';
 
 const Style = {
   Container: styled.div`
     display: flex;
-    align-items: center;
     flex-direction: column;
-    padding: ${getSpacing(4)} ${getSpacing(20)};
-    margin: 0 auto;
+    padding: 0;
+    margin: 0;
   `,
-  ProjectTitle: styled.div`
-    margin: ${getSpacing(4)};
-  `,
-  ProjectTiles: styled.div`
-    align-items: flex-start;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-content: space-between;
+  LoaderContainer: styled.div`
     width: 100%;
+    min-height: 400px;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${props => props.color};
+  `,
+  Error: styled.div`
+    padding: ${getSpacing(3)};
+    color: ${colorUsage.popinErrorText};
+    background-color: ${colorUsage.popinErrorBackground};
+    border-radius: ${getSpacing(1)};
+    margin: ${getSpacing(8)};
+    white-space: pre-wrap;
   `,
 };
 
