@@ -3,6 +3,7 @@ import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { Redirect, RouteComponentProps } from 'react-router';
 import { ProjectType } from 'redux/projects/types';
+import { routeDefinitions } from 'routes';
 import { colorUsage } from 'stylesheet';
 
 import Style from './Project.style';
@@ -46,11 +47,21 @@ const Project: React.FunctionComponent<Props> = props => {
     );
   }
 
-  let firstPageOrScriptLocation = window.location.pathname + '/audits/';
+  let firstPageOrScriptLocation = routeDefinitions.auditsDetails.path.replace(
+    ':projectId',
+    project.uuid,
+  );
+
   if (project.pages.length > 0) {
-    firstPageOrScriptLocation += project.pages[0].uuid;
+    firstPageOrScriptLocation = firstPageOrScriptLocation.replace(
+      ':pageOrScriptId',
+      project.pages[0].uuid,
+    );
   } else if (project.scripts.length > 0) {
-    firstPageOrScriptLocation += project.scripts[0].uuid;
+    firstPageOrScriptLocation = firstPageOrScriptLocation.replace(
+      ':pageOrScriptId',
+      project.scripts[0].uuid,
+    );
   }
   return <Redirect to={firstPageOrScriptLocation} />;
 };
