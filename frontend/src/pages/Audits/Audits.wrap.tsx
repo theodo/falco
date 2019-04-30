@@ -1,7 +1,13 @@
 import { connect } from 'react-redux';
-import Audits from './Audits';
+import { RootState } from 'redux/types';
 
-const mapStateToProps = null;
+import { Audits, OwnProps } from './Audits';
+
+const mapStateToProps = (state: RootState, props: OwnProps) => ({
+  project: state.projects.byId[props.match.params.projectId],
+  page: state.pages.byId[props.match.params.pageOrScriptId],
+  script: state.scripts.byId[props.match.params.pageOrScriptId],
+});
 
 const mapDispatchToProps = null;
 
