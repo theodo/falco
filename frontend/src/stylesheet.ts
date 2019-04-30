@@ -62,6 +62,13 @@ export const colorUsage = {
   headerLogo: colorPalette.primary500,
   headerFakeBackground: colorPalette.white,
   loader: colorPalette.primary500,
+  auditLinkBorder: colorPalette.grey300,
+  auditLinkHoverText: colorPalette.primary500,
+  auditLinkSelectedText: colorPalette.white,
+  auditLinkSelectedBackground: colorPalette.primary500,
+  auditLinkSelectedBorder: colorPalette.grey500,
+  menuArrow: colorPalette.grey800,
+  menuArrowSelected: colorPalette.white,
 
   // Former design
   primary: colorPalette.blueNight,

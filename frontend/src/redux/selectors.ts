@@ -8,3 +8,7 @@ export const getCurrentProject = (state: RootStateWithRouter) => {
   }
   return;
 };
+
+export const getCurrentURL = (state: RootStateWithRouter) => {
+  return state.router.location.pathname;
+};

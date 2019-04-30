@@ -15,6 +15,7 @@ const StyledRoot = {
     left: 490px;
     margin-left: ${getSpacing(8)};
     padding-right: ${getSpacing(22)};
+    padding-top: ${getSpacing(4)};
     width: 800px;
   `,
 };

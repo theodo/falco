@@ -24,6 +24,19 @@ const StyledAudits = {
     font-weight: ${fontWeight.h1Text};
     margin-bottom: ${getSpacing(4)};
     align-self: center;
+    text-align: center;
+    width: 75%;
+  `,
+  
+  LoaderContainer: styled.div`
+    width: 100%;
+    min-height: 400px;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${props => props.color};
   `,
 
   Dashboard: styled.div`

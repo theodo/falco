@@ -62,6 +62,14 @@ const Project: React.FunctionComponent<Props> = props => {
       ':pageOrScriptId',
       project.scripts[0].uuid,
     );
+  } else {
+    return (
+      <Style.Container>
+        <Style.Error>
+          <FormattedMessage id="Project.no_page_or_script_error" />
+        </Style.Error>
+      </Style.Container>
+    );
   }
   return <Redirect to={firstPageOrScriptLocation} />;
 };
