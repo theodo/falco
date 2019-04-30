@@ -16,18 +16,24 @@ const StyledAudits = {
     white-space: pre-wrap;
   `,
 
+  PageTitleBlock: styled.div`
+    margin-bottom: ${getSpacing(4)};
+    width: 75%;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `,
+
   PageTitle: styled.div`
     line-height: ${lineHeight.h1Text};
     color: ${colorUsage.h1Text};
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.h1Text};
     font-weight: ${fontWeight.h1Text};
-    margin-bottom: ${getSpacing(4)};
-    align-self: center;
     text-align: center;
-    width: 75%;
   `,
-  
+
   LoaderContainer: styled.div`
     width: 100%;
     min-height: 400px;
