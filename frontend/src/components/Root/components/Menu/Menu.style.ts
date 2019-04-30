@@ -6,7 +6,7 @@ const StyledMenu = {
   Container: styled.div`
     position: fixed;
     top: 100px;
-    z-index: 10;
+    z-index: 1;
     background-color: ${colorUsage.menuBackground};
     padding-left: ${getSpacing(22)};
     padding-top: ${getSpacing(4)};
