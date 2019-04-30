@@ -19,16 +19,15 @@ type Props = {
 } & InjectedIntlProps;
 
 export const Audits: React.FunctionComponent<Props> = ({ project, page, script }) => {
-  const pageOrScriptName =
-    undefined !== page ? page.name : undefined !== script ? script.name : null;
-
+  const pageOrScriptName = page ? page.name : script ? script.name : null;
   if (!pageOrScriptName) {
     return <FormattedMessage id="Audits.no_page_or_script" />;
   }
+
   return (
-    <Style.Audits>
+    <Style.Container>
       <Style.PageTitle>{project.name + ' / ' + pageOrScriptName}</Style.PageTitle>
       <Style.Dashboard>Dashboard</Style.Dashboard>
-    </Style.Audits>
+    </Style.Container>
   );
 };

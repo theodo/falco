@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
 const StyledAudits = {
-  Audits: styled.div`
+  Container: styled.div`
     display: flex;
     flex-direction: column;
   `,

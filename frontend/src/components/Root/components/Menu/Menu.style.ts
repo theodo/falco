@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
 const StyledMenu = {
-  Menu: styled.div`
+  Container: styled.div`
     position: fixed;
     top: 100px;
     z-index: 10;

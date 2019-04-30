@@ -13,9 +13,9 @@ export const Menu: React.FunctionComponent<Props> = ({ project }) => {
     return <div />;
   }
   return (
-    <Style.Menu>
+    <Style.Container>
       <Style.ProjectName>{project.name}</Style.ProjectName>
       <Style.Audits>Audits</Style.Audits>
-    </Style.Menu>
+    </Style.Container>
   );
 };
