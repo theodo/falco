@@ -7,6 +7,15 @@ const StyledAudits = {
     flex-direction: column;
   `,
 
+  Error: styled.div`
+    padding: ${getSpacing(3)};
+    color: ${colorUsage.popinErrorText};
+    background-color: ${colorUsage.popinErrorBackground};
+    border-radius: ${getSpacing(1)};
+    margin: ${getSpacing(8)};
+    white-space: pre-wrap;
+  `,
+
   PageTitle: styled.div`
     line-height: ${lineHeight.h1Text};
     color: ${colorUsage.h1Text};

@@ -20,8 +20,14 @@ type Props = {
 
 export const Audits: React.FunctionComponent<Props> = ({ project, page, script }) => {
   const pageOrScriptName = page ? page.name : script ? script.name : null;
-  if (!pageOrScriptName) {
-    return <FormattedMessage id="Audits.no_page_or_script" />;
+  if (!pageOrScriptName || !project) {
+    return (
+      <Style.Container>
+        <Style.Error>
+          <FormattedMessage id="Audits.no_page_or_script" />
+        </Style.Error>
+      </Style.Container>
+    );
   }
 
   return (
