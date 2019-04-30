@@ -5,7 +5,7 @@ import { injectIntl } from 'react-intl';
 import { Audits, OwnProps } from './Audits';
 
 const mapStateToProps = (state: RootState, props: OwnProps) => ({
-  project: state.projects.byId[props.match.params.projectId],
+  project: state.projects.byId ? state.projects.byId[props.match.params.projectId] : undefined,
   page: state.pages.byId[props.match.params.pageOrScriptId],
   script: state.scripts.byId[props.match.params.pageOrScriptId],
 });

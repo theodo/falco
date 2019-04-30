@@ -13,7 +13,7 @@ export type OwnProps = {} & RouteComponentProps<{
 }>;
 
 type Props = {
-  project: ProjectType;
+  project?: ProjectType;
   page?: PageType;
   script?: ScriptType;
 } & InjectedIntlProps;
