@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
@@ -8,6 +9,7 @@ const StyledMenu = {
     z-index: 10;
     background-color: ${colorUsage.menuBackground};
     padding-left: ${getSpacing(22)};
+    padding-top: ${getSpacing(4)};
     width: 380px;
     height: 100%;
   `,
@@ -19,6 +21,7 @@ const StyledMenu = {
     font-size: ${fontSize.h2Text};
     font-weight: ${fontWeight.h2Text};
     margin-bottom: ${getSpacing(4)};
+    padding-left: ${getSpacing(3)};
   `,
 
   Audits: styled.div`
@@ -27,6 +30,38 @@ const StyledMenu = {
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.h3Text};
     font-weight: ${fontWeight.h3Text};
+    padding: ${getSpacing(4)} ${getSpacing(3)};
+  `,
+
+  PageScriptItem: styled(Link)`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: ${getSpacing(4)} ${getSpacing(4)} ${getSpacing(4)} ${getSpacing(3)};
+    text-decoration: none;
+    line-height: ${lineHeight.auditLink};
+    color: ${colorUsage.auditLink};
+    font-size: ${fontSize.auditLink};
+    font-weight: ${fontWeight.auditLink};
+    border-top: 1px solid ${colorUsage.auditLinkBorder};
+
+    &:last-child {
+      border-bottom: 1px solid ${colorUsage.auditLinkBorder};
+    }
+
+    &:hover {
+      color: ${colorUsage.auditLinkHoverText};
+    }
+
+    &.active {
+      color: ${colorUsage.auditLinkSelectedText};
+      background-color: ${colorUsage.auditLinkSelectedBackground};
+      border: 1px solid ${colorUsage.auditLinkSelectedBorder};
+    }
+  `,
+
+  MenuArrowContainer: styled.span`
+    width: 12px;
   `,
 };
 
