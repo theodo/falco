@@ -1,12 +1,21 @@
 import React from 'react';
+import { RouteComponentProps } from 'react-router';
+import { ProjectType } from 'redux/projects/types';
 
 import Style from './Menu.style';
 
-// Your component own properties
-interface Props {
-  [n: string]: never;
+export interface Props {
+  project?: ProjectType;
 }
 
-const Menu: React.FunctionComponent<Props> = () => <Style.Menu>Menu</Style.Menu>;
-
-export default Menu;
+export const Menu: React.FunctionComponent<Props> = ({ project }) => {
+  if (!project) {
+    return <div />;
+  }
+  return (
+    <Style.Container>
+      <Style.ProjectName>{project.name}</Style.ProjectName>
+      <Style.Audits>Audits</Style.Audits>
+    </Style.Container>
+  );
+};
