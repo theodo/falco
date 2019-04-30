@@ -8,7 +8,7 @@ import { RootState } from 'redux/types';
 import Front, { OwnProps } from './Front';
 
 const mapStateToProps = (state: RootState, props: OwnProps) => ({
-  project: state.projects.byId[props.match.params.projectId],
+  project: state.projects.byId ? state.projects.byId[props.match.params.projectId] : undefined,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
