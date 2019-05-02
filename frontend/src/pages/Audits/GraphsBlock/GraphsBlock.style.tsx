@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { colorUsage } from 'stylesheet';
 
-type graphPropsType = {
+interface GraphPropsType {
   index: number;
-};
+}
 
 const Style = {
   Container: styled.div`
@@ -14,8 +14,8 @@ const Style = {
   `,
 
   GraphContainer: styled.div`
-    grid-row-start: ${(props: graphPropsType) => 2 * Math.floor(props.index / 2) + 1};
-    grid-column-start: ${(props: graphPropsType) => 2 * (props.index % 2) + 1};
+    grid-row-start: ${(props: GraphPropsType) => 2 * Math.floor(props.index / 2) + 1};
+    grid-column-start: ${(props: GraphPropsType) => 2 * (props.index % 2) + 1};
     padding-left: 20px;
     padding-top: 5px;
     border: 1px solid ${colorUsage.graphBorder};

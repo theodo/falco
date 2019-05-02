@@ -18,8 +18,8 @@ type Props = OwnProps & InjectedIntlProps;
 const MetricGraph: React.FunctionComponent<Props> = props => {
   const { auditResults, intl, metrics } = props;
 
-  const renderLegend = (props: { payload: Array<{ value: MetricType }> }) => {
-    const { payload } = props;
+  const renderLegend = (legendProps: { payload: Array<{ value: MetricType }> }) => {
+    const { payload } = legendProps;
     return payload.map((entry, index) => (
       <Style.Legend key={index}>{intl.formatMessage({ id: `Front.${entry.value}` })}</Style.Legend>
     ));
@@ -36,11 +36,11 @@ const MetricGraph: React.FunctionComponent<Props> = props => {
     }
   };
 
-  const renderTooltip = (props: {
+  const renderTooltip = (tooltipProps: {
     label: number;
     payload: Array<{ value: number; dataKey: MetricType }>;
   }) => {
-    const { payload, label } = props;
+    const { payload, label } = tooltipProps;
     return payload.map((entry, index) => {
       const dataType = METRICS[entry.dataKey].type;
       return (
