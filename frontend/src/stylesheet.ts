@@ -25,6 +25,7 @@ const colorPalette = {
   accentYellow500: '#F7B500',
   white200: 'rgba(255,255,255,0.1)',
   white500: '#ffffff',
+  lightGreen: '#3bafa3',
 
   // Former design
   blueNight: '#374894',
@@ -77,6 +78,13 @@ export const colorUsage = {
   auditLinkSelectedBorder: colorPalette.grey500,
   menuArrow: colorPalette.grey800,
   menuArrowSelected: colorPalette.white500,
+  graphBorder: colorPalette.grey800,
+  graphLine: colorPalette.primary500,
+  tooltipCursor: colorPalette.lightGreen,
+  tooltipBackground: colorPalette.grey300,
+  tooltipActiveDot: colorPalette.lightGreen,
+  tooltipActiveDotBorder: colorPalette.white500,
+  graphText: colorPalette.grey800,
 
   // Former design
   primary: colorPalette.blueNight,
@@ -118,6 +126,7 @@ export const fontSize = {
   badgeText: '14px',
   quoteText: '24px',
   smallText: '10px',
+  graphText: '14px',
 
   // Former design
   Xlarge: '24px',
@@ -140,6 +149,7 @@ export const lineHeight = {
   badgeText: '18px',
   quoteText: '34px',
   smallText: '15px',
+  graphText: '20px',
 
   // Former design
   header: '70px',
@@ -155,6 +165,7 @@ export const fontWeight = {
   menuLink: 'bold',
   auditLink: 'bold',
   badgeText: 'bold',
+  graphText: 'bold',
 };
 
 export const fontStyle = {
