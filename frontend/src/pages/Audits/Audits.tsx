@@ -5,10 +5,12 @@ import { ProjectType } from 'redux/projects/types';
 
 import Badge from 'components/Badge';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { MetricType } from 'redux/auditResults/types';
 import { PageType } from 'redux/pages/types';
 import { ScriptType } from 'redux/scripts/types';
 import { colorUsage, getSpacing } from 'stylesheet';
 import Style from './Audits.style';
+import GraphsBlock from './GraphsBlock';
 
 export type OwnProps = {} & RouteComponentProps<{
   projectId: string;
@@ -86,6 +88,12 @@ export const Audits: React.FunctionComponent<Props> = ({
 
   const badgeParams = getBadgeParams();
 
+  const metrics: MetricType[] = [
+    'WPTMetricFirstViewTTI',
+    'WPTMetricFirstViewSpeedIndex',
+    'WPTMetricFirstViewTimeToFirstByte',
+  ];
+
   return (
     <Style.Container>
       <Style.PageTitleBlock>
@@ -100,6 +108,7 @@ export const Audits: React.FunctionComponent<Props> = ({
         )}
       </Style.PageTitleBlock>
       <Style.Dashboard>Dashboard</Style.Dashboard>
+      <GraphsBlock auditResultIds={sortedAuditResultsIds} metrics={metrics} />
     </Style.Container>
   );
 };
