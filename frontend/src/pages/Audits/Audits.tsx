@@ -19,9 +19,29 @@ type Props = {
   project?: ProjectType;
   page?: PageType;
   script?: ScriptType;
+  sortedAuditResultsIds: string[];
+  fetchAuditResultsRequest: (id: string, type: 'page' | 'script') => void;
 } & InjectedIntlProps;
 
-export const Audits: React.FunctionComponent<Props> = ({ intl, project, page, script }) => {
+export const Audits: React.FunctionComponent<Props> = ({
+  intl,
+  project,
+  page,
+  script,
+  sortedAuditResultsIds,
+  fetchAuditResultsRequest,
+}) => {
+  const pageOrScript = page || script;
+
+  if (pageOrScript) {
+    React.useEffect(
+      () => {
+        fetchAuditResultsRequest(pageOrScript.uuid, 'page');
+      },
+      [pageOrScript.uuid],
+    );
+  }
+
   if (!project || (!project.pages && !project.scripts)) {
     return (
       <Style.Container>
