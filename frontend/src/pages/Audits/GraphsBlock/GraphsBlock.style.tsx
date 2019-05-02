@@ -1,0 +1,24 @@
+import styled from 'styled-components';
+import { colorUsage } from 'stylesheet';
+
+type graphPropsType = {
+  index: number;
+};
+
+const Style = {
+  Container: styled.div`
+    margin-top: 29px;
+    display: grid;
+    grid-template-columns: 366px 50px 366px;
+    grid-template-rows: 194px 20px 194px;
+  `,
+
+  GraphContainer: styled.div`
+    grid-row-start: ${(props: graphPropsType) => 2 * Math.floor(props.index / 2) + 1};
+    grid-column-start: ${(props: graphPropsType) => 2 * (props.index % 2) + 1};
+    padding-left: 20px;
+    padding-top: 5px;
+    border: 1px solid ${colorUsage.graphBorder};
+  `,
+};
+export default Style;
