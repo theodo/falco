@@ -23,7 +23,8 @@ const colorPalette = {
   accentGreen200: 'rgba(54,179,126,0.1)',
   accentGreen500: '#36B37E',
   accentYellow500: '#F7B500',
-  white: '#ffffff',
+  white200: 'rgba(255,255,255,0.1)',
+  white500: '#ffffff',
 
   // Former design
   blueNight: '#374894',
@@ -35,6 +36,7 @@ const colorPalette = {
   grey: '#6e7a8b',
   greyLight: '#e1e7eb',
   greyVeryLight: '#f8f9fa',
+  white: '#ffffff',
 };
 
 /**
@@ -54,21 +56,27 @@ export const colorUsage = {
   logoText: colorPalette.grey800,
   menuLink: colorPalette.grey800,
   auditLink: colorPalette.grey800,
-  badgeText: colorPalette.accentBlue500,
-  badgeBackground: colorPalette.accentBlue200,
+  pageBadgeText: colorPalette.accentBlue500,
+  pageBadgeBackground: colorPalette.accentBlue200,
+  pageBadgeSelectedText: colorPalette.white500,
+  pageBadgeSelectedBackground: colorPalette.white200,
+  scriptBadgeText: colorPalette.accentGreen500,
+  scriptBadgeBackground: colorPalette.accentGreen200,
+  scriptBadgeSelectedText: colorPalette.white500,
+  scriptBadgeSelectedBackground: colorPalette.white200,
   quoteText: colorPalette.grey800,
   smallText: colorPalette.grey800,
   menuBackground: colorPalette.grey200,
   headerLogo: colorPalette.primary500,
-  headerFakeBackground: colorPalette.white,
+  headerFakeBackground: colorPalette.white500,
   loader: colorPalette.primary500,
   auditLinkBorder: colorPalette.grey300,
   auditLinkHoverText: colorPalette.primary500,
-  auditLinkSelectedText: colorPalette.white,
+  auditLinkSelectedText: colorPalette.white500,
   auditLinkSelectedBackground: colorPalette.primary500,
   auditLinkSelectedBorder: colorPalette.grey500,
   menuArrow: colorPalette.grey800,
-  menuArrowSelected: colorPalette.white,
+  menuArrowSelected: colorPalette.white500,
 
   // Former design
   primary: colorPalette.blueNight,

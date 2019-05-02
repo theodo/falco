@@ -2,6 +2,10 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
+interface MenuArrowContainerProps {
+  margin?: string;
+}
+
 const StyledMenu = {
   Container: styled.div`
     position: fixed;
@@ -60,8 +64,17 @@ const StyledMenu = {
     }
   `,
 
+  PageScriptTitleBlock: styled.div`
+    display: flex;
+    align-items: center;
+  `,
+
+  PageScriptTitle: styled.div``,
+
   MenuArrowContainer: styled.span`
     width: 12px;
+    min-width: 12px;
+    margin: ${(props: MenuArrowContainerProps) => (props.margin ? props.margin : '0')};
   `,
 };
 

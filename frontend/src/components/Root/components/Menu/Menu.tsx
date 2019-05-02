@@ -1,17 +1,28 @@
+import Badge from 'components/Badge';
 import { MenuArrow } from 'icons';
 import React from 'react';
+import { InjectedIntlProps } from 'react-intl';
 import { ProjectType } from 'redux/projects/types';
 import { routeDefinitions } from 'routes';
-import { colorUsage } from 'stylesheet';
+import { colorUsage, getSpacing } from 'stylesheet';
 
 import Style from './Menu.style';
 
-export interface Props {
+export interface PageOrScript {
+  uuid: string;
+  title: string;
+  linkPath: string;
+  type: string;
+}
+
+export interface OwnProps {
   project?: ProjectType;
   currentURL: string;
 }
 
-export const Menu: React.FunctionComponent<Props> = ({ currentURL, project }) => {
+type Props = OwnProps & InjectedIntlProps;
+
+export const Menu: React.FunctionComponent<Props> = ({ currentURL, intl, project }) => {
   if (!project) {
     return <Style.Container />;
   }
@@ -35,22 +46,80 @@ export const Menu: React.FunctionComponent<Props> = ({ currentURL, project }) =>
     })),
   ];
 
+  const getBadgeParams = (pageOrScript: PageOrScript) => {
+    if ('PAGE' === pageOrScript.type) {
+      const badgeText = intl.formatMessage({ id: `Menu.page_badge` });
+      if (currentURL === pageOrScript.linkPath) {
+        return {
+          backgroundColor: colorUsage.pageBadgeSelectedBackground,
+          color: colorUsage.pageBadgeSelectedText,
+          text: badgeText,
+        };
+      } else {
+        return {
+          backgroundColor: colorUsage.pageBadgeBackground,
+          color: colorUsage.pageBadgeText,
+          text: badgeText,
+        };
+      }
+    } else if ('SCRIPT' === pageOrScript.type) {
+      const badgeText = intl.formatMessage({ id: `Menu.script_badge` });
+      if (currentURL === pageOrScript.linkPath) {
+        return {
+          backgroundColor: colorUsage.scriptBadgeSelectedBackground,
+          color: colorUsage.scriptBadgeSelectedText,
+          text: badgeText,
+        };
+      } else {
+        return {
+          backgroundColor: colorUsage.scriptBadgeBackground,
+          color: colorUsage.scriptBadgeText,
+          text: badgeText,
+        };
+      }
+    }
+    return {
+      backgroundColor: '',
+      color: '',
+      text: '',
+    };
+  };
+
   return (
     <Style.Container>
       <Style.ProjectName>{project.name}</Style.ProjectName>
       <Style.Audits>Audits</Style.Audits>
-      {pagesAndScripts.map(pageOrScript => (
-        <Style.PageScriptItem
-          key={pageOrScript.uuid}
-          to={pageOrScript.linkPath}
-          className={currentURL === pageOrScript.linkPath ? 'active' : ''}
-        >
-          {pageOrScript.title}
-          <Style.MenuArrowContainer>
-            <MenuArrow color={currentURL === pageOrScript.linkPath ? colorUsage.menuArrowSelected : colorUsage.menuArrow} />
-          </Style.MenuArrowContainer>
-        </Style.PageScriptItem>
-      ))}
+      {pagesAndScripts.map((pageOrScript: PageOrScript) => {
+        const badgeParams = getBadgeParams(pageOrScript);
+        return (
+          <Style.PageScriptItem
+            key={pageOrScript.uuid}
+            to={pageOrScript.linkPath}
+            className={currentURL === pageOrScript.linkPath ? 'active' : ''}
+          >
+            <Style.PageScriptTitleBlock>
+              <Style.PageScriptTitle>{pageOrScript.title}</Style.PageScriptTitle>
+              {pageOrScript.type && (
+                <Badge
+                  backgroundColor={badgeParams.backgroundColor}
+                  color={badgeParams.color}
+                  margin={'0 0 0 ' + getSpacing(4)}
+                  text={badgeParams.text}
+                />
+              )}
+            </Style.PageScriptTitleBlock>
+            <Style.MenuArrowContainer margin={'0 0 0 ' + getSpacing(4)}>
+              <MenuArrow
+                color={
+                  currentURL === pageOrScript.linkPath
+                    ? colorUsage.menuArrowSelected
+                    : colorUsage.menuArrow
+                }
+              />
+            </Style.MenuArrowContainer>
+          </Style.PageScriptItem>
+        );
+      })}
     </Style.Container>
   );
 };

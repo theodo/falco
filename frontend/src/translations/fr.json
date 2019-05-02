@@ -9,6 +9,10 @@
   "Login": {
     "login_error": "Ces identifiants ne semblent pas corrects.\nVeuillez réessayer."
   },
+  "Menu": {
+    "page_badge": "PAGE",
+    "script_badge": "SCRIPT"
+  },
   "Project": {
     "project_error": "Vous ne semblez pas avoir accès à ce projet.\n\nMerci de réessayer ou de vous rapprocher de votre administrateur pour obtenir l'accès.",
     "no_page_or_script_error": "Ce projet semble être vide (aucune page ou script configuré).\n\nMerci de réessayer ou de vous rapprocher de votre administrateur pour corriger le problème."
