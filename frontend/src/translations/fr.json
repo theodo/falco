@@ -23,7 +23,10 @@
     "title": "Projets"
   },
   "Audits": {
-    "no_page_or_script": "Aucune page ou script configuré"
+    "no_page_or_script": "Aucune page ou script configuré",
+    "webpagetest_analysis": "Analyse",
+    "webpagetest_results": "Accéder aux résultats",
+    "webpagetest_detailed_results": "Résultats détaillés (sur WebPageTest)"
   },
   "Front": {
     "WPTMetricFirstViewTTI": "TTI (First View)",
