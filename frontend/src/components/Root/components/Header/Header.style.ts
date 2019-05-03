@@ -57,12 +57,18 @@ const StyledHeader = {
     display: flex;
     align-items: center;
     color: ${colorUsage.menuLink};
+    border-color: ${colorUsage.menuLink};
     line-height: ${lineHeight.menuLink};
     font-weight: ${fontWeight.menuLink};
     font-size: ${fontSize.menuLink};
     margin-left: ${getSpacing(4)};
     user-select: none;
     cursor: pointer;
+
+    &:hover {
+      color: ${colorUsage.headerButtonHoverText};
+      border-color: ${colorUsage.headerButtonHoverText};
+    }
 
     &:first-of-type {
       margin-left: 0;
@@ -74,7 +80,8 @@ const StyledHeader = {
     margin-left: ${getSpacing(1)};
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 5px solid ${colorUsage.menuLink};
+    border-top-width: 5px;
+    border-top-style: solid;
   `,
   MenusContainer: styled.div`
     display: flex;
