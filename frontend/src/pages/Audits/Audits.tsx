@@ -12,6 +12,7 @@ import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
 import Style from './Audits.style';
 import GraphsBlock from './GraphsBlock';
+import WebPageTestBlock from './WebPageTestBlock';
 
 export type OwnProps = {} & RouteComponentProps<{
   projectId: string;
@@ -143,6 +144,10 @@ export const Audits: React.FunctionComponent<Props> = ({
       </Style.PageTitleBlock>
       <Style.Title>Dashboard</Style.Title>
       <GraphsBlock auditResultIds={sortedAuditResultsIds} metrics={metrics} />
+      <Style.Title>
+        <FormattedMessage id="Audits.webpagetest_analysis" />
+      </Style.Title>
+      <WebPageTestBlock auditResultIds={sortedAuditResultsIds} />
     </Style.Container>
   );
 };
