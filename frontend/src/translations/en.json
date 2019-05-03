@@ -25,21 +25,21 @@
     "no_page_or_script": "No page or script configured"
   },
   "Front": {
-    "WPTMetricFirstViewTTI": "1️⃣ TTI",
-    "WPTMetricRepeatViewTTI": "🔄 TTI",
-    "WPTMetricFirstViewSpeedIndex": "1️⃣ Speed Index",
-    "WPTMetricRepeatViewSpeedIndex": "🔄 Speed Index",
-    "WPTMetricFirstViewFirstPaint": "1️⃣ First Paint",
-    "WPTMetricRepeatViewFirstPaint": "🔄 First Paint",
-    "WPTMetricFirstViewFirstMeaningfulPaint": "1️⃣ First Meaningful Paint",
-    "WPTMetricRepeatViewFirstMeaningfulPaint": "🔄 First Meaningful Paint",
-    "WPTMetricFirstViewLoadTime": "1️⃣ Load Time",
-    "WPTMetricRepeatViewLoadTime": "🔄 Load Time",
-    "WPTMetricFirstViewFirstContentfulPaint": "1️⃣ First Contentful Paint",
-    "WPTMetricRepeatViewFirstContentfulPaint": "🔄 First Contentful Paint",
-    "WPTMetricFirstViewTimeToFirstByte": "1️⃣ Time to First Byte",
-    "WPTMetricRepeatViewTimeToFirstByte": "🔄 Time to First Byte",
-    "WPTMetricLighthousePerformance": "📶 Lighthouse Performance Score"
+    "WPTMetricFirstViewTTI": "TTI (First View)",
+    "WPTMetricRepeatViewTTI": "TTI (Repeat View)",
+    "WPTMetricFirstViewSpeedIndex": "Speed Index (First View)",
+    "WPTMetricRepeatViewSpeedIndex": "Speed Index (Repeat View)",
+    "WPTMetricFirstViewFirstPaint": "First Paint (First View)",
+    "WPTMetricRepeatViewFirstPaint": "First Paint (Repeat View)",
+    "WPTMetricFirstViewFirstMeaningfulPaint": "First Meaningful Paint (First View)",
+    "WPTMetricRepeatViewFirstMeaningfulPaint": "First Meaningful Paint (Repeat View)",
+    "WPTMetricFirstViewLoadTime": "Load Time (First View)",
+    "WPTMetricRepeatViewLoadTime": "Load Time (Repeat View)",
+    "WPTMetricFirstViewFirstContentfulPaint": "First Contentful Paint (First View)",
+    "WPTMetricRepeatViewFirstContentfulPaint": "First Contentful Paint (Repeat View)",
+    "WPTMetricFirstViewTimeToFirstByte": "Time to First Byte (First View)",
+    "WPTMetricRepeatViewTimeToFirstByte": "Time to First Byte (Repeat View)",
+    "WPTMetricLighthousePerformance": "Lighthouse Performance Score"
   },
   "components": {
     "AuditResult": {
@@ -48,6 +48,9 @@
       "percent": "{percent} %",
       "time": "{time} sec.",
       "seeOnWPT": "See on WebPageTest"
+    },
+    "MetricGraph": {
+      "tooltipDate": "On MM/DD at HH:mm"
     }
   }
 }

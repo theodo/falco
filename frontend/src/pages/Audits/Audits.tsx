@@ -5,10 +5,12 @@ import { ProjectType } from 'redux/projects/types';
 
 import Badge from 'components/Badge';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { MetricType } from 'redux/auditResults/types';
 import { PageType } from 'redux/pages/types';
 import { ScriptType } from 'redux/scripts/types';
 import { colorUsage, getSpacing } from 'stylesheet';
 import Style from './Audits.style';
+import GraphsBlock from './GraphsBlock';
 
 export type OwnProps = {} & RouteComponentProps<{
   projectId: string;
@@ -19,9 +21,29 @@ type Props = {
   project?: ProjectType;
   page?: PageType;
   script?: ScriptType;
+  sortedAuditResultsIds: string[];
+  fetchAuditResultsRequest: (id: string, type: 'page' | 'script') => void;
 } & InjectedIntlProps;
 
-export const Audits: React.FunctionComponent<Props> = ({ intl, project, page, script }) => {
+export const Audits: React.FunctionComponent<Props> = ({
+  intl,
+  project,
+  page,
+  script,
+  sortedAuditResultsIds,
+  fetchAuditResultsRequest,
+}) => {
+  const pageOrScript = page || script;
+
+  if (pageOrScript) {
+    React.useEffect(
+      () => {
+        fetchAuditResultsRequest(pageOrScript.uuid, 'page');
+      },
+      [pageOrScript.uuid],
+    );
+  }
+
   if (!project || (!project.pages && !project.scripts)) {
     return (
       <Style.Container>
@@ -66,6 +88,12 @@ export const Audits: React.FunctionComponent<Props> = ({ intl, project, page, sc
 
   const badgeParams = getBadgeParams();
 
+  const metrics: MetricType[] = [
+    'WPTMetricFirstViewTTI',
+    'WPTMetricFirstViewSpeedIndex',
+    'WPTMetricFirstViewTimeToFirstByte',
+  ];
+
   return (
     <Style.Container>
       <Style.PageTitleBlock>
@@ -80,6 +108,7 @@ export const Audits: React.FunctionComponent<Props> = ({ intl, project, page, sc
         )}
       </Style.PageTitleBlock>
       <Style.Dashboard>Dashboard</Style.Dashboard>
+      <GraphsBlock auditResultIds={sortedAuditResultsIds} metrics={metrics} />
     </Style.Container>
   );
 };
