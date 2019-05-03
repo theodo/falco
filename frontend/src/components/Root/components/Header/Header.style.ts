@@ -3,9 +3,13 @@ import styled from 'styled-components';
 import { colorUsage, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
 const StyledHeader = {
-  Header: styled.header`
+  HeaderContainer: styled.div`
     position: fixed;
-    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+  `,
+  Header: styled.header`
     background-color: ${colorUsage.headerFakeBackground};
     height: 100px;
     display: flex;
@@ -57,6 +61,8 @@ const StyledHeader = {
     font-weight: ${fontWeight.menuLink};
     font-size: ${fontSize.menuLink};
     margin-left: ${getSpacing(4)};
+    user-select: none;
+    cursor: pointer;
 
     &:first-of-type {
       margin-left: 0;
@@ -69,6 +75,9 @@ const StyledHeader = {
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-top: 5px solid ${colorUsage.menuLink};
+  `,
+  MenusContainer: styled.div`
+    display: flex;
   `,
 };
 
