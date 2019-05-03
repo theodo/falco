@@ -3,7 +3,7 @@ import { colorUsage, getSpacing } from 'stylesheet';
 
 const Style = {
   Container: styled.div`
-    margin-top: ${getSpacing(6)};
+    margin-bottom: ${getSpacing(8)};
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

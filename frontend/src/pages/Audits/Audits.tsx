@@ -141,7 +141,7 @@ export const Audits: React.FunctionComponent<Props> = ({
           />
         )}
       </Style.PageTitleBlock>
-      <Style.Dashboard>Dashboard</Style.Dashboard>
+      <Style.Title>Dashboard</Style.Title>
       <GraphsBlock auditResultIds={sortedAuditResultsIds} metrics={metrics} />
     </Style.Container>
   );
