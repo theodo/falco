@@ -1,7 +1,8 @@
 {
   "Header": {
     "login_button": "MY ACCOUNT",
-    "projects_button": "MY PROJECTS"
+    "projects_button": "MY PROJECTS",
+    "last_audit_intro": "Last audit"
   },
   "home": {
     "welcome": "Welcome to Falco! Please click on “Login” to login, or “My Projects” to see your projects"
