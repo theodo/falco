@@ -78,7 +78,7 @@ const MetricGraph: React.FunctionComponent<Props> = props => {
           interval={'preserveStart'}
           mirror={false}
         />
-        <Tooltip content={renderTooltip} cursor={{ stroke: colorUsage.tooltipCursor }} />
+        <Tooltip content={renderTooltip} cursor={{ stroke: colorUsage.graphTooltipCursor }} />
         {metrics.map(metric => (
           <Area
             key={metric}
@@ -88,8 +88,8 @@ const MetricGraph: React.FunctionComponent<Props> = props => {
             fillOpacity={1}
             fill="url(#areaGradient)"
             activeDot={{
-              fill: colorUsage.tooltipActiveDot,
-              stroke: colorUsage.tooltipActiveDotBorder,
+              fill: colorUsage.graphTooltipActiveDot,
+              stroke: colorUsage.graphTooltipActiveDotBorder,
               strokeWidth: 4,
               r: 10,
             }}

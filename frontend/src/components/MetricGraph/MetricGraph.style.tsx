@@ -14,7 +14,7 @@ const Style = {
     height: 52px;
     width: 147px;
     border-radius: 8px;
-    background-color: ${colorUsage.tooltipBackground};
+    background-color: ${colorUsage.graphTooltipBackground};
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
     padding: 10px 19px;
     display: flex;

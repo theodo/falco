@@ -80,10 +80,10 @@ export const colorUsage = {
   menuArrowSelected: colorPalette.white500,
   graphBorder: colorPalette.grey800,
   graphLine: colorPalette.primary500,
-  tooltipCursor: colorPalette.lightGreen,
-  tooltipBackground: colorPalette.grey300,
-  tooltipActiveDot: colorPalette.lightGreen,
-  tooltipActiveDotBorder: colorPalette.white500,
+  graphTooltipCursor: colorPalette.lightGreen,
+  graphTooltipBackground: colorPalette.grey300,
+  graphTooltipActiveDot: colorPalette.lightGreen,
+  graphTooltipActiveDotBorder: colorPalette.white500,
   graphText: colorPalette.grey800,
 
   // Former design
