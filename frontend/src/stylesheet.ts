@@ -97,6 +97,8 @@ export const colorUsage = {
   projectsMenuItemSnapshotBorder: colorPalette.grey800,
   projectsMenuItemStar: colorPalette.accentYellow500,
   headerButtonHoverText: colorPalette.primary500,
+  webPageTestLinkButtonBackground: colorPalette.primary500,
+  webPageTestLinkButtonText: colorPalette.white500,
 
   // Former design
   primary: colorPalette.blueNight,
@@ -162,6 +164,7 @@ export const lineHeight = {
   quoteText: '34px',
   smallText: '15px',
   graphText: '20px',
+  linkText: '18px',
 
   // Former design
   header: '70px',
@@ -178,6 +181,7 @@ export const fontWeight = {
   auditLink: 'bold',
   badgeText: 'bold',
   graphText: 'bold',
+  linkText: 'bold',
 };
 
 export const fontStyle = {
