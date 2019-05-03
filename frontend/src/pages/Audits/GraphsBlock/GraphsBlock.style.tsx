@@ -1,23 +1,21 @@
 import styled from 'styled-components';
 import { colorUsage, getSpacing } from 'stylesheet';
 
-interface GraphPropsType {
-  index: number;
-}
-
 const Style = {
   Container: styled.div`
     margin-top: ${getSpacing(6)};
-    display: grid;
-    grid-template-columns: 366px 50px 366px;
-    grid-template-rows: 194px 20px 194px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
   `,
 
   GraphContainer: styled.div`
-    grid-row-start: ${(props: GraphPropsType) => 2 * Math.floor(props.index / 2) + 1};
-    grid-column-start: ${(props: GraphPropsType) => 2 * (props.index % 2) + 1};
+    height: 190px;
+    width: 360px;
     padding-left: ${getSpacing(4)};
     padding-top: ${getSpacing(1)};
+    margin-bottom: ${getSpacing(4)};
     border: 1px solid ${colorUsage.graphBorder};
   `,
 

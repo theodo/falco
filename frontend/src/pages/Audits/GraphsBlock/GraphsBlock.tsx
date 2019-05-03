@@ -31,7 +31,7 @@ const GraphsBlock: React.FunctionComponent<Props> = props => {
     <Style.Container>
       {metrics.map((metric, index) => {
         return (
-          <Style.GraphContainer key={index} index={index}>
+          <Style.GraphContainer key={index}>
             <MetricGraph auditResults={auditResults} metrics={[metric]} />
           </Style.GraphContainer>
         );
