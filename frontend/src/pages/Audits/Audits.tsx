@@ -91,7 +91,7 @@ export const Audits: React.FunctionComponent<Props> = ({
   const metrics: MetricType[] = [
     'WPTMetricFirstViewTTI',
     'WPTMetricFirstViewSpeedIndex',
-    'WPTMetricFirstViewTimeToFirstByte',
+    'WPTMetricFirstViewLoadTime',
   ];
 
   return (
