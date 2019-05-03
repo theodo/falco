@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colorUsage } from 'stylesheet';
+import { colorUsage, getSpacing } from 'stylesheet';
 
 interface GraphPropsType {
   index: number;
@@ -7,7 +7,7 @@ interface GraphPropsType {
 
 const Style = {
   Container: styled.div`
-    margin-top: 29px;
+    margin-top: ${getSpacing(6)};
     display: grid;
     grid-template-columns: 366px 50px 366px;
     grid-template-rows: 194px 20px 194px;
@@ -16,8 +16,8 @@ const Style = {
   GraphContainer: styled.div`
     grid-row-start: ${(props: GraphPropsType) => 2 * Math.floor(props.index / 2) + 1};
     grid-column-start: ${(props: GraphPropsType) => 2 * (props.index % 2) + 1};
-    padding-left: 20px;
-    padding-top: 5px;
+    padding-left: ${getSpacing(4)};
+    padding-top: ${getSpacing(1)};
     border: 1px solid ${colorUsage.graphBorder};
   `,
 

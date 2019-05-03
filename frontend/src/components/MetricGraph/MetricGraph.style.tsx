@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, fontWeight, lineHeight } from 'stylesheet';
+import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
 const Style = {
   Legend: styled.div`
@@ -16,7 +16,7 @@ const Style = {
     border-radius: 8px;
     background-color: ${colorUsage.graphTooltipBackground};
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-    padding: 10px 19px;
+    padding: ${getSpacing(2)} ${getSpacing(4)};
     display: flex;
     flex-direction: column;
     justify-content: center;
