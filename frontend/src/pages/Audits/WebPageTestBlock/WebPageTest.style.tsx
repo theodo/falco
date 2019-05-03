@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
+interface ItemWithMarginProps {
+  margin?: string;
+}
+
 const Style = {
   Container: styled.div`
-    margin-bottom: ${getSpacing(8)};
+    margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
     display: flex;
     flex-direction: column;
   `,
@@ -34,7 +38,7 @@ const Style = {
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.h3Text};
     font-weight: ${fontWeight.h3Text};
-    margin-bottom: ${getSpacing(4)};
+    margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
   `,
 
   WebPageTestButton: styled.a`
@@ -45,9 +49,9 @@ const Style = {
     color: ${colorUsage.webPageTestLinkButtonText};
     background-color: ${colorUsage.webPageTestLinkButtonBackground};
     font-family: ${fontFamily.mainSans};
-    font-size: ${fontSize.link};
-    font-weight: ${fontWeight.linkText};
-    line-height: ${lineHeight.linkText};
+    font-size: ${fontSize.webPageTestLink};
+    font-weight: ${fontWeight.webPageTestLink};
+    line-height: ${lineHeight.webPageTestLink};
     text-decoration: none;
     display: flex;
     align-items: center;

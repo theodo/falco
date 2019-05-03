@@ -134,6 +134,7 @@ export const fontSize = {
   introductionText: '18px',
   bodyText: '14px',
   link: '14px',
+  webPageTestLink: '14px',
   logoText: '26px',
   menuLink: '20px',
   auditLink: '20px',
@@ -164,7 +165,7 @@ export const lineHeight = {
   quoteText: '34px',
   smallText: '15px',
   graphText: '20px',
-  linkText: '18px',
+  webPageTestLink: '18px',
 
   // Former design
   header: '70px',
@@ -182,6 +183,7 @@ export const fontWeight = {
   badgeText: 'bold',
   graphText: 'bold',
   linkText: 'bold',
+  webPageTestLink: 'bold',
 };
 
 export const fontStyle = {

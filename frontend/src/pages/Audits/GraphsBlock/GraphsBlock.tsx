@@ -2,7 +2,7 @@ import { CircularProgress } from '@material-ui/core';
 import MetricGraph from 'components/MetricGraph';
 import * as React from 'react';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
-import { colorUsage } from 'stylesheet';
+import { colorUsage, getSpacing } from 'stylesheet';
 import Style from './GraphsBlock.style';
 
 export interface OwnProps {
@@ -19,7 +19,7 @@ const GraphsBlock: React.FunctionComponent<Props> = props => {
 
   if (0 === auditResults.length) {
     return (
-      <Style.Container>
+      <Style.Container margin={'0 0 ' + getSpacing(8) + ' 0'}>
         <Style.LoaderContainer color={colorUsage.loader}>
           <CircularProgress color={'inherit'} />
         </Style.LoaderContainer>
@@ -28,7 +28,7 @@ const GraphsBlock: React.FunctionComponent<Props> = props => {
   }
 
   return (
-    <Style.Container>
+    <Style.Container margin={'0 0 ' + getSpacing(8) + ' 0'}>
       {metrics.map((metric, index) => {
         return (
           <Style.GraphContainer key={index}>

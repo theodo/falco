@@ -2,7 +2,7 @@ import { CircularProgress } from '@material-ui/core';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { AuditResultType } from 'redux/auditResults/types';
-import { colorUsage } from 'stylesheet';
+import { colorUsage, getSpacing } from 'stylesheet';
 import Style from './WebPageTest.style';
 
 export interface OwnProps {
@@ -18,7 +18,7 @@ const WebPageTestBlock: React.FunctionComponent<Props> = props => {
 
   if (null === auditResults) {
     return (
-      <Style.Container>
+      <Style.Container margin={'0 0 ' + getSpacing(8) + ' 0'}>
         <Style.LoaderContainer color={colorUsage.loader}>
           <CircularProgress color={'inherit'} />
         </Style.LoaderContainer>
@@ -28,7 +28,7 @@ const WebPageTestBlock: React.FunctionComponent<Props> = props => {
 
   if (0 === auditResults.length) {
     return (
-      <Style.Container>
+      <Style.Container margin={'0 0 ' + getSpacing(8) + ' 0'}>
         <Style.Error>
           <FormattedMessage id="Audits.no_audit" />
         </Style.Error>
@@ -38,8 +38,8 @@ const WebPageTestBlock: React.FunctionComponent<Props> = props => {
   const lastAuditResult = auditResults[0];
 
   return (
-    <Style.Container>
-      <Style.SubTitle>
+    <Style.Container margin={'0 0 ' + getSpacing(8) + ' 0'}>
+      <Style.SubTitle margin={'0 0 ' + getSpacing(4) + ' 0'}>
         <FormattedMessage id="Audits.webpagetest_detailed_results" />
       </Style.SubTitle>
       <Style.WebPageTestButton href={lastAuditResult.WPTResultsUserUrl} target={'_blank'}>

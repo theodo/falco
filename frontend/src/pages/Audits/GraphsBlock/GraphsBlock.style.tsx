@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 import { colorUsage, getSpacing } from 'stylesheet';
 
+interface ItemWithMarginProps {
+  margin?: string;
+}
+
 const Style = {
   Container: styled.div`
-    margin-bottom: ${getSpacing(8)};
+    margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
