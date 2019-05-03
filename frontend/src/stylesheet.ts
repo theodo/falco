@@ -26,6 +26,7 @@ const colorPalette = {
   white200: 'rgba(255,255,255,0.1)',
   white500: '#ffffff',
   lightGreen: '#3bafa3',
+  black200: 'rgba(0, 0, 0, 0.5)',
 
   // Former design
   blueNight: '#374894',
@@ -82,6 +83,7 @@ export const colorUsage = {
   graphLine: colorPalette.primary500,
   graphTooltipCursor: colorPalette.lightGreen,
   graphTooltipBackground: colorPalette.grey300,
+  graphTooltipShadowBox: colorPalette.black200,
   graphTooltipActiveDot: colorPalette.lightGreen,
   graphTooltipActiveDotBorder: colorPalette.white500,
   graphText: colorPalette.grey800,

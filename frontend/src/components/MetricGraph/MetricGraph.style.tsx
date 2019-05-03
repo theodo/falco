@@ -15,7 +15,7 @@ const Style = {
     width: 147px;
     border-radius: 8px;
     background-color: ${colorUsage.graphTooltipBackground};
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 4px 0 ${colorUsage.graphTooltipShadowBox};
     padding: ${getSpacing(2)} ${getSpacing(4)};
     display: flex;
     flex-direction: column;
