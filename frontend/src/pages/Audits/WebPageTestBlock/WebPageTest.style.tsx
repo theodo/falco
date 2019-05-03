@@ -19,6 +19,15 @@ const Style = {
     color: ${props => props.color};
   `,
 
+  Error: styled.div`
+    padding: ${getSpacing(3)};
+    color: ${colorUsage.popinErrorText};
+    background-color: ${colorUsage.popinErrorBackground};
+    border-radius: ${getSpacing(1)};
+    margin: ${getSpacing(8)};
+    white-space: pre-wrap;
+  `,
+
   SubTitle: styled.div`
     line-height: ${lineHeight.h3Text};
     color: ${colorUsage.h3Text};

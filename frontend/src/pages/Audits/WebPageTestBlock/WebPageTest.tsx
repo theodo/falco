@@ -25,6 +25,16 @@ const WebPageTestBlock: React.FunctionComponent<Props> = props => {
       </Style.Container>
     );
   }
+
+  if (0 === auditResults.length) {
+    return (
+      <Style.Container>
+        <Style.Error>
+          <FormattedMessage id="Audits.no_audit" />
+        </Style.Error>
+      </Style.Container>
+    );
+  }
   const lastAuditResult = auditResults[0];
 
   return (

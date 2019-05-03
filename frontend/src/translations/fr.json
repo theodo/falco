@@ -24,6 +24,7 @@
   },
   "Audits": {
     "no_page_or_script": "Aucune page ou script configuré",
+    "no_audit": "Pas de donnée d'audit",
     "webpagetest_analysis": "Analyse",
     "webpagetest_results": "Accéder aux résultats",
     "webpagetest_detailed_results": "Résultats détaillés (sur WebPageTest)"
