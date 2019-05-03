@@ -43,10 +43,11 @@ const MetricGraph: React.FunctionComponent<Props> = props => {
     const { payload, label } = tooltipProps;
     return payload.map((entry, index) => {
       const dataType = METRICS[entry.dataKey].type;
+      const dateFormat = intl.formatMessage({ id: 'components.MetricGraph.tooltipDate' });
       return (
         <Style.Tooltip key={index}>
           <Style.TooltipValue>{getFormattedValue(dataType, entry.value)}</Style.TooltipValue>
-          <Style.TooltipDate>{dayjs(label).format('Le DD/MM à HH:mm')}</Style.TooltipDate>
+          <Style.TooltipDate>{dayjs(label).format(dateFormat)}</Style.TooltipDate>
         </Style.Tooltip>
       );
     });

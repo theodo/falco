@@ -48,6 +48,9 @@
       "percent": "{percent} %",
       "time": "{time} sec.",
       "seeOnWPT": "Voir sur WebPageTest"
+    },
+    "MetricGraph": {
+      "tooltipDate": "Le DD/MM à HH:mm"
     }
   }
 }
