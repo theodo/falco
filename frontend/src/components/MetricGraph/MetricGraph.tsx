@@ -62,7 +62,11 @@ const MetricGraph: React.FunctionComponent<Props> = props => {
           </linearGradient>
         </defs>
         <Legend verticalAlign="top" align="left" iconSize={0} content={renderLegend} />
-        <YAxis hide={true} type="number" domain={[0, 'dataMax + 1000']} />
+        <YAxis
+          hide={true}
+          type="number"
+          domain={[dataMin => Math.min(0, dataMin), dataMax => dataMax * 1.2]}
+        />
         <XAxis
           width={30}
           dataKey="date"
