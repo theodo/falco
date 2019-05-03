@@ -16,6 +16,7 @@ const colorPalette = {
   primary500: '#3657FF',
   grey200: '#F7F8FA',
   grey300: '#E9EBED',
+  grey400: 'rgba(151, 151, 151, 0.80)',
   grey500: '#979797',
   grey800: '#4A4A4A',
   accentBlue200: 'rgba(0,184,217,0.1)',
@@ -87,6 +88,14 @@ export const colorUsage = {
   graphTooltipActiveDot: colorPalette.lightGreen,
   graphTooltipActiveDotBorder: colorPalette.white500,
   graphText: colorPalette.grey800,
+  projectsMenuBackground: colorPalette.white500,
+  projectsMenuShadow: colorPalette.grey400,
+  projectsMenuItemText: colorPalette.grey800,
+  projectsMenuItemHoverText: colorPalette.primary500,
+  projectsMenuItemBackground: colorPalette.grey200,
+  projectsMenuItemBorder: colorPalette.grey500,
+  projectsMenuItemSnapshotBorder: colorPalette.grey800,
+  projectsMenuItemStar: colorPalette.accentYellow500,
 
   // Former design
   primary: colorPalette.blueNight,

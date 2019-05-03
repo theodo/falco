@@ -1,7 +1,8 @@
 {
   "Header": {
     "login_button": "MON COMPTE",
-    "projects_button": "MES PROJETS"
+    "projects_button": "MES PROJETS",
+    "last_audit_intro": "Dernier audit"
   },
   "home": {
     "welcome": "Bienvenue sur Falco ! Veuillez cliquer sur “Se connecter” pour vous connecter, ou sur “Mes projets” pour voir vos projets"
