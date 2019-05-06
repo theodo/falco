@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { selectAuditScriptSteps } from 'redux/auditResults/selectors';
 import { RootState } from 'redux/types';
 
 import { injectIntl } from 'react-intl';
@@ -13,6 +14,7 @@ const mapStateToProps = (state: RootState, props: OwnProps) => ({
   sortedPageAuditResultsIds: state.auditResults.sortedByPageId[props.match.params.pageOrScriptId],
   sortedScriptAuditResultsIds:
     state.auditResults.sortedByScriptId[props.match.params.pageOrScriptId],
+  scriptSteps: selectAuditScriptSteps(state, props.match.params.pageOrScriptId),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

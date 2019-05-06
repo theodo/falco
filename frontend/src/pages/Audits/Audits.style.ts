@@ -1,3 +1,4 @@
+import Select from 'react-select';
 import styled from 'styled-components';
 import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
@@ -51,6 +52,27 @@ const StyledAudits = {
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.h2Text};
     font-weight: ${fontWeight.h2Text};
+    margin-bottom: ${getSpacing(4)};
+  `,
+
+  ScriptStepBlock: styled.div`
+    display: flex;
+    flex-direction: column;
+  `,
+
+  ScriptStepBlockTitle: styled.div`
+    font-size: ${fontSize.scriptStepSelectLabelText};
+    line-height: ${lineHeight.scriptStepSelectLabelText};
+    font-weight: ${fontWeight.scriptStepSelectLabelText};
+    color: ${colorUsage.scriptStepSelectLabelText};
+    margin-bottom: ${getSpacing(2)};
+  `,
+
+  ScriptStepSelect: styled(Select)`
+    width: 300px;
+    height: 36px;
+    font-size: ${fontSize.scriptStepSelectText};
+    line-height: ${lineHeight.scriptStepSelectText};
     margin-bottom: ${getSpacing(4)};
   `,
 };
