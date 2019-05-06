@@ -10,7 +10,9 @@ const mapStateToProps = (state: RootState, props: OwnProps) => ({
   project: state.projects.byId ? state.projects.byId[props.match.params.projectId] : undefined,
   page: state.pages.byId[props.match.params.pageOrScriptId],
   script: state.scripts.byId[props.match.params.pageOrScriptId],
-  sortedAuditResultsIds: state.auditResults.sortedByPageId[props.match.params.pageOrScriptId],
+  sortedPageAuditResultsIds: state.auditResults.sortedByPageId[props.match.params.pageOrScriptId],
+  sortedScriptAuditResultsIds:
+    state.auditResults.sortedByScriptId[props.match.params.pageOrScriptId],
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

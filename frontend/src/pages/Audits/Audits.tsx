@@ -1,6 +1,6 @@
 import CircularProgress from '@material-ui/core/CircularProgress';
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
+import { Redirect, RouteComponentProps } from 'react-router';
 import { ProjectType } from 'redux/projects/types';
 
 import Badge from 'components/Badge';
@@ -8,6 +8,7 @@ import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { MetricType } from 'redux/auditResults/types';
 import { PageType } from 'redux/pages/types';
 import { ScriptType } from 'redux/scripts/types';
+import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
 import Style from './Audits.style';
 import GraphsBlock from './GraphsBlock';
@@ -15,34 +16,41 @@ import GraphsBlock from './GraphsBlock';
 export type OwnProps = {} & RouteComponentProps<{
   projectId: string;
   pageOrScriptId: string;
+  scriptStepId?: string;
 }>;
 
 type Props = {
   project?: ProjectType;
   page?: PageType;
   script?: ScriptType;
-  sortedAuditResultsIds: string[];
+  sortedPageAuditResultsIds: string[];
+  sortedScriptAuditResultsIds: Record<string, string[]>;
   fetchAuditResultsRequest: (id: string, type: 'page' | 'script') => void;
-} & InjectedIntlProps;
+} & OwnProps &
+  InjectedIntlProps;
 
 export const Audits: React.FunctionComponent<Props> = ({
   intl,
+  match,
   project,
   page,
   script,
-  sortedAuditResultsIds,
+  sortedPageAuditResultsIds,
+  sortedScriptAuditResultsIds,
   fetchAuditResultsRequest,
 }) => {
-  const pageOrScript = page || script;
+  const { projectId, pageOrScriptId, scriptStepId } = match.params;
 
-  if (pageOrScript) {
-    React.useEffect(
-      () => {
-        fetchAuditResultsRequest(pageOrScript.uuid, 'page');
-      },
-      [pageOrScript.uuid],
-    );
-  }
+  React.useEffect(
+    () => {
+      if (page) {
+        fetchAuditResultsRequest(pageOrScriptId, 'page');
+      } else if (script) {
+        fetchAuditResultsRequest(pageOrScriptId, 'script');
+      }
+    },
+    [pageOrScriptId, page, script],
+  );
 
   if (!project || (!project.pages && !project.scripts)) {
     return (
@@ -53,15 +61,30 @@ export const Audits: React.FunctionComponent<Props> = ({
       </Style.Container>
     );
   }
-  const pageOrScriptName = page ? page.name : script ? script.name : null;
 
-  if (!pageOrScriptName) {
+  if (!page && !script) {
     return (
       <Style.Container>
         <Style.LoaderContainer color={colorUsage.loader}>
           <CircularProgress color={'inherit'} />
         </Style.LoaderContainer>
       </Style.Container>
+    );
+  }
+
+  if (
+    script &&
+    sortedScriptAuditResultsIds &&
+    0 !== Object.keys(sortedScriptAuditResultsIds).length &&
+    !scriptStepId
+  ) {
+    return (
+      <Redirect
+        to={routeDefinitions.auditsScriptDetails.path
+          .replace(':projectId', projectId)
+          .replace(':pageOrScriptId', pageOrScriptId)
+          .replace(':scriptStepId', Object.keys(sortedScriptAuditResultsIds)[0])}
+      />
     );
   }
 
@@ -86,13 +109,24 @@ export const Audits: React.FunctionComponent<Props> = ({
     };
   };
 
+  const pageOrScriptName = page ? page.name : script ? script.name : '';
+
   const badgeParams = getBadgeParams();
 
   const metrics: MetricType[] = [
     'WPTMetricFirstViewTTI',
     'WPTMetricFirstViewSpeedIndex',
-    'WPTMetricFirstViewTimeToFirstByte',
+    'WPTMetricFirstViewLoadTime',
   ];
+
+  const sortedAuditResultsIds = page
+    ? sortedPageAuditResultsIds
+    : script &&
+      sortedScriptAuditResultsIds &&
+      scriptStepId &&
+      sortedScriptAuditResultsIds[scriptStepId]
+    ? sortedScriptAuditResultsIds[scriptStepId]
+    : [];
 
   return (
     <Style.Container>

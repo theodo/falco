@@ -96,6 +96,7 @@ export const colorUsage = {
   projectsMenuItemBorder: colorPalette.grey500,
   projectsMenuItemSnapshotBorder: colorPalette.grey800,
   projectsMenuItemStar: colorPalette.accentYellow500,
+  headerButtonHoverText: colorPalette.primary500,
 
   // Former design
   primary: colorPalette.blueNight,
