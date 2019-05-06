@@ -49,7 +49,7 @@ export const Menu: React.FunctionComponent<Props> = ({ currentURL, intl, project
   const getBadgeParams = (pageOrScript: PageOrScript) => {
     if ('PAGE' === pageOrScript.type) {
       const badgeText = intl.formatMessage({ id: `Menu.page_badge` });
-      if (currentURL === pageOrScript.linkPath) {
+      if (doesLinkPathCorrespondToUrl(pageOrScript.linkPath, currentURL)) {
         return {
           backgroundColor: colorUsage.pageBadgeSelectedBackground,
           color: colorUsage.pageBadgeSelectedText,
@@ -64,7 +64,7 @@ export const Menu: React.FunctionComponent<Props> = ({ currentURL, intl, project
       }
     } else if ('SCRIPT' === pageOrScript.type) {
       const badgeText = intl.formatMessage({ id: `Menu.script_badge` });
-      if (currentURL === pageOrScript.linkPath) {
+      if (doesLinkPathCorrespondToUrl(pageOrScript.linkPath, currentURL)) {
         return {
           backgroundColor: colorUsage.scriptBadgeSelectedBackground,
           color: colorUsage.scriptBadgeSelectedText,
@@ -85,6 +85,20 @@ export const Menu: React.FunctionComponent<Props> = ({ currentURL, intl, project
     };
   };
 
+  const doesLinkPathCorrespondToUrl = (linkPath: string, url: string) => {
+    if (
+      project &&
+      url.startsWith(
+        routeDefinitions.auditsDetails.path
+          .replace(':projectId', project.uuid)
+          .replace(':pageOrScriptId', ''),
+      )
+    ) {
+      return url.startsWith(linkPath);
+    }
+    return linkPath === url;
+  };
+
   return (
     <Style.Container>
       <Style.ProjectName>{project.name}</Style.ProjectName>
@@ -95,7 +109,9 @@ export const Menu: React.FunctionComponent<Props> = ({ currentURL, intl, project
           <Style.PageScriptItem
             key={pageOrScript.uuid}
             to={pageOrScript.linkPath}
-            className={currentURL === pageOrScript.linkPath ? 'active' : ''}
+            className={
+              doesLinkPathCorrespondToUrl(pageOrScript.linkPath, currentURL) ? 'active' : ''
+            }
           >
             <Style.PageScriptTitleBlock>
               <Style.PageScriptTitle>{pageOrScript.title}</Style.PageScriptTitle>
@@ -111,7 +127,7 @@ export const Menu: React.FunctionComponent<Props> = ({ currentURL, intl, project
             <Style.MenuArrowContainer margin={`0 0 0 ${getSpacing(4)}`}>
               <MenuArrow
                 color={
-                  currentURL === pageOrScript.linkPath
+                  doesLinkPathCorrespondToUrl(pageOrScript.linkPath, currentURL)
                     ? colorUsage.menuArrowSelected
                     : colorUsage.menuArrow
                 }
