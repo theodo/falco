@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 import { colorUsage, getSpacing } from 'stylesheet';
 
+interface ItemWithMarginProps {
+  margin?: string;
+}
+
 const Style = {
   Container: styled.div`
-    margin-top: ${getSpacing(6)};
+    margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -15,7 +19,7 @@ const Style = {
     width: 360px;
     padding-left: ${getSpacing(4)};
     padding-top: ${getSpacing(1)};
-    margin-bottom: ${getSpacing(4)};
+    margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
     border: 1px solid ${colorUsage.graphBorder};
   `,
 

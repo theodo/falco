@@ -45,12 +45,13 @@ const StyledAudits = {
     color: ${props => props.color};
   `,
 
-  Dashboard: styled.div`
+  Title: styled.div`
     line-height: ${lineHeight.h2Text};
     color: ${colorUsage.h2Text};
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.h2Text};
     font-weight: ${fontWeight.h2Text};
+    margin-bottom: ${getSpacing(4)};
   `,
 };
 
