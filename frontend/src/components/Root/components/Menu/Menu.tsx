@@ -103,12 +103,12 @@ export const Menu: React.FunctionComponent<Props> = ({ currentURL, intl, project
                 <Badge
                   backgroundColor={badgeParams.backgroundColor}
                   color={badgeParams.color}
-                  margin={'0 0 0 ' + getSpacing(4)}
+                  margin={`0 0 0 ${getSpacing(4)}`}
                   text={badgeParams.text}
                 />
               )}
             </Style.PageScriptTitleBlock>
-            <Style.MenuArrowContainer margin={'0 0 0 ' + getSpacing(4)}>
+            <Style.MenuArrowContainer margin={`0 0 0 ${getSpacing(4)}`}>
               <MenuArrow
                 color={
                   currentURL === pageOrScript.linkPath

@@ -137,17 +137,24 @@ export const Audits: React.FunctionComponent<Props> = ({
           <Badge
             backgroundColor={badgeParams.backgroundColor}
             color={badgeParams.color}
-            margin={'0 0 0 ' + getSpacing(4)}
+            margin={`0 0 0 ${getSpacing(4)}`}
             text={badgeParams.text}
           />
         )}
       </Style.PageTitleBlock>
       <Style.Title>Dashboard</Style.Title>
-      <GraphsBlock auditResultIds={sortedAuditResultsIds} metrics={metrics} />
+      <GraphsBlock
+        blockMargin={`0 0 ${getSpacing(8)} 0`}
+        auditResultIds={sortedAuditResultsIds}
+        metrics={metrics}
+      />
       <Style.Title>
         <FormattedMessage id="Audits.webpagetest_analysis" />
       </Style.Title>
-      <WebPageTestBlock auditResultIds={sortedAuditResultsIds} />
+      <WebPageTestBlock
+        blockMargin={`0 0 ${getSpacing(8)} 0`}
+        auditResultIds={sortedAuditResultsIds}
+      />
     </Style.Container>
   );
 };

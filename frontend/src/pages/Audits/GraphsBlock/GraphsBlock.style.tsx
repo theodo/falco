@@ -19,7 +19,7 @@ const Style = {
     width: 360px;
     padding-left: ${getSpacing(4)};
     padding-top: ${getSpacing(1)};
-    margin-bottom: ${getSpacing(4)};
+    margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
     border: 1px solid ${colorUsage.graphBorder};
   `,
 

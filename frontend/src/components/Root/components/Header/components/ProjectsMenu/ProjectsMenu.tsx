@@ -33,12 +33,12 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
         <Style.ProjectItemSnapshotContainer>
           <Style.CurrentProjectItemSnapshot
             src={currentProject.screenshotUrl}
-            margin={'0 ' + getSpacing(6) + ' 0 0'}
+            margin={`0 ${getSpacing(6)} 0 0`}
           />
         </Style.ProjectItemSnapshotContainer>
         <Style.CurrentProjectItemTitleBlock>
-          <Style.CurrentProjectItemTitleContainer margin={'0 0 ' + getSpacing(1) + ' 0'}>
-            <Style.CurrentProjectItemStarContainer margin={'0 ' + getSpacing(2) + ' 0 0'}>
+          <Style.CurrentProjectItemTitleContainer margin={`0 0 ${getSpacing(1)} 0`}>
+            <Style.CurrentProjectItemStarContainer margin={`0 ${getSpacing(2)} 0 0`}>
               <Star color={colorUsage.projectsMenuItemStar} />
             </Style.CurrentProjectItemStarContainer>
             <Style.CurrentProjectItemTitle>{currentProject.name}</Style.CurrentProjectItemTitle>
@@ -60,7 +60,7 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
         <Style.ProjectItemSnapshotContainer>
           <Style.ProjectItemSnapshot
             src={project.screenshotUrl}
-            margin={'0 ' + getSpacing(4) + ' 0 0'}
+            margin={`0 ${getSpacing(4)} 0 0`}
           />
         </Style.ProjectItemSnapshotContainer>
         <Style.ProjectItemTitleBlock>
