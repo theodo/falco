@@ -51,6 +51,7 @@ body, #root {
 }
 
 input {
+  margin:0;
   border: none;
   outline: none;
 }
