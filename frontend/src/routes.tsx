@@ -67,6 +67,13 @@ export const routeDefinitions: Record<string, RouteDefinition> = {
     strict: false,
     isAuthenticated: true,
   },
+  auditsScriptDetails: {
+    path: '/project/:projectId/audits/:pageOrScriptId/step/:scriptStepId',
+    component: Audits,
+    exact: true,
+    strict: false,
+    isAuthenticated: true,
+  },
 };
 
 const routes: React.FunctionComponent<RouteProps> = props => (
