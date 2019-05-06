@@ -27,7 +27,9 @@
     "no_audit": "No audit data",
     "webpagetest_analysis": "Analysis",
     "webpagetest_results": "Access results",
-    "webpagetest_detailed_results": "Detailed results (on WebPageTest)"
+    "webpagetest_detailed_results": "Detailed results (on WebPageTest)",
+    "webpagetest_latest_audit": "Latest audit",
+    "webpagetest_choose_results": "Choose the type of result"
   },
   "Front": {
     "WPTMetricFirstViewTTI": "TTI (First View)",
