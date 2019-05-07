@@ -31,10 +31,13 @@
     "webpagetest_detailed_results": "Résultats détaillés (sur WebPageTest)",
     "webpagetest_choose_results": "Choisir le type de résultat",
     "webpagetest_latest_audit": "Audit le plus récent",
-    "webpagetest_specify_date": "Audit à la date spécifiée",
+    "webpagetest_dateSelector_audit": "Audit à la date spécifiée",
     "webpagetest_date_format": "DD/MM/YYYY à HH:mm",
-    "webpagetest_select_date": "Choisir la date du/des audit(s)",
-    "script_step_selection": "Étape du script à afficher"
+    "script_step_selection": "Étape du script à afficher",
+    "webpagetest_select_date": "Choisir la date de l'audit",
+    "webpagetest_select_dates": "Choisir les dates des audits",
+    "webpagetest_date_label": "Date de l'audit",
+    "webpagetest_dateComparator_audit": "Comparer plusieurs audits"
   },
   "Front": {
     "WPTMetricFirstViewTTI": "TTI (First View)",
