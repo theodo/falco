@@ -3,9 +3,9 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { ActionType, getType } from 'typesafe-actions';
 
-import { loginUserClearError, loginUserError, loginUserRequest, loginUserSuccess } from './actions';
+import { loginUserClearError, loginUserError, loginUserRequest, loginUserSuccess, logoutUserRequest } from './actions';
 
-export type LoginAction = ActionType<typeof loginUserSuccess | typeof loginUserError |  typeof loginUserRequest | typeof loginUserClearError>;
+export type LoginAction = ActionType<typeof loginUserSuccess | typeof loginUserError |  typeof loginUserRequest | typeof loginUserClearError | typeof logoutUserRequest>;
 
 export type LoginState = Readonly<{
   token: string | null;
@@ -47,6 +47,8 @@ const reducer = (state: LoginState = initialState, action: AnyAction) => {
         ...state,
         loginError: initialState.loginError,
       };
+    case getType(logoutUserRequest):
+      return initialState;
     default:
       return state;
   }
