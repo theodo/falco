@@ -1,4 +1,3 @@
-import Select from 'react-select';
 import styled from 'styled-components';
 import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
@@ -115,13 +114,6 @@ const Style = {
     font-weight: ${fontWeight.labelText};
     line-height: ${lineHeight.labelText};
     margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
-  `,
-
-  DateSelector: styled(Select)`
-    width: 300px;
-    height: 36px;
-    border: 1px solid #979797;
-    border-radius: 3px;
   `,
 };
 
