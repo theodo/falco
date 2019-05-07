@@ -5,6 +5,7 @@ import { ValueType } from 'react-select/lib/types';
 import { ProjectType } from 'redux/projects/types';
 
 import Badge from 'components/Badge';
+import Select from 'components/Select';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { MetricType } from 'redux/auditResults/types';
 import { PageType } from 'redux/pages/types';
@@ -143,36 +144,6 @@ export const Audits: React.FunctionComponent<Props> = ({
     label: scriptStepKey + ' : ' + scriptSteps[scriptStepKey],
   }));
 
-  const scriptSelectStyle = {
-    control: (provided: any) => ({
-      ...provided,
-      borderColor: colorUsage.scriptStepSelectBorder,
-      borderRadius: '3px',
-    }),
-    dropdownIndicator: (provided: any) => ({
-      ...provided,
-      color: colorUsage.scriptStepSelectBorder,
-    }),
-    indicatorSeparator: (provided: any) => ({
-      ...provided,
-      backgroundColor: colorUsage.scriptStepSelectBorder,
-    }),
-    option: (provided: any, state: any) => {
-      if (state.isSelected) {
-        return provided;
-      } else {
-        return {
-          ...provided,
-          color: colorUsage.scriptStepSelectText,
-        };
-      }
-    },
-    singleValue: (provided: any) => ({
-      ...provided,
-      color: colorUsage.scriptStepSelectText,
-    }),
-  };
-
   const handleScriptStepSelection = (selectedOption: ValueType<ScriptStepOption | {}>) => {
     // Check needed to avoid TS2339 error
     if (selectedOption && 'value' in selectedOption) {
@@ -204,14 +175,13 @@ export const Audits: React.FunctionComponent<Props> = ({
           <Style.ScriptStepBlockTitle>
             <FormattedMessage id="Audits.script_step_selection" />
           </Style.ScriptStepBlockTitle>
-          <Style.ScriptStepSelect
+          <Select
             defaultValue={scriptStepSelectOptions.find(scriptStepOption => {
               return scriptStepOption.value === scriptStepId;
             })}
-            isSearchable
             onChange={handleScriptStepSelection}
             options={scriptStepSelectOptions}
-            styles={scriptSelectStyle}
+            margin={`0 0 ${getSpacing(4)} 0`}
           />
         </Style.ScriptStepBlock>
       )}

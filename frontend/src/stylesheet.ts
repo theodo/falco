@@ -104,8 +104,8 @@ export const colorUsage = {
   webPageTestRadioButtonColor: colorPalette.primary500,
   webPageTestRadioButtonBackground: colorPalette.white500,
   scriptStepSelectLabelText: colorPalette.grey800,
-  scriptStepSelectText: colorPalette.grey800,
-  scriptStepSelectBorder: colorPalette.grey500,
+  inputSelectText: colorPalette.grey800,
+  inputSelectBorder: colorPalette.grey500,
 
   // Former design
   primary: colorPalette.blueNight,
@@ -151,7 +151,7 @@ export const fontSize = {
   smallText: '10px',
   graphText: '14px',
   scriptStepSelectLabelText: '16px',
-  scriptStepSelectText: '14px',
+  inputSelectText: '14px',
 
   // Former design
   Xlarge: '24px',
@@ -178,7 +178,7 @@ export const lineHeight = {
   graphText: '20px',
   webPageTestLink: '18px',
   scriptStepSelectLabelText: '20px',
-  scriptStepSelectText: '18px',
+  inputSelectText: '18px',
 
   // Former design
   header: '70px',
