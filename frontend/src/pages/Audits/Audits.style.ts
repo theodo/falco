@@ -53,6 +53,19 @@ const StyledAudits = {
     font-weight: ${fontWeight.h2Text};
     margin-bottom: ${getSpacing(4)};
   `,
+
+  ScriptStepBlock: styled.div`
+    display: flex;
+    flex-direction: column;
+  `,
+
+  ScriptStepBlockTitle: styled.div`
+    font-size: ${fontSize.scriptStepSelectLabelText};
+    line-height: ${lineHeight.scriptStepSelectLabelText};
+    font-weight: ${fontWeight.scriptStepSelectLabelText};
+    color: ${colorUsage.scriptStepSelectLabelText};
+    margin-bottom: ${getSpacing(2)};
+  `,
 };
 
 export default StyledAudits;

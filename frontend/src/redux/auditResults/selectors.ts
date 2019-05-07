@@ -29,3 +29,34 @@ export const selectAuditResultsAsGraphData = (
 
   return auditResultsAsGraphDataPerMetric;
 };
+
+export const selectAuditScriptSteps = (
+  state: RootState,
+  scriptId: string,
+): Record<string, string> => {
+  if (state.auditResults.sortedByScriptId[scriptId]) {
+    return Object.keys(state.auditResults.sortedByScriptId[scriptId]).reduce(
+      (scriptStepNames, scriptStepKey) => {
+        if (
+          state.auditResults.sortedByScriptId[scriptId] &&
+          state.auditResults.sortedByScriptId[scriptId][scriptStepKey] &&
+          state.auditResults.sortedByScriptId[scriptId][scriptStepKey][0] &&
+          state.auditResults.byAuditId[
+            state.auditResults.sortedByScriptId[scriptId][scriptStepKey][0]
+          ]
+        ) {
+          return {
+            ...scriptStepNames,
+            [scriptStepKey]:
+              state.auditResults.byAuditId[
+                state.auditResults.sortedByScriptId[scriptId][scriptStepKey][0]
+              ].scriptStepName,
+          };
+        }
+        return scriptStepNames;
+      },
+      {},
+    );
+  }
+  return {};
+};

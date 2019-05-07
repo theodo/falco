@@ -32,7 +32,8 @@
     "webpagetest_latest_audit": "Audit le plus récent",
     "webpagetest_specify_date": "Audit à la date spécifiée",
     "webpagetest_date_format": "DD/MM/YYYY à HH:mm",
-    "webpagetest_select_date": "Choisir la date du/des audit(s)"
+    "webpagetest_select_date": "Choisir la date du/des audit(s)",
+    "script_step_selection": "Étape du script à afficher"
   },
   "Front": {
     "WPTMetricFirstViewTTI": "TTI (First View)",

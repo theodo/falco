@@ -32,7 +32,8 @@
     "webpagetest_choose_results": "Choose the type of result",
     "webpagetest_specify_date": "Specify a date",
     "webpagetest_date_format": "YYYY/MM/DD at HH:mm",
-    "webpagetest_select_date": "Choose audit(s) date"
+    "webpagetest_select_date": "Choose audit(s) date",
+    "script_step_selection": "Script step to display"
   },
   "Front": {
     "WPTMetricFirstViewTTI": "TTI (First View)",

@@ -1,9 +1,11 @@
 import CircularProgress from '@material-ui/core/CircularProgress';
 import * as React from 'react';
 import { Redirect, RouteComponentProps } from 'react-router';
+import { ValueType } from 'react-select/lib/types';
 import { ProjectType } from 'redux/projects/types';
 
 import Badge from 'components/Badge';
+import Select from 'components/Select';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { MetricType } from 'redux/auditResults/types';
 import { PageType } from 'redux/pages/types';
@@ -13,6 +15,11 @@ import { colorUsage, getSpacing } from 'stylesheet';
 import Style from './Audits.style';
 import GraphsBlock from './GraphsBlock';
 import WebPageTestBlock from './WebPageTestBlock';
+
+interface ScriptStepOption {
+  value: string;
+  label: string;
+}
 
 export type OwnProps = {} & RouteComponentProps<{
   projectId: string;
@@ -24,6 +31,7 @@ type Props = {
   project?: ProjectType;
   page?: PageType;
   script?: ScriptType;
+  scriptSteps: Record<string, string>;
   sortedPageAuditResultsIds: string[];
   sortedScriptAuditResultsIds: Record<string, string[]>;
   fetchAuditResultsRequest: (id: string, type: 'page' | 'script') => void;
@@ -31,11 +39,13 @@ type Props = {
   InjectedIntlProps;
 
 export const Audits: React.FunctionComponent<Props> = ({
+  history,
   intl,
   match,
   project,
   page,
   script,
+  scriptSteps,
   sortedPageAuditResultsIds,
   sortedScriptAuditResultsIds,
   fetchAuditResultsRequest,
@@ -129,6 +139,23 @@ export const Audits: React.FunctionComponent<Props> = ({
     ? sortedScriptAuditResultsIds[scriptStepId]
     : [];
 
+  const scriptStepSelectOptions = Object.keys(scriptSteps).map(scriptStepKey => ({
+    value: scriptStepKey,
+    label: scriptStepKey + ' : ' + scriptSteps[scriptStepKey],
+  }));
+
+  const handleScriptStepSelection = (selectedOption: ValueType<ScriptStepOption | {}>) => {
+    // Check needed to avoid TS2339 error
+    if (selectedOption && 'value' in selectedOption) {
+      history.push(
+        routeDefinitions.auditsScriptDetails.path
+          .replace(':projectId', projectId)
+          .replace(':pageOrScriptId', pageOrScriptId)
+          .replace(':scriptStepId', selectedOption.value),
+      );
+    }
+  };
+
   return (
     <Style.Container>
       <Style.PageTitleBlock>
@@ -143,6 +170,21 @@ export const Audits: React.FunctionComponent<Props> = ({
         )}
       </Style.PageTitleBlock>
       <Style.Title>Dashboard</Style.Title>
+      {script && 0 !== scriptStepSelectOptions.length && (
+        <Style.ScriptStepBlock>
+          <Style.ScriptStepBlockTitle>
+            <FormattedMessage id="Audits.script_step_selection" />
+          </Style.ScriptStepBlockTitle>
+          <Select
+            defaultValue={scriptStepSelectOptions.find(scriptStepOption => {
+              return scriptStepOption.value === scriptStepId;
+            })}
+            onChange={handleScriptStepSelection}
+            options={scriptStepSelectOptions}
+            margin={`0 0 ${getSpacing(4)} 0`}
+          />
+        </Style.ScriptStepBlock>
+      )}
       <GraphsBlock
         blockMargin={`0 0 ${getSpacing(8)} 0`}
         auditResultIds={sortedAuditResultsIds}
