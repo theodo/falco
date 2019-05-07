@@ -19,4 +19,6 @@ class BaseModel(models.Model):
 
 
 class User(AbstractUser):
-    pass
+    first_name = models.CharField("first name", blank=False, null=False, max_length=30)
+    last_name = models.CharField("last name", blank=False, null=False, max_length=150)
+    email = models.EmailField("email address", blank=False, null=False)
