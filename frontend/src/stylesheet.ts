@@ -105,6 +105,7 @@ export const colorUsage = {
   webPageTestRadioButtonBackground: colorPalette.white500,
   scriptStepSelectLabelText: colorPalette.grey800,
   inputSelectText: colorPalette.grey800,
+  inputDisabledSelectText: colorPalette.grey500,
   inputSelectBorder: colorPalette.grey500,
   accountMenuBackground: colorPalette.white500,
   accountMenuShadow: colorPalette.grey400,

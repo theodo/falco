@@ -30,12 +30,21 @@ const Select: React.FunctionComponent<Props> = props => {
     option: (provided: any, state: any) => {
       if (state.isSelected) {
         return provided;
-      } else {
+      }
+      if (state.isDisabled) {
         return {
           ...provided,
-          color: colorUsage.inputSelectText,
+          ':active': {
+            backgroundColor: 'transparent',
+          },
+          backgroundColor: 'transparent',
+          color: colorUsage.inputDisabledSelectText,
         };
       }
+      return {
+        ...provided,
+        color: colorUsage.inputSelectText,
+      };
     },
     singleValue: (provided: any) => ({
       ...provided,
