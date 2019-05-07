@@ -12,6 +12,7 @@ import { reducer as pages } from './pages';
 import { reducer as projects } from './projects';
 import { reducer as scripts } from './scripts';
 import { RootAction, RootState } from './types';
+import { reducer as user } from './user';
 
 /**
  * Creates the main reducer with the asynchronously loaded ones
@@ -26,5 +27,6 @@ export default function createReducer(asyncReducers: {
     pages,
     scripts,
     auditResults,
+    user,
   });
 }
