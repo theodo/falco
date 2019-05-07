@@ -29,6 +29,7 @@ urlpatterns = [
     path("health", views.health, name="health"),
     path("api/projects/", include("projects.urls", namespace="projects")),
     path("api/audits/", include("audits.urls", namespace="audits")),
+    path("api/core/", include("core.urls", namespace="core")),
     path("", include("front.urls")),  # Keep this line last
 ]
 
