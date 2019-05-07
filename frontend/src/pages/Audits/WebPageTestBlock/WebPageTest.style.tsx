@@ -1,3 +1,4 @@
+import Select from 'react-select';
 import styled from 'styled-components';
 import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
@@ -100,6 +101,27 @@ const Style = {
     display: flex;
     align-items: center;
     justify-content: center;
+  `,
+  DateSelectorContainer: styled.div`
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+  `,
+
+  DateTitle: styled.div`
+    color: ${colorUsage.labelText};
+    font-family: ${fontFamily.mainSans};
+    font-size: ${fontSize.labelText};
+    font-weight: ${fontWeight.labelText};
+    line-height: ${lineHeight.labelText};
+    margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
+  `,
+
+  DateSelector: styled(Select)`
+    width: 300px;
+    height: 36px;
+    border: 1px solid #979797;
+    border-radius: 3px;
   `,
 };
 
