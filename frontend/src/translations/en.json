@@ -29,7 +29,10 @@
     "webpagetest_results": "Access results",
     "webpagetest_detailed_results": "Detailed results (on WebPageTest)",
     "webpagetest_latest_audit": "Latest audit",
-    "webpagetest_choose_results": "Choose the type of result"
+    "webpagetest_choose_results": "Choose the type of result",
+    "webpagetest_specify_date": "Specify a date",
+    "webpagetest_date_format": "YYYY/MM/DD at HH:mm",
+    "webpagetest_select_date": "Choose audit(s) date"
   },
   "Front": {
     "WPTMetricFirstViewTTI": "TTI (First View)",

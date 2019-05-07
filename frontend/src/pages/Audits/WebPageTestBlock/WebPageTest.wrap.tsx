@@ -1,3 +1,4 @@
+import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { RootState } from 'redux/types';
 import WebPageTest, { OwnProps } from './WebPageTest';
@@ -13,4 +14,4 @@ const mapDispatchToProps = null;
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(WebPageTest);
+)(injectIntl(WebPageTest));
