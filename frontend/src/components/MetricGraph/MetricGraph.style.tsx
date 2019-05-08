@@ -1,8 +1,13 @@
 import styled from 'styled-components';
 import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
+interface ItemWithMarginProps {
+  margin?: string;
+}
+
 const Style = {
   Legend: styled.div`
+    margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
     color: ${colorUsage.graphText};
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.graphText};
