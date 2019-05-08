@@ -12,7 +12,6 @@ const MEASUREMENT_UNIT = 'px';
  * Create an entry in the colorUsage below instead
  */
 const colorPalette = {
-  // New design
   primary500: '#3657FF',
   grey200: '#F7F8FA',
   grey300: '#E9EBED',
@@ -28,18 +27,8 @@ const colorPalette = {
   white500: '#ffffff',
   lightGreen: '#3bafa3',
   black200: 'rgba(0, 0, 0, 0.5)',
-
-  // Former design
-  blueNight: '#374894',
-  blueNightDark: '#212934',
-  blueNightLight: '#6175de',
-  blueNightVeryLight: '#9ba3c9',
-  error: '#d8000c',
-  errorLight: '#ffd2d2',
-  grey: '#6e7a8b',
-  greyLight: '#e1e7eb',
-  greyVeryLight: '#f8f9fa',
-  white: '#ffffff',
+  red500: '#d8000c',
+  red200: '#ffd2d2',
 };
 
 /**
@@ -48,7 +37,6 @@ const colorPalette = {
  * Ex: fill, border-color, background-color, color ...
  */
 export const colorUsage = {
-  // New design
   h1Text: colorPalette.grey800,
   h2Text: colorPalette.grey800,
   h3Text: colorPalette.grey800,
@@ -112,34 +100,16 @@ export const colorUsage = {
   accountMenuText: colorPalette.grey800,
   accountMenuUserInfosBlockBorder: colorPalette.grey300,
   accountMenuActionItemHoverText: colorPalette.primary500,
-
-  // Former design
-  primary: colorPalette.blueNight,
-  auditResultContainer: colorPalette.blueNight,
-  auditResultLink: colorPalette.blueNightLight,
-  auditTitleText: colorPalette.white,
-  auditTitleBackground: colorPalette.blueNightVeryLight,
-  auditContainer: colorPalette.blueNightVeryLight,
-  headerBackground: colorPalette.blueNight,
-  headerText: colorPalette.greyVeryLight,
-  popinErrorText: colorPalette.error,
-  popinErrorBackground: colorPalette.errorLight,
-  tileContainer: colorPalette.blueNightDark,
-  tileButtonBackground: colorPalette.blueNightLight,
-  tileButtonText: colorPalette.greyLight,
-  tileLastAudit: colorPalette.grey,
-  tilePageTitle: colorPalette.blueNightDark,
-  tileTitle: colorPalette.blueNightLight,
+  popinErrorText: colorPalette.red500,
+  popinErrorBackground: colorPalette.red200,
 };
 
 export const fontFamily = {
-  // New & former designs
   mainMono: `'IBM Plex Mono', monospace`,
   mainSans: `'IBM Plex Sans', sans-serif`,
 };
 
 export const fontSize = {
-  // New design
   h1Text: '36px',
   h2Text: '30px',
   h3Text: '24px',
@@ -158,15 +128,9 @@ export const fontSize = {
   graphText: '14px',
   scriptStepSelectLabelText: '16px',
   inputSelectText: '14px',
-
-  // Former design
-  Xlarge: '24px',
-  large: '20px',
-  medium: '16px',
 };
 
 export const lineHeight = {
-  // New design
   h1Text: '47px',
   h2Text: '39px',
   h3Text: '32px',
@@ -185,13 +149,9 @@ export const lineHeight = {
   webPageTestLink: '18px',
   scriptStepSelectLabelText: '20px',
   inputSelectText: '18px',
-
-  // Former design
-  header: '70px',
 };
 
 export const fontWeight = {
-  // New design
   h1Text: 'bold',
   h2Text: 'bold',
   h3Text: 'bold',
@@ -209,7 +169,6 @@ export const fontWeight = {
 };
 
 export const fontStyle = {
-  // New design
   quoteText: 'italic',
 };
 
@@ -223,7 +182,7 @@ export const muiTheme = createMuiTheme({
   },
   palette: {
     primary: {
-      main: colorUsage.primary,
+      main: colorPalette.primary500,
     },
   },
 });
