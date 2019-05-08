@@ -11,22 +11,33 @@ import Style from './ProjectsMenu.style';
 
 interface OwnProps {
   currentProject: ProjectType | undefined;
+  fetchProjectsRequest: () => void;
   isVisible: boolean;
   position?: string;
   projects: Array<ProjectType | null> | null;
   right?: string | null;
+  userToken: string | null;
 }
 
 type Props = OwnProps & InjectedIntlProps;
 
 export const ProjectsMenu: React.FunctionComponent<Props> = ({
   currentProject,
+  fetchProjectsRequest,
   intl,
   isVisible,
   position,
   projects,
   right,
+  userToken,
 }) => {
+  React.useEffect(
+    () => {
+      fetchProjectsRequest();
+    },
+    [userToken],
+  );
+
   const renderCurrentProjectItem = () =>
     currentProject && (
       <Style.CurrentProjectItem>

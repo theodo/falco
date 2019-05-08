@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { selectAuditScriptSteps } from 'redux/auditResults/selectors';
+import { fetchProjectRequest } from 'redux/projects';
 import { RootState } from 'redux/types';
 
 import { injectIntl } from 'react-intl';
@@ -20,6 +21,7 @@ const mapStateToProps = (state: RootState, props: OwnProps) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   fetchAuditResultsRequest: (id: string, type: 'page' | 'script') =>
     dispatch(fetchAuditResultsRequest({ id, type })),
+  fetchProjectRequest: (projectId: string) => dispatch(fetchProjectRequest({ projectId })),
 });
 
 export default connect(
