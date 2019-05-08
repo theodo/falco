@@ -10,10 +10,10 @@ import Style from './Header.style';
 
 // Your component own properties
 interface Props {
-  [n: string]: never;
+  currentURL: string;
 }
 
-const Header: React.FunctionComponent<Props> = () => {
+export const Header: React.FunctionComponent<Props> = ({ currentURL }) => {
   const [isAccountMenuVisible, setIsAccountMenuVisible] = React.useState(false);
   const [accountMenuRight, setAccountMenuRight] = React.useState('auto');
   const [isProjectsMenuVisible, setIsProjectsMenuVisible] = React.useState(false);
@@ -35,7 +35,7 @@ const Header: React.FunctionComponent<Props> = () => {
         );
       }
     },
-    [headerContainerRef, accountMenuButtonRef],
+    [headerContainerRef.current, accountMenuButtonRef.current],
   );
 
   React.useEffect(
@@ -50,7 +50,7 @@ const Header: React.FunctionComponent<Props> = () => {
         );
       }
     },
-    [headerContainerRef, projectsMenuButtonRef],
+    [headerContainerRef.current, projectsMenuButtonRef.current],
   );
 
   const toggleAccountMenuVisibility = (event: MouseEvent) => {
@@ -91,6 +91,8 @@ const Header: React.FunctionComponent<Props> = () => {
     document.removeEventListener('click', hideProjectsMenu);
   };
 
+  const isLoginPage = currentURL === routeDefinitions.login.path;
+
   return (
     <Style.HeaderContainer ref={headerContainerRef}>
       <Style.Header>
@@ -103,21 +105,26 @@ const Header: React.FunctionComponent<Props> = () => {
           </Style.LogoContainer>
         </Style.HeaderMenu>
         <Style.HeaderContent>
-          <Style.Nav>
-            <Style.HeaderButtonsBlock>
-              <Style.HeaderButton
-                onClick={toggleProjectsMenuVisibility}
-                ref={projectsMenuButtonRef}
-              >
-                <FormattedMessage id="Header.projects_button" />
-                <Style.HeaderButtonArrow />
-              </Style.HeaderButton>
-              <Style.HeaderButton onClick={toggleAccountMenuVisibility} ref={accountMenuButtonRef}>
-                <FormattedMessage id="Header.login_button" />
-                <Style.HeaderButtonArrow />
-              </Style.HeaderButton>
-            </Style.HeaderButtonsBlock>
-          </Style.Nav>
+          {!isLoginPage && (
+            <Style.Nav>
+              <Style.HeaderButtonsBlock>
+                <Style.HeaderButton
+                  onClick={toggleProjectsMenuVisibility}
+                  ref={projectsMenuButtonRef}
+                >
+                  <FormattedMessage id="Header.projects_button" />
+                  <Style.HeaderButtonArrow />
+                </Style.HeaderButton>
+                <Style.HeaderButton
+                  onClick={toggleAccountMenuVisibility}
+                  ref={accountMenuButtonRef}
+                >
+                  <FormattedMessage id="Header.login_button" />
+                  <Style.HeaderButtonArrow />
+                </Style.HeaderButton>
+              </Style.HeaderButtonsBlock>
+            </Style.Nav>
+          )}
         </Style.HeaderContent>
       </Style.Header>
       <Style.MenusContainer>
@@ -135,5 +142,3 @@ const Header: React.FunctionComponent<Props> = () => {
     </Style.HeaderContainer>
   );
 };
-
-export default Header;

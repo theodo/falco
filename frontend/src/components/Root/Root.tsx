@@ -3,6 +3,7 @@ import { addLocaleData, IntlProvider } from 'react-intl';
 import en from 'react-intl/locale-data/en';
 import fr from 'react-intl/locale-data/fr';
 import { RouteComponentProps } from 'react-router';
+import { routeDefinitions } from 'routes';
 
 import { flattenMessages } from 'services/i18n/intl';
 import enMessages from 'translations/en.json';
@@ -22,16 +23,20 @@ interface Props extends RouteComponentProps<any> {
   children: ReactNode;
 }
 
-const Root: React.FunctionComponent<Props> = ({ children }) => (
-  <IntlProvider locale="fr" messages={locales.fr}>
-    <Style.Page>
-      <Header />
-      <Style.Body>
-        <Menu />
-        <Style.Content>{children}</Style.Content>
-      </Style.Body>
-    </Style.Page>
-  </IntlProvider>
-);
+const Root: React.FunctionComponent<Props> = ({ children, location }) => {
+  const isLoginPage = location.pathname === routeDefinitions.login.path;
+
+  return (
+    <IntlProvider locale="fr" messages={locales.fr}>
+      <Style.Page>
+        <Header />
+        <Style.Body>
+          {!isLoginPage && <Menu />}
+          <Style.Content isLoginPage={isLoginPage}>{children}</Style.Content>
+        </Style.Body>
+      </Style.Page>
+    </IntlProvider>
+  );
+};
 
 export default Root;
