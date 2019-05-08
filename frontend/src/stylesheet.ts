@@ -170,6 +170,7 @@ export const fontWeight = {
 
 export const fontStyle = {
   quoteText: 'italic',
+  lighthouseNote: 'italic',
 };
 
 export const getSpacing = (multiplier: number): string =>
