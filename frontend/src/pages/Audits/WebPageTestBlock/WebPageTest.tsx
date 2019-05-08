@@ -65,11 +65,13 @@ const WebPageTestBlock: React.FunctionComponent<Props & InjectedIntlProps> = pro
         displayDateComparator(false);
         break;
       case 'dateSelector':
+        setSelectedAudit(auditResults[0]);
         displayDateSelector(true);
         displayDateComparator(false);
         break;
       case 'dateComparator':
         setSelectedAudit(auditResults[0]);
+        setAuditToCompare(auditResults[1]);
         displayDateSelector(false);
         displayDateComparator(true);
         break;
