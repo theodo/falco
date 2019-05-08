@@ -106,6 +106,11 @@ export const colorUsage = {
   scriptStepSelectLabelText: colorPalette.grey800,
   inputSelectText: colorPalette.grey800,
   inputSelectBorder: colorPalette.grey500,
+  accountMenuBackground: colorPalette.white500,
+  accountMenuShadow: colorPalette.grey400,
+  accountMenuText: colorPalette.grey800,
+  accountMenuUserInfosBlockBorder: colorPalette.grey300,
+  accountMenuActionItemHoverText: colorPalette.primary500,
 
   // Former design
   primary: colorPalette.blueNight,

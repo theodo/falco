@@ -4,6 +4,7 @@ import Logo from 'components/Logo';
 import { FormattedMessage } from 'react-intl';
 import { routeDefinitions } from 'routes';
 import { colorUsage } from 'stylesheet';
+import AccountMenu from './components/AccountMenu';
 import ProjectsMenu from './components/ProjectsMenu';
 import Style from './Header.style';
 
@@ -13,11 +14,29 @@ interface Props {
 }
 
 const Header: React.FunctionComponent<Props> = () => {
+  const [isAccountMenuVisible, setIsAccountMenuVisible] = React.useState(false);
+  const [accountMenuRight, setAccountMenuRight] = React.useState('auto');
   const [isProjectsMenuVisible, setIsProjectsMenuVisible] = React.useState(false);
   const [projectsMenuRight, setProjectsMenuRight] = React.useState('auto');
 
   const headerContainerRef = React.useRef<HTMLDivElement>(null);
+  const accountMenuButtonRef = React.useRef<HTMLLIElement>(null);
   const projectsMenuButtonRef = React.useRef<HTMLLIElement>(null);
+
+  React.useEffect(
+    () => {
+      if (headerContainerRef.current && accountMenuButtonRef.current) {
+        setAccountMenuRight(
+          Math.floor(
+            headerContainerRef.current.getBoundingClientRect().right -
+              accountMenuButtonRef.current.getBoundingClientRect().right -
+              15,
+          ) + 'px',
+        );
+      }
+    },
+    [headerContainerRef, accountMenuButtonRef],
+  );
 
   React.useEffect(
     () => {
@@ -33,6 +52,25 @@ const Header: React.FunctionComponent<Props> = () => {
     },
     [headerContainerRef, projectsMenuButtonRef],
   );
+
+  const toggleAccountMenuVisibility = (event: MouseEvent) => {
+    event.preventDefault();
+    if (isAccountMenuVisible) {
+      hideAccountMenu();
+    } else {
+      showAccountMenu();
+    }
+  };
+
+  const showAccountMenu = () => {
+    setIsAccountMenuVisible(true);
+    document.addEventListener('click', hideAccountMenu);
+  };
+
+  const hideAccountMenu = () => {
+    setIsAccountMenuVisible(false);
+    document.removeEventListener('click', hideAccountMenu);
+  };
 
   const toggleProjectsMenuVisibility = (event: MouseEvent) => {
     event.preventDefault();
@@ -74,7 +112,7 @@ const Header: React.FunctionComponent<Props> = () => {
                 <FormattedMessage id="Header.projects_button" />
                 <Style.HeaderButtonArrow />
               </Style.HeaderButton>
-              <Style.HeaderButton>
+              <Style.HeaderButton onClick={toggleAccountMenuVisibility} ref={accountMenuButtonRef}>
                 <FormattedMessage id="Header.login_button" />
                 <Style.HeaderButtonArrow />
               </Style.HeaderButton>
@@ -87,6 +125,11 @@ const Header: React.FunctionComponent<Props> = () => {
           isVisible={isProjectsMenuVisible}
           position={'absolute'}
           right={projectsMenuRight}
+        />
+        <AccountMenu
+          isVisible={isAccountMenuVisible}
+          position={'absolute'}
+          right={accountMenuRight}
         />
       </Style.MenusContainer>
     </Style.HeaderContainer>

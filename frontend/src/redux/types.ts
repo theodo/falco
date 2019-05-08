@@ -5,6 +5,7 @@ import { LoginAction, LoginState } from './login';
 import { pagesAction, pagesState } from './pages';
 import { projectsAction, projectsState } from './projects';
 import { scriptsAction, scriptsState } from './scripts';
+import { userAction, userState } from './user';
 
 export type RootState = Readonly<{
   login: LoginState & PersistPartial;
@@ -12,6 +13,7 @@ export type RootState = Readonly<{
   pages: pagesState;
   scripts: scriptsState;
   auditResults: auditResultsState;
+  user: userState;
 }>;
 // This type allows url fetching from anywhere without modifying the RootState
 export type RootStateWithRouter = RootState & Readonly<{ router: RouterState }>;
@@ -21,4 +23,5 @@ export type RootAction =
   | projectsAction
   | pagesAction
   | scriptsAction
-  | auditResultsAction;
+  | auditResultsAction
+  | userAction;

@@ -15,9 +15,12 @@ export const loginUserError = createStandardAction('Login/USER_LOGIN_ERROR')<{
 
 export const loginUserClearError = createStandardAction('Login/USER_CLEAR_LOGIN_ERROR')();
 
+export const logoutUserRequest = createStandardAction('Logout/USER_LOGOUT_REQUEST')();
+
 export default {
   loginUserRequest,
   loginUserSuccess,
   loginUserError,
   loginUserClearError,
+  logoutUserRequest,
 };

@@ -12,7 +12,8 @@
   },
   "Menu": {
     "page_badge": "PAGE",
-    "script_badge": "SCRIPT"
+    "script_badge": "SCRIPT",
+    "logoff_link": "Log off"
   },
   "Project": {
     "project_error": "It seems that you are not authorized to access this project.\n\nPlease try again or contact your administrator to get granted.",
