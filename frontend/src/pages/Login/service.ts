@@ -5,6 +5,7 @@ export interface FormValues {
 
 interface LoginServiceStateProps {
   loginError: string | null;
+  isUserAuthenticated: boolean;
   isSubmittingFromStore: boolean;
 }
 

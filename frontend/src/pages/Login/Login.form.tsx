@@ -4,6 +4,8 @@ import React from 'react';
 
 import Input from 'components/Input';
 import { FormattedMessage } from 'react-intl';
+import { Redirect } from 'react-router';
+import { routeDefinitions } from 'routes';
 
 import Styles from './Login.style';
 import { FormValues } from './service';
@@ -13,6 +15,7 @@ interface InnerLoginFormProps {
     username?: string;
     password?: string;
   };
+  isUserAuthenticated: boolean;
   isSubmittingFromStore: boolean;
   /*
     isSubmittingFromStore:
@@ -36,7 +39,11 @@ interface InnerLoginFormProps {
 const InnerLoginForm: React.FunctionComponent<
   InjectedFormikProps<InnerLoginFormProps, FormValues>
 > = props => {
-  const { errors, touched, isSubmittingFromStore, loginError } = props;
+  const { errors, touched, isUserAuthenticated, isSubmittingFromStore, loginError } = props;
+
+  if (isUserAuthenticated) {
+    return <Redirect to={routeDefinitions.projectsList.path} />;
+  }
 
   return (
     <Styles.Container>
