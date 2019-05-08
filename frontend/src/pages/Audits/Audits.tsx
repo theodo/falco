@@ -34,11 +34,13 @@ type Props = {
   scriptSteps: Record<string, string>;
   sortedPageAuditResultsIds: string[];
   sortedScriptAuditResultsIds: Record<string, string[]>;
+  fetchProjectRequest: (projectId: string) => void;
   fetchAuditResultsRequest: (id: string, type: 'page' | 'script') => void;
 } & OwnProps &
   InjectedIntlProps;
 
 export const Audits: React.FunctionComponent<Props> = ({
+  fetchProjectRequest,
   history,
   intl,
   match,
@@ -51,6 +53,13 @@ export const Audits: React.FunctionComponent<Props> = ({
   fetchAuditResultsRequest,
 }) => {
   const { projectId, pageOrScriptId, scriptStepId } = match.params;
+
+  React.useEffect(
+    () => {
+      fetchProjectRequest(projectId);
+    },
+    [projectId],
+  );
 
   React.useEffect(
     () => {

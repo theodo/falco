@@ -1,5 +1,7 @@
 import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { fetchProjectsRequest } from 'redux/projects';
 import { getCurrentProject } from 'redux/selectors';
 import { RootStateWithRouter } from 'redux/types';
 import { ProjectsMenu } from './ProjectsMenu';
@@ -11,9 +13,12 @@ const mapStateToProps = (state: RootStateWithRouter) => ({
         state.projects.byId ? state.projects.byId[projectId] : null,
       )
     : null,
+  userToken: state.login.token,
 });
 
-const mapDispatchToProps = null;
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  fetchProjectsRequest: () => dispatch(fetchProjectsRequest({})),
+});
 
 export default connect(
   mapStateToProps,
