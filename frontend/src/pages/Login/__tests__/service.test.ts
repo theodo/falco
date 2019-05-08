@@ -52,10 +52,11 @@ describe('Login form service', () => {
       };
       const props = {
         login: jest.fn(),
+        location: { state: undefined },
       };
       handleSubmit(values, { props });
       expect(props.login).toHaveBeenCalledTimes(1);
-      expect(props.login).toHaveBeenCalledWith(values);
+      expect(props.login).toHaveBeenCalledWith(values, undefined);
     });
   });
 });

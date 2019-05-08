@@ -12,6 +12,7 @@ import loginUserSaga, { loginUser } from '../sagas';
 const loginUserRequestAction = loginUserRequest({
   username: 'bilbo@culdesac.gnd',
   password: 'm0ñPr3cieuX',
+  originLocation: undefined,
 });
 const token = 'OX1dSSVRFX1BPU1QsQ0FOX1JFQURfTkV';
 const endpoint = '/api/login_check';

@@ -14,7 +14,10 @@ export function* loginUser(action: ActionType<typeof loginUserRequest>) {
     const token: string | undefined = yield call(login, endpoint, action.payload);
     if (token) {
       yield put(loginUserSuccess({ token }));
-      yield put(push(routeDefinitions.projectsList.path));
+      const urlToRedirect = action.payload.originLocation
+        ? action.payload.originLocation
+        : routeDefinitions.projectsList.path;
+      yield put(push(urlToRedirect));
     } else {
       yield put(loginUserError({ errorMessage: 'No token in login response body' }));
     }

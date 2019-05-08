@@ -9,6 +9,7 @@ import reducer from '../reducer';
 const token = 'OX1dSSVRFX1BPU1QsQ0FOX1JFQURfTkV';
 const username = 'MyUser';
 const password = 'AwsomeP@sSw0rd';
+const originLocation = undefined;
 const initialState = { token: null, loginError: null, isSubmitting: false };
 const stateDuringLogin = { token: null, loginError: null, isSubmitting: true };
 const stateAfterLoginError = { token: null, loginError: 'OUPS', isSubmitting: false };
@@ -19,6 +20,7 @@ describe('Login reducer', () => {
       const action = loginUserRequest({
         username,
         password,
+        originLocation,
       });
       const expectedState = { ...initialState, isSubmitting: true };
 
