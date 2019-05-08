@@ -37,7 +37,9 @@
     "webpagetest_select_date": "Choose the date of the audit",
     "webpagetest_select_dates": "Choose the dates of the audits",
     "webpagetest_date_label": "Audit date",
-    "webpagetest_dateComparator_audit": "Compare several audits"
+    "webpagetest_dateComparator_audit": "Compare several audits",
+    "lighthouse_report": "Lighthouse Report",
+    "lighthouse_note": "Note: all data provided by Lighthouse may differ from the Dashboard values. This is due to a different audit environement. Diagnoses and opportunities are still relevant, even though the indicated metric improvements may differ from the real results"
   },
   "Front": {
     "WPTMetricFirstViewTTI": "TTI (First View)",
