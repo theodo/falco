@@ -110,31 +110,31 @@ const WebPageTestBlock: React.FunctionComponent<Props & InjectedIntlProps> = pro
     }
   };
 
-  const options: any = ['latest', 'dateSelector', 'dateComparator'].reduce(
-    (cummulatedOptions, optionType) => {
+  const radioOptions: any = ['latest', 'dateSelector', 'dateComparator'].reduce(
+    (cummulatedOptions, radioOptionType) => {
       return {
         ...cummulatedOptions,
-        [optionType]: {
-          value: optionType,
-          label: `Audits.webpagetest_${optionType}_audit`,
+        [radioOptionType]: {
+          value: radioOptionType,
+          label: `Audits.webpagetest_${radioOptionType}_audit`,
         },
       };
     },
     {},
   );
 
-  const optionBlock = (optionType: 'latest' | 'dateSelector' | 'dateComparator') => {
+  const optionBlock = (radioOptionType: 'latest' | 'dateSelector' | 'dateComparator') => {
     return (
       <Style.OptionContainer margin={`0 0 ${getSpacing(4)} 0`}>
         <Style.RadioButton
-          defaultChecked={optionType === 'latest'}
+          defaultChecked={radioOptionType === 'latest'}
           type="radio"
-          value={options[optionType].value}
+          value={radioOptions[radioOptionType].value}
           name="audit"
           onChange={handleRadioButtonChange}
         />
         <Style.RadioButtonLabel margin={`0 ${getSpacing(2)} 0 0`} />
-        <FormattedMessage id={options[optionType].label} />
+        <FormattedMessage id={radioOptions[radioOptionType].label} />
       </Style.OptionContainer>
     );
   };
