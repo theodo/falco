@@ -5,7 +5,7 @@ import { InjectedIntlProps } from 'react-intl';
 import { Area, AreaChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { METRICS } from 'redux/auditResults/constants';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
-import { colorUsage, fontFamily, fontSize } from 'stylesheet';
+import { colorUsage, fontFamily, fontSize, getSpacing } from 'stylesheet';
 import Style from './MetricGraph.style';
 
 export interface OwnProps {
@@ -21,7 +21,9 @@ const MetricGraph: React.FunctionComponent<Props> = props => {
   const renderLegend = (legendProps: { payload: Array<{ value: MetricType }> }) => {
     const { payload } = legendProps;
     return payload.map((entry, index) => (
-      <Style.Legend key={index}>{intl.formatMessage({ id: `Front.${entry.value}` })}</Style.Legend>
+      <Style.Legend margin={`0 0 ${getSpacing(2)} ${getSpacing(4)}`} key={index}>
+        {intl.formatMessage({ id: `Front.${entry.value}` })}
+      </Style.Legend>
     ));
   };
 
@@ -64,9 +66,15 @@ const MetricGraph: React.FunctionComponent<Props> = props => {
         </defs>
         <Legend verticalAlign="top" align="left" iconSize={0} content={renderLegend} />
         <YAxis
-          hide={true}
           type="number"
-          domain={[dataMin => Math.min(0, dataMin), dataMax => dataMax * 1.2]}
+          tick={{
+            color: `${colorUsage.smallText}`,
+            fontFamily: `${fontFamily.mainSans}`,
+            fontSize: `${fontSize.smallText}`,
+          }}
+          axisLine={false}
+          tickLine={false}
+          interval={'preserveStart'}
         />
         <XAxis
           width={30}
@@ -81,7 +89,6 @@ const MetricGraph: React.FunctionComponent<Props> = props => {
           tickLine={false}
           minTickGap={50}
           interval={'preserveStart'}
-          mirror={false}
         />
         <Tooltip content={renderTooltip} cursor={{ stroke: colorUsage.graphTooltipCursor }} />
         {metrics.map(metric => (
