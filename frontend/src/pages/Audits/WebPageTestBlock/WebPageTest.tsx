@@ -6,6 +6,7 @@ import { ValueType } from 'react-select/lib/types';
 import Select from 'components/Select';
 import { AuditResultType } from 'redux/auditResults/types';
 import { colorUsage, getSpacing } from 'stylesheet';
+import LighthouseBlock from './LighthouseBlock';
 import Style from './WebPageTest.style';
 
 export interface OwnProps {
@@ -45,17 +46,26 @@ const WebPageTestBlock: React.FunctionComponent<Props & InjectedIntlProps> = pro
   const [dateSelectorDisplayed, displayDateSelector] = useState(false);
   const [dateComparatorDisplayed, displayDateComparator] = useState(false);
 
+  const getAuditId = (audit: AuditResultType) => {
+    const auditUrl = new URL(audit.WPTResultsJsonUrl);
+    return auditUrl.searchParams.get('test');
+  };
+
   const getWebPageTestUrl = () => {
     if (!dateComparatorDisplayed) {
       return selectedAudit.WPTResultsUserUrl;
     }
     const baseUrl = 'https://www.webpagetest.org/video/compare.php?tests=';
-    const selectedAuditUrl = new URL(selectedAudit.WPTResultsJsonUrl);
-    const selectedAuditId = selectedAuditUrl.searchParams.get('test');
-    const auditToCompareUrl = new URL(auditToCompare.WPTResultsJsonUrl);
-    const auditToCompareId = auditToCompareUrl.searchParams.get('test');
+    const selectedAuditId = getAuditId(selectedAudit);
+    const auditToCompareId = getAuditId(auditToCompare);
 
     return `${baseUrl}${selectedAuditId},${auditToCompareId}`;
+  };
+
+  const getLighthouseUrl = () => {
+    const baseUrl = 'https://www.webpagetest.org/lighthouse.php?test=';
+    const auditId = getAuditId(auditResults[0]);
+    return `${baseUrl}${auditId}`;
   };
 
   const handleRadioButtonChange = (e: ChangeEvent): void => {
@@ -200,6 +210,7 @@ const WebPageTestBlock: React.FunctionComponent<Props & InjectedIntlProps> = pro
       <Style.WebPageTestLink href={getWebPageTestUrl()} target={'_blank'}>
         <FormattedMessage id="Audits.webpagetest_results" />
       </Style.WebPageTestLink>
+      <LighthouseBlock lighthouseUrl={getLighthouseUrl()} />
     </Style.Container>
   );
 };
