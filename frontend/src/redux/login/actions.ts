@@ -3,6 +3,7 @@ import { createStandardAction } from 'typesafe-actions';
 export const loginUserRequest = createStandardAction('Login/USER_LOGIN_REQUEST')<{
   username: string;
   password: string;
+  originLocation: string | undefined;
 }>();
 
 export const loginUserSuccess = createStandardAction('Login/USER_LOGIN_SUCCESS')<{
