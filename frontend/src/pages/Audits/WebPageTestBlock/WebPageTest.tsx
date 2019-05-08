@@ -164,7 +164,7 @@ const WebPageTestBlock: React.FunctionComponent<Props & InjectedIntlProps> = pro
             )}
           </Style.FormLabel>
           <Style.FormInputs>
-            <Style.DateSelectorContainer>
+            <Style.DateSelectorContainer margin={`0 0 ${getSpacing(2)} 0`}>
               <Style.DateTitle margin={`0 0 ${getSpacing(2)} 0`}>
                 {dateComparatorDisplayed ? (
                   'Date 1'

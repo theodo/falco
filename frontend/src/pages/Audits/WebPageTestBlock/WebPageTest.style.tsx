@@ -102,6 +102,7 @@ const Style = {
     justify-content: center;
   `,
   DateSelectorContainer: styled.div`
+    margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
     display: flex;
     flex-direction: column;
     padding-left: 20px;
