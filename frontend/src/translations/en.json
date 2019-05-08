@@ -59,13 +59,6 @@
     "WPTMetricLighthousePerformance": "Lighthouse Performance Score"
   },
   "components": {
-    "AuditResult": {
-      "ofdate": "of {date}",
-      "number": "{number}",
-      "percent": "{percent} %",
-      "time": "{time} sec.",
-      "seeOnWPT": "See on WebPageTest"
-    },
     "MetricGraph": {
       "tooltipDate": "On MM/DD at HH:mm"
     }
