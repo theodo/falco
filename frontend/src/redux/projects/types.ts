@@ -1,11 +1,19 @@
-import { PageType } from 'redux/pages/types';
-import { ScriptType } from 'redux/scripts/types';
-
 export interface AuditParametersType {
   uuid: string;
   location: string;
   browser: string;
   networkShape: string;
+}
+
+export interface PageType {
+  name: string;
+  url: string;
+  uuid: string;
+}
+
+export interface ScriptType {
+  uuid: string;
+  name: string;
 }
 
 export interface ProjectType {

@@ -9,8 +9,7 @@ import Loader from 'components/Loader';
 import Select from 'components/Select';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { MetricType } from 'redux/auditResults/types';
-import { PageType } from 'redux/pages/types';
-import { ScriptType } from 'redux/scripts/types';
+import { PageType, ScriptType } from 'redux/projects/types';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
 import AnalyticsBlock from './AnalyticsBlock';
@@ -70,7 +69,7 @@ export const Audits: React.FunctionComponent<Props> = ({
         fetchAuditResultsRequest(pageOrScriptId, 'script');
       }
     },
-    [pageOrScriptId, page, script],
+    [pageOrScriptId, page && page.uuid, script && script.uuid],
   );
 
   if (!project || (!project.pages && !project.scripts)) {
