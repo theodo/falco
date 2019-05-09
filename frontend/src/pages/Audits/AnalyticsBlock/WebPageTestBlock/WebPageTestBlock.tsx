@@ -3,6 +3,7 @@ import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { ValueType } from 'react-select/lib/types';
 import { AuditResultType } from 'redux/auditResults/types';
+import { getWPTAuditId } from 'services/utils';
 import { getSpacing } from 'stylesheet';
 import Style from './WebPageTestBlock.style';
 
@@ -19,18 +20,13 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps & InjectedIntlProps> = 
   const [dateSelectorDisplayed, displayDateSelector] = React.useState(false);
   const [dateComparatorDisplayed, displayDateComparator] = React.useState(false);
 
-  const getAuditId = (audit: AuditResultType) => {
-    const auditUrl = new URL(audit.WPTResultsJsonUrl);
-    return auditUrl.searchParams.get('test');
-  };
-
   const getWebPageTestUrl = () => {
     if (!dateComparatorDisplayed) {
       return selectedAudit.WPTResultsUserUrl;
     }
     const baseUrl = 'https://www.webpagetest.org/video/compare.php?tests=';
-    const selectedAuditId = getAuditId(selectedAudit);
-    const auditToCompareId = getAuditId(auditToCompare);
+    const selectedAuditId = getWPTAuditId(selectedAudit);
+    const auditToCompareId = getWPTAuditId(auditToCompare);
 
     return `${baseUrl}${selectedAuditId},${auditToCompareId}`;
   };

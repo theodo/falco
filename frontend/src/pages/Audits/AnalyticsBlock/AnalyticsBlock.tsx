@@ -3,6 +3,7 @@ import React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 
 import { AuditResultType } from 'redux/auditResults/types';
+import { getWPTAuditId } from 'services/utils';
 import { colorUsage, getSpacing } from 'stylesheet';
 import Style from './AnalyticsBlock.style';
 import LighthouseBlock from './LighthouseBlock';
@@ -40,14 +41,9 @@ const AnalyticsBlock: React.FunctionComponent<Props & InjectedIntlProps> = props
     );
   }
 
-  const getAuditId = (audit: AuditResultType) => {
-    const auditUrl = new URL(audit.WPTResultsJsonUrl);
-    return auditUrl.searchParams.get('test');
-  };
-
   const getLighthouseUrl = () => {
     const baseUrl = 'https://www.webpagetest.org/lighthouse.php?test=';
-    const auditId = getAuditId(auditResults[0]);
+    const auditId = getWPTAuditId(auditResults[0]);
     return `${baseUrl}${auditId}`;
   };
 
