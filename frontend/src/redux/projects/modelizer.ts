@@ -1,4 +1,4 @@
-import { ApiProjectType, ProjectType } from './types';
+import { ApiProjectType, PageType, ProjectType, ScriptType } from './types';
 
 export const modelizeProject = (project: ApiProjectType): Record<string, ProjectType> => ({
   [project.uuid]: {
@@ -32,4 +32,29 @@ export const modelizeProjects = (projects: ApiProjectType[]) => {
     }),
     {},
   );
+};
+
+export const modelizePages = (pages: PageType[]): Record<string, PageType> => {
+  return pages.reduce((pagesById, page) => {
+    return {
+      ...pagesById,
+      [page.uuid]: {
+        uuid: page.uuid,
+        name: page.name,
+        url: page.url,
+      },
+    };
+  }, {});
+};
+
+export const modelizeScripts = (scripts: ScriptType[]): Record<string, ScriptType> => {
+  return scripts.reduce((scriptsById, script) => {
+    return {
+      ...scriptsById,
+      [script.uuid]: {
+        uuid: script.uuid,
+        name: script.name,
+      },
+    };
+  }, {});
 };

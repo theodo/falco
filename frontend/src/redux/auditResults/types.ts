@@ -85,4 +85,4 @@ export type AuditResultsAsGraphDataItem = AuditResultsAsGraphDataDate &
   AuditResultsAsGraphDataMetric &
   AuditResultsAsGraphDataScript;
 
-export type AuditResultsAsGraphData = AuditResultsAsGraphDataItem[];
+export type AuditResultsAsGraphData = AuditResultsAsGraphDataItem[] | null;

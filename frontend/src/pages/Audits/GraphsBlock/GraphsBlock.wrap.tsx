@@ -1,10 +1,12 @@
 import { connect } from 'react-redux';
 import { selectAuditResultsAsGraphData } from 'redux/auditResults/selectors';
 import { RootState } from 'redux/types';
-import GraphsBlock, { OwnProps } from './GraphsBlock';
+import { GraphsBlock, OwnProps } from './GraphsBlock';
 
 const mapStateToProps = (state: RootState, props: OwnProps) => ({
-  auditResults: selectAuditResultsAsGraphData(state, props.auditResultIds, props.metrics),
+  auditResults: props.auditResultIds
+    ? selectAuditResultsAsGraphData(state, props.auditResultIds, props.metrics)
+    : null,
 });
 
 const mapDispatchToProps = null;

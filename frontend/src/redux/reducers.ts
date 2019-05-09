@@ -8,9 +8,7 @@ import { combineReducers, Reducer } from 'redux';
 
 import { reducer as auditResults } from './auditResults';
 import { reducer as login } from './login';
-import { reducer as pages } from './pages';
 import { reducer as projects } from './projects';
-import { reducer as scripts } from './scripts';
 import { RootAction, RootState } from './types';
 import { reducer as user } from './user';
 
@@ -24,8 +22,6 @@ export default function createReducer(asyncReducers: {
     ...asyncReducers,
     login,
     projects,
-    pages,
-    scripts,
     auditResults,
     user,
   });
