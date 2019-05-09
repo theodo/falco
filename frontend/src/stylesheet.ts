@@ -102,6 +102,7 @@ export const colorUsage = {
   accountMenuActionItemHoverText: colorPalette.primary500,
   popinErrorText: colorPalette.red500,
   popinErrorBackground: colorPalette.red200,
+  pickRightMetricsLinkText: colorPalette.primary500,
 };
 
 export const fontFamily = {

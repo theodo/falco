@@ -26,6 +26,7 @@
   "Audits": {
     "no_page_or_script": "No page or script configured",
     "no_audit": "No audit data",
+    "pick_right_metrics": "How to pick the right metrics? →",
     "webpagetest_analysis": "Analysis",
     "webpagetest_results": "Access results",
     "webpagetest_detailed_results": "Detailed results (on WebPageTest)",

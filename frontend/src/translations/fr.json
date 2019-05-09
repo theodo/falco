@@ -26,6 +26,7 @@
   "Audits": {
     "no_page_or_script": "Aucune page ou script configuré",
     "no_audit": "Pas de donnée d'audit",
+    "pick_right_metrics": "Comment choisir les bonnes métriques ? →",
     "webpagetest_analysis": "Analyse",
     "webpagetest_results": "Accéder aux résultats",
     "webpagetest_detailed_results": "Résultats détaillés (sur WebPageTest)",
@@ -39,7 +40,7 @@
     "webpagetest_date_label": "Date de l'audit",
     "webpagetest_dateComparator_audit": "Comparer plusieurs audits",
     "lighthouse_report": "Rapport Lighthouse",
-    "lighthouse_note": "Note: les valeurs données par Lighthouse peuvent différer des valeurs du Dashboard, car l'environnement de l'audit Lighthouse est différent. Les diagnostics et opportunités sont toujours valables, bien que les gains indiqués puissent différer des résultats réels."
+    "lighthouse_note": "Note : les valeurs données par Lighthouse peuvent différer des valeurs du Dashboard, car l'environnement de l'audit Lighthouse est différent. Les diagnostics et opportunités sont toujours valables, bien que les gains indiqués puissent différer des résultats réels."
   },
   "Front": {
     "WPTMetricFirstViewTTI": "TTI (First View)",
