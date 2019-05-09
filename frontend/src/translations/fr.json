@@ -1,5 +1,6 @@
 {
   "Header": {
+    "connect_link": "SE CONNECTER",
     "login_button": "MON COMPTE",
     "projects_button": "MES PROJETS",
     "last_audit_intro": "Dernier audit",

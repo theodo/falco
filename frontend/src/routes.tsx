@@ -29,7 +29,7 @@ export const routeDefinitions: Record<string, RouteDefinition> = {
     component: Landing,
     exact: true,
     strict: false,
-    isAuthenticated: true,
+    isAuthenticated: false,
   },
   login: {
     path: '/login',

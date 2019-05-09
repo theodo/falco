@@ -91,13 +91,21 @@ export const Header: React.FunctionComponent<Props> = ({ currentURL }) => {
     document.removeEventListener('click', hideProjectsMenu);
   };
 
+  const isLandingPage = currentURL === routeDefinitions.landing.path;
   const isLoginPage = currentURL === routeDefinitions.login.path;
+  const shouldDisplayConnectedUserHeader = !isLandingPage && !isLoginPage;
 
   return (
     <Style.HeaderContainer ref={headerContainerRef}>
       <Style.Header>
-        <Style.HeaderMenu>
-          <Style.LogoContainer to={routeDefinitions.projectsList.path}>
+        <Style.HeaderMenu isLandingPage={isLandingPage}>
+          <Style.LogoContainer
+            to={
+              shouldDisplayConnectedUserHeader
+                ? routeDefinitions.projectsList.path
+                : routeDefinitions.landing.path
+            }
+          >
             <Style.Logo>
               <Logo color={colorUsage.headerLogo} />
             </Style.Logo>
@@ -105,7 +113,7 @@ export const Header: React.FunctionComponent<Props> = ({ currentURL }) => {
           </Style.LogoContainer>
         </Style.HeaderMenu>
         <Style.HeaderContent>
-          {!isLoginPage && (
+          {shouldDisplayConnectedUserHeader ? (
             <Style.Nav>
               <Style.HeaderButtonsBlock>
                 <Style.HeaderButton
@@ -124,6 +132,10 @@ export const Header: React.FunctionComponent<Props> = ({ currentURL }) => {
                 </Style.HeaderButton>
               </Style.HeaderButtonsBlock>
             </Style.Nav>
+          ) : (
+            <Style.HeaderLink href={routeDefinitions.login.path}>
+              <FormattedMessage id="Header.connect_link" />
+            </Style.HeaderLink>
           )}
         </Style.HeaderContent>
       </Style.Header>

@@ -17,7 +17,7 @@ const Landing: React.FunctionComponent<Props> = props => {
   return (
     <React.Fragment>
       <Typography variant="subtitle1" gutterBottom>
-        TBD
+        Welcome to my landing page :)
       </Typography>
     </React.Fragment>
   );

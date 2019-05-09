@@ -13,6 +13,7 @@ const MEASUREMENT_UNIT = 'px';
  */
 const colorPalette = {
   primary500: '#3657FF',
+  grey100: '#FAFAFA',
   grey200: '#F7F8FA',
   grey300: '#E9EBED',
   grey400: 'rgba(151, 151, 151, 0.80)',
@@ -103,6 +104,9 @@ export const colorUsage = {
   popinErrorText: colorPalette.red500,
   popinErrorBackground: colorPalette.red200,
   pickRightMetricsLinkText: colorPalette.primary500,
+  menuLinkHover: colorPalette.primary500,
+  defaultContentBackground: colorPalette.white500,
+  landingPageGlobalBackground: colorPalette.grey100,
 };
 
 export const fontFamily = {
