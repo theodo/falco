@@ -4,9 +4,6 @@
     "projects_button": "MY PROJECTS",
     "last_audit_intro": "Last audit"
   },
-  "home": {
-    "welcome": "Welcome to Falco! Please click on “Login” to login, or “My Projects” to see your projects"
-  },
   "Login": {
     "login_error": "Those credentials seem incorrect.\nPlease try again."
   },

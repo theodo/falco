@@ -5,9 +5,6 @@
     "last_audit_intro": "Dernier audit",
     "logoff_link": "Se déconnecter"
   },
-  "home": {
-    "welcome": "Bienvenue sur Falco ! Veuillez cliquer sur “Se connecter” pour vous connecter, ou sur “Mes projets” pour voir vos projets"
-  },
   "Login": {
     "login_error": "Ces identifiants ne semblent pas corrects.\nVeuillez réessayer."
   },
