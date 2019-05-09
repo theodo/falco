@@ -9,8 +9,7 @@ const Style = {
   Container: styled.div`
     width: 100%;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: space-between;
   `,
 
