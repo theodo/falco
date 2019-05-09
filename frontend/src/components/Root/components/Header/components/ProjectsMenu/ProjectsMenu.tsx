@@ -1,4 +1,3 @@
-import CircularProgress from '@material-ui/core/CircularProgress';
 import dayjs from 'dayjs';
 import { Star } from 'icons';
 import React from 'react';
@@ -7,6 +6,8 @@ import { ProjectType } from 'redux/projects/types';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
 
+import ErrorMessage from 'components/ErrorMessage';
+import Loader from 'components/Loader';
 import Style from './ProjectsMenu.style';
 
 interface OwnProps {
@@ -88,9 +89,7 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
     if (null === projects) {
       return (
         <Style.Container position={position} right={right}>
-          <Style.LoaderContainer color={colorUsage.loader}>
-            <CircularProgress color={'inherit'} />
-          </Style.LoaderContainer>
+          <Loader minHeight={'200px'} />
         </Style.Container>
       );
     }
@@ -98,9 +97,9 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
     if (0 === projects.length) {
       return (
         <Style.Container position={position} right={right}>
-          <Style.Error>
+          <ErrorMessage>
             <FormattedMessage id="Projects.no_project_error" />
-          </Style.Error>
+          </ErrorMessage>
         </Style.Container>
       );
     }

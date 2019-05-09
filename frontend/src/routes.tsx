@@ -1,8 +1,8 @@
-import CircularProgress from '@material-ui/core/CircularProgress';
 import React, { lazy, Suspense } from 'react';
 import { Redirect, Route, Switch, withRouter } from 'react-router';
 import { RootState } from 'redux/types';
 
+import Loader from 'components/Loader';
 import { selectIsAuthenticated } from 'redux/login/selectors';
 
 const Audits = lazy(() => import('./pages/Audits'));
@@ -69,7 +69,7 @@ export const routeDefinitions: Record<string, RouteDefinition> = {
 };
 
 const routes: React.FunctionComponent<RouteProps> = props => (
-  <Suspense fallback={<CircularProgress color={'primary'} />}>
+  <Suspense fallback={<Loader />}>
     <Switch>
       {Object.keys(routeDefinitions).map(key => {
         if (routeDefinitions[key].isAuthenticated) {

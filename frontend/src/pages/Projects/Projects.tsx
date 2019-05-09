@@ -1,11 +1,11 @@
-import CircularProgress from '@material-ui/core/CircularProgress';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { Redirect } from 'react-router';
 import { ProjectType } from 'redux/projects/types';
 import { routeDefinitions } from 'routes';
-import { colorUsage } from 'stylesheet';
 
+import ErrorMessage from 'components/ErrorMessage';
+import Loader from 'components/Loader';
 import Style from './Projects.style';
 
 type Props = {
@@ -22,9 +22,7 @@ const Projects: React.FunctionComponent<Props> = props => {
   if (null === projects) {
     return (
       <Style.Container>
-        <Style.LoaderContainer color={colorUsage.loader}>
-          <CircularProgress color={'inherit'} />
-        </Style.LoaderContainer>
+        <Loader />
       </Style.Container>
     );
   }
@@ -32,9 +30,9 @@ const Projects: React.FunctionComponent<Props> = props => {
   if (0 === projects.length) {
     return (
       <Style.Container>
-        <Style.Error>
+        <ErrorMessage>
           <FormattedMessage id="Projects.no_project_error" />
-        </Style.Error>
+        </ErrorMessage>
       </Style.Container>
     );
   }

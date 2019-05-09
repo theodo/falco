@@ -7,15 +7,6 @@ const StyledAudits = {
     flex-direction: column;
   `,
 
-  Error: styled.div`
-    padding: ${getSpacing(3)};
-    color: ${colorUsage.popinErrorText};
-    background-color: ${colorUsage.popinErrorBackground};
-    border-radius: ${getSpacing(1)};
-    margin: ${getSpacing(8)};
-    white-space: pre-wrap;
-  `,
-
   PageTitleBlock: styled.div`
     margin-bottom: ${getSpacing(4)};
     width: 75%;
@@ -32,17 +23,6 @@ const StyledAudits = {
     font-size: ${fontSize.h1Text};
     font-weight: ${fontWeight.h1Text};
     text-align: center;
-  `,
-
-  LoaderContainer: styled.div`
-    width: 100%;
-    min-height: 400px;
-    height: 100%;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: ${props => props.color};
   `,
 
   Title: styled.div`

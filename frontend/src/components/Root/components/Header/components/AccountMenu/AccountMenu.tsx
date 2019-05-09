@@ -1,11 +1,10 @@
-import CircularProgress from '@material-ui/core/CircularProgress';
 import React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
 import { userState } from 'redux/user/reducer';
 import { routeDefinitions } from 'routes';
-import { colorUsage } from 'stylesheet';
 
+import Loader from 'components/Loader';
 import Style from './AccountMenu.style';
 
 interface OwnProps {
@@ -52,9 +51,7 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
     if (null === user) {
       return (
         <Style.Container position={position} right={right}>
-          <Style.LoaderContainer color={colorUsage.loader}>
-            <CircularProgress color={'inherit'} />
-          </Style.LoaderContainer>
+          <Loader minHeight={'200px'} />
         </Style.Container>
       );
     }
