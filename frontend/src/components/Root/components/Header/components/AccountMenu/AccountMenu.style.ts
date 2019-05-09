@@ -20,16 +20,6 @@ const StyledAccountMenu = {
     color: ${colorUsage.accountMenuText};
     font-family: ${fontFamily.mainSans};
   `,
-  LoaderContainer: styled.div`
-    width: 100%;
-    min-height: 200px;
-    height: 100%;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: ${props => props.color};
-  `,
 
   UserInfosBlockContainer: styled.div`
     display: flex;

@@ -1,8 +1,9 @@
-import { CircularProgress } from '@material-ui/core';
-import MetricGraph from 'components/MetricGraph';
 import * as React from 'react';
+
+import Loader from 'components/Loader';
+import MetricGraph from 'components/MetricGraph';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
-import { colorUsage, getSpacing } from 'stylesheet';
+import { getSpacing } from 'stylesheet';
 import Style from './GraphsBlock.style';
 
 export interface OwnProps {
@@ -21,9 +22,7 @@ const GraphsBlock: React.FunctionComponent<Props> = props => {
   if (0 === auditResults.length) {
     return (
       <Style.Container margin={blockMargin}>
-        <Style.LoaderContainer color={colorUsage.loader}>
-          <CircularProgress color={'inherit'} />
-        </Style.LoaderContainer>
+        <Loader />
       </Style.Container>
     );
   }

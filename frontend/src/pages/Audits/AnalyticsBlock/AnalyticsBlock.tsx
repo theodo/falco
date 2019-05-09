@@ -1,10 +1,11 @@
-import { CircularProgress } from '@material-ui/core';
 import React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 
+import ErrorMessage from 'components/ErrorMessage';
+import Loader from 'components/Loader';
 import { AuditResultType } from 'redux/auditResults/types';
 import { getWPTAuditId } from 'services/utils';
-import { colorUsage, getSpacing } from 'stylesheet';
+import { getSpacing } from 'stylesheet';
 import Style from './AnalyticsBlock.style';
 import LighthouseBlock from './LighthouseBlock';
 import WebPageTestBlock from './WebPageTestBlock';
@@ -24,9 +25,7 @@ const AnalyticsBlock: React.FunctionComponent<Props & InjectedIntlProps> = props
   if (null === auditResults) {
     return (
       <Style.Container margin={blockMargin}>
-        <Style.LoaderContainer color={colorUsage.loader}>
-          <CircularProgress color={'inherit'} />
-        </Style.LoaderContainer>
+        <Loader />
       </Style.Container>
     );
   }
@@ -34,9 +33,9 @@ const AnalyticsBlock: React.FunctionComponent<Props & InjectedIntlProps> = props
   if (0 === auditResults.length) {
     return (
       <Style.Container margin={blockMargin}>
-        <Style.Error>
+        <ErrorMessage>
           <FormattedMessage id="Audits.no_audit" />
-        </Style.Error>
+        </ErrorMessage>
       </Style.Container>
     );
   }

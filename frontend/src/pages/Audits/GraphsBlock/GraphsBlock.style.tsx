@@ -21,16 +21,5 @@ const Style = {
     margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
     border: 1px solid ${colorUsage.graphBorder};
   `,
-
-  LoaderContainer: styled.div`
-    width: 100%;
-    min-height: 400px;
-    height: 100%;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: ${props => props.color};
-  `,
 };
 export default Style;
