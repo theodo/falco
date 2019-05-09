@@ -57,7 +57,7 @@ const MetricGraph: React.FunctionComponent<Props> = props => {
 
   return (
     <ResponsiveContainer width={'100%'} height={'100%'}>
-      <AreaChart data={auditResults}>
+      <AreaChart data={auditResults || undefined}>
         <defs>
           <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor={colorUsage.graphLine} stopOpacity={0.8} />
