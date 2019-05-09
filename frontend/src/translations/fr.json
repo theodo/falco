@@ -37,7 +37,9 @@
     "webpagetest_select_date": "Choisir la date de l'audit",
     "webpagetest_select_dates": "Choisir les dates des audits",
     "webpagetest_date_label": "Date de l'audit",
-    "webpagetest_dateComparator_audit": "Comparer plusieurs audits"
+    "webpagetest_dateComparator_audit": "Comparer plusieurs audits",
+    "lighthouse_report": "Rapport Lighthouse",
+    "lighthouse_note": "Note: les valeurs données par Lighthouse peuvent différer des valeurs du Dashboard, car l'environnement de l'audit Lighthouse est différent. Les diagnostics et opportunités sont toujours valables, bien que les gains indiqués puissent différer des résultats réels."
   },
   "Front": {
     "WPTMetricFirstViewTTI": "TTI (First View)",
@@ -57,13 +59,6 @@
     "WPTMetricLighthousePerformance": "Lighthouse Performance Score"
   },
   "components": {
-    "AuditResult": {
-      "ofdate": "du {date}",
-      "number": "{number}",
-      "percent": "{percent} %",
-      "time": "{time} sec.",
-      "seeOnWPT": "Voir sur WebPageTest"
-    },
     "MetricGraph": {
       "tooltipDate": "Le DD/MM à HH:mm"
     }

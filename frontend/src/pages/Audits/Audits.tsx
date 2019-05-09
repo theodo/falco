@@ -12,9 +12,9 @@ import { PageType } from 'redux/pages/types';
 import { ScriptType } from 'redux/scripts/types';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
+import AnalyticsBlock from './AnalyticsBlock';
 import Style from './Audits.style';
 import GraphsBlock from './GraphsBlock';
-import WebPageTestBlock from './WebPageTestBlock';
 
 interface ScriptStepOption {
   value: string;
@@ -202,7 +202,7 @@ export const Audits: React.FunctionComponent<Props> = ({
       <Style.Title>
         <FormattedMessage id="Audits.webpagetest_analysis" />
       </Style.Title>
-      <WebPageTestBlock
+      <AnalyticsBlock
         blockMargin={`0 0 ${getSpacing(8)} 0`}
         auditResultIds={sortedAuditResultsIds}
       />
