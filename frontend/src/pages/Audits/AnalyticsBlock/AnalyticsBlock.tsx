@@ -11,7 +11,7 @@ import LighthouseBlock from './LighthouseBlock';
 import WebPageTestBlock from './WebPageTestBlock';
 
 export interface OwnProps {
-  auditResultIds: string[];
+  auditResultIds: string[] | null;
   blockMargin: string;
 }
 
@@ -19,10 +19,10 @@ interface Props extends OwnProps {
   auditResults: AuditResultType[] | null;
 }
 
-const AnalyticsBlock: React.FunctionComponent<Props & InjectedIntlProps> = props => {
-  const { auditResults, blockMargin, intl } = props;
+export const AnalyticsBlock: React.FunctionComponent<Props & InjectedIntlProps> = props => {
+  const { auditResults, auditResultIds, blockMargin } = props;
 
-  if (null === auditResults) {
+  if (!auditResultIds || !auditResults) {
     return (
       <Style.Container margin={blockMargin}>
         <Loader />
@@ -30,7 +30,7 @@ const AnalyticsBlock: React.FunctionComponent<Props & InjectedIntlProps> = props
     );
   }
 
-  if (0 === auditResults.length) {
+  if (0 === auditResultIds.length || 0 === auditResults.length) {
     return (
       <Style.Container margin={blockMargin}>
         <ErrorMessage>
@@ -53,5 +53,3 @@ const AnalyticsBlock: React.FunctionComponent<Props & InjectedIntlProps> = props
     </Style.Container>
   );
 };
-
-export default AnalyticsBlock;

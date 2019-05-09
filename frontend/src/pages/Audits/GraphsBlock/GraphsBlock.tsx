@@ -1,3 +1,4 @@
+import ErrorMessage from 'components/ErrorMessage';
 import * as React from 'react';
 
 import Loader from 'components/Loader';
@@ -8,7 +9,7 @@ import { getSpacing } from 'stylesheet';
 import Style from './GraphsBlock.style';
 
 export interface OwnProps {
-  auditResultIds: string[];
+  auditResultIds: string[] | null;
   metrics: MetricType[];
   blockMargin: string;
 }
@@ -17,13 +18,23 @@ interface Props extends OwnProps {
   auditResults: AuditResultsAsGraphData;
 }
 
-const GraphsBlock: React.FunctionComponent<Props> = props => {
-  const { auditResults, metrics, blockMargin } = props;
+export const GraphsBlock: React.FunctionComponent<Props> = props => {
+  const { auditResults, auditResultIds, metrics, blockMargin } = props;
 
-  if (0 === auditResults.length) {
+  if (!auditResultIds || !auditResults) {
     return (
       <Style.Container margin={blockMargin}>
         <Loader />
+      </Style.Container>
+    );
+  }
+
+  if (0 === auditResultIds.length || 0 === auditResults.length) {
+    return (
+      <Style.Container margin={blockMargin}>
+        <ErrorMessage>
+          <FormattedMessage id="Audits.no_audit" />
+        </ErrorMessage>
       </Style.Container>
     );
   }
@@ -49,5 +60,3 @@ const GraphsBlock: React.FunctionComponent<Props> = props => {
     </Style.Container>
   );
 };
-
-export default GraphsBlock;

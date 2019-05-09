@@ -72,11 +72,32 @@ export const Audits: React.FunctionComponent<Props> = ({
     [pageOrScriptId, page && page.uuid, script && script.uuid],
   );
 
-  if (!project || (!project.pages && !project.scripts)) {
+  if (project === undefined) {
+    return (
+      <Style.Container>
+        <Loader />
+      </Style.Container>
+    );
+  }
+
+  if (project === null) {
     return (
       <Style.Container>
         <ErrorMessage>
-          <FormattedMessage id="Audits.no_page_or_script" />
+          <FormattedMessage id="Project.project_error" />
+        </ErrorMessage>
+      </Style.Container>
+    );
+  }
+
+  if (
+    (!project.pages || 0 === project.pages.length) &&
+    (!project.scripts || 0 === project.scripts.length)
+  ) {
+    return (
+      <Style.Container>
+        <ErrorMessage>
+          <FormattedMessage id="Project.no_page_or_script_error" />
         </ErrorMessage>
       </Style.Container>
     );
@@ -85,7 +106,9 @@ export const Audits: React.FunctionComponent<Props> = ({
   if (!page && !script) {
     return (
       <Style.Container>
-        <Loader />
+        <ErrorMessage>
+          <FormattedMessage id="Audits.page_or_script_unavailable" />
+        </ErrorMessage>
       </Style.Container>
     );
   }
@@ -144,7 +167,7 @@ export const Audits: React.FunctionComponent<Props> = ({
       scriptStepId &&
       sortedScriptAuditResultsIds[scriptStepId]
     ? sortedScriptAuditResultsIds[scriptStepId]
-    : [];
+    : null;
 
   const scriptStepSelectOptions = Object.keys(scriptSteps).map(scriptStepKey => ({
     value: scriptStepKey,

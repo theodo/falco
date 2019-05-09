@@ -6,7 +6,7 @@ export const selectAuditResultsAsGraphData = (
   auditResultIds: string[],
   metrics: MetricType[],
 ): AuditResultsAsGraphData => {
-  let auditResultsAsGraphDataPerMetric: AuditResultsAsGraphData = [];
+  let auditResultsAsGraphDataPerMetric: AuditResultsAsGraphData = null;
 
   if (!auditResultIds || !metrics) {
     return auditResultsAsGraphDataPerMetric;
