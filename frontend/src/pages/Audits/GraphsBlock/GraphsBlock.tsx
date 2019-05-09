@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import Loader from 'components/Loader';
 import MetricGraph from 'components/MetricGraph';
+import { FormattedMessage } from 'react-intl';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
 import { getSpacing } from 'stylesheet';
 import Style from './GraphsBlock.style';
@@ -36,6 +37,15 @@ const GraphsBlock: React.FunctionComponent<Props> = props => {
           </Style.GraphContainer>
         );
       })}
+      <Style.GraphSettingsContainer>
+        <Style.GraphInfoLink
+          href="https://twitter.com/Phacks/status/1110161414025555968"
+          target="_blank"
+          margin={`0 0 0 ${getSpacing(8)}`}
+        >
+          <FormattedMessage id="Audits.pick_right_metrics" />
+        </Style.GraphInfoLink>
+      </Style.GraphSettingsContainer>
     </Style.Container>
   );
 };
