@@ -1,13 +1,5 @@
 import styled from 'styled-components';
-import {
-  colorUsage,
-  fontFamily,
-  fontSize,
-  fontStyle,
-  fontWeight,
-  getSpacing,
-  lineHeight,
-} from 'stylesheet';
+import { colorUsage, fontFamily, fontSize, fontStyle, fontWeight, lineHeight } from 'stylesheet';
 
 interface ItemWithMarginProps {
   margin?: string;

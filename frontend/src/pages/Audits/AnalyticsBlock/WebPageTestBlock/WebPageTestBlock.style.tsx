@@ -13,33 +13,13 @@ const Style = {
     flex-direction: column;
   `,
 
-  LoaderContainer: styled.div`
-    width: 100%;
-    min-height: 400px;
-    height: 100%;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: ${props => props.color};
-  `,
-
-  Error: styled.div`
-    padding: ${getSpacing(3)};
-    color: ${colorUsage.popinErrorText};
-    background-color: ${colorUsage.popinErrorBackground};
-    border-radius: ${getSpacing(1)};
-    margin: ${getSpacing(8)};
-    white-space: pre-wrap;
-  `,
-
   SubTitle: styled.div`
+    margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
     line-height: ${lineHeight.h3Text};
     color: ${colorUsage.h3Text};
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.h3Text};
     font-weight: ${fontWeight.h3Text};
-    margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
   `,
 
   Form: styled.div`
@@ -101,6 +81,7 @@ const Style = {
     align-items: center;
     justify-content: center;
   `,
+
   DateSelectorContainer: styled.div`
     margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
     display: flex;

@@ -1,50 +1,23 @@
-import { CircularProgress } from '@material-ui/core';
-import React, { ChangeEvent, useState } from 'react';
+import Select from 'components/Select';
+import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { ValueType } from 'react-select/lib/types';
-
-import Select from 'components/Select';
 import { AuditResultType } from 'redux/auditResults/types';
-import { colorUsage, getSpacing } from 'stylesheet';
-import LighthouseBlock from './LighthouseBlock';
-import Style from './WebPageTest.style';
+import { getSpacing } from 'stylesheet';
+import Style from './WebPageTestBlock.style';
 
 export interface OwnProps {
-  auditResultIds: string[];
+  auditResults: AuditResultType[];
   blockMargin: string;
 }
 
-interface Props extends OwnProps {
-  auditResults: AuditResultType[] | null;
-}
-
-const WebPageTestBlock: React.FunctionComponent<Props & InjectedIntlProps> = props => {
+const WebPageTestBlock: React.FunctionComponent<OwnProps & InjectedIntlProps> = props => {
   const { auditResults, blockMargin, intl } = props;
 
-  if (null === auditResults) {
-    return (
-      <Style.Container margin={blockMargin}>
-        <Style.LoaderContainer color={colorUsage.loader}>
-          <CircularProgress color={'inherit'} />
-        </Style.LoaderContainer>
-      </Style.Container>
-    );
-  }
-
-  if (0 === auditResults.length) {
-    return (
-      <Style.Container margin={blockMargin}>
-        <Style.Error>
-          <FormattedMessage id="Audits.no_audit" />
-        </Style.Error>
-      </Style.Container>
-    );
-  }
-
-  const [selectedAudit, setSelectedAudit] = useState(auditResults[0]);
-  const [auditToCompare, setAuditToCompare] = useState(auditResults[1]);
-  const [dateSelectorDisplayed, displayDateSelector] = useState(false);
-  const [dateComparatorDisplayed, displayDateComparator] = useState(false);
+  const [selectedAudit, setSelectedAudit] = React.useState(auditResults[0]);
+  const [auditToCompare, setAuditToCompare] = React.useState(auditResults[1]);
+  const [dateSelectorDisplayed, displayDateSelector] = React.useState(false);
+  const [dateComparatorDisplayed, displayDateComparator] = React.useState(false);
 
   const getAuditId = (audit: AuditResultType) => {
     const auditUrl = new URL(audit.WPTResultsJsonUrl);
@@ -62,13 +35,7 @@ const WebPageTestBlock: React.FunctionComponent<Props & InjectedIntlProps> = pro
     return `${baseUrl}${selectedAuditId},${auditToCompareId}`;
   };
 
-  const getLighthouseUrl = () => {
-    const baseUrl = 'https://www.webpagetest.org/lighthouse.php?test=';
-    const auditId = getAuditId(auditResults[0]);
-    return `${baseUrl}${auditId}`;
-  };
-
-  const handleRadioButtonChange = (e: ChangeEvent): void => {
+  const handleRadioButtonChange = (e: React.ChangeEvent): void => {
     switch ((e.target as HTMLInputElement).value) {
       case 'latest':
         displayDateSelector(false);
@@ -210,7 +177,6 @@ const WebPageTestBlock: React.FunctionComponent<Props & InjectedIntlProps> = pro
       <Style.WebPageTestLink href={getWebPageTestUrl()} target={'_blank'}>
         <FormattedMessage id="Audits.webpagetest_results" />
       </Style.WebPageTestLink>
-      <LighthouseBlock lighthouseUrl={getLighthouseUrl()} />
     </Style.Container>
   );
 };
