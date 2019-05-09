@@ -16,6 +16,8 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps & InjectedIntlProps> = 
   const { auditResults, blockMargin, intl } = props;
 
   const [selectedAudit, setSelectedAudit] = React.useState(auditResults[0]);
+  React.useEffect(() => setSelectedAudit(auditResults[0]), [auditResults]);
+
   const [auditToCompare, setAuditToCompare] = React.useState(auditResults[1]);
   const [dateSelectorDisplayed, displayDateSelector] = React.useState(false);
   const [dateComparatorDisplayed, displayDateComparator] = React.useState(false);
