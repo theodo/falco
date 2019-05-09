@@ -60,17 +60,17 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
     }
     return (
       <Style.Container position={position} right={right}>
-        <Style.UserInfosBlock>
-          <Style.UserName>
-            {capitalize(user.firstName)} {capitalize(user.lastName)}
-          </Style.UserName>
-          <Style.UserEmail>{user.emailAddress.toLowerCase()}</Style.UserEmail>
-        </Style.UserInfosBlock>
+        <Style.UserInfosBlockContainer>
+          <Style.UserInfosBlock>
+            <Style.UserName>
+              {capitalize(user.firstName)} {capitalize(user.lastName)}
+            </Style.UserName>
+            <Style.UserEmail>{user.emailAddress.toLowerCase()}</Style.UserEmail>
+          </Style.UserInfosBlock>
+        </Style.UserInfosBlockContainer>
         <Style.UserActionsBlock>
-          <Style.UserActionItem margin={'0'}>
-            <Style.UserActionLink onClick={logoutUser}>
-              <FormattedMessage id="Header.logoff_link" />
-            </Style.UserActionLink>
+          <Style.UserActionItem margin={'0'} onClick={logoutUser}>
+            <FormattedMessage id="Header.logoff_link" />
           </Style.UserActionItem>
         </Style.UserActionsBlock>
       </Style.Container>

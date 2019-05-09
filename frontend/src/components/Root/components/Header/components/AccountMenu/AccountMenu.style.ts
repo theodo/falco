@@ -12,12 +12,11 @@ interface AccountMenuContainerProps {
 
 const StyledAccountMenu = {
   Container: styled.div`
-    width: 360px;
+    width: 460px;
     background-color: ${colorUsage.accountMenuBackground};
     box-shadow: 0 0 8px 4px ${colorUsage.accountMenuShadow};
     position: ${(props: AccountMenuContainerProps) => (props.position ? props.position : 'static')};
     right: ${(props: AccountMenuContainerProps) => (props.right ? props.right : 'auto')};
-    padding: 0 ${getSpacing(10)};
     color: ${colorUsage.accountMenuText};
     font-family: ${fontFamily.mainSans};
   `,
@@ -30,6 +29,12 @@ const StyledAccountMenu = {
     align-items: center;
     justify-content: center;
     color: ${props => props.color};
+  `,
+
+  UserInfosBlockContainer: styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 0 ${getSpacing(10)};
   `,
 
   UserInfosBlock: styled.div`
@@ -51,16 +56,13 @@ const StyledAccountMenu = {
   UserActionsBlock: styled.div`
     display: flex;
     flex-direction: column;
-    padding: ${getSpacing(3)} 0;
+    padding: ${getSpacing(2)} 0;
   `,
 
   UserActionItem: styled.div`
-    display: flex;
     margin: ${(props: ItemWithMarginProps) =>
       props.margin ? props.margin : `0 0 ${getSpacing(3)} 0`};
-  `,
-
-  UserActionLink: styled.div`
+    padding: ${getSpacing(2)} ${getSpacing(10)};
     cursor: pointer;
     font-size: ${fontSize.introductionText};
     line-height: ${lineHeight.introductionText};
@@ -68,6 +70,7 @@ const StyledAccountMenu = {
 
     &:hover {
       color: ${colorUsage.accountMenuActionItemHoverText};
+      font-weight: ${fontWeight.accountMenuActionItemHoverText};
     }
   `,
 };

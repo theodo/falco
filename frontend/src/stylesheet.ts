@@ -166,6 +166,7 @@ export const fontWeight = {
   linkText: 'bold',
   webPageTestLink: 'bold',
   scriptStepSelectLabelText: '500',
+  accountMenuActionItemHoverText: 'bold',
 };
 
 export const fontStyle = {
