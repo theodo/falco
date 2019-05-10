@@ -30,7 +30,8 @@ const Root: React.FunctionComponent<Props> = ({ children, location }) => {
 
   return (
     <IntlProvider locale="fr" messages={locales.fr}>
-      <Style.PageContainer isLandingPage={isLandingPage}>
+      <Style.PageContainer>
+        <Style.PageBackground isLandingPage={isLandingPage} />
         <Style.Page>
           <Header />
           <Style.Body>
