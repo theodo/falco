@@ -22,10 +22,10 @@ const Landing: React.FunctionComponent<Props> = props => {
         <Style.FirstBlockContainer>
           <Style.FirstBlockColumn>
             <Style.Title>
-              <FormattedMessage id="home.first_block.title" />
+              <FormattedMessage id="Landing.first_block.title" />
             </Style.Title>
             <Style.Introduction>
-              <FormattedMessage id="home.first_block.introduction" />
+              <FormattedMessage id="Landing.first_block.introduction" />
             </Style.Introduction>
           </Style.FirstBlockColumn>
           <Style.FirstBlockColumn>
