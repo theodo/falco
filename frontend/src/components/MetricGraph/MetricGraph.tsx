@@ -22,7 +22,7 @@ const MetricGraph: React.FunctionComponent<Props> = props => {
     const { payload } = legendProps;
     return payload.map((entry, index) => (
       <Style.Legend margin={`0 0 ${getSpacing(2)} ${getSpacing(4)}`} key={index}>
-        {intl.formatMessage({ id: `Front.${entry.value}` })}
+        {intl.formatMessage({ id: `Metrics.${entry.value}.name` })}
       </Style.Legend>
     ));
   };

@@ -47,22 +47,52 @@
     "lighthouse_report": "Lighthouse Report",
     "lighthouse_note": "Note: data provided by Lighthouse may differ from the Dashboard data. This is due to a different audit environment. Diagnostics and opportunities are still relevant, even though the indicated metric improvements may differ from the real results."
   },
-  "Front": {
-    "WPTMetricFirstViewTTI": "TTI (First View)",
-    "WPTMetricRepeatViewTTI": "TTI (Repeat View)",
-    "WPTMetricFirstViewSpeedIndex": "Speed Index (First View)",
-    "WPTMetricRepeatViewSpeedIndex": "Speed Index (Repeat View)",
-    "WPTMetricFirstViewFirstPaint": "First Paint (First View)",
-    "WPTMetricRepeatViewFirstPaint": "First Paint (Repeat View)",
-    "WPTMetricFirstViewFirstMeaningfulPaint": "First Meaningful Paint (First View)",
-    "WPTMetricRepeatViewFirstMeaningfulPaint": "First Meaningful Paint (Repeat View)",
-    "WPTMetricFirstViewLoadTime": "Load Time (First View)",
-    "WPTMetricRepeatViewLoadTime": "Load Time (Repeat View)",
-    "WPTMetricFirstViewFirstContentfulPaint": "First Contentful Paint (First View)",
-    "WPTMetricRepeatViewFirstContentfulPaint": "First Contentful Paint (Repeat View)",
-    "WPTMetricFirstViewTimeToFirstByte": "Time to First Byte (First View)",
-    "WPTMetricRepeatViewTimeToFirstByte": "Time to First Byte (Repeat View)",
-    "WPTMetricLighthousePerformance": "Lighthouse Performance Score"
+  "Metrics": {
+    "WPTMetricFirstViewTTI": {
+      "name": "TTI (First View)"
+    },
+    "WPTMetricRepeatViewTTI": {
+      "name": "TTI (Repeat View)"
+    },
+    "WPTMetricFirstViewSpeedIndex": {
+      "name": "Speed Index (First View)"
+    },
+    "WPTMetricRepeatViewSpeedIndex": {
+      "name": "Speed Index (Repeat View)"
+    },
+    "WPTMetricFirstViewFirstPaint": {
+      "name": "First Paint (First View)"
+    },
+    "WPTMetricRepeatViewFirstPaint": {
+      "name": "First Paint (Repeat View)"
+    },
+    "WPTMetricFirstViewFirstMeaningfulPaint": {
+      "name": "First Meaningful Paint (First View)"
+    },
+    "WPTMetricRepeatViewFirstMeaningfulPaint": {
+      "name": "First Meaningful Paint (Repeat View)"
+    },
+    "WPTMetricFirstViewLoadTime": {
+      "name": "Load Time (First View)"
+    },
+    "WPTMetricRepeatViewLoadTime": {
+      "name": "Load Time (Repeat View)"
+    },
+    "WPTMetricFirstViewFirstContentfulPaint": {
+      "name": "First Contentful Paint (First View)"
+    },
+    "WPTMetricRepeatViewFirstContentfulPaint": {
+      "name": "First Contentful Paint (Repeat View)"
+    },
+    "WPTMetricFirstViewTimeToFirstByte": {
+      "name": "Time to First Byte (First View)"
+    },
+    "WPTMetricRepeatViewTimeToFirstByte": {
+      "name": "Time to First Byte (Repeat View)"
+    },
+    "WPTMetricLighthousePerformance": {
+      "name": "Lighthouse Performance Score"
+    }
   },
   "components": {
     "MetricGraph": {
