@@ -44,7 +44,7 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
 
   const logoutUser = () => {
     logoutUserRequest();
-    history.push(routeDefinitions.login.path);
+    history.push(routeDefinitions.landing.path);
   };
 
   if (isVisible) {

@@ -2,6 +2,10 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { colorUsage, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
+interface Props {
+  isLandingPage: boolean;
+}
+
 const StyledHeader = {
   HeaderContainer: styled.div`
     position: fixed;
@@ -18,7 +22,7 @@ const StyledHeader = {
     display: flex;
     padding-left: ${getSpacing(22)};
     width: 380px;
-    background-color: ${colorUsage.menuBackground};
+    background-color: ${(props: Props) => !props.isLandingPage && colorUsage.menuBackground};
   `,
   LogoContainer: styled(Link)`
     display: flex;
@@ -85,6 +89,20 @@ const StyledHeader = {
   `,
   MenusContainer: styled.div`
     display: flex;
+  `,
+
+  HeaderLink: styled.a`
+    text-decoration: none;
+    color: ${colorUsage.menuLink};
+    line-height: ${lineHeight.menuLink};
+    font-weight: ${fontWeight.menuLink};
+    font-size: ${fontSize.menuLink};
+    user-select: none;
+    cursor: pointer;
+
+    &:hover {
+      color: ${colorUsage.menuLinkHover};
+    }
   `,
 };
 

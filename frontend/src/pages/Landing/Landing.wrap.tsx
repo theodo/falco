@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { selectIsAuthenticated } from 'redux/login';
-import { RootState } from 'redux/types';
-import Home from './Home';
+import { RootStateWithRouter } from 'redux/types';
+import Landing from './Landing';
 
-const mapStateToProps = (state: RootState) => ({
+const mapStateToProps = (state: RootStateWithRouter) => ({
   isUserAuthenticated: selectIsAuthenticated(state),
 });
 
@@ -14,4 +14,4 @@ function mapDispatchToProps() {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Home);
+)(Landing);

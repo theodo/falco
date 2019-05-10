@@ -24,17 +24,21 @@ interface Props extends RouteComponentProps<any> {
 }
 
 const Root: React.FunctionComponent<Props> = ({ children, location }) => {
+  const isLandingPage = location.pathname === routeDefinitions.landing.path;
   const isLoginPage = location.pathname === routeDefinitions.login.path;
+  const shouldDisplayMenu = !isLandingPage && !isLoginPage;
 
   return (
     <IntlProvider locale="fr" messages={locales.fr}>
-      <Style.Page>
-        <Header />
-        <Style.Body>
-          {!isLoginPage && <Menu />}
-          <Style.Content isLoginPage={isLoginPage}>{children}</Style.Content>
-        </Style.Body>
-      </Style.Page>
+      <Style.PageContainer isLandingPage={isLandingPage}>
+        <Style.Page>
+          <Header />
+          <Style.Body>
+            {shouldDisplayMenu && <Menu />}
+            <Style.Content shouldDisplayMenu={shouldDisplayMenu}>{children}</Style.Content>
+          </Style.Body>
+        </Style.Page>
+      </Style.PageContainer>
     </IntlProvider>
   );
 };

@@ -6,7 +6,7 @@ import Loader from 'components/Loader';
 import { selectIsAuthenticated } from 'redux/login/selectors';
 
 const Audits = lazy(() => import('./pages/Audits'));
-const Home = lazy(() => import('./pages/Home'));
+const Landing = lazy(() => import('./pages/Landing'));
 const Login = lazy(() => import('./pages/Login'));
 const Project = lazy(() => import('./pages/Project'));
 const Projects = lazy(() => import('./pages/Projects'));
@@ -24,12 +24,12 @@ interface RouteProps {
 }
 
 export const routeDefinitions: Record<string, RouteDefinition> = {
-  home: {
+  landing: {
     path: '/',
-    component: Home,
+    component: Landing,
     exact: true,
     strict: false,
-    isAuthenticated: true,
+    isAuthenticated: false,
   },
   login: {
     path: '/login',

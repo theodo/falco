@@ -1,11 +1,10 @@
 {
   "Header": {
+    "connect_link": "LOG IN",
     "login_button": "MY ACCOUNT",
     "projects_button": "MY PROJECTS",
-    "last_audit_intro": "Last audit"
-  },
-  "home": {
-    "welcome": "Welcome to Falco! Please click on “Login” to login, or “My Projects” to see your projects"
+    "last_audit_intro": "Last audit",
+    "logoff_link": "Log off"
   },
   "Login": {
     "login_error": "Those credentials seem incorrect.\nPlease try again."
