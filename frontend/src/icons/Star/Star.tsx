@@ -6,7 +6,7 @@ interface Props {
   height?: string;
 }
 
-export default class Logo extends React.Component<Props> {
+export default class Star extends React.Component<Props> {
   render() {
     return (
       <svg

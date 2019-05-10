@@ -109,6 +109,10 @@ export const colorUsage = {
   defaultContentBackground: colorPalette.white500,
   landingPageGlobalBackground: colorPalette.grey100,
   landingImageShadowBox: colorPalette.black100,
+  metricInformationIcon: colorPalette.primary500,
+  metricInformationTooltipBackground: colorPalette.grey300,
+  metricInformationTooltipShadowBox: colorPalette.black200,
+  metricInformationTooltipText: colorPalette.grey800,
 };
 
 export const fontFamily = {
@@ -135,6 +139,7 @@ export const fontSize = {
   graphText: '14px',
   scriptStepSelectLabelText: '16px',
   inputSelectText: '14px',
+  metricInformationTooltip: '12px',
 };
 
 export const lineHeight = {
@@ -156,6 +161,7 @@ export const lineHeight = {
   webPageTestLink: '18px',
   scriptStepSelectLabelText: '20px',
   inputSelectText: '18px',
+  metricInformationTooltip: '16px',
 };
 
 export const fontWeight = {
@@ -174,6 +180,7 @@ export const fontWeight = {
   webPageTestLink: 'bold',
   scriptStepSelectLabelText: '500',
   accountMenuActionItemHoverText: 'bold',
+  metricInformationTooltip: '500',
 };
 
 export const fontStyle = {

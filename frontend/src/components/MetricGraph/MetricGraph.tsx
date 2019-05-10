@@ -1,7 +1,8 @@
-import * as React from 'react';
+import React, { MouseEvent } from 'react';
 
 import dayjs from 'dayjs';
-import { InjectedIntlProps } from 'react-intl';
+import { Information } from 'icons';
+import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { Area, AreaChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { METRICS } from 'redux/auditResults/constants';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
@@ -17,12 +18,54 @@ type Props = OwnProps & InjectedIntlProps;
 
 const MetricGraph: React.FunctionComponent<Props> = props => {
   const { auditResults, intl, metrics } = props;
+  const [isMetricInfoTooltipVisible, setIsMetricInfoTooltipVisible] = React.useState(false);
+  const [metricInfoTooltipLeft, setMetricInfoTooltipLeft] = React.useState('auto');
+  const [metricInfoTooltipTop, setMetricInfoTooltipTop] = React.useState('auto');
+
+  const legendRef = React.useRef<HTMLDivElement>(null);
+  const metricInfoIconContainerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(
+    () => {
+      if (legendRef.current && metricInfoIconContainerRef.current) {
+        setMetricInfoTooltipLeft(
+          Math.floor(
+            metricInfoIconContainerRef.current.getBoundingClientRect().right -
+              legendRef.current.getBoundingClientRect().left +
+              30,
+          ) + 'px',
+        );
+        setMetricInfoTooltipTop(
+          Math.floor(
+            metricInfoIconContainerRef.current.getBoundingClientRect().top -
+              legendRef.current.getBoundingClientRect().top -
+              5,
+          ) + 'px',
+        );
+      }
+    },
+    [legendRef.current, metricInfoIconContainerRef.current],
+  );
 
   const renderLegend = (legendProps: { payload: Array<{ value: MetricType }> }) => {
     const { payload } = legendProps;
     return payload.map((entry, index) => (
-      <Style.Legend margin={`0 0 ${getSpacing(2)} ${getSpacing(4)}`} key={index}>
-        {intl.formatMessage({ id: `Front.${entry.value}` })}
+      <Style.Legend margin={`0 0 ${getSpacing(2)} ${getSpacing(4)}`} key={index} ref={legendRef}>
+        <Style.LegendTitle>
+          {intl.formatMessage({ id: `Metrics.${entry.value}.name` })}
+        </Style.LegendTitle>
+        <Style.MetricInfoIconContainer
+          margin={`0 0 0 ${getSpacing(2)}`}
+          onClick={toggleMetricInfoTooltipVisibility}
+          ref={metricInfoIconContainerRef}
+        >
+          <Information color={colorUsage.metricInformationIcon} />
+        </Style.MetricInfoIconContainer>
+        {isMetricInfoTooltipVisible && (
+          <Style.MetricInfoTooltip left={metricInfoTooltipLeft} top={metricInfoTooltipTop}>
+            <FormattedMessage id={`Metrics.${entry.value}.description`} />
+          </Style.MetricInfoTooltip>
+        )}
       </Style.Legend>
     ));
   };
@@ -53,6 +96,25 @@ const MetricGraph: React.FunctionComponent<Props> = props => {
         </Style.Tooltip>
       );
     });
+  };
+
+  const toggleMetricInfoTooltipVisibility = (event: MouseEvent) => {
+    event.preventDefault();
+    if (isMetricInfoTooltipVisible) {
+      hideMetricInfoTooltip();
+    } else {
+      showMetricInfoTooltip();
+    }
+  };
+
+  const showMetricInfoTooltip = () => {
+    setIsMetricInfoTooltipVisible(true);
+    document.addEventListener('click', hideMetricInfoTooltip);
+  };
+
+  const hideMetricInfoTooltip = () => {
+    setIsMetricInfoTooltipVisible(false);
+    document.removeEventListener('click', hideMetricInfoTooltip);
   };
 
   return (
