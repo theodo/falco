@@ -5,7 +5,7 @@ interface Props {
 }
 
 const Style = {
-  LoaderContainer: styled.div`
+  LandingBlockContainer: styled.div`
     display: flex;
     justify-content: center;
     width: 1240px;
