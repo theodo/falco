@@ -49,49 +49,64 @@
   },
   "Metrics": {
     "WPTMetricFirstViewTTI": {
-      "name": "TTI (First View)"
+      "name": "TTI (First View)",
+      "description" : "Triggered when CPU computations and network requests are few and far between (for first visit on website)"
     },
     "WPTMetricRepeatViewTTI": {
-      "name": "TTI (Repeat View)"
+      "name": "TTI (Repeat View)",
+      "description" : "Triggered when CPU computations and network requests are few and far between (when coming back to website)"
     },
     "WPTMetricFirstViewSpeedIndex": {
-      "name": "Speed Index (First View)"
+      "name": "Speed Index (First View)",
+      "description" : "Triggered when pixels of the page reach their final position (for first visit on website)"
     },
     "WPTMetricRepeatViewSpeedIndex": {
-      "name": "Speed Index (Repeat View)"
+      "name": "Speed Index (Repeat View)",
+      "description" : "Triggered when pixels of the page reach their final position (when coming back to website)"
     },
     "WPTMetricFirstViewFirstPaint": {
-      "name": "First Paint (First View)"
+      "name": "First Paint (First View)",
+      "description" : "Triggered when the first pixel is drawn on the screen (for first visit on website)"
     },
     "WPTMetricRepeatViewFirstPaint": {
-      "name": "First Paint (Repeat View)"
+      "name": "First Paint (Repeat View)",
+      "description" : "Triggered when the first pixel is drawn on the screen (when coming back to website)"
     },
     "WPTMetricFirstViewFirstMeaningfulPaint": {
-      "name": "First Meaningful Paint (First View)"
+      "name": "First Meaningful Paint (First View)",
+      "description" : "Triggered when the “hero” element of the page (a big element at the top center) is visible (for first visit on website)"
     },
     "WPTMetricRepeatViewFirstMeaningfulPaint": {
-      "name": "First Meaningful Paint (Repeat View)"
+      "name": "First Meaningful Paint (Repeat View)",
+      "description" : "Triggered when the “hero” element of the page (a big element at the top center) is visible (when coming back to website)"
     },
     "WPTMetricFirstViewLoadTime": {
-      "name": "Load Time (First View)"
+      "name": "Load Time (First View)",
+      "description" : "Triggered when network is quiet and page is fully loaded (for first visit on website)"
     },
     "WPTMetricRepeatViewLoadTime": {
-      "name": "Load Time (Repeat View)"
+      "name": "Load Time (Repeat View)",
+      "description" : "Triggered when network is quiet and page is fully loaded (when coming back to website)"
     },
     "WPTMetricFirstViewFirstContentfulPaint": {
-      "name": "First Contentful Paint (First View)"
+      "name": "First Contentful Paint (First View)",
+      "description" : "Triggered when the first DOM element (text, image, ...) is drawn on the screen (for first visit on website)"
     },
     "WPTMetricRepeatViewFirstContentfulPaint": {
-      "name": "First Contentful Paint (Repeat View)"
+      "name": "First Contentful Paint (Repeat View)",
+      "description" : "Triggered when the first DOM element (text, image, ...) is drawn on the screen (when coming back to website)"
     },
     "WPTMetricFirstViewTimeToFirstByte": {
-      "name": "Time to First Byte (First View)"
+      "name": "Time to First Byte (First View)",
+      "description" : "Triggered when the browser receives the first byte from the server, usually HTML (for first visit on website)"
     },
     "WPTMetricRepeatViewTimeToFirstByte": {
-      "name": "Time to First Byte (Repeat View)"
+      "name": "Time to First Byte (Repeat View)",
+      "description" : "Triggered when the browser receives the first byte from the server, usually HTML (when coming back to website)"
     },
     "WPTMetricLighthousePerformance": {
-      "name": "Lighthouse Performance Score"
+      "name": "Lighthouse Performance Score",
+      "description" : "Aggregates many of other performance metrics, simulates middle-end device & poor network conditions.\nMeasured via Dev Tools or https://web.dev/fast"
     }
   },
   "components": {
