@@ -5,7 +5,7 @@ import { Redirect } from 'react-router';
 import LandingBlock from 'components/LandingBlock';
 import { routeDefinitions } from 'routes';
 import FalcoAnalysisImage from 'static/images/FalcoAnalysis.svg';
-import FalcoDashboardImage from 'static/images/FalcoDashboard.png';
+import FalcoDashboardImage from 'static/images/FalcoDashboard.jpg';
 import FalcoMonitoringImage from 'static/images/FalcoMonitoring.svg';
 import FalcoOptimisationImage from 'static/images/FalcoOptimisation.svg';
 import { colorUsage, getSpacing } from 'stylesheet';

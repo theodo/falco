@@ -42,8 +42,7 @@ const Styles = {
   `,
 
   FalcoIllustration: styled.img`
-    height: 303px;
-    width: 475px;
+    width: 520px;
     border-radius: 6px;
     box-shadow: 0 14px 21px 0 ${colorUsage.landingImageShadowBox};
   `,
