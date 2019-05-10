@@ -27,6 +27,7 @@ const colorPalette = {
   white200: 'rgba(255,255,255,0.1)',
   white500: '#ffffff',
   lightGreen: '#3bafa3',
+  black100: 'rgba(0, 0, 0, 0.2)',
   black200: 'rgba(0, 0, 0, 0.5)',
   red500: '#d8000c',
   red200: '#ffd2d2',
@@ -107,6 +108,7 @@ export const colorUsage = {
   menuLinkHover: colorPalette.primary500,
   defaultContentBackground: colorPalette.white500,
   landingPageGlobalBackground: colorPalette.grey100,
+  landingImageShadowBox: colorPalette.black100,
 };
 
 export const fontFamily = {

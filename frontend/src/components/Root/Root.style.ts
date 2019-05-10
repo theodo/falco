@@ -27,7 +27,7 @@ const StyledRoot = {
     position: relative;
     top: 100px;
     left: ${(props: ContentProps) => (props.shouldDisplayMenu ? '490px' : '0')};
-    margin-left: ${getSpacing(8)};
+    margin-left: ${(props: ContentProps) => (props.shouldDisplayMenu ? getSpacing(8) : '0')};
     padding-right: ${getSpacing(22)};
     padding-top: ${getSpacing(4)};
     width: ${(props: ContentProps) => (props.shouldDisplayMenu ? '800px' : '100%')};
