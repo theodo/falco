@@ -11,7 +11,7 @@ import frMessages from 'translations/fr.json';
 import { Header, Menu } from './components';
 import Style from './Root.style';
 
-const locales = {
+const locales: Record<string, any> = {
   fr: flattenMessages(frMessages),
   en: flattenMessages(enMessages),
 };
@@ -28,8 +28,14 @@ const Root: React.FunctionComponent<Props> = ({ children, location }) => {
   const isLoginPage = location.pathname === routeDefinitions.login.path;
   const shouldDisplayMenu = !isLandingPage && !isLoginPage;
 
+  const userLanguage =
+    (navigator.languages && navigator.languages[0]) || navigator.language || 'fr';
+  // Split locales with a region code
+  const userLanguageWithoutRegionCode = userLanguage.toLowerCase().split(/[_-]+/)[0];
+  const localizedMessages = locales[userLanguage] || locales[userLanguageWithoutRegionCode];
+
   return (
-    <IntlProvider locale="fr" messages={locales.fr}>
+    <IntlProvider locale={userLanguageWithoutRegionCode} messages={localizedMessages}>
       <Style.PageContainer>
         <Style.PageBackground isLandingPage={isLandingPage} />
         <Style.Page>
