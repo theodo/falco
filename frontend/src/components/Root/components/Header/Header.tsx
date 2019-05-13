@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react';
+import React, { MouseEvent, useState } from 'react';
 
 import Logo from 'components/Logo';
 import { FormattedMessage } from 'react-intl';
@@ -95,9 +95,14 @@ export const Header: React.FunctionComponent<Props> = ({ currentURL }) => {
   const isLoginPage = currentURL === routeDefinitions.login.path;
   const shouldDisplayConnectedUserHeader = !isLandingPage && !isLoginPage;
 
+  const [scrollPosition, setScrollPostition] = useState(0);
+  window.addEventListener('scroll', () => {
+    setScrollPostition(window.scrollY);
+  });
+
   return (
     <Style.HeaderContainer ref={headerContainerRef}>
-      <Style.Header>
+      <Style.Header shouldHaveShadow={isLandingPage && scrollPosition > 10}>
         <Style.HeaderMenu isLandingPage={isLandingPage}>
           <Style.LogoContainer
             to={
