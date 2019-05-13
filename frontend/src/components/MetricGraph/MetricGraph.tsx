@@ -1,6 +1,7 @@
 import React, { MouseEvent } from 'react';
 
 import dayjs from 'dayjs';
+import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import { Information } from 'icons';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { Area, AreaChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
@@ -81,6 +82,8 @@ const MetricGraph: React.FunctionComponent<Props> = props => {
     }
   };
 
+  dayjs.extend(LocalizedFormat).locale(intl.locale);
+
   const renderTooltip = (tooltipProps: {
     label: number;
     payload: Array<{ value: number; dataKey: MetricType }>;
@@ -88,11 +91,21 @@ const MetricGraph: React.FunctionComponent<Props> = props => {
     const { payload, label } = tooltipProps;
     return payload.map((entry, index) => {
       const dataType = METRICS[entry.dataKey].type;
-      const dateFormat = intl.formatMessage({ id: 'components.MetricGraph.tooltipDate' });
+      const formattedDate = intl.formatMessage(
+        {
+          id: 'components.MetricGraph.tooltipDate',
+        },
+        {
+          day: dayjs(label)
+            .format('L')
+            .replace(new RegExp('[^.]?' + dayjs().format('YYYY') + '.?'), ''), // remove year
+          time: dayjs(label).format('LT'),
+        },
+      );
       return (
         <Style.Tooltip key={index}>
           <Style.TooltipValue>{getFormattedValue(dataType, entry.value)}</Style.TooltipValue>
-          <Style.TooltipDate>{dayjs(label).format(dateFormat)}</Style.TooltipDate>
+          <Style.TooltipDate>{formattedDate}</Style.TooltipDate>
         </Style.Tooltip>
       );
     });

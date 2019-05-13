@@ -135,7 +135,7 @@
   },
   "components": {
     "MetricGraph": {
-      "tooltipDate": "Le DD/MM à HH:mm"
+      "tooltipDate": "Le {day} à {time}"
     }
   }
 }

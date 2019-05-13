@@ -136,7 +136,7 @@
   },
   "components": {
     "MetricGraph": {
-      "tooltipDate": "On MM/DD at HH:mm"
+      "tooltipDate": "On {day} at {time}"
     }
   }
 }
