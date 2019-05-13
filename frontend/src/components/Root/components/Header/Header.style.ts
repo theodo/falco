@@ -6,6 +6,10 @@ interface Props {
   isLandingPage: boolean;
 }
 
+interface HeaderProps {
+  shouldHaveShadow: boolean;
+}
+
 const StyledHeader = {
   HeaderContainer: styled.div`
     position: fixed;
@@ -17,6 +21,9 @@ const StyledHeader = {
     background-color: ${colorUsage.headerFakeBackground};
     height: 100px;
     display: flex;
+    transition: box-shadow 0.3s ease-in-out;
+    box-shadow: ${(props: HeaderProps) =>
+      props.shouldHaveShadow && `0 10px 5px -2px ${colorUsage.headerShadowBox}`};
   `,
   HeaderMenu: styled.div`
     display: flex;
