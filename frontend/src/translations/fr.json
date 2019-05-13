@@ -74,63 +74,63 @@
   "Metrics": {
     "WPTMetricFirstViewTTI": {
       "name": "TTI (First View)",
-      "description" : "Moment où les calculs de CPU et les requêtes réseau deviennent rares (lors de la première visite du site)"
+      "description": "Moment où les calculs de CPU et les requêtes réseau deviennent rares (lors de la première visite du site)"
     },
     "WPTMetricRepeatViewTTI": {
       "name": "TTI (Repeat View)",
-      "description" : "Moment où les calculs de CPU et les requêtes réseau deviennent rares (lorsque l'on retourne sur le site)"
+      "description": "Moment où les calculs de CPU et les requêtes réseau deviennent rares (lorsque l'on retourne sur le site)"
     },
     "WPTMetricFirstViewSpeedIndex": {
       "name": "Speed Index (First View)",
-      "description" : "Moment où tous les pixels de la page sont à leur position définitive (lors de la première visite du site)"
+      "description": "Moment où tous les pixels de la page sont à leur position définitive (lors de la première visite du site)"
     },
     "WPTMetricRepeatViewSpeedIndex": {
       "name": "Speed Index (Repeat View)",
-      "description" : "Moment où tous les pixels de la page sont à leur position définitive (lorsque l'on retourne sur le site)"
+      "description": "Moment où tous les pixels de la page sont à leur position définitive (lorsque l'on retourne sur le site)"
     },
     "WPTMetricFirstViewFirstPaint": {
       "name": "First Paint (First View)",
-      "description" : "Moment où le premier pixel est affiché sur la page (lors de la première visite du site)"
+      "description": "Moment où le premier pixel est affiché sur la page (lors de la première visite du site)"
     },
     "WPTMetricRepeatViewFirstPaint": {
       "name": "First Paint (Repeat View)",
-      "description" : "Moment où le premier pixel est affiché sur la page (lorsque l'on retourne sur le site)"
+      "description": "Moment où le premier pixel est affiché sur la page (lorsque l'on retourne sur le site)"
     },
     "WPTMetricFirstViewFirstMeaningfulPaint": {
       "name": "First Meaningful Paint (First View)",
-      "description" : "Moment où le “hero” (n'importe quel élément important en haut au centre de la page) est visible (lors de la première visite du site)"
+      "description": "Moment où le “hero” (n'importe quel élément important en haut au centre de la page) est visible (lors de la première visite du site)"
     },
     "WPTMetricRepeatViewFirstMeaningfulPaint": {
       "name": "First Meaningful Paint (Repeat View)",
-      "description" : "Moment où le “hero” (n'importe quel élément important en haut au centre de la page) est visible (lorsque l'on retourne sur le site)"
+      "description": "Moment où le “hero” (n'importe quel élément important en haut au centre de la page) est visible (lorsque l'on retourne sur le site)"
     },
     "WPTMetricFirstViewLoadTime": {
       "name": "Load Time (First View)",
-      "description" : "Moment où l'activité réseau est nulle et où la page est complètement chargée (lors de la première visite du site)"
+      "description": "Moment où l'activité réseau est nulle et où la page est complètement chargée (lors de la première visite du site)"
     },
     "WPTMetricRepeatViewLoadTime": {
       "name": "Load Time (Repeat View)",
-      "description" : "Moment où l'activité réseau est nulle et où la page est complètement chargée (lorsque l'on retourne sur le site)"
+      "description": "Moment où l'activité réseau est nulle et où la page est complètement chargée (lorsque l'on retourne sur le site)"
     },
     "WPTMetricFirstViewFirstContentfulPaint": {
       "name": "First Contentful Paint (First View)",
-      "description" : "Moment où le premier élement DOM (texte, image, ...) est affiché sur la page (lors de la première visite du site)"
+      "description": "Moment où le premier élement DOM (texte, image, ...) est affiché sur la page (lors de la première visite du site)"
     },
     "WPTMetricRepeatViewFirstContentfulPaint": {
       "name": "First Contentful Paint (Repeat View)",
-      "description" : "Moment où le premier élement DOM (texte, image, ...) est affiché sur la page  is drawn on the screen (lorsque l'on retourne sur le site)"
+      "description": "Moment où le premier élement DOM (texte, image, ...) est affiché sur la page  is drawn on the screen (lorsque l'on retourne sur le site)"
     },
     "WPTMetricFirstViewTimeToFirstByte": {
       "name": "Time to First Byte (First View)",
-      "description" : "Moment où le navigateur reçoit le premier octet de la part du serveur, habituellement du HTML (lors de la première visite du site)"
+      "description": "Moment où le navigateur reçoit le premier octet de la part du serveur, habituellement du HTML (lors de la première visite du site)"
     },
     "WPTMetricRepeatViewTimeToFirstByte": {
       "name": "Time to First Byte (Repeat View)",
-      "description" : "Moment où le navigateur reçoit le premier octet de la part du serveur, habituellement du HTML (lorsque l'on retourne sur le site)"
+      "description": "Moment où le navigateur reçoit le premier octet de la part du serveur, habituellement du HTML (lorsque l'on retourne sur le site)"
     },
     "WPTMetricLighthousePerformance": {
       "name": "Lighthouse Performance Score",
-      "description" : "Aggrège un ensemble des autres métriques de performance, simule un appareil de milieu de gamme et des conditions réseau défavorables.\nMesuré via Dev Tools ou https://web.dev/fast"
+      "description": "Aggrège un ensemble des autres métriques de performance, simule un appareil de milieu de gamme et des conditions réseau défavorables.\nMesuré via Dev Tools ou https://web.dev/fast"
     }
   },
   "components": {
