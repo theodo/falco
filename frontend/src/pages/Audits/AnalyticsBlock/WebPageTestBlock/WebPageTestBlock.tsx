@@ -1,8 +1,11 @@
 import Select from 'components/Select';
+import dayjs from 'dayjs';
+import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { ValueType } from 'react-select/lib/types';
 import { AuditResultType } from 'redux/auditResults/types';
+
 import { getWPTAuditId } from 'services/utils';
 import { getSpacing } from 'stylesheet';
 import Style from './WebPageTestBlock.style';
@@ -58,11 +61,18 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps & InjectedIntlProps> = 
     label: string;
   }
 
+  dayjs.extend(LocalizedFormat).locale(intl.locale);
+
   const auditResultsSelectOptions = (origin: 'FROM_SELECTED' | 'FROM_TO_COMPARE') =>
     auditResults.map(auditResult => ({
-      label: auditResult.createdAt.format(
-        intl.formatMessage({ id: 'Audits.webpagetest_date_format' }),
+      label: intl.formatMessage(
+        { id: 'Audits.webpagetest_date_format' },
+        {
+          day: dayjs(auditResult.createdAt).format('L'),
+          time: dayjs(auditResult.createdAt).format('LT'),
+        },
       ),
+
       value: auditResult.auditId,
       isDisabled:
         origin === 'FROM_TO_COMPARE'
