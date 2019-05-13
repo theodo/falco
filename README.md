@@ -25,9 +25,15 @@ Falco helps you get your Performance Kaizen ready to go, in minutes
 > 🚧 Update me!
 
 Product Manager:
-  - **Jaafar Raji** (jaafarr@theodo.fr)
+
+- **Jaafar Raji** (jaafarr@theodo.fr)
+
+Agile Coach:
+
+- **Lou Prieur** (loup@theodo.fr)
 
 Developers (see [contributors](../../graphs/contributors)):
-  - **Nicolas Goutay** (nicolasgo@theodo.fr)
-  - **Jérémy Dardour** (jeremyd@theodo.fr)
 
+- **Nicolas Goutay** (nicolasgo@theodo.fr)
+- **Etienne Grall** (etienneg@theodo.fr)
+- **Vincent Larrat** (vincentla@theodo.fr)
