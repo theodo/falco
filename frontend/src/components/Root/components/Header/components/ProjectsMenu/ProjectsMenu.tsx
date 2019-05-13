@@ -57,7 +57,9 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
           </Style.CurrentProjectItemTitleContainer>
           <Style.ProjectItemLastAudit>
             {intl.formatMessage({ id: `Header.last_audit_intro` })}{' '}
-            {dayjs(currentProject.latestAuditAt).fromNow()}
+            {dayjs(currentProject.latestAuditAt)
+              .locale(intl.locale)
+              .fromNow()}
           </Style.ProjectItemLastAudit>
         </Style.CurrentProjectItemTitleBlock>
       </Style.CurrentProjectItem>
@@ -79,7 +81,9 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
           <Style.ProjectItemTitle>{project.name}</Style.ProjectItemTitle>
           <Style.ProjectItemLastAudit>
             {intl.formatMessage({ id: `Header.last_audit_intro` })}{' '}
-            {dayjs(project.latestAuditAt).fromNow()}
+            {dayjs(project.latestAuditAt)
+              .locale(intl.locale)
+              .fromNow()}
           </Style.ProjectItemLastAudit>
         </Style.ProjectItemTitleBlock>
       </Style.ProjectItem>
