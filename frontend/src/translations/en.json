@@ -63,7 +63,7 @@
     "webpagetest_latest_audit": "Latest audit",
     "webpagetest_choose_results": "Choose the type of result",
     "webpagetest_dateSelector_audit": "Select a date",
-    "webpagetest_date_format": "YYYY/MM/DD at HH:mm",
+    "webpagetest_date_format": "{day} at {time}",
     "script_step_selection": "Script step to display",
     "webpagetest_select_date": "Choose the date of the audit",
     "webpagetest_select_dates": "Choose the dates of the audits",
