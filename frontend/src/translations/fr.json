@@ -8,7 +8,7 @@
   },
   "Landing": {
     "first_block": {
-      "title": "Surveillez et analysez la performance de vos sites Web",
+      "title": "Optimisez la performance de vos sites Web",
       "introduction": "Quelque soit votre domaine, la performance de votre site web est cruciale pour vos utilisateurs et donc pour votre business. Falco vous aide à monitorer, à analyser et à optimiser vos sites."
     },
     "second_block": {
@@ -24,6 +24,17 @@
         "title": "Optimisations pertinentes",
         "description": "Falco vous propose les optimisations les plus efficaces, en s'appuyant sur les recommandations de Google."
       }
+    },
+    "third_block": {
+      "title": "FAQ",
+      "1st_question": "Quelles métriques Falco permet-il de piloter ?",
+      "1st_answer": "Falco permet de mesurer le Time to Interactive, le Speed Index, le score Lighthouse, le Time to First Byte et d’autres métriques.",
+      "2nd_question": "Mon site possède une partie authentifiée, puis-je l’auditer ?",
+      "2nd_answer": "Oui, Falco permet de scripter un audit de manière à passer une authentification, ou à simuler des interactions utilisateur.",
+      "3rd_question": "Est-ce que Falco permet d’auditer des Single Page Applications ?",
+      "3rd_answer": "Falco est indépendant de la technologie utilisée sur vos sites, et permet d’auditer les performances et d’obtenir des recommendations quelque soit la stack.",
+      "4th_question": "Qui est à l’origine de Falco ?",
+      "4th_answer": "Falco est un produit développé par {theodoLink}, afin d’accompagner au mieux ses clients sur les problématiques de performance."
     }
   },
   "Login": {
@@ -63,7 +74,7 @@
   "Metrics": {
     "WPTMetricFirstViewTTI": {
       "name": "TTI (First View)",
-      "description" : "Moment où les calculs de CPU et les requêtes réseau deviennent rares (lors de la première viste du site)"
+      "description" : "Moment où les calculs de CPU et les requêtes réseau deviennent rares (lors de la première visite du site)"
     },
     "WPTMetricRepeatViewTTI": {
       "name": "TTI (Repeat View)",
@@ -71,7 +82,7 @@
     },
     "WPTMetricFirstViewSpeedIndex": {
       "name": "Speed Index (First View)",
-      "description" : "Moment où tous les pixels de la page sont à leur position définitive (lors de la première viste du site)"
+      "description" : "Moment où tous les pixels de la page sont à leur position définitive (lors de la première visite du site)"
     },
     "WPTMetricRepeatViewSpeedIndex": {
       "name": "Speed Index (Repeat View)",
@@ -79,7 +90,7 @@
     },
     "WPTMetricFirstViewFirstPaint": {
       "name": "First Paint (First View)",
-      "description" : "Moment où le premier pixel est affiché sur la page (lors de la première viste du site)"
+      "description" : "Moment où le premier pixel est affiché sur la page (lors de la première visite du site)"
     },
     "WPTMetricRepeatViewFirstPaint": {
       "name": "First Paint (Repeat View)",
@@ -87,7 +98,7 @@
     },
     "WPTMetricFirstViewFirstMeaningfulPaint": {
       "name": "First Meaningful Paint (First View)",
-      "description" : "Moment où le “hero” (n'importe quel élément important en haut au centre de la page) est visible (lors de la première viste du site)"
+      "description" : "Moment où le “hero” (n'importe quel élément important en haut au centre de la page) est visible (lors de la première visite du site)"
     },
     "WPTMetricRepeatViewFirstMeaningfulPaint": {
       "name": "First Meaningful Paint (Repeat View)",
@@ -95,7 +106,7 @@
     },
     "WPTMetricFirstViewLoadTime": {
       "name": "Load Time (First View)",
-      "description" : "Moment où l'activité réseau est nulle et où la page est complètement chargée (lors de la première viste du site)"
+      "description" : "Moment où l'activité réseau est nulle et où la page est complètement chargée (lors de la première visite du site)"
     },
     "WPTMetricRepeatViewLoadTime": {
       "name": "Load Time (Repeat View)",
@@ -103,7 +114,7 @@
     },
     "WPTMetricFirstViewFirstContentfulPaint": {
       "name": "First Contentful Paint (First View)",
-      "description" : "Moment où le premier élement DOM (texte, image, ...) est affiché sur la page (lors de la première viste du site)"
+      "description" : "Moment où le premier élement DOM (texte, image, ...) est affiché sur la page (lors de la première visite du site)"
     },
     "WPTMetricRepeatViewFirstContentfulPaint": {
       "name": "First Contentful Paint (Repeat View)",
@@ -111,7 +122,7 @@
     },
     "WPTMetricFirstViewTimeToFirstByte": {
       "name": "Time to First Byte (First View)",
-      "description" : "Moment où le navigateur reçoit le premier octet de la part du serveur, habituellement du HTML (lors de la première viste du site)"
+      "description" : "Moment où le navigateur reçoit le premier octet de la part du serveur, habituellement du HTML (lors de la première visite du site)"
     },
     "WPTMetricRepeatViewTimeToFirstByte": {
       "name": "Time to First Byte (Repeat View)",

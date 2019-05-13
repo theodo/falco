@@ -8,8 +8,8 @@
   },
   "Landing": {
     "first_block": {
-      "title": "Surveillez et analysez la performance de vos sites Web",
-      "introduction": "Quelque soit votre domaine, la performance de votre site web est cruciale pour vos utilisateurs et donc pour votre business. Falco vous aide à monitorer, à analyser et à optimiser vos sites."
+      "title": "Optimize the performance of your websites",
+      "introduction": "Whatever your field is, the performance of your pages is critical for your users, and thus for your business. Falco helps you to monitor, analyze, and optimize your websites."
     },
     "second_block": {
       "monitoring": {
@@ -24,6 +24,17 @@
         "title": "Relevant optimisations",
         "description": "Falco helps you get the most effective optimisations, by following Google recommendations."
       }
+    },
+    "third_block": {
+      "title": "FAQ",
+      "1st_question": "Which metrics can Falco help managing?",
+      "1st_answer": "Falco can measure the Time to Interactive, the Speed Index, the Lighthouse score, the Time to First Byte and other metrics.",
+      "2nd_question": "My website needs authentication, can I still audit it?",
+      "2nd_answer": "Yes, Falco allows scripts in order to go through authentication systems, or to simulate user interactions.",
+      "3rd_question": "Can Falco help to audit Single Page Applications?",
+      "3rd_answer": "Falco is independent of the technology used on your websites, and allows to audit performances and obtain recommendations whatever the stack is.",
+      "4th_question": "Who created Falco?",
+      "4th_answer": "Falco is a tool developed by {theodoLink}, in order to help its clients as well as possible on performance issues."
     }
   },
   "Login": {

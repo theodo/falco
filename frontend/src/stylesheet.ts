@@ -113,6 +113,7 @@ export const colorUsage = {
   metricInformationTooltipBackground: colorPalette.grey300,
   metricInformationTooltipShadowBox: colorPalette.black200,
   metricInformationTooltipText: colorPalette.grey800,
+  landingTheodoLink: colorPalette.primary500,
 };
 
 export const fontFamily = {
@@ -181,6 +182,7 @@ export const fontWeight = {
   scriptStepSelectLabelText: '500',
   accountMenuActionItemHoverText: 'bold',
   metricInformationTooltip: '500',
+  landingTheodoLink: 'bold',
 };
 
 export const fontStyle = {
