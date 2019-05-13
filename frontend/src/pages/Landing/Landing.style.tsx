@@ -23,7 +23,7 @@ const Styles = {
     flex-direction: column;
   `,
 
-  FirstBlockTitle: styled.div`
+  FirstBlockTitle: styled.h1`
     width: 370px;
     line-height: ${lineHeight.h1Text};
     color: ${colorUsage.h1Text};
@@ -66,12 +66,12 @@ const Styles = {
     margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
   `,
 
-  SecondBlockTitle: styled.div`
-    line-height: ${lineHeight.h3Text};
-    color: ${colorUsage.h3Text};
+  SecondBlockTitle: styled.h4`
+    line-height: ${lineHeight.h4Text};
+    color: ${colorUsage.h4Text};
     font-family: ${fontFamily.mainSans};
-    font-size: ${fontSize.h3Text};
-    font-weight: ${fontWeight.h3Text};
+    font-size: ${fontSize.h4Text};
+    font-weight: ${fontWeight.h4Text};
     margin-bottom: ${getSpacing(2)};
   `,
 
