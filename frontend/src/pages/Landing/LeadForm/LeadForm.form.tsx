@@ -14,6 +14,7 @@ interface LeadFormProps {
   touched: {
     email?: boolean;
   };
+  createLead: (values: FormValues) => void;
 }
 
 const LeadForm: React.FunctionComponent<
