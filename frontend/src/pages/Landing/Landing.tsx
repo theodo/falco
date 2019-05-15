@@ -8,6 +8,7 @@ import FalcoAnalysisImage from 'static/images/FalcoAnalysis.svg';
 import FalcoDashboardImage from 'static/images/FalcoDashboard.jpg';
 import FalcoMonitoringImage from 'static/images/FalcoMonitoring.svg';
 import FalcoOptimisationImage from 'static/images/FalcoOptimisation.svg';
+import LogoTheodo from 'static/images/TheodoLogo.svg';
 import { colorUsage, getSpacing } from 'stylesheet';
 import Style from './Landing.style';
 import LeadForm from './LeadForm';
@@ -16,7 +17,7 @@ interface Props {
   isUserAuthenticated: boolean;
 }
 
-const Landing: React.FunctionComponent<Props> = props => {
+export const Landing: React.FunctionComponent<Props> = props => {
   if (props.isUserAuthenticated) {
     return <Redirect to={routeDefinitions.projectsList.path} />;
   }
@@ -124,8 +125,13 @@ const Landing: React.FunctionComponent<Props> = props => {
           </Style.ThirdBlockColumnsContainer>
         </Style.ThirdBlockContainer>
       </LandingBlock>
+      <LandingBlock backgroundColor={colorUsage.landingPageGlobalBackground}>
+        <Style.FooterContainer>
+          <Style.TheodoLogoLink href={'https://www.theodo.fr'} target={'_blank'}>
+            <Style.TheodoLogo src={LogoTheodo} />
+          </Style.TheodoLogoLink>
+        </Style.FooterContainer>
+      </LandingBlock>
     </React.Fragment>
   );
 };
-
-export default Landing;
