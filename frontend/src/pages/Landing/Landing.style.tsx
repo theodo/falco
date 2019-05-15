@@ -39,6 +39,7 @@ const Styles = {
     color: ${colorUsage.introductionText};
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.introductionText};
+    margin: 0 0 ${getSpacing(6)} 0;
   `,
 
   FalcoIllustration: styled.img`
