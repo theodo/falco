@@ -1,3 +1,6 @@
+import os
+
+from django.core.mail import EmailMessage
 from django.http import JsonResponse
 from leads.models import Lead
 from leads.serializers import LeadSerializer
@@ -14,6 +17,15 @@ def lead_list(request):
         if serializer.is_valid():
             lead = Lead.objects.create(**serializer.validated_data)
             lead.save()
+            message = "A new user just asked for a demo !\nEmail: " + lead.email
+            email = EmailMessage(
+                "New lead on Falco",
+                message,
+                from_email=os.environ.get("EMAIL_FROM"),
+                to=os.environ.get("EMAIL_TO").split(","),
+            )
+            email.send(fail_silently=False)
+
             return JsonResponse(
                 {"uuid": lead.uuid, **serializer.data}, status=status.HTTP_201_CREATED
             )
