@@ -82,4 +82,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = os.environ.get("EMAIL_HOST")
 EMAIL_HOST_USER = os.environ.get("EMAIL_USER")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_PASSWORD")
-EMAIL_PORT = int(os.environ.get("EMAIL_PORT"))
+port = os.environ.get("EMAIL_PORT")
+EMAIL_PORT = int(port) if port is not None else 0
