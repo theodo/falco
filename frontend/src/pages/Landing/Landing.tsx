@@ -10,6 +10,7 @@ import FalcoMonitoringImage from 'static/images/FalcoMonitoring.svg';
 import FalcoOptimisationImage from 'static/images/FalcoOptimisation.svg';
 import { colorUsage, getSpacing } from 'stylesheet';
 import Style from './Landing.style';
+import LeadForm from './LeadForm';
 
 interface Props {
   isUserAuthenticated: boolean;
@@ -31,6 +32,7 @@ const Landing: React.FunctionComponent<Props> = props => {
             <Style.Introduction>
               <FormattedMessage id="Landing.first_block.introduction" />
             </Style.Introduction>
+            <LeadForm />
           </Style.FirstBlockColumn>
           <Style.FirstBlockColumn>
             <Style.FalcoIllustration src={FalcoDashboardImage} />

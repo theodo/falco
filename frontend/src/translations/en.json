@@ -9,7 +9,12 @@
   "Landing": {
     "first_block": {
       "title": "Optimize the performance of your websites",
-      "introduction": "Whatever your field is, the performance of your pages is critical for your users, and thus for your business. Falco helps you to monitor, analyze, and optimize your websites."
+      "introduction": "Whatever your field is, the performance of your pages is critical for your users, and thus for your business. Falco helps you to monitor, analyze, and optimize your websites.",
+      "leadForm": {
+        "email_label": "Your email address ...",
+        "submit_button": "Ask for a demo",
+        "error_email_required": "You must type email address"
+      }
     },
     "second_block": {
       "monitoring": {
