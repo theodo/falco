@@ -116,6 +116,10 @@ export const colorUsage = {
   metricInformationTooltipShadowBox: colorPalette.black200,
   metricInformationTooltipText: colorPalette.grey800,
   landingTheodoLink: colorPalette.primary500,
+  inputText: colorPalette.grey800,
+  inputTextPlaceholder: colorPalette.primary500,
+  inputTextFocused: colorPalette.primary500,
+  inputTextError: colorPalette.red500,
 };
 
 export const fontFamily = {
@@ -143,6 +147,9 @@ export const fontSize = {
   scriptStepSelectLabelText: '16px',
   inputSelectText: '14px',
   metricInformationTooltip: '12px',
+  inputText: '14px',
+  inputTextPlaceholder: '14px',
+  inputErrorMessage: '12px',
 };
 
 export const lineHeight = {
@@ -165,6 +172,9 @@ export const lineHeight = {
   scriptStepSelectLabelText: '20px',
   inputSelectText: '18px',
   metricInformationTooltip: '16px',
+  inputText: '18px',
+  inputTextPlaceholder: '16px',
+  inputErrorMessage: '14px',
 };
 
 export const fontWeight = {
@@ -185,11 +195,13 @@ export const fontWeight = {
   accountMenuActionItemHoverText: 'bold',
   metricInformationTooltip: '500',
   landingTheodoLink: 'bold',
+  inputErrorMessage: 'bold' as 'bold',
 };
 
 export const fontStyle = {
   quoteText: 'italic',
   lighthouseNote: 'italic',
+  inputErrorMessage: 'italic',
 };
 
 export const getSpacing = (multiplier: number): string =>
