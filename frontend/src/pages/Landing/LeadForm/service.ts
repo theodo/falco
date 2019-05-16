@@ -4,7 +4,11 @@ export interface FormValues {
   email: string;
 }
 
-export type LeadFormServiceProps = RouteComponentProps;
+interface LeadServiceDispatchProps {
+  createLead: (values: FormValues) => void;
+}
+
+export type LeadFormServiceProps = LeadServiceDispatchProps & RouteComponentProps;
 
 export const validate = (values: FormValues) => {
   const errors: { email?: string } = {};
@@ -19,5 +23,5 @@ export const mapPropsToValues = () => ({
 });
 
 export const handleSubmit = (values: FormValues, { props }: { props: LeadFormServiceProps }) => {
-  return null;
+  props.createLead(values);
 };
