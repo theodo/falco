@@ -52,7 +52,7 @@ const MetricModal: React.FunctionComponent<Props> = props => {
       style={modalStyles}
       onAfterOpen={disableBackground}
       onAfterClose={enableBackground}
-      ariaHideApp={true}
+      appElement={document.querySelector('#root') as HTMLElement}
     >
       <Style.ModalTitle>
         <FormattedMessage id="Audits.MetricsModal.add_delete_metrics" />
