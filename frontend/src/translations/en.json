@@ -62,6 +62,11 @@
     "page_or_script_unavailable": "The page or the script you requested seems unavailable for this project.\n\nPlease try again or contact your administrator to solve this issue.",
     "no_audit": "No audit data is available for this page or script.\n\nPlease try again later.",
     "pick_right_metrics": "How to pick the right metrics? →",
+    "MetricsModal": {
+      "add_delete_metric": "Add / Delete metrics",
+      "cancel_button": "Cancel",
+      "validate_button": "Validate"
+    },
     "webpagetest_analysis": "Analysis",
     "webpagetest_results": "Access results",
     "webpagetest_detailed_results": "Detailed results (on WebPageTest)",

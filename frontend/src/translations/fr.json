@@ -61,6 +61,11 @@
     "page_or_script_unavailable": "La page ou le script que vous souhaitez visualiser ne semble pas exister pour ce projet.\n\nMerci de réessayer ou de vous rapprocher de votre administrateur pour corriger le problème.",
     "no_audit": "Aucune donnée d'audit n'est disponible pour cette page ou ce script.\n\nMerci de réessayer plus tard.",
     "pick_right_metrics": "Comment choisir les bonnes métriques ? →",
+    "MetricsModal": {
+      "add_delete_metrics": "Ajouter / Supprimer des métriques",
+      "cancel_button": "Annuler",
+      "validate_button": "Valider"
+    },
     "webpagetest_analysis": "Analyse",
     "webpagetest_results": "Accéder aux résultats",
     "webpagetest_detailed_results": "Résultats détaillés (sur WebPageTest)",

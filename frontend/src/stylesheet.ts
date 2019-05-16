@@ -32,6 +32,7 @@ const colorPalette = {
   black200: 'rgba(0, 0, 0, 0.5)',
   red500: '#d8000c',
   red200: '#ffd2d2',
+  transparent: 'transparent',
 };
 
 /**
@@ -106,7 +107,7 @@ export const colorUsage = {
   accountMenuActionItemHoverText: colorPalette.primary500,
   popinErrorText: colorPalette.red500,
   popinErrorBackground: colorPalette.red200,
-  pickRightMetricsLinkText: colorPalette.primary500,
+  metricsSettingsText: colorPalette.primary500,
   menuLinkHover: colorPalette.primary500,
   defaultContentBackground: colorPalette.white500,
   landingPageGlobalBackground: colorPalette.grey100,
@@ -122,6 +123,16 @@ export const colorUsage = {
   inputTextPlaceholder: colorPalette.primary500,
   inputTextFocused: colorPalette.primary500,
   inputTextError: colorPalette.red500,
+  metricsModalBackground: colorPalette.grey200,
+  metricsModalShadow: colorPalette.grey400,
+  cancelButtonText: colorPalette.primary500,
+  cancelButtonBorder: colorPalette.primary500,
+  cancelButtonBackground: colorPalette.transparent,
+  validateButtonText: colorPalette.white500,
+  validateButtonBackground: colorPalette.primary500,
+  checkboxBorder: colorPalette.grey500,
+  checkboxColor: colorPalette.primary500,
+  checkboxBackground: colorPalette.white500,
 };
 
 export const fontFamily = {
@@ -150,6 +161,8 @@ export const fontSize = {
   inputSelectText: '14px',
   metricInformationTooltip: '12px',
   submitButton: '14px',
+  cancelButton: '14px',
+  validateButton: '14px',
   inputText: '14px',
   inputTextPlaceholder: '14px',
   inputErrorMessage: '12px',
@@ -176,6 +189,8 @@ export const lineHeight = {
   inputSelectText: '18px',
   metricInformationTooltip: '16px',
   submitButton: '18px',
+  cancelButton: '18px',
+  validateButton: '18px',
   inputText: '18px',
   inputTextPlaceholder: '16px',
   inputErrorMessage: '14px',
@@ -200,6 +215,8 @@ export const fontWeight = {
   metricInformationTooltip: '500',
   landingTheodoLink: 'bold',
   submitButton: 'bold',
+  cancelButton: 'bold',
+  validateButton: 'bold',
   inputErrorMessage: 'bold' as 'bold',
 };
 
