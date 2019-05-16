@@ -5,16 +5,18 @@ interface Props {
   children?: ReactNode;
   color?: string;
   backgroundColor?: string;
+  fontSize?: string;
   margin?: string;
   padding?: string;
 }
 
 const ErrorMessage: React.FunctionComponent<Props> = props => {
-  const { children, color, backgroundColor, margin, padding } = props;
+  const { children, color, backgroundColor, fontSize, margin, padding } = props;
   return (
     <Style.ErrorMessageContainer
       color={color}
       backgroundColor={backgroundColor}
+      fontSize={fontSize}
       margin={margin}
       padding={padding}
     >

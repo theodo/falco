@@ -25,7 +25,6 @@ const styles = (theme: any) =>
   createStyles({
     root: {
       marginTop: '1px',
-      marginRight: getSpacing(4),
       '& input': {
         padding: getSpacing(2),
       },
@@ -85,7 +84,7 @@ const styles = (theme: any) =>
 
 type Props = OwnProps & TextFieldProps & InjectedIntlProps;
 
-const Input: React.FunctionComponent<Props> = ({ classes, error, field, intl, label, type }) => {
+const Input: React.FunctionComponent<Props> = ({ classes, disabled, error, field, intl, label, type }) => {
   return (
     <TextField
       variant="outlined"
@@ -117,6 +116,7 @@ const Input: React.FunctionComponent<Props> = ({ classes, error, field, intl, la
       }}
       {...field}
       type={type}
+      disabled={disabled}
     />
   );
 };

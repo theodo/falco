@@ -13,7 +13,11 @@
       "leadForm": {
         "email_label": "Votre adresse email ...",
         "submit_button": "Demander une démonstration",
-        "error_email_required": "Vous devez fournir un email"
+        "submit_button_running": "Demande en cours",
+        "submit_button_success": "Merci !",
+        "submit_failed": "Une erreur s'est produite lors de la soumission de votre demande.\n\nMerci de réessayer.",
+        "error_email_required": "Vous devez fournir un email",
+        "error_email_valid": "Votre email n'est pas valide"
       }
     },
     "second_block": {

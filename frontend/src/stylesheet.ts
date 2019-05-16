@@ -32,7 +32,7 @@ const colorPalette = {
   black200: 'rgba(0, 0, 0, 0.5)',
   red500: '#d8000c',
   red200: '#ffd2d2',
-  transparent: 'transparent',
+  transparent: 'rgba(0,0,0,0)',
 };
 
 /**
@@ -119,6 +119,11 @@ export const colorUsage = {
   landingTheodoLink: colorPalette.primary500,
   submitButtonText: colorPalette.white500,
   submitButtonBackground: colorPalette.primary500,
+  leadSubmitButtonWaitingBackground: colorPalette.grey800,
+  leadSubmitButtonLoaderPrimary: colorPalette.white500,
+  leadSubmitButtonLoaderSecondary: colorPalette.transparent,
+  leadSubmitButtonSuccessBackground: colorPalette.accentGreen500,
+  leadSubmitButtonSuccessCheck: colorPalette.white500,
   inputText: colorPalette.grey800,
   inputTextPlaceholder: colorPalette.primary500,
   inputTextFocused: colorPalette.primary500,
@@ -166,6 +171,7 @@ export const fontSize = {
   inputText: '14px',
   inputTextPlaceholder: '14px',
   inputErrorMessage: '12px',
+  leadSubmitErrorMessage: '12px',
 };
 
 export const lineHeight = {

@@ -19,7 +19,7 @@ describe('[Saga] Create Lead', () => {
         return expectSaga(createLead, createLeadRequestAction)
           .provide([[matchers.call.fn(makePostRequest), {}]])
           .put(createLeadSuccess({}))
-          .run();
+          .run(1250);
       });
     });
 
@@ -30,7 +30,7 @@ describe('[Saga] Create Lead', () => {
           .provide([[matchers.call.fn(makePostRequest), throwError(error)]])
           .put(createLeadError({ errorMessage: error.message }))
           .not.put.actionType(getType(createLeadSuccess))
-          .run();
+          .run(1250);
       });
     });
   });
