@@ -15,8 +15,14 @@ if "ALLOWED_HOST" in os.environ:
     ALLOWED_HOSTS.append(os.environ.get("ALLOWED_HOST"))
 
 try:
-    EC2_IP = requests.get("http://169.254.169.254/latest/meta-data/local-ipv4").text
-    ALLOWED_HOSTS.append(EC2_IP)
+    LOCAL_EC2_IP = requests.get(
+        "http://169.254.169.254/latest/meta-data/local-ipv4"
+    ).text
+    PUBLIC_EC2_IP = requests.get(
+        "http://169.254.169.254/latest/meta-data/public-ipv4"
+    ).text
+    ALLOWED_HOSTS.append(LOCAL_EC2_IP)
+    ALLOWED_HOSTS.append(PUBLIC_EC2_IP)
 except requests.exceptions.RequestException:
     pass
 
