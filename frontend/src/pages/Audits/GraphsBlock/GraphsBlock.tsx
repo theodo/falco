@@ -1,12 +1,13 @@
-import ErrorMessage from 'components/ErrorMessage';
 import * as React from 'react';
 
+import ErrorMessage from 'components/ErrorMessage';
 import Loader from 'components/Loader';
 import MetricGraph from 'components/MetricGraph';
 import { FormattedMessage } from 'react-intl';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
 import { getSpacing } from 'stylesheet';
 import Style from './GraphsBlock.style';
+import MetricModal from './MetricModal';
 
 export interface OwnProps {
   auditResultIds: string[] | null;
@@ -39,6 +40,14 @@ export const GraphsBlock: React.FunctionComponent<Props> = props => {
     );
   }
 
+  const [showModal, toggleModal] = React.useState(false);
+  const openModal = () => {
+    toggleModal(true);
+  };
+  const closeModal = () => {
+    toggleModal(false);
+  };
+
   return (
     <Style.Container margin={blockMargin}>
       {metrics.map((metric, index) => {
@@ -49,6 +58,9 @@ export const GraphsBlock: React.FunctionComponent<Props> = props => {
         );
       })}
       <Style.GraphSettingsContainer>
+        <Style.ChooseMetricsButton margin={`0 0 ${getSpacing(4)} 0`} onClick={openModal}>
+          <FormattedMessage id="Audits.MetricsModal.add_delete_metrics" /> →
+        </Style.ChooseMetricsButton>
         <Style.GraphInfoLink
           href="https://twitter.com/Phacks/status/1110161414025555968"
           target="_blank"
@@ -57,6 +69,7 @@ export const GraphsBlock: React.FunctionComponent<Props> = props => {
           <FormattedMessage id="Audits.pick_right_metrics" />
         </Style.GraphInfoLink>
       </Style.GraphSettingsContainer>
+      <MetricModal metrics={metrics} show={showModal} close={closeModal} />
     </Style.Container>
   );
 };
