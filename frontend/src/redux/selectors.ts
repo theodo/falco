@@ -9,6 +9,14 @@ export const getCurrentProject = (state: RootStateWithRouter) => {
   return;
 };
 
+export const getCurrentProjectId = (state: RootStateWithRouter) => {
+  const currentProject = getCurrentProject(state);
+  if (undefined !== currentProject) {
+    return currentProject.uuid;
+  }
+  return '';
+};
+
 export const getCurrentURL = (state: RootStateWithRouter) => {
   return state.router.location.pathname;
 };
