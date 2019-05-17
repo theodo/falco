@@ -1,5 +1,6 @@
 import { push } from 'connected-react-router';
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { all, call, put, takeEvery } from 'redux-saga/effects';
+import { pause } from 'services/utils';
 import { ActionType, getType } from 'typesafe-actions';
 
 import { routeDefinitions } from 'routes';
@@ -11,7 +12,8 @@ export function* loginUser(action: ActionType<typeof loginUserRequest>) {
   const endpoint = `/auth/jwt/create`;
   try {
     yield put(loginUserClearError());
-    const token: string | undefined = yield call(login, endpoint, action.payload);
+    // pause function is called to let enough time to animation on button to be seen
+    const [token, unused] = yield all([call(login, endpoint, action.payload), call(pause, 1000)]);
     if (token) {
       yield put(loginUserSuccess({ token }));
       const urlToRedirect = action.payload.originLocation

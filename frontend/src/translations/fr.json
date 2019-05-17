@@ -47,6 +47,12 @@
     }
   },
   "Login": {
+    "username_label": "Nom d'utilisateur",
+    "password_label": "Mot de passe",
+    "connect_button": "Se connecter",
+    "connect_button_running": "Connexion en cours",
+    "error_username_required": "Vous devez fournir un nom d'utilisateur",
+    "error_password_required": "Vous devez fournir un mot de passe",
     "login_error": "Ces identifiants ne semblent pas corrects.\nVeuillez réessayer."
   },
   "Menu": {

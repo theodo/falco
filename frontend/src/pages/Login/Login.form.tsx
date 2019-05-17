@@ -1,11 +1,12 @@
-import Button from '@material-ui/core/Button';
-import { Field, Form, InjectedFormikProps } from 'formik';
+import { InjectedFormikProps } from 'formik';
 import React from 'react';
 
+import ErrorMessage from 'components/ErrorMessage';
 import Input from 'components/Input';
 import { FormattedMessage } from 'react-intl';
 import { Redirect, RouteComponentProps } from 'react-router';
 import { routeDefinitions } from 'routes';
+import { fontSize, getSpacing } from 'stylesheet';
 
 import Styles from './Login.style';
 import { FormValues } from './service';
@@ -45,42 +46,57 @@ const InnerLoginForm: React.FunctionComponent<
     return <Redirect to={routeDefinitions.projectsList.path} />;
   }
 
+  const getSubmitButtonParameters = () => {
+    if (isSubmittingFromStore) {
+      return {
+        className: 'submittingRequest',
+        translationKey: 'Login.connect_button_running',
+      };
+    } else {
+      return {
+        className: 'normal',
+        translationKey: 'Login.connect_button',
+      };
+    }
+  };
+
+  const submitButtonParameters = getSubmitButtonParameters();
+
   return (
     <Styles.Container>
-      {loginError && (
-        <Styles.FormError>
-          <FormattedMessage id="Login.login_error" />
-        </Styles.FormError>
-      )}
-      <Form>
-        <div>
-          <Field
+      <Styles.LoginForm>
+        <Styles.InputFieldContainer margin={`0 0 ${getSpacing(5)} 0`}>
+          <Styles.InputField
             type="text"
             name="username"
-            label="Username"
+            label={'Login.username_label'}
             component={Input}
             error={touched.username && errors.username}
+            disabled={isSubmittingFromStore}
           />
-        </div>
-        <div>
-          <Field
+        </Styles.InputFieldContainer>
+        <Styles.InputFieldContainer margin={`0 0 ${getSpacing(5)} 0`}>
+          <Styles.InputField
             type="password"
             name="password"
-            label="Password"
+            label={'Login.password_label'}
             component={Input}
             error={touched.password && errors.password}
+            disabled={isSubmittingFromStore}
           />
-        </div>
-        <Button
-          type="submit"
-          color="primary"
-          size="medium"
-          disabled={isSubmittingFromStore}
-          variant="outlined"
-        >
-          Connect
-        </Button>
-      </Form>
+        </Styles.InputFieldContainer>
+        {loginError && (
+          <ErrorMessage margin={`0 0 ${getSpacing(5)} 0`} padding={`${getSpacing(3)}`}>
+            <FormattedMessage id="Login.login_error" />
+          </ErrorMessage>
+        )}
+        <Styles.ConnectButton type="submit" className={submitButtonParameters.className}>
+          <Styles.ConnectButtonContent>
+            {isSubmittingFromStore && <Styles.Loader />}
+            <FormattedMessage id={submitButtonParameters.translationKey} />
+          </Styles.ConnectButtonContent>
+        </Styles.ConnectButton>
+      </Styles.LoginForm>
     </Styles.Container>
   );
 };
