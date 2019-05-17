@@ -48,11 +48,14 @@ const StyledProjectsMenu = {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 283px;
   `,
   ProjectItemTitle: styled.div`
     font-size: ${fontSize.h4Text};
     font-weight: ${fontWeight.h4Text};
     line-height: ${lineHeight.h4Text};
+    overflow: hidden;
+    text-overflow: ellipsis;
   `,
   ProjectItemLastAudit: styled.div`
     font-size: ${fontSize.bodyText};
