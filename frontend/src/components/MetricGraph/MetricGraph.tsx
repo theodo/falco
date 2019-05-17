@@ -76,7 +76,7 @@ const MetricGraph: React.FunctionComponent<Props> = props => {
       case 'time':
         return `${(value / 1000).toFixed(2)}s`;
       case 'percent':
-        return `${value}%`;
+        return `${Math.floor(value * 100)}%`;
       case 'number':
         return `${value}`;
     }
