@@ -125,7 +125,7 @@ export const colorUsage = {
   leadSubmitButtonSuccessBackground: colorPalette.accentGreen500,
   leadSubmitButtonSuccessCheck: colorPalette.white500,
   inputText: colorPalette.grey800,
-  inputTextPlaceholder: colorPalette.primary500,
+  inputTextPlaceholder: colorPalette.grey800,
   inputTextFocused: colorPalette.primary500,
   inputTextError: colorPalette.red500,
   metricsModalBackground: colorPalette.grey200,
