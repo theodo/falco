@@ -1,7 +1,7 @@
 import { updateDisplayedMetrics } from '../actions';
-import reducer, { parametersState } from '../reducer';
+import reducer, { ParametersState } from '../reducer';
 
-const initialState: parametersState = {
+const initialState: ParametersState = {
   displayedMetrics: [
     'WPTMetricFirstViewTTI',
     'WPTMetricFirstViewSpeedIndex',
@@ -19,15 +19,7 @@ describe('Parameters reducer', () => {
     });
 
     it('Should return the given list if the list is not empty', () => {
-      const action = updateDisplayedMetrics({
-        displayedMetrics: [
-          'WPTMetricFirstViewSpeedIndex',
-          'WPTMetricRepeatViewSpeedIndex',
-          'WPTMetricFirstViewFirstPaint',
-          'WPTMetricRepeatViewFirstPaint',
-        ],
-      });
-      const expectedState = {
+      const newState: ParametersState = {
         displayedMetrics: [
           'WPTMetricFirstViewSpeedIndex',
           'WPTMetricRepeatViewSpeedIndex',
@@ -35,8 +27,10 @@ describe('Parameters reducer', () => {
           'WPTMetricRepeatViewFirstPaint',
         ],
       };
+      const action = updateDisplayedMetrics(newState);
+      const expectedState = newState;
 
-      expect(reducer(initialState, action)).toEqual(expectedState);
+      expect(reducer(newState, action)).toEqual(expectedState);
     });
   });
 });

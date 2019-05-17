@@ -4,13 +4,13 @@ import { ActionType, getType } from 'typesafe-actions';
 import { MetricType } from 'redux/auditResults/types';
 import { updateDisplayedMetrics } from './actions';
 
-export type parametersAction = ActionType<typeof updateDisplayedMetrics>;
+export type ParametersAction = ActionType<typeof updateDisplayedMetrics>;
 
-export type parametersState = Readonly<{
+export type ParametersState = Readonly<{
   displayedMetrics: MetricType[];
 }>;
 
-const initialState: parametersState = {
+const initialState: ParametersState = {
   displayedMetrics: [
     'WPTMetricFirstViewTTI',
     'WPTMetricFirstViewSpeedIndex',
@@ -18,8 +18,8 @@ const initialState: parametersState = {
   ],
 };
 
-const reducer = (state: parametersState = initialState, action: AnyAction) => {
-  const typedAction = action as parametersAction;
+const reducer = (state: ParametersState = initialState, action: AnyAction) => {
+  const typedAction = action as ParametersAction;
   switch (typedAction.type) {
     case getType(updateDisplayedMetrics):
       return {
