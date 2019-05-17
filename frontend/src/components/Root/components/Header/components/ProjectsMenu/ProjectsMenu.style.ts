@@ -77,6 +77,7 @@ const StyledProjectsMenu = {
   CurrentProjectItemTitleBlock: styled.div`
     display: flex;
     flex-direction: column;
+    width: 198px;
   `,
   CurrentProjectItemTitleContainer: styled.div`
     display: flex;
@@ -84,6 +85,8 @@ const StyledProjectsMenu = {
     margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
   `,
   CurrentProjectItemStarContainer: styled.div`
+    min-height: 25px;
+    min-width: 25px;
     height: 25px;
     width: 25px;
     margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
@@ -92,6 +95,8 @@ const StyledProjectsMenu = {
     font-size: ${fontSize.h3Text};
     font-weight: ${fontWeight.h3Text};
     line-height: ${lineHeight.h3Text};
+    overflow: hidden;
+    text-overflow: ellipsis;
   `,
 };
 
