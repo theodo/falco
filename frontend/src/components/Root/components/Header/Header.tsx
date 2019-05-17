@@ -118,7 +118,7 @@ export const Header: React.FunctionComponent<Props> = ({ currentURL }) => {
           </Style.LogoContainer>
         </Style.HeaderMenu>
         <Style.HeaderContent>
-          {shouldDisplayConnectedUserHeader ? (
+          {shouldDisplayConnectedUserHeader && (
             <Style.Nav>
               <Style.HeaderButtonsBlock>
                 <Style.HeaderButton
@@ -137,7 +137,8 @@ export const Header: React.FunctionComponent<Props> = ({ currentURL }) => {
                 </Style.HeaderButton>
               </Style.HeaderButtonsBlock>
             </Style.Nav>
-          ) : (
+          )}
+          {isLandingPage && (
             <Style.HeaderLink href={routeDefinitions.login.path}>
               <FormattedMessage id="Header.connect_link" />
             </Style.HeaderLink>
