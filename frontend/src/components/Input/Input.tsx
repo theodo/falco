@@ -49,12 +49,12 @@ const styles = (theme: any) =>
       fontFamily: fontFamily.mainSans,
       color: colorUsage.inputText,
       '&:not($inputFocused):not($inputDisabled):not($inputError) $notchedOutline': {
-        borderColor: colorUsage.inputTextFocused,
-        borderWidth: '2px',
+        borderColor: colorUsage.inputText,
+        borderWidth: '1px',
       },
       '&:hover:not($inputDisabled):not($inputFocused):not($inputError) $notchedOutline': {
-        borderColor: colorUsage.inputTextFocused,
-        borderWidth: '2px',
+        borderColor: colorUsage.inputText,
+        borderWidth: '1px',
       },
       '&$inputFocused $notchedOutline': {
         borderColor: colorUsage.inputTextFocused,

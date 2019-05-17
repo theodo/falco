@@ -24,7 +24,7 @@ describe('[Saga] Login redux', () => {
         return expectSaga(loginUser, loginUserRequestAction)
           .provide([[matchers.call.fn(login), token]])
           .put(loginUserSuccess({ token }))
-          .run();
+          .run(1250);
       });
     });
 
@@ -35,7 +35,7 @@ describe('[Saga] Login redux', () => {
           .provide([[matchers.call.fn(login), throwError(error)]])
           .put(loginUserError({ errorMessage: error.message }))
           .not.put.actionType(getType(loginUserSuccess))
-          .run();
+          .run(1250);
       });
     });
   });

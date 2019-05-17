@@ -22,10 +22,10 @@ export type LoginServiceProps = LoginServiceStateProps &
 export const validateForm = (values: FormValues) => {
   const errors: { password?: string; username?: string } = {};
   if (!values.username) {
-    errors.username = 'Username required';
+    errors.username = 'Login.error_username_required';
   }
   if (!values.password) {
-    errors.password = 'Password required';
+    errors.password = 'Login.error_password_required';
   }
   return errors;
 };
@@ -36,5 +36,7 @@ export const mapPropsToValues = () => ({
 });
 
 export const handleSubmit = (values: FormValues, { props }: { props: LoginServiceProps }) => {
-  props.login(values, props.location.state ? props.location.state.from : undefined);
+  if (!props.isSubmittingFromStore) {
+    props.login(values, props.location.state ? props.location.state.from : undefined);
+  }
 };
