@@ -71,7 +71,11 @@ const StyledMenu = {
     align-items: center;
   `,
 
-  PageScriptTitle: styled.div``,
+  PageScriptTitle: styled.div`
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  `,
 
   MenuArrowContainer: styled.span`
     width: 12px;
