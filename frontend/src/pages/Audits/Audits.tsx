@@ -154,12 +154,6 @@ export const Audits: React.FunctionComponent<Props> = ({
 
   const badgeParams = getBadgeParams();
 
-  const metrics: MetricType[] = [
-    'WPTMetricFirstViewTTI',
-    'WPTMetricFirstViewSpeedIndex',
-    'WPTMetricFirstViewLoadTime',
-  ];
-
   const sortedAuditResultsIds = page
     ? sortedPageAuditResultsIds
     : script &&
@@ -215,11 +209,7 @@ export const Audits: React.FunctionComponent<Props> = ({
           />
         </Style.ScriptStepBlock>
       )}
-      <GraphsBlock
-        blockMargin={`0 0 ${getSpacing(8)} 0`}
-        auditResultIds={sortedAuditResultsIds}
-        metrics={metrics}
-      />
+      <GraphsBlock blockMargin={`0 0 ${getSpacing(8)} 0`} auditResultIds={sortedAuditResultsIds} />
       <Style.Title>
         <FormattedMessage id="Audits.webpagetest_analysis" />
       </Style.Title>
