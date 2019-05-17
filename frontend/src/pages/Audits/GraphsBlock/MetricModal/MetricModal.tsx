@@ -7,15 +7,19 @@ import { MetricType } from 'redux/auditResults/types';
 import { colorUsage, getSpacing } from 'stylesheet';
 import Style from './MetricModal.style';
 
-interface Props {
+interface OwnProps {
+  projectId: string;
+}
+
+interface Props extends OwnProps {
   metrics: MetricType[];
   show: boolean;
   close: () => void;
-  updateDisplayedMetrics: (selectedMetrics: MetricType[]) => void;
+  updateDisplayedMetrics: (projectId: string, selectedMetrics: MetricType[]) => void;
 }
 
 const MetricModal: React.FunctionComponent<Props> = props => {
-  const { metrics, show, close, updateDisplayedMetrics } = props;
+  const { metrics, show, close, updateDisplayedMetrics, projectId } = props;
 
   const modalStyles = {
     content: {
@@ -62,7 +66,7 @@ const MetricModal: React.FunctionComponent<Props> = props => {
 
   const submitDisplayedMetrics = (event: MouseEvent) => {
     event.preventDefault();
-    updateDisplayedMetrics(selectedMetrics);
+    updateDisplayedMetrics(projectId, selectedMetrics);
     close();
   };
 

@@ -9,22 +9,18 @@ import { updateDisplayedMetrics } from './actions';
 export type ParametersAction = ActionType<typeof updateDisplayedMetrics>;
 
 export type ParametersState = Readonly<{
-  displayedMetrics: MetricType[];
+  metrics: Record<string, MetricType[]>;
 }>;
 
 const persistConfig = {
   key: 'parameters',
-  whitelist: ['displayedMetrics'],
+  whitelist: ['metrics'],
   blacklist: [],
   storage,
 };
 
 const initialState: ParametersState = {
-  displayedMetrics: [
-    'WPTMetricFirstViewTTI',
-    'WPTMetricFirstViewSpeedIndex',
-    'WPTMetricFirstViewLoadTime',
-  ],
+  metrics: {},
 };
 
 const reducer = (state: ParametersState = initialState, action: AnyAction) => {
@@ -33,7 +29,10 @@ const reducer = (state: ParametersState = initialState, action: AnyAction) => {
     case getType(updateDisplayedMetrics):
       return {
         ...state,
-        displayedMetrics: action.payload.displayedMetrics,
+        metrics: {
+          ...state.metrics,
+          [action.payload.projectId]: action.payload.displayedMetrics,
+        },
       };
     default:
       return state;
