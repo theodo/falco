@@ -1,1 +1,1 @@
-export { default } from './MetricModal';
+export { default } from './MetricModal.wrap';

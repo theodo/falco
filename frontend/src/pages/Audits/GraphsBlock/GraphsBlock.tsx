@@ -11,12 +11,12 @@ import MetricModal from './MetricModal';
 
 export interface OwnProps {
   auditResultIds: string[] | null;
-  metrics: MetricType[];
   blockMargin: string;
 }
 
 interface Props extends OwnProps {
   auditResults: AuditResultsAsGraphData;
+  metrics: MetricType[];
 }
 
 export const GraphsBlock: React.FunctionComponent<Props> = props => {
