@@ -10,7 +10,7 @@ import { userAction, userState } from './user';
 export type RootState = Readonly<{
   lead: LeadState;
   login: LoginState & PersistPartial;
-  parameters: ParametersState;
+  parameters: ParametersState & PersistPartial;
   projects: projectsState;
   auditResults: auditResultsState;
   user: userState;
