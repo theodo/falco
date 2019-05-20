@@ -1,0 +1,65 @@
+#!/bin/bash
+
+pass=true
+RED='\033[1;31m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+echo "Running Linters:"
+
+
+# Run yarn lint and get the output and return code
+lint=$(yarn --cwd frontend lint)
+ret_code=$?
+
+# If it didn't pass, announce it failed and print the output
+if [ $ret_code != 0 ]; then
+	printf "\n${RED}lint failed:${NC}"
+	echo "$lint\n"
+	pass=false
+else
+	printf "${GREEN}lint passed.${NC}\n"
+fi
+
+# Run yarn lint-style and get the output and return code
+stylelint=$(yarn --cwd frontend lint-style)
+ret_code=$?
+
+if [ $ret_code != 0 ]; then
+	printf "${RED}lint-style failed:${NC}"
+	echo "$stylelint\n"
+	pass=false
+else
+	printf "${GREEN}lint-style passed.${NC}\n"
+fi
+
+# Run black and get the output and return code
+black=$(black --diff --check backend/.)
+ret_code=$?
+
+if [ $ret_code != 0 ]; then
+	printf "${RED}black failed:${NC}"
+	echo "$black\n"
+	pass=false
+else
+	printf "${GREEN}black passed.${NC}\n"
+fi
+
+# Run flake8 and get the output and return code
+flake=$(flake8 backend/.)
+ret_code=$?
+
+if [ $ret_code != 0 ]; then
+	printf "${RED}flake8 failed:${NC}"
+	echo "$flake\n"
+	pass=false
+else
+	printf "${GREEN}flake8 passed.${NC}\n"
+fi
+
+# If there were no failures, it is good to commit
+if $pass; then
+	exit 0
+fi
+
+exit 1
