@@ -2,6 +2,7 @@ backend/install: .env
 	TMPDIR=/private$$TMPDIR docker-compose up -d
 	docker-compose exec backend ./manage.py migrate
 	docker-compose exec backend ./manage.py createcachetable
+	make hook
 
 backend/start:
 	TMPDIR=/private$$TMPDIR docker-compose up
@@ -20,6 +21,7 @@ db/connect:
 
 frontend/install: frontend/.env
 	yarn --cwd frontend install
+	make hook
 
 frontend/start:
 	yarn --cwd frontend start
@@ -45,3 +47,7 @@ frontend/.env: frontend/.env.example
 		echo cp frontend/.env.example frontend/.env;\
 		cp frontend/.env.example frontend/.env;\
 	fi
+
+hook:
+	chmod +x hooks/pre-commit
+	ln -s -f ../../hooks/pre-commit .git/hooks/pre-commit
