@@ -102,10 +102,11 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(days=7),
-    "REFRESH_TOKEN_LIFETIME": datetime.timedelta(days=365),
+    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(minutes=10),
+    "REFRESH_TOKEN_LIFETIME": datetime.timedelta(minutes=525600),
 }
 
+REFRESH_TOKEN = "refreshToken"
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/

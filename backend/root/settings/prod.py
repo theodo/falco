@@ -90,3 +90,6 @@ EMAIL_HOST_USER = os.environ.get("EMAIL_USER")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_PASSWORD")
 port = os.environ.get("EMAIL_PORT")
 EMAIL_PORT = int(port) if port is not None else 0
+
+# RefreshToken JWT
+STORE_REFRESH_TOKEN_COOKIE_ONLY_IN_HTTPS = True
