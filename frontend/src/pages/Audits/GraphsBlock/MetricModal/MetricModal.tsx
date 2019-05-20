@@ -7,15 +7,19 @@ import { MetricType } from 'redux/auditResults/types';
 import { colorUsage, getSpacing } from 'stylesheet';
 import Style from './MetricModal.style';
 
-interface Props {
+interface OwnProps {
+  projectId: string;
+}
+
+interface Props extends OwnProps {
   metrics: MetricType[];
   show: boolean;
   close: () => void;
-  updateDisplayedMetrics: (selectedMetrics: MetricType[]) => void;
+  updateDisplayedMetrics: (projectId: string, selectedMetrics: MetricType[]) => void;
 }
 
 const MetricModal: React.FunctionComponent<Props> = props => {
-  const { metrics, show, close, updateDisplayedMetrics } = props;
+  const { metrics, show, close, updateDisplayedMetrics, projectId } = props;
 
   const modalStyles = {
     content: {
@@ -37,10 +41,11 @@ const MetricModal: React.FunctionComponent<Props> = props => {
     },
   };
 
-  const disableBackground = () => {
+  const handleModalOpen = () => {
     document.body.style.overflow = 'hidden';
   };
-  const enableBackground = () => {
+  const handleModalClose = () => {
+    updateSelectedMetrics(metrics);
     document.body.style.overflow = 'scroll';
   };
 
@@ -62,7 +67,7 @@ const MetricModal: React.FunctionComponent<Props> = props => {
 
   const submitDisplayedMetrics = (event: MouseEvent) => {
     event.preventDefault();
-    updateDisplayedMetrics(selectedMetrics);
+    updateDisplayedMetrics(projectId, selectedMetrics);
     close();
   };
 
@@ -73,8 +78,8 @@ const MetricModal: React.FunctionComponent<Props> = props => {
       shouldCloseOnOverlayClick={true}
       onRequestClose={close}
       style={modalStyles}
-      onAfterOpen={disableBackground}
-      onAfterClose={enableBackground}
+      onAfterOpen={handleModalOpen}
+      onAfterClose={handleModalClose}
       appElement={document.querySelector('#root') as HTMLElement}
     >
       <Style.ModalTitle>

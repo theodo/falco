@@ -73,7 +73,7 @@
     "no_audit": "No audit data is available for this page or script.\n\nPlease try again later.",
     "pick_right_metrics": "How to pick the right metrics? →",
     "MetricsModal": {
-      "add_delete_metric": "Add / Delete metrics",
+      "add_delete_metrics": "Add / Delete metrics",
       "cancel_button": "Cancel",
       "validate_button": "Validate"
     },

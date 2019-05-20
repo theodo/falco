@@ -8,7 +8,6 @@ import ErrorMessage from 'components/ErrorMessage';
 import Loader from 'components/Loader';
 import Select from 'components/Select';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
-import { MetricType } from 'redux/auditResults/types';
 import { PageType, ScriptType } from 'redux/projects/types';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
