@@ -2,7 +2,6 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { makeGetRequest } from 'services/networking/request';
 import { ActionType, getType } from 'typesafe-actions';
 
-import { getUserToken } from 'redux/login/selectors';
 import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
 
 import {
@@ -24,24 +23,22 @@ function* fetchProjectFailedHandler(error: Error, actionPayload: Record<string, 
 
 export function* fetchProjects(action: ActionType<typeof fetchProjectsRequest>) {
   const endpoint = '/api/projects/';
-  const token = yield select(getUserToken);
   const { body: projects }: { body: ApiProjectType[] } = yield call(
     makeGetRequest,
     endpoint,
+    true,
     null,
-    token,
   );
   yield put(fetchProjectSuccess({ byId: modelizeProjects(projects) }));
 }
 
 export function* fetchProject(action: ActionType<typeof fetchProjectRequest>) {
   const endpoint = `/api/projects/${action.payload.projectId}/`;
-  const token = yield select(getUserToken);
   const { body: project }: { body: ApiProjectType } = yield call(
     makeGetRequest,
     endpoint,
+    true,
     null,
-    token,
   );
   yield put(fetchProjectSuccess({ byId: modelizeProject(project) }));
 }
