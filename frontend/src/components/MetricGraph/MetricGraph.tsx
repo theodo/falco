@@ -56,6 +56,7 @@ const MetricGraph: React.FunctionComponent<Props> = props => {
           {intl.formatMessage({ id: `Metrics.${entry.value}.name` })}
         </Style.LegendTitle>
         <Style.MetricInfoIconContainer
+          title={intl.formatMessage({ id: `components.MetricGraph.metric_info_title` })}
           margin={`0 0 0 ${getSpacing(2)}`}
           onClick={toggleMetricInfoTooltipVisibility}
           ref={metricInfoIconContainerRef}

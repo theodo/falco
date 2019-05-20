@@ -158,7 +158,8 @@
   },
   "components": {
     "MetricGraph": {
-      "tooltipDate": "On {day} at {time}"
+      "tooltipDate": "On {day} at {time}",
+      "metric_info_title": "Details"
     }
   }
 }
