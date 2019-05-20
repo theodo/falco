@@ -12,7 +12,7 @@ const customMetrics = ['WPTMetricFirstViewFirstPaint', 'WPTMetricRepeatViewFirst
 const initialState = {
   ...state,
   parameters: {
-    metrics: { [projectId]: customMetrics },
+    displayedMetrics: { [projectId]: customMetrics },
   },
 };
 

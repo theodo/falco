@@ -4,8 +4,8 @@ import { RootState, RootStateWithRouter } from 'redux/types';
 
 export const getMetricsToDisplay = (state: RootState): MetricType[] => {
   const projectId = getCurrentProjectId(state as RootStateWithRouter);
-  if (!state.parameters.metrics[projectId]) {
+  if (!state.parameters.displayedMetrics[projectId]) {
     return ['WPTMetricFirstViewTTI', 'WPTMetricFirstViewSpeedIndex', 'WPTMetricFirstViewLoadTime'];
   }
-  return state.parameters.metrics[projectId];
+  return state.parameters.displayedMetrics[projectId];
 };

@@ -9,18 +9,18 @@ import { updateDisplayedMetrics } from './actions';
 export type ParametersAction = ActionType<typeof updateDisplayedMetrics>;
 
 export type ParametersState = Readonly<{
-  metrics: Record<string, MetricType[]>;
+  displayedMetrics: Record<string, MetricType[]>;
 }>;
 
 const persistConfig = {
   key: 'parameters',
-  whitelist: ['metrics'],
+  whitelist: ['displayedMetrics'],
   blacklist: [],
   storage,
 };
 
 const initialState: ParametersState = {
-  metrics: {},
+  displayedMetrics: {},
 };
 
 const reducer = (state: ParametersState = initialState, action: AnyAction) => {
@@ -29,8 +29,8 @@ const reducer = (state: ParametersState = initialState, action: AnyAction) => {
     case getType(updateDisplayedMetrics):
       return {
         ...state,
-        metrics: {
-          ...state.metrics,
+        displayedMetrics: {
+          ...state.displayedMetrics,
           [action.payload.projectId]: action.payload.displayedMetrics,
         },
       };
