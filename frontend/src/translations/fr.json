@@ -1,5 +1,7 @@
 {
   "Header": {
+    "logo_title_landing": "Page d'accueil",
+    "logo_title_app": "Rafraîchir la page",
     "connect_link": "SE CONNECTER",
     "login_button": "MON COMPTE",
     "projects_button": "MES PROJETS",
