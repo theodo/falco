@@ -23,6 +23,8 @@ const StyledAudits = {
     font-size: ${fontSize.h1Text};
     font-weight: ${fontWeight.h1Text};
     text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
   `,
 
   Title: styled.div`

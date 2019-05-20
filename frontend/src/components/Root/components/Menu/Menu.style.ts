@@ -26,6 +26,8 @@ const StyledMenu = {
     font-weight: ${fontWeight.h2Text};
     margin-bottom: ${getSpacing(4)};
     padding-left: ${getSpacing(3)};
+    overflow: hidden;
+    text-overflow: ellipsis;
   `,
 
   Audits: styled.div`
@@ -69,7 +71,11 @@ const StyledMenu = {
     align-items: center;
   `,
 
-  PageScriptTitle: styled.div``,
+  PageScriptTitle: styled.div`
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  `,
 
   MenuArrowContainer: styled.span`
     width: 12px;
