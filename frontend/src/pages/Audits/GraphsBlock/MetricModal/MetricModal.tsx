@@ -41,10 +41,11 @@ const MetricModal: React.FunctionComponent<Props> = props => {
     },
   };
 
-  const disableBackground = () => {
+  const handleModalOpen = () => {
     document.body.style.overflow = 'hidden';
   };
-  const enableBackground = () => {
+  const handleModalClose = () => {
+    updateSelectedMetrics(metrics);
     document.body.style.overflow = 'scroll';
   };
 
@@ -77,8 +78,8 @@ const MetricModal: React.FunctionComponent<Props> = props => {
       shouldCloseOnOverlayClick={true}
       onRequestClose={close}
       style={modalStyles}
-      onAfterOpen={disableBackground}
-      onAfterClose={enableBackground}
+      onAfterOpen={handleModalOpen}
+      onAfterClose={handleModalClose}
       appElement={document.querySelector('#root') as HTMLElement}
     >
       <Style.ModalTitle>
