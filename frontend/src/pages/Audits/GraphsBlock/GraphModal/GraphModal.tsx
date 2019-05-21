@@ -51,7 +51,7 @@ const GraphModal: React.FunctionComponent<Props> = props => {
       onAfterClose={handleModalClose}
       appElement={document.querySelector('#root') as HTMLElement}
     >
-      <MetricGraph auditResults={auditResults} metrics={[metric]} />
+      <MetricGraph fullscreen={true} auditResults={auditResults} metrics={[metric]} />
     </Modal>
   );
 };

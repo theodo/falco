@@ -65,7 +65,7 @@ export const GraphsBlock: React.FunctionComponent<Props> = props => {
       {metrics.map((metric, index) => {
         return (
           <Style.GraphContainer margin={`0 0 ${getSpacing(4)} 0`} key={index}>
-            <MetricGraph auditResults={auditResults} metrics={[metric]} />
+            <MetricGraph fullscreen={false} auditResults={auditResults} metrics={[metric]} />
             <Style.ExpandButton onClick={openGraphModal(metric)}>
               <Expand color={'#4A4A4A'} />
             </Style.ExpandButton>
