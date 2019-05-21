@@ -7,6 +7,7 @@ import Expand from 'icons/Expand';
 import { FormattedMessage } from 'react-intl';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
 import { getSpacing } from 'stylesheet';
+import GraphModal from './GraphModal';
 import Style from './GraphsBlock.style';
 import MetricModal from './MetricModal';
 
@@ -41,12 +42,22 @@ export const GraphsBlock: React.FunctionComponent<Props> = props => {
     );
   }
 
-  const [showModal, toggleModal] = React.useState(false);
-  const openModal = () => {
-    toggleModal(true);
+  const [showMetricModal, toggleMetricModal] = React.useState(false);
+  const openMetricModal = () => {
+    toggleMetricModal(true);
   };
-  const closeModal = () => {
-    toggleModal(false);
+  const closeMetricModal = () => {
+    toggleMetricModal(false);
+  };
+
+  const [showGraphModal, toggleGraphModal] = React.useState(false);
+  const [fullScreenedMetric, setFullScreenedMetric] = React.useState('' as MetricType);
+  const openGraphModal = (metric: MetricType) => () => {
+    setFullScreenedMetric(metric);
+    toggleGraphModal(true);
+  };
+  const closeGraphModal = () => {
+    toggleGraphModal(false);
   };
 
   return (
@@ -55,14 +66,14 @@ export const GraphsBlock: React.FunctionComponent<Props> = props => {
         return (
           <Style.GraphContainer margin={`0 0 ${getSpacing(4)} 0`} key={index}>
             <MetricGraph auditResults={auditResults} metrics={[metric]} />
-            <Style.ExpandButton onClick={openGraphModal}>
+            <Style.ExpandButton onClick={openGraphModal(metric)}>
               <Expand color={'#4A4A4A'} />
             </Style.ExpandButton>
           </Style.GraphContainer>
         );
       })}
       <Style.GraphSettingsContainer>
-        <Style.ChooseMetricsButton margin={`0 0 ${getSpacing(4)} 0`} onClick={openModal}>
+        <Style.ChooseMetricsButton margin={`0 0 ${getSpacing(4)} 0`} onClick={openMetricModal}>
           <FormattedMessage id="Audits.MetricsModal.add_delete_metrics" /> →
         </Style.ChooseMetricsButton>
         <Style.GraphInfoLink
@@ -73,7 +84,13 @@ export const GraphsBlock: React.FunctionComponent<Props> = props => {
           <FormattedMessage id="Audits.pick_right_metrics" />
         </Style.GraphInfoLink>
       </Style.GraphSettingsContainer>
-      <MetricModal metrics={metrics} show={showModal} close={closeModal} />
+      <MetricModal metrics={metrics} show={showMetricModal} close={closeMetricModal} />
+      <GraphModal
+        metric={fullScreenedMetric}
+        auditResults={auditResults}
+        show={showGraphModal}
+        close={closeGraphModal}
+      />
     </Style.Container>
   );
 };
