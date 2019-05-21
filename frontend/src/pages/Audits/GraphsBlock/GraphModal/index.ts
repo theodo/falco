@@ -1,1 +1,1 @@
-export { default } from './GraphModal';
+export { default } from './GraphModal.wrap';

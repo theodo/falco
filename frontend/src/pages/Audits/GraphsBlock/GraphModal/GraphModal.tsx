@@ -1,4 +1,5 @@
 import React from 'react';
+import { InjectedIntlProps } from 'react-intl';
 import Modal from 'react-modal';
 
 import MetricGraph from 'components/MetricGraph';
@@ -14,8 +15,8 @@ interface Props {
   close: () => void;
 }
 
-const GraphModal: React.FunctionComponent<Props> = props => {
-  const { auditResults, metric, show, close } = props;
+const GraphModal: React.FunctionComponent<Props & InjectedIntlProps> = props => {
+  const { auditResults, metric, show, close, intl } = props;
 
   const modalStyles = {
     content: {
@@ -53,7 +54,10 @@ const GraphModal: React.FunctionComponent<Props> = props => {
       onAfterClose={handleModalClose}
       appElement={document.querySelector('#root') as HTMLElement}
     >
-      <Style.Close onClick={close}>
+      <Style.Close
+        title={intl.formatMessage({ id: `components.MetricGraph.close` })}
+        onClick={close}
+      >
         <Close color={colorUsage.graphModalToggleButton} />
       </Style.Close>
       <MetricGraph fullscreen={true} auditResults={auditResults} metrics={[metric]} />

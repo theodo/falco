@@ -16,7 +16,6 @@ export default class Close extends React.Component<Props> {
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <title>Close</title>
         <g
           id="Close-Icon"
           stroke="none"

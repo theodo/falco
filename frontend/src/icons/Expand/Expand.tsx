@@ -16,7 +16,6 @@ export default class Information extends React.Component<Props> {
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <title>Expand</title>
         <g id="Expand-Icon-/-Normal" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
           <g id="expand" fill={this.props.color} fill-rule="nonzero">
             <path

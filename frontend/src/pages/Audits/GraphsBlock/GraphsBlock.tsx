@@ -4,7 +4,7 @@ import ErrorMessage from 'components/ErrorMessage';
 import Loader from 'components/Loader';
 import MetricGraph from 'components/MetricGraph';
 import Expand from 'icons/Expand';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
 import { colorUsage, getSpacing } from 'stylesheet';
 import GraphModal from './GraphModal';
@@ -21,8 +21,8 @@ interface Props extends OwnProps {
   metrics: MetricType[];
 }
 
-export const GraphsBlock: React.FunctionComponent<Props> = props => {
-  const { auditResults, auditResultIds, metrics, blockMargin } = props;
+export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = props => {
+  const { auditResults, auditResultIds, metrics, blockMargin, intl } = props;
 
   if (!auditResultIds || !auditResults) {
     return (
@@ -66,7 +66,10 @@ export const GraphsBlock: React.FunctionComponent<Props> = props => {
         return (
           <Style.GraphContainer margin={`0 0 ${getSpacing(4)} 0`} key={index}>
             <MetricGraph fullscreen={false} auditResults={auditResults} metrics={[metric]} />
-            <Style.ExpandButton onClick={openGraphModal(metric)}>
+            <Style.ExpandButton
+              title={intl.formatMessage({ id: `components.MetricGraph.expand` })}
+              onClick={openGraphModal(metric)}
+            >
               <Expand color={colorUsage.graphModalToggleButton} />
             </Style.ExpandButton>
           </Style.GraphContainer>
