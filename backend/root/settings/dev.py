@@ -28,3 +28,6 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+# RefreshToken JWT
+STORE_REFRESH_TOKEN_COOKIE_ONLY_IN_HTTPS = False

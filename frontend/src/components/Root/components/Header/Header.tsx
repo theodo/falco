@@ -153,18 +153,20 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
           )}
         </Style.HeaderContent>
       </Style.Header>
-      <Style.MenusContainer>
-        <ProjectsMenu
-          isVisible={isProjectsMenuVisible}
-          position={'absolute'}
-          right={projectsMenuRight}
-        />
-        <AccountMenu
-          isVisible={isAccountMenuVisible}
-          position={'absolute'}
-          right={accountMenuRight}
-        />
-      </Style.MenusContainer>
+      {shouldDisplayConnectedUserHeader && (
+        <Style.MenusContainer>
+          <ProjectsMenu
+            isVisible={isProjectsMenuVisible}
+            position={'absolute'}
+            right={projectsMenuRight}
+          />
+          <AccountMenu
+            isVisible={isAccountMenuVisible}
+            position={'absolute'}
+            right={accountMenuRight}
+          />
+        </Style.MenusContainer>
+      )}
     </Style.HeaderContainer>
   );
 };

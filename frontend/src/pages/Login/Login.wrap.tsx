@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
 import { Dispatch } from 'redux';
-import { getIsSubmitting, getLoginError, getUserToken, selectIsAuthenticated } from 'redux/login';
+import { getIsAuthenticated, getIsSubmitting, getLoginError } from 'redux/login';
 import { loginUserRequest } from 'redux/login/actions';
 import { RootState } from 'redux/types';
 
@@ -11,9 +11,8 @@ import { FormValues } from './service';
 
 const mapStateToProps = (state: RootState) => ({
   loginError: getLoginError(state),
-  isUserAuthenticated: selectIsAuthenticated(state),
+  isUserAuthenticated: getIsAuthenticated(state),
   isSubmittingFromStore: getIsSubmitting(state),
-  token: getUserToken(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

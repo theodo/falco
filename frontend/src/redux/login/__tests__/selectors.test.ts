@@ -1,18 +1,17 @@
 import { state } from '__fixtures__/state';
-import { getIsSubmitting, getLoginError, getUserToken } from '../selectors';
+import { PersistState } from 'redux-persist/es/types';
+import { getIsAuthenticated, getIsSubmitting, getLoginError } from '../selectors';
 
-const token = 'OX1dSSVRFX1BPU1QsQ0FOX1JFQURfTkV';
+const isAuthenticated = true;
 const loginError = 'User not logged in';
 const isSubmitting = false;
 
-const initialState = { ...state, login: { token, loginError, isSubmitting } };
+const initialState = {
+  ...state,
+  login: { isAuthenticated, loginError, isSubmitting, _persist: {} as PersistState },
+};
 
 describe('Login selectors', () => {
-  describe('getUserToken function', () => {
-    it('Should return the value stored in store.login.token', () => {
-      expect(getUserToken(initialState)).toBe(token);
-    });
-  });
   describe('getLoginError function', () => {
     it('Should return the value stored in store.login.loginError', () => {
       expect(getLoginError(initialState)).toBe(loginError);
@@ -21,6 +20,11 @@ describe('Login selectors', () => {
   describe('getIsSubmitting function', () => {
     it('Should return the value stored in store.login.isSubmitting', () => {
       expect(getIsSubmitting(initialState)).toBe(isSubmitting);
+    });
+  });
+  describe('getIsAuthenticated function', () => {
+    it('Should return the value stored in store.login.isAuthenticated', () => {
+      expect(getIsAuthenticated(initialState)).toBe(isAuthenticated);
     });
   });
 });

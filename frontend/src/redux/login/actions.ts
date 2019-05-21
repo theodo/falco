@@ -6,9 +6,7 @@ export const loginUserRequest = createStandardAction('Login/USER_LOGIN_REQUEST')
   originLocation: string | undefined;
 }>();
 
-export const loginUserSuccess = createStandardAction('Login/USER_LOGIN_SUCCESS')<{
-  token: string;
-}>();
+export const loginUserSuccess = createStandardAction('Login/USER_LOGIN_SUCCESS')();
 
 export const loginUserError = createStandardAction('Login/USER_LOGIN_ERROR')<{
   errorMessage: string;
@@ -16,7 +14,9 @@ export const loginUserError = createStandardAction('Login/USER_LOGIN_ERROR')<{
 
 export const loginUserClearError = createStandardAction('Login/USER_CLEAR_LOGIN_ERROR')();
 
-export const logoutUserRequest = createStandardAction('Logout/USER_LOGOUT_REQUEST')();
+export const logoutUserRequest = createStandardAction('Logout/USER_LOGOUT_REQUEST')<{
+  redirectTo?: string | undefined;
+}>();
 
 export default {
   loginUserRequest,

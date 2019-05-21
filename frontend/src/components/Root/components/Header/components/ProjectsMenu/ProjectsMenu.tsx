@@ -17,7 +17,7 @@ interface OwnProps {
   position?: string;
   projects: Array<ProjectType | null> | null;
   right?: string | null;
-  userToken: string | null;
+  isUserAuthenticated: boolean;
 }
 
 type Props = OwnProps & InjectedIntlProps;
@@ -30,13 +30,15 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
   position,
   projects,
   right,
-  userToken,
+  isUserAuthenticated,
 }) => {
   React.useEffect(
     () => {
-      fetchProjectsRequest();
+      if (isUserAuthenticated) {
+        fetchProjectsRequest();
+      }
     },
-    [userToken],
+    [isUserAuthenticated],
   );
 
   const renderCurrentProjectItem = () =>

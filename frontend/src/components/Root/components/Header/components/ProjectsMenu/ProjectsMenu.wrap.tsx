@@ -1,6 +1,7 @@
 import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { getIsAuthenticated } from 'redux/login';
 import { fetchProjectsRequest } from 'redux/projects';
 import { getCurrentProject } from 'redux/selectors';
 import { RootStateWithRouter } from 'redux/types';
@@ -13,7 +14,7 @@ const mapStateToProps = (state: RootStateWithRouter) => ({
         state.projects.byId ? state.projects.byId[projectId] : null,
       )
     : null,
-  userToken: state.login.token,
+  isUserAuthenticated: getIsAuthenticated(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

@@ -2,19 +2,19 @@ import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Dispatch } from 'redux';
-import { logoutUserRequest } from 'redux/login';
+import { getIsAuthenticated, logoutUserRequest } from 'redux/login';
 import { RootState } from 'redux/types';
 import { fetchUserRequest } from 'redux/user';
 import { AccountMenu } from './AccountMenu';
 
 const mapStateToProps = (state: RootState) => ({
   user: state.user,
-  userToken: state.login.token,
+  isUserAuthenticated: getIsAuthenticated(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   fetchUserRequest: () => dispatch(fetchUserRequest({})),
-  logoutUserRequest: () => dispatch(logoutUserRequest()),
+  logoutUser: (redirectTo?: string | undefined) => dispatch(logoutUserRequest({ redirectTo })),
 });
 
 export default connect(

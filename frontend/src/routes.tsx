@@ -3,7 +3,7 @@ import { Redirect, Route, Switch, withRouter } from 'react-router';
 import { RootState } from 'redux/types';
 
 import Loader from 'components/Loader';
-import { selectIsAuthenticated } from 'redux/login/selectors';
+import { getIsAuthenticated } from 'redux/login/selectors';
 
 const Audits = lazy(() => import('./pages/Audits'));
 const Landing = lazy(() => import('./pages/Landing'));
@@ -104,7 +104,7 @@ const PrivateRoute = ({ component, store, ...other }: any) => {
     <Route
       {...other}
       render={props =>
-        selectIsAuthenticated(store) ? (
+        getIsAuthenticated(store) ? (
           <RouteComponent {...props} />
         ) : (
           <Redirect

@@ -2,7 +2,6 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { makeGetRequest } from 'services/networking/request';
 import { getType } from 'typesafe-actions';
 
-import { getUserToken } from 'redux/login/selectors';
 import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
 
 import { fetchUserError, fetchUserRequest, fetchUserSuccess } from './actions';
@@ -15,12 +14,11 @@ function* fetchUserFailedHandler(error: Error) {
 
 export function* fetchUser() {
   const endpoint = '/api/core/user';
-  const token = yield select(getUserToken);
   const { body: user }: { body: ApiUser } = yield call(
     makeGetRequest,
     endpoint,
+    true,
     null,
-    token,
   );
   yield put(fetchUserSuccess(modelizeUser(user)));
 }
