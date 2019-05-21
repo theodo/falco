@@ -9,12 +9,12 @@ import Style from './AccountMenu.style';
 
 interface OwnProps {
   fetchUserRequest: () => void;
-  logoutUserRequest: () => void;
+  logoutUser: () => void;
   isVisible: boolean;
   position?: string;
   right?: string | null;
   user: userState;
-  userToken: string | null;
+  isUserAuthenticated: boolean;
 }
 
 type Props = OwnProps & InjectedIntlProps & RouteComponentProps;
@@ -23,17 +23,19 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
   fetchUserRequest,
   history,
   isVisible,
-  logoutUserRequest,
+  logoutUser,
   position,
   right,
   user,
-  userToken,
+  isUserAuthenticated,
 }) => {
   React.useEffect(
     () => {
-      fetchUserRequest();
+      if (isUserAuthenticated) {
+        fetchUserRequest();
+      }
     },
-    [userToken],
+    [isUserAuthenticated],
   );
   const capitalize = (word: any) => {
     if (typeof word !== 'string') {
@@ -42,8 +44,8 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
     return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
   };
 
-  const logoutUser = () => {
-    logoutUserRequest();
+  const logoutUserAndRedirect = () => {
+    logoutUser();
     history.push(routeDefinitions.landing.path);
   };
 
@@ -66,7 +68,7 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
           </Style.UserInfosBlock>
         </Style.UserInfosBlockContainer>
         <Style.UserActionsBlock>
-          <Style.UserActionItem margin={'0'} onClick={logoutUser}>
+          <Style.UserActionItem margin={'0'} onClick={logoutUserAndRedirect}>
             <FormattedMessage id="Header.logoff_link" />
           </Style.UserActionItem>
         </Style.UserActionsBlock>

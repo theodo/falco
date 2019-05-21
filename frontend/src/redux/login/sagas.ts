@@ -13,9 +13,12 @@ export function* loginUser(action: ActionType<typeof loginUserRequest>) {
   try {
     yield put(loginUserClearError());
     // pause function is called to let enough time to animation on button to be seen
-    const [token, unused] = yield all([call(login, endpoint, action.payload), call(pause, 1000)]);
-    if (token) {
-      yield put(loginUserSuccess({ token }));
+    const [isAuthenticated, unused] = yield all([
+      call(login, endpoint, action.payload),
+      call(pause, 1000),
+    ]);
+    if (isAuthenticated) {
+      yield put(loginUserSuccess());
       const urlToRedirect = action.payload.originLocation
         ? action.payload.originLocation
         : routeDefinitions.projectsList.path;

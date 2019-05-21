@@ -84,6 +84,7 @@ export const login = async (endpoint: string, data: {}) => {
   const token: string | undefined = response.body.token || response.body.access;
   if (token) {
     await update_token(token);
+    return true;
   }
-  return token;
+  return false;
 };

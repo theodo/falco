@@ -3,24 +3,24 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { ActionType, getType } from 'typesafe-actions';
 
-import { loginUserClearError, loginUserError, loginUserRequest, loginUserSuccess, logoutUserRequest } from './actions';
+import { loginUserClearError, loginUserError, loginUserRequest, loginUserSuccess, logoutUser } from './actions';
 
-export type LoginAction = ActionType<typeof loginUserSuccess | typeof loginUserError |  typeof loginUserRequest | typeof loginUserClearError | typeof logoutUserRequest>;
+export type LoginAction = ActionType<typeof loginUserSuccess | typeof loginUserError |  typeof loginUserRequest | typeof loginUserClearError | typeof logoutUser>;
 
 export type LoginState = Readonly<{
-  token: string | null;
+  isAuthenticated: boolean;
   loginError: string | null;
   isSubmitting: boolean;
 }>;
 
 const persistConfig = {
   key: 'login',
-  whitelist: ['token'],
+  whitelist: ['isAuthenticated'],
   blacklist: ['loginError', 'isSubmitting'],
   storage,
 };
 
-const initialState: LoginState = { token: null, loginError: null, isSubmitting: false };
+const initialState: LoginState = { isAuthenticated: false, loginError: null, isSubmitting: false };
 
 const reducer = (state: LoginState = initialState, action: AnyAction) => {
   const typedAction = action as LoginAction;
@@ -28,17 +28,19 @@ const reducer = (state: LoginState = initialState, action: AnyAction) => {
     case getType(loginUserRequest):
       return {
         ...state,
+        isAuthenticated: false,
         isSubmitting: true,
       };
     case getType(loginUserSuccess):
       return {
         ...state,
-        token: typedAction.payload.token,
+        isAuthenticated: true,
         isSubmitting: false,
       };
     case getType(loginUserError):
       return {
         ...state,
+        isAuthenticated: false,
         loginError: typedAction.payload.errorMessage,
         isSubmitting: false,
       };
@@ -47,7 +49,7 @@ const reducer = (state: LoginState = initialState, action: AnyAction) => {
         ...state,
         loginError: initialState.loginError,
       };
-    case getType(logoutUserRequest):
+    case getType(logoutUser):
       return initialState;
     default:
       return state;
