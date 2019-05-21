@@ -54,7 +54,7 @@ const GraphModal: React.FunctionComponent<Props> = props => {
       appElement={document.querySelector('#root') as HTMLElement}
     >
       <Style.Close onClick={close}>
-        <Close color={'#4A4A4A'} />
+        <Close color={colorUsage.graphModalToggleButton} />
       </Style.Close>
       <MetricGraph fullscreen={true} auditResults={auditResults} metrics={[metric]} />
     </Modal>

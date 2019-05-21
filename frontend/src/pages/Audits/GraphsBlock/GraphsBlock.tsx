@@ -6,7 +6,7 @@ import MetricGraph from 'components/MetricGraph';
 import Expand from 'icons/Expand';
 import { FormattedMessage } from 'react-intl';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
-import { getSpacing } from 'stylesheet';
+import { colorUsage, getSpacing } from 'stylesheet';
 import GraphModal from './GraphModal';
 import Style from './GraphsBlock.style';
 import MetricModal from './MetricModal';
@@ -67,7 +67,7 @@ export const GraphsBlock: React.FunctionComponent<Props> = props => {
           <Style.GraphContainer margin={`0 0 ${getSpacing(4)} 0`} key={index}>
             <MetricGraph fullscreen={false} auditResults={auditResults} metrics={[metric]} />
             <Style.ExpandButton onClick={openGraphModal(metric)}>
-              <Expand color={'#4A4A4A'} />
+              <Expand color={colorUsage.graphModalToggleButton} />
             </Style.ExpandButton>
           </Style.GraphContainer>
         );
