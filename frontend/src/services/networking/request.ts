@@ -1,4 +1,6 @@
+import { store } from 'index';
 import jwt_decode from 'jwt-decode';
+import { logoutUserRequest } from 'redux/login';
 import { routeDefinitions } from 'routes';
 import request from 'superagent';
 
@@ -42,7 +44,7 @@ const checkAccessToken = async (requestFunction: () => void) => {
       const response = await request.post(`${backendBaseUrl}/auth/jwt/refresh`).withCredentials();
       await update_token(response.body.access);
     } catch (e) {
-      // TODO: window.location.replace(routeDefinitions.login.path);
+      store.dispatch(logoutUserRequest({ redirectTo: routeDefinitions.login.path }));
     }
   }
   return requestFunction();
