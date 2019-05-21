@@ -1,7 +1,7 @@
 import React, { MouseEvent, useState } from 'react';
 
 import Logo from 'components/Logo';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { routeDefinitions } from 'routes';
 import { colorUsage } from 'stylesheet';
 import AccountMenu from './components/AccountMenu';
@@ -13,7 +13,10 @@ interface Props {
   currentURL: string;
 }
 
-export const Header: React.FunctionComponent<Props> = ({ currentURL }) => {
+export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
+  currentURL,
+  intl,
+}) => {
   const [isAccountMenuVisible, setIsAccountMenuVisible] = React.useState(false);
   const [accountMenuRight, setAccountMenuRight] = React.useState('auto');
   const [isProjectsMenuVisible, setIsProjectsMenuVisible] = React.useState(false);
@@ -105,6 +108,11 @@ export const Header: React.FunctionComponent<Props> = ({ currentURL }) => {
       <Style.Header shouldHaveShadow={isLandingPage && scrollPosition > 10}>
         <Style.HeaderMenu isLandingPage={isLandingPage}>
           <Style.LogoContainer
+            title={
+              shouldDisplayConnectedUserHeader
+                ? intl.formatMessage({ id: `Header.logo_title_app` })
+                : intl.formatMessage({ id: `Header.logo_title_landing` })
+            }
             to={
               shouldDisplayConnectedUserHeader
                 ? routeDefinitions.projectsList.path

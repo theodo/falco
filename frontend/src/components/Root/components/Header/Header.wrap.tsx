@@ -1,3 +1,4 @@
+import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { RootStateWithRouter } from 'redux/types';
 
@@ -13,4 +14,4 @@ const mapDispatchToProps = null;
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Header);
+)(injectIntl(Header));
