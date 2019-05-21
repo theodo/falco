@@ -2,8 +2,10 @@ import React from 'react';
 import Modal from 'react-modal';
 
 import MetricGraph from 'components/MetricGraph';
+import Close from 'icons/Close';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
 import { colorUsage } from 'stylesheet';
+import Style from './GraphModal.style';
 
 interface Props {
   metric: MetricType;
@@ -51,6 +53,9 @@ const GraphModal: React.FunctionComponent<Props> = props => {
       onAfterClose={handleModalClose}
       appElement={document.querySelector('#root') as HTMLElement}
     >
+      <Style.Close onClick={close}>
+        <Close color={'#4A4A4A'} />
+      </Style.Close>
       <MetricGraph fullscreen={true} auditResults={auditResults} metrics={[metric]} />
     </Modal>
   );
