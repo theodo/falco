@@ -9,7 +9,7 @@ import Style from './AccountMenu.style';
 
 interface OwnProps {
   fetchUserRequest: () => void;
-  logoutUser: () => void;
+  logoutUser: (redirectTo?: string | undefined) => void;
   isVisible: boolean;
   position?: string;
   right?: string | null;
@@ -21,7 +21,6 @@ type Props = OwnProps & InjectedIntlProps & RouteComponentProps;
 
 export const AccountMenu: React.FunctionComponent<Props> = ({
   fetchUserRequest,
-  history,
   isVisible,
   logoutUser,
   position,
@@ -44,11 +43,6 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
     return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
   };
 
-  const logoutUserAndRedirect = () => {
-    logoutUser();
-    history.push(routeDefinitions.landing.path);
-  };
-
   if (isVisible) {
     if (null === user) {
       return (
@@ -68,7 +62,10 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
           </Style.UserInfosBlock>
         </Style.UserInfosBlockContainer>
         <Style.UserActionsBlock>
-          <Style.UserActionItem margin={'0'} onClick={logoutUserAndRedirect}>
+          <Style.UserActionItem
+            margin={'0'}
+            onClick={() => logoutUser(routeDefinitions.landing.path)}
+          >
             <FormattedMessage id="Header.logoff_link" />
           </Style.UserActionItem>
         </Style.UserActionsBlock>

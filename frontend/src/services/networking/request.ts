@@ -9,8 +9,12 @@ interface AccessToken {
   exp: number;
 }
 
-function update_token(token: string) {
-  localStorage.setItem('token', token);
+export function update_token(token: string | undefined) {
+  if (token) {
+    localStorage.setItem('token', token);
+  } else {
+    localStorage.removeItem('token');
+  }
 }
 
 function getTimestampInSeconds(): number {
@@ -62,8 +66,11 @@ export const makeGetRequest = async (
   }
 };
 
-export const makePostRequest = async (endpoint: string, needsAuthentication: boolean, data: {}) =>{
-  const postRequest = request.post(`${baseUrl}${endpoint}`).send(data).set('Accept', 'application/json');
+export const makePostRequest = async (endpoint: string, needsAuthentication: boolean, data: {}) => {
+  const postRequest = request
+    .post(`${baseUrl}${endpoint}`)
+    .send(data)
+    .set('Accept', 'application/json');
   if (needsAuthentication) {
     return await checkAccessToken(() => {
       return postRequest.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
@@ -87,4 +94,13 @@ export const login = async (endpoint: string, data: {}) => {
     return true;
   }
   return false;
+};
+
+export const makeLogoutRequest = (endpoint: string) =>
+  request.post(`${backendBaseUrl}${endpoint}`).withCredentials();
+
+export const logout = async (endpoint: string) => {
+  const response = await makeLogoutRequest(endpoint);
+  await update_token(undefined);
+  return !!response;
 };

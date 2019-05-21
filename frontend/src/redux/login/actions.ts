@@ -14,12 +14,14 @@ export const loginUserError = createStandardAction('Login/USER_LOGIN_ERROR')<{
 
 export const loginUserClearError = createStandardAction('Login/USER_CLEAR_LOGIN_ERROR')();
 
-export const logoutUser = createStandardAction('Logout/USER_LOGOUT')();
+export const logoutUserRequest = createStandardAction('Logout/USER_LOGOUT_REQUEST')<{
+  redirectTo?: string | undefined;
+}>();
 
 export default {
   loginUserRequest,
   loginUserSuccess,
   loginUserError,
   loginUserClearError,
-  logoutUser,
+  logoutUserRequest,
 };

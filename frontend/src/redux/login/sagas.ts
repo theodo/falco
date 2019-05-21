@@ -4,9 +4,15 @@ import { pause } from 'services/utils';
 import { ActionType, getType } from 'typesafe-actions';
 
 import { routeDefinitions } from 'routes';
-import { login } from 'services/networking/request';
+import { login, logout } from 'services/networking/request';
 
-import { loginUserClearError, loginUserError, loginUserRequest, loginUserSuccess } from './actions';
+import {
+  loginUserClearError,
+  loginUserError,
+  loginUserRequest,
+  loginUserSuccess,
+  logoutUserRequest,
+} from './actions';
 
 export function* loginUser(action: ActionType<typeof loginUserRequest>) {
   const endpoint = `/auth/jwt/create`;
@@ -31,6 +37,20 @@ export function* loginUser(action: ActionType<typeof loginUserRequest>) {
   }
 }
 
+export function* logoutUser(action: ActionType<typeof logoutUserRequest>) {
+  const endpoint = `/auth/jwt/logout`;
+  try {
+    yield call(logout, endpoint);
+    const urlToRedirect = action.payload.redirectTo
+      ? action.payload.redirectTo
+      : routeDefinitions.landing.path;
+    yield put(push(urlToRedirect));
+  } catch (error) {
+    //
+  }
+}
+
 export default function* loginUserSaga() {
   yield takeEvery(getType(loginUserRequest), loginUser);
+  yield takeEvery(getType(logoutUserRequest), logoutUser);
 }

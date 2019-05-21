@@ -4,7 +4,7 @@ import {
   loginUserError,
   loginUserRequest,
   loginUserSuccess,
-  logoutUser,
+  logoutUserRequest,
 } from '../actions';
 import reducer from '../reducer';
 
@@ -58,9 +58,9 @@ describe('Login reducer', () => {
     });
   });
 
-  describe('USER_LOGOUT case', () => {
+  describe('USER_LOGOUT_REQUEST case', () => {
     it('Should return the initial state', () => {
-      const action = logoutUser();
+      const action = logoutUserRequest({});
       const expectedState = { ...initialState };
 
       expect(reducer(stateAfterLogin, action)).toEqual(expectedState);
