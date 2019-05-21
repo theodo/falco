@@ -3,6 +3,7 @@ import * as React from 'react';
 import ErrorMessage from 'components/ErrorMessage';
 import Loader from 'components/Loader';
 import MetricGraph from 'components/MetricGraph';
+import Expand from 'icons/Expand';
 import { FormattedMessage } from 'react-intl';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
 import { getSpacing } from 'stylesheet';
@@ -54,6 +55,9 @@ export const GraphsBlock: React.FunctionComponent<Props> = props => {
         return (
           <Style.GraphContainer margin={`0 0 ${getSpacing(4)} 0`} key={index}>
             <MetricGraph auditResults={auditResults} metrics={[metric]} />
+            <Style.ExpandButton onClick={openGraphModal}>
+              <Expand color={'#4A4A4A'} />
+            </Style.ExpandButton>
           </Style.GraphContainer>
         );
       })}
