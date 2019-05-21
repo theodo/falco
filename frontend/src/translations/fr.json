@@ -22,6 +22,9 @@
         "error_email_valid": "Votre email n'est pas valide"
       }
     },
+    "customers_block": {
+      "title": "Ils nous font confiance"
+    },
     "features_block": {
       "monitoring": {
         "title": "Suivi quotidien",

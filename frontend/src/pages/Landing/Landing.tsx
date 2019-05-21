@@ -8,6 +8,10 @@ import FalcoAnalysisImage from 'static/images/FalcoAnalysis.svg';
 import FalcoDashboardImage from 'static/images/FalcoDashboard.jpg';
 import FalcoMonitoringImage from 'static/images/FalcoMonitoring.svg';
 import FalcoOptimisationImage from 'static/images/FalcoOptimisation.svg';
+import LogoBNP from 'static/images/LogoBNP.png';
+import LogoChooseMyCompany from 'static/images/LogoChooseMyCompany.png';
+import LogoTarkett from 'static/images/LogoTarkett.png';
+import LogoVoodoo from 'static/images/LogoVoodoo.png';
 import LogoTheodo from 'static/images/TheodoLogo.svg';
 import { colorUsage, getSpacing } from 'stylesheet';
 import Style from './Landing.style';
@@ -41,6 +45,19 @@ export const Landing: React.FunctionComponent<Props> = props => {
         </Style.IntroductionBlockContainer>
       </LandingBlock>
       <LandingBlock backgroundColor={colorUsage.landingPageGlobalBackground}>
+        <Style.CustomersBlockContainer>
+          <Style.CustomersBlockTitle>
+            <FormattedMessage id={'Landing.customers_block.title'} />
+          </Style.CustomersBlockTitle>
+          <Style.CustomersBlockLogosContainer>
+            <Style.CustomersBlockLogo src={LogoBNP} height={'40px'} />
+            <Style.CustomersBlockLogo src={LogoChooseMyCompany} height={'40px'} />
+            <Style.CustomersBlockLogo src={LogoTarkett} height={'40px'} />
+            <Style.CustomersBlockLogo src={LogoVoodoo} height={'40px'} />
+          </Style.CustomersBlockLogosContainer>
+        </Style.CustomersBlockContainer>
+      </LandingBlock>
+      <LandingBlock>
         <Style.FeaturesBlockContainer>
           <Style.FeaturesBlockColumn margin={`0 ${getSpacing(4)} 0 0`}>
             <Style.FeaturesBlockTitle>
@@ -71,7 +88,7 @@ export const Landing: React.FunctionComponent<Props> = props => {
           </Style.FeaturesBlockColumn>
         </Style.FeaturesBlockContainer>
       </LandingBlock>
-      <LandingBlock>
+      <LandingBlock backgroundColor={colorUsage.landingPageGlobalBackground}>
         <Style.FAQBlockContainer>
           <Style.FAQBlockTitle>
             <FormattedMessage id={'Landing.faq_block.title'} />
@@ -125,7 +142,7 @@ export const Landing: React.FunctionComponent<Props> = props => {
           </Style.FAQBlockColumnsContainer>
         </Style.FAQBlockContainer>
       </LandingBlock>
-      <LandingBlock backgroundColor={colorUsage.landingPageGlobalBackground}>
+      <LandingBlock>
         <Style.FooterContainer>
           <Style.TheodoLogoLink href={'https://www.theodo.fr'} target={'_blank'}>
             <Style.TheodoLogo src={LogoTheodo} />

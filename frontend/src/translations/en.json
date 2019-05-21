@@ -22,6 +22,9 @@
         "error_email_valid": "Your email address is not valid"
       }
     },
+    "customers_block": {
+      "title": "Trusted by"
+    },
     "features_block": {
       "monitoring": {
         "title": "Daily follow-up",
