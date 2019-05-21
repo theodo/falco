@@ -61,7 +61,7 @@ const MetricGraph: React.FunctionComponent<Props> = props => {
         key={index}
         ref={legendRef}
       >
-        <Style.LegendTitle {...{ fullscreen }}>
+        <Style.LegendTitle fullscreen={fullscreen}>
           {intl.formatMessage({ id: `Metrics.${entry.value}.name` })}
         </Style.LegendTitle>
         {!fullscreen && (
