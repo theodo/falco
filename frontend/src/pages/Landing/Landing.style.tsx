@@ -6,7 +6,7 @@ interface ItemWithMarginProps {
 }
 
 const Styles = {
-  FirstBlockContainer: styled.div`
+  IntroductionBlockContainer: styled.div`
     width: 100%;
     height: 100%;
     display: flex;
@@ -16,14 +16,14 @@ const Styles = {
     padding: ${getSpacing(20)};
   `,
 
-  FirstBlockColumn: styled.div`
+  IntroductionBlockColumn: styled.div`
     width: 50%;
     height: 100%;
     display: flex;
     flex-direction: column;
   `,
 
-  FirstBlockTitle: styled.h1`
+  IntroductionBlockTitle: styled.h1`
     width: 370px;
     line-height: ${lineHeight.h1Text};
     color: ${colorUsage.h1Text};
@@ -48,7 +48,7 @@ const Styles = {
     box-shadow: 0 14px 21px 0 ${colorUsage.landingImageShadowBox};
   `,
 
-  SecondBlockContainer: styled.div`
+  FeaturesBlockContainer: styled.div`
     width: 100%;
     height: 100%;
     display: flex;
@@ -58,7 +58,7 @@ const Styles = {
     padding: ${getSpacing(10)};
   `,
 
-  SecondBlockColumn: styled.div`
+  FeaturesBlockColumn: styled.div`
     height: 100%;
     display: flex;
     align-items: center;
@@ -67,7 +67,7 @@ const Styles = {
     margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
   `,
 
-  SecondBlockTitle: styled.h4`
+  FeaturesBlockTitle: styled.h4`
     line-height: ${lineHeight.h4Text};
     color: ${colorUsage.h4Text};
     font-family: ${fontFamily.mainSans};
@@ -91,7 +91,7 @@ const Styles = {
     font-size: ${fontSize.bodyText};
   `,
 
-  ThirdBlockContainer: styled.div`
+  FAQBlockContainer: styled.div`
     width: 100%;
     height: 100%;
     display: flex;
@@ -102,14 +102,14 @@ const Styles = {
     font-family: ${fontFamily.mainSans};
   `,
 
-  ThirdBlockTitle: styled.h2`
+  FAQBlockTitle: styled.h2`
     color: ${colorUsage.h2Text};
     font-size: ${fontSize.h2Text};
     line-height: ${lineHeight.h2Text};
     font-weight: ${fontWeight.h2Text};
   `,
 
-  ThirdBlockColumnsContainer: styled.div`
+  FAQBlockColumnsContainer: styled.div`
     width: 100%;
     height: 100%;
     display: flex;
@@ -119,7 +119,7 @@ const Styles = {
     padding: ${getSpacing(6)} 0;
   `,
 
-  ThirdBlockColumn: styled.div`
+  FAQBlockColumn: styled.div`
     width: 50%;
     height: 100%;
     display: flex;

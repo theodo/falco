@@ -25,92 +25,92 @@ export const Landing: React.FunctionComponent<Props> = props => {
   return (
     <React.Fragment>
       <LandingBlock>
-        <Style.FirstBlockContainer>
-          <Style.FirstBlockColumn>
-            <Style.FirstBlockTitle>
-              <FormattedMessage id="Landing.first_block.title" />
-            </Style.FirstBlockTitle>
+        <Style.IntroductionBlockContainer>
+          <Style.IntroductionBlockColumn>
+            <Style.IntroductionBlockTitle>
+              <FormattedMessage id="Landing.introduction_block.title" />
+            </Style.IntroductionBlockTitle>
             <Style.Introduction>
-              <FormattedMessage id="Landing.first_block.introduction" />
+              <FormattedMessage id="Landing.introduction_block.introduction" />
             </Style.Introduction>
             <LeadForm />
-          </Style.FirstBlockColumn>
-          <Style.FirstBlockColumn>
+          </Style.IntroductionBlockColumn>
+          <Style.IntroductionBlockColumn>
             <Style.FalcoIllustration src={FalcoDashboardImage} />
-          </Style.FirstBlockColumn>
-        </Style.FirstBlockContainer>
+          </Style.IntroductionBlockColumn>
+        </Style.IntroductionBlockContainer>
       </LandingBlock>
       <LandingBlock backgroundColor={colorUsage.landingPageGlobalBackground}>
-        <Style.SecondBlockContainer>
-          <Style.SecondBlockColumn margin={`0 ${getSpacing(4)} 0 0`}>
-            <Style.SecondBlockTitle>
-              <FormattedMessage id="Landing.second_block.monitoring.title" />
-            </Style.SecondBlockTitle>
+        <Style.FeaturesBlockContainer>
+          <Style.FeaturesBlockColumn margin={`0 ${getSpacing(4)} 0 0`}>
+            <Style.FeaturesBlockTitle>
+              <FormattedMessage id="Landing.features_block.monitoring.title" />
+            </Style.FeaturesBlockTitle>
             <Style.FunctionalIllustration src={FalcoMonitoringImage} />
             <Style.Description>
-              <FormattedMessage id="Landing.second_block.monitoring.description" />
+              <FormattedMessage id="Landing.features_block.monitoring.description" />
             </Style.Description>
-          </Style.SecondBlockColumn>
-          <Style.SecondBlockColumn margin={`0 ${getSpacing(4)} 0 0`}>
-            <Style.SecondBlockTitle>
-              <FormattedMessage id="Landing.second_block.analysis.title" />
-            </Style.SecondBlockTitle>
+          </Style.FeaturesBlockColumn>
+          <Style.FeaturesBlockColumn margin={`0 ${getSpacing(4)} 0 0`}>
+            <Style.FeaturesBlockTitle>
+              <FormattedMessage id="Landing.features_block.analysis.title" />
+            </Style.FeaturesBlockTitle>
             <Style.FunctionalIllustration src={FalcoAnalysisImage} />
             <Style.Description>
-              <FormattedMessage id="Landing.second_block.analysis.description" />
+              <FormattedMessage id="Landing.features_block.analysis.description" />
             </Style.Description>
-          </Style.SecondBlockColumn>
-          <Style.SecondBlockColumn>
-            <Style.SecondBlockTitle>
-              <FormattedMessage id="Landing.second_block.optimisation.title" />
-            </Style.SecondBlockTitle>
+          </Style.FeaturesBlockColumn>
+          <Style.FeaturesBlockColumn>
+            <Style.FeaturesBlockTitle>
+              <FormattedMessage id="Landing.features_block.optimisation.title" />
+            </Style.FeaturesBlockTitle>
             <Style.FunctionalIllustration src={FalcoOptimisationImage} />
             <Style.Description>
-              <FormattedMessage id="Landing.second_block.optimisation.description" />
+              <FormattedMessage id="Landing.features_block.optimisation.description" />
             </Style.Description>
-          </Style.SecondBlockColumn>
-        </Style.SecondBlockContainer>
+          </Style.FeaturesBlockColumn>
+        </Style.FeaturesBlockContainer>
       </LandingBlock>
       <LandingBlock>
-        <Style.ThirdBlockContainer>
-          <Style.ThirdBlockTitle>
-            <FormattedMessage id={'Landing.third_block.title'} />
-          </Style.ThirdBlockTitle>
-          <Style.ThirdBlockColumnsContainer>
-            <Style.ThirdBlockColumn margin={`0 ${getSpacing(30)} 0 0 `}>
+        <Style.FAQBlockContainer>
+          <Style.FAQBlockTitle>
+            <FormattedMessage id={'Landing.faq_block.title'} />
+          </Style.FAQBlockTitle>
+          <Style.FAQBlockColumnsContainer>
+            <Style.FAQBlockColumn margin={`0 ${getSpacing(30)} 0 0 `}>
               <Style.FAQBlock margin={`0 0 ${getSpacing(4)} 0`}>
                 <Style.FAQQuestion>
-                  <FormattedMessage id={'Landing.third_block.1st_question'} />
+                  <FormattedMessage id={'Landing.faq_block.1st_question'} />
                 </Style.FAQQuestion>
                 <Style.FAQAnswer>
-                  <FormattedMessage id={'Landing.third_block.1st_answer'} />
+                  <FormattedMessage id={'Landing.faq_block.1st_answer'} />
                 </Style.FAQAnswer>
               </Style.FAQBlock>
               <Style.FAQBlock>
                 <Style.FAQQuestion>
-                  <FormattedMessage id={'Landing.third_block.2nd_question'} />
+                  <FormattedMessage id={'Landing.faq_block.2nd_question'} />
                 </Style.FAQQuestion>
                 <Style.FAQAnswer>
-                  <FormattedMessage id={'Landing.third_block.2nd_answer'} />
+                  <FormattedMessage id={'Landing.faq_block.2nd_answer'} />
                 </Style.FAQAnswer>
               </Style.FAQBlock>
-            </Style.ThirdBlockColumn>
-            <Style.ThirdBlockColumn margin={`0 0 0 ${getSpacing(30)}`}>
+            </Style.FAQBlockColumn>
+            <Style.FAQBlockColumn margin={`0 0 0 ${getSpacing(30)}`}>
               <Style.FAQBlock margin={`0 0 ${getSpacing(4)} 0`}>
                 <Style.FAQQuestion>
-                  <FormattedMessage id={'Landing.third_block.3rd_question'} />
+                  <FormattedMessage id={'Landing.faq_block.3rd_question'} />
                 </Style.FAQQuestion>
                 <Style.FAQAnswer>
-                  <FormattedMessage id={'Landing.third_block.3rd_answer'} />
+                  <FormattedMessage id={'Landing.faq_block.3rd_answer'} />
                 </Style.FAQAnswer>
               </Style.FAQBlock>
               <Style.FAQBlock>
                 <Style.FAQQuestion>
-                  <FormattedMessage id={'Landing.third_block.4th_question'} />
+                  <FormattedMessage id={'Landing.faq_block.4th_question'} />
                 </Style.FAQQuestion>
                 <Style.FAQAnswer>
                   <FormattedMessage
-                    id="Landing.third_block.4th_answer"
+                    id="Landing.faq_block.4th_answer"
                     values={{
                       theodoLink: (
                         <Style.TheodoLink href="https://www.theodo.fr" target="_blank">
@@ -121,9 +121,9 @@ export const Landing: React.FunctionComponent<Props> = props => {
                   />
                 </Style.FAQAnswer>
               </Style.FAQBlock>
-            </Style.ThirdBlockColumn>
-          </Style.ThirdBlockColumnsContainer>
-        </Style.ThirdBlockContainer>
+            </Style.FAQBlockColumn>
+          </Style.FAQBlockColumnsContainer>
+        </Style.FAQBlockContainer>
       </LandingBlock>
       <LandingBlock backgroundColor={colorUsage.landingPageGlobalBackground}>
         <Style.FooterContainer>

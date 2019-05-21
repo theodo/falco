@@ -9,7 +9,7 @@
     "logoff_link": "Se déconnecter"
   },
   "Landing": {
-    "first_block": {
+    "introduction_block": {
       "title": "Optimisez la performance de vos sites Web",
       "introduction": "Quelque soit votre domaine, la performance de votre site web est cruciale pour vos utilisateurs et donc pour votre business. Falco vous aide à monitorer, à analyser et à optimiser vos sites.",
       "leadForm": {
@@ -22,7 +22,7 @@
         "error_email_valid": "Votre email n'est pas valide"
       }
     },
-    "second_block": {
+    "features_block": {
       "monitoring": {
         "title": "Suivi quotidien",
         "description": "Falco monitore les performances plusieurs fois pas jour, et propose une vue historisée pour piloter leur évolution."
@@ -36,7 +36,7 @@
         "description": "Falco vous propose les optimisations les plus efficaces, en s'appuyant sur les recommandations de Google."
       }
     },
-    "third_block": {
+    "faq_block": {
       "title": "FAQ",
       "1st_question": "Quelles métriques Falco permet-il de piloter ?",
       "1st_answer": "Falco permet de mesurer le Time to Interactive, le Speed Index, le score Lighthouse, le Time to First Byte et d’autres métriques.",
