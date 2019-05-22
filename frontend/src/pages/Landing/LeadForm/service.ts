@@ -15,10 +15,10 @@ export type LeadFormServiceProps = LeadServiceDispatchProps & RouteComponentProp
 export const validate = (values: FormValues) => {
   const errors: { email?: string } = {};
   if (values.email && !validateEmail(values.email)) {
-    errors.email = 'Landing.first_block.leadForm.error_email_valid';
+    errors.email = 'Landing.introduction_block.leadForm.error_email_valid';
   }
   if (!values.email) {
-    errors.email = 'Landing.first_block.leadForm.error_email_required';
+    errors.email = 'Landing.introduction_block.leadForm.error_email_required';
   }
   return errors;
 };

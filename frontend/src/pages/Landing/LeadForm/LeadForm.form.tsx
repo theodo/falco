@@ -30,22 +30,22 @@ const LeadForm: React.FunctionComponent<
       case 'running':
         return {
           className: 'submittingRequest',
-          translationKey: 'Landing.first_block.leadForm.submit_button_running',
+          translationKey: 'Landing.introduction_block.leadForm.submit_button_running',
         };
       case 'success':
         return {
           className: 'requestSucceeded',
-          translationKey: 'Landing.first_block.leadForm.submit_button_success',
+          translationKey: 'Landing.introduction_block.leadForm.submit_button_success',
         };
       case 'failed':
         return {
           className: 'normal',
-          translationKey: 'Landing.first_block.leadForm.submit_button',
+          translationKey: 'Landing.introduction_block.leadForm.submit_button',
         };
       default:
         return {
           className: 'normal',
-          translationKey: 'Landing.first_block.leadForm.submit_button',
+          translationKey: 'Landing.introduction_block.leadForm.submit_button',
         };
     }
   };
@@ -58,7 +58,7 @@ const LeadForm: React.FunctionComponent<
         <Style.EmailField
           type="email"
           name="email"
-          label={'Landing.first_block.leadForm.email_label'}
+          label={'Landing.introduction_block.leadForm.email_label'}
           component={Input}
           error={touched.email && errors.email}
           disabled={leadSubmissionStatus === 'running' || leadSubmissionStatus === 'success'}
@@ -81,7 +81,7 @@ const LeadForm: React.FunctionComponent<
               padding={`${getSpacing(2)} ${getSpacing(3)}`}
               fontSize={fontSize.leadSubmitErrorMessage}
             >
-              <FormattedMessage id={'Landing.first_block.leadForm.submit_failed'} />
+              <FormattedMessage id={'Landing.introduction_block.leadForm.submit_failed'} />
             </ErrorMessage>
           )}
         </Style.SubmitFormContainer>
