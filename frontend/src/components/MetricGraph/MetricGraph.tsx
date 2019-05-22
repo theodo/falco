@@ -1,5 +1,6 @@
 import React, { MouseEvent } from 'react';
 
+import MetricTooltip from 'components/MetricTooltip';
 import dayjs from 'dayjs';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import { Information } from 'icons';
@@ -64,9 +65,9 @@ const MetricGraph: React.FunctionComponent<Props> = props => {
           <Information color={colorUsage.metricInformationIcon} />
         </Style.MetricInfoIconContainer>
         {isMetricInfoTooltipVisible && (
-          <Style.MetricInfoTooltip left={metricInfoTooltipLeft} top={metricInfoTooltipTop}>
+          <MetricTooltip left={metricInfoTooltipLeft} top={metricInfoTooltipTop}>
             <FormattedMessage id={`Metrics.${entry.value}.description`} />
-          </Style.MetricInfoTooltip>
+          </MetricTooltip>
         )}
       </Style.Legend>
     ));
