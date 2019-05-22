@@ -14,6 +14,7 @@ interface ProjectsMenuContainerProps {
 const StyledProjectsMenu = {
   Container: styled.div`
     width: 460px;
+    max-height: 600px;
     background-color: ${colorUsage.projectsMenuBackground};
     box-shadow: 0 0 8px 4px ${colorUsage.projectsMenuShadow};
     position: ${(props: ProjectsMenuContainerProps) =>
@@ -27,11 +28,19 @@ const StyledProjectsMenu = {
     color: ${colorUsage.projectsMenuItemText};
     background-color: ${colorUsage.projectsMenuItemBackground};
     font-family: ${fontFamily.mainSans};
-    border-top: 1px solid ${colorUsage.projectsMenuItemBorder};
+    border-bottom: 1px solid ${colorUsage.projectsMenuItemBorder};
+
+    &:last-child {
+      border: 0;
+    }
 
     &:hover {
       color: ${colorUsage.projectsMenuItemHoverText};
     }
+  `,
+  ProjectItemContainer: styled.div`
+    max-height: 458px;
+    overflow-y: auto;
   `,
   ProjectItemSnapshotContainer: styled.div`
     display: flex;
@@ -67,6 +76,7 @@ const StyledProjectsMenu = {
     padding: ${getSpacing(4)} ${getSpacing(8)};
     color: ${colorUsage.projectsMenuItemText};
     font-family: ${fontFamily.mainSans};
+    border-bottom: 1px solid ${colorUsage.projectsMenuItemBorder};
   `,
   CurrentProjectItemSnapshot: styled.img`
     width: 150px;
