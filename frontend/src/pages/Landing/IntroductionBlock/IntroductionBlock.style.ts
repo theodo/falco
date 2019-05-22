@@ -8,15 +8,21 @@ const Styles = {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    padding: ${getSpacing(20)};
+    justify-content: flex-start;
+    padding: ${getSpacing(8)} 0 ${getSpacing(18)} 0;
   `,
 
   IntroductionBlockColumn: styled.div`
-    width: 50%;
-    height: 100%;
+    width: 470px;
     display: flex;
     flex-direction: column;
+    padding: 0 ${getSpacing(17)} 0 ${getSpacing(13)};
+  `,
+
+  IntroductionBlockPitch: styled.div`
+    display: flex;
+    flex-direction: column;
+    padding-left: ${getSpacing(7)};
   `,
 
   IntroductionBlockTitle: styled.h1`
@@ -35,13 +41,11 @@ const Styles = {
     color: ${colorUsage.introductionText};
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.introductionText};
-    margin: 0 0 ${getSpacing(6)} 0;
+    margin: 0 0 ${getSpacing(10)} 0;
   `,
 
   FalcoIllustration: styled.img`
-    width: 520px;
-    border-radius: 6px;
-    box-shadow: 0 14px 21px 0 ${colorUsage.landingImageShadowBox};
+    width: 599px;
   `,
 };
 
