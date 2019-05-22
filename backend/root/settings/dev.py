@@ -30,4 +30,11 @@ DEBUG_TOOLBAR_CONFIG = {
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # RefreshToken JWT
+"""
+    STORE_REFRESH_TOKEN_COOKIE_ONLY_IN_HTTPS parameter indicates if refreshToken cookie received from ResponseHeader
+    must be stored locally (and so used as RequestHeader for following requests) if it has been received through
+    an unsecured connection (over HTTP and not HTTPS).
+    In DEV environment, as our server has no SSL certificate and does not handle HTTPS, we have to force this parameter
+    to False.
+"""
 STORE_REFRESH_TOKEN_COOKIE_ONLY_IN_HTTPS = False

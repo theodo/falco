@@ -46,7 +46,7 @@ export function* logoutUser(action: ActionType<typeof logoutUserRequest>) {
       : routeDefinitions.landing.path;
     yield put(push(urlToRedirect));
   } catch (error) {
-    //
+    console.error('Could not logout properly current user: ', error);
   }
 }
 
