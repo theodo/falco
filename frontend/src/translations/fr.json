@@ -26,6 +26,7 @@
       "title": "Ils nous font confiance"
     },
     "features_block": {
+      "title": "Fonctionnalités",
       "monitoring": {
         "title": "Suivi quotidien",
         "description": "Falco monitore les performances plusieurs fois pas jour, et propose une vue historisée pour piloter leur évolution."

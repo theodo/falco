@@ -26,6 +26,7 @@
       "title": "Trusted by"
     },
     "features_block": {
+      "title": "Features",
       "monitoring": {
         "title": "Daily follow-up",
         "description": "Falco monitors performances several times a day, and offers a historical overview to pilot their evolution."
