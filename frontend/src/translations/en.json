@@ -50,6 +50,9 @@
       "3rd_answer": "Falco is independent of the technology used on your websites, and allows to audit performances and obtain recommendations whatever the stack is.",
       "4th_question": "Who created Falco?",
       "4th_answer": "Falco is a tool developed by {theodoLink}, in order to help its clients as well as possible on performance issues."
+    },
+    "footer": {
+      "created_by": "Created with ❤️ by {theodoLink}"
     }
   },
   "Login": {

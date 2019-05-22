@@ -50,6 +50,9 @@
       "3rd_answer": "Falco est indépendant de la technologie utilisée sur vos sites, et permet d’auditer les performances et d’obtenir des recommendations quelle que soit la stack.",
       "4th_question": "Qui est à l’origine de Falco ?",
       "4th_answer": "Falco est un produit développé par {theodoLink}, afin d’accompagner au mieux ses clients sur les problématiques de performance."
+    },
+    "footer": {
+      "created_by": "Créé avec ❤️ par {theodoLink}"
     }
   },
   "Login": {
