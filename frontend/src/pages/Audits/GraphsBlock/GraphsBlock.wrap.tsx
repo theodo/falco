@@ -1,4 +1,6 @@
+import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
+
 import { selectAuditResultsAsGraphData } from 'redux/auditResults/selectors';
 import { getMetricsToDisplay } from 'redux/parameters/selectors';
 import { RootState } from 'redux/types';
@@ -16,4 +18,4 @@ const mapDispatchToProps = null;
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(GraphsBlock);
+)(injectIntl(GraphsBlock));

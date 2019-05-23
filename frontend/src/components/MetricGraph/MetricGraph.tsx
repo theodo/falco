@@ -12,13 +12,19 @@ import { colorUsage, fontFamily, fontSize, getSpacing } from 'stylesheet';
 import Style from './MetricGraph.style';
 
 export interface OwnProps {
+  fullscreen: boolean;
   auditResults: AuditResultsAsGraphData;
   metrics: MetricType[];
 }
 
 type Props = OwnProps & InjectedIntlProps;
 
-const MetricGraph: React.FunctionComponent<Props> = ({ auditResults, intl, metrics }) => {
+const MetricGraph: React.FunctionComponent<Props> = ({
+  fullscreen,
+  auditResults,
+  intl,
+  metrics,
+}) => {
   const [isMetricInfoTooltipVisible, setIsMetricInfoTooltipVisible] = React.useState(false);
 
   const legendRef = React.useRef<HTMLDivElement>(null);
@@ -27,18 +33,28 @@ const MetricGraph: React.FunctionComponent<Props> = ({ auditResults, intl, metri
   const renderLegend = (legendProps: { payload: Array<{ value: MetricType }> }) => {
     const { payload } = legendProps;
     return payload.map((entry, index) => (
-      <Style.Legend margin={`0 0 ${getSpacing(2)} ${getSpacing(4)}`} key={index} ref={legendRef}>
-        <Style.LegendTitle>
+      <Style.Legend
+        margin={
+          fullscreen
+            ? `0 0 ${getSpacing(10)} ${getSpacing(4)}`
+            : `0 0 ${getSpacing(2)} ${getSpacing(4)}`
+        }
+        key={index}
+        ref={legendRef}
+      >
+        <Style.LegendTitle fullscreen={fullscreen}>
           {intl.formatMessage({ id: `Metrics.${entry.value}.name` })}
         </Style.LegendTitle>
-        <Style.MetricInfoIconContainer
-          title={intl.formatMessage({ id: `components.MetricGraph.metric_info_title` })}
-          margin={`0 0 0 ${getSpacing(2)}`}
-          onClick={toggleMetricInfoTooltipVisibility}
-          ref={metricInfoIconContainerRef}
-        >
-          <Information color={colorUsage.metricInformationIcon} />
-        </Style.MetricInfoIconContainer>
+        {!fullscreen && (
+          <Style.MetricInfoIconContainer
+            title={intl.formatMessage({ id: `components.MetricGraph.metric_info_title` })}
+            margin={`0 0 0 ${getSpacing(2)}`}
+            onClick={toggleMetricInfoTooltipVisibility}
+            ref={metricInfoIconContainerRef}
+          >
+            <Information color={colorUsage.metricInformationIcon} />
+          </Style.MetricInfoIconContainer>
+        )}
         {isMetricInfoTooltipVisible && (
           <MetricTooltip parentRef={legendRef} initiatorRef={metricInfoIconContainerRef}>
             <FormattedMessage id={`Metrics.${entry.value}.description`} />
@@ -107,6 +123,12 @@ const MetricGraph: React.FunctionComponent<Props> = ({ auditResults, intl, metri
     document.removeEventListener('click', hideMetricInfoTooltip);
   };
 
+  const axisStyle = {
+    color: `${colorUsage.smallText}`,
+    fontFamily: `${fontFamily.mainSans}`,
+    fontSize: fullscreen ? `${fontSize.bodyText}` : `${fontSize.smallText}`,
+  };
+
   return (
     <ResponsiveContainer width={'100%'} height={'100%'}>
       <AreaChart data={auditResults || undefined}>
@@ -119,11 +141,7 @@ const MetricGraph: React.FunctionComponent<Props> = ({ auditResults, intl, metri
         <Legend verticalAlign="top" align="left" iconSize={0} content={renderLegend} />
         <YAxis
           type="number"
-          tick={{
-            color: `${colorUsage.smallText}`,
-            fontFamily: `${fontFamily.mainSans}`,
-            fontSize: `${fontSize.smallText}`,
-          }}
+          tick={axisStyle}
           axisLine={false}
           tickLine={false}
           interval={'preserveStart'}
@@ -132,11 +150,7 @@ const MetricGraph: React.FunctionComponent<Props> = ({ auditResults, intl, metri
           width={30}
           dataKey="date"
           tickFormatter={tickItem => dayjs(tickItem).format('DD/MM')}
-          tick={{
-            color: `${colorUsage.smallText}`,
-            fontFamily: `${fontFamily.mainSans}`,
-            fontSize: `${fontSize.smallText}`,
-          }}
+          tick={axisStyle}
           axisLine={false}
           tickLine={false}
           minTickGap={50}

@@ -1,4 +1,6 @@
 # flake8: noqa
+import sys
+
 from .base import *
 
 SECRET_KEY = "f0de227df9c0c14f1d4d07bbf878846de538fc21cf3150bf14"
@@ -23,6 +25,14 @@ CACHES = {
     }
 }
 
+# Logging
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {"console": {"class": "logging.StreamHandler", "stream": sys.stdout}},
+    "root": {"handlers": ["console"], "level": "INFO"},
+}
+
 DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TOOLBAR_CALLBACK": lambda request: request.META["SERVER_NAME"] != "testserver"
 }
@@ -30,4 +40,11 @@ DEBUG_TOOLBAR_CONFIG = {
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # RefreshToken JWT
+"""
+    STORE_REFRESH_TOKEN_COOKIE_ONLY_IN_HTTPS parameter indicates if refreshToken cookie received from ResponseHeader
+    must be stored locally (and so used as RequestHeader for following requests) if it has been received through
+    an unsecured connection (over HTTP and not HTTPS).
+    In DEV environment, as our server has no SSL certificate and does not handle HTTPS, we have to force this parameter
+    to False.
+"""
 STORE_REFRESH_TOKEN_COOKIE_ONLY_IN_HTTPS = False

@@ -112,9 +112,11 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
     return (
       <Style.Container position={position} right={right}>
         {renderCurrentProjectItem()}
-        {projects
-          .filter((project: ProjectType | null) => currentProject !== project)
-          .map((project: ProjectType | null) => renderProjectItem(project))}
+        <Style.ProjectItemContainer>
+          {projects
+            .filter((project: ProjectType | null) => currentProject !== project)
+            .map((project: ProjectType | null) => renderProjectItem(project))}
+        </Style.ProjectItemContainer>
       </Style.Container>
     );
   }

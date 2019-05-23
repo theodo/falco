@@ -141,6 +141,7 @@ export const colorUsage = {
   checkboxBorder: colorPalette.grey500,
   checkboxColor: colorPalette.primary500,
   checkboxBackground: colorPalette.white500,
+  graphModalToggleButton: colorPalette.grey800,
 };
 
 export const fontFamily = {

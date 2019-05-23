@@ -1,4 +1,5 @@
 import os
+import logging
 
 from django.core.mail import EmailMessage
 from django.http import JsonResponse
@@ -17,14 +18,17 @@ def lead_list(request):
         if serializer.is_valid():
             lead = Lead.objects.create(**serializer.validated_data)
             lead.save()
-            message = "A new user just asked for a demo !\nEmail: " + lead.email
-            email = EmailMessage(
-                "New lead on Falco",
-                message,
-                from_email=os.environ.get("EMAIL_FROM"),
-                to=os.environ.get("EMAIL_TO").split(","),
-            )
-            email.send(fail_silently=False)
+            try:
+                message = "A new user just asked for a demo !\nEmail: " + lead.email
+                email = EmailMessage(
+                    "New lead on Falco",
+                    message,
+                    from_email=os.environ.get("EMAIL_FROM"),
+                    to=os.environ.get("EMAIL_TO").split(","),
+                )
+                email.send(fail_silently=False)
+            except Exception as e:
+                logging.error(f"Email could not be sent: {e}")
 
             return JsonResponse(
                 {"uuid": lead.uuid, **serializer.data}, status=status.HTTP_201_CREATED

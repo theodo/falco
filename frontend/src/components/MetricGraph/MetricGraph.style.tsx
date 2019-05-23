@@ -10,6 +10,10 @@ interface MetricInfoTooltipProps {
   left?: string | null;
 }
 
+interface FullscreenProps {
+  fullscreen: boolean;
+}
+
 const Style = {
   Legend: styled.div`
     display: flex;
@@ -17,12 +21,18 @@ const Style = {
     margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
     font-family: ${fontFamily.mainSans};
   `,
+
+  /* stylelint-disable */
   LegendTitle: styled.div`
     color: ${colorUsage.graphText};
-    font-size: ${fontSize.graphText};
-    font-weight: ${fontWeight.graphText};
-    line-height: ${lineHeight.graphText};
+    font-size: ${(props: FullscreenProps) =>
+      props.fullscreen ? fontSize.h2Text : fontSize.graphText};
+    font-weight: ${(props: FullscreenProps) =>
+      props.fullscreen ? fontWeight.h2Text : fontWeight.graphText};
+    line-height: ${(props: FullscreenProps) =>
+      props.fullscreen ? lineHeight.h2Text : lineHeight.graphText};
   `,
+  /* stylelint-enable */
 
   MetricInfoIconContainer: styled.div`
     width: 16px;

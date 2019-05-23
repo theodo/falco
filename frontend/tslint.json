@@ -8,7 +8,8 @@
     "jsx-boolean-value": false,
     "member-access": false,
     "object-literal-sort-keys": false,
-    "jsx-no-lambda": false
+    "jsx-no-lambda": false,
+    "no-console": [true, "log"]
   },
   "rulesDirectory": []
 }
