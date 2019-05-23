@@ -54,6 +54,7 @@ const Style = {
     font-size: ${fontSize.metricInformationTooltip};
     line-height: ${lineHeight.metricInformationTooltip};
     font-weight: ${fontWeight.metricInformationTooltip};
+    z-index: 1;
   `,
 
   Tooltip: styled.div`

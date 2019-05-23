@@ -1,4 +1,6 @@
 # flake8: noqa
+import sys
+
 from .base import *
 
 SECRET_KEY = "f0de227df9c0c14f1d4d07bbf878846de538fc21cf3150bf14"
@@ -21,6 +23,14 @@ CACHES = {
         "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
         "LOCATION": "/var/tmp/django_cache",
     }
+}
+
+# Logging
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {"console": {"class": "logging.StreamHandler", "stream": sys.stdout}},
+    "root": {"handlers": ["console"], "level": "INFO"},
 }
 
 DEBUG_TOOLBAR_CONFIG = {
