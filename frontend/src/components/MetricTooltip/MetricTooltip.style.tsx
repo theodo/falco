@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
 interface MetricTooltipProps {
-  top?: string;
+  top?: string | null;
   left?: string | null;
 }
 
@@ -13,14 +13,14 @@ const Style = {
     left: ${(props: MetricTooltipProps) => (props.left ? props.left : 'auto')};
     width: 200px;
     border-radius: 5px;
-    background-color: ${colorUsage.metricInformationTooltipBackground};
-    box-shadow: 0 2px 4px 0 ${colorUsage.metricInformationTooltipShadowBox};
+    background-color: ${colorUsage.metricTooltipBackground};
+    box-shadow: 0 2px 4px 0 ${colorUsage.metricTooltipShadowBox};
     padding: ${getSpacing(2)} ${getSpacing(3)};
-    color: ${colorUsage.metricInformationTooltipText};
+    color: ${colorUsage.metricTooltipText};
     font-family: ${fontFamily.mainSans};
-    font-size: ${fontSize.metricInformationTooltip};
-    line-height: ${lineHeight.metricInformationTooltip};
-    font-weight: ${fontWeight.metricInformationTooltip};
+    font-size: ${fontSize.metricTooltip};
+    line-height: ${lineHeight.metricTooltip};
+    font-weight: ${fontWeight.metricTooltip};
   `,
 };
 export default Style;

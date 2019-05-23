@@ -31,21 +31,6 @@ const Style = {
     cursor: pointer;
   `,
 
-  MetricInfoTooltip: styled.div`
-    position: absolute;
-    top: ${(props: MetricInfoTooltipProps) => (props.top ? props.top : 'auto')};
-    left: ${(props: MetricInfoTooltipProps) => (props.left ? props.left : 'auto')};
-    width: 200px;
-    border-radius: 5px;
-    background-color: ${colorUsage.metricInformationTooltipBackground};
-    box-shadow: 0 2px 4px 0 ${colorUsage.metricInformationTooltipShadowBox};
-    padding: ${getSpacing(2)} ${getSpacing(3)};
-    color: ${colorUsage.metricInformationTooltipText};
-    font-size: ${fontSize.metricInformationTooltip};
-    line-height: ${lineHeight.metricInformationTooltip};
-    font-weight: ${fontWeight.metricInformationTooltip};
-  `,
-
   Tooltip: styled.div`
     height: 52px;
     width: 147px;

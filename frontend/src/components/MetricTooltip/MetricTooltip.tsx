@@ -33,15 +33,14 @@ const MetricTooltip: React.FunctionComponent<Props> = ({ children, parentRef, in
     [parentRef.current, initiatorRef.current],
   );
 
-  if (topPosition && leftPosition) {
-    return (
-      <Style.Container left={leftPosition} top={topPosition}>
-        {children}
-      </Style.Container>
-    );
-  } else {
+  if (!(topPosition && leftPosition)) {
     return <div />;
   }
+  return (
+    <Style.Container left={leftPosition} top={topPosition}>
+      {children}
+    </Style.Container>
+  );
 };
 
 export default MetricTooltip;
