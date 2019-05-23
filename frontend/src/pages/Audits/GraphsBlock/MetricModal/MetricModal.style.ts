@@ -6,6 +6,12 @@ interface ItemWithMarginProps {
 }
 
 const Style = {
+  ModalInnerContainer: styled.div`
+    padding: ${getSpacing(5)} ${getSpacing(8)};
+    display: flex;
+    flex-direction: column;
+  `,
+
   ModalTitle: styled.h2`
     line-height: ${lineHeight.h2Text};
     color: ${colorUsage.h2Text};
@@ -39,13 +45,6 @@ const Style = {
     height: 16px;
     background: ${colorUsage.checkboxBackground};
     border: 1px solid ${colorUsage.checkboxBorder};
-  `,
-
-  MetricName: styled.div`
-    color: ${colorUsage.labelText};
-    font-size: ${fontSize.labelText};
-    line-height: ${lineHeight.labelText};
-    font-family: ${fontFamily.mainSans};
   `,
 
   ModalButtonsContainer: styled.div`

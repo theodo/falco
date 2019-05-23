@@ -1,5 +1,6 @@
 import React, { MouseEvent } from 'react';
 
+import MetricTooltip from 'components/MetricTooltip';
 import dayjs from 'dayjs';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import { Information } from 'icons';
@@ -18,36 +19,16 @@ export interface OwnProps {
 
 type Props = OwnProps & InjectedIntlProps;
 
-const MetricGraph: React.FunctionComponent<Props> = props => {
-  const { fullscreen, auditResults, intl, metrics } = props;
+const MetricGraph: React.FunctionComponent<Props> = ({
+  fullscreen,
+  auditResults,
+  intl,
+  metrics,
+}) => {
   const [isMetricInfoTooltipVisible, setIsMetricInfoTooltipVisible] = React.useState(false);
-  const [metricInfoTooltipLeft, setMetricInfoTooltipLeft] = React.useState('auto');
-  const [metricInfoTooltipTop, setMetricInfoTooltipTop] = React.useState('auto');
 
   const legendRef = React.useRef<HTMLDivElement>(null);
   const metricInfoIconContainerRef = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(
-    () => {
-      if (legendRef.current && metricInfoIconContainerRef.current) {
-        setMetricInfoTooltipLeft(
-          Math.floor(
-            metricInfoIconContainerRef.current.getBoundingClientRect().right -
-              legendRef.current.getBoundingClientRect().left +
-              30,
-          ) + 'px',
-        );
-        setMetricInfoTooltipTop(
-          Math.floor(
-            metricInfoIconContainerRef.current.getBoundingClientRect().top -
-              legendRef.current.getBoundingClientRect().top -
-              5,
-          ) + 'px',
-        );
-      }
-    },
-    [legendRef.current, metricInfoIconContainerRef.current],
-  );
 
   const renderLegend = (legendProps: { payload: Array<{ value: MetricType }> }) => {
     const { payload } = legendProps;
@@ -75,9 +56,9 @@ const MetricGraph: React.FunctionComponent<Props> = props => {
           </Style.MetricInfoIconContainer>
         )}
         {isMetricInfoTooltipVisible && (
-          <Style.MetricInfoTooltip left={metricInfoTooltipLeft} top={metricInfoTooltipTop}>
+          <MetricTooltip parentRef={legendRef} initiatorRef={metricInfoIconContainerRef}>
             <FormattedMessage id={`Metrics.${entry.value}.description`} />
-          </Style.MetricInfoTooltip>
+          </MetricTooltip>
         )}
       </Style.Legend>
     ));
