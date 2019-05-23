@@ -6,6 +6,7 @@ import { METRICS } from 'redux/auditResults/constants';
 import { MetricType } from 'redux/auditResults/types';
 import { colorUsage, getSpacing } from 'stylesheet';
 import Style from './MetricModal.style';
+import MetricName from './MetricName';
 
 interface OwnProps {
   projectId: string;
@@ -96,9 +97,9 @@ const MetricModal: React.FunctionComponent<Props> = props => {
                 value={metric}
               />
               <Style.ModalCheckboxLabel margin={`0 ${getSpacing(3)} 0 0`} />
-              <Style.MetricName>
+                <MetricName metric={metric as MetricType} modalRef={metricModalRef}>
                 <FormattedMessage id={`Metrics.${metric}.name`} />
-              </Style.MetricName>
+                </MetricName>
             </Style.MetricItem>
           );
         })}

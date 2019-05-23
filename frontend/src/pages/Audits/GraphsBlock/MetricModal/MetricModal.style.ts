@@ -41,13 +41,6 @@ const Style = {
     border: 1px solid ${colorUsage.checkboxBorder};
   `,
 
-  MetricName: styled.div`
-    color: ${colorUsage.labelText};
-    font-size: ${fontSize.labelText};
-    line-height: ${lineHeight.labelText};
-    font-family: ${fontFamily.mainSans};
-  `,
-
   ModalButtonsContainer: styled.div`
     display: flex;
     flex-direction: row;
