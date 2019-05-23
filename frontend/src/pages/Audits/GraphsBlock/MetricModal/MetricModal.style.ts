@@ -6,6 +6,12 @@ interface ItemWithMarginProps {
 }
 
 const Style = {
+  ModalInnerContainer: styled.div`
+    padding: ${getSpacing(5)} ${getSpacing(8)};
+    display: flex;
+    flex-direction: column;
+  `,
+
   ModalTitle: styled.h2`
     line-height: ${lineHeight.h2Text};
     color: ${colorUsage.h2Text};

@@ -21,33 +21,9 @@ type Props = OwnProps & InjectedIntlProps;
 const MetricGraph: React.FunctionComponent<Props> = props => {
   const { auditResults, intl, metrics } = props;
   const [isMetricInfoTooltipVisible, setIsMetricInfoTooltipVisible] = React.useState(false);
-  const [metricInfoTooltipLeft, setMetricInfoTooltipLeft] = React.useState('auto');
-  const [metricInfoTooltipTop, setMetricInfoTooltipTop] = React.useState('auto');
 
   const legendRef = React.useRef<HTMLDivElement>(null);
   const metricInfoIconContainerRef = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(
-    () => {
-      if (legendRef.current && metricInfoIconContainerRef.current) {
-        setMetricInfoTooltipLeft(
-          Math.floor(
-            metricInfoIconContainerRef.current.getBoundingClientRect().right -
-              legendRef.current.getBoundingClientRect().left +
-              30,
-          ) + 'px',
-        );
-        setMetricInfoTooltipTop(
-          Math.floor(
-            metricInfoIconContainerRef.current.getBoundingClientRect().top -
-              legendRef.current.getBoundingClientRect().top -
-              5,
-          ) + 'px',
-        );
-      }
-    },
-    [legendRef.current, metricInfoIconContainerRef.current],
-  );
 
   const renderLegend = (legendProps: { payload: Array<{ value: MetricType }> }) => {
     const { payload } = legendProps;
@@ -65,7 +41,7 @@ const MetricGraph: React.FunctionComponent<Props> = props => {
           <Information color={colorUsage.metricInformationIcon} />
         </Style.MetricInfoIconContainer>
         {isMetricInfoTooltipVisible && (
-          <MetricTooltip left={metricInfoTooltipLeft} top={metricInfoTooltipTop}>
+          <MetricTooltip parentRef={legendRef} initiatorRef={metricInfoIconContainerRef}>
             <FormattedMessage id={`Metrics.${entry.value}.description`} />
           </MetricTooltip>
         )}

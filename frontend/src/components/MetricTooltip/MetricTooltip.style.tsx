@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colorUsage, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
+import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
 interface MetricTooltipProps {
   top?: string;
@@ -17,6 +17,7 @@ const Style = {
     box-shadow: 0 2px 4px 0 ${colorUsage.metricInformationTooltipShadowBox};
     padding: ${getSpacing(2)} ${getSpacing(3)};
     color: ${colorUsage.metricInformationTooltipText};
+    font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.metricInformationTooltip};
     line-height: ${lineHeight.metricInformationTooltip};
     font-weight: ${fontWeight.metricInformationTooltip};
