@@ -10,9 +10,7 @@ interface Props {
   modalRef: React.RefObject<HTMLDivElement>;
 }
 
-const MetricName: React.FunctionComponent<Props> = props => {
-  const { metric, modalRef } = props;
-
+const MetricName: React.FunctionComponent<Props> = ({ metric, modalRef }) => {
   const [showMetricTooltip, toggleMetricTooltip] = React.useState(false);
 
   const displayTooltip = () => {

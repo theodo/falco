@@ -8,9 +8,7 @@ export interface Props {
   initiatorRef: React.RefObject<HTMLDivElement>;
 }
 
-const MetricTooltip: React.FunctionComponent<Props> = props => {
-  const { children, parentRef, initiatorRef } = props;
-
+const MetricTooltip: React.FunctionComponent<Props> = ({ children, parentRef, initiatorRef }) => {
   const [leftPosition, setLeftPosition] = React.useState('');
   const [topPosition, setTopPosition] = React.useState('');
 

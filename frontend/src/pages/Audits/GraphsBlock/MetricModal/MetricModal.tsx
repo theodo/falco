@@ -19,9 +19,13 @@ interface Props extends OwnProps {
   updateDisplayedMetrics: (projectId: string, selectedMetrics: MetricType[]) => void;
 }
 
-const MetricModal: React.FunctionComponent<Props> = props => {
-  const { metrics, show, close, updateDisplayedMetrics, projectId } = props;
-
+const MetricModal: React.FunctionComponent<Props> = ({
+  metrics,
+  show,
+  close,
+  updateDisplayedMetrics,
+  projectId,
+}) => {
   const modalStyles = {
     content: {
       width: '800px',

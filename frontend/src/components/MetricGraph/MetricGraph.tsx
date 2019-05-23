@@ -18,8 +18,7 @@ export interface OwnProps {
 
 type Props = OwnProps & InjectedIntlProps;
 
-const MetricGraph: React.FunctionComponent<Props> = props => {
-  const { auditResults, intl, metrics } = props;
+const MetricGraph: React.FunctionComponent<Props> = ({ auditResults, intl, metrics }) => {
   const [isMetricInfoTooltipVisible, setIsMetricInfoTooltipVisible] = React.useState(false);
 
   const legendRef = React.useRef<HTMLDivElement>(null);
