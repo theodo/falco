@@ -168,11 +168,11 @@ const MetricGraph: React.FunctionComponent<Props> = ({
             activeDot={{
               fill: colorUsage.graphTooltipActiveDot,
               stroke: colorUsage.graphTooltipActiveDotBorder,
-              strokeWidth: 4,
-              r: 10,
+              strokeWidth: fullscreen ? 4 : 2,
+              r: fullscreen ? 10 : 6,
             }}
             dot={false}
-            strokeWidth={5}
+            strokeWidth={fullscreen ? 5 : 2}
           />
         ))}
       </AreaChart>
