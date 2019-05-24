@@ -2,11 +2,11 @@ import { InjectedFormikProps } from 'formik';
 import React from 'react';
 
 import ErrorMessage from 'components/ErrorMessage';
-import Input from 'components/Input';
+import InputMUI from 'components/InputMUI';
 import { FormattedMessage } from 'react-intl';
 import { Redirect, RouteComponentProps } from 'react-router';
 import { routeDefinitions } from 'routes';
-import { fontSize, getSpacing } from 'stylesheet';
+import { getSpacing } from 'stylesheet';
 
 import Styles from './Login.style';
 import { FormValues } from './service';
@@ -70,7 +70,7 @@ const InnerLoginForm: React.FunctionComponent<
             type="text"
             name="username"
             label={'Login.username_label'}
-            component={Input}
+            component={InputMUI}
             error={touched.username && errors.username}
             disabled={isSubmittingFromStore}
           />
@@ -80,7 +80,7 @@ const InnerLoginForm: React.FunctionComponent<
             type="password"
             name="password"
             label={'Login.password_label'}
-            component={Input}
+            component={InputMUI}
             error={touched.password && errors.password}
             disabled={isSubmittingFromStore}
           />

@@ -31,6 +31,7 @@ const styles = (theme: any) =>
       '& label': {
         transform: 'translate(10px, 10px) scale(1)',
       },
+      width: '100%',
     },
     label: {
       fontSize: fontSize.inputTextPlaceholder,
@@ -84,7 +85,7 @@ const styles = (theme: any) =>
 
 type Props = OwnProps & TextFieldProps & InjectedIntlProps;
 
-const Input: React.FunctionComponent<Props> = ({ classes, disabled, error, field, intl, label, type }) => {
+const InputMUI: React.FunctionComponent<Props> = ({ classes, disabled, error, field, intl, label, type }) => {
   return (
     <TextField
       variant="outlined"
@@ -121,4 +122,4 @@ const Input: React.FunctionComponent<Props> = ({ classes, disabled, error, field
   );
 };
 
-export default withStyles(styles)(Input);
+export default withStyles(styles)(InputMUI);

@@ -4,7 +4,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
 
-import Input from 'components/Input';
+import InputMUI from 'components/InputMUI';
 import { fontSize, getSpacing } from 'stylesheet';
 import Style from './LeadForm.style';
 import { FormValues } from './service';
@@ -59,7 +59,7 @@ const LeadForm: React.FunctionComponent<
           type="email"
           name="email"
           label={'Landing.introduction_block.leadForm.email_label'}
-          component={Input}
+          component={InputMUI}
           error={touched.email && errors.email}
           disabled={leadSubmissionStatus === 'running' || leadSubmissionStatus === 'success'}
         />
