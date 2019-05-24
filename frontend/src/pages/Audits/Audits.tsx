@@ -155,11 +155,10 @@ export const Audits: React.FunctionComponent<Props> = ({
 
   const sortedAuditResultsIds = page
     ? sortedPageAuditResultsIds
-    : script &&
-      sortedScriptAuditResultsIds &&
-      scriptStepId &&
-      sortedScriptAuditResultsIds[scriptStepId]
-    ? sortedScriptAuditResultsIds[scriptStepId]
+    : script && sortedScriptAuditResultsIds
+    ? scriptStepId && sortedScriptAuditResultsIds[scriptStepId]
+      ? sortedScriptAuditResultsIds[scriptStepId]
+      : []
     : null;
 
   const scriptStepSelectOptions = Object.keys(scriptSteps).map(scriptStepKey => ({
