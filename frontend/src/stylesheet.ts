@@ -119,6 +119,8 @@ export const colorUsage = {
   landingTheodoLink: colorPalette.primary500,
   submitButtonText: colorPalette.white500,
   submitButtonBackground: colorPalette.primary500,
+  leadFormBorder: colorPalette.grey800,
+  leadSubmitButtonBackground: colorPalette.accentGreen500,
   leadSubmitButtonWaitingBackground: colorPalette.grey800,
   leadSubmitButtonLoaderPrimary: colorPalette.white500,
   leadSubmitButtonLoaderSecondary: colorPalette.transparent,
@@ -178,7 +180,7 @@ export const fontSize = {
   inputTextPlaceholder: '14px',
   inputTextLabel: '12px',
   inputErrorMessage: '12px',
-  leadSubmitErrorMessage: '12px',
+  leadSubmitErrorMessage: '13px',
 };
 
 export const lineHeight = {

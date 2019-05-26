@@ -13,10 +13,10 @@
       "title": "Optimisez la performance de vos sites Web",
       "introduction": "Quel que soit votre domaine, la performance de votre site web est cruciale pour vos utilisateurs et donc pour votre business. Falco vous aide à monitorer, à analyser et à optimiser vos sites.",
       "leadForm": {
-        "email_label": "Votre adresse email ...",
-        "submit_button": "Demander une démonstration",
-        "submit_button_running": "Demande en cours",
-        "submit_button_success": "Merci !",
+        "email_label": "Saisissez votre adresse email ...",
+        "submit_button": "DEMANDER UNE DÉMO",
+        "submit_button_running": "DEMANDE EN COURS",
+        "submit_button_success": "MERCI !",
         "submit_failed": "Une erreur s'est produite lors de la soumission de votre demande.\n\nMerci de réessayer.",
         "error_email_required": "Vous devez fournir un email",
         "error_email_valid": "Votre email n'est pas valide"

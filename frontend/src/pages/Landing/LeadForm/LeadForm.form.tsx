@@ -4,7 +4,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
 
-import InputMUI from 'components/InputMUI';
+import Input from 'components/Input';
 import { fontSize, getSpacing } from 'stylesheet';
 import Style from './LeadForm.style';
 import { FormValues } from './service';
@@ -59,33 +59,31 @@ const LeadForm: React.FunctionComponent<
           type="email"
           name="email"
           label={'Landing.introduction_block.leadForm.email_label'}
-          component={InputMUI}
+          component={Input}
           error={touched.email && errors.email}
           disabled={leadSubmissionStatus === 'running' || leadSubmissionStatus === 'success'}
         />
-        <Style.SubmitFormContainer>
-          <Style.SubmitButton type="submit" className={submitButtonParameters.className}>
-            <Style.SubmitButtonContent>
-              {leadSubmissionStatus === 'running' && <Style.Loader />}
-              {leadSubmissionStatus === 'success' && (
-                <Style.CheckmarkContainer>
-                  <Style.Checkmark />
-                </Style.CheckmarkContainer>
-              )}
-              <FormattedMessage id={submitButtonParameters.translationKey} />
-            </Style.SubmitButtonContent>
-          </Style.SubmitButton>
-          {leadSubmissionStatus === 'failed' && (
-            <ErrorMessage
-              margin={`${getSpacing(2)} 0 0 ${getSpacing(4)}`}
-              padding={`${getSpacing(2)} ${getSpacing(3)}`}
-              fontSize={fontSize.leadSubmitErrorMessage}
-            >
-              <FormattedMessage id={'Landing.introduction_block.leadForm.submit_failed'} />
-            </ErrorMessage>
-          )}
-        </Style.SubmitFormContainer>
+        <Style.SubmitButton type="submit" className={submitButtonParameters.className}>
+          <Style.SubmitButtonContent>
+            {leadSubmissionStatus === 'running' && <Style.Loader />}
+            {leadSubmissionStatus === 'success' && (
+              <Style.CheckmarkContainer>
+                <Style.Checkmark />
+              </Style.CheckmarkContainer>
+            )}
+            <FormattedMessage id={submitButtonParameters.translationKey} />
+          </Style.SubmitButtonContent>
+        </Style.SubmitButton>
       </Style.LeadForm>
+      {leadSubmissionStatus === 'failed' && (
+        <ErrorMessage
+          margin={`${getSpacing(4)} ${getSpacing(4)} 0 ${getSpacing(4)}`}
+          padding={`${getSpacing(3)}`}
+          fontSize={fontSize.leadSubmitErrorMessage}
+        >
+          <FormattedMessage id={'Landing.introduction_block.leadForm.submit_failed'} />
+        </ErrorMessage>
+      )}
     </Style.Container>
   );
 };

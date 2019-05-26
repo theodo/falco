@@ -13,10 +13,10 @@
       "title": "Optimize the performance of your websites",
       "introduction": "Whatever your field is, the performance of your pages is critical for your users, and thus for your business. Falco helps you to monitor, analyze, and optimize your websites.",
       "leadForm": {
-        "email_label": "Your email address ...",
-        "submit_button": "Ask for a demo",
-        "submit_button_running": "Request in progress",
-        "submit_button_success": "Thank you!",
+        "email_label": "Please type your email address ...",
+        "submit_button": "ASK FOR A DEMO",
+        "submit_button_running": "REQUEST IN PROGRESS",
+        "submit_button_success": "THANK YOU!",
         "submit_failed": "An error occurred while submitting your request.\n\nPlease try again.",
         "error_email_required": "You must type email address",
         "error_email_valid": "Your email address is not valid"
