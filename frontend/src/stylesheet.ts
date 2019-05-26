@@ -131,6 +131,8 @@ export const colorUsage = {
   inputTextPlaceholder: colorPalette.grey800,
   inputTextFocused: colorPalette.primary500,
   inputTextError: colorPalette.red500,
+  inputTextLabel: colorPalette.grey800,
+  inputTextBackground: colorPalette.transparent,
   metricsModalBackground: colorPalette.grey200,
   metricsModalShadow: colorPalette.grey400,
   cancelButtonText: colorPalette.primary500,
@@ -174,6 +176,7 @@ export const fontSize = {
   validateButton: '14px',
   inputText: '14px',
   inputTextPlaceholder: '14px',
+  inputTextLabel: '12px',
   inputErrorMessage: '12px',
   leadSubmitErrorMessage: '12px',
 };
@@ -203,6 +206,7 @@ export const lineHeight = {
   validateButton: '18px',
   inputText: '18px',
   inputTextPlaceholder: '16px',
+  inputTextLabel: '16px',
   inputErrorMessage: '14px',
 };
 
@@ -228,6 +232,7 @@ export const fontWeight = {
   cancelButton: 'bold',
   validateButton: 'bold',
   inputErrorMessage: 'bold' as 'bold',
+  inputTextLabel: 'bold',
 };
 
 export const fontStyle = {
