@@ -135,6 +135,7 @@ export const colorUsage = {
   inputTextError: colorPalette.red500,
   inputTextLabel: colorPalette.grey800,
   inputTextBackground: colorPalette.transparent,
+  loginInputBorder: colorPalette.grey800,
   metricsModalBackground: colorPalette.grey200,
   metricsModalShadow: colorPalette.grey400,
   cancelButtonText: colorPalette.primary500,

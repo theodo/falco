@@ -58,8 +58,8 @@
   "Login": {
     "username_label": "Username",
     "password_label": "Password",
-    "connect_button": "Log in",
-    "connect_button_running": "Logging in",
+    "connect_button": "LOG IN",
+    "connect_button_running": "LOGGING IN",
     "error_username_required": "You must type username",
     "error_password_required": "You must type password",
     "login_error": "Those credentials seem incorrect.\nPlease try again."

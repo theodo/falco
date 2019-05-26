@@ -23,13 +23,18 @@ const Styles = {
   `,
 
   InputFieldContainer: styled.div`
+    min-width: 300px;
     margin: ${(props: ItemWithMarginProps) => props.margin || '0'};
+    border-radius: 6px;
+    border: 1px solid ${colorUsage.loginInputBorder};
+    padding: 0 ${getSpacing(5)};
   `,
 
   InputField: styled(Field)``,
 
   ConnectButton: styled.button`
-    min-height: 38px;
+    height: 56px;
+    white-space: nowrap;
     border-radius: 6px;
     border: none;
     outline: none;
@@ -54,14 +59,14 @@ const Styles = {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: ${getSpacing(1)} ${getSpacing(3)};
+    padding: ${getSpacing(2)} ${getSpacing(4)};
   `,
 
   Loader: styled.div`
     width: 18px;
     height: 18px;
     border-radius: 18px;
-    margin-right: ${getSpacing(3)};
+    margin-right: ${getSpacing(4)};
     border: 2px solid ${colorUsage.connectButtonLoaderSecondary};
     border-left-color: ${colorUsage.connectButtonLoaderPrimary};
     animation: rotating 1.5s 0s linear infinite;
