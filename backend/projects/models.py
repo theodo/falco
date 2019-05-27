@@ -67,6 +67,7 @@ class NetworkShapeOptions(Enum):
 
 
 class ProjectAuditParameters(BaseModel):
+    name = models.CharField(max_length=100)
     browser = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     network_shape = models.CharField(
