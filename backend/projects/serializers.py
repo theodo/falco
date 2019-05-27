@@ -28,7 +28,7 @@ class ProjectAuditParametersSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProjectAuditParameters
-        fields = ("uuid", "location", "browser", "network_shape")
+        fields = ("uuid", "name", "location", "browser", "network_shape")
 
 
 class ProjectSerializer(serializers.ModelSerializer):
