@@ -10,24 +10,25 @@ const Styles = {
   `,
 
   LeadForm: styled(Form)`
+    height: 54px;
     width: 100%;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px;
+    border: 1px solid ${colorUsage.leadFormBorder};
+    padding-left: ${getSpacing(5)};
   `,
 
   EmailField: styled(Field)``,
 
-  SubmitFormContainer: styled.div`
-    display: flex;
-    flex-direction: column;
-    max-width: 275px;
-  `,
-
   SubmitButton: styled.button`
-    margin-left: ${getSpacing(4)};
-    min-height: 38px;
+    position: relative;
+    right: -1px;
+    margin-left: ${getSpacing(5)};
+    height: 56px;
+    white-space: nowrap;
     border-radius: 6px;
     border: none;
     outline: none;
@@ -37,7 +38,7 @@ const Styles = {
     line-height: ${lineHeight.submitButton};
     color: ${colorUsage.submitButtonText};
     transition: all 0.5s ease;
-    background-color: ${colorUsage.submitButtonBackground};
+    background-color: ${colorUsage.leadSubmitButtonBackground};
 
     &.normal {
       cursor: pointer;
@@ -56,14 +57,14 @@ const Styles = {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: ${getSpacing(1)} ${getSpacing(3)};
+    padding: 0 ${getSpacing(2)};
   `,
 
   Loader: styled.div`
     width: 18px;
     height: 18px;
     border-radius: 18px;
-    margin-right: ${getSpacing(3)};
+    margin-right: ${getSpacing(2)};
     border: 2px solid ${colorUsage.leadSubmitButtonLoaderSecondary};
     border-left-color: ${colorUsage.leadSubmitButtonLoaderPrimary};
     animation: rotating 1.5s 0s linear infinite;
@@ -81,7 +82,7 @@ const Styles = {
   CheckmarkContainer: styled.div`
     width: 18px;
     height: 18px;
-    margin-right: ${getSpacing(3)};
+    margin-right: ${getSpacing(2)};
   `,
 
   Checkmark: styled.div`

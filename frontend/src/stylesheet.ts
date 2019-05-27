@@ -119,6 +119,8 @@ export const colorUsage = {
   landingTheodoLink: colorPalette.primary500,
   submitButtonText: colorPalette.white500,
   submitButtonBackground: colorPalette.primary500,
+  leadFormBorder: colorPalette.grey800,
+  leadSubmitButtonBackground: colorPalette.accentGreen500,
   leadSubmitButtonWaitingBackground: colorPalette.grey800,
   leadSubmitButtonLoaderPrimary: colorPalette.white500,
   leadSubmitButtonLoaderSecondary: colorPalette.transparent,
@@ -131,6 +133,9 @@ export const colorUsage = {
   inputTextPlaceholder: colorPalette.grey800,
   inputTextFocused: colorPalette.primary500,
   inputTextError: colorPalette.red500,
+  inputTextLabel: colorPalette.grey800,
+  inputTextBackground: colorPalette.transparent,
+  loginInputBorder: colorPalette.grey800,
   metricsModalBackground: colorPalette.grey200,
   metricsModalShadow: colorPalette.grey400,
   cancelButtonText: colorPalette.primary500,
@@ -174,8 +179,9 @@ export const fontSize = {
   validateButton: '14px',
   inputText: '14px',
   inputTextPlaceholder: '14px',
+  inputTextLabel: '12px',
   inputErrorMessage: '12px',
-  leadSubmitErrorMessage: '12px',
+  leadSubmitErrorMessage: '13px',
 };
 
 export const lineHeight = {
@@ -203,6 +209,7 @@ export const lineHeight = {
   validateButton: '18px',
   inputText: '18px',
   inputTextPlaceholder: '16px',
+  inputTextLabel: '16px',
   inputErrorMessage: '14px',
 };
 
@@ -228,6 +235,7 @@ export const fontWeight = {
   cancelButton: 'bold',
   validateButton: 'bold',
   inputErrorMessage: 'bold' as 'bold',
+  inputTextLabel: 'bold',
 };
 
 export const fontStyle = {

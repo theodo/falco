@@ -6,7 +6,7 @@ import Input from 'components/Input';
 import { FormattedMessage } from 'react-intl';
 import { Redirect, RouteComponentProps } from 'react-router';
 import { routeDefinitions } from 'routes';
-import { fontSize, getSpacing } from 'stylesheet';
+import { getSpacing } from 'stylesheet';
 
 import Styles from './Login.style';
 import { FormValues } from './service';
