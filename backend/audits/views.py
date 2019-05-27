@@ -101,16 +101,21 @@ def audits_results(request):
     if request.method == "GET":
         page_uuid = request.GET.get("page")
         script_uuid = request.GET.get("script")
+        audit_parameters_uuid = request.GET.get("audit_parameters")
         if page_uuid is not None:
             page = get_object_or_404(Page, pk=page_uuid)
             check_if_member_of_project(request.user.id, page.project.uuid)
             audits = Audit.objects.filter(page=page_uuid)
+            if audit_parameters_uuid:
+                audits = audits.filter(parameters=audit_parameters_uuid)
             audits_results = AuditResults.objects.filter(audit__in=audits)
             serializer = AuditResultsSerializer(audits_results, many=True)
         elif script_uuid is not None:
             script = get_object_or_404(Script, pk=script_uuid)
             check_if_member_of_project(request.user.id, script.project.uuid)
             audits = Audit.objects.filter(script=script_uuid)
+            if audit_parameters_uuid:
+                audits = audits.filter(parameters=audit_parameters_uuid)
             audits_results = AuditResults.objects.filter(audit__in=audits)
             serializer = AuditResultsSerializer(audits_results, many=True)
 
