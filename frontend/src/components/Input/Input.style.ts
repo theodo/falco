@@ -5,14 +5,14 @@ const Styles = {
   Field: styled.div`
     position: relative;
     width: 100%;
-    height: 56px;
+    height: 54px;
     border-radius: 6px;
   `,
 
   Input: styled.input`
     box-sizing: border-box;
     width: 100%;
-    height: 56px;
+    height: 54px;
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.inputText};
     line-height: ${lineHeight.inputText};
@@ -21,7 +21,7 @@ const Styles = {
     background-color: ${colorUsage.inputTextBackground};
 
     &.active {
-      padding: 28px 0 8px 0;
+      padding: 27px 0 8px 0;
     }
 
     &::placeholder {
@@ -31,7 +31,7 @@ const Styles = {
 
   Label: styled.label`
     position: absolute;
-    top: 28px;
+    top: 27px;
     left: 0;
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.inputTextLabel};
