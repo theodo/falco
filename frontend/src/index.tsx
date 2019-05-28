@@ -10,7 +10,7 @@ import App from './App';
 import configureStore from './redux/store';
 import { register } from './serviceWorker';
 
-const history = createBrowserHistory();
+export const history = createBrowserHistory();
 export const { store, persistor } = configureStore(history);
 
 const rootEl = document.getElementById('root');

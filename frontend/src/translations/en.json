@@ -65,9 +65,9 @@
     "login_error": "Those credentials seem incorrect.\nPlease try again."
   },
   "Menu": {
+    "audit_parameters_selection": "Audits environment",
     "page_badge": "PAGE",
-    "script_badge": "SCRIPT",
-    "logoff_link": "Log off"
+    "script_badge": "SCRIPT"
   },
   "Project": {
     "project_error": "It seems that you are not authorized to access this project.\n\nPlease try again or contact your administrator to get granted.",

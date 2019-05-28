@@ -1,12 +1,21 @@
 import Badge from 'components/Badge';
+import Select from 'components/Select';
 import { MenuArrow } from 'icons';
 import React from 'react';
-import { InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { ValueType } from 'react-select/lib/types';
 import { ProjectType } from 'redux/projects/types';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
 
+import { history } from 'index';
+
 import Style from './Menu.style';
+
+interface AuditParametersOption {
+  value: string;
+  label: string;
+}
 
 export interface PageOrScript {
   uuid: string;
@@ -17,7 +26,10 @@ export interface PageOrScript {
 
 export interface OwnProps {
   auditParametersId: string | null;
+  pageId: string | null;
   project?: ProjectType;
+  scriptId: string | null;
+  scriptStepId: string | null;
   currentURL: string;
 }
 
@@ -27,7 +39,10 @@ export const Menu: React.FunctionComponent<Props> = ({
   auditParametersId,
   currentURL,
   intl,
+  pageId,
   project,
+  scriptId,
+  scriptStepId,
 }) => {
   if (!project) {
     return <Style.Container />;
@@ -107,9 +122,53 @@ export const Menu: React.FunctionComponent<Props> = ({
     return linkPath === url;
   };
 
+  const auditParametersSelectOptions = project.auditParametersList.map(auditParameters => ({
+    value: auditParameters.uuid,
+    label: auditParameters.name,
+  }));
+
+  const handleAuditParametersSelection = (
+    selectedOption: ValueType<AuditParametersOption | {}>,
+  ) => {
+    // Check needed to avoid TS2339 error
+    if (selectedOption && 'value' in selectedOption && auditParametersId) {
+      if (pageId) {
+        history.push(
+          routeDefinitions.auditsDetails.path
+            .replace(':projectId', project.uuid)
+            .replace(':pageOrScriptId', pageId)
+            .replace(':auditParametersId', selectedOption.value),
+        );
+      } else if (scriptId && scriptStepId) {
+        history.push(
+          routeDefinitions.auditsScriptDetails.path
+            .replace(':projectId', project.uuid)
+            .replace(':pageOrScriptId', scriptId)
+            .replace(':auditParametersId', selectedOption.value)
+            .replace(':scriptStepId', scriptStepId),
+        );
+      }
+    }
+  };
+
   return (
     <Style.Container>
       <Style.ProjectName>{project.name}</Style.ProjectName>
+
+      {project && 0 !== auditParametersSelectOptions.length && (
+        <Style.AuditParametersBlock>
+          <Style.AuditParametersTitle>
+            <FormattedMessage id="Menu.audit_parameters_selection" />
+          </Style.AuditParametersTitle>
+          <Select
+            value={auditParametersSelectOptions.find(auditParametersOption => {
+              return auditParametersOption.value === auditParametersId;
+            })}
+            onChange={handleAuditParametersSelection}
+            options={auditParametersSelectOptions}
+          />
+        </Style.AuditParametersBlock>
+      )}
       <Style.Audits>Audits</Style.Audits>
       {pagesAndScripts.map((pageOrScript: PageOrScript) => {
         const badgeParams = getBadgeParams(pageOrScript);

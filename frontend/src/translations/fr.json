@@ -65,6 +65,7 @@
     "login_error": "Ces identifiants ne semblent pas corrects.\nVeuillez réessayer."
   },
   "Menu": {
+    "audit_parameters_selection": "Environnement des audits",
     "page_badge": "PAGE",
     "script_badge": "SCRIPT"
   },

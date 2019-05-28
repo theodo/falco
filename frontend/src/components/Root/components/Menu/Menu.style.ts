@@ -25,9 +25,25 @@ const StyledMenu = {
     font-size: ${fontSize.h2Text};
     font-weight: ${fontWeight.h2Text};
     margin-bottom: ${getSpacing(4)};
-    padding-left: ${getSpacing(3)};
+    padding: 0 ${getSpacing(3)};
     overflow: hidden;
     text-overflow: ellipsis;
+  `,
+
+  AuditParametersBlock: styled.div`
+    margin-bottom: ${getSpacing(4)};
+    padding: 0 ${getSpacing(3)};
+    display: flex;
+    flex-direction: column;
+  `,
+
+  AuditParametersTitle: styled.div`
+    font-family: ${fontFamily.mainSans};
+    font-size: ${fontSize.inputSelectLabelText};
+    line-height: ${lineHeight.inputSelectLabelText};
+    font-weight: ${fontWeight.inputSelectLabelText};
+    color: ${colorUsage.inputSelectLabelText};
+    margin-bottom: ${getSpacing(2)};
   `,
 
   Audits: styled.div`
@@ -36,7 +52,7 @@ const StyledMenu = {
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.h3Text};
     font-weight: ${fontWeight.h3Text};
-    padding: ${getSpacing(4)} ${getSpacing(3)};
+    padding: 0 ${getSpacing(3)} ${getSpacing(4)} ${getSpacing(3)};
   `,
 
   PageScriptItem: styled(Link)`
