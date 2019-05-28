@@ -19,15 +19,17 @@ function* fetchAuditResultsFailedHandler(error: Error) {
 
 export function* fetchAuditResults(action: ActionType<typeof fetchAuditResultsRequest>) {
   const endpoint = `/api/audits/results`;
-  const { id, type } = action.payload;
-  const payload: {page?: string; script?: string;} = {
-  }
+  const { auditParametersId, pageOrScriptId, type } = action.payload;
+  const payload: { audit_parameters: string; page?: string; script?: string } = {
+    audit_parameters: auditParametersId,
+  };
   switch (type) {
-    case "page":
-      payload.page = action.payload.id
+    case 'page':
+      payload.page = pageOrScriptId;
       break;
-    case "script":
-      payload.script = action.payload.id
+    case 'script':
+      payload.script = pageOrScriptId;
+      break;
     default:
       break;
   }
@@ -39,15 +41,20 @@ export function* fetchAuditResults(action: ActionType<typeof fetchAuditResultsRe
   );
   const modelizedAuditResults = modelizeAuditResultsForPage(auditResults);
   const sortedAuditResultsIds = getSortAuditResultsId(
-    Object.keys(modelizedAuditResults).map(auditId => modelizedAuditResults[auditId])
-  )
+    Object.keys(modelizedAuditResults).map(auditId => modelizedAuditResults[auditId]),
+  );
   let sortedByPageId;
   let sortedByScriptId;
-  if (type === "page") {
-    sortedByPageId = { [id]: sortedAuditResultsIds }
+  if (type === 'page') {
+    sortedByPageId = { [pageOrScriptId]: sortedAuditResultsIds };
   }
-  if (type === "script") {
-    sortedByScriptId = { [id]: groupBy(sortedAuditResultsIds, (auditId) => modelizedAuditResults[auditId].scriptStepNumber) }
+  if (type === 'script') {
+    sortedByScriptId = {
+      [pageOrScriptId]: groupBy(
+        sortedAuditResultsIds,
+        auditId => modelizedAuditResults[auditId].scriptStepNumber,
+      ),
+    };
   }
   yield put(
     fetchAuditResultsSuccess({

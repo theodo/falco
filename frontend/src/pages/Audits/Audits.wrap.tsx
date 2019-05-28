@@ -38,8 +38,11 @@ const mapStateToProps = (state: RootState, props: OwnProps) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  fetchAuditResultsRequest: (id: string, type: 'page' | 'script') =>
-    dispatch(fetchAuditResultsRequest({ id, type })),
+  fetchAuditResultsRequest: (
+    auditParametersId: string,
+    pageOrScriptId: string,
+    type: 'page' | 'script',
+  ) => dispatch(fetchAuditResultsRequest({ auditParametersId, pageOrScriptId, type })),
   fetchProjectRequest: (projectId: string) => dispatch(fetchProjectRequest({ projectId })),
   setCurrentAuditParametersId: (auditParametersId: string | null | undefined) =>
     dispatch(setCurrentAuditParametersId({ auditParametersId })),
