@@ -42,10 +42,10 @@ const StyledAudits = {
   `,
 
   ScriptStepBlockTitle: styled.div`
-    font-size: ${fontSize.scriptStepSelectLabelText};
-    line-height: ${lineHeight.scriptStepSelectLabelText};
-    font-weight: ${fontWeight.scriptStepSelectLabelText};
-    color: ${colorUsage.scriptStepSelectLabelText};
+    font-size: ${fontSize.inputSelectLabelText};
+    line-height: ${lineHeight.inputSelectLabelText};
+    font-weight: ${fontWeight.inputSelectLabelText};
+    color: ${colorUsage.inputSelectLabelText};
     margin-bottom: ${getSpacing(2)};
   `,
 };
