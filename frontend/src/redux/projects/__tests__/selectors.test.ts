@@ -6,6 +6,7 @@ const firstProjectId = '1234';
 const firstProjectFirstParametersId = `${firstProjectId}-1234`;
 const firstProjectFirstParameters = {
   uuid: firstProjectFirstParametersId,
+  name: 'Project Parameters 1-1',
   location: 'Dulles 1-1',
   browser: 'Firefox 1-1',
   networkShape: 'Cable 1-1',
@@ -13,6 +14,7 @@ const firstProjectFirstParameters = {
 const firstProjectSecondParametersId = `${firstProjectId}-5678`;
 const firstProjectSecondParameters = {
   uuid: firstProjectSecondParametersId,
+  name: 'Project Parameters 1-2',
   location: 'Dulles 1-2',
   browser: 'Firefox 1-2',
   networkShape: 'Cable 1-2',
@@ -31,6 +33,7 @@ const secondProjectId = '5678';
 const secondProjectFirstParametersId = `${secondProjectId}-1234`;
 const secondProjectFirstParameters = {
   uuid: secondProjectFirstParametersId,
+  name: 'Project Parameters 2-1',
   location: 'Dulles 2-1',
   browser: 'Firefox 2-1',
   networkShape: 'Cable 2-1',
@@ -38,6 +41,7 @@ const secondProjectFirstParameters = {
 const secondProjectSecondParametersId = `${secondProjectId}-5678`;
 const secondProjectSecondParameters = {
   uuid: secondProjectSecondParametersId,
+  name: 'Project Parameters 2-2',
   location: 'Dulles 2-2',
   browser: 'Firefox 2-2',
   networkShape: 'Cable 2-2',
