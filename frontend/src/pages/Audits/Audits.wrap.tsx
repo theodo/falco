@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { selectAuditScriptSteps } from 'redux/auditResults/selectors';
+import { setCurrentAuditParametersId } from 'redux/parameters';
 import { fetchProjectRequest } from 'redux/projects';
 import { modelizePages, modelizeScripts } from 'redux/projects/modelizer';
 import { RootState } from 'redux/types';
@@ -33,6 +34,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   fetchAuditResultsRequest: (id: string, type: 'page' | 'script') =>
     dispatch(fetchAuditResultsRequest({ id, type })),
   fetchProjectRequest: (projectId: string) => dispatch(fetchProjectRequest({ projectId })),
+  setCurrentAuditParametersId: (auditParametersId: string | null | undefined) =>
+    dispatch(setCurrentAuditParametersId({ auditParametersId })),
 });
 
 export default connect(

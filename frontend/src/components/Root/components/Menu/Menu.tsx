@@ -16,13 +16,19 @@ export interface PageOrScript {
 }
 
 export interface OwnProps {
+  auditParametersId: string | null;
   project?: ProjectType;
   currentURL: string;
 }
 
 type Props = OwnProps & InjectedIntlProps;
 
-export const Menu: React.FunctionComponent<Props> = ({ currentURL, intl, project }) => {
+export const Menu: React.FunctionComponent<Props> = ({
+  auditParametersId,
+  currentURL,
+  intl,
+  project,
+}) => {
   if (!project) {
     return <Style.Container />;
   }
@@ -33,7 +39,8 @@ export const Menu: React.FunctionComponent<Props> = ({ currentURL, intl, project
       title: page.name,
       linkPath: routeDefinitions.auditsDetails.path
         .replace(':projectId', project.uuid)
-        .replace(':pageOrScriptId', page.uuid),
+        .replace(':pageOrScriptId', page.uuid)
+        .replace(':auditParametersId', auditParametersId ? auditParametersId : ''),
       type: 'PAGE',
     })),
     ...project.scripts.map(script => ({
@@ -41,7 +48,8 @@ export const Menu: React.FunctionComponent<Props> = ({ currentURL, intl, project
       title: script.name,
       linkPath: routeDefinitions.auditsDetails.path
         .replace(':projectId', project.uuid)
-        .replace(':pageOrScriptId', script.uuid),
+        .replace(':pageOrScriptId', script.uuid)
+        .replace(':auditParametersId', auditParametersId ? auditParametersId : ''),
       type: 'SCRIPT',
     })),
   ];
@@ -91,7 +99,7 @@ export const Menu: React.FunctionComponent<Props> = ({ currentURL, intl, project
       url.startsWith(
         routeDefinitions.auditsDetails.path
           .replace(':projectId', project.uuid)
-          .replace(':pageOrScriptId', ''),
+          .replace(':pageOrScriptId/audit-parameters/:auditParametersId', ''),
       )
     ) {
       return url.startsWith(linkPath);

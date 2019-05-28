@@ -53,14 +53,15 @@ export const routeDefinitions: Record<string, RouteDefinition> = {
     isAuthenticated: true,
   },
   auditsDetails: {
-    path: '/project/:projectId/audits/:pageOrScriptId',
+    path: '/project/:projectId/audits/:pageOrScriptId/audit-parameters/:auditParametersId',
     component: Audits,
     exact: true,
     strict: false,
     isAuthenticated: true,
   },
   auditsScriptDetails: {
-    path: '/project/:projectId/audits/:pageOrScriptId/step/:scriptStepId',
+    path:
+      '/project/:projectId/audits/:pageOrScriptId/audit-parameters/:auditParametersId/step/:scriptStepId',
     component: Audits,
     exact: true,
     strict: false,

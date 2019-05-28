@@ -14,15 +14,23 @@ export type OwnProps = {} & RouteComponentProps<{
 
 type Props = {
   fetchProjectRequest: (projectId: string) => void;
+  setCurrentAuditParametersId: (auditParametersId: string | null | undefined) => void;
   project?: ProjectType;
 } & OwnProps &
   InjectedIntlProps;
 
 const Project: React.FunctionComponent<Props> = props => {
-  const { fetchProjectRequest, project, match } = props;
+  const { fetchProjectRequest, project, match, setCurrentAuditParametersId } = props;
   React.useEffect(
     () => {
       fetchProjectRequest(match.params.projectId);
+    },
+    [match.params.projectId],
+  );
+
+  React.useEffect(
+    () => {
+      setCurrentAuditParametersId(undefined);
     },
     [match.params.projectId],
   );

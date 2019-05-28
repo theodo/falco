@@ -11,6 +11,7 @@ export const state = {
     _persist: {} as PersistState
   },
   parameters: {
+    currentAuditParametersId: null,
     displayedMetrics: {},
     _persist: {} as PersistState
   },

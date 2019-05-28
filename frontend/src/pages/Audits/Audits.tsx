@@ -23,6 +23,7 @@ interface ScriptStepOption {
 export type OwnProps = {} & RouteComponentProps<{
   projectId: string;
   pageOrScriptId: string;
+  auditParametersId: string;
   scriptStepId?: string;
 }>;
 
@@ -35,6 +36,7 @@ type Props = {
   sortedScriptAuditResultsIds: Record<string, string[]>;
   fetchProjectRequest: (projectId: string) => void;
   fetchAuditResultsRequest: (id: string, type: 'page' | 'script') => void;
+  setCurrentAuditParametersId: (auditParametersId: string | null | undefined) => void;
 } & OwnProps &
   InjectedIntlProps;
 
@@ -50,8 +52,9 @@ export const Audits: React.FunctionComponent<Props> = ({
   sortedPageAuditResultsIds,
   sortedScriptAuditResultsIds,
   fetchAuditResultsRequest,
+  setCurrentAuditParametersId,
 }) => {
-  const { projectId, pageOrScriptId, scriptStepId } = match.params;
+  const { projectId, pageOrScriptId, auditParametersId, scriptStepId } = match.params;
 
   React.useEffect(
     () => {
@@ -69,6 +72,13 @@ export const Audits: React.FunctionComponent<Props> = ({
       }
     },
     [pageOrScriptId, page && page.uuid, script && script.uuid],
+  );
+
+  React.useEffect(
+    () => {
+      setCurrentAuditParametersId(auditParametersId);
+    },
+    [auditParametersId],
   );
 
   if (project === undefined) {
@@ -123,6 +133,7 @@ export const Audits: React.FunctionComponent<Props> = ({
         to={routeDefinitions.auditsScriptDetails.path
           .replace(':projectId', projectId)
           .replace(':pageOrScriptId', pageOrScriptId)
+          .replace(':auditParametersId', auditParametersId)
           .replace(':scriptStepId', Object.keys(sortedScriptAuditResultsIds)[0])}
       />
     );
@@ -173,6 +184,7 @@ export const Audits: React.FunctionComponent<Props> = ({
         routeDefinitions.auditsScriptDetails.path
           .replace(':projectId', projectId)
           .replace(':pageOrScriptId', pageOrScriptId)
+          .replace(':auditParametersId', auditParametersId)
           .replace(':scriptStepId', selectedOption.value),
       );
     }

@@ -9,3 +9,7 @@ export const getMetricsToDisplay = (state: RootState): MetricType[] => {
   }
   return state.parameters.displayedMetrics[projectId];
 };
+
+export const getCurrentAuditParametersId = (state: RootState): string | null => {
+  return state.parameters.currentAuditParametersId;
+};

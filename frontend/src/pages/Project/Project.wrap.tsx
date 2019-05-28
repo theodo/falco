@@ -1,6 +1,7 @@
 import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { setCurrentAuditParametersId } from 'redux/parameters';
 
 import { fetchProjectRequest } from 'redux/projects';
 import { RootState } from 'redux/types';
@@ -13,6 +14,8 @@ const mapStateToProps = (state: RootState, props: OwnProps) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   fetchProjectRequest: (projectId: string) => dispatch(fetchProjectRequest({ projectId })),
+  setCurrentAuditParametersId: (auditParametersId: string | null | undefined) =>
+    dispatch(setCurrentAuditParametersId({ auditParametersId })),
 });
 
 export default connect(
