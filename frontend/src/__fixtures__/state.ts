@@ -12,6 +12,9 @@ export const state = {
   },
   parameters: {
     currentAuditParametersId: null,
+    currentPageId: null,
+    currentScriptId: null,
+    currentScriptStepId: null,
     displayedMetrics: {},
     _persist: {} as PersistState
   },

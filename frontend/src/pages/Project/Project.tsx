@@ -15,22 +15,29 @@ export type OwnProps = {} & RouteComponentProps<{
 type Props = {
   fetchProjectRequest: (projectId: string) => void;
   setCurrentAuditParametersId: (auditParametersId: string | null | undefined) => void;
+  setCurrentPageId: (pageId: string | null | undefined) => void;
+  setCurrentScriptId: (scriptId: string | null | undefined) => void;
+  setCurrentScriptStepId: (scriptStepId: string | null | undefined) => void;
   project?: ProjectType;
 } & OwnProps &
   InjectedIntlProps;
 
-const Project: React.FunctionComponent<Props> = props => {
-  const { fetchProjectRequest, project, match, setCurrentAuditParametersId } = props;
-  React.useEffect(
-    () => {
-      fetchProjectRequest(match.params.projectId);
-    },
-    [match.params.projectId],
-  );
-
+const Project: React.FunctionComponent<Props> = ({
+  fetchProjectRequest,
+  project,
+  match,
+  setCurrentAuditParametersId,
+  setCurrentPageId,
+  setCurrentScriptId,
+  setCurrentScriptStepId,
+}) => {
   React.useEffect(
     () => {
       setCurrentAuditParametersId(undefined);
+      setCurrentPageId(undefined);
+      setCurrentScriptId(undefined);
+      setCurrentScriptStepId(undefined);
+      fetchProjectRequest(match.params.projectId);
     },
     [match.params.projectId],
   );

@@ -38,6 +38,9 @@ type Props = {
   fetchProjectRequest: (projectId: string) => void;
   fetchAuditResultsRequest: (id: string, type: 'page' | 'script') => void;
   setCurrentAuditParametersId: (auditParametersId: string | null | undefined) => void;
+  setCurrentPageId: (pageId: string | null | undefined) => void;
+  setCurrentScriptId: (scriptId: string | null | undefined) => void;
+  setCurrentScriptStepId: (scriptStepId: string | null | undefined) => void;
 } & OwnProps &
   InjectedIntlProps;
 
@@ -55,6 +58,9 @@ export const Audits: React.FunctionComponent<Props> = ({
   sortedScriptAuditResultsIds,
   fetchAuditResultsRequest,
   setCurrentAuditParametersId,
+  setCurrentPageId,
+  setCurrentScriptId,
+  setCurrentScriptStepId,
 }) => {
   const { projectId, pageOrScriptId, auditParametersId, scriptStepId } = match.params;
 
@@ -68,8 +74,12 @@ export const Audits: React.FunctionComponent<Props> = ({
   React.useEffect(
     () => {
       if (page) {
+        setCurrentPageId(pageOrScriptId ? pageOrScriptId : undefined);
+        setCurrentScriptId(undefined);
         fetchAuditResultsRequest(pageOrScriptId, 'page');
       } else if (script) {
+        setCurrentPageId(undefined);
+        setCurrentScriptId(pageOrScriptId ? pageOrScriptId : undefined);
         fetchAuditResultsRequest(pageOrScriptId, 'script');
       }
     },
@@ -81,6 +91,13 @@ export const Audits: React.FunctionComponent<Props> = ({
       setCurrentAuditParametersId(auditParametersId);
     },
     [auditParametersId],
+  );
+
+  React.useEffect(
+    () => {
+      setCurrentScriptStepId(script && scriptStepId ? scriptStepId : undefined);
+    },
+    [script && script.uuid, scriptStepId],
   );
 
   if (project === undefined) {
