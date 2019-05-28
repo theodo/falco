@@ -16,6 +16,10 @@ const StyledHeader = {
     display: flex;
     flex-direction: column;
     z-index: 2;
+
+    @media only screen and (max-width: 1240px) {
+      position: absolute;
+    }
   `,
   Header: styled.header`
     background-color: ${colorUsage.headerFakeBackground};
@@ -24,6 +28,10 @@ const StyledHeader = {
     transition: box-shadow 0.3s ease-in-out;
     box-shadow: ${(props: HeaderProps) =>
       props.shouldHaveShadow && `0 10px 5px -2px ${colorUsage.headerShadowBox}`};
+
+    @media only screen and (max-width: 1240px) {
+      box-shadow: none;
+    }
   `,
   HeaderMenu: styled.div`
     display: flex;
