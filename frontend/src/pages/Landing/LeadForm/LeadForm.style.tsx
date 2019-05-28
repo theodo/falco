@@ -4,9 +4,20 @@ import styled from 'styled-components';
 import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 const Styles = {
   Container: styled.div`
+    grid-row-start: 3;
+    grid-column-start: 1;
     width: 470px;
     display: flex;
     flex-direction: column;
+    margin: auto;
+
+    @media only screen and (max-width: 1240px) {
+      grid-row-start: 4;
+      grid-column-start: 1;
+      width: 245px;
+      padding: 0 ${getSpacing(7)};
+      margin: 0 0 ${getSpacing(6)} 0;
+    }
   `,
 
   LeadForm: styled(Form)`
@@ -19,6 +30,14 @@ const Styles = {
     border-radius: 6px;
     border: 1px solid ${colorUsage.leadFormBorder};
     padding-left: ${getSpacing(5)};
+
+    @media only screen and (max-width: 1240px) {
+      height: auto;
+      flex-wrap: wrap;
+      padding-left: 0;
+      border: none;
+      margin: auto;
+    }
   `,
 
   EmailField: styled(Field)``,
@@ -50,6 +69,10 @@ const Styles = {
 
     &.requestSucceeded {
       background-color: ${colorUsage.leadSubmitButtonSuccessBackground};
+    }
+
+    @media only screen and (max-width: 1240px) {
+      margin: auto;
     }
   `,
 

@@ -11,6 +11,11 @@ const Style = {
     width: 1240px;
     background-color: ${(props: Props) => props.backgroundColor || 'transparent'};
     padding: 0 100px;
+
+    @media only screen and (max-width: 1240px) {
+      width: 320px;
+      padding: 0;
+    }
   `,
 };
 

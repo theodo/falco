@@ -30,11 +30,20 @@ const StyledHeader = {
     padding-left: ${getSpacing(22)};
     width: 380px;
     background-color: ${(props: Props) => !props.isLandingPage && colorUsage.menuBackground};
+
+    @media only screen and (max-width: 1240px) {
+      width: 320px;
+      padding: 0;
+    }
   `,
   LogoContainer: styled(Link)`
     display: flex;
     align-items: center;
     text-decoration: none;
+    @media only screen and (max-width: 1240px) {
+      width: 320px;
+      padding-left: ${getSpacing(6)};
+    }
   `,
   Logo: styled.div`
     width: 53px;
@@ -54,6 +63,10 @@ const StyledHeader = {
     margin-left: ${getSpacing(8)};
     padding-right: ${getSpacing(22)};
     width: 800px;
+
+    @media only screen and (max-width: 1240px) {
+      display: none;
+    }
   `,
   Nav: styled.nav``,
   HeaderButtonsBlock: styled.ul`

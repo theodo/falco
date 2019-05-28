@@ -26,6 +26,11 @@ const StyledRoot = {
     width: 1440px;
     margin: auto;
     background-color: ${colorUsage.defaultContentBackground};
+
+    @media only screen and (max-width: 1240px) {
+      width: 320px;
+      margin: auto;
+    }
   `,
   Body: styled.div``,
   Content: styled.div`
