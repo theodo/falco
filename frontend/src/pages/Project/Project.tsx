@@ -77,6 +77,21 @@ const Project: React.FunctionComponent<Props> = props => {
       </Style.Container>
     );
   }
+
+  if (0 !== project.auditParametersList.length) {
+    firstPageOrScriptLocation = firstPageOrScriptLocation.replace(
+      ':auditParametersId',
+      project.auditParametersList[0].uuid,
+    );
+  } else {
+    return (
+      <Style.Container>
+        <ErrorMessage>
+          <FormattedMessage id="Project.no_audit_parameters_error" />
+        </ErrorMessage>
+      </Style.Container>
+    );
+  }
   return <Redirect to={firstPageOrScriptLocation} />;
 };
 

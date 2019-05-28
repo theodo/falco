@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Redirect, RouteComponentProps } from 'react-router';
 import { ValueType } from 'react-select/lib/types';
-import { ProjectType } from 'redux/projects/types';
+import { AuditParametersType, ProjectType } from 'redux/projects/types';
 
 import Badge from 'components/Badge';
 import ErrorMessage from 'components/ErrorMessage';
@@ -31,6 +31,7 @@ type Props = {
   project?: ProjectType;
   page?: PageType;
   script?: ScriptType;
+  auditParameters: Record<string, AuditParametersType>;
   scriptSteps: Record<string, string>;
   sortedPageAuditResultsIds: string[];
   sortedScriptAuditResultsIds: Record<string, string[]>;
@@ -41,6 +42,7 @@ type Props = {
   InjectedIntlProps;
 
 export const Audits: React.FunctionComponent<Props> = ({
+  auditParameters,
   fetchProjectRequest,
   history,
   intl,
@@ -117,6 +119,26 @@ export const Audits: React.FunctionComponent<Props> = ({
       <Style.Container>
         <ErrorMessage>
           <FormattedMessage id="Audits.page_or_script_unavailable" />
+        </ErrorMessage>
+      </Style.Container>
+    );
+  }
+
+  if (0 === project.auditParametersList.length) {
+    return (
+      <Style.Container>
+        <ErrorMessage>
+          <FormattedMessage id="Project.no_audit_parameters_error" />
+        </ErrorMessage>
+      </Style.Container>
+    );
+  }
+
+  if (!auditParameters[auditParametersId]) {
+    return (
+      <Style.Container>
+        <ErrorMessage>
+          <FormattedMessage id="Audits.audit_parameters_unavailable" />
         </ErrorMessage>
       </Style.Container>
     );

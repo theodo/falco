@@ -3,6 +3,7 @@ import { selectAuditScriptSteps } from 'redux/auditResults/selectors';
 import { setCurrentAuditParametersId } from 'redux/parameters';
 import { fetchProjectRequest } from 'redux/projects';
 import { modelizePages, modelizeScripts } from 'redux/projects/modelizer';
+import { selectAuditParametersAsDict } from 'redux/projects/selectors';
 import { RootState } from 'redux/types';
 
 import { injectIntl } from 'react-intl';
@@ -24,6 +25,7 @@ const mapStateToProps = (state: RootState, props: OwnProps) => ({
           props.match.params.pageOrScriptId
         ]
       : undefined,
+  auditParameters: selectAuditParametersAsDict(state, props.match.params.projectId),
   sortedPageAuditResultsIds: state.auditResults.sortedByPageId[props.match.params.pageOrScriptId],
   sortedScriptAuditResultsIds:
     state.auditResults.sortedByScriptId[props.match.params.pageOrScriptId],
