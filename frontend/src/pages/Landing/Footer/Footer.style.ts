@@ -13,6 +13,10 @@ const Styles = {
     color: ${colorUsage.introductionText};
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.introductionText};
+
+    @media only screen and (max-width: 1240px) {
+      display: none;
+    }
   `,
 
   TheodoLink: styled.a`

@@ -11,6 +11,10 @@ const Styles = {
     justify-content: center;
     padding: ${getSpacing(6)} ${getSpacing(20)};
     font-family: ${fontFamily.mainSans};
+
+    @media only screen and (max-width: 1240px) {
+      display: none;
+    }
   `,
 
   FeaturesBlockTitle: styled.h2`
