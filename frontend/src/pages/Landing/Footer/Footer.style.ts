@@ -22,7 +22,7 @@ const Styles = {
     font-size: ${fontSize.introductionText};
 
     @media only screen and (max-width: ${responsiveThreshold}) {
-      display: none;
+      padding: ${getSpacing(6)} 0 ${getSpacing(10)} 0;
     }
   `,
 
