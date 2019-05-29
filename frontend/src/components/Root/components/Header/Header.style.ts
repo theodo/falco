@@ -1,6 +1,13 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { colorUsage, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
+import {
+  colorUsage,
+  fontSize,
+  fontWeight,
+  getSpacing,
+  lineHeight,
+  responsiveThreshold,
+} from 'stylesheet';
 
 interface Props {
   isLandingPage: boolean;
@@ -17,7 +24,7 @@ const StyledHeader = {
     flex-direction: column;
     z-index: 2;
 
-    @media only screen and (max-width: 1240px) {
+    @media only screen and (max-width: ${responsiveThreshold}) {
       position: absolute;
     }
   `,
@@ -29,7 +36,7 @@ const StyledHeader = {
     box-shadow: ${(props: HeaderProps) =>
       props.shouldHaveShadow && `0 10px 5px -2px ${colorUsage.headerShadowBox}`};
 
-    @media only screen and (max-width: 1240px) {
+    @media only screen and (max-width: ${responsiveThreshold}) {
       box-shadow: none;
     }
   `,
@@ -39,7 +46,7 @@ const StyledHeader = {
     width: 380px;
     background-color: ${(props: Props) => !props.isLandingPage && colorUsage.menuBackground};
 
-    @media only screen and (max-width: 1240px) {
+    @media only screen and (max-width: ${responsiveThreshold}) {
       width: 320px;
       padding: 0;
     }
@@ -48,7 +55,7 @@ const StyledHeader = {
     display: flex;
     align-items: center;
     text-decoration: none;
-    @media only screen and (max-width: 1240px) {
+    @media only screen and (max-width: ${responsiveThreshold}) {
       width: 320px;
       padding-left: ${getSpacing(6)};
     }
@@ -72,7 +79,7 @@ const StyledHeader = {
     padding-right: ${getSpacing(22)};
     width: 800px;
 
-    @media only screen and (max-width: 1240px) {
+    @media only screen and (max-width: ${responsiveThreshold}) {
       display: none;
     }
   `,

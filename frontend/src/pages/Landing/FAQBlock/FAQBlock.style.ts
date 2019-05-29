@@ -1,5 +1,13 @@
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
+import {
+  colorUsage,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  getSpacing,
+  lineHeight,
+  responsiveThreshold,
+} from 'stylesheet';
 
 interface ItemWithMarginProps {
   margin?: string;
@@ -16,7 +24,7 @@ const Styles = {
     padding: ${getSpacing(6)} ${getSpacing(20)};
     font-family: ${fontFamily.mainSans};
 
-    @media only screen and (max-width: 1240px) {
+    @media only screen and (max-width: ${responsiveThreshold}) {
       display: none;
     }
   `,

@@ -1,5 +1,12 @@
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, getSpacing, lineHeight } from 'stylesheet';
+import {
+  colorUsage,
+  fontFamily,
+  fontSize,
+  getSpacing,
+  lineHeight,
+  responsiveThreshold,
+} from 'stylesheet';
 
 const Styles = {
   FooterContainer: styled.div`
@@ -14,7 +21,7 @@ const Styles = {
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.introductionText};
 
-    @media only screen and (max-width: 1240px) {
+    @media only screen and (max-width: ${responsiveThreshold}) {
       display: none;
     }
   `,

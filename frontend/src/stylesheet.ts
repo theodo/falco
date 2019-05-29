@@ -243,6 +243,8 @@ export const fontStyle = {
 export const getSpacing = (multiplier: number): string =>
   `${multiplier * SPACING_UNIT}${MEASUREMENT_UNIT}`;
 
+export const responsiveThreshold = '1240px';
+
 // Material UI - theme, do not declare constant inside this object
 export const muiTheme = createMuiTheme({
   typography: {

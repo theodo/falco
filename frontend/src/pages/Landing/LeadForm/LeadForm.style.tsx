@@ -1,7 +1,15 @@
 import { Field, Form } from 'formik';
 import styled from 'styled-components';
 
-import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
+import {
+  colorUsage,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  getSpacing,
+  lineHeight,
+  responsiveThreshold,
+} from 'stylesheet';
 const Styles = {
   Container: styled.div`
     grid-row-start: 3;
@@ -11,7 +19,7 @@ const Styles = {
     flex-direction: column;
     margin: auto;
 
-    @media only screen and (max-width: 1240px) {
+    @media only screen and (max-width: ${responsiveThreshold}) {
       grid-row-start: 4;
       grid-column-start: 1;
       width: 245px;
@@ -31,7 +39,7 @@ const Styles = {
     border: 1px solid ${colorUsage.leadFormBorder};
     padding-left: ${getSpacing(5)};
 
-    @media only screen and (max-width: 1240px) {
+    @media only screen and (max-width: ${responsiveThreshold}) {
       height: auto;
       flex-wrap: wrap;
       padding-left: 0;
@@ -71,7 +79,7 @@ const Styles = {
       background-color: ${colorUsage.leadSubmitButtonSuccessBackground};
     }
 
-    @media only screen and (max-width: 1240px) {
+    @media only screen and (max-width: ${responsiveThreshold}) {
       margin: auto;
     }
   `,

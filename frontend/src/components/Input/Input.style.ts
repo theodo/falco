@@ -1,5 +1,13 @@
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
+import {
+  colorUsage,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  getSpacing,
+  lineHeight,
+  responsiveThreshold,
+} from 'stylesheet';
 
 const Styles = {
   Field: styled.div`
@@ -8,7 +16,7 @@ const Styles = {
     height: 54px;
     border-radius: 6px;
 
-    @media only screen and (max-width: 1240px) {
+    @media only screen and (max-width: ${responsiveThreshold}) {
       border: 1px solid ${colorUsage.leadFormBorder};
       padding: 0 0 0 ${getSpacing(5)};
       margin: 0 0 ${getSpacing(2)} 0;
@@ -57,7 +65,7 @@ const Styles = {
       color: ${colorUsage.inputTextError};
     }
 
-    @media only screen and (max-width: 1240px) {
+    @media only screen and (max-width: ${responsiveThreshold}) {
       padding: 0 0 0 ${getSpacing(5)};
     }
   `,

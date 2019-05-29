@@ -1,5 +1,13 @@
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
+import {
+  colorUsage,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  getSpacing,
+  lineHeight,
+  responsiveThreshold,
+} from 'stylesheet';
 
 const Styles = {
   IntroductionBlockContainer: styled.div`
@@ -7,10 +15,10 @@ const Styles = {
     height: 100%;
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: 40% 40% auto;
+    grid-template-rows: repeat(3, max-content);
     padding: ${getSpacing(8)} 0 ${getSpacing(18)} 0;
 
-    @media only screen and (max-width: 1240px) {
+    @media only screen and (max-width: ${responsiveThreshold}) {
       width: 320px;
       grid-template-columns: 100%;
       grid-template-rows: repeat(4, max-content);
@@ -27,11 +35,10 @@ const Styles = {
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.h1Text};
     font-weight: ${fontWeight.h1Text};
-    margin: auto;
+    margin: 0 auto ${getSpacing(6)} auto;
 
-    @media only screen and (max-width: 1240px) {
+    @media only screen and (max-width: ${responsiveThreshold}) {
       width: 260px;
-      margin: 0 auto ${getSpacing(6)} auto;
       line-height: ${lineHeight.h3Text};
       color: ${colorUsage.h3Text};
       font-family: ${fontFamily.mainSans};
@@ -48,13 +55,12 @@ const Styles = {
     color: ${colorUsage.introductionText};
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.introductionText};
-    margin: auto;
+    margin: 0 auto ${getSpacing(6)} auto;
 
-    @media only screen and (max-width: 1240px) {
+    @media only screen and (max-width: ${responsiveThreshold}) {
       grid-row-start: 3;
       grid-column-start: 1;
       width: 260px;
-      margin: 0 auto ${getSpacing(6)} auto;
     }
   `,
 
@@ -64,11 +70,11 @@ const Styles = {
     grid-column-start: 2;
     width: 599px;
 
-    @media only screen and (max-width: 1240px) {
+    @media only screen and (max-width: ${responsiveThreshold}) {
       grid-row-start: 2;
       grid-row-end: 3;
       grid-column-start: 1;
-      width: 299.5px;
+      width: 300px;
       margin: 0 auto ${getSpacing(10)} auto;
     }
   `,
