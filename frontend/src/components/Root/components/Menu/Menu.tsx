@@ -139,14 +139,23 @@ export const Menu: React.FunctionComponent<Props> = ({
             .replace(':pageOrScriptId', pageId)
             .replace(':auditParametersId', selectedOption.value),
         );
-      } else if (scriptId && scriptStepId) {
-        history.push(
-          routeDefinitions.auditsScriptDetails.path
-            .replace(':projectId', project.uuid)
-            .replace(':pageOrScriptId', scriptId)
-            .replace(':auditParametersId', selectedOption.value)
-            .replace(':scriptStepId', scriptStepId),
-        );
+      } else if (scriptId) {
+        if (!scriptStepId) {
+          history.push(
+            routeDefinitions.auditsDetails.path
+              .replace(':projectId', project.uuid)
+              .replace(':pageOrScriptId', scriptId)
+              .replace(':auditParametersId', selectedOption.value),
+          );
+        } else {
+          history.push(
+            routeDefinitions.auditsScriptDetails.path
+              .replace(':projectId', project.uuid)
+              .replace(':pageOrScriptId', scriptId)
+              .replace(':auditParametersId', selectedOption.value)
+              .replace(':scriptStepId', scriptStepId),
+          );
+        }
       }
     }
   };
