@@ -81,7 +81,7 @@
   "Audits": {
     "page_or_script_unavailable": "La page ou le script que vous souhaitez visualiser ne semble pas exister pour ce projet.\n\nMerci de réessayer ou de vous rapprocher de votre administrateur pour corriger le problème.",
     "audit_parameters_unavailable": "Les paramètres d'audit que vous souhaitez visualiser ne semblent pas exister pour ce projet.\n\nMerci de réessayer ou de vous rapprocher de votre administrateur pour corriger le problème.",
-    "no_audit": "Aucune donnée d'audit n'est disponible pour cette page ou ce script.\n\nMerci de réessayer plus tard.",
+    "no_audit": "Aucune donnée d'audit n'est disponible pour cette page/script et pour cet environnement d'audits.\n\nMerci de réessayer plus tard.",
     "pick_right_metrics": "Comment choisir les bonnes métriques ? →",
     "MetricsModal": {
       "add_delete_metrics": "Ajouter / Supprimer des métriques",
