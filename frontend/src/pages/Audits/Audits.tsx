@@ -33,10 +33,14 @@ type Props = {
   script?: ScriptType;
   auditParameters: Record<string, AuditParametersType>;
   scriptSteps: Record<string, string>;
-  sortedPageAuditResultsIds: string[];
-  sortedScriptAuditResultsIds: Record<string, string[]>;
+  sortedPageAuditResultsIds: string[] | null;
+  sortedScriptAuditResultsIds: Record<string, string[]> | null;
   fetchProjectRequest: (projectId: string) => void;
-  fetchAuditResultsRequest: (id: string, type: 'page' | 'script') => void;
+  fetchAuditResultsRequest: (
+    auditParametersId: string,
+    pageOrScriptId: string,
+    type: 'page' | 'script',
+  ) => void;
   setCurrentAuditParametersId: (auditParametersId: string | null | undefined) => void;
   setCurrentPageId: (pageId: string | null | undefined) => void;
   setCurrentScriptId: (scriptId: string | null | undefined) => void;
@@ -76,14 +80,14 @@ export const Audits: React.FunctionComponent<Props> = ({
       if (page) {
         setCurrentPageId(pageOrScriptId ? pageOrScriptId : undefined);
         setCurrentScriptId(undefined);
-        fetchAuditResultsRequest(pageOrScriptId, 'page');
+        fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'page');
       } else if (script) {
         setCurrentPageId(undefined);
         setCurrentScriptId(pageOrScriptId ? pageOrScriptId : undefined);
-        fetchAuditResultsRequest(pageOrScriptId, 'script');
+        fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'script');
       }
     },
-    [pageOrScriptId, page && page.uuid, script && script.uuid],
+    [auditParametersId, pageOrScriptId, page && page.uuid, script && script.uuid],
   );
 
   React.useEffect(

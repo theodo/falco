@@ -19,15 +19,17 @@ function* fetchAuditResultsFailedHandler(error: Error) {
 
 export function* fetchAuditResults(action: ActionType<typeof fetchAuditResultsRequest>) {
   const endpoint = `/api/audits/results`;
-  const { id, type } = action.payload;
-  const payload: {page?: string; script?: string;} = {
-  }
+  const { auditParametersId, pageOrScriptId, type } = action.payload;
+  const payload: { audit_parameters: string; page?: string; script?: string } = {
+    audit_parameters: auditParametersId,
+  };
   switch (type) {
-    case "page":
-      payload.page = action.payload.id
+    case 'page':
+      payload.page = pageOrScriptId;
       break;
-    case "script":
-      payload.script = action.payload.id
+    case 'script':
+      payload.script = pageOrScriptId;
+      break;
     default:
       break;
   }
@@ -38,22 +40,28 @@ export function* fetchAuditResults(action: ActionType<typeof fetchAuditResultsRe
     payload,
   );
   const modelizedAuditResults = modelizeAuditResultsForPage(auditResults);
-  const sortedAuditResultsIds = getSortAuditResultsId(
-    Object.keys(modelizedAuditResults).map(auditId => modelizedAuditResults[auditId])
-  )
-  let sortedByPageId;
-  let sortedByScriptId;
-  if (type === "page") {
-    sortedByPageId = { [id]: sortedAuditResultsIds }
-  }
-  if (type === "script") {
-    sortedByScriptId = { [id]: groupBy(sortedAuditResultsIds, (auditId) => modelizedAuditResults[auditId].scriptStepNumber) }
+  const sortedAuditResultsPageIds = getSortAuditResultsId(
+    Object.keys(modelizedAuditResults).map(auditId => modelizedAuditResults[auditId]),
+  );
+  let sortedAuditResultsScriptIds;
+  if (type === 'script') {
+    sortedAuditResultsScriptIds = groupBy(
+      sortedAuditResultsPageIds,
+      auditId => modelizedAuditResults[auditId].scriptStepNumber,
+    );
   }
   yield put(
     fetchAuditResultsSuccess({
       byAuditId: modelizedAuditResults,
-      sortedByPageId,
-      sortedByScriptId,
+      auditParametersId,
+      pageId: type === 'page' ? pageOrScriptId : undefined,
+      scriptId: type === 'script' ? pageOrScriptId : undefined,
+      sortedAuditResultsIds:
+        type === 'page'
+          ? sortedAuditResultsPageIds
+          : type === 'script'
+          ? sortedAuditResultsScriptIds
+          : undefined,
     }),
   );
 }
