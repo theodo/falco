@@ -159,6 +159,7 @@ const MetricGraph: React.FunctionComponent<Props> = ({
         <Tooltip content={renderTooltip} cursor={{ stroke: colorUsage.graphTooltipCursor }} />
         {metrics.map(metric => (
           <Area
+            connectNulls
             key={metric}
             type="monotone"
             dataKey={metric}
