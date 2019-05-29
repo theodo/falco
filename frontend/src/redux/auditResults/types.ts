@@ -20,8 +20,16 @@ export interface AuditResultType {
   WPTMetricFirstViewTimeToFirstByte: number;
   WPTMetricRepeatViewTimeToFirstByte: number;
   WPTMetricLighthousePerformance: number;
-  scriptStepName: string;
-  scriptStepNumber: string;
+  scriptStepName: string | null;
+  scriptStepNumber: string | null;
+}
+
+export interface SortedPageAuditResultIds {
+  byAuditParametersId: Record<string, string[]>;
+}
+
+export interface SortedScriptAuditResultIds {
+  byAuditParametersId: Record<string, Record<string, string[]>>;
 }
 
 export type MetricType =
@@ -79,7 +87,7 @@ export type AuditResultsAsGraphDataDate = Record<'date', number>;
 
 export type AuditResultsAsGraphDataMetric = Partial<Record<MetricType, number>>;
 
-export type AuditResultsAsGraphDataScript = Record<'scriptStepName', string>;
+export type AuditResultsAsGraphDataScript = Record<'scriptStepName', string | null>;
 
 export type AuditResultsAsGraphDataItem = AuditResultsAsGraphDataDate &
   AuditResultsAsGraphDataMetric &

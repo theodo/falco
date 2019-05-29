@@ -32,31 +32,58 @@ export const selectAuditResultsAsGraphData = (
 
 export const selectAuditScriptSteps = (
   state: RootState,
+  auditParametersId: string,
   scriptId: string,
 ): Record<string, string> => {
-  if (state.auditResults.sortedByScriptId[scriptId]) {
-    return Object.keys(state.auditResults.sortedByScriptId[scriptId]).reduce(
-      (scriptStepNames, scriptStepKey) => {
-        if (
-          state.auditResults.sortedByScriptId[scriptId] &&
-          state.auditResults.sortedByScriptId[scriptId][scriptStepKey] &&
-          state.auditResults.sortedByScriptId[scriptId][scriptStepKey][0] &&
-          state.auditResults.byAuditId[
-            state.auditResults.sortedByScriptId[scriptId][scriptStepKey][0]
-          ]
-        ) {
-          return {
-            ...scriptStepNames,
-            [scriptStepKey]:
-              state.auditResults.byAuditId[
-                state.auditResults.sortedByScriptId[scriptId][scriptStepKey][0]
-              ].scriptStepName,
-          };
-        }
-        return scriptStepNames;
-      },
-      {},
-    );
+  if (
+    state.auditResults.sortedByScriptId[scriptId] &&
+    state.auditResults.sortedByScriptId[scriptId].byAuditParametersId &&
+    state.auditResults.sortedByScriptId[scriptId].byAuditParametersId[auditParametersId]
+  ) {
+    const sortedAuditResults =
+      state.auditResults.sortedByScriptId[scriptId].byAuditParametersId[auditParametersId];
+    return Object.keys(sortedAuditResults).reduce((scriptStepNames, scriptStepKey) => {
+      if (
+        sortedAuditResults[scriptStepKey] &&
+        sortedAuditResults[scriptStepKey][0] &&
+        state.auditResults.byAuditId[sortedAuditResults[scriptStepKey][0]]
+      ) {
+        return {
+          ...scriptStepNames,
+          [scriptStepKey]:
+            state.auditResults.byAuditId[sortedAuditResults[scriptStepKey][0]].scriptStepName,
+        };
+      }
+      return scriptStepNames;
+    }, {});
   }
   return {};
+};
+
+export const selectPageAuditResultsIds = (
+  state: RootState,
+  auditParametersId: string,
+  pageId: string,
+): string[] | null => {
+  if (
+    pageId in state.auditResults.sortedByPageId &&
+    auditParametersId in state.auditResults.sortedByPageId[pageId].byAuditParametersId
+  ) {
+    return state.auditResults.sortedByPageId[pageId].byAuditParametersId[auditParametersId];
+  }
+  return null;
+};
+
+export const selectScriptAuditResultsIds = (
+  state: RootState,
+  auditParametersId: string,
+  scriptId: string,
+): Record<string, string[]> | null => {
+  if (
+    scriptId in state.auditResults.sortedByScriptId &&
+    auditParametersId in state.auditResults.sortedByScriptId[scriptId].byAuditParametersId
+  ) {
+    return state.auditResults.sortedByScriptId[scriptId].byAuditParametersId[auditParametersId];
+  }
+  return null;
 };

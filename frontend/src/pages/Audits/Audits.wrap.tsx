@@ -1,5 +1,9 @@
 import { connect } from 'react-redux';
-import { selectAuditScriptSteps } from 'redux/auditResults/selectors';
+import {
+  selectAuditScriptSteps,
+  selectPageAuditResultsIds,
+  selectScriptAuditResultsIds,
+} from 'redux/auditResults/selectors';
 import {
   setCurrentAuditParametersId,
   setCurrentPageId,
@@ -31,10 +35,21 @@ const mapStateToProps = (state: RootState, props: OwnProps) => ({
         ]
       : undefined,
   auditParameters: selectAuditParametersAsDict(state, props.match.params.projectId),
-  sortedPageAuditResultsIds: state.auditResults.sortedByPageId[props.match.params.pageOrScriptId],
-  sortedScriptAuditResultsIds:
-    state.auditResults.sortedByScriptId[props.match.params.pageOrScriptId],
-  scriptSteps: selectAuditScriptSteps(state, props.match.params.pageOrScriptId),
+  sortedPageAuditResultsIds: selectPageAuditResultsIds(
+    state,
+    props.match.params.auditParametersId,
+    props.match.params.pageOrScriptId,
+  ),
+  sortedScriptAuditResultsIds: selectScriptAuditResultsIds(
+    state,
+    props.match.params.auditParametersId,
+    props.match.params.pageOrScriptId,
+  ),
+  scriptSteps: selectAuditScriptSteps(
+    state,
+    props.match.params.auditParametersId,
+    props.match.params.pageOrScriptId,
+  ),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

@@ -33,8 +33,8 @@ type Props = {
   script?: ScriptType;
   auditParameters: Record<string, AuditParametersType>;
   scriptSteps: Record<string, string>;
-  sortedPageAuditResultsIds: string[];
-  sortedScriptAuditResultsIds: Record<string, string[]>;
+  sortedPageAuditResultsIds: string[] | null;
+  sortedScriptAuditResultsIds: Record<string, string[]> | null;
   fetchProjectRequest: (projectId: string) => void;
   fetchAuditResultsRequest: (
     auditParametersId: string,

@@ -40,27 +40,28 @@ export function* fetchAuditResults(action: ActionType<typeof fetchAuditResultsRe
     payload,
   );
   const modelizedAuditResults = modelizeAuditResultsForPage(auditResults);
-  const sortedAuditResultsIds = getSortAuditResultsId(
+  const sortedAuditResultsPageIds = getSortAuditResultsId(
     Object.keys(modelizedAuditResults).map(auditId => modelizedAuditResults[auditId]),
   );
-  let sortedByPageId;
-  let sortedByScriptId;
-  if (type === 'page') {
-    sortedByPageId = { [pageOrScriptId]: sortedAuditResultsIds };
-  }
+  let sortedAuditResultsScriptIds;
   if (type === 'script') {
-    sortedByScriptId = {
-      [pageOrScriptId]: groupBy(
-        sortedAuditResultsIds,
-        auditId => modelizedAuditResults[auditId].scriptStepNumber,
-      ),
-    };
+    sortedAuditResultsScriptIds = groupBy(
+      sortedAuditResultsPageIds,
+      auditId => modelizedAuditResults[auditId].scriptStepNumber,
+    );
   }
   yield put(
     fetchAuditResultsSuccess({
       byAuditId: modelizedAuditResults,
-      sortedByPageId,
-      sortedByScriptId,
+      auditParametersId,
+      pageId: type === 'page' ? pageOrScriptId : undefined,
+      scriptId: type === 'script' ? pageOrScriptId : undefined,
+      sortedAuditResultsIds:
+        type === 'page'
+          ? sortedAuditResultsPageIds
+          : type === 'script'
+          ? sortedAuditResultsScriptIds
+          : undefined,
     }),
   );
 }
