@@ -21,7 +21,7 @@ const Styles = {
     font-family: ${fontFamily.mainSans};
 
     @media only screen and (max-width: ${responsiveThreshold}) {
-      padding: ${getSpacing(6)} ${getSpacing(10)};
+      padding: ${getSpacing(6)} ${getSpacing(10)} 0 ${getSpacing(10)};
     }
   `,
 
