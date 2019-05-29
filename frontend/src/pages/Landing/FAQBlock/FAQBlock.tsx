@@ -16,7 +16,7 @@ const FAQBlock: React.FunctionComponent<Props> = ({ backgroundColor }) => {
           <FormattedMessage id={'Landing.faq_block.title'} />
         </Style.FAQBlockTitle>
         <Style.FAQBlockColumnsContainer>
-          <Style.FAQBlockColumn margin={`0 ${getSpacing(30)} 0 0 `}>
+          <Style.FAQBlockColumn>
             <Style.FAQBlock margin={`0 0 ${getSpacing(4)} 0`}>
               <Style.FAQQuestion>
                 <FormattedMessage id={'Landing.faq_block.1st_question'} />
@@ -34,7 +34,7 @@ const FAQBlock: React.FunctionComponent<Props> = ({ backgroundColor }) => {
               </Style.FAQAnswer>
             </Style.FAQBlock>
           </Style.FAQBlockColumn>
-          <Style.FAQBlockColumn margin={`0 0 0 ${getSpacing(30)}`}>
+          <Style.FAQBlockColumn>
             <Style.FAQBlock margin={`0 0 ${getSpacing(4)} 0`}>
               <Style.FAQQuestion>
                 <FormattedMessage id={'Landing.faq_block.3rd_question'} />

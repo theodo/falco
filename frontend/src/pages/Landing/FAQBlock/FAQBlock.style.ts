@@ -25,7 +25,7 @@ const Styles = {
     font-family: ${fontFamily.mainSans};
 
     @media only screen and (max-width: ${responsiveThreshold}) {
-      display: none;
+      padding: ${getSpacing(6)} 0;
     }
   `,
 
@@ -34,28 +34,46 @@ const Styles = {
     font-size: ${fontSize.h2Text};
     line-height: ${lineHeight.h2Text};
     font-weight: ${fontWeight.h2Text};
+
+    @media only screen and (max-width: ${responsiveThreshold}) {
+      font-size: ${fontSize.h4Text};
+      line-height: ${lineHeight.h4Text};
+      margin-bottom: ${getSpacing(6)};
+    }
   `,
 
   FAQBlockColumnsContainer: styled.div`
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     align-items: center;
     justify-content: space-between;
     padding: ${getSpacing(6)} 0;
+
+    @media only screen and (max-width: ${responsiveThreshold}) {
+      justify-content: center;
+      padding: 0;
+    }
   `,
 
   FAQBlockColumn: styled.div`
-    width: 50%;
+    width: 370px;
     height: 100%;
     display: flex;
     flex-direction: column;
-    margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
+
+    @media only screen and (max-width: ${responsiveThreshold}) {
+      width: 260px;
+    }
   `,
 
   FAQBlock: styled.div`
     margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
+
+    @media only screen and (max-width: ${responsiveThreshold}) {
+      margin-bottom: ${getSpacing(4)};
+    }
   `,
 
   FAQQuestion: styled.h4`
