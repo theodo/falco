@@ -21,6 +21,7 @@ const Style = {
     font-size: ${fontSize.metricTooltip};
     line-height: ${lineHeight.metricTooltip};
     font-weight: ${fontWeight.metricTooltip};
+    z-index: 1;
   `,
 };
 export default Style;
