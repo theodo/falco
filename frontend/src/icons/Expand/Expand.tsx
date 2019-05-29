@@ -16,8 +16,8 @@ export default class Information extends React.Component<Props> {
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g id="Expand-Icon-/-Normal" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <g id="expand" fill={this.props.color} fill-rule="nonzero">
+        <g id="Expand-Icon-/-Normal" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+          <g id="expand" fill={this.props.color} fillRule="nonzero">
             <path
               d="M74.0887344,0 L1.89572685,0 C0.83909221,0 0,0.854281627 0,1.89495197 L0,36.5011241 C0,37.5573268 0.854630955,38.396076 1.89572685,38.396076 C2.93682274,38.396076 3.80699244,37.5417944 3.80699244,36.5011241 L3.80699244,3.80543634 L72.2085463,3.80543634 L72.2085463,72.1790313 L39.2819464,72.1790313 C38.2253118,72.1790313 37.3706808,73.0333129 37.3706808,74.0895156 C37.3706808,75.1457184 38.2253118,76 39.2819464,76 L74.0887344,76 C75.145369,76 76,75.1457184 76,74.0895156 L76,1.91048437 C76,0.854281627 75.145369,0 74.0887344,0 Z"
               id="Path"

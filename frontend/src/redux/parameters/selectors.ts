@@ -9,3 +9,19 @@ export const getMetricsToDisplay = (state: RootState): MetricType[] => {
   }
   return state.parameters.displayedMetrics[projectId];
 };
+
+export const getCurrentAuditParametersId = (state: RootState): string | null => {
+  return state.parameters.currentAuditParametersId;
+};
+
+export const getCurrentPageId = (state: RootState): string | null => {
+  return state.parameters.currentPageId;
+};
+
+export const getCurrentScriptId = (state: RootState): string | null => {
+  return state.parameters.currentScriptId;
+};
+
+export const getCurrentScriptStepId = (state: RootState): string | null => {
+  return state.parameters.currentScriptStepId;
+};

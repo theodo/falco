@@ -65,12 +65,14 @@
     "login_error": "Ces identifiants ne semblent pas corrects.\nVeuillez réessayer."
   },
   "Menu": {
+    "audit_parameters_selection": "Environnement des audits",
     "page_badge": "PAGE",
     "script_badge": "SCRIPT"
   },
   "Project": {
     "project_error": "Vous ne semblez pas avoir accès à ce projet.\n\nMerci de réessayer ou de vous rapprocher de votre administrateur pour obtenir l'accès.",
-    "no_page_or_script_error": "Ce projet semble être vide (aucune page ou script configuré).\n\nMerci de réessayer ou de vous rapprocher de votre administrateur pour corriger le problème."
+    "no_page_or_script_error": "Ce projet semble être vide (aucune page ou script configuré).\n\nMerci de réessayer ou de vous rapprocher de votre administrateur pour corriger le problème.",
+    "no_audit_parameters_error": "Ce projet semble n'avoir aucun paramètre d'audit.\n\nMerci de réessayer ou de vous rapprocher de votre administrateur pour corriger le problème."
   },
   "Projects": {
     "no_project_error": "Vous ne semblez avoir accès à aucun projet.\n\nMerci de réessayer ou de vous rapprocher de votre administrateur pour obtenir l'accès à votre projet.",
@@ -78,6 +80,7 @@
   },
   "Audits": {
     "page_or_script_unavailable": "La page ou le script que vous souhaitez visualiser ne semble pas exister pour ce projet.\n\nMerci de réessayer ou de vous rapprocher de votre administrateur pour corriger le problème.",
+    "audit_parameters_unavailable": "Les paramètres d'audit que vous souhaitez visualiser ne semblent pas exister pour ce projet.\n\nMerci de réessayer ou de vous rapprocher de votre administrateur pour corriger le problème.",
     "no_audit": "Aucune donnée d'audit n'est disponible pour cette page ou ce script.\n\nMerci de réessayer plus tard.",
     "pick_right_metrics": "Comment choisir les bonnes métriques ? →",
     "MetricsModal": {

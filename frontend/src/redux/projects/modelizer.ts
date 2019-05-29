@@ -15,6 +15,7 @@ export const modelizeProject = (project: ApiProjectType): Record<string, Project
     })),
     auditParametersList: project.audit_parameters_list.map(auditParameters => ({
       uuid: auditParameters.uuid,
+      name: auditParameters.name,
       location: auditParameters.location,
       browser: auditParameters.browser,
       networkShape: auditParameters.network_shape,

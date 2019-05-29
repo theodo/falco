@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Redirect, RouteComponentProps } from 'react-router';
 import { ValueType } from 'react-select/lib/types';
-import { ProjectType } from 'redux/projects/types';
+import { AuditParametersType, ProjectType } from 'redux/projects/types';
 
 import Badge from 'components/Badge';
 import ErrorMessage from 'components/ErrorMessage';
@@ -23,6 +23,7 @@ interface ScriptStepOption {
 export type OwnProps = {} & RouteComponentProps<{
   projectId: string;
   pageOrScriptId: string;
+  auditParametersId: string;
   scriptStepId?: string;
 }>;
 
@@ -30,15 +31,21 @@ type Props = {
   project?: ProjectType;
   page?: PageType;
   script?: ScriptType;
+  auditParameters: Record<string, AuditParametersType>;
   scriptSteps: Record<string, string>;
   sortedPageAuditResultsIds: string[];
   sortedScriptAuditResultsIds: Record<string, string[]>;
   fetchProjectRequest: (projectId: string) => void;
   fetchAuditResultsRequest: (id: string, type: 'page' | 'script') => void;
+  setCurrentAuditParametersId: (auditParametersId: string | null | undefined) => void;
+  setCurrentPageId: (pageId: string | null | undefined) => void;
+  setCurrentScriptId: (scriptId: string | null | undefined) => void;
+  setCurrentScriptStepId: (scriptStepId: string | null | undefined) => void;
 } & OwnProps &
   InjectedIntlProps;
 
 export const Audits: React.FunctionComponent<Props> = ({
+  auditParameters,
   fetchProjectRequest,
   history,
   intl,
@@ -50,8 +57,12 @@ export const Audits: React.FunctionComponent<Props> = ({
   sortedPageAuditResultsIds,
   sortedScriptAuditResultsIds,
   fetchAuditResultsRequest,
+  setCurrentAuditParametersId,
+  setCurrentPageId,
+  setCurrentScriptId,
+  setCurrentScriptStepId,
 }) => {
-  const { projectId, pageOrScriptId, scriptStepId } = match.params;
+  const { projectId, pageOrScriptId, auditParametersId, scriptStepId } = match.params;
 
   React.useEffect(
     () => {
@@ -63,12 +74,30 @@ export const Audits: React.FunctionComponent<Props> = ({
   React.useEffect(
     () => {
       if (page) {
+        setCurrentPageId(pageOrScriptId ? pageOrScriptId : undefined);
+        setCurrentScriptId(undefined);
         fetchAuditResultsRequest(pageOrScriptId, 'page');
       } else if (script) {
+        setCurrentPageId(undefined);
+        setCurrentScriptId(pageOrScriptId ? pageOrScriptId : undefined);
         fetchAuditResultsRequest(pageOrScriptId, 'script');
       }
     },
     [pageOrScriptId, page && page.uuid, script && script.uuid],
+  );
+
+  React.useEffect(
+    () => {
+      setCurrentAuditParametersId(auditParametersId);
+    },
+    [auditParametersId],
+  );
+
+  React.useEffect(
+    () => {
+      setCurrentScriptStepId(script && scriptStepId ? scriptStepId : undefined);
+    },
+    [script && script.uuid, scriptStepId],
   );
 
   if (project === undefined) {
@@ -112,6 +141,26 @@ export const Audits: React.FunctionComponent<Props> = ({
     );
   }
 
+  if (0 === project.auditParametersList.length) {
+    return (
+      <Style.Container>
+        <ErrorMessage>
+          <FormattedMessage id="Project.no_audit_parameters_error" />
+        </ErrorMessage>
+      </Style.Container>
+    );
+  }
+
+  if (!auditParameters[auditParametersId]) {
+    return (
+      <Style.Container>
+        <ErrorMessage>
+          <FormattedMessage id="Audits.audit_parameters_unavailable" />
+        </ErrorMessage>
+      </Style.Container>
+    );
+  }
+
   if (
     script &&
     sortedScriptAuditResultsIds &&
@@ -123,6 +172,7 @@ export const Audits: React.FunctionComponent<Props> = ({
         to={routeDefinitions.auditsScriptDetails.path
           .replace(':projectId', projectId)
           .replace(':pageOrScriptId', pageOrScriptId)
+          .replace(':auditParametersId', auditParametersId)
           .replace(':scriptStepId', Object.keys(sortedScriptAuditResultsIds)[0])}
       />
     );
@@ -173,6 +223,7 @@ export const Audits: React.FunctionComponent<Props> = ({
         routeDefinitions.auditsScriptDetails.path
           .replace(':projectId', projectId)
           .replace(':pageOrScriptId', pageOrScriptId)
+          .replace(':auditParametersId', auditParametersId)
           .replace(':scriptStepId', selectedOption.value),
       );
     }
