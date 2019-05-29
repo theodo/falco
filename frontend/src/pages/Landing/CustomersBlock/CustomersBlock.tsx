@@ -12,7 +12,6 @@ interface Props {
 }
 
 const CustomersBlock: React.FunctionComponent<Props> = ({ backgroundColor }) => {
-  const customerLogoHeight = '40px';
   return (
     <LandingBlock backgroundColor={backgroundColor}>
       <Style.CustomersBlockContainer>
@@ -20,10 +19,10 @@ const CustomersBlock: React.FunctionComponent<Props> = ({ backgroundColor }) => 
           <FormattedMessage id={'Landing.customers_block.title'} />
         </Style.CustomersBlockTitle>
         <Style.CustomersBlockLogosContainer>
-          <Style.CustomersBlockLogo src={LogoBNP} height={customerLogoHeight} />
-          <Style.CustomersBlockLogo src={LogoChooseMyCompany} height={customerLogoHeight} />
-          <Style.CustomersBlockLogo src={LogoTarkett} height={customerLogoHeight} />
-          <Style.CustomersBlockLogo src={LogoVoodoo} height={customerLogoHeight} />
+          <Style.CustomersBlockLogo src={LogoBNP} />
+          <Style.CustomersBlockLogo src={LogoChooseMyCompany} />
+          <Style.CustomersBlockLogo src={LogoTarkett} />
+          <Style.CustomersBlockLogo src={LogoVoodoo} />
         </Style.CustomersBlockLogosContainer>
       </Style.CustomersBlockContainer>
     </LandingBlock>
