@@ -47,6 +47,16 @@ const Styles = {
     }
   `,
 
+  EmailFieldContainer: styled.div`
+    width: 100%;
+    border-radius: 6px;
+    @media only screen and (max-width: ${responsiveThreshold}) {
+      border: 1px solid ${colorUsage.leadFormBorder};
+      padding: 0 0 0 ${getSpacing(5)};
+      margin: 0 0 ${getSpacing(2)} 0;
+    }
+  `,
+
   EmailField: styled(Field)``,
 
   SubmitButton: styled.button`

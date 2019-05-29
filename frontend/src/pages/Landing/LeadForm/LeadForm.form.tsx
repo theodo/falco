@@ -55,14 +55,16 @@ const LeadForm: React.FunctionComponent<
   return (
     <Style.Container>
       <Style.LeadForm>
-        <Style.EmailField
-          type="email"
-          name="email"
-          label={'Landing.introduction_block.leadForm.email_label'}
-          component={Input}
-          error={touched.email && errors.email}
-          disabled={leadSubmissionStatus === 'running' || leadSubmissionStatus === 'success'}
-        />
+        <Style.EmailFieldContainer>
+          <Style.EmailField
+            type="email"
+            name="email"
+            label={'Landing.introduction_block.leadForm.email_label'}
+            component={Input}
+            error={touched.email && errors.email}
+            disabled={leadSubmissionStatus === 'running' || leadSubmissionStatus === 'success'}
+          />
+        </Style.EmailFieldContainer>
         <Style.SubmitButton type="submit" className={submitButtonParameters.className}>
           <Style.SubmitButtonContent>
             {leadSubmissionStatus === 'running' && <Style.Loader />}

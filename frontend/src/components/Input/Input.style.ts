@@ -15,12 +15,6 @@ const Styles = {
     width: 100%;
     height: 54px;
     border-radius: 6px;
-
-    @media only screen and (max-width: ${responsiveThreshold}) {
-      border: 1px solid ${colorUsage.leadFormBorder};
-      padding: 0 0 0 ${getSpacing(5)};
-      margin: 0 0 ${getSpacing(2)} 0;
-    }
   `,
 
   Input: styled.input`
@@ -63,10 +57,6 @@ const Styles = {
 
     &.error {
       color: ${colorUsage.inputTextError};
-    }
-
-    @media only screen and (max-width: ${responsiveThreshold}) {
-      padding: 0 0 0 ${getSpacing(5)};
     }
   `,
 };
