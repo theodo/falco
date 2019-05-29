@@ -19,7 +19,6 @@ const Styles = {
     padding: ${getSpacing(8)} 0 ${getSpacing(18)} 0;
 
     @media only screen and (max-width: ${responsiveThreshold}) {
-      width: 320px;
       grid-template-columns: 100%;
       grid-template-rows: repeat(4, max-content);
       padding: 0;
@@ -40,10 +39,7 @@ const Styles = {
     @media only screen and (max-width: ${responsiveThreshold}) {
       width: 260px;
       line-height: ${lineHeight.h3Text};
-      color: ${colorUsage.h3Text};
-      font-family: ${fontFamily.mainSans};
       font-size: ${fontSize.h3Text};
-      font-weight: ${fontWeight.h3Text};
     }
   `,
 

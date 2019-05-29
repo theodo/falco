@@ -17,14 +17,13 @@ const Styles = {
     width: 470px;
     display: flex;
     flex-direction: column;
-    margin: auto;
+    margin: 0 auto ${getSpacing(6)} auto;
 
     @media only screen and (max-width: ${responsiveThreshold}) {
       grid-row-start: 4;
       grid-column-start: 1;
       width: 245px;
       padding: 0 ${getSpacing(7)};
-      margin: 0 0 ${getSpacing(6)} 0;
     }
   `,
 
@@ -44,7 +43,7 @@ const Styles = {
       flex-wrap: wrap;
       padding-left: 0;
       border: none;
-      margin: auto;
+      justify-content: center;
     }
   `,
 

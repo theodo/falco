@@ -56,7 +56,6 @@ const StyledHeader = {
     align-items: center;
     text-decoration: none;
     @media only screen and (max-width: ${responsiveThreshold}) {
-      width: 320px;
       padding-left: ${getSpacing(6)};
     }
   `,
