@@ -19,6 +19,10 @@ const Styles = {
     justify-content: center;
     padding: ${getSpacing(6)} ${getSpacing(20)};
     font-family: ${fontFamily.mainSans};
+
+    @media only screen and (max-width: ${responsiveThreshold}) {
+      padding: ${getSpacing(6)} 0;
+    }
   `,
 
   FeaturesBlockTitle: styled.h2`
@@ -45,6 +49,7 @@ const Styles = {
 
     @media only screen and (max-width: ${responsiveThreshold}) {
       padding: 0;
+      justify-content: center;
     }
   `,
 
