@@ -1,5 +1,13 @@
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
+import {
+  colorUsage,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  getSpacing,
+  lineHeight,
+  responsiveThreshold,
+} from 'stylesheet';
 
 const Styles = {
   FeaturesBlockContainer: styled.div`
@@ -11,6 +19,10 @@ const Styles = {
     justify-content: center;
     padding: ${getSpacing(6)} ${getSpacing(20)};
     font-family: ${fontFamily.mainSans};
+
+    @media only screen and (max-width: ${responsiveThreshold}) {
+      display: none;
+    }
   `,
 
   FeaturesBlockTitle: styled.h2`

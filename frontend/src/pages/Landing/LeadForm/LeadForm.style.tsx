@@ -1,12 +1,30 @@
 import { Field, Form } from 'formik';
 import styled from 'styled-components';
 
-import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
+import {
+  colorUsage,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  getSpacing,
+  lineHeight,
+  responsiveThreshold,
+} from 'stylesheet';
 const Styles = {
   Container: styled.div`
+    grid-row-start: 3;
+    grid-column-start: 1;
     width: 470px;
     display: flex;
     flex-direction: column;
+    margin: 0 auto ${getSpacing(6)} auto;
+
+    @media only screen and (max-width: ${responsiveThreshold}) {
+      grid-row-start: 4;
+      grid-column-start: 1;
+      width: 245px;
+      padding: 0 ${getSpacing(7)};
+    }
   `,
 
   LeadForm: styled(Form)`
@@ -19,6 +37,24 @@ const Styles = {
     border-radius: 6px;
     border: 1px solid ${colorUsage.leadFormBorder};
     padding-left: ${getSpacing(5)};
+
+    @media only screen and (max-width: ${responsiveThreshold}) {
+      height: auto;
+      flex-wrap: wrap;
+      padding-left: 0;
+      border: none;
+      justify-content: center;
+    }
+  `,
+
+  EmailFieldContainer: styled.div`
+    width: 100%;
+    border-radius: 6px;
+    @media only screen and (max-width: ${responsiveThreshold}) {
+      border: 1px solid ${colorUsage.leadFormBorder};
+      padding: 0 0 0 ${getSpacing(5)};
+      margin: 0 0 ${getSpacing(2)} 0;
+    }
   `,
 
   EmailField: styled(Field)``,
@@ -50,6 +86,10 @@ const Styles = {
 
     &.requestSucceeded {
       background-color: ${colorUsage.leadSubmitButtonSuccessBackground};
+    }
+
+    @media only screen and (max-width: ${responsiveThreshold}) {
+      margin: auto;
     }
   `,
 

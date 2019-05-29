@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { responsiveThreshold } from 'stylesheet';
+
 interface Props {
   backgroundColor?: string;
 }
@@ -11,6 +13,11 @@ const Style = {
     width: 1240px;
     background-color: ${(props: Props) => props.backgroundColor || 'transparent'};
     padding: 0 100px;
+
+    @media only screen and (max-width: ${responsiveThreshold}) {
+      width: 100%;
+      padding: 0;
+    }
   `,
 };
 

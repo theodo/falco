@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colorUsage, fontFamily, getSpacing } from 'stylesheet';
+import { colorUsage, fontFamily, getSpacing, responsiveThreshold } from 'stylesheet';
 
 interface ContentProps {
   shouldDisplayMenu: boolean;
@@ -26,6 +26,11 @@ const StyledRoot = {
     width: 1440px;
     margin: auto;
     background-color: ${colorUsage.defaultContentBackground};
+
+    @media only screen and (max-width: ${responsiveThreshold}) {
+      width: 320px;
+      margin: auto;
+    }
   `,
   Body: styled.div``,
   Content: styled.div`
