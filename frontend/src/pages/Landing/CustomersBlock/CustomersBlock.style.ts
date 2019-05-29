@@ -21,7 +21,7 @@ const Styles = {
     font-family: ${fontFamily.mainSans};
 
     @media only screen and (max-width: ${responsiveThreshold}) {
-      display: none;
+      padding: ${getSpacing(6)} ${getSpacing(10)};
     }
   `,
 
@@ -30,19 +30,31 @@ const Styles = {
     font-size: ${fontSize.h2Text};
     line-height: ${lineHeight.h2Text};
     font-weight: ${fontWeight.h2Text};
+
+    @media only screen and (max-width: ${responsiveThreshold}) {
+      font-size: ${fontSize.h4Text};
+      line-height: ${lineHeight.h4Text};
+    }
   `,
 
   CustomersBlockLogosContainer: styled.div`
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     align-items: center;
     justify-content: space-between;
     padding: ${getSpacing(7)} 0 ${getSpacing(4)} 0;
   `,
 
-  CustomersBlockLogo: styled.img``,
+  CustomersBlockLogo: styled.img`
+    height: 40px;
+
+    @media only screen and (max-width: ${responsiveThreshold}) {
+      height: 20px;
+      margin-bottom: ${getSpacing(5)};
+    }
+  `,
 };
 
 export default Styles;
