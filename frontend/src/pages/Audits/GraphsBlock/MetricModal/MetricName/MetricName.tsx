@@ -8,9 +8,10 @@ import Style from './MetricName.style';
 interface Props {
   metric: MetricType;
   modalRef: React.RefObject<HTMLDivElement>;
+  onClick: (event: MouseEvent, value: MetricType) => void;
 }
 
-const MetricName: React.FunctionComponent<Props> = ({ metric, modalRef }) => {
+const MetricName: React.FunctionComponent<Props> = ({ metric, modalRef, onClick }) => {
   const [showMetricTooltip, toggleMetricTooltip] = React.useState(false);
 
   const displayTooltip = () => {
@@ -29,6 +30,7 @@ const MetricName: React.FunctionComponent<Props> = ({ metric, modalRef }) => {
         onMouseEnter={displayTooltip}
         onMouseLeave={hideTooltip}
         ref={metricNameRef}
+        onClick={event => onClick(event, metric)}
       >
         <FormattedMessage id={`Metrics.${metric}.name`} />
       </Style.MetricName>

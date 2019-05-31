@@ -8,6 +8,7 @@ const Style = {
     font-size: ${fontSize.labelText};
     line-height: ${lineHeight.labelText};
     font-family: ${fontFamily.mainSans};
+    cursor: pointer;
   `,
 };
 
