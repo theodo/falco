@@ -40,7 +40,7 @@ const GraphModal: React.FunctionComponent<Props & InjectedIntlProps> = props => 
     document.body.style.overflow = 'hidden';
   };
   const handleModalClose = () => {
-    document.body.style.overflow = 'scroll';
+    document.body.style.overflow = 'auto';
   };
 
   return (

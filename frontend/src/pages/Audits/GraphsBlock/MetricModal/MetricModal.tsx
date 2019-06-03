@@ -49,7 +49,7 @@ const MetricModal: React.FunctionComponent<Props> = ({
   };
   const handleModalClose = () => {
     updateSelectedMetrics(metrics);
-    document.body.style.overflow = 'scroll';
+    document.body.style.overflow = 'auto';
   };
 
   const [selectedMetrics, updateSelectedMetrics] = useState(metrics);
