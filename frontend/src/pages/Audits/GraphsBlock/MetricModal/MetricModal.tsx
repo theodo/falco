@@ -54,18 +54,21 @@ const MetricModal: React.FunctionComponent<Props> = ({
 
   const [selectedMetrics, updateSelectedMetrics] = useState(metrics);
 
-  const updateMetrics = (event: ChangeEvent) => {
-    const target = event.target as HTMLInputElement;
-    if (target.checked) {
-      updateSelectedMetrics(currentSelectedMetrics => [
-        ...currentSelectedMetrics,
-        target.value as MetricType,
-      ]);
+  const updateMetrics = (event: MouseEvent, selectedValue: MetricType) => {
+    if (selectedMetrics.indexOf(selectedValue) === -1) {
+      updateSelectedMetrics(currentSelectedMetrics => [...currentSelectedMetrics, selectedValue]);
     } else {
       updateSelectedMetrics(currentSelectedMetrics =>
-        currentSelectedMetrics.filter(metric => target.value !== metric),
+        currentSelectedMetrics.filter(metric => selectedValue !== metric),
       );
     }
+  };
+
+  const isMetricSelected = (selectedValue: MetricType) => {
+    if (selectedMetrics.indexOf(selectedValue) === -1) {
+      return false;
+    }
+    return true;
   };
 
   const submitDisplayedMetrics = (event: MouseEvent) => {
@@ -97,12 +100,16 @@ const MetricModal: React.FunctionComponent<Props> = ({
               <Style.MetricItem key={index} margin={`0 0 ${getSpacing(2)} 0`}>
                 <Style.ModalCheckbox
                   type="checkbox"
-                  defaultChecked={!!metrics.find(m => m === metric)}
-                  onChange={updateMetrics}
-                  value={metric}
+                  onClick={event => updateMetrics(event, metric as MetricType)}
+                  checked={isMetricSelected(metric as MetricType)}
+                  readOnly={true}
                 />
                 <Style.ModalCheckboxLabel margin={`0 ${getSpacing(3)} 0 0`} />
-                <MetricName metric={metric as MetricType} modalRef={metricModalRef}>
+                <MetricName
+                  metric={metric as MetricType}
+                  modalRef={metricModalRef}
+                  onClick={updateMetrics}
+                >
                   <FormattedMessage id={`Metrics.${metric}.name`} />
                 </MetricName>
               </Style.MetricItem>
