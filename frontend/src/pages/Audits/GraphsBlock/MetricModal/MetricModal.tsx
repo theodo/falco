@@ -64,7 +64,7 @@ const MetricModal: React.FunctionComponent<Props> = ({
     }
   };
 
-  const updateChecked = (selectedValue: MetricType) => {
+  const isMetricSelected = (selectedValue: MetricType) => {
     if (selectedMetrics.indexOf(selectedValue) === -1) {
       return false;
     }
@@ -101,7 +101,7 @@ const MetricModal: React.FunctionComponent<Props> = ({
                 <Style.ModalCheckbox
                   type="checkbox"
                   onClick={event => updateMetrics(event, metric as MetricType)}
-                  checked={updateChecked(metric as MetricType)}
+                  checked={isMetricSelected(metric as MetricType)}
                   readOnly={true}
                 />
                 <Style.ModalCheckboxLabel margin={`0 ${getSpacing(3)} 0 0`} />
