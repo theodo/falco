@@ -34,6 +34,7 @@ Agile Coach:
 
 Developers (see [contributors](../../graphs/contributors)):
 
+- **Cécile Gontier** (cecilego@theodo.fr)
 - **Nicolas Goutay** (nicolasgo@theodo.fr)
 - **Etienne Grall** (etienneg@theodo.fr)
 - **Vincent Larrat** (vincentla@theodo.fr)

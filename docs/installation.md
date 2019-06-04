@@ -26,12 +26,16 @@ Go through this once when you install the project, you shouldn't need to do that
   ```bash
   make backend/migrate
   ```
+- Ensure backend is started:
+  ```bash
+  make backend/start
+  ```
 - If you have data that you want to import from PostgreSQL backup file:
   - Connect to local PostgreSQL server:
     ```bash
     make db/connect
     ```
-  - For each table *<table_name>* within public database, delete all data stored in it:
+  - If your script does not include it, for each table *<table_name>* that you will update within public schema, delete all data stored in it:
     ```sql
     TRUNCATE TABLE <table_name> CASCADE;
     ```
