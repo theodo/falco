@@ -39,6 +39,10 @@ Useful commands:
 
 Other useful commands:
 
+* `yarn lint` to launch TypeScript linter report
+
+* `yarn lint-style` to launch StyleLint (CSS) linter report
+
 * `yarn lint:fix` to automatically fix linting errors
 
 * `yarn test:coverage` to generate the coverage
