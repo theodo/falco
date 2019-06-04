@@ -74,9 +74,12 @@ const StyledHeader = {
     align-items: center;
     display: flex;
     justify-content: flex-end;
-    margin-left: ${getSpacing(8)};
+    padding-left: ${getSpacing(8)};
     padding-right: ${getSpacing(22)};
     width: 800px;
+    transition: box-shadow 0.3s ease-in-out;
+    box-shadow: ${(props: HeaderProps) =>
+      props.shouldHaveShadow && `0 10px 5px -2px ${colorUsage.headerShadowBox}`};
 
     @media only screen and (max-width: ${responsiveThreshold}) {
       display: none;

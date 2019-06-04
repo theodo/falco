@@ -125,7 +125,9 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
             <Style.LogoTitle>FALCO</Style.LogoTitle>
           </Style.LogoContainer>
         </Style.HeaderMenu>
-        <Style.HeaderContent>
+        <Style.HeaderContent
+          shouldHaveShadow={shouldDisplayConnectedUserHeader && scrollPosition > 10}
+        >
           {shouldDisplayConnectedUserHeader && (
             <Style.Nav>
               <Style.HeaderButtonsBlock>
