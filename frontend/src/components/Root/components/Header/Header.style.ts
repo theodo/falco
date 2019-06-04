@@ -10,7 +10,7 @@ import {
 } from 'stylesheet';
 
 interface Props {
-  isLandingPage: boolean;
+  shouldDisplayConnectedUserHeader: boolean;
 }
 
 interface HeaderProps {
@@ -44,7 +44,7 @@ const StyledHeader = {
     display: flex;
     padding-left: ${getSpacing(22)};
     width: 380px;
-    background-color: ${(props: Props) => !props.isLandingPage && colorUsage.menuBackground};
+    background-color: ${(props: Props) => props.shouldDisplayConnectedUserHeader && colorUsage.menuBackground};
 
     @media only screen and (max-width: ${responsiveThreshold}) {
       width: 320px;

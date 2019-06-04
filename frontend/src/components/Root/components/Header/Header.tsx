@@ -106,7 +106,7 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
   return (
     <Style.HeaderContainer ref={headerContainerRef}>
       <Style.Header shouldHaveShadow={isLandingPage && scrollPosition > 10}>
-        <Style.HeaderMenu isLandingPage={isLandingPage}>
+        <Style.HeaderMenu shouldDisplayConnectedUserHeader={shouldDisplayConnectedUserHeader}>
           <Style.LogoContainer
             title={
               shouldDisplayConnectedUserHeader
