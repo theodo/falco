@@ -116,10 +116,12 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps & InjectedIntlProps> = 
           type="radio"
           value={radioOptions[radioOptionType].value}
           name="audit"
-          onChange={handleRadioButtonChange}
+          style={{ cursor: 'pointer' }}
         />
         <Style.RadioButtonLabel margin={`0 ${getSpacing(2)} 0 0`} />
+        <Style.RadioButtonText>
         <FormattedMessage id={radioOptions[radioOptionType].label} />
+        </Style.RadioButtonText>
       </Style.OptionContainer>
     );
   };
