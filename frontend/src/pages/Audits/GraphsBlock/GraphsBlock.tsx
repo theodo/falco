@@ -5,6 +5,7 @@ import Loader from 'components/Loader';
 import MetricGraph from 'components/MetricGraph';
 import Expand from 'icons/Expand';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { METRICS } from 'redux/auditResults/constants';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
 import { colorUsage, getSpacing } from 'stylesheet';
 import GraphModal from './GraphModal';
@@ -62,19 +63,21 @@ export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = p
 
   return (
     <Style.Container margin={blockMargin}>
-      {metrics.map((metric, index) => {
-        return (
-          <Style.GraphContainer margin={`0 0 ${getSpacing(4)} 0`} key={index}>
-            <MetricGraph fullscreen={false} auditResults={auditResults} metrics={[metric]} />
-            <Style.ExpandButton
-              title={intl.formatMessage({ id: `components.MetricGraph.expand` })}
-              onClick={openGraphModal(metric)}
-            >
-              <Expand color={colorUsage.graphModalToggleButton} />
-            </Style.ExpandButton>
-          </Style.GraphContainer>
-        );
-      })}
+      {(Object.keys(METRICS) as MetricType[])
+        .filter(metric => metrics.indexOf(metric) > -1)
+        .map((metric, index) => {
+          return (
+            <Style.GraphContainer margin={`0 0 ${getSpacing(4)} 0`} key={index}>
+              <MetricGraph fullscreen={false} auditResults={auditResults} metrics={[metric]} />
+              <Style.ExpandButton
+                title={intl.formatMessage({ id: `components.MetricGraph.expand` })}
+                onClick={openGraphModal(metric)}
+              >
+                <Expand color={colorUsage.graphModalToggleButton} />
+              </Style.ExpandButton>
+            </Style.GraphContainer>
+          );
+        })}
       <Style.GraphSettingsContainer>
         <Style.ChooseMetricsButton margin={`0 0 ${getSpacing(4)} 0`} onClick={openMetricModal}>
           <FormattedMessage id="Audits.MetricsModal.add_delete_metrics" /> →

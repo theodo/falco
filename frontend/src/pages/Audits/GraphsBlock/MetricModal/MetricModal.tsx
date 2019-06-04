@@ -95,21 +95,17 @@ const MetricModal: React.FunctionComponent<Props> = ({
           <FormattedMessage id="Audits.MetricsModal.add_delete_metrics" />
         </Style.ModalTitle>
         <Style.MetricsContainer>
-          {Object.keys(METRICS).map((metric, index) => {
+          {(Object.keys(METRICS) as MetricType[]).map((metric, index) => {
             return (
               <Style.MetricItem key={index} margin={`0 0 ${getSpacing(2)} 0`}>
                 <Style.ModalCheckbox
                   type="checkbox"
-                  onClick={event => updateMetrics(event, metric as MetricType)}
-                  checked={isMetricSelected(metric as MetricType)}
+                  onClick={event => updateMetrics(event, metric)}
+                  checked={isMetricSelected(metric)}
                   readOnly={true}
                 />
                 <Style.ModalCheckboxLabel margin={`0 ${getSpacing(3)} 0 0`} />
-                <MetricName
-                  metric={metric as MetricType}
-                  modalRef={metricModalRef}
-                  onClick={updateMetrics}
-                >
+                <MetricName metric={metric} modalRef={metricModalRef} onClick={updateMetrics}>
                   <FormattedMessage id={`Metrics.${metric}.name`} />
                 </MetricName>
               </Style.MetricItem>
