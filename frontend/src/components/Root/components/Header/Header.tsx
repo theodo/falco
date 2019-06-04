@@ -6,7 +6,21 @@ import { routeDefinitions } from 'routes';
 import { colorUsage } from 'stylesheet';
 import AccountMenu from './components/AccountMenu';
 import ProjectsMenu from './components/ProjectsMenu';
-import Style from './Header.style';
+import {
+  HeaderBlock,
+  HeaderButton,
+  HeaderButtonArrow,
+  HeaderButtonsBlock,
+  HeaderContainer,
+  HeaderContent,
+  HeaderLink,
+  HeaderMenu,
+  LogoBlock,
+  LogoContainer,
+  LogoTitle,
+  MenusContainer,
+  Nav,
+} from './Header.style';
 
 // Your component own properties
 interface Props {
@@ -104,10 +118,10 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
   });
 
   return (
-    <Style.HeaderContainer ref={headerContainerRef}>
-      <Style.Header shouldHaveShadow={isLandingPage && scrollPosition > 10}>
-        <Style.HeaderMenu shouldDisplayConnectedUserHeader={shouldDisplayConnectedUserHeader}>
-          <Style.LogoContainer
+    <HeaderContainer ref={headerContainerRef}>
+      <HeaderBlock shouldHaveShadow={isLandingPage && scrollPosition > 10}>
+        <HeaderMenu shouldDisplayConnectedUserHeader={shouldDisplayConnectedUserHeader}>
+          <LogoContainer
             title={
               shouldDisplayConnectedUserHeader
                 ? intl.formatMessage({ id: `Header.logo_title_app` })
@@ -119,44 +133,36 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
                 : routeDefinitions.landing.path
             }
           >
-            <Style.Logo>
+            <LogoBlock>
               <Logo color={colorUsage.headerLogo} />
-            </Style.Logo>
-            <Style.LogoTitle>FALCO</Style.LogoTitle>
-          </Style.LogoContainer>
-        </Style.HeaderMenu>
-        <Style.HeaderContent
-          shouldHaveShadow={shouldDisplayConnectedUserHeader && scrollPosition > 10}
-        >
+            </LogoBlock>
+            <LogoTitle>FALCO</LogoTitle>
+          </LogoContainer>
+        </HeaderMenu>
+        <HeaderContent shouldHaveShadow={shouldDisplayConnectedUserHeader && scrollPosition > 10}>
           {shouldDisplayConnectedUserHeader && (
-            <Style.Nav>
-              <Style.HeaderButtonsBlock>
-                <Style.HeaderButton
-                  onClick={toggleProjectsMenuVisibility}
-                  ref={projectsMenuButtonRef}
-                >
+            <Nav>
+              <HeaderButtonsBlock>
+                <HeaderButton onClick={toggleProjectsMenuVisibility} ref={projectsMenuButtonRef}>
                   <FormattedMessage id="Header.projects_button" />
-                  <Style.HeaderButtonArrow />
-                </Style.HeaderButton>
-                <Style.HeaderButton
-                  onClick={toggleAccountMenuVisibility}
-                  ref={accountMenuButtonRef}
-                >
+                  <HeaderButtonArrow />
+                </HeaderButton>
+                <HeaderButton onClick={toggleAccountMenuVisibility} ref={accountMenuButtonRef}>
                   <FormattedMessage id="Header.login_button" />
-                  <Style.HeaderButtonArrow />
-                </Style.HeaderButton>
-              </Style.HeaderButtonsBlock>
-            </Style.Nav>
+                  <HeaderButtonArrow />
+                </HeaderButton>
+              </HeaderButtonsBlock>
+            </Nav>
           )}
           {isLandingPage && (
-            <Style.HeaderLink href={routeDefinitions.login.path}>
+            <HeaderLink href={routeDefinitions.login.path}>
               <FormattedMessage id="Header.connect_link" />
-            </Style.HeaderLink>
+            </HeaderLink>
           )}
-        </Style.HeaderContent>
-      </Style.Header>
+        </HeaderContent>
+      </HeaderBlock>
       {shouldDisplayConnectedUserHeader && (
-        <Style.MenusContainer>
+        <MenusContainer>
           <ProjectsMenu
             isVisible={isProjectsMenuVisible}
             position={'absolute'}
@@ -167,8 +173,8 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
             position={'absolute'}
             right={accountMenuRight}
           />
-        </Style.MenusContainer>
+        </MenusContainer>
       )}
-    </Style.HeaderContainer>
+    </HeaderContainer>
   );
 };
