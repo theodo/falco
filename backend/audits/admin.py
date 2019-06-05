@@ -4,10 +4,12 @@ from django.contrib import admin
 
 class AuditStatusHistoryInline(admin.TabularInline):
     model = AuditStatusHistory
+    extra = 0
 
 
 class AuditResultsInline(admin.TabularInline):
     model = AuditResults
+    extra = 0
 
 
 class AuditAdmin(admin.ModelAdmin):
