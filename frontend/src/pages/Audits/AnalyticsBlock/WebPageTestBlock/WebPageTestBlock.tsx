@@ -25,6 +25,8 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps & InjectedIntlProps> = 
   const [dateSelectorDisplayed, displayDateSelector] = React.useState(false);
   const [dateComparatorDisplayed, displayDateComparator] = React.useState(false);
 
+  const [selectedOption, setSelectedOption] = React.useState('latest');
+
   const getWebPageTestUrl = () => {
     if (!dateComparatorDisplayed) {
       return selectedAudit.WPTResultsUserUrl;
@@ -36,8 +38,12 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps & InjectedIntlProps> = 
     return `${baseUrl}${selectedAuditId},${auditToCompareId}`;
   };
 
-  const handleRadioButtonChange = (e: React.ChangeEvent): void => {
-    switch ((e.target as HTMLInputElement).value) {
+  const handleRadioButtonChange = (
+    e: React.MouseEvent,
+    radioOptionType: 'latest' | 'dateSelector' | 'dateComparator',
+  ): void => {
+    setSelectedOption(radioOptionType);
+    switch (radioOptionType) {
       case 'latest':
         displayDateSelector(false);
         displayDateComparator(false);
@@ -54,6 +60,10 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps & InjectedIntlProps> = 
         displayDateComparator(true);
         break;
     }
+  };
+
+  const isOptionSelected = (radioOptionType: 'latest' | 'dateSelector' | 'dateComparator') => {
+    return radioOptionType === selectedOption;
   };
 
   interface AuditResultOption {
@@ -112,14 +122,18 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps & InjectedIntlProps> = 
     return (
       <Style.OptionContainer margin={`0 0 ${getSpacing(4)} 0`}>
         <Style.RadioButton
-          defaultChecked={radioOptionType === 'latest'}
+          checked={isOptionSelected(radioOptionType)}
           type="radio"
           value={radioOptions[radioOptionType].value}
           name="audit"
-          onChange={handleRadioButtonChange}
+          onClick={e => handleRadioButtonChange(e, radioOptionType)}
+          style={{ cursor: 'pointer' }}
+          readOnly={true}
         />
         <Style.RadioButtonLabel margin={`0 ${getSpacing(2)} 0 0`} />
-        <FormattedMessage id={radioOptions[radioOptionType].label} />
+        <Style.RadioButtonText onClick={e => handleRadioButtonChange(e, radioOptionType)}>
+          <FormattedMessage id={radioOptions[radioOptionType].label} />
+        </Style.RadioButtonText>
       </Style.OptionContainer>
     );
   };

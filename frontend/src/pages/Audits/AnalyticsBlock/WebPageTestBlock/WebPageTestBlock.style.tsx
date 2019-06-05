@@ -63,6 +63,10 @@ const Style = {
     border: 1px solid ${colorUsage.webPageTestRadioButtonBorder};
   `,
 
+  RadioButtonText: styled.div`
+    cursor: pointer;
+  `,
+
   RadioButton: styled.input``,
 
   WebPageTestLink: styled.a`
