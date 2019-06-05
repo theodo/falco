@@ -9,7 +9,7 @@ import { flattenMessages } from 'services/i18n/intl';
 import enMessages from 'translations/en.json';
 import frMessages from 'translations/fr.json';
 import { Header, Menu } from './components';
-import Style from './Root.style';
+import { Body, Content, Page, PageBackground, PageContainer } from './Root.style';
 
 const locales: Record<string, any> = {
   fr: flattenMessages(frMessages),
@@ -36,16 +36,16 @@ const Root: React.FunctionComponent<Props> = ({ children, location }) => {
 
   return (
     <IntlProvider locale={userLanguageWithoutRegionCode} messages={localizedMessages}>
-      <Style.PageContainer>
-        <Style.PageBackground isLandingPage={isLandingPage} />
-        <Style.Page>
+      <PageContainer>
+        <PageBackground isLandingPage={isLandingPage} />
+        <Page>
           <Header />
-          <Style.Body>
+          <Body>
             {shouldDisplayMenu && <Menu />}
-            <Style.Content shouldDisplayMenu={shouldDisplayMenu}>{children}</Style.Content>
-          </Style.Body>
-        </Style.Page>
-      </Style.PageContainer>
+            <Content shouldDisplayMenu={shouldDisplayMenu}>{children}</Content>
+          </Body>
+        </Page>
+      </PageContainer>
     </IntlProvider>
   );
 };
