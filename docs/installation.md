@@ -14,6 +14,14 @@ In development:
 
 Go through this once when you install the project, you shouldn't need to do that again.
 
+- Clone FALCO repository:
+  ```bash
+  git clone git@github.com:theodo/falco.git
+  ```
+- Move to `falco` subdirectory:
+  ```bash
+  cd falco
+  ```
 - Install the backend:
   ```bash
   make backend/install
