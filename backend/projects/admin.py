@@ -13,6 +13,7 @@ class ScriptInline(admin.TabularInline):
 
 class ProjectAuditParametersInline(admin.TabularInline):
     model = ProjectAuditParameters
+    min_num = 1
 
 
 class ProjectAdmin(admin.ModelAdmin):
