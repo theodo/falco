@@ -1,5 +1,6 @@
 from urllib.parse import parse_qs, urlparse
 
+import logging
 import requests
 
 from audits.models import Audit, AuditResults, AuditStatusHistory, AvailableStatuses
@@ -52,7 +53,7 @@ def request_audit(audit_uuid):
             (audit_uuid, response["data"]["jsonUrl"]), countdown=15
         )
     elif response["statusCode"] == 400:
-        # Usually 400 errors come from exceeding the daily limit
+        # Usually 400 errors come from empty script or exceeding the daily limit
         audit_status_error = AuditStatusHistory(
             audit=audit,
             status=AvailableStatuses.ERROR.value,
@@ -86,80 +87,100 @@ def poll_audit_results(audit_uuid, json_url):
         parsed_url = urlparse(json_url)
         test_id = parse_qs(parsed_url.query)["test"][0]
         wpt_results_user_url = f"https://www.webpagetest.org/result/{test_id}"
-        if audit.page is not None:
-            project = audit.page.project
-            formatted_results_array = format_wpt_json_results_for_page(response["data"])
-        elif audit.script is not None:
-            project = audit.script.project
-            formatted_results_array = format_wpt_json_results_for_script(
-                response["data"]
+        try:
+            if audit.page is not None:
+                project = audit.page.project
+                formatted_results_array = format_wpt_json_results_for_page(
+                    response["data"]
+                )
+            elif audit.script is not None:
+                project = audit.script.project
+                formatted_results_array = format_wpt_json_results_for_script(
+                    response["data"]
+                )
+            for formatted_results in formatted_results_array:
+                audit_results = AuditResults(
+                    audit=audit,
+                    wpt_results_json_url=json_url,
+                    wpt_results_user_url=wpt_results_user_url,
+                    wpt_metric_first_view_tti=formatted_results[
+                        "wpt_metric_first_view_tti"
+                    ],
+                    wpt_metric_repeat_view_tti=formatted_results[
+                        "wpt_metric_repeat_view_tti"
+                    ],
+                    wpt_metric_first_view_speed_index=formatted_results[
+                        "wpt_metric_first_view_speed_index"
+                    ],
+                    wpt_metric_repeat_view_speed_index=formatted_results[
+                        "wpt_metric_repeat_view_speed_index"
+                    ],
+                    wpt_metric_first_view_first_paint=formatted_results[
+                        "wpt_metric_first_view_first_paint"
+                    ],
+                    wpt_metric_repeat_view_first_paint=formatted_results[
+                        "wpt_metric_repeat_view_first_paint"
+                    ],
+                    wpt_metric_first_view_first_meaningful_paint=formatted_results[
+                        "wpt_metric_first_view_first_meaningful_paint"
+                    ],
+                    wpt_metric_repeat_view_first_meaningful_paint=formatted_results[
+                        "wpt_metric_repeat_view_first_meaningful_paint"
+                    ],
+                    wpt_metric_first_view_load_time=formatted_results[
+                        "wpt_metric_first_view_load_time"
+                    ],
+                    wpt_metric_repeat_view_load_time=formatted_results[
+                        "wpt_metric_repeat_view_load_time"
+                    ],
+                    wpt_metric_first_view_first_contentful_paint=formatted_results[
+                        "wpt_metric_first_view_first_contentful_paint"
+                    ],
+                    wpt_metric_repeat_view_first_contentful_paint=formatted_results[
+                        "wpt_metric_repeat_view_first_contentful_paint"
+                    ],
+                    wpt_metric_first_view_time_to_first_byte=formatted_results[
+                        "wpt_metric_first_view_time_to_first_byte"
+                    ],
+                    wpt_metric_repeat_view_time_to_first_byte=formatted_results[
+                        "wpt_metric_repeat_view_time_to_first_byte"
+                    ],
+                    wpt_metric_lighthouse_performance=formatted_results[
+                        "wpt_metric_lighthouse_performance"
+                    ],
+                    script_step_name=formatted_results.get("step_name"),
+                    script_step_number=formatted_results.get("step_number"),
+                )
+                audit_results.save()
+
+            project.screenshot_url = formatted_results["screenshot_url"]
+            project.save()
+
+            audit_status_success = AuditStatusHistory(
+                audit=audit,
+                status=AvailableStatuses.SUCCESS.value,
+                details=(
+                    "Audit Successful! AuditResults uuid: %s" % str(audit_results.uuid)
+                ),
             )
-        for formatted_results in formatted_results_array:
+            audit_status_success.save()
+        except Exception:
+            logging.error("Could not parse audit result", stack_info=True)
             audit_results = AuditResults(
                 audit=audit,
                 wpt_results_json_url=json_url,
                 wpt_results_user_url=wpt_results_user_url,
-                wpt_metric_first_view_tti=formatted_results[
-                    "wpt_metric_first_view_tti"
-                ],
-                wpt_metric_repeat_view_tti=formatted_results[
-                    "wpt_metric_repeat_view_tti"
-                ],
-                wpt_metric_first_view_speed_index=formatted_results[
-                    "wpt_metric_first_view_speed_index"
-                ],
-                wpt_metric_repeat_view_speed_index=formatted_results[
-                    "wpt_metric_repeat_view_speed_index"
-                ],
-                wpt_metric_first_view_first_paint=formatted_results[
-                    "wpt_metric_first_view_first_paint"
-                ],
-                wpt_metric_repeat_view_first_paint=formatted_results[
-                    "wpt_metric_repeat_view_first_paint"
-                ],
-                wpt_metric_first_view_first_meaningful_paint=formatted_results[
-                    "wpt_metric_first_view_first_meaningful_paint"
-                ],
-                wpt_metric_repeat_view_first_meaningful_paint=formatted_results[
-                    "wpt_metric_repeat_view_first_meaningful_paint"
-                ],
-                wpt_metric_first_view_load_time=formatted_results[
-                    "wpt_metric_first_view_load_time"
-                ],
-                wpt_metric_repeat_view_load_time=formatted_results[
-                    "wpt_metric_repeat_view_load_time"
-                ],
-                wpt_metric_first_view_first_contentful_paint=formatted_results[
-                    "wpt_metric_first_view_first_contentful_paint"
-                ],
-                wpt_metric_repeat_view_first_contentful_paint=formatted_results[
-                    "wpt_metric_repeat_view_first_contentful_paint"
-                ],
-                wpt_metric_first_view_time_to_first_byte=formatted_results[
-                    "wpt_metric_first_view_time_to_first_byte"
-                ],
-                wpt_metric_repeat_view_time_to_first_byte=formatted_results[
-                    "wpt_metric_repeat_view_time_to_first_byte"
-                ],
-                wpt_metric_lighthouse_performance=formatted_results[
-                    "wpt_metric_lighthouse_performance"
-                ],
-                script_step_name=formatted_results.get("step_name"),
-                script_step_number=formatted_results.get("step_number"),
             )
             audit_results.save()
-
-        project.screenshot_url = formatted_results["screenshot_url"]
-        project.save()
-
-        audit_status_success = AuditStatusHistory(
-            audit=audit,
-            status=AvailableStatuses.SUCCESS.value,
-            details=(
-                "Audit Successful! AuditResults uuid: %s" % str(audit_results.uuid)
-            ),
-        )
-        audit_status_success.save()
+            audit_status_error = AuditStatusHistory(
+                audit=audit,
+                status=AvailableStatuses.ERROR.value,
+                details=(
+                    "Error while parsing the audit results from WPT. AuditResults uuid: %s"
+                    % str(audit_results.uuid)
+                ),
+            )
+            audit_status_error.save()
 
 
 @shared_task
