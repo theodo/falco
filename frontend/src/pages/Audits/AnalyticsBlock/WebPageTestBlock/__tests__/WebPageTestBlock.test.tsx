@@ -16,6 +16,18 @@ import configureMockStore from 'redux-mock-store';
 import WebPageTestBlock from '..';
 
 afterEach(cleanup);
+// eslint-disable-next-line
+const consoleError = console.error.bind(console);
+// eslint-disable-next-line
+console.error = (message: string, ...args: any) => {
+  if (
+    message.startsWith('[React Intl] Cannot format message') ||
+    message.startsWith('[React Intl] Missing message')
+  ) {
+    return;
+  }
+  consoleError(message, ...args);
+};
 
 const mockStore = configureMockStore();
 const store = mockStore(state);
@@ -78,7 +90,7 @@ describe('WebPageTestBlock', () => {
     test('for title and subtitle', () => {
       const { container } = render(
         <Provider store={store}>
-          <IntlProvider>
+          <IntlProvider locale={'fr'}>
             <WebPageTestBlock
               auditResults={[pageAuditResult, pageAuditResultToCompare]}
               blockMargin=""
@@ -101,7 +113,7 @@ describe('WebPageTestBlock', () => {
     test('should toggle', () => {
       const { container } = render(
         <Provider store={store}>
-          <IntlProvider>
+          <IntlProvider locale={'fr'}>
             <WebPageTestBlock
               auditResults={[pageAuditResult, pageAuditResultToCompare]}
               blockMargin=""
