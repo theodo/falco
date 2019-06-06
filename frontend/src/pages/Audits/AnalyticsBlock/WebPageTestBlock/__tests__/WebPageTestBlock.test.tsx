@@ -13,7 +13,7 @@ import React from 'react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
-import WebPageTestBlock from '../WebPageTestBlock';
+import WebPageTestBlock from '..';
 
 afterEach(cleanup);
 
@@ -73,42 +73,53 @@ const pageAuditResultToCompare = {
   scriptStepNumber: null,
 };
 
-test('Block messages render', () => {
-  const { container } = render(
-    <Provider store={store}>
-      <IntlProvider>
-        <WebPageTestBlock
-          auditResults={[pageAuditResult, pageAuditResultToCompare]}
-          blockMargin=""
-        />
-      </IntlProvider>
-    </Provider>,
-  );
+describe('WebPageTestBlock', () => {
+  describe('Text renders correctly', () => {
+    test('for title and subtitle', () => {
+      const { container } = render(
+        <Provider store={store}>
+          <IntlProvider>
+            <WebPageTestBlock
+              auditResults={[pageAuditResult, pageAuditResultToCompare]}
+              blockMargin=""
+            />
+          </IntlProvider>
+        </Provider>,
+      );
 
-  expect(getByTestId(container, 'title')).toHaveTextContent('Audits.webpagetest_detailed_results');
-  expect(getByTestId(container, 'subtitle')).toHaveTextContent('Audits.webpagetest_choose_results');
-});
+      expect(getByTestId(container, 'title')).toHaveTextContent(
+        'Audits.webpagetest_detailed_results',
+      );
 
-test('Date selector block appears and disappears', () => {
-  const { container } = render(
-    <Provider store={store}>
-      <IntlProvider>
-        <WebPageTestBlock
-          auditResults={[pageAuditResult, pageAuditResultToCompare]}
-          blockMargin=""
-        />
-      </IntlProvider>
-    </Provider>,
-  );
+      expect(getByTestId(container, 'subtitle')).toHaveTextContent(
+        'Audits.webpagetest_choose_results',
+      );
+    });
+  });
 
-  expect(queryByTestId(container, 'select-dates-form')).toBeNull();
+  describe('Date selection block', () => {
+    test('should toggle', () => {
+      const { container } = render(
+        <Provider store={store}>
+          <IntlProvider>
+            <WebPageTestBlock
+              auditResults={[pageAuditResult, pageAuditResultToCompare]}
+              blockMargin=""
+            />
+          </IntlProvider>
+        </Provider>,
+      );
 
-  fireEvent.click(getByDisplayValue(container, 'dateSelector'));
-  expect(getByTestId(container, 'select-dates-form')).toBeVisible();
+      expect(queryByTestId(container, 'select-dates-form')).toBeNull();
 
-  fireEvent.click(getByDisplayValue(container, 'latest'));
-  expect(queryByTestId(container, 'select-dates-form')).toBeNull();
+      fireEvent.click(getByDisplayValue(container, 'dateSelector'));
+      expect(getByTestId(container, 'select-dates-form')).toBeVisible();
 
-  fireEvent.click(getByDisplayValue(container, 'dateComparator'));
-  expect(getByTestId(container, 'select-dates-form')).toBeVisible();
+      fireEvent.click(getByDisplayValue(container, 'latest'));
+      expect(queryByTestId(container, 'select-dates-form')).toBeNull();
+
+      fireEvent.click(getByDisplayValue(container, 'dateComparator'));
+      expect(getByTestId(container, 'select-dates-form')).toBeVisible();
+    });
+  });
 });
