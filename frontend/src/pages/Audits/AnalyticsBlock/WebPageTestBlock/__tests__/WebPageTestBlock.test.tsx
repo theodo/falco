@@ -6,17 +6,22 @@ import {
   queryByTestId,
   render,
 } from '@testing-library/react';
-import { state } from '__fixtures__/state';
 import dayjs from 'dayjs';
 import 'jest-dom/extend-expect';
 import React from 'react';
-import { IntlProvider } from 'react-intl';
+import { addLocaleData, IntlProvider } from 'react-intl';
+import intlfr from 'react-intl/locale-data/fr';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
+
+import { state } from '__fixtures__/state';
+import fr from 'translations/fr.json';
 import WebPageTestBlock from '..';
 
 afterEach(cleanup);
-// eslint-disable-next-line
+addLocaleData(intlfr);
+
+// To remove once we figure out how to pass translations
 const consoleError = console.error.bind(console);
 // eslint-disable-next-line
 console.error = (message: string, ...args: any) => {
@@ -60,76 +65,35 @@ const pageAuditResult = {
   scriptStepNumber: null,
 };
 
-const pageAuditResultIdCompare = '6666';
-const pageAuditResultToCompare = {
-  auditId: pageAuditResultIdCompare,
-  createdAt: pageAuditResultDate,
-  WPTResultsJsonUrl: 'https://www.webpagetest.org/jsonResult.php?test=1',
-  WPTResultsUserUrl: 'https://www.webpagetest.org/result/1/',
-  WPTMetricFirstViewTTI: pageAuditResultValue,
-  WPTMetricRepeatViewTTI: pageAuditResultValue,
-  WPTMetricFirstViewSpeedIndex: pageAuditResultValue,
-  WPTMetricRepeatViewSpeedIndex: pageAuditResultValue,
-  WPTMetricFirstViewFirstPaint: pageAuditResultValue,
-  WPTMetricRepeatViewFirstPaint: pageAuditResultValue,
-  WPTMetricFirstViewFirstMeaningfulPaint: pageAuditResultValue,
-  WPTMetricRepeatViewFirstMeaningfulPaint: pageAuditResultValue,
-  WPTMetricFirstViewLoadTime: pageAuditResultValue,
-  WPTMetricRepeatViewLoadTime: pageAuditResultValue,
-  WPTMetricFirstViewFirstContentfulPaint: pageAuditResultValue,
-  WPTMetricRepeatViewFirstContentfulPaint: pageAuditResultValue,
-  WPTMetricFirstViewTimeToFirstByte: pageAuditResultValue,
-  WPTMetricRepeatViewTimeToFirstByte: pageAuditResultValue,
-  WPTMetricLighthousePerformance: pageAuditResultValue,
-  scriptStepName: null,
-  scriptStepNumber: null,
-};
+const pageAuditResultToCompare = pageAuditResult
+pageAuditResultToCompare.auditId ='6666'
+
 
 describe('WebPageTestBlock', () => {
-  describe('Text renders correctly', () => {
-    test('for title and subtitle', () => {
-      const { container } = render(
-        <Provider store={store}>
-          <IntlProvider locale={'fr'}>
-            <WebPageTestBlock
-              auditResults={[pageAuditResult, pageAuditResultToCompare]}
-              blockMargin=""
-            />
-          </IntlProvider>
-        </Provider>,
-      );
-
-      expect(getByTestId(container, 'title')).toHaveTextContent(
-        'Audits.webpagetest_detailed_results',
-      );
-
-      expect(getByTestId(container, 'subtitle')).toHaveTextContent(
-        'Audits.webpagetest_choose_results',
-      );
-    });
-  });
-
   describe('Date selection block', () => {
-    test('should toggle', () => {
-      const { container } = render(
-        <Provider store={store}>
-          <IntlProvider locale={'fr'}>
-            <WebPageTestBlock
-              auditResults={[pageAuditResult, pageAuditResultToCompare]}
-              blockMargin=""
-            />
-          </IntlProvider>
-        </Provider>,
-      );
-
+    const { container } = render(
+      <Provider store={store}>
+        <IntlProvider locale={'fr'} messages={fr}>
+          <WebPageTestBlock
+            auditResults={[pageAuditResult, pageAuditResultToCompare]}
+            blockMargin=""
+          />
+        </IntlProvider>
+      </Provider>,
+    );
+    test('should be zero then one then zero then one', () => {
+      // Date selection is invisible by default
       expect(queryByTestId(container, 'select-dates-form')).toBeNull();
 
+      // When user selects "specific date" then date selection should be visible
       fireEvent.click(getByDisplayValue(container, 'dateSelector'));
       expect(getByTestId(container, 'select-dates-form')).toBeVisible();
 
+      // If user selects "latest date" then data selectino should hide
       fireEvent.click(getByDisplayValue(container, 'latest'));
       expect(queryByTestId(container, 'select-dates-form')).toBeNull();
 
+      // If user selects "compare dates" then date selection should be visible
       fireEvent.click(getByDisplayValue(container, 'dateComparator'));
       expect(getByTestId(container, 'select-dates-form')).toBeVisible();
     });
