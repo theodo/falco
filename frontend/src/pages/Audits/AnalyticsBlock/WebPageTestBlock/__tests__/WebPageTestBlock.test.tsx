@@ -21,7 +21,7 @@ import WebPageTestBlock from '..';
 afterEach(cleanup);
 addLocaleData(intlfr);
 
-// To remove once we figure out how to pass translations
+// TODO: To remove once we figure out how to pass translations
 const consoleError = console.error.bind(console);
 // eslint-disable-next-line
 console.error = (message: string, ...args: any) => {
@@ -89,7 +89,7 @@ describe('WebPageTestBlock', () => {
       fireEvent.click(getByDisplayValue(container, 'dateSelector'));
       expect(getByTestId(container, 'select-dates-form')).toBeVisible();
 
-      // If user selects "latest date" then data selectino should hide
+      // If user selects "latest date" then data selection should not be present
       fireEvent.click(getByDisplayValue(container, 'latest'));
       expect(queryByTestId(container, 'select-dates-form')).toBeNull();
 
