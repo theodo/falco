@@ -140,11 +140,11 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps & InjectedIntlProps> = 
 
   return (
     <Style.Container margin={blockMargin}>
-      <Style.SubTitle margin={`0 0 ${getSpacing(4)} 0`}>
+      <Style.SubTitle margin={`0 0 ${getSpacing(4)} 0`} data-testid="title">
         <FormattedMessage id="Audits.webpagetest_detailed_results" />
       </Style.SubTitle>
       <Style.Form>
-        <Style.FormLabel>
+        <Style.FormLabel data-testid="subtitle">
           <FormattedMessage id="Audits.webpagetest_choose_results" />
         </Style.FormLabel>
         <Style.FormInputs>
@@ -154,7 +154,7 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps & InjectedIntlProps> = 
         </Style.FormInputs>
       </Style.Form>
       {(dateSelectorDisplayed || dateComparatorDisplayed) && (
-        <Style.Form>
+        <Style.Form data-testid="select-dates-form">
           <Style.FormLabel>
             {dateComparatorDisplayed ? (
               <FormattedMessage id="Audits.webpagetest_select_dates" />
