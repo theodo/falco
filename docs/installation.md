@@ -22,42 +22,21 @@ Go through this once when you install the project, you shouldn't need to do that
   ```bash
   cd falco
   ```
-- Install the backend:
+- Install the backend and the frontend:
   ```bash
-  make backend/install
-  ```
-- Install the frontend:
-  ```bash
-  make frontend/install
-  ```
-- Apply all migrations:
-  ```bash
-  make backend/migrate
+  make install
   ```
 - Ensure backend is started:
   ```bash
   make backend/start
   ```
-- If you have data that you want to import from PostgreSQL backup file:
-  - Connect to local PostgreSQL server:
-    ```bash
-    make db/connect
-    ```
-  - If your script does not include it, for each table *<table_name>* that you will update within public schema, delete all data stored in it:
-    ```sql
-    TRUNCATE TABLE <table_name> CASCADE;
-    ```
-  - Close connection to local PostgreSQL server:
-    ```sql
-    \q
-    ```
-  - Import data from backup file:
-    ```bash
-    docker exec -i falco_db_1 psql -Upostgres < backup_file.sql
-    ```
 - Create an admin account:
   ```bash
   make backend/createsuperuser
+  ```
+- Populate the database with fixtures:
+  ```bash
+  make fixtures/load
   ```
 
 ## Start the app
