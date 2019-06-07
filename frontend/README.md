@@ -13,13 +13,24 @@ The project is structured as follows:
 
 * `src/redux`: Redux actions/reducers/sagas/selectors are all grouped by page in this folder (following the [ducks pattern](https://medium.freecodecamp.org/scaling-your-redux-app-with-ducks-6115955638be)). Learn more about Redux by reading [the documentation](https://redux.js.org/basics).
 
+## Testing
+Once in the frontend folder, run tests with `yarn test`.
+
+Tests should be in a folder `__tests__` inside the folder of the component you want to test.
+
+For component testing we use [React Testing Library](https://testing-library.com/docs/react-testing-library/intro). It allows to simulate user interactions (like clicks) and checks the DOM to ensure if the user sees what he is supposed to see.
+
+We also test reducers, selectors and sagas for the redux cycle.
+
 ## Quick start
 
-Useful commands:
+After `cd frontend` you can use:
 
 * `yarn` to install dependencies
 
-* `yarn start` to start a local dev-server
+* `yarn add [package_name]` to add a package and save it in `package.json`
+
+* `yarn start` to start a local dev-server. The server starts on http://localhost:3000/ but you should actually go to http://localhost:8000/ to access actual local server.
 
 * `yarn build` to build a minified version of the code, for production use!
 
