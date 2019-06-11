@@ -6,7 +6,6 @@ import {
   fontWeight,
   getSpacing,
   lineHeight,
-  responsiveThreshold,
 } from 'stylesheet';
 
 const Styles = {
@@ -20,6 +19,7 @@ const Styles = {
   Input: styled.input`
     box-sizing: border-box;
     width: 100%;
+    padding: 0 ${getSpacing(5)};
     height: 54px;
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.inputText};
@@ -27,9 +27,11 @@ const Styles = {
     color: ${colorUsage.inputText};
     transition: 0.2s all ease-in-out;
     background-color: ${colorUsage.inputTextBackground};
+    border-radius: 6px;
 
     &.active {
-      padding: 27px 0 8px 0;
+      padding-top: 27px;
+      padding-bottom: 8px;
     }
 
     &::placeholder {
@@ -40,7 +42,7 @@ const Styles = {
   Label: styled.label`
     position: absolute;
     top: 27px;
-    left: 0;
+    left: ${getSpacing(5)};
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.inputTextLabel};
     line-height: ${lineHeight.inputTextLabel};

@@ -36,12 +36,10 @@ const Styles = {
     justify-content: space-between;
     border-radius: 6px;
     border: 1px solid ${colorUsage.leadFormBorder};
-    padding-left: ${getSpacing(5)};
 
     @media only screen and (max-width: ${responsiveThreshold}) {
       height: auto;
       flex-wrap: wrap;
-      padding-left: 0;
       border: none;
       justify-content: center;
     }
@@ -52,7 +50,6 @@ const Styles = {
     border-radius: 6px;
     @media only screen and (max-width: ${responsiveThreshold}) {
       border: 1px solid ${colorUsage.leadFormBorder};
-      padding: 0 0 0 ${getSpacing(5)};
       margin: 0 0 ${getSpacing(2)} 0;
     }
   `,
@@ -62,7 +59,6 @@ const Styles = {
   SubmitButton: styled.button`
     position: relative;
     right: -1px;
-    margin-left: ${getSpacing(5)};
     height: 56px;
     white-space: nowrap;
     border-radius: 6px;

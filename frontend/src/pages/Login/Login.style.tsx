@@ -23,11 +23,10 @@ const Styles = {
   `,
 
   InputFieldContainer: styled.div`
-    min-width: 300px;
+    min-width: 350px;
     margin: ${(props: ItemWithMarginProps) => props.margin || '0'};
     border-radius: 6px;
     border: 1px solid ${colorUsage.loginInputBorder};
-    padding: 0 ${getSpacing(5)};
   `,
 
   InputField: styled(Field)``,
