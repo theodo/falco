@@ -79,6 +79,7 @@
     "title": "Projects"
   },
   "Audits": {
+    "title": "Dashboard for the last week",
     "page_or_script_unavailable": "The page or the script you requested seems unavailable for this project.\n\nPlease try again or contact your administrator to solve this issue.",
     "audit_parameters_unavailable": "The audit parameters you requested seem unavailable for this project.\n\nPlease try again or contact your administrator to solve this issue.",
     "no_audit": "No audit data is available for this page/script and for this audits environment.\n\nPlease try again later.",
@@ -169,7 +170,7 @@
     "MetricGraph": {
       "tooltipDate": "On {day} at {time}",
       "metric_info_title": "Details",
-      "expand": "Expand",
+      "expand": "Show all data",
       "close": "Close"
     }
   }
