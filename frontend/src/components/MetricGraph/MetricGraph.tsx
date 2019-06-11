@@ -4,6 +4,7 @@ import MetricTooltip from 'components/MetricTooltip';
 import dayjs from 'dayjs';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import { Information } from 'icons';
+import Expand from 'icons/Expand';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { Area, AreaChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { METRICS } from 'redux/auditResults/constants';
@@ -15,6 +16,7 @@ export interface OwnProps {
   fullscreen: boolean;
   auditResults: AuditResultsAsGraphData;
   metrics: MetricType[];
+  onExpandClick? : (metric: MetricType) => () => void;
 }
 
 type Props = OwnProps & InjectedIntlProps;
@@ -24,11 +26,14 @@ const MetricGraph: React.FunctionComponent<Props> = ({
   auditResults,
   intl,
   metrics,
+  onExpandClick
 }) => {
   const [isMetricInfoTooltipVisible, setIsMetricInfoTooltipVisible] = React.useState(false);
+  const [isExpandTooltipVisible, toggleExpandTooltip] = React.useState(false);
 
   const legendRef = React.useRef<HTMLDivElement>(null);
   const metricInfoIconContainerRef = React.useRef<HTMLDivElement>(null);
+  const expandButtonRef = React.useRef<HTMLDivElement>(null);
 
   const renderLegend = (legendProps: { payload: Array<{ value: MetricType }> }) => {
     const { payload } = legendProps;
@@ -54,6 +59,21 @@ const MetricGraph: React.FunctionComponent<Props> = ({
           >
             <Information color={colorUsage.metricInformationIcon} />
           </Style.MetricInfoIconContainer>
+        )}
+        {!fullscreen && onExpandClick !== undefined && (
+        <Style.ExpandButton
+          onClick={onExpandClick(metrics[0])}
+          onMouseEnter={displayExpandTooltip}
+          onMouseLeave={hideExpandTooltip}
+          ref={expandButtonRef}
+        >
+          <Expand color={colorUsage.graphModalToggleButton} />
+        </Style.ExpandButton>
+        )}
+        {isExpandTooltipVisible && (
+          <MetricTooltip parentRef={legendRef} initiatorRef={expandButtonRef}>
+            <FormattedMessage id={`components.MetricGraph.expand`} />
+          </MetricTooltip>
         )}
         {isMetricInfoTooltipVisible && (
           <MetricTooltip parentRef={legendRef} initiatorRef={metricInfoIconContainerRef}>
@@ -121,6 +141,14 @@ const MetricGraph: React.FunctionComponent<Props> = ({
   const hideMetricInfoTooltip = () => {
     setIsMetricInfoTooltipVisible(false);
     document.removeEventListener('click', hideMetricInfoTooltip);
+  };
+
+  const displayExpandTooltip = () => {
+    toggleExpandTooltip(true);
+  };
+
+  const hideExpandTooltip = () => {
+    toggleExpandTooltip(false);
   };
 
   const axisStyle = {

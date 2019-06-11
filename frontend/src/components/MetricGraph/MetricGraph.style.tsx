@@ -53,6 +53,14 @@ const Style = {
     justify-content: center;
   `,
 
+  ExpandButton: styled.div`
+  position: absolute;
+  align-self: flex-end;
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+`,
+
   TooltipValue: styled.div`
     color: ${colorUsage.graphText};
     font-family: ${fontFamily.mainSans};
