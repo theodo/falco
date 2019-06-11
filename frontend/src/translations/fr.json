@@ -105,11 +105,11 @@
   },
   "Metrics": {
     "WPTMetricFirstViewTTI": {
-      "name": "TTI (First View)",
+      "name": "TTI - Time To Interactive (First View)",
       "description": "Moment où les calculs de CPU et les requêtes réseau deviennent rares (lors de la première visite du site)"
     },
     "WPTMetricRepeatViewTTI": {
-      "name": "TTI (Repeat View)",
+      "name": "TTI - Time To Interactive (Repeat View)",
       "description": "Moment où les calculs de CPU et les requêtes réseau deviennent rares (lorsque l'on retourne sur le site)"
     },
     "WPTMetricFirstViewSpeedIndex": {
