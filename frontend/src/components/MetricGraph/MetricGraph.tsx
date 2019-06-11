@@ -160,10 +160,10 @@ const MetricGraph: React.FunctionComponent<Props> = ({
     fontSize: fullscreen ? `${fontSize.bodyText}` : `${fontSize.smallText}`,
   };
 
-  const oneWeekInMilliseconds = 604800000;
+  const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000;
   const lastWeekDate = auditResults
-    ? auditResults.find(element => {
-        return element.date >= auditResults[auditResults.length - 1].date - oneWeekInMilliseconds;
+    ? auditResults.find(auditResult => {
+        return auditResult.date >= auditResults[auditResults.length - 1].date - oneWeekInMilliseconds;
       })
     : null;
 
