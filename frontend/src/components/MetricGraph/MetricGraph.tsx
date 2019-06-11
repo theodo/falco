@@ -160,12 +160,17 @@ const MetricGraph: React.FunctionComponent<Props> = ({
     fontSize: fullscreen ? `${fontSize.bodyText}` : `${fontSize.smallText}`,
   };
 
+  const today = new Date().getTime();
   const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000;
-  const lastWeekDate = auditResults
+  const sevenDaysAgo = today - oneWeekInMilliseconds;
+  const oldestAuditResultWithinLastWeek = auditResults
     ? auditResults.find(auditResult => {
-        return auditResult.date >= auditResults[auditResults.length - 1].date - oneWeekInMilliseconds;
+        return auditResult.date >= sevenDaysAgo;
       })
     : null;
+  const dateOfOldestAuditResultWithinLastWeek = oldestAuditResultWithinLastWeek
+    ? oldestAuditResultWithinLastWeek.date
+    : sevenDaysAgo;
 
   return (
     <ResponsiveContainer width={'100%'} height={'100%'}>
@@ -194,7 +199,9 @@ const MetricGraph: React.FunctionComponent<Props> = ({
           tickLine={false}
           minTickGap={50}
           domain={
-            showOnlyLastWeek && lastWeekDate ? [lastWeekDate.date, 'dataMax'] : ['dataMin', 'dataMax']
+            showOnlyLastWeek
+              ? [dateOfOldestAuditResultWithinLastWeek, today]
+              : ['dataMin', 'dataMax']
           }
           allowDataOverflow={showOnlyLastWeek}
           interval={'preserveStart'}
