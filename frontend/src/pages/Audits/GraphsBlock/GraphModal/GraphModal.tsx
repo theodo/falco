@@ -60,7 +60,7 @@ const GraphModal: React.FunctionComponent<Props & InjectedIntlProps> = props => 
       >
         <Close color={colorUsage.graphModalToggleButton} />
       </Style.Close>
-      <MetricGraph fullscreen={true} auditResults={auditResults} metrics={[metric]} />
+      <MetricGraph fullscreen={true} auditResults={auditResults} metrics={[metric]} showOnlyLastWeek={false}/>
     </Modal>
   );
 };

@@ -16,7 +16,9 @@ export interface OwnProps {
   fullscreen: boolean;
   auditResults: AuditResultsAsGraphData;
   metrics: MetricType[];
-  onExpandClick?: (metric: MetricType) => () => void;
+
+  onExpandClick? : (metric: MetricType) => () => void;
+  showOnlyLastWeek: boolean;
 }
 
 type Props = OwnProps & InjectedIntlProps;
@@ -27,6 +29,7 @@ const MetricGraph: React.FunctionComponent<Props> = ({
   intl,
   metrics,
   onExpandClick,
+  showOnlyLastWeek,
 }) => {
   const [isMetricInfoTooltipVisible, setIsMetricInfoTooltipVisible] = React.useState(false);
   const [isExpandTooltipVisible, setIsExpandTooltipVisible] = React.useState(false);
@@ -157,6 +160,13 @@ const MetricGraph: React.FunctionComponent<Props> = ({
     fontSize: fullscreen ? `${fontSize.bodyText}` : `${fontSize.smallText}`,
   };
 
+  const oneWeekInMilliseconds = 604800000;
+  const lastWeekDate = auditResults
+    ? auditResults.find(element => {
+        return element.date >= auditResults[auditResults.length - 1].date - oneWeekInMilliseconds;
+      })
+    : null;
+
   return (
     <ResponsiveContainer width={'100%'} height={'100%'}>
       <AreaChart data={auditResults || undefined}>
@@ -176,12 +186,17 @@ const MetricGraph: React.FunctionComponent<Props> = ({
         />
         <XAxis
           width={30}
+          type="number"
           dataKey="date"
           tickFormatter={tickItem => dayjs(tickItem).format('DD/MM')}
           tick={axisStyle}
           axisLine={false}
           tickLine={false}
           minTickGap={50}
+          domain={
+            showOnlyLastWeek && lastWeekDate ? [lastWeekDate.date, 'dataMax'] : ['dataMin', 'dataMax']
+          }
+          allowDataOverflow={showOnlyLastWeek}
           interval={'preserveStart'}
         />
         <Tooltip content={renderTooltip} cursor={{ stroke: colorUsage.graphTooltipCursor }} />
