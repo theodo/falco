@@ -1,0 +1,38 @@
+{# Inspired from https://medium.com/@hakibenita/how-to-add-custom-action-buttons-to-django-admin-8d266f5b0d41#}
+
+
+{% extends "admin/change_form.html" %}
+{% load i18n admin_static admin_modify %}
+{% block content %}
+<div id="content-main">
+  <form action="" method="POST">
+    {% csrf_token %}
+    {% if form.non_field_errors|length > 0 %}
+      <p class="errornote">
+          Please correct the errors below.
+      </p>
+      {{ form.non_field_errors }}
+    {% endif %}
+    <fieldset class="module aligned">
+      {% for field in form %}
+        <div class="form-row">
+          {{ field.errors }}
+          {{ field.label_tag }}
+          {{ field }}
+          {% if field.field.help_text %}
+          <p class="help">
+            {{ field.field.help_text|safe }}
+          </p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </fieldset>
+    <div class="submit-row">
+      <a href="{% url 'admin:projects_project_changelist' %}">
+          <input type="button" name="Cancel" value="Cancel">
+      </a>
+      <input type="submit" class="default" value="Submit" />
+    </div>
+  </form>
+</div>
+{% endblock %}

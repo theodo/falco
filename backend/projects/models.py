@@ -81,6 +81,9 @@ class ProjectAuditParameters(BaseModel):
         Project, related_name="audit_parameters_list", on_delete=models.CASCADE
     )
 
+    def __str__(self):
+        return self.name
+
 
 class Script(BaseModel):
     name = models.CharField(max_length=100)
@@ -88,6 +91,9 @@ class Script(BaseModel):
     project = models.ForeignKey(
         Project, related_name="scripts", on_delete=models.CASCADE
     )
+
+    def __str__(self):
+        return self.name
 
 
 class ScriptForm(forms.ModelForm):
