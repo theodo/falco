@@ -38,3 +38,4 @@ Developers (see [contributors](../../graphs/contributors)):
 - **Nicolas Goutay** (nicolasgo@theodo.fr)
 - **Etienne Grall** (etienneg@theodo.fr)
 - **Vincent Larrat** (vincentla@theodo.fr)
+- **François Farge** (francoisf@theodo.fr)
