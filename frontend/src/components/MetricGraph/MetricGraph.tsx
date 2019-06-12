@@ -29,7 +29,7 @@ const MetricGraph: React.FunctionComponent<Props> = ({
   onExpandClick
 }) => {
   const [isMetricInfoTooltipVisible, setIsMetricInfoTooltipVisible] = React.useState(false);
-  const [isExpandTooltipVisible, toggleExpandTooltip] = React.useState(false);
+  const [isExpandTooltipVisible, setIsExpandTooltipVisible] = React.useState(false);
 
   const legendRef = React.useRef<HTMLDivElement>(null);
   const metricInfoIconContainerRef = React.useRef<HTMLDivElement>(null);
@@ -144,11 +144,11 @@ const MetricGraph: React.FunctionComponent<Props> = ({
   };
 
   const displayExpandTooltip = () => {
-    toggleExpandTooltip(true);
+    setIsExpandTooltipVisible(true);
   };
 
   const hideExpandTooltip = () => {
-    toggleExpandTooltip(false);
+    setIsExpandTooltipVisible(false);
   };
 
   const axisStyle = {
