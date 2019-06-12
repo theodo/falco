@@ -16,7 +16,7 @@ export interface OwnProps {
   fullscreen: boolean;
   auditResults: AuditResultsAsGraphData;
   metrics: MetricType[];
-  onExpandClick? : (metric: MetricType) => () => void;
+  onExpandClick?: (metric: MetricType) => () => void;
 }
 
 type Props = OwnProps & InjectedIntlProps;
@@ -26,7 +26,7 @@ const MetricGraph: React.FunctionComponent<Props> = ({
   auditResults,
   intl,
   metrics,
-  onExpandClick
+  onExpandClick,
 }) => {
   const [isMetricInfoTooltipVisible, setIsMetricInfoTooltipVisible] = React.useState(false);
   const [isExpandTooltipVisible, setIsExpandTooltipVisible] = React.useState(false);
@@ -47,28 +47,28 @@ const MetricGraph: React.FunctionComponent<Props> = ({
         key={index}
         ref={legendRef}
       >
-        <Style.LegendTitle fullscreen={fullscreen}>
-          {intl.formatMessage({ id: `Metrics.${entry.value}.name` })}
-        </Style.LegendTitle>
-        {!fullscreen && (
-          <Style.MetricInfoIconContainer
-            title={intl.formatMessage({ id: `components.MetricGraph.metric_info_title` })}
-            margin={`0 0 0 ${getSpacing(2)}`}
-            onClick={toggleMetricInfoTooltipVisibility}
-            ref={metricInfoIconContainerRef}
-          >
-            <Information color={colorUsage.metricInformationIcon} />
-          </Style.MetricInfoIconContainer>
-        )}
+          <Style.LegendTitle fullscreen={fullscreen}>
+            {intl.formatMessage({ id: `Metrics.${entry.value}.name` })}
+          </Style.LegendTitle>
+          {!fullscreen && (
+            <Style.MetricInfoIconContainer
+              title={intl.formatMessage({ id: `components.MetricGraph.metric_info_title` })}
+              margin={`0 0 0 ${getSpacing(2)}`}
+              onClick={toggleMetricInfoTooltipVisibility}
+              ref={metricInfoIconContainerRef}
+            >
+              <Information color={colorUsage.metricInformationIcon} />
+            </Style.MetricInfoIconContainer>
+          )}
         {!fullscreen && onExpandClick !== undefined && (
-        <Style.ExpandButton
-          onClick={onExpandClick(metrics[0])}
-          onMouseEnter={displayExpandTooltip}
-          onMouseLeave={hideExpandTooltip}
-          ref={expandButtonRef}
-        >
-          <Expand color={colorUsage.graphModalToggleButton} />
-        </Style.ExpandButton>
+          <Style.ExpandButton
+            onClick={onExpandClick(metrics[0])}
+            onMouseEnter={displayExpandTooltip}
+            onMouseLeave={hideExpandTooltip}
+            ref={expandButtonRef}
+          >
+            <Expand color={colorUsage.graphModalToggleButton} />
+          </Style.ExpandButton>
         )}
         {isExpandTooltipVisible && (
           <MetricTooltip parentRef={legendRef} initiatorRef={expandButtonRef}>
