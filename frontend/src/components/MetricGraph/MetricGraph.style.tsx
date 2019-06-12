@@ -54,11 +54,10 @@ const Style = {
   `,
 
   ExpandButton: styled.div`
-    position: absolute;
-    align-self: flex-end;
     cursor: pointer;
     height: 20px;
     width: 20px;
+    margin-left: auto
   `,
 
   TooltipValue: styled.div`
