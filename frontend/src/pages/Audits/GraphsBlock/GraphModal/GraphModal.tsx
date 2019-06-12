@@ -5,8 +5,17 @@ import Modal from 'react-modal';
 import MetricGraph from 'components/MetricGraph';
 import Close from 'icons/Close';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
+import { PageType, ProjectType, ScriptType } from 'redux/projects/types';
 import { colorUsage } from 'stylesheet';
 import Style from './GraphModal.style';
+
+export interface OwnProps {
+  auditParametersId: string | null;
+  project?: ProjectType;
+  page?: PageType;
+  script?: ScriptType;
+}
+
 
 interface Props {
   metric: MetricType;
@@ -15,8 +24,23 @@ interface Props {
   close: () => void;
 }
 
-const GraphModal: React.FunctionComponent<Props & InjectedIntlProps> = props => {
-  const { auditResults, metric, show, close, intl } = props;
+const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> = props => {
+  const { auditResults, metric, show, close, intl, auditParametersId, project, page, script } = props;
+
+  if (!project) {
+    return null;
+  }
+
+  const pageOrScriptName = page ? page.name : script ? script.name : undefined;
+  const auditParametersSelectOptions = project.auditParametersList.map(auditParameters => ({
+    value: auditParameters.uuid,
+    label: auditParameters.name,
+  }));
+  const currentAuditParameter = auditParametersSelectOptions.find(auditParametersOption => {
+    return auditParametersOption.value === auditParametersId;
+  });
+
+  const currentAuditParameterName = currentAuditParameter ? currentAuditParameter.label : "";
 
   const modalStyles = {
     content: {
@@ -54,6 +78,16 @@ const GraphModal: React.FunctionComponent<Props & InjectedIntlProps> = props => 
       onAfterClose={handleModalClose}
       appElement={document.querySelector('#root') as HTMLElement}
     >
+      {
+        project && pageOrScriptName && (
+          <div>
+            <Style.PageTitle>
+              {project.name + ' / ' + pageOrScriptName}
+            </Style.PageTitle>
+            <Style.PageSubTitle>{currentAuditParameterName}</Style.PageSubTitle>
+          </div>
+        )
+      }
       <Style.Close
         title={intl.formatMessage({ id: `components.MetricGraph.close` })}
         onClick={close}
