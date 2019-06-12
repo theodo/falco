@@ -22,15 +22,6 @@ const Style = {
     border: 1px solid ${colorUsage.graphBorder};
   `,
 
-  ExpandButton: styled.div`
-    position: relative;
-    top: -190px;
-    right: -355px;
-    cursor: pointer;
-    height: 20px;
-    width: 20px;
-  `,
-
   GraphSettingsContainer: styled.div`
     height: 190px;
     width: 380px;

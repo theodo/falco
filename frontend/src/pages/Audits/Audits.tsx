@@ -246,7 +246,7 @@ export const Audits: React.FunctionComponent<Props> = ({
           />
         )}
       </Style.PageTitleBlock>
-      <Style.Title>Dashboard</Style.Title>
+      <Style.Title><FormattedMessage id="Audits.title" /></Style.Title>
       {script && 0 !== scriptStepSelectOptions.length && (
         <Style.ScriptStepBlock>
           <Style.ScriptStepBlockTitle>
