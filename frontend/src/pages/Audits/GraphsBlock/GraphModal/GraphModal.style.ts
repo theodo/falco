@@ -32,5 +32,3 @@ export const PageSubTitle = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
 `;
-
-export const PageTitleContainer = styled.div``;

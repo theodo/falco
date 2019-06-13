@@ -8,7 +8,7 @@ import Close from 'icons/Close';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
 import { PageType, ProjectType, ScriptType } from 'redux/projects/types';
 import { colorUsage } from 'stylesheet';
-import { CloseContainer, PageSubTitle, PageTitle, PageTitleContainer } from './GraphModal.style';
+import { CloseContainer, PageSubTitle, PageTitle } from './GraphModal.style';
 
 export interface OwnProps {
   auditParametersId: string | null;
@@ -87,12 +87,12 @@ const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> 
       onAfterClose={handleModalClose}
       appElement={document.querySelector('#root') as HTMLElement}
     >
-      <PageTitleContainer>
+      <>
         <PageTitle>
           {project.name + ' / ' + pageOrScriptName}
         </PageTitle>
         <PageSubTitle>{currentAuditParameterName}</PageSubTitle>
-      </PageTitleContainer>
+      </>
       <CloseContainer
         title={intl.formatMessage({ id: `components.MetricGraph.close` })}
         onClick={close}
