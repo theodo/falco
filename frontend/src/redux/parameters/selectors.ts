@@ -30,6 +30,11 @@ export const getCurrentPage = (state: RootStateWithRouter): PageType | null => {
   )
 }
 
+export const getCurrentPageName = (state: RootStateWithRouter): string => {
+  const currentPage = getCurrentPage(state);
+  return currentPage ? currentPage.name : "";
+}
+
 export const getCurrentScriptId = (state: RootState): string | null => {
   return state.parameters.currentScriptId;
 };
@@ -42,6 +47,11 @@ export const getCurrentScript = (state: RootStateWithRouter): ScriptType | null 
       ? modelizeScripts(state.projects.byId[currentProjectId].scripts)[currentScriptId]
       : null
   )
+}
+
+export const getCurrentScriptName = (state: RootStateWithRouter): string => {
+  const currentScript = getCurrentScript(state);
+  return currentScript ? currentScript.name : "";
 }
 
 export const getCurrentScriptStepId = (state: RootState): string | null => {

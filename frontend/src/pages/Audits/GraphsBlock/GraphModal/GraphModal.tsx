@@ -13,8 +13,8 @@ import { CloseContainer, PageSubTitle, PageTitle, PageTitleContainer } from './G
 export interface OwnProps {
   auditParametersId: string | null;
   project?: ProjectType;
-  page: PageType | null;
-  script: ScriptType | null;
+  pageName: string;
+  scriptName: string;
 }
 
 
@@ -25,7 +25,7 @@ interface Props {
   close: () => void;
 }
 
-const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> = ({ auditResults, metric, show, close, intl, auditParametersId, project, page, script }) => {
+const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> = ({ auditResults, metric, show, close, intl, auditParametersId, project, pageName, scriptName }) => {
 
   if (!project) {
     return (
@@ -35,7 +35,7 @@ const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> 
     );
   }
 
-  if (!page && !script) {
+  if (!pageName && !scriptName) {
     return (
       <ErrorMessage>
         <FormattedMessage id="Projects.no_page_or_script_error" />
@@ -43,7 +43,7 @@ const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> 
     );
   }
 
-  const pageOrScriptName = page ? page.name : script ? script.name : "";
+  const pageOrScriptName = pageName || scriptName;
 
   const currentAuditParameter = project.auditParametersList.find(auditParametersOption => {
     return auditParametersOption.uuid === auditParametersId;
