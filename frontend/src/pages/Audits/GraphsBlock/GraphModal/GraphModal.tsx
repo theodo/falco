@@ -1,13 +1,14 @@
 import React from 'react';
-import { InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import Modal from 'react-modal';
 
+import ErrorMessage from 'components/ErrorMessage';
 import MetricGraph from 'components/MetricGraph';
 import Close from 'icons/Close';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
 import { PageType, ProjectType, ScriptType } from 'redux/projects/types';
 import { colorUsage } from 'stylesheet';
-import Style from './GraphModal.style';
+import { CloseContainer, PageSubTitle, PageTitle, PageTitleContainer } from './GraphModal.style';
 
 export interface OwnProps {
   auditParametersId: string | null;
@@ -24,23 +25,31 @@ interface Props {
   close: () => void;
 }
 
-const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> = props => {
-  const { auditResults, metric, show, close, intl, auditParametersId, project, page, script } = props;
+const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> = ({ auditResults, metric, show, close, intl, auditParametersId, project, page, script }) => {
 
   if (!project) {
-    return null;
+    return (
+      <ErrorMessage>
+        <FormattedMessage id="Projects.no_project_error" />
+      </ErrorMessage>
+    );
   }
 
-  const pageOrScriptName = page ? page.name : script ? script.name : undefined;
-  const auditParametersSelectOptions = project.auditParametersList.map(auditParameters => ({
-    value: auditParameters.uuid,
-    label: auditParameters.name,
-  }));
-  const currentAuditParameter = auditParametersSelectOptions.find(auditParametersOption => {
-    return auditParametersOption.value === auditParametersId;
+  if (!page && !script) {
+    return (
+      <ErrorMessage>
+        <FormattedMessage id="Projects.no_page_or_script_error" />
+      </ErrorMessage>
+    );
+  }
+
+  const pageOrScriptName = page ? page.name : script ? script.name : "";
+
+  const currentAuditParameter = project.auditParametersList.find(auditParametersOption => {
+    return auditParametersOption.uuid === auditParametersId;
   });
 
-  const currentAuditParameterName = currentAuditParameter ? currentAuditParameter.label : "";
+  const currentAuditParameterName = currentAuditParameter ? currentAuditParameter.name : "";
 
   const modalStyles = {
     content: {
@@ -78,23 +87,19 @@ const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> 
       onAfterClose={handleModalClose}
       appElement={document.querySelector('#root') as HTMLElement}
     >
-      {
-        project && pageOrScriptName && (
-          <div>
-            <Style.PageTitle>
-              {project.name + ' / ' + pageOrScriptName}
-            </Style.PageTitle>
-            <Style.PageSubTitle>{currentAuditParameterName}</Style.PageSubTitle>
-          </div>
-        )
-      }
-      <Style.Close
+      <PageTitleContainer>
+        <PageTitle>
+          {project.name + ' / ' + pageOrScriptName}
+        </PageTitle>
+        <PageSubTitle>{currentAuditParameterName}</PageSubTitle>
+      </PageTitleContainer>
+      <CloseContainer
         title={intl.formatMessage({ id: `components.MetricGraph.close` })}
         onClick={close}
       >
         <Close color={colorUsage.graphModalToggleButton} />
-      </Style.Close>
-      <MetricGraph fullscreen={true} auditResults={auditResults} metrics={[metric]} showOnlyLastWeek={false}/>
+      </CloseContainer>
+      <MetricGraph fullscreen={true} auditResults={auditResults} metrics={[metric]} showOnlyLastWeek={false} />
     </Modal>
   );
 };

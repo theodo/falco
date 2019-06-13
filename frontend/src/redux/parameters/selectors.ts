@@ -22,11 +22,12 @@ export const getCurrentPageId = (state: RootState): string | null => {
 
 export const getCurrentPage = (state: RootStateWithRouter): PageType | undefined => {
   const currentPageId = getCurrentPageId(state);
+  const currentProjectId = getCurrentProjectId(state);
   return (
-    state.projects.byId && state.projects.byId[getCurrentProjectId(state)] && currentPageId
-    ? modelizePages(state.projects.byId[getCurrentProjectId(state)].pages)[currentPageId]
-    : undefined
-    )
+    state.projects.byId && state.projects.byId[currentProjectId] && currentPageId
+      ? modelizePages(state.projects.byId[currentProjectId].pages)[currentPageId]
+      : undefined
+  )
 }
 
 export const getCurrentScriptId = (state: RootState): string | null => {
@@ -35,11 +36,12 @@ export const getCurrentScriptId = (state: RootState): string | null => {
 
 export const getCurrentScript = (state: RootStateWithRouter): ScriptType | undefined => {
   const currentScriptId = getCurrentScriptId(state);
+  const currentProjectId = getCurrentProjectId(state);
   return (
-    state.projects.byId && state.projects.byId[getCurrentProjectId(state)] && currentScriptId
-    ? modelizeScripts(state.projects.byId[getCurrentProjectId(state)].scripts)[currentScriptId]
-    : undefined
-    )
+    state.projects.byId && state.projects.byId[currentProjectId] && currentScriptId
+      ? modelizeScripts(state.projects.byId[currentProjectId].scripts)[currentScriptId]
+      : undefined
+  )
 }
 
 export const getCurrentScriptStepId = (state: RootState): string | null => {
