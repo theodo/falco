@@ -20,13 +20,13 @@ export const getCurrentPageId = (state: RootState): string | null => {
   return state.parameters.currentPageId;
 };
 
-export const getCurrentPage = (state: RootStateWithRouter): PageType | undefined => {
+export const getCurrentPage = (state: RootStateWithRouter): PageType | null => {
   const currentPageId = getCurrentPageId(state);
   const currentProjectId = getCurrentProjectId(state);
   return (
     state.projects.byId && state.projects.byId[currentProjectId] && currentPageId
       ? modelizePages(state.projects.byId[currentProjectId].pages)[currentPageId]
-      : undefined
+      : null
   )
 }
 
@@ -34,13 +34,13 @@ export const getCurrentScriptId = (state: RootState): string | null => {
   return state.parameters.currentScriptId;
 };
 
-export const getCurrentScript = (state: RootStateWithRouter): ScriptType | undefined => {
+export const getCurrentScript = (state: RootStateWithRouter): ScriptType | null => {
   const currentScriptId = getCurrentScriptId(state);
   const currentProjectId = getCurrentProjectId(state);
   return (
     state.projects.byId && state.projects.byId[currentProjectId] && currentScriptId
       ? modelizeScripts(state.projects.byId[currentProjectId].scripts)[currentScriptId]
-      : undefined
+      : null
   )
 }
 

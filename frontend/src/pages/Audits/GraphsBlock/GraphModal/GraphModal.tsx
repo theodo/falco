@@ -13,8 +13,8 @@ import { CloseContainer, PageSubTitle, PageTitle, PageTitleContainer } from './G
 export interface OwnProps {
   auditParametersId: string | null;
   project?: ProjectType;
-  page?: PageType;
-  script?: ScriptType;
+  page: PageType | null;
+  script: ScriptType | null;
 }
 
 
