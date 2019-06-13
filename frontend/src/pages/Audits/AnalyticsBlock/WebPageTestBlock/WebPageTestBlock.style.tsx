@@ -1,5 +1,13 @@
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
+import {
+  colorUsage,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  getSpacing,
+  lineHeight,
+  zIndex,
+} from 'stylesheet';
 
 interface ItemWithMarginProps {
   margin?: string;
@@ -112,7 +120,7 @@ Style.RadioButton = styled.input`
   position: relative;
   left: 16px;
   opacity: 0;
-  z-index: 1;
+  z-index: ${zIndex.webPageTestRadioButton};
   width: 16px;
   height: 16px;
   &:checked + ${Style.RadioButtonLabel} {

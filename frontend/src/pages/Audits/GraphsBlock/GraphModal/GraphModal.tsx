@@ -7,7 +7,7 @@ import MetricGraph from 'components/MetricGraph';
 import Close from 'icons/Close';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
 import { PageType, ProjectType, ScriptType } from 'redux/projects/types';
-import { colorUsage } from 'stylesheet';
+import { colorUsage, zIndex } from 'stylesheet';
 import { CloseContainer, PageSubTitle, PageTitle } from './GraphModal.style';
 
 export interface OwnProps {
@@ -17,7 +17,6 @@ export interface OwnProps {
   scriptName: string;
 }
 
-
 interface Props {
   metric: MetricType;
   auditResults: AuditResultsAsGraphData;
@@ -25,8 +24,17 @@ interface Props {
   close: () => void;
 }
 
-const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> = ({ auditResults, metric, show, close, intl, auditParametersId, project, pageName, scriptName }) => {
-
+const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> = ({
+  auditResults,
+  metric,
+  show,
+  close,
+  intl,
+  auditParametersId,
+  project,
+  pageName,
+  scriptName,
+}) => {
   if (!project) {
     return (
       <ErrorMessage>
@@ -49,7 +57,7 @@ const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> 
     return auditParametersOption.uuid === auditParametersId;
   });
 
-  const currentAuditParameterName = currentAuditParameter ? currentAuditParameter.name : "";
+  const currentAuditParameterName = currentAuditParameter ? currentAuditParameter.name : '';
 
   const modalStyles = {
     content: {
@@ -65,7 +73,7 @@ const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> 
       boxShadow: `0 0 8px 4px ${colorUsage.metricsModalShadow}`,
     },
     overlay: {
-      zIndex: 3,
+      zIndex: `${zIndex.modal}`,
     },
   };
 
@@ -88,9 +96,7 @@ const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> 
       appElement={document.querySelector('#root') as HTMLElement}
     >
       <>
-        <PageTitle>
-          {project.name + ' / ' + pageOrScriptName}
-        </PageTitle>
+        <PageTitle>{project.name + ' / ' + pageOrScriptName}</PageTitle>
         <PageSubTitle>{currentAuditParameterName}</PageSubTitle>
       </>
       <CloseContainer
@@ -99,7 +105,12 @@ const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> 
       >
         <Close color={colorUsage.graphModalToggleButton} />
       </CloseContainer>
-      <MetricGraph fullscreen={true} auditResults={auditResults} metrics={[metric]} showOnlyLastWeek={false} />
+      <MetricGraph
+        fullscreen={true}
+        auditResults={auditResults}
+        metrics={[metric]}
+        showOnlyLastWeek={false}
+      />
     </Modal>
   );
 };

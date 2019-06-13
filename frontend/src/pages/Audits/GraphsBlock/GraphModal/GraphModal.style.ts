@@ -1,5 +1,13 @@
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
+import {
+  colorUsage,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  getSpacing,
+  lineHeight,
+  zIndex,
+} from 'stylesheet';
 
 export const CloseContainer = styled.div`
   position: absolute;
@@ -8,7 +16,7 @@ export const CloseContainer = styled.div`
   width: 30px;
   height: 30px;
   cursor: pointer;
-  z-index: 1;
+  z-index: ${zIndex.graphModalCloseButton};
 `;
 
 export const PageTitle = styled.div`

@@ -1,5 +1,13 @@
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
+import {
+  colorUsage,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  getSpacing,
+  lineHeight,
+  zIndex,
+} from 'stylesheet';
 
 interface MetricTooltipProps {
   top?: string | null;
@@ -21,7 +29,7 @@ const Style = {
     font-size: ${fontSize.metricTooltip};
     line-height: ${lineHeight.metricTooltip};
     font-weight: ${fontWeight.metricTooltip};
-    z-index: 1;
+    z-index: ${zIndex.tooltip};
   `,
 };
 export default Style;

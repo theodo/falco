@@ -1,6 +1,14 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
+import {
+  colorUsage,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  getSpacing,
+  lineHeight,
+  zIndex,
+} from 'stylesheet';
 
 interface MenuArrowContainerProps {
   margin?: string;
@@ -10,7 +18,7 @@ const StyledMenu = {
   Container: styled.div`
     position: fixed;
     top: 100px;
-    z-index: 1;
+    z-index: ${zIndex.menu};
     background-color: ${colorUsage.menuBackground};
     padding-left: ${getSpacing(22)};
     padding-top: ${getSpacing(4)};

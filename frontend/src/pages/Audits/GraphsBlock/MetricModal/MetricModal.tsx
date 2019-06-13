@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 
 import { METRICS } from 'redux/auditResults/constants';
 import { MetricType } from 'redux/auditResults/types';
-import { colorUsage, getSpacing } from 'stylesheet';
+import { colorUsage, getSpacing, zIndex } from 'stylesheet';
 import Style from './MetricModal.style';
 import MetricName from './MetricName';
 
@@ -40,7 +40,7 @@ const MetricModal: React.FunctionComponent<Props> = ({
       overflow: 'visible',
     },
     overlay: {
-      zIndex: 3,
+      zIndex: `${zIndex.modal}`,
     },
   };
 

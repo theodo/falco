@@ -304,6 +304,23 @@ export const fontStyle = {
   inputErrorMessage: 'italic',
 };
 
+export const zIndex = {
+  // General
+  modal: '3',
+  header: '2',
+  menu: '1',
+  tooltip: '1',
+
+  // Graphs
+  graphModalCloseButton: '1',
+
+  // Metrics
+  metricModalCheckbox: '1',
+
+  // WebPageTest
+  webPageTestRadioButton: '1',
+};
+
 export const getSpacing = (multiplier: number): string =>
   `${multiplier * SPACING_UNIT}${MEASUREMENT_UNIT}`;
 

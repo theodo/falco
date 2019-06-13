@@ -1,5 +1,13 @@
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
+import {
+  colorUsage,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  getSpacing,
+  lineHeight,
+  zIndex,
+} from 'stylesheet';
 
 interface ItemWithMarginProps {
   margin?: string;
@@ -92,7 +100,7 @@ Style.ModalCheckbox = styled.input`
   position: relative;
   left: 18px;
   opacity: 0;
-  z-index: 1;
+  z-index: ${zIndex.metricModalCheckbox};
   width: 18px;
   height: 18px;
   cursor: pointer;
