@@ -12,7 +12,7 @@ import { PageType, ScriptType } from 'redux/projects/types';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
 import AnalyticsBlock from './AnalyticsBlock';
-import Style from './Audits.style';
+import { Container, PageTitle, PageTitleBlock, ScriptStepBlock, ScriptStepBlockTitle, Title } from './Audits.style';
 import GraphsBlock from './GraphsBlock';
 
 interface ScriptStepOption {
@@ -106,19 +106,19 @@ export const Audits: React.FunctionComponent<Props> = ({
 
   if (project === undefined) {
     return (
-      <Style.Container>
+      <Container>
         <Loader />
-      </Style.Container>
+      </Container>
     );
   }
 
   if (project === null) {
     return (
-      <Style.Container>
+      <Container>
         <ErrorMessage>
           <FormattedMessage id="Project.project_error" />
         </ErrorMessage>
-      </Style.Container>
+      </Container>
     );
   }
 
@@ -127,41 +127,41 @@ export const Audits: React.FunctionComponent<Props> = ({
     (!project.scripts || 0 === project.scripts.length)
   ) {
     return (
-      <Style.Container>
+      <Container>
         <ErrorMessage>
           <FormattedMessage id="Project.no_page_or_script_error" />
         </ErrorMessage>
-      </Style.Container>
+      </Container>
     );
   }
 
   if (!page && !script) {
     return (
-      <Style.Container>
+      <Container>
         <ErrorMessage>
           <FormattedMessage id="Audits.page_or_script_unavailable" />
         </ErrorMessage>
-      </Style.Container>
+      </Container>
     );
   }
 
   if (0 === project.auditParametersList.length) {
     return (
-      <Style.Container>
+      <Container>
         <ErrorMessage>
           <FormattedMessage id="Project.no_audit_parameters_error" />
         </ErrorMessage>
-      </Style.Container>
+      </Container>
     );
   }
 
   if (!auditParameters[auditParametersId]) {
     return (
-      <Style.Container>
+      <Container>
         <ErrorMessage>
           <FormattedMessage id="Audits.audit_parameters_unavailable" />
         </ErrorMessage>
-      </Style.Container>
+      </Container>
     );
   }
 
@@ -210,10 +210,10 @@ export const Audits: React.FunctionComponent<Props> = ({
   const sortedAuditResultsIds = page
     ? sortedPageAuditResultsIds
     : script && sortedScriptAuditResultsIds
-    ? scriptStepId && sortedScriptAuditResultsIds[scriptStepId]
-      ? sortedScriptAuditResultsIds[scriptStepId]
-      : []
-    : null;
+      ? scriptStepId && sortedScriptAuditResultsIds[scriptStepId]
+        ? sortedScriptAuditResultsIds[scriptStepId]
+        : []
+      : null;
 
   const scriptStepSelectOptions = Object.keys(scriptSteps).map(scriptStepKey => ({
     value: scriptStepKey,
@@ -234,9 +234,9 @@ export const Audits: React.FunctionComponent<Props> = ({
   };
 
   return (
-    <Style.Container>
-      <Style.PageTitleBlock>
-        <Style.PageTitle>{project.name + ' / ' + pageOrScriptName}</Style.PageTitle>
+    <Container>
+      <PageTitleBlock>
+        <PageTitle>{project.name + ' / ' + pageOrScriptName}</PageTitle>
         {(page || script) && (
           <Badge
             backgroundColor={badgeParams.backgroundColor}
@@ -245,13 +245,13 @@ export const Audits: React.FunctionComponent<Props> = ({
             text={badgeParams.text}
           />
         )}
-      </Style.PageTitleBlock>
-      <Style.Title><FormattedMessage id="Audits.title" /></Style.Title>
+      </PageTitleBlock>
+      <Title><FormattedMessage id="Audits.title" /></Title>
       {script && 0 !== scriptStepSelectOptions.length && (
-        <Style.ScriptStepBlock>
-          <Style.ScriptStepBlockTitle>
+        <ScriptStepBlock>
+          <ScriptStepBlockTitle>
             <FormattedMessage id="Audits.script_step_selection" />
-          </Style.ScriptStepBlockTitle>
+          </ScriptStepBlockTitle>
           <Select
             defaultValue={scriptStepSelectOptions.find(scriptStepOption => {
               return scriptStepOption.value === scriptStepId;
@@ -260,16 +260,16 @@ export const Audits: React.FunctionComponent<Props> = ({
             options={scriptStepSelectOptions}
             margin={`0 0 ${getSpacing(4)} 0`}
           />
-        </Style.ScriptStepBlock>
+        </ScriptStepBlock>
       )}
       <GraphsBlock blockMargin={`0 0 ${getSpacing(8)} 0`} auditResultIds={sortedAuditResultsIds} />
-      <Style.Title>
+      <Title>
         <FormattedMessage id="Audits.webpagetest_analysis" />
-      </Style.Title>
+      </Title>
       <AnalyticsBlock
         blockMargin={`0 0 ${getSpacing(8)} 0`}
         auditResultIds={sortedAuditResultsIds}
       />
-    </Style.Container>
+    </Container>
   );
 };
