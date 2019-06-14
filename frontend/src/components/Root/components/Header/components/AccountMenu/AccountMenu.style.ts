@@ -63,6 +63,10 @@ const StyledAccountMenu = {
       font-weight: ${fontWeight.accountMenuActionItemHoverText};
     }
   `,
+
+  WhatsNewLink: styled.a`
+    all: unset;
+  `,
 };
 
 export default StyledAccountMenu;
