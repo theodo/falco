@@ -215,10 +215,11 @@ export const Audits: React.FunctionComponent<Props> = ({
         : []
       : null;
 
-  const scriptStepSelectOptions = Object.keys(scriptSteps).map(scriptStepKey => ({
-    value: scriptStepKey,
-    label: scriptStepKey + ' : ' + scriptSteps[scriptStepKey],
-  }));
+  const scriptStepSelectOptions = Object.keys(scriptSteps)
+    .map(scriptStepKey => ({
+      value: scriptStepKey,
+      label: scriptStepKey || 0 + ' : ' + scriptSteps[scriptStepKey] || "Unknown step",
+    }));
 
   const handleScriptStepSelection = (selectedOption: ValueType<ScriptStepOption | {}>) => {
     // Check needed to avoid TS2339 error
