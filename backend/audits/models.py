@@ -2,6 +2,7 @@ from enum import Enum
 from core.models import BaseModel
 from django.db import models
 from projects.models import Page, ProjectAuditParameters, Script
+from django.utils import timezone
 
 
 class AvailableStatuses(Enum):  # A subclass of Enum
@@ -32,7 +33,11 @@ class Audit(BaseModel):
         elif self.script is not None:
             project_name = self.script.project.name
             audit_name = self.script.name
-        return "%s — %s | % s" % (project_name, audit_name, self.created_at)
+        return "%s — %s | % s" % (
+            project_name,
+            audit_name,
+            timezone.localtime(self.created_at),
+        )
 
 
 class AuditStatusHistory(BaseModel):
