@@ -55,8 +55,12 @@ export const colorUsage = {
   link: colorPalette.primary500,
   loader: colorPalette.primary500,
   defaultContentBackground: colorPalette.white500,
+
+  // Popin
   popinErrorText: colorPalette.red500,
   popinErrorBackground: colorPalette.red200,
+
+  // Button
   cancelButtonText: colorPalette.primary500,
   cancelButtonBorder: colorPalette.primary500,
   cancelButtonBackground: colorPalette.transparent,
@@ -64,9 +68,13 @@ export const colorUsage = {
   validateButtonBackground: colorPalette.primary500,
   submitButtonText: colorPalette.white500,
   submitButtonBackground: colorPalette.primary500,
+
+  // Checkbox
   checkboxBorder: colorPalette.grey500,
   checkboxColor: colorPalette.primary500,
   checkboxBackground: colorPalette.white500,
+
+  // Input
   inputText: colorPalette.grey800,
   inputTextPlaceholder: colorPalette.grey800,
   inputTextFocused: colorPalette.primary500,
@@ -187,9 +195,7 @@ export const fontSize = {
   smallText: '10px',
   logoText: '26px',
   link: '14px',
-  submitButton: '14px',
-  cancelButton: '14px',
-  validateButton: '14px',
+  button: '14px',
   inputText: '14px',
   inputTextPlaceholder: '14px',
   inputTextLabel: '12px',
@@ -230,9 +236,7 @@ export const lineHeight = {
   smallText: '15px',
   link: '20px',
   logoText: '34px',
-  submitButton: '18px',
-  cancelButton: '18px',
-  validateButton: '18px',
+  button: '18px',
   inputText: '18px',
   inputTextPlaceholder: '16px',
   inputTextLabel: '16px',
@@ -267,9 +271,7 @@ export const fontWeight = {
   bodyText: '500',
   logoText: 'bold',
   linkText: 'bold',
-  submitButton: 'bold',
-  cancelButton: 'bold',
-  validateButton: 'bold',
+  button: 'bold',
   inputErrorMessage: 'bold' as 'bold',
   inputTextLabel: 'bold',
 
@@ -305,19 +307,12 @@ export const fontStyle = {
 };
 
 export const zIndex = {
-  // General
   modal: '3',
   header: '2',
   menu: '1',
   tooltip: '1',
-
-  // Graphs
   graphModalCloseButton: '1',
-
-  // Metrics
   metricModalCheckbox: '1',
-
-  // WebPageTest
   webPageTestRadioButton: '1',
 };
 

@@ -65,9 +65,9 @@ const Styles = {
     border: none;
     outline: none;
     font-family: ${fontFamily.mainSans};
-    font-size: ${fontSize.submitButton};
-    font-weight: ${fontWeight.submitButton};
-    line-height: ${lineHeight.submitButton};
+    font-size: ${fontSize.button};
+    font-weight: ${fontWeight.button};
+    line-height: ${lineHeight.button};
     color: ${colorUsage.submitButtonText};
     transition: all 0.5s ease;
     background-color: ${colorUsage.leadSubmitButtonBackground};
