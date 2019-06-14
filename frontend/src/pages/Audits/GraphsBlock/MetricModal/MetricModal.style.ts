@@ -1,5 +1,13 @@
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
+import {
+  colorUsage,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  getSpacing,
+  lineHeight,
+  zIndex,
+} from 'stylesheet';
 
 interface ItemWithMarginProps {
   margin?: string;
@@ -61,9 +69,9 @@ const Style = {
     outline: none;
     cursor: pointer;
     font-family: ${fontFamily.mainSans};
-    font-size: ${fontSize.cancelButton};
-    font-weight: ${fontWeight.cancelButton};
-    line-height: ${lineHeight.cancelButton};
+    font-size: ${fontSize.button};
+    font-weight: ${fontWeight.button};
+    line-height: ${lineHeight.button};
     color: ${colorUsage.cancelButtonText};
     background-color: ${colorUsage.cancelButtonBackground};
   `,
@@ -75,9 +83,9 @@ const Style = {
     outline: none;
     cursor: pointer;
     font-family: ${fontFamily.mainSans};
-    font-size: ${fontSize.validateButton};
-    font-weight: ${fontWeight.validateButton};
-    line-height: ${lineHeight.validateButton};
+    font-size: ${fontSize.button};
+    font-weight: ${fontWeight.button};
+    line-height: ${lineHeight.button};
     color: ${colorUsage.validateButtonText};
     background-color: ${colorUsage.validateButtonBackground};
   `,
@@ -92,7 +100,7 @@ Style.ModalCheckbox = styled.input`
   position: relative;
   left: 18px;
   opacity: 0;
-  z-index: 1;
+  z-index: ${zIndex.metricModalCheckbox};
   width: 18px;
   height: 18px;
   cursor: pointer;

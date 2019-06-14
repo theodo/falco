@@ -7,6 +7,7 @@ import {
   getSpacing,
   lineHeight,
   responsiveThreshold,
+  zIndex,
 } from 'stylesheet';
 
 interface MenuProps {
@@ -34,7 +35,7 @@ export const HeaderContainer = styled.div`
   position: fixed;
   display: flex;
   flex-direction: column;
-  z-index: 2;
+  z-index: ${zIndex.header};
 
   @media only screen and (max-width: ${responsiveThreshold}) {
     position: absolute;
