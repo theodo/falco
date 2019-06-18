@@ -74,12 +74,21 @@ def format_wpt_json_results_for_script(data):
         logging.warn("[WPT Warning] Repeat view median run index not admissible")
 
     for step_index in range(0, number_of_steps):
-        first_view_step_data = data["runs"][first_view_median_run_index]["firstView"][
-            "steps"
-        ][step_index]
-        repeat_view_step_data = data["runs"][repeat_view_median_run_index][
-            "repeatView"
-        ]["steps"][step_index]
+        if number_of_steps == 1:
+            first_view_step_data = data["runs"][first_view_median_run_index][
+                "firstView"
+            ]
+            repeat_view_step_data = data["runs"][repeat_view_median_run_index][
+                "repeatView"
+            ]
+        else:
+            first_view_step_data = data["runs"][first_view_median_run_index][
+                "firstView"
+            ]["steps"][step_index]
+            repeat_view_step_data = data["runs"][repeat_view_median_run_index][
+                "repeatView"
+            ]["steps"][step_index]
+
         result_array.append(
             {
                 "wpt_metric_first_view_tti": first_view_step_data.get(
