@@ -18,6 +18,9 @@ backend/makemigrations:
 backend/shell:
 	docker-compose exec backend ./manage.py shell
 
+backend/populate_audit_configurations:
+	docker-compose exec backend ./manage.py get_available_audit_configurations
+
 db/connect:
 	docker exec -it falco_db_1 psql -Upostgres postgres
 
