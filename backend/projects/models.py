@@ -85,6 +85,19 @@ class ProjectAuditParameters(BaseModel):
         return self.name
 
 
+class AvailableAuditParameters(BaseModel):
+    browser = models.CharField(max_length=100, blank=False, null=False)
+    location = models.CharField(max_length=100, blank=False, null=False)
+    location_label = models.CharField(max_length=100, blank=False, null=False)
+    location_group = models.CharField(max_length=100, blank=False, null=False)
+
+    class Meta:
+        ordering = ("location", "browser")
+
+    def __str__(self):
+        return "{} : {}".format(self.location_label, self.browser)
+
+
 class Script(BaseModel):
     name = models.CharField(max_length=100)
     script = EncryptedTextField()
