@@ -68,7 +68,12 @@ class NetworkShapeOptions(Enum):
 
 class ProjectAuditParameters(BaseModel):
     name = models.CharField(max_length=100)
+    configuration = models.ForeignKey(
+        "AvailableAuditParameters", null=False, on_delete=models.PROTECT
+    )
+    # soon deprecated
     browser = models.CharField(max_length=100)
+    # soon deprecated
     location = models.CharField(max_length=100)
     network_shape = models.CharField(
         max_length=20,

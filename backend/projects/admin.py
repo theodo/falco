@@ -26,6 +26,7 @@ class ProjectAuditParametersInline(admin.TabularInline):
     model = ProjectAuditParameters
     min_num = 1
     extra = 0
+    exclude = ("location", "browser")
 
 
 class ProjectAdmin(admin.ModelAdmin):
@@ -48,7 +49,7 @@ class ProjectAdmin(admin.ModelAdmin):
 
     def project_actions(self, obj):
         return format_html(
-            '<a class="button" href="{}">Launch manual audit</a>&nbsp;',
+            "<a class='button' href='{}'>Launch manual audit</a>&nbsp;",
             reverse("admin:launch-manual-audit", args=[obj.pk]),
         )
 
