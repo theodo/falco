@@ -26,7 +26,6 @@ class ProjectAuditParametersInline(admin.TabularInline):
     model = ProjectAuditParameters
     min_num = 1
     extra = 0
-    exclude = ("location", "browser")
 
 
 class ProjectAdmin(admin.ModelAdmin):
