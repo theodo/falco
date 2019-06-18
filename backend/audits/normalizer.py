@@ -1,3 +1,6 @@
+import logging
+
+
 def format_wpt_json_results_for_page(data):
     return [
         {
@@ -65,8 +68,10 @@ def format_wpt_json_results_for_script(data):
     number_of_tests = data["testRuns"]
     if not 1 <= int(first_view_median_run_index) <= number_of_tests:
         first_view_median_run_index = "1"
+        logging.warn("[WPT Warning] First view median run index not admissible")
     if not 1 <= int(repeat_view_median_run_index) <= number_of_tests:
         repeat_view_median_run_index = "1"
+        logging.warn("[WPT Warning] Repeat view median run index not admissible")
 
     for step_index in range(0, number_of_steps):
         first_view_step_data = data["runs"][first_view_median_run_index]["firstView"][
