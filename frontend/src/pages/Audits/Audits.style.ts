@@ -1,22 +1,21 @@
 import styled from 'styled-components';
 import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
-const StyledAudits = {
-  Container: styled.div`
+export const Container = styled.div`
     display: flex;
     flex-direction: column;
-  `,
+  `;
 
-  PageTitleBlock: styled.div`
+export const PageTitleBlock = styled.div`
     margin-bottom: ${getSpacing(4)};
     width: 75%;
     align-self: center;
     display: flex;
     align-items: center;
     justify-content: center;
-  `,
+  `;
 
-  PageTitle: styled.div`
+export const PageTitle = styled.div`
     line-height: ${lineHeight.h1Text};
     color: ${colorUsage.h1Text};
     font-family: ${fontFamily.mainSans};
@@ -25,29 +24,26 @@ const StyledAudits = {
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
-  `,
+  `;
 
-  Title: styled.div`
+export const Title = styled.div`
     line-height: ${lineHeight.h2Text};
     color: ${colorUsage.h2Text};
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.h2Text};
     font-weight: ${fontWeight.h2Text};
     margin-bottom: ${getSpacing(4)};
-  `,
+  `;
 
-  ScriptStepBlock: styled.div`
+export const ScriptStepBlock = styled.div`
     display: flex;
     flex-direction: column;
-  `,
+  `;
 
-  ScriptStepBlockTitle: styled.div`
+export const ScriptStepBlockTitle = styled.div`
     font-size: ${fontSize.labelText};
     line-height: ${lineHeight.labelText};
     font-weight: ${fontWeight.labelText};
     color: ${colorUsage.labelText};
     margin-bottom: ${getSpacing(2)};
-  `,
-};
-
-export default StyledAudits;
+  `;
