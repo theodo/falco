@@ -1,8 +1,8 @@
 # How to dump production database in local
-This is a turorial to get current production database and copy it so we can access it when running in local during development. This is to have development data as close as possible to production data. Our server is setup on AWS.
+This is a tutorial to get current production database and copy it so we can access it when running in local during development. This is to have development data as close as possible to production data. Our server is setup on AWS.
 
 ## Change production database settings
-On AWS, go to RDS then databases and select production database of your application (`falco-production`).
+On AWS, go to RDS then databases and select the production database of your application (`falco-production`).
 Click on `Modify`.
 In the section `VPC Security Group`, add the staging group (`falco-staging-database`), and check `Yes` to authorize public access. Validate, it will now show you the changes you want to apply (there should only be these two), select that you want to apply them immmediately. Apply changes, it will redirect you to the database page. Wait for changes to be applied.
 
