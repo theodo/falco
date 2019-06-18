@@ -29,7 +29,7 @@ def request_audit(audit_uuid):
         "f": "json",
         "runs": 3,
         "video": 1,
-        "location": f"{parameters.location}:{parameters.browser}.{NetworkShapeOptions[parameters.network_shape].value}",
+        "location": f"{parameters.configuration.location}:{parameters.configuration.browser}.{NetworkShapeOptions[parameters.network_shape].value}",
     }
 
     if audit.page is not None:
