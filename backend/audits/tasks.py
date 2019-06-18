@@ -164,6 +164,9 @@ def poll_audit_results(audit_uuid, json_url):
                 ),
             )
             audit_status_success.save()
+            AuditStatusHistory.objects.filter(audit=audit, status="PENDING").exclude(
+                uuid=audit_status_success.uuid
+            ).delete()
         except Exception:
             logging.error("Could not parse audit result", stack_info=True)
             audit_results = AuditResults(
