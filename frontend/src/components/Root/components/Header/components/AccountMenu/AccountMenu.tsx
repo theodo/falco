@@ -66,7 +66,7 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
             margin={'0'}
             onClick={() => logoutUser(routeDefinitions.landing.path)}
           >
-            <FormattedMessage id="Header.logoff_link" />
+            <FormattedMessage id="Header.logout_link" />
           </Style.UserActionItem>
         </Style.UserActionsBlock>
       </Style.Container>
