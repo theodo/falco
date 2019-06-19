@@ -205,3 +205,11 @@ def request_all_audits():
             audit = Audit(script=script, parameters=audit_parameters)
             audit.save()
             request_audit.delay(audit.uuid)
+
+
+@shared_task
+def clean_old_audit_statuses():
+    for audit in Audit.objects.all():
+        statuses = AuditStatusHistory.objects.filter(audit=audit)
+        if "SUCCESS" in statuses.values_list("status", flat=True):
+            statuses.filter(status="PENDING").delete()
