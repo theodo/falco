@@ -91,6 +91,7 @@ class AvailableAuditParameters(BaseModel):
     location = models.CharField(max_length=100, blank=False, null=False)
     location_label = models.CharField(max_length=100, blank=False, null=False)
     location_group = models.CharField(max_length=100, blank=False, null=False)
+    is_active = models.BooleanField(default=True)
 
     class Meta:
         ordering = ("location", "browser")
