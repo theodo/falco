@@ -62,6 +62,14 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
           </Style.UserInfosBlock>
         </Style.UserInfosBlockContainer>
         <Style.UserActionsBlock>
+          <Style.UserActionItem margin={'0'}>
+            <Style.WhatsNewLink
+              href="https://www.notion.so/Falco-What-s-new-3c08ac348c7b40499638c0a62924aacc"
+              target="_blank"
+            >
+              <FormattedMessage id="Header.whats_new" />
+            </Style.WhatsNewLink>
+          </Style.UserActionItem>
           <Style.UserActionItem
             margin={'0'}
             onClick={() => logoutUser(routeDefinitions.landing.path)}

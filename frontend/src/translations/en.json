@@ -6,7 +6,8 @@
     "login_button": "MY ACCOUNT",
     "projects_button": "MY PROJECTS",
     "last_audit_intro": "Last audit",
-    "logout_link": "Log out"
+    "logout_link": "Log out",
+    "whats_new": "What's new on Falco?"
   },
   "Landing": {
     "introduction_block": {
