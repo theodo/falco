@@ -103,7 +103,8 @@
     "webpagetest_date_label": "Date de l'audit",
     "webpagetest_dateComparator_audit": "Comparer plusieurs audits",
     "lighthouse_report": "Rapport Lighthouse",
-    "lighthouse_note": "Note : les valeurs données par Lighthouse peuvent différer des valeurs du Dashboard, car l'environnement de l'audit Lighthouse est différent. Les diagnostics et opportunités sont toujours valables, bien que les gains indiqués puissent différer des résultats réels."
+    "lighthouse_note": "Note : les valeurs données par Lighthouse peuvent différer des valeurs du Dashboard, car l'environnement de l'audit Lighthouse est différent. Les diagnostics et opportunités sont toujours valables, bien que les gains indiqués puissent différer des résultats réels.",
+    "lighthouse_performance": "Performance",
   },
   "Metrics": {
     "WPTMetricFirstViewTTI": {
