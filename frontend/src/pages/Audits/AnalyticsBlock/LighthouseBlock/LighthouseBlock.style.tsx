@@ -38,3 +38,20 @@ export const LighthouseNote = styled.div`
   line-height: ${lineHeight.bodyText};
 `;
 
+export const LighthouseLink = styled.a`
+  width: 170px;
+  padding: ${getSpacing(2)} ${getSpacing(0)};
+  align-self: center;
+  border-radius: 6px;
+  color: ${colorUsage.webPageTestLinkButtonText};
+  background-color: ${colorUsage.webPageTestLinkButtonBackground};
+  font-family: ${fontFamily.mainSans};
+  font-size: ${fontSize.webPageTestLink};
+  font-weight: ${fontWeight.webPageTestLink};
+  line-height: ${lineHeight.webPageTestLink};
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+`;

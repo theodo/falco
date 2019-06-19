@@ -19,6 +19,9 @@ const LighthouseBlock: React.FunctionComponent<OwnProps> = ({ lighthouseUrl, lig
         <FormattedMessage id="Audits.lighthouse_note" />
       </LighthouseNote>
       <LighthouseScore score={lighthouseScore}/>
+      <LighthouseLink href={lighthouseUrl} target={'_blank'}>
+        <FormattedMessage id="Audits.lighthouse_results" />
+      </LighthouseLink>
     </Container>
   );
 };

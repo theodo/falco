@@ -105,6 +105,7 @@
     "lighthouse_report": "Lighthouse Report",
     "lighthouse_note": "Note: data provided by Lighthouse may differ from the Dashboard data. This is due to a different audit environment. Diagnostics and opportunities are still relevant, even though the indicated metric improvements may differ from the real results.",
     "lighthouse_performance": "Performance",
+    "lighthouse_results": "Access report"
   },
   "Metrics": {
     "WPTMetricFirstViewTTI": {
