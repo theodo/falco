@@ -22,9 +22,17 @@ class ScriptSerializer(serializers.ModelSerializer):
 
 class ProjectAuditParametersSerializer(serializers.ModelSerializer):
     network_shape = serializers.SerializerMethodField("resolve_network_shape")
+    location = serializers.SerializerMethodField("resolve_location")
+    browser = serializers.SerializerMethodField("resolve_browser")
 
     def resolve_network_shape(self, obj):
         return NetworkShapeOptions[obj.network_shape].value
+
+    def resolve_location(self, obj):
+        return obj.configuration.location
+
+    def resolve_browser(self, obj):
+        return obj.configuration.browser
 
     class Meta:
         model = ProjectAuditParameters
