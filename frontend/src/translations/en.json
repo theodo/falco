@@ -6,7 +6,7 @@
     "login_button": "MY ACCOUNT",
     "projects_button": "MY PROJECTS",
     "last_audit_intro": "Last audit",
-    "logoff_link": "Log off"
+    "logout_link": "Log out"
   },
   "Landing": {
     "introduction_block": {
