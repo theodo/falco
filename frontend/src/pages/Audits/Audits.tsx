@@ -218,7 +218,7 @@ export const Audits: React.FunctionComponent<Props> = ({
   const scriptStepSelectOptions = Object.keys(scriptSteps)
     .map(scriptStepKey => ({
       value: scriptStepKey,
-      label: scriptStepKey || 0 + ' : ' + scriptSteps[scriptStepKey] || "Unknown step",
+      label: (scriptStepKey !== 'null' ? scriptStepKey : 0) + ' : ' + (scriptSteps[scriptStepKey] || "Unknown step"),
     }));
 
   const handleScriptStepSelection = (selectedOption: ValueType<ScriptStepOption | {}>) => {
