@@ -1,4 +1,4 @@
-import { createAsyncAction } from 'typesafe-actions';
+import { createAsyncAction, createStandardAction } from 'typesafe-actions';
 
 
 export const fetchLastUpdateOfWhatsNew = createAsyncAction(
@@ -8,6 +8,11 @@ export const fetchLastUpdateOfWhatsNew = createAsyncAction(
 )<{}, { lastUpdateNewsLetter: string | null }, { errorMessage: string }>();
 
 
+export const registerClickOnWhatsNew = createStandardAction(
+    'Content/REGISTER_CLICK_ON_WHATSNEW',
+)<{ lastClickOnWhatsNew: string | null }>();
+
 export default {
     fetchLastUpdateOfWhatsNew,
+    registerClickOnWhatsNew,
 };
