@@ -18,8 +18,7 @@ interface OwnProps {
   right?: string | null;
   user: userState;
   isUserAuthenticated: boolean;
-  lastUpdateOfWhatsNew: string | null;
-  lastClickOnWhatsNew: string | null;
+  shouldDisplayWhatsNewNotification: boolean;
 }
 
 type Props = OwnProps & InjectedIntlProps & RouteComponentProps;
@@ -34,8 +33,7 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
   right,
   user,
   isUserAuthenticated,
-  lastUpdateOfWhatsNew,
-  lastClickOnWhatsNew,
+  shouldDisplayWhatsNewNotification,
 }) => {
   React.useEffect(
     () => {
@@ -93,9 +91,7 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
             >
               <FormattedMessage id="Header.whats_new" />
               {
-                lastClickOnWhatsNew && lastUpdateOfWhatsNew && dayjs(lastClickOnWhatsNew).isBefore(dayjs(lastUpdateOfWhatsNew)) && (
-                  <Notification />
-                )
+                shouldDisplayWhatsNewNotification && <Notification />
               }
             </WhatsNewLink>
           </UserActionItem>
