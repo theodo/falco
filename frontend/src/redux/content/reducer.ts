@@ -4,10 +4,10 @@ import { ActionType, getType } from 'typesafe-actions';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import {
-  fetchLastUpdateOfWhatsNew,
+  fetchLastUpdateOfWhatsNew, registerClickOnWhatsNew,
 } from './actions';
 
-export type ContentAction = ActionType<typeof fetchLastUpdateOfWhatsNew>;
+export type ContentAction = ActionType<typeof fetchLastUpdateOfWhatsNew | typeof registerClickOnWhatsNew>;
 
 export type ContentState = Readonly<{
   lastUpdateOfWhatsNew: string | null;
@@ -33,6 +33,11 @@ const reducer = (state: ContentState = initialState, action: AnyAction) => {
       return {
         ...state,
         lastUpdateOfWhatsNew: typedAction.payload.lastUpdateNewsLetter,
+      };
+    case getType(registerClickOnWhatsNew):
+      return {
+        ...state,
+        lastClickOnWhatsNew: typedAction.payload.lastClickOnWhatsNew,
       };
     default:
       return state;
