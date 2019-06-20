@@ -6,7 +6,7 @@ import { routeDefinitions } from 'routes';
 
 import Loader from 'components/Loader';
 import dayjs from 'dayjs';
-import { Container, UserActionItem, UserActionsBlock, UserEmail, UserInfosBlock, UserInfosBlockContainer, UserName, WhatsNewLink } from './AccountMenu.style';
+import { Container, Notification, UserActionItem, UserActionsBlock, UserEmail, UserInfosBlock, UserInfosBlockContainer, UserName, WhatsNewLink } from './AccountMenu.style';
 
 interface OwnProps {
   fetchUserRequest: () => void;
@@ -92,6 +92,11 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
               target="_blank"
             >
               <FormattedMessage id="Header.whats_new" />
+              {
+                lastClickOnWhatsNew && lastUpdateOfWhatsNew && dayjs(lastClickOnWhatsNew).isBefore(dayjs(lastUpdateOfWhatsNew)) && (
+                  <Notification />
+                )
+              }
             </WhatsNewLink>
           </UserActionItem>
           <UserActionItem

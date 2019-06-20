@@ -95,6 +95,7 @@ export const colorUsage = {
   accountMenuText: colorPalette.grey800,
   accountMenuUserInfosBlockBorder: colorPalette.grey300,
   accountMenuActionItemHoverText: colorPalette.primary500,
+  accountMenuNotification: colorPalette.red500,
 
   // Menu
   menuLink: colorPalette.grey800,
