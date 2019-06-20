@@ -36,6 +36,7 @@ export const GaugeWrapper = styled.div`
 
 export const GaugeSvgWrapper = styled.div`
   position: relative;
+  height: 112px;
 `;
 
 export const GaugeSvg = styled.svg`
@@ -46,13 +47,13 @@ export const GaugeSvg = styled.svg`
 
 export const GaugePercentage = styled.div`
   width: 100%;
-  height: 80px;
+  height: 112px;
   position: absolute;
   font-family: ${fontFamily.LighthouseMono};
   font-size: ${fontSize.lighthousePercentage};
   line-height: ${lineHeight.lighthousePercentage};
   text-align: center;
-  top: calc((8px + 112px) / 2);
+  top: calc(8px + 112px / 2);
 `;
 
 export const GaugeBase = styled.circle`
