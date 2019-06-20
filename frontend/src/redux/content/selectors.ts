@@ -9,7 +9,8 @@ export const getShouldDisplayWhatsNewNotification = (store: RootState) => {
     const lastClickOnWhatsNew = getLastClickOnWhatsNew(store);
     const lastUpdateOfWhatsNew = getLastUpdateOfWhatsNew(store);
     if (!lastClickOnWhatsNew) {
-        return false;
+        // display notification to the user if he has never clicked on the link
+        return true;
     }
     if (!lastUpdateOfWhatsNew) {
         return false;
