@@ -31,6 +31,7 @@ urlpatterns = [
     path("api/projects/", include("projects.urls", namespace="projects")),
     path("api/audits/", include("audits.urls", namespace="audits")),
     path("api/core/", include("core.urls", namespace="core")),
+    path("api/content/", include("content.urls", namespace="content")),
     path("", include("front.urls")),  # Keep this line last
 ]
 
