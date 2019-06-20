@@ -9,24 +9,28 @@ import Style from './AccountMenu.style';
 
 interface OwnProps {
   fetchUserRequest: () => void;
+  fetchLastUpdateOfWhatsNewRequest: () => void;
   logoutUser: (redirectTo?: string | undefined) => void;
   isVisible: boolean;
   position?: string;
   right?: string | null;
   user: userState;
   isUserAuthenticated: boolean;
+  lastUpdateOfWhatsNew: string | null;
 }
 
 type Props = OwnProps & InjectedIntlProps & RouteComponentProps;
 
 export const AccountMenu: React.FunctionComponent<Props> = ({
   fetchUserRequest,
+  fetchLastUpdateOfWhatsNewRequest,
   isVisible,
   logoutUser,
   position,
   right,
   user,
   isUserAuthenticated,
+  lastUpdateOfWhatsNew,
 }) => {
   React.useEffect(
     () => {
@@ -36,6 +40,16 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
     },
     [isUserAuthenticated],
   );
+
+  React.useEffect(
+    () => {
+      if (isUserAuthenticated) {
+        fetchLastUpdateOfWhatsNewRequest();
+      }
+    },
+    [isUserAuthenticated],
+  );
+
   const capitalize = (word: any) => {
     if (typeof word !== 'string') {
       return '';
