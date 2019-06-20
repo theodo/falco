@@ -7,6 +7,7 @@ from rest_framework.decorators import api_view, permission_classes
 @api_view(["GET"])
 @permission_classes([permissions.IsAuthenticated])
 def lastUpdateNewsletter(request):
-    return JsonResponse(
-        {"last_update_newsletter": WhatsNew.objects.first().last_update_newsletter}
-    )
+    whats_new = WhatsNew.objects.first()
+    last_update_date = whats_new.last_update_newsletter if whats_new else None
+
+    return JsonResponse({"last_update_newsletter": last_update_date})
