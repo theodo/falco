@@ -7,6 +7,7 @@ import { LocationChangeAction, RouterState } from 'connected-react-router';
 import { combineReducers, Reducer } from 'redux';
 
 import { reducer as auditResults } from './auditResults';
+import { reducer as content } from './content';
 import { reducer as lead } from './lead';
 import { reducer as login } from './login';
 import { reducer as parameters } from './parameters';
@@ -27,6 +28,7 @@ export default function createReducer(asyncReducers: {
     parameters,
     projects,
     auditResults,
+    content,
     user,
   });
 }

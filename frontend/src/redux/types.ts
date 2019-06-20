@@ -2,6 +2,7 @@ import { RouterState } from 'connected-react-router';
 import { PersistPartial } from 'redux-persist/lib/persistReducer';
 import { LeadAction, LeadState } from 'redux/lead';
 import { auditResultsAction, auditResultsState } from './auditResults';
+import { ContentAction, ContentState } from './content';
 import { LoginAction, LoginState } from './login';
 import { ParametersAction, ParametersState } from './parameters';
 import { projectsAction, projectsState } from './projects';
@@ -14,6 +15,7 @@ export type RootState = Readonly<{
   projects: projectsState;
   auditResults: auditResultsState;
   user: userState;
+  content: ContentState;
 }>;
 // This type allows url fetching from anywhere without modifying the RootState
 export type RootStateWithRouter = RootState & Readonly<{ router: RouterState }>;
@@ -24,4 +26,5 @@ export type RootAction =
   | ParametersAction
   | projectsAction
   | auditResultsAction
-  | userAction;
+  | userAction
+  | ContentAction;
