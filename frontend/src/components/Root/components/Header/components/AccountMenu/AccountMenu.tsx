@@ -5,6 +5,7 @@ import { userState } from 'redux/user/reducer';
 import { routeDefinitions } from 'routes';
 
 import Loader from 'components/Loader';
+import dayjs from 'dayjs';
 import Style from './AccountMenu.style';
 
 interface OwnProps {
@@ -82,6 +83,11 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
         <Style.UserActionsBlock>
           <Style.UserActionItem margin={'0'}>
             <Style.WhatsNewLink
+              onClick={
+                () => {
+                  registerNewClickOnWhatsNew(dayjs().toISOString())
+                }
+              }
               href="https://www.notion.so/Falco-What-s-new-3c08ac348c7b40499638c0a62924aacc"
               target="_blank"
             >
