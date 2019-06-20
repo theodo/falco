@@ -166,6 +166,11 @@ export const colorUsage = {
   webPageTestRadioButtonColor: colorPalette.primary500,
   webPageTestRadioButtonBackground: colorPalette.white500,
 
+  // Lighthouse
+  lighthouseFail: '#FF4E42',
+  lighthouseAverage: '#ffa400',
+  lighthouseGood: '#0CCE6B',
+
   // Badge
   pageBadgeText: colorPalette.accentBlue500,
   pageBadgeBackground: colorPalette.accentBlue200,
@@ -180,6 +185,7 @@ export const colorUsage = {
 export const fontFamily = {
   mainMono: `'IBM Plex Mono', monospace`,
   mainSans: `'IBM Plex Sans', sans-serif`,
+  LighthouseMono: 'Roboto Mono, Menlo, dejavu sans mono, Consolas, Lucida Console, monospace',
 };
 
 export const fontSize = {
@@ -220,6 +226,10 @@ export const fontSize = {
   // WebPageTest
   webPageTestLink: '14px',
 
+  // Lighthouse
+  lighthousePercentage: '38px',
+  lighthouseGaugeLabel: '28px',
+
   // Badge
   badgeText: '14px',
 };
@@ -257,6 +267,10 @@ export const lineHeight = {
 
   // WebPageTest
   webPageTestLink: '18px',
+
+  // Lighthouse
+  lighthousePercentage: '0',
+  lighthouseGaugeLabel: '36px',
 
   // Badge
   badgeText: '18px',

@@ -1,23 +1,28 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { getSpacing } from 'stylesheet';
-import Style from './LighthouseBlock.style';
+import { Container, LighthouseLink, LighthouseNote, SubTitle } from './LighthouseBlock.style';
+import LighthouseScore from './LighthouseScore';
 
 export interface OwnProps {
   lighthouseUrl: string;
+  lighthouseScore: number;
 }
 
-const LighthouseBlock: React.FunctionComponent<OwnProps> = ({ lighthouseUrl }) => {
+const LighthouseBlock: React.FunctionComponent<OwnProps> = ({ lighthouseUrl, lighthouseScore }) => {
   return (
-    <Style.Container>
-      <Style.SubTitle margin={`0 0 ${getSpacing(5)} 0}`}>
+    <Container>
+      <SubTitle margin={`0 0 ${getSpacing(5)} 0}`}>
         <FormattedMessage id="Audits.lighthouse_report" />
-      </Style.SubTitle>
-      <Style.LighthouseNote margin={`0 0 ${getSpacing(4)} 0}`}>
+      </SubTitle>
+      <LighthouseNote margin={`0 0 ${getSpacing(4)} 0}`}>
         <FormattedMessage id="Audits.lighthouse_note" />
-      </Style.LighthouseNote>
-      <Style.LighthouseFrame src={lighthouseUrl} />
-    </Style.Container>
+      </LighthouseNote>
+      <LighthouseScore score={lighthouseScore}/>
+      <LighthouseLink href={lighthouseUrl} target={'_blank'}>
+        <FormattedMessage id="Audits.lighthouse_results" />
+      </LighthouseLink>
+    </Container>
   );
 };
 

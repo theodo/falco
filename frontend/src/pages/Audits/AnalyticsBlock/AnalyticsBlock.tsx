@@ -50,7 +50,7 @@ export const AnalyticsBlock: React.FunctionComponent<Props & InjectedIntlProps> 
     <Style.Container margin={blockMargin}>
       <WebPageTestBlock blockMargin={`0 0 ${getSpacing(4)} 0`} auditResults={auditResults} />
       {auditResults[0].WPTMetricLighthousePerformance && (
-        <LighthouseBlock lighthouseUrl={getLighthouseUrl()} />
+        <LighthouseBlock lighthouseUrl={getLighthouseUrl()} lighthouseScore={auditResults[0].WPTMetricLighthousePerformance} />
       )}
     </Style.Container>
   );
