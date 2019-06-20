@@ -10,6 +10,7 @@ import Style from './AccountMenu.style';
 interface OwnProps {
   fetchUserRequest: () => void;
   fetchLastUpdateOfWhatsNewRequest: () => void;
+  registerNewClickOnWhatsNew: (newClickTime: string | null) => void;
   logoutUser: (redirectTo?: string | undefined) => void;
   isVisible: boolean;
   position?: string;
@@ -17,6 +18,7 @@ interface OwnProps {
   user: userState;
   isUserAuthenticated: boolean;
   lastUpdateOfWhatsNew: string | null;
+  lastClickOnWhatsNew: string | null;
 }
 
 type Props = OwnProps & InjectedIntlProps & RouteComponentProps;
@@ -24,6 +26,7 @@ type Props = OwnProps & InjectedIntlProps & RouteComponentProps;
 export const AccountMenu: React.FunctionComponent<Props> = ({
   fetchUserRequest,
   fetchLastUpdateOfWhatsNewRequest,
+  registerNewClickOnWhatsNew,
   isVisible,
   logoutUser,
   position,
@@ -31,6 +34,7 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
   user,
   isUserAuthenticated,
   lastUpdateOfWhatsNew,
+  lastClickOnWhatsNew,
 }) => {
   React.useEffect(
     () => {

@@ -15,7 +15,7 @@ export type RootState = Readonly<{
   projects: projectsState;
   auditResults: auditResultsState;
   user: userState;
-  content: ContentState;
+  content: ContentState & PersistPartial;
 }>;
 // This type allows url fetching from anywhere without modifying the RootState
 export type RootStateWithRouter = RootState & Readonly<{ router: RouterState }>;
