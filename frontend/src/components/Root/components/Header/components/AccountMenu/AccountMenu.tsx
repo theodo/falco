@@ -6,7 +6,7 @@ import { routeDefinitions } from 'routes';
 
 import Loader from 'components/Loader';
 import dayjs from 'dayjs';
-import Style from './AccountMenu.style';
+import { Container, UserActionItem, UserActionsBlock, UserEmail, UserInfosBlock, UserInfosBlockContainer, UserName, WhatsNewLink } from './AccountMenu.style';
 
 interface OwnProps {
   fetchUserRequest: () => void;
@@ -65,24 +65,24 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
   if (isVisible) {
     if (null === user) {
       return (
-        <Style.Container position={position} right={right}>
+        <Container position={position} right={right}>
           <Loader minHeight={'200px'} />
-        </Style.Container>
+        </Container>
       );
     }
     return (
-      <Style.Container position={position} right={right}>
-        <Style.UserInfosBlockContainer>
-          <Style.UserInfosBlock>
-            <Style.UserName>
+      <Container position={position} right={right}>
+        <UserInfosBlockContainer>
+          <UserInfosBlock>
+            <UserName>
               {capitalize(user.firstName)} {capitalize(user.lastName)}
-            </Style.UserName>
-            <Style.UserEmail>{user.emailAddress.toLowerCase()}</Style.UserEmail>
-          </Style.UserInfosBlock>
-        </Style.UserInfosBlockContainer>
-        <Style.UserActionsBlock>
-          <Style.UserActionItem margin={'0'}>
-            <Style.WhatsNewLink
+            </UserName>
+            <UserEmail>{user.emailAddress.toLowerCase()}</UserEmail>
+          </UserInfosBlock>
+        </UserInfosBlockContainer>
+        <UserActionsBlock>
+          <UserActionItem margin={'0'}>
+            <WhatsNewLink
               onClick={
                 () => {
                   registerNewClickOnWhatsNew(dayjs().toISOString())
@@ -92,16 +92,16 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
               target="_blank"
             >
               <FormattedMessage id="Header.whats_new" />
-            </Style.WhatsNewLink>
-          </Style.UserActionItem>
-          <Style.UserActionItem
+            </WhatsNewLink>
+          </UserActionItem>
+          <UserActionItem
             margin={'0'}
             onClick={() => logoutUser(routeDefinitions.landing.path)}
           >
             <FormattedMessage id="Header.logout_link" />
-          </Style.UserActionItem>
-        </Style.UserActionsBlock>
-      </Style.Container>
+          </UserActionItem>
+        </UserActionsBlock>
+      </Container>
     );
   }
   return <div />;
