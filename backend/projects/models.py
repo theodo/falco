@@ -68,8 +68,9 @@ class NetworkShapeOptions(Enum):
 
 class ProjectAuditParameters(BaseModel):
     name = models.CharField(max_length=100)
-    browser = models.CharField(max_length=100)
-    location = models.CharField(max_length=100)
+    configuration = models.ForeignKey(
+        "AvailableAuditParameters", null=False, on_delete=models.PROTECT
+    )
     network_shape = models.CharField(
         max_length=20,
         choices=[
@@ -83,6 +84,20 @@ class ProjectAuditParameters(BaseModel):
 
     def __str__(self):
         return self.name
+
+
+class AvailableAuditParameters(BaseModel):
+    browser = models.CharField(max_length=100, blank=False, null=False)
+    location = models.CharField(max_length=100, blank=False, null=False)
+    location_label = models.CharField(max_length=100, blank=False, null=False)
+    location_group = models.CharField(max_length=100, blank=False, null=False)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ("location", "browser")
+
+    def __str__(self):
+        return "{} : {}".format(self.location_label, self.browser)
 
 
 class Script(BaseModel):

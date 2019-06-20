@@ -15,6 +15,9 @@ backend/createsuperuser:
 backend/makemigrations:
 	docker-compose exec backend ./manage.py makemigrations
 
+backend/shell:
+	docker-compose exec backend ./manage.py shell
+
 db/connect:
 	docker exec -it falco_db_1 psql -Upostgres postgres
 

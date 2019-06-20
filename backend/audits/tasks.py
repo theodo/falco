@@ -5,7 +5,7 @@ import requests
 
 from audits.models import Audit, AuditResults, AuditStatusHistory, AvailableStatuses
 from celery import shared_task
-from projects.models import NetworkShapeOptions, Page, Script
+from projects.models import NetworkShapeOptions, Page, Script, AvailableAuditParameters
 from audits.normalizer import (
     format_wpt_json_results_for_page,
     format_wpt_json_results_for_script,
@@ -29,7 +29,7 @@ def request_audit(audit_uuid):
         "f": "json",
         "runs": 3,
         "video": 1,
-        "location": f"{parameters.location}:{parameters.browser}.{NetworkShapeOptions[parameters.network_shape].value}",
+        "location": f"{parameters.configuration.location}:{parameters.configuration.browser}.{NetworkShapeOptions[parameters.network_shape].value}",
     }
 
     if audit.page is not None:
@@ -213,3 +213,32 @@ def clean_old_audit_statuses():
         statuses = AuditStatusHistory.objects.filter(audit=audit)
         if "SUCCESS" in statuses.values_list("status", flat=True):
             statuses.filter(status="PENDING").delete()
+
+
+@shared_task
+def get_wpt_audit_configurations():
+    """gets all the available locations from WPT"""
+    response = requests.get("https://www.webpagetest.org/getLocations.php?f=json")
+
+    if response.status_code != 200:
+        logging.error("Invalid response from WebPageTest API: non-200 response code")
+        return
+
+    try:
+        data = response.json()["data"]
+    except KeyError:
+        logging.error(
+            "Invalid response from WebPageTest API: 'data' key is not present"
+        )
+        return
+
+    for location, location_data in data.items():
+        browsers = location_data["Browsers"].split(",")
+        group = location_data["group"]
+        label = location_data["labelShort"]
+        for brower in browsers:
+            configuration, created = AvailableAuditParameters.objects.get_or_create(
+                browser=brower,
+                location=location,
+                defaults={"location_label": label, "location_group": group},
+            )
