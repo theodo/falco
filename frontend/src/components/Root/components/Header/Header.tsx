@@ -5,6 +5,7 @@ import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { routeDefinitions } from 'routes';
 import { colorUsage } from 'stylesheet';
 import AccountMenu from './components/AccountMenu';
+import { Notification } from './components/AccountMenu/AccountMenu.style';
 import ProjectsMenu from './components/ProjectsMenu';
 import {
   HeaderBlock,
@@ -25,10 +26,12 @@ import {
 // Your component own properties
 interface Props {
   currentURL: string;
+  shouldDisplayWhatsNewNotification: boolean;
 }
 
 export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
   currentURL,
+  shouldDisplayWhatsNewNotification,
   intl,
 }) => {
   const [isAccountMenuVisible, setIsAccountMenuVisible] = React.useState(false);
@@ -46,8 +49,8 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
         setAccountMenuRight(
           Math.floor(
             headerContainerRef.current.getBoundingClientRect().right -
-              accountMenuButtonRef.current.getBoundingClientRect().right -
-              15,
+            accountMenuButtonRef.current.getBoundingClientRect().right -
+            15,
           ) + 'px',
         );
       }
@@ -61,8 +64,8 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
         setProjectsMenuRight(
           Math.floor(
             headerContainerRef.current.getBoundingClientRect().right -
-              projectsMenuButtonRef.current.getBoundingClientRect().right -
-              15,
+            projectsMenuButtonRef.current.getBoundingClientRect().right -
+            15,
           ) + 'px',
         );
       }
@@ -149,6 +152,7 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
                 </HeaderButton>
                 <HeaderButton onClick={toggleAccountMenuVisibility} ref={accountMenuButtonRef}>
                   <FormattedMessage id="Header.login_button" />
+                  {shouldDisplayWhatsNewNotification && <Notification />}
                   <HeaderButtonArrow />
                 </HeaderButton>
               </HeaderButtonsBlock>
