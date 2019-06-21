@@ -232,13 +232,21 @@ def get_wpt_audit_configurations():
         )
         return
 
+    for available_audit_parameter in AvailableAuditParameters.objects.all():
+        available_audit_parameter.is_active = False
+        available_audit_parameter.save()
+
     for location, location_data in data.items():
         browsers = location_data["Browsers"].split(",")
         group = location_data["group"]
         label = location_data["labelShort"]
         for brower in browsers:
-            configuration, created = AvailableAuditParameters.objects.get_or_create(
+            configuration, created = AvailableAuditParameters.objects.update_or_create(
                 browser=brower,
                 location=location,
-                defaults={"location_label": label, "location_group": group},
+                defaults={
+                    "location_label": label,
+                    "location_group": group,
+                    "is_active": True,
+                },
             )
