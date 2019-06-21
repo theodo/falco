@@ -176,5 +176,10 @@
       "expand": "Voir toutes les données",
       "close": "Fermer"
     }
+  },
+  "notFound": {
+    "404Title": "404 Page Introuvable",
+    "404Subtitle": "Désolé, cette page n'existe pas",
+    "404Button": "Retour à l'accueil"
   }
 }

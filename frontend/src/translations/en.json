@@ -176,5 +176,10 @@
       "expand": "Show all data",
       "close": "Close"
     }
+  },
+  "notFound": {
+    "404Title": "404 Not Found",
+    "404Subtitle": "Sorry, this page does not exist",
+    "404Button": "Back to Homepage"
   }
 }
