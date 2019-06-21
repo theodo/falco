@@ -3,6 +3,7 @@ import { Redirect, Route, Switch, withRouter } from 'react-router';
 import { RootState } from 'redux/types';
 
 import Loader from 'components/Loader';
+import { NotFoundComponent } from 'components/Root/components';
 import { getIsAuthenticated } from 'redux/login/selectors';
 
 const Audits = lazy(() => import('./pages/Audits'));
@@ -95,6 +96,7 @@ const routes: React.FunctionComponent<RouteProps> = props => (
           />
         );
       })}
+      <Route component={NotFoundComponent} />
     </Switch>
   </Suspense>
 );
@@ -108,13 +110,13 @@ const PrivateRoute = ({ component, store, ...other }: any) => {
         getIsAuthenticated(store) ? (
           <RouteComponent {...props} />
         ) : (
-          <Redirect
-            to={{
-              pathname: routeDefinitions.login.path,
-              state: { from: props.location.pathname },
-            }}
-          />
-        )
+            <Redirect
+              to={{
+                pathname: routeDefinitions.login.path,
+                state: { from: props.location.pathname },
+              }}
+            />
+          )
       }
     />
   );
