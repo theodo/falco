@@ -50,7 +50,7 @@ def project_detail(request, project_uuid):
     elif request.method == "DELETE":
         check_if_admin_of_project(request.user.id, project.uuid)
         project.delete()
-        return JsonResponse(status=status.HTTP_204_NO_CONTENT)
+        return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(["GET", "POST"])
@@ -83,7 +83,7 @@ def project_page_detail(request, project_uuid, page_uuid):
     check_if_member_of_project(request.user.id, project.uuid)
 
     if page.project != project:
-        return JsonResponse(status=status.HTTP_400_BAD_REQUEST)
+        return JsonResponse({}, status=status.HTTP_400_BAD_REQUEST)
 
     if request.method == "GET":
         serializer = PageSerializer(page)
@@ -99,4 +99,4 @@ def project_page_detail(request, project_uuid, page_uuid):
 
     elif request.method == "DELETE":
         page.delete()
-        return JsonResponse(status=status.HTTP_204_NO_CONTENT)
+        return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
