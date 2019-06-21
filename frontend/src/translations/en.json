@@ -167,7 +167,13 @@
     "WPTMetricLighthousePerformance": {
       "name": "Lighthouse Performance Score",
       "description": "Aggregates many of other performance metrics, simulates middle-end device & poor network conditions.\nMeasured via Dev Tools or https://web.dev/fast"
-    }
+    },
+    "LighthouseFirstContentfulPaint": "First Contentful Paint",
+    "LighthouseSpeedIndex": "Speed Index",
+    "LighthouseTTI": "Time To Interactive",
+    "LighthouseFirstMeaningfulPaint": "First Meaningful Paint",
+    "LighthouseFirstCPUIdle": "First CPU Idle",
+    "LighthouseMaxPotentialFirstInputDelay": "First Potential First Input Delay"
   },
   "components": {
     "MetricGraph": {
