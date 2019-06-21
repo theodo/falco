@@ -27,7 +27,6 @@ export type ParametersState = Readonly<{
   currentScriptId: string | null;
   currentScriptStepId: string | null;
   displayedMetrics: Record<string, MetricType[]>;
-  _persist: PersistState;
 }>;
 
 const persistConfig = {
@@ -48,7 +47,6 @@ const initialState: ParametersState = {
   currentScriptId: null,
   currentScriptStepId: null,
   displayedMetrics: {},
-  _persist: {} as PersistState,
 };
 
 const reducer = (state: ParametersState = initialState, action: AnyAction) => {
