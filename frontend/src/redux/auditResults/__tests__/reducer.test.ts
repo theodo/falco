@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { fetchAuditResultsSuccess } from '../actions';
-import reducer, { auditResultsState } from '../reducer';
+import reducer, { AuditResultsState } from '../reducer';
 
 const initialPageAuditParametersId = '1111';
 const initialPageId = '2222';
@@ -68,7 +68,7 @@ const initialScriptAuditResult = {
   },
 };
 
-const initialState: auditResultsState = {
+const initialState: AuditResultsState = {
   byAuditId: { ...initialPageAuditResult, ...initialScriptAuditResult },
   sortedByPageId: {
     [initialPageId]: {
