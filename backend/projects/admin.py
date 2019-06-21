@@ -43,7 +43,7 @@ class ProjectAuditParametersInline(admin.TabularInline):
 class ProjectAdmin(admin.ModelAdmin):
     inlines = [PageInline, ScriptInline, ProjectAuditParametersInline]
     exclude = ["screenshot_url"]
-    filter_horizontal = ("members",)
+    filter_horizontal = ("members", "admins")
 
     list_display = ("__str__", "project_actions")
 
