@@ -8,7 +8,14 @@ from django.http import HttpResponseRedirect
 from django.template.response import TemplateResponse
 
 from projects.forms import ManualAuditForm
-from projects.models import Page, Project, ProjectAuditParameters, Script, ScriptForm
+from projects.models import (
+    Page,
+    Project,
+    ProjectAuditParameters,
+    Script,
+    ScriptForm,
+    AvailableAuditParameters,
+)
 
 
 class PageInline(admin.TabularInline):
@@ -26,6 +33,11 @@ class ProjectAuditParametersInline(admin.TabularInline):
     model = ProjectAuditParameters
     min_num = 1
     extra = 0
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "configuration":
+            kwargs["queryset"] = AvailableAuditParameters.objects.filter(is_active=True)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 class ProjectAdmin(admin.ModelAdmin):
