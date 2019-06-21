@@ -4,18 +4,18 @@ import { ActionType, getType } from 'typesafe-actions';
 import { fetchAuditResultsSuccess } from './actions';
 import { AuditResultType, SortedPageAuditResultIds, SortedScriptAuditResultIds } from './types';
 
-export type auditResultsAction = ActionType<typeof fetchAuditResultsSuccess>;
+export type AuditResultsAction = ActionType<typeof fetchAuditResultsSuccess>;
 
-export type auditResultsState = Readonly<{
+export type AuditResultsState = Readonly<{
   byAuditId: Readonly<Record<string, AuditResultType>>;
   sortedByPageId: Record<string, SortedPageAuditResultIds>;
   sortedByScriptId: Record<string, SortedScriptAuditResultIds>;
 }>;
 
-const initialState: auditResultsState = { byAuditId: {}, sortedByPageId: {}, sortedByScriptId: {} };
+const initialState: AuditResultsState = { byAuditId: {}, sortedByPageId: {}, sortedByScriptId: {} };
 
-const reducer = (state: auditResultsState = initialState, action: AnyAction) => {
-  const typedAction = action as auditResultsAction;
+const reducer = (state: AuditResultsState = initialState, action: AnyAction) => {
+  const typedAction = action as AuditResultsAction;
   switch (typedAction.type) {
     case getType(fetchAuditResultsSuccess):
       const currentSortedByPageId = { ...state.sortedByPageId };

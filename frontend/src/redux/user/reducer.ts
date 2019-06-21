@@ -3,18 +3,18 @@ import { ActionType, getType } from 'typesafe-actions';
 
 import { fetchUserError, fetchUserRequest, fetchUserSuccess } from './actions';
 
-export type userAction = ActionType<typeof fetchUserError | typeof fetchUserRequest | typeof fetchUserSuccess>;
+export type UserAction = ActionType<typeof fetchUserError | typeof fetchUserRequest | typeof fetchUserSuccess>;
 
-export type userState = Readonly<{
+export type UserState = Readonly<{
   firstName: string;
   lastName: string;
   emailAddress: string;
 } | null>;
 
-const initialState: userState = null;
+const initialState: UserState = null;
 
-const reducer = (state: userState = initialState, action: AnyAction) => {
-  const typedAction = action as userAction;
+const reducer = (state: UserState = initialState, action: AnyAction) => {
+  const typedAction = action as UserAction;
   switch (typedAction.type) {
     case getType(fetchUserRequest):
       return initialState;

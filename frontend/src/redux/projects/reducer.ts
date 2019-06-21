@@ -4,16 +4,16 @@ import { ActionType, getType } from 'typesafe-actions';
 import { fetchProjectError, fetchProjectsRequest, fetchProjectSuccess } from './actions';
 import { ProjectType } from './types';
 
-export type projectsAction = ActionType<typeof fetchProjectsRequest | typeof fetchProjectSuccess | typeof fetchProjectError>;
+export type ProjectsAction = ActionType<typeof fetchProjectsRequest | typeof fetchProjectSuccess | typeof fetchProjectError>;
 
-export type projectsState = Readonly<{
+export type ProjectsState = Readonly<{
   byId: Readonly<Record<string, ProjectType>> | null;
 }>;
 
-const initialState: projectsState = { byId: null };
+const initialState: ProjectsState = { byId: null };
 
-const reducer = (state: projectsState = initialState, action: AnyAction) => {
-  const typedAction = action as projectsAction;
+const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
+  const typedAction = action as ProjectsAction;
   switch (typedAction.type) {
     case getType(fetchProjectsRequest):
       return {
@@ -33,7 +33,7 @@ const reducer = (state: projectsState = initialState, action: AnyAction) => {
         ...state,
         byId: {
           ...state.byId,
-          ...{[action.payload.projectId]: null},
+          ...{ [action.payload.projectId]: null },
         },
       };
     default:

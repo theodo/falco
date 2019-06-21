@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
-import { userState } from 'redux/user/reducer';
+import { UserState } from 'redux/user/reducer';
 import { routeDefinitions } from 'routes';
 
 import Loader from 'components/Loader';
@@ -16,7 +16,7 @@ interface OwnProps {
   isVisible: boolean;
   position?: string;
   right?: string | null;
-  user: userState;
+  user: UserState;
   isUserAuthenticated: boolean;
   shouldDisplayWhatsNewNotification: boolean;
 }
