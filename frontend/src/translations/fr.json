@@ -173,7 +173,7 @@
     "LighthouseTTI": "Time To Interactive",
     "LighthouseFirstMeaningfulPaint": "First Meaningful Paint",
     "LighthouseFirstCPUIdle": "First CPU Idle",
-    "LighthouseMaxPotentialFirstInputDelay": "First Potential First Input Delay"
+    "LighthouseMaxPotentialFirstInputDelay": "Max Potential First Input Delay"
   },
   "components": {
     "MetricGraph": {

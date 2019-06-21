@@ -1,18 +1,21 @@
 // styles imported from lighthouse open source project: https://github.com/GoogleChrome/lighthouse
 
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, lineHeight } from 'stylesheet';
+import { colorUsage } from 'stylesheet';
 
 interface ItemWithProps {
-  state: string;
+  state: 'FAIL' | 'AVERAGE' | 'PASS';
 }
 
-const color = (state: string): string => {
-  return state === 'FAIL'
-    ? colorUsage.lighthouseFail
-    : state === 'AVERAGE'
-    ? colorUsage.lighthouseAverage
-    : colorUsage.lighthouseGood;
+const color = (state: 'FAIL' | 'AVERAGE' | 'PASS'): string => {
+  switch (state) {
+    case 'FAIL':
+      return colorUsage.lighthouseFail;
+    case 'AVERAGE':
+      return colorUsage.lighthouseAverage;
+    case 'PASS':
+      return colorUsage.lighthouseGood;
+  }
 };
 
 export const ColumnsContainer = styled.div`
