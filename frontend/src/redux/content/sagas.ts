@@ -1,4 +1,4 @@
-import { all, call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import { makeGetRequest } from "services/networking/request";
 import { getType } from 'typesafe-actions';
 
@@ -15,5 +15,5 @@ export function* fetchLastUpdateOfWhatsNewSaga() {
 };
 
 export default function* contentSagas() {
-    yield takeEvery(getType(fetchLastUpdateOfWhatsNew.request), fetchLastUpdateOfWhatsNewSaga);
+    yield takeLatest(getType(fetchLastUpdateOfWhatsNew.request), fetchLastUpdateOfWhatsNewSaga);
 };
