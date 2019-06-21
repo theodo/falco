@@ -171,6 +171,7 @@ export const colorUsage = {
   lighthouseFail: '#FF4E42',
   lighthouseAverage: '#ffa400',
   lighthouseGood: '#0CCE6B',
+  lighthouseLineColor: '#ebebeb',
 
   // Badge
   pageBadgeText: colorPalette.accentBlue500,

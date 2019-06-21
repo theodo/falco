@@ -2,6 +2,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { getSpacing } from 'stylesheet';
 import { Container, LighthouseLink, LighthouseNote, SubTitle } from './LighthouseBlock.style';
+import LighthouseMetrics from './LighthouseMetrics';
 import LighthouseScore from './LighthouseScore';
 
 export interface OwnProps {
@@ -18,7 +19,8 @@ const LighthouseBlock: React.FunctionComponent<OwnProps> = ({ lighthouseUrl, lig
       <LighthouseNote margin={`0 0 ${getSpacing(4)} 0}`}>
         <FormattedMessage id="Audits.lighthouse_note" />
       </LighthouseNote>
-      <LighthouseScore score={lighthouseScore}/>
+      <LighthouseScore score={lighthouseScore} />
+      <LighthouseMetrics />
       <LighthouseLink href={lighthouseUrl} target={'_blank'}>
         <FormattedMessage id="Audits.lighthouse_results" />
       </LighthouseLink>
