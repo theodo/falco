@@ -81,6 +81,18 @@ export interface ApiAuditResultType {
   wpt_metric_lighthouse_performance: number;
   script_step_name: string;
   script_step_number: number;
+  lh_metric_tti_displayed_value: string;
+  lh_metric_tti_score: number;
+  lh_metric_first_contentful_paint_displayed_value: string;
+  lh_metric_first_contentful_paint_score: number;
+  lh_metric_speed_index_displayed_value: string;
+  lh_metric_speed_index_score: number;
+  lh_metric_first_meaningful_paint_displayed_value: string;
+  lh_metric_first_meaningful_paint_score: number;
+  lh_metric_first_cpu_idle_displayed_value: string;
+  lh_metric_first_cpu_idle_score: number;
+  lh_metric_max_potential_first_input_delay_displayed_value: string;
+  lh_metric_max_potential_first_input_delay_score: number;
 }
 
 export type AuditResultsAsGraphDataDate = Record<'date', number>;
