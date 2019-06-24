@@ -32,3 +32,6 @@ For all scripts, as they are crypted, you need to remove crypted scripts and rep
 In your local database, right click and select `Run SQL script`, with the script you just generated!
 
 When running the app in localhost you have now access to recent production data.
+
+## Troubleshooting
+If you do not see you database schema after adding the database, right-click on the database name then click Database Tools > Manage Shown Schemas and select falco as "all schemas"
