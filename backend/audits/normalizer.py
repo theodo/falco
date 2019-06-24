@@ -2,6 +2,7 @@ import logging
 
 
 def format_wpt_json_results_for_page(data):
+    lighthouse_data = data.get("lighthouse")
     return [
         {
             "wpt_metric_first_view_tti": data["median"]["firstView"].get(
@@ -50,6 +51,44 @@ def format_wpt_json_results_for_page(data):
                 "lighthouse.Performance"
             ),
             "screenshot_url": data["median"]["firstView"]["images"]["screenShot"],
+            "lh_metric_tti_displayed_value": lighthouse_data["audits"]["interactive"][
+                "displayValue"
+            ],
+            "lh_metric_tti_score": lighthouse_data["audits"]["interactive"]["score"],
+            "lh_metric_first_contentful_paint_displayed_value": lighthouse_data[
+                "audits"
+            ]["first-contentful-paint"]["displayValue"],
+            "lh_metric_first_contentful_paint_score": lighthouse_data["audits"][
+                "first-contentful-paint"
+            ]["score"],
+            "lh_metric_speed_index_displayed_value": lighthouse_data["audits"][
+                "speed-index"
+            ]["displayValue"],
+            "lh_metric_speed_index_score": lighthouse_data["audits"]["speed-index"][
+                "score"
+            ],
+            "lh_metric_first_meaningful_paint_displayed_value": lighthouse_data[
+                "audits"
+            ]["first-meaningful-paint"]["displayValue"],
+            "lh_metric_first_meaningful_paint_score": lighthouse_data["audits"][
+                "first-meaningful-paint"
+            ]["score"],
+            "lh_metric_first_cpu_idle_displayed_value": lighthouse_data["audits"][
+                "first-cpu-idle"
+            ]["displayValue"],
+            "lh_metric_first_cpu_idle_score": lighthouse_data["audits"][
+                "first-cpu-idle"
+            ]["score"],
+            "lh_metric_max_potential_first_input_delay_displayed_value": lighthouse_data[
+                "audits"
+            ][
+                "max-potential-fid"
+            ][
+                "displayValue"
+            ],
+            "lh_metric_max_potential_first_input_delay_score": lighthouse_data[
+                "audits"
+            ]["max-potential-fid"]["score"],
         }
     ]
 
