@@ -26,7 +26,7 @@ db/connect:
 
 fixtures/load:
 	docker exec -i falco_db_1 psql -Upostgres < fixtures/initial_dump.sql;\
-	backend/attributeprojectstoadmins;
+	make backend/attributeprojectstoadmins;
 
 frontend/install: frontend/.env
 	yarn --cwd frontend install
