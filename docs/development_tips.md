@@ -38,7 +38,7 @@ If you need to add a Django package in FALCO backend, please use folowing proced
   ```
 - Enjoy! 🎉
 
-## How to import custom data from abackup file
+## How to import custom data from a backup file
 
 If you need to add a Django package in FALCO backend, please use folowing procedure:
 
@@ -72,4 +72,15 @@ TRUNCATE TABLE <table_name> CASCADE;
 
 ```bash
 docker exec -i falco_db_1 psql -Upostgres < backup_file.sql
+```
+
+
+- Attribute all the projects to the superusers of the site
+```bash
+make backend/attributeprojectstoadmins
+```
+
+- Attribute all the projects to the superusers and set all the wpt_api_keys
+```bash
+docker-compose exec backend ./manage.py attributeprojectstoadmins --key <your_key>
 ```
