@@ -181,6 +181,11 @@ export const colorUsage = {
   scriptBadgeBackground: colorPalette.accentGreen200,
   scriptBadgeSelectedText: colorPalette.white500,
   scriptBadgeSelectedBackground: colorPalette.white200,
+
+
+  // Not Found 404
+  notFoundButtonBackground: colorPalette.grey500,
+  notFoundButtonText: colorPalette.white500,
 };
 
 export const fontFamily = {
@@ -227,6 +232,9 @@ export const fontSize = {
   // WebPageTest
   webPageTestLink: '14px',
 
+  // 404
+  notFoundButton: '14px',
+
   // Lighthouse
   lighthousePercentage: '38px',
   lighthouseGaugeLabel: '28px',
@@ -269,6 +277,9 @@ export const lineHeight = {
   // WebPageTest
   webPageTestLink: '18px',
 
+  // 404
+  notFoundButton: '18px',
+
   // Lighthouse
   lighthousePercentage: '0',
   lighthouseGaugeLabel: '36px',
@@ -310,6 +321,9 @@ export const fontWeight = {
 
   // WebPageTest
   webPageTestLink: 'bold',
+
+  // 404
+  notFoundButton: 'bold',
 
   // Badge
   badgeText: 'bold',
