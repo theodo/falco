@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from projects.models import Page, Project
 from projects.serializers import PageSerializer, ProjectSerializer
-from projects.permissions import check_if_member_of_project
+from projects.permissions import check_if_member_of_project, check_if_admin_of_project
 from rest_framework import permissions, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.parsers import JSONParser
@@ -39,6 +39,7 @@ def project_detail(request, project_uuid):
         return JsonResponse(serializer.data)
 
     elif request.method == "PUT":
+        check_if_admin_of_project(request.user.id, project.uuid)
         data = JSONParser().parse(request)
         serializer = ProjectSerializer(project, data=data)
         if serializer.is_valid():
@@ -47,8 +48,9 @@ def project_detail(request, project_uuid):
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == "DELETE":
+        check_if_admin_of_project(request.user.id, project.uuid)
         project.delete()
-        return JsonResponse(status=status.HTTP_204_NO_CONTENT)
+        return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(["GET", "POST"])
@@ -81,7 +83,7 @@ def project_page_detail(request, project_uuid, page_uuid):
     check_if_member_of_project(request.user.id, project.uuid)
 
     if page.project != project:
-        return JsonResponse(status=status.HTTP_400_BAD_REQUEST)
+        return JsonResponse({}, status=status.HTTP_400_BAD_REQUEST)
 
     if request.method == "GET":
         serializer = PageSerializer(page)
@@ -97,4 +99,4 @@ def project_page_detail(request, project_uuid, page_uuid):
 
     elif request.method == "DELETE":
         page.delete()
-        return JsonResponse(status=status.HTTP_204_NO_CONTENT)
+        return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
