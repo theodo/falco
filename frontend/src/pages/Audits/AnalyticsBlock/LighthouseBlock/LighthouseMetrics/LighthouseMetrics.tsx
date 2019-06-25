@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { AuditResultType, LighthouseMetricType } from 'redux/auditResults/types';
 import {
   Column,
   ColumnsContainer,
@@ -9,38 +10,12 @@ import {
   MetricValue,
 } from './LighthouseMetrics.style';
 
-// TODO to move in ticket 334
-export interface LighthouseMetricsType {
-  displayedValue: string;
-  score: number;
+export interface OwnProps {
+  auditResult: AuditResultType;
 }
 
-export interface LighthouseResultType {
-  [key: string]: LighthouseMetricsType;
-}
-
-// TODO to remove in ticket 334
-const LighthouseMetrics: React.FunctionComponent = () => {
-  const TTI: LighthouseMetricsType = { displayedValue: '1.2 s', score: 0.9 };
-  const SpeedIndex: LighthouseMetricsType = { displayedValue: '3.2 s', score: 0.3 };
-  const FirstContentfulPaint: LighthouseMetricsType = { displayedValue: '2.2 s', score: 0.7 };
-  const FirstMeaningfulPaint: LighthouseMetricsType = { displayedValue: '3.2 s', score: 0.3 };
-  const FirstCPUIdle: LighthouseMetricsType = { displayedValue: '3.2 s', score: 0.3 };
-  const MaxPotentialFirstInputDelay: LighthouseMetricsType = {
-    displayedValue: '3.2 s',
-    score: 0.3,
-  };
-
-  const result: LighthouseResultType = {
-    LighthouseTTI: TTI,
-    LighthouseSpeedIndex: SpeedIndex,
-    LighthouseFirstContentfulPaint: FirstContentfulPaint,
-    LighthouseFirstMeaningfulPaint: FirstMeaningfulPaint,
-    LighthouseFirstCPUIdle: FirstCPUIdle,
-    LighthouseMaxPotentialFirstInputDelay: MaxPotentialFirstInputDelay,
-  };
-
-  const metrics = [
+const LighthouseMetrics: React.FunctionComponent<OwnProps> = ({ auditResult }) => {
+  const metrics: LighthouseMetricType[][] = [
     ['LighthouseFirstContentfulPaint', 'LighthouseSpeedIndex', 'LighthouseTTI'],
     [
       'LighthouseFirstMeaningfulPaint',
@@ -54,21 +29,23 @@ const LighthouseMetrics: React.FunctionComponent = () => {
   const AVERAGE = 'AVERAGE';
   const PASS = 'PASS';
 
-  const metricState = (metric: LighthouseMetricsType): 'FAIL' | 'AVERAGE' | 'PASS' => {
-    return metric.score < 0.5 ? FAIL : metric.score < 0.8 ? AVERAGE : PASS;
+  const metricState = (score: number): 'FAIL' | 'AVERAGE' | 'PASS' => {
+    return score < 0.5 ? FAIL : score < 0.8 ? AVERAGE : PASS;
   };
 
   return (
     <ColumnsContainer>
-      {metrics.map((column: string[]) => (
+      {metrics.map((column: LighthouseMetricType[]) => (
         <Column>
-          {column.map((metric: string) => (
+          {column.map((metric: LighthouseMetricType) => (
             <Metric>
-              <MetricInnerwrap state={metricState(result[metric])}>
+              <MetricInnerwrap state={metricState(auditResult[metric].score)}>
                 <MetricTitle>
                   <FormattedMessage id={`Metrics.${metric}`} />
                 </MetricTitle>
-                <MetricValue state={metricState(result[metric])}>{result[metric].displayedValue}</MetricValue>
+                <MetricValue state={metricState(auditResult[metric].score)}>
+                  {auditResult[metric].displayed_value}
+                </MetricValue>
               </MetricInnerwrap>
             </Metric>
           ))}

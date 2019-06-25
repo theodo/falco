@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { AuditResultType } from 'redux/auditResults/types';
 import { getSpacing } from 'stylesheet';
 import { Container, LighthouseLink, LighthouseNote, SubTitle } from './LighthouseBlock.style';
 import LighthouseMetrics from './LighthouseMetrics';
@@ -7,10 +8,10 @@ import LighthouseScore from './LighthouseScore';
 
 export interface OwnProps {
   lighthouseUrl: string;
-  lighthouseScore: number;
+  lastAuditResult: AuditResultType;
 }
 
-const LighthouseBlock: React.FunctionComponent<OwnProps> = ({ lighthouseUrl, lighthouseScore }) => {
+const LighthouseBlock: React.FunctionComponent<OwnProps> = ({ lighthouseUrl, lastAuditResult }) => {
   return (
     <Container>
       <SubTitle margin={`0 0 ${getSpacing(5)} 0}`}>
@@ -19,8 +20,8 @@ const LighthouseBlock: React.FunctionComponent<OwnProps> = ({ lighthouseUrl, lig
       <LighthouseNote margin={`0 0 ${getSpacing(4)} 0}`}>
         <FormattedMessage id="Audits.lighthouse_note" />
       </LighthouseNote>
-      <LighthouseScore score={lighthouseScore} />
-      <LighthouseMetrics />
+      <LighthouseScore score={lastAuditResult.WPTMetricLighthousePerformance} />
+      <LighthouseMetrics auditResult={lastAuditResult} />
       <LighthouseLink href={lighthouseUrl} target={'_blank'}>
         <FormattedMessage id="Audits.lighthouse_results" />
       </LighthouseLink>

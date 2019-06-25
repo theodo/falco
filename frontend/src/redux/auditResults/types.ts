@@ -22,6 +22,30 @@ export interface AuditResultType {
   WPTMetricLighthousePerformance: number;
   scriptStepName: string | null;
   scriptStepNumber: string | null;
+  LighthouseTTI: {
+    displayed_value: string;
+    score: number;
+  };
+  LighthouseSpeedIndex: {
+    displayed_value: string;
+    score: number;
+  };
+  LighthouseFirstContentfulPaint: {
+    displayed_value: string;
+    score: number;
+  };
+  LighthouseFirstMeaningfulPaint: {
+    displayed_value: string;
+    score: number;
+  };
+  LighthouseFirstCPUIdle: {
+    displayed_value: string;
+    score: number;
+  };
+  LighthouseMaxPotentialFirstInputDelay: {
+    displayed_value: string;
+    score: number;
+  };
 }
 
 export interface SortedPageAuditResultIds {
@@ -48,6 +72,14 @@ export type MetricType =
   | 'WPTMetricFirstViewTimeToFirstByte'
   | 'WPTMetricRepeatViewTimeToFirstByte'
   | 'WPTMetricLighthousePerformance';
+
+export type LighthouseMetricType =
+  | 'LighthouseFirstContentfulPaint'
+  | 'LighthouseSpeedIndex'
+  | 'LighthouseTTI'
+  | 'LighthouseFirstMeaningfulPaint'
+  | 'LighthouseFirstCPUIdle'
+  | 'LighthouseMaxPotentialFirstInputDelay';
 
 export interface MetricConstantForGraph {
   type: 'time' | 'number' | 'percent';
