@@ -32,7 +32,7 @@ const LighthouseMetrics: React.FunctionComponent<OwnProps> = ({ auditResult }) =
   const PASS = 'PASS';
 
   const metricState = (score: number): 'FAIL' | 'AVERAGE' | 'PASS' => {
-    return score < 0.5 ? FAIL : score < 0.8 ? AVERAGE : PASS;
+    return score < 0.5 ? FAIL : score < 0.9 ? AVERAGE : PASS;
   };
 
   return (
