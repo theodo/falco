@@ -79,3 +79,23 @@ docker exec -i falco_db_1 psql -Upostgres < backup_file.sql
 ```bash
 docker-compose exec backend ./manage.py attributeprojectstoadmins --key <your_key>
 ```
+
+## Validation using Postman
+Postman is a very useful tool in order to test and validate the API.
+
+### Configure an environment
+An environment allows you to store sensitive and repetitive information locally and still be able to share your collections with you team.
+
+Click on the eye icon in the top right of the Postman interface and create a new environment (e.g. 'Falco Staging').
+Define as variables:
+- `token` : the access token that you can copy from the localstorage
+- `endpoint` : the api endpoint (e.g. `staging.getfal.co/api`)
+
+### Create a collection
+A collection is a set of requests. It can be very useful in order to speed up the validation of tickets.
+
+In the top left of the interface, click on 'create' the 'new collection'
+**Important** In the 'Authorization' tab, Choose in the dropdown menu the 'Bearer Token' option and set `{{token}}` in the 'Token' field. Postman will then use the environment variable to populate the collection field
+
+### Create a request
+Do not forget to save the request in the collection and check in the 'Authorization' tab of the request that the authorization type is 'Inherit from parent'
