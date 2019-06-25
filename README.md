@@ -20,6 +20,7 @@ Falco helps you get your Performance Kaizen ready to go, in minutes
 - [HTTPS](./docs/https.md)
 - [Dump production database in local](./docs/database_dump.md)
 - [DEV tips](./docs/development_tips.md)
+- [Outboarding](./docs/outboarding.md)
 
 ## Team
 
