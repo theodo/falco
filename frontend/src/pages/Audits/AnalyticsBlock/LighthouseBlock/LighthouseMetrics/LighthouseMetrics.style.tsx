@@ -1,7 +1,7 @@
 // styles imported from lighthouse open source project: https://github.com/GoogleChrome/lighthouse
 
 import styled from 'styled-components';
-import { colorUsage } from 'stylesheet';
+import { colorUsage, fontSize, fontWeight } from 'stylesheet';
 
 interface ItemWithProps {
   state: 'FAIL' | 'AVERAGE' | 'PASS';
@@ -28,6 +28,18 @@ const textColor = (state: 'FAIL' | 'AVERAGE' | 'PASS'): string => {
       return colorUsage.lighthouseGoodSecondary;
   }
 };
+
+export const MetricsContainer = styled.div`
+  position: relative;
+`;
+
+export const MetricsHeader = styled.div`
+  display: flex;
+  width: 100%;
+  font-size: ${fontSize.lighthouseMetricsHeader};
+  font-weight: ${fontWeight.lighthouseMetricsHeader};
+  margin: 0 0 8px;
+`;
 
 export const ColumnsContainer = styled.div`
   display: flex;

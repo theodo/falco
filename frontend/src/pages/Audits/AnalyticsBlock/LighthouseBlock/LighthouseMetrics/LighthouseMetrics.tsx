@@ -6,6 +6,8 @@ import {
   ColumnsContainer,
   Metric,
   MetricInnerwrap,
+  MetricsContainer,
+  MetricsHeader,
   MetricTitle,
   MetricValue,
 } from './LighthouseMetrics.style';
@@ -34,24 +36,29 @@ const LighthouseMetrics: React.FunctionComponent<OwnProps> = ({ auditResult }) =
   };
 
   return (
-    <ColumnsContainer>
-      {metrics.map((column: LighthouseMetricType[]) => (
-        <Column>
-          {column.map((metric: LighthouseMetricType) => (
-            <Metric>
-              <MetricInnerwrap state={metricState(auditResult[metric].score)}>
-                <MetricTitle>
-                  <FormattedMessage id={`Metrics.${metric}`} />
-                </MetricTitle>
-                <MetricValue state={metricState(auditResult[metric].score)}>
-                  {auditResult[metric].displayed_value}
-                </MetricValue>
-              </MetricInnerwrap>
-            </Metric>
-          ))}
-        </Column>
-      ))}
-    </ColumnsContainer>
+    <MetricsContainer>
+      <MetricsHeader>
+        <FormattedMessage id="Audits.lighthouse_header" />
+      </MetricsHeader>
+      <ColumnsContainer>
+        {metrics.map((column: LighthouseMetricType[]) => (
+          <Column>
+            {column.map((metric: LighthouseMetricType) => (
+              <Metric>
+                <MetricInnerwrap state={metricState(auditResult[metric].score)}>
+                  <MetricTitle>
+                    <FormattedMessage id={`Metrics.${metric}`} />
+                  </MetricTitle>
+                  <MetricValue state={metricState(auditResult[metric].score)}>
+                    {auditResult[metric].displayed_value}
+                  </MetricValue>
+                </MetricInnerwrap>
+              </Metric>
+            ))}
+          </Column>
+        ))}
+      </ColumnsContainer>
+    </MetricsContainer>
   );
 };
 

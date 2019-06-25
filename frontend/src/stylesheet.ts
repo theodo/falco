@@ -242,6 +242,7 @@ export const fontSize = {
   // Lighthouse
   lighthousePercentage: '38px',
   lighthouseGaugeLabel: '28px',
+  lighthouseMetricsHeader: '16px',
 
   // Badge
   badgeText: '14px',
@@ -328,6 +329,9 @@ export const fontWeight = {
 
   // 404
   notFoundButton: 'bold',
+
+  // Lighthouse
+  lighthouseMetricsHeader: 'bold',
 
   // Badge
   badgeText: 'bold',
