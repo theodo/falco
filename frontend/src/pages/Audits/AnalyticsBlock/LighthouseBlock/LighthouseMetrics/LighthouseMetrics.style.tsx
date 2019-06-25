@@ -7,7 +7,7 @@ interface ItemWithProps {
   state: 'FAIL' | 'AVERAGE' | 'PASS';
 }
 
-const color = (state: 'FAIL' | 'AVERAGE' | 'PASS'): string => {
+const iconColor = (state: 'FAIL' | 'AVERAGE' | 'PASS'): string => {
   switch (state) {
     case 'FAIL':
       return colorUsage.lighthouseFail;
@@ -15,6 +15,17 @@ const color = (state: 'FAIL' | 'AVERAGE' | 'PASS'): string => {
       return colorUsage.lighthouseAverage;
     case 'PASS':
       return colorUsage.lighthouseGood;
+  }
+};
+
+const textColor = (state: 'FAIL' | 'AVERAGE' | 'PASS'): string => {
+  switch (state) {
+    case 'FAIL':
+      return colorUsage.lighthouseFailSecondary;
+    case 'AVERAGE':
+      return colorUsage.lighthouseAverageSecondary;
+    case 'PASS':
+      return colorUsage.lighthouseGoodSecondary;
   }
 };
 
@@ -53,9 +64,9 @@ export const MetricInnerwrap = styled.div`
     border-radius: ${(props: ItemWithProps) => (props.state === 'PASS' ? '100%' : '')};
     background: ${(props: ItemWithProps) =>
       props.state === 'PASS'
-        ? color(props.state)
+        ? iconColor(props.state)
         : props.state === 'AVERAGE'
-        ? color(props.state)
+        ? iconColor(props.state)
         : ''};
     width: ${(props: ItemWithProps) =>
       props.state === 'PASS' ? '12px' : props.state === 'AVERAGE' ? 'calc(12px * 0.88)' : ''};
@@ -66,7 +77,7 @@ export const MetricInnerwrap = styled.div`
     border-right: ${(props: ItemWithProps) =>
       props.state === 'FAIL' ? '6px solid transparent' : ''};
     border-bottom: ${(props: ItemWithProps) =>
-      props.state === 'FAIL' ? '12px solid ' + color(props.state) : ''};
+      props.state === 'FAIL' ? '12px solid ' + iconColor(props.state) : ''};
   }
 `;
 
@@ -76,5 +87,5 @@ export const MetricTitle = styled.span`
 
 export const MetricValue = styled.div`
   white-space: nowrap;
-  color: ${(props: ItemWithProps) => color(props.state)};
+  color: ${(props: ItemWithProps) => textColor(props.state)};
 `;

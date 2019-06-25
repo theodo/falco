@@ -169,8 +169,11 @@ export const colorUsage = {
 
   // Lighthouse
   lighthouseFail: '#FF4E42',
+  lighthouseFailSecondary: '#EB0F00',
   lighthouseAverage: '#ffa400',
+  lighthouseAverageSecondary: '#D04900',
   lighthouseGood: '#0CCE6B',
+  lighthouseGoodSecondary: '#018642',
   lighthouseLineColor: '#ebebeb',
 
   // Badge
