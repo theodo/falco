@@ -97,6 +97,9 @@ const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> 
     >
       <>
         <PageTitle>{project.name + ' / ' + pageOrScriptName}</PageTitle>
+        {auditResults && auditResults[0] && auditResults[0].scriptStepName && (
+          <PageSubTitle>{auditResults[0].scriptStepName}</PageSubTitle>
+        )}
         <PageSubTitle>{currentAuditParameterName}</PageSubTitle>
       </>
       <CloseContainer
