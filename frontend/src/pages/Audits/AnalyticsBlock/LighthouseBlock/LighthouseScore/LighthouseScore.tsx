@@ -42,7 +42,7 @@ const LighthouseScore: React.FunctionComponent<OwnProps> = ({ score }) => {
               />
             </GaugeSvg>
           </GaugeSvgWrapper>
-          <GaugePercentage>{score * 100}</GaugePercentage>
+          <GaugePercentage>{Math.round(score * 100)}</GaugePercentage>
           <GaugeLabel>
             <FormattedMessage id="Audits.lighthouse_performance" />
           </GaugeLabel>
