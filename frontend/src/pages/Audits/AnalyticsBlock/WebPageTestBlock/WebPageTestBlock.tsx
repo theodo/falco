@@ -150,7 +150,7 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps & InjectedIntlProps> = 
         <Style.FormInputs>
           {optionBlock('latest')}
           {optionBlock('dateSelector')}
-          {optionBlock('dateComparator')}
+          {auditResults.length > 1 && optionBlock('dateComparator')}
         </Style.FormInputs>
       </Style.Form>
       {(dateSelectorDisplayed || dateComparatorDisplayed) && (
