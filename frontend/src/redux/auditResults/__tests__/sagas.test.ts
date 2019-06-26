@@ -27,6 +27,8 @@ const pageAuditResultId = '5555';
 const pageAuditId = '6666';
 const pageAuditResultDate = dayjs('2019-05-11T00:00:00.000000+00:00');
 const pageAuditResultValue = 11;
+const pageAuditResultLighthouseDisplayedValue = "3,2 s";
+const pageAuditResultLighthouseScore = 0.6;
 const pageAuditResultAPI = [
   {
     uuid: pageAuditResultId,
@@ -56,6 +58,18 @@ const pageAuditResultAPI = [
     wpt_metric_lighthouse_performance: pageAuditResultValue,
     script_step_name: null,
     script_step_number: null,
+    lh_metric_tti_displayed_value: pageAuditResultLighthouseDisplayedValue,
+    lh_metric_tti_score: pageAuditResultLighthouseScore,
+    lh_metric_first_contentful_paint_displayed_value: pageAuditResultLighthouseDisplayedValue,
+    lh_metric_first_contentful_paint_score: pageAuditResultLighthouseScore,
+    lh_metric_speed_index_displayed_value: pageAuditResultLighthouseDisplayedValue,
+    lh_metric_speed_index_score: pageAuditResultLighthouseScore,
+    lh_metric_first_meaningful_paint_displayed_value: pageAuditResultLighthouseDisplayedValue,
+    lh_metric_first_meaningful_paint_score: pageAuditResultLighthouseScore,
+    lh_metric_first_cpu_idle_displayed_value: pageAuditResultLighthouseDisplayedValue,
+    lh_metric_first_cpu_idle_score: pageAuditResultLighthouseScore,
+    lh_metric_max_potential_first_input_delay_displayed_value: pageAuditResultLighthouseDisplayedValue,
+    lh_metric_max_potential_first_input_delay_score: pageAuditResultLighthouseScore,
   },
 ];
 
@@ -82,6 +96,30 @@ const pageAuditResultModelized = {
     WPTMetricLighthousePerformance: pageAuditResultValue,
     scriptStepName: null,
     scriptStepNumber: null,
+    lighthouseTTI: {
+      displayed_value: pageAuditResultLighthouseDisplayedValue,
+      score: pageAuditResultLighthouseScore,
+    },
+    lighthouseSpeedIndex: {
+      displayed_value: pageAuditResultLighthouseDisplayedValue,
+      score: pageAuditResultLighthouseScore,
+    },
+    lighthouseFirstContentfulPaint: {
+      displayed_value: pageAuditResultLighthouseDisplayedValue,
+      score: pageAuditResultLighthouseScore,
+    },
+    lighthouseFirstMeaningfulPaint: {
+      displayed_value: pageAuditResultLighthouseDisplayedValue,
+      score: pageAuditResultLighthouseScore,
+    },
+    lighthouseFirstCPUIdle: {
+      displayed_value: pageAuditResultLighthouseDisplayedValue,
+      score: pageAuditResultLighthouseScore,
+    },
+    lighthouseMaxPotentialFirstInputDelay: {
+      displayed_value: pageAuditResultLighthouseDisplayedValue,
+      score: pageAuditResultLighthouseScore,
+    },
   },
 };
 
@@ -120,6 +158,18 @@ const scriptAuditResultAPI = [
     wpt_metric_lighthouse_performance: scriptAuditResultValue,
     script_step_name: scriptAuditStepName,
     script_step_number: scriptAuditStepNumber,
+    lh_metric_tti_displayed_value: null,
+    lh_metric_tti_score: null,
+    lh_metric_first_contentful_paint_displayed_value: null,
+    lh_metric_first_contentful_paint_score: null,
+    lh_metric_speed_index_displayed_value: null,
+    lh_metric_speed_index_score: null,
+    lh_metric_first_meaningful_paint_displayed_value: null,
+    lh_metric_first_meaningful_paint_score: null,
+    lh_metric_first_cpu_idle_displayed_value: null,
+    lh_metric_first_cpu_idle_score: null,
+    lh_metric_max_potential_first_input_delay_displayed_value: null,
+    lh_metric_max_potential_first_input_delay_score: null,
   },
 ];
 
@@ -146,6 +196,30 @@ const scriptAuditResultModelized = {
     WPTMetricLighthousePerformance: scriptAuditResultValue,
     scriptStepName: scriptAuditStepName,
     scriptStepNumber: scriptAuditStepNumber,
+    lighthouseTTI: {
+      displayed_value: null,
+      score: null,
+    },
+    lighthouseSpeedIndex: {
+      displayed_value: null,
+      score: null,
+    },
+    lighthouseFirstContentfulPaint: {
+      displayed_value: null,
+      score: null,
+    },
+    lighthouseFirstMeaningfulPaint: {
+      displayed_value: null,
+      score: null,
+    },
+    lighthouseFirstCPUIdle: {
+      displayed_value: null,
+      score: null,
+    },
+    lighthouseMaxPotentialFirstInputDelay: {
+      displayed_value: null,
+      score: null,
+    },
   },
 };
 

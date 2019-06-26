@@ -150,6 +150,40 @@ def poll_audit_results(audit_uuid, json_url):
                     ],
                     script_step_name=formatted_results.get("step_name"),
                     script_step_number=formatted_results.get("step_number"),
+                    lh_metric_tti_displayed_value=formatted_results.get(
+                        "lh_metric_tti_displayed_value"
+                    ),
+                    lh_metric_tti_score=formatted_results.get("lh_metric_tti_score"),
+                    lh_metric_first_contentful_paint_displayed_value=formatted_results.get(
+                        "lh_metric_first_contentful_paint_displayed_value"
+                    ),
+                    lh_metric_first_contentful_paint_score=formatted_results.get(
+                        "lh_metric_first_contentful_paint_score"
+                    ),
+                    lh_metric_speed_index_displayed_value=formatted_results.get(
+                        "lh_metric_speed_index_displayed_value"
+                    ),
+                    lh_metric_speed_index_score=formatted_results.get(
+                        "lh_metric_speed_index_score"
+                    ),
+                    lh_metric_first_meaningful_paint_displayed_value=formatted_results.get(
+                        "lh_metric_first_meaningful_paint_displayed_value"
+                    ),
+                    lh_metric_first_meaningful_paint_score=formatted_results.get(
+                        "lh_metric_first_meaningful_paint_score"
+                    ),
+                    lh_metric_first_cpu_idle_displayed_value=formatted_results.get(
+                        "lh_metric_first_cpu_idle_displayed_value"
+                    ),
+                    lh_metric_first_cpu_idle_score=formatted_results.get(
+                        "lh_metric_first_cpu_idle_score"
+                    ),
+                    lh_metric_max_potential_first_input_delay_displayed_value=formatted_results.get(
+                        "lh_metric_max_potential_first_input_delay_displayed_value"
+                    ),
+                    lh_metric_max_potential_first_input_delay_score=formatted_results.get(
+                        "lh_metric_max_potential_first_input_delay_score"
+                    ),
                 )
                 audit_results.save()
 

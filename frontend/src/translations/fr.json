@@ -105,7 +105,8 @@
     "lighthouse_report": "Rapport Lighthouse",
     "lighthouse_note": "Note : les valeurs données par Lighthouse peuvent différer des valeurs du Dashboard, car l'environnement de l'audit Lighthouse est différent. Les diagnostics et opportunités sont toujours valables, bien que les gains indiqués puissent différer des résultats réels.",
     "lighthouse_performance": "Performance",
-    "lighthouse_results": "Accéder au rapport"
+    "lighthouse_results": "Accéder au rapport",
+    "lighthouse_header": "Metrics"
   },
   "Metrics": {
     "WPTMetricFirstViewTTI": {
@@ -167,7 +168,13 @@
     "WPTMetricLighthousePerformance": {
       "name": "Lighthouse Performance Score",
       "description": "Aggrège un ensemble des autres métriques de performance, simule un appareil de milieu de gamme et des conditions réseau défavorables.\nMesuré via Dev Tools ou https://web.dev/fast"
-    }
+    },
+    "lighthouseFirstContentfulPaint": "First Contentful Paint",
+    "lighthouseSpeedIndex": "Speed Index",
+    "lighthouseTTI": "Time To Interactive",
+    "lighthouseFirstMeaningfulPaint": "First Meaningful Paint",
+    "lighthouseFirstCPUIdle": "First CPU Idle",
+    "lighthouseMaxPotentialFirstInputDelay": "Max Potential First Input Delay"
   },
   "components": {
     "MetricGraph": {

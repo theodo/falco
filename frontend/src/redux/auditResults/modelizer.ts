@@ -34,6 +34,30 @@ export const modelizeAuditResultsForPage = (
         WPTMetricLighthousePerformance: auditResult.wpt_metric_lighthouse_performance,
         scriptStepName: auditResult.script_step_name,
         scriptStepNumber: auditResult.script_step_number,
+        lighthouseTTI: {
+          displayed_value: auditResult.lh_metric_tti_displayed_value,
+          score: auditResult.lh_metric_tti_score,
+        },
+        lighthouseSpeedIndex: {
+          displayed_value: auditResult.lh_metric_speed_index_displayed_value,
+          score: auditResult.lh_metric_speed_index_score,
+        },
+        lighthouseFirstContentfulPaint: {
+          displayed_value: auditResult.lh_metric_first_contentful_paint_displayed_value,
+          score: auditResult.lh_metric_first_contentful_paint_score,
+        },
+        lighthouseFirstMeaningfulPaint: {
+          displayed_value: auditResult.lh_metric_first_meaningful_paint_displayed_value,
+          score: auditResult.lh_metric_first_meaningful_paint_score,
+        },
+        lighthouseFirstCPUIdle: {
+          displayed_value: auditResult.lh_metric_first_cpu_idle_displayed_value,
+          score: auditResult.lh_metric_first_cpu_idle_score,
+        },
+        lighthouseMaxPotentialFirstInputDelay: {
+          displayed_value: auditResult.lh_metric_max_potential_first_input_delay_displayed_value,
+          score: auditResult.lh_metric_max_potential_first_input_delay_score,
+        },
       },
     };
   }, {});

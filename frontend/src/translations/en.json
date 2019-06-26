@@ -105,7 +105,8 @@
     "lighthouse_report": "Lighthouse Report",
     "lighthouse_note": "Note: data provided by Lighthouse may differ from the Dashboard data. This is due to a different audit environment. Diagnostics and opportunities are still relevant, even though the indicated metric improvements may differ from the real results.",
     "lighthouse_performance": "Performance",
-    "lighthouse_results": "Access report"
+    "lighthouse_results": "Access report",
+    "lighthouse_header": "Metrics"
   },
   "Metrics": {
     "WPTMetricFirstViewTTI": {
@@ -167,7 +168,13 @@
     "WPTMetricLighthousePerformance": {
       "name": "Lighthouse Performance Score",
       "description": "Aggregates many of other performance metrics, simulates middle-end device & poor network conditions.\nMeasured via Dev Tools or https://web.dev/fast"
-    }
+    },
+    "lighthouseFirstContentfulPaint": "First Contentful Paint",
+    "lighthouseSpeedIndex": "Speed Index",
+    "lighthouseTTI": "Time To Interactive",
+    "lighthouseFirstMeaningfulPaint": "First Meaningful Paint",
+    "lighthouseFirstCPUIdle": "First CPU Idle",
+    "lighthouseMaxPotentialFirstInputDelay": "Max Potential First Input Delay"
   },
   "components": {
     "MetricGraph": {

@@ -17,13 +17,17 @@ export interface OwnProps {
   score: number;
 }
 
+export const LIGHTHOUSE_FAIL_SCORE_THRESHOLD = 0
+export const LIGHTHOUSE_AVERAGE_SCORE_THRESHOLD = 0.5
+export const LIGHTHOUSE_PASS_SCORE_THRESHOLD = 0.9
+
 const LighthouseScore: React.FunctionComponent<OwnProps> = ({ score }) => {
   const color =
-    score * 100 < 50
+    score < LIGHTHOUSE_AVERAGE_SCORE_THRESHOLD
       ? colorUsage.lighthouseFail
-      : score * 100 < 90
+      : score < LIGHTHOUSE_PASS_SCORE_THRESHOLD
       ? colorUsage.lighthouseAverage
-      : colorUsage.lighthouseGood;
+      : colorUsage.lighthousePass;
   return (
     <Container>
       <ScoreGauge>
@@ -42,7 +46,7 @@ const LighthouseScore: React.FunctionComponent<OwnProps> = ({ score }) => {
               />
             </GaugeSvg>
           </GaugeSvgWrapper>
-          <GaugePercentage>{score * 100}</GaugePercentage>
+          <GaugePercentage>{Math.round(score * 100)}</GaugePercentage>
           <GaugeLabel>
             <FormattedMessage id="Audits.lighthouse_performance" />
           </GaugeLabel>

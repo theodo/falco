@@ -84,3 +84,29 @@ class AuditResults(BaseModel):
     wpt_metric_lighthouse_performance = models.FloatField(blank=True, null=True)
     script_step_name = models.CharField(max_length=100, blank=True, null=True)
     script_step_number = models.IntegerField(blank=True, null=True)
+    lh_metric_tti_displayed_value = models.CharField(
+        max_length=100, blank=True, null=True
+    )
+    lh_metric_tti_score = models.FloatField(blank=True, null=True)
+    lh_metric_first_contentful_paint_displayed_value = models.CharField(
+        max_length=100, blank=True, null=True
+    )
+    lh_metric_first_contentful_paint_score = models.FloatField(blank=True, null=True)
+    lh_metric_speed_index_displayed_value = models.CharField(
+        max_length=100, blank=True, null=True
+    )
+    lh_metric_speed_index_score = models.FloatField(blank=True, null=True)
+    lh_metric_first_meaningful_paint_displayed_value = models.CharField(
+        max_length=100, blank=True, null=True
+    )
+    lh_metric_first_meaningful_paint_score = models.FloatField(blank=True, null=True)
+    lh_metric_first_cpu_idle_displayed_value = models.CharField(
+        max_length=100, blank=True, null=True
+    )
+    lh_metric_first_cpu_idle_score = models.FloatField(blank=True, null=True)
+    lh_metric_max_potential_first_input_delay_displayed_value = models.CharField(
+        max_length=100, blank=True, null=True
+    )
+    lh_metric_max_potential_first_input_delay_score = models.FloatField(
+        blank=True, null=True
+    )

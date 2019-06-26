@@ -169,8 +169,12 @@ export const colorUsage = {
 
   // Lighthouse
   lighthouseFail: '#FF4E42',
+  lighthouseFailSecondary: '#EB0F00',
   lighthouseAverage: '#ffa400',
-  lighthouseGood: '#0CCE6B',
+  lighthouseAverageSecondary: '#D04900',
+  lighthousePass: '#0CCE6B',
+  lighthousePassSecondary: '#018642',
+  lighthouseLineColor: '#ebebeb',
 
   // Badge
   pageBadgeText: colorPalette.accentBlue500,
@@ -238,6 +242,7 @@ export const fontSize = {
   // Lighthouse
   lighthousePercentage: '38px',
   lighthouseGaugeLabel: '28px',
+  lighthouseMetricsHeader: '16px',
 
   // Badge
   badgeText: '14px',
@@ -324,6 +329,9 @@ export const fontWeight = {
 
   // 404
   notFoundButton: 'bold',
+
+  // Lighthouse
+  lighthouseMetricsHeader: 'bold',
 
   // Badge
   badgeText: 'bold',
