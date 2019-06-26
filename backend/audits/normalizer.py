@@ -4,7 +4,7 @@ import logging
 def format_wpt_json_results_for_page(data):
     lighthouse_data = data.get("lighthouse")
     lighthouse_metrics = dict()
-    # lighthouse_data["audits"] only exists on chrome browser
+    # lighthouse_data["audits"] only exists on Chrome browser
     if lighthouse_data.get("audits"):
         lighthouse_metrics = {
             "lh_metric_tti_displayed_value": lighthouse_data["audits"]["interactive"][
