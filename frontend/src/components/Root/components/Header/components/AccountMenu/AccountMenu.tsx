@@ -78,22 +78,22 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
           </UserInfosBlock>
         </UserInfosBlockContainer>
         <UserActionsBlock>
-          <UserActionItem margin={'0'}>
-            <WhatsNewLink
-              onClick={
-                () => {
-                  registerNewClickOnWhatsNew((new Date()).toISOString())
-                }
+          <WhatsNewLink
+            onClick={
+              () => {
+                registerNewClickOnWhatsNew((new Date()).toISOString())
               }
-              href="https://www.notion.so/Falco-What-s-new-3c08ac348c7b40499638c0a62924aacc"
-              target="_blank"
-            >
+            }
+            href="https://www.notion.so/Falco-What-s-new-3c08ac348c7b40499638c0a62924aacc"
+            target="_blank"
+          >
+            <UserActionItem margin={'0'}>
               <FormattedMessage id="Header.whats_new" />
               {
                 shouldDisplayWhatsNewNotification && <Notification />
               }
-            </WhatsNewLink>
-          </UserActionItem>
+            </UserActionItem>
+          </WhatsNewLink>
           <UserActionItem
             margin={'0'}
             onClick={() => logoutUser(routeDefinitions.landing.path)}
