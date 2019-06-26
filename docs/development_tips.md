@@ -74,13 +74,8 @@ TRUNCATE TABLE <table_name> CASCADE;
 docker exec -i falco_db_1 psql -Upostgres < backup_file.sql
 ```
 
-
-- Attribute all the projects to the superusers of the site
-```bash
-make backend/attributeprojectstoadmins
-```
-
 - Attribute all the projects to the superusers and set all the wpt_api_keys
+
 ```bash
 docker-compose exec backend ./manage.py attributeprojectstoadmins --key <your_key>
 ```

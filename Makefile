@@ -18,15 +18,12 @@ backend/makemigrations:
 backend/shell:
 	docker-compose exec backend ./manage.py shell
 
-backend/attributeprojectstoadmins:
-	docker-compose exec backend ./manage.py attributeprojectstoadmins --key "---TO CHANGE---"
-
 db/connect:
 	docker exec -it falco_db_1 psql -Upostgres postgres
 
 fixtures/load:
 	docker exec -i falco_db_1 psql -Upostgres < fixtures/initial_dump.sql;\
-	make backend/attributeprojectstoadmins;
+	docker-compose exec backend ./manage.py attributeprojectstoadmins --key "---TO CHANGE---";
 
 frontend/install: frontend/.env
 	yarn --cwd frontend install
