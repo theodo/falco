@@ -1,5 +1,5 @@
 # How to write scripts
-Falco allows to track a website's performance, from a public page but also a private page, accessed only through authentication. For that you will need to write a script and this guide will help you through that.
+Falco makes it possible to track a website's performance from a public page but also a private page, accessed only through authentication. For that you will need to write a script and this guide will help you through that.
 
 You can also refer to [WebPageTest documentation about scripting](https://sites.google.com/a/webpagetest.org/docs/using-webpagetest/scripting).
 
