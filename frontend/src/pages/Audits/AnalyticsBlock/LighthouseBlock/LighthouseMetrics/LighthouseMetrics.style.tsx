@@ -14,7 +14,7 @@ const iconColor = (state: 'FAIL' | 'AVERAGE' | 'PASS'): string => {
     case 'AVERAGE':
       return colorUsage.lighthouseAverage;
     case 'PASS':
-      return colorUsage.lighthouseGood;
+      return colorUsage.lighthousePass;
   }
 };
 
@@ -25,7 +25,7 @@ const textColor = (state: 'FAIL' | 'AVERAGE' | 'PASS'): string => {
     case 'AVERAGE':
       return colorUsage.lighthouseAverageSecondary;
     case 'PASS':
-      return colorUsage.lighthouseGoodSecondary;
+      return colorUsage.lighthousePassSecondary;
   }
 };
 
