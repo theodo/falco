@@ -65,9 +65,6 @@ export const UserActionItem = styled.div`
 
 export const WhatsNewLink = styled.a`
     all: unset;
-    display:inline-block;
-    width:100%;
-    height:100%;
   `;
 
 export const Notification = styled.span`
