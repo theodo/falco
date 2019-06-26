@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from projects.models import Page, Project
 from projects.serializers import PageSerializer, ProjectSerializer
@@ -12,7 +13,9 @@ from rest_framework.parsers import JSONParser
 @permission_classes([permissions.IsAuthenticated])
 def project_list(request):
     if request.method == "GET":
-        projects = Project.objects.filter(members__id=request.user.id)
+        projects = Project.objects.filter(
+            Q(Q(members__id=request.user.id) | Q(admins__id=request.user.id))
+        )
         serializer = ProjectSerializer(projects, many=True)
         return JsonResponse(serializer.data, safe=False)
     elif request.method == "POST":
