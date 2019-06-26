@@ -173,7 +173,7 @@ const MetricGraph: React.FunctionComponent<Props> = ({
     : sevenDaysAgo;
 
   return (
-    <ResponsiveContainer width={'100%'} height={fullscreen ? window.innerHeight - 200 : '100%'}>
+    <ResponsiveContainer width={'100%'} height={fullscreen ? window.innerHeight - 220 : '100%'}>
       <AreaChart data={auditResults || undefined}>
         <defs>
           <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
