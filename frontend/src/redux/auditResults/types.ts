@@ -22,27 +22,27 @@ export interface AuditResultType {
   WPTMetricLighthousePerformance: number;
   scriptStepName: string | null;
   scriptStepNumber: string | null;
-  LighthouseTTI: {
+  lighthouseTTI: {
     displayed_value: string;
     score: number;
   };
-  LighthouseSpeedIndex: {
+  lighthouseSpeedIndex: {
     displayed_value: string;
     score: number;
   };
-  LighthouseFirstContentfulPaint: {
+  lighthouseFirstContentfulPaint: {
     displayed_value: string;
     score: number;
   };
-  LighthouseFirstMeaningfulPaint: {
+  lighthouseFirstMeaningfulPaint: {
     displayed_value: string;
     score: number;
   };
-  LighthouseFirstCPUIdle: {
+  lighthouseFirstCPUIdle: {
     displayed_value: string;
     score: number;
   };
-  LighthouseMaxPotentialFirstInputDelay: {
+  lighthouseMaxPotentialFirstInputDelay: {
     displayed_value: string;
     score: number;
   };
@@ -74,12 +74,12 @@ export type MetricType =
   | 'WPTMetricLighthousePerformance';
 
 export type LighthouseMetricType =
-  | 'LighthouseFirstContentfulPaint'
-  | 'LighthouseSpeedIndex'
-  | 'LighthouseTTI'
-  | 'LighthouseFirstMeaningfulPaint'
-  | 'LighthouseFirstCPUIdle'
-  | 'LighthouseMaxPotentialFirstInputDelay';
+  | 'lighthouseFirstContentfulPaint'
+  | 'lighthouseSpeedIndex'
+  | 'lighthouseTTI'
+  | 'lighthouseFirstMeaningfulPaint'
+  | 'lighthouseFirstCPUIdle'
+  | 'lighthouseMaxPotentialFirstInputDelay';
 
 export interface MetricConstantForGraph {
   type: 'time' | 'number' | 'percent';

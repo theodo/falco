@@ -96,27 +96,27 @@ const pageAuditResultModelized = {
     WPTMetricLighthousePerformance: pageAuditResultValue,
     scriptStepName: null,
     scriptStepNumber: null,
-    LighthouseTTI: {
+    lighthouseTTI: {
       displayed_value: pageAuditResultLighthhouseDisplayedValue,
       score: pageAuditResultLighthhouseScore,
     },
-    LighthouseSpeedIndex: {
+    lighthouseSpeedIndex: {
       displayed_value: pageAuditResultLighthhouseDisplayedValue,
       score: pageAuditResultLighthhouseScore,
     },
-    LighthouseFirstContentfulPaint: {
+    lighthouseFirstContentfulPaint: {
       displayed_value: pageAuditResultLighthhouseDisplayedValue,
       score: pageAuditResultLighthhouseScore,
     },
-    LighthouseFirstMeaningfulPaint: {
+    lighthouseFirstMeaningfulPaint: {
       displayed_value: pageAuditResultLighthhouseDisplayedValue,
       score: pageAuditResultLighthhouseScore,
     },
-    LighthouseFirstCPUIdle: {
+    lighthouseFirstCPUIdle: {
       displayed_value: pageAuditResultLighthhouseDisplayedValue,
       score: pageAuditResultLighthhouseScore,
     },
-    LighthouseMaxPotentialFirstInputDelay: {
+    lighthouseMaxPotentialFirstInputDelay: {
       displayed_value: pageAuditResultLighthhouseDisplayedValue,
       score: pageAuditResultLighthhouseScore,
     },
@@ -196,27 +196,27 @@ const scriptAuditResultModelized = {
     WPTMetricLighthousePerformance: scriptAuditResultValue,
     scriptStepName: scriptAuditStepName,
     scriptStepNumber: scriptAuditStepNumber,
-    LighthouseTTI: {
+    lighthouseTTI: {
       displayed_value: null,
       score: null,
     },
-    LighthouseSpeedIndex: {
+    lighthouseSpeedIndex: {
       displayed_value: null,
       score: null,
     },
-    LighthouseFirstContentfulPaint: {
+    lighthouseFirstContentfulPaint: {
       displayed_value: null,
       score: null,
     },
-    LighthouseFirstMeaningfulPaint: {
+    lighthouseFirstMeaningfulPaint: {
       displayed_value: null,
       score: null,
     },
-    LighthouseFirstCPUIdle: {
+    lighthouseFirstCPUIdle: {
       displayed_value: null,
       score: null,
     },
-    LighthouseMaxPotentialFirstInputDelay: {
+    lighthouseMaxPotentialFirstInputDelay: {
       displayed_value: null,
       score: null,
     },

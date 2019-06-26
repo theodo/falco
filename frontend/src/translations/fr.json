@@ -169,12 +169,12 @@
       "name": "Lighthouse Performance Score",
       "description": "Aggrège un ensemble des autres métriques de performance, simule un appareil de milieu de gamme et des conditions réseau défavorables.\nMesuré via Dev Tools ou https://web.dev/fast"
     },
-    "LighthouseFirstContentfulPaint": "First Contentful Paint",
-    "LighthouseSpeedIndex": "Speed Index",
-    "LighthouseTTI": "Time To Interactive",
-    "LighthouseFirstMeaningfulPaint": "First Meaningful Paint",
-    "LighthouseFirstCPUIdle": "First CPU Idle",
-    "LighthouseMaxPotentialFirstInputDelay": "Max Potential First Input Delay"
+    "lighthouseFirstContentfulPaint": "First Contentful Paint",
+    "lighthouseSpeedIndex": "Speed Index",
+    "lighthouseTTI": "Time To Interactive",
+    "lighthouseFirstMeaningfulPaint": "First Meaningful Paint",
+    "lighthouseFirstCPUIdle": "First CPU Idle",
+    "lighthouseMaxPotentialFirstInputDelay": "Max Potential First Input Delay"
   },
   "components": {
     "MetricGraph": {

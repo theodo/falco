@@ -18,11 +18,11 @@ export interface OwnProps {
 
 const LighthouseMetrics: React.FunctionComponent<OwnProps> = ({ auditResult }) => {
   const metrics: LighthouseMetricType[][] = [
-    ['LighthouseFirstContentfulPaint', 'LighthouseSpeedIndex', 'LighthouseTTI'],
+    ['lighthouseFirstContentfulPaint', 'lighthouseSpeedIndex', 'lighthouseTTI'],
     [
-      'LighthouseFirstMeaningfulPaint',
-      'LighthouseFirstCPUIdle',
-      'LighthouseMaxPotentialFirstInputDelay',
+      'lighthouseFirstMeaningfulPaint',
+      'lighthouseFirstCPUIdle',
+      'lighthouseMaxPotentialFirstInputDelay',
     ],
   ];
 
