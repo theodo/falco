@@ -125,7 +125,7 @@
     "react-app-rewired": "1.6.2",
     "react-test-renderer": "16.6.3",
     "redux-saga-test-plan": "3.7.0",
-    "stylelint": "^9.10.1",
+    "stylelint": "^10.1.0",
     "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-standard": "^18.2.0",
     "stylelint-config-styled-components": "^0.1.1",
