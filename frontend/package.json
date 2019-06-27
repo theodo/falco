@@ -119,7 +119,7 @@
     "eslint-plugin-prefer-object-spread": "1.2.1",
     "eslint-plugin-prettier": "3.0.0",
     "eslint-plugin-react": "7.11.1",
-    "plop": "2.1.0",
+    "plop": "2.4.0",
     "prettier": "1.15.1",
     "react-app-rewire-webpack-bundle-analyzer": "1.0.1",
     "react-app-rewired": "1.6.2",
