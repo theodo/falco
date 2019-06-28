@@ -3,11 +3,10 @@ import * as React from 'react';
 import ErrorMessage from 'components/ErrorMessage';
 import Loader from 'components/Loader';
 import MetricGraph from 'components/MetricGraph';
-import Expand from 'icons/Expand';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { METRICS } from 'redux/auditResults/constants';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
-import { colorUsage, getSpacing } from 'stylesheet';
+import { getSpacing } from 'stylesheet';
 import GraphModal from './GraphModal';
 import Style from './GraphsBlock.style';
 import MetricModal from './MetricModal';
@@ -22,8 +21,7 @@ interface Props extends OwnProps {
   metrics: MetricType[];
 }
 
-export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = props => {
-  const { auditResults, auditResultIds, metrics, blockMargin, intl } = props;
+export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = ({ auditResults, auditResultIds, metrics, blockMargin }) => {
 
   if (!auditResultIds || !auditResults) {
     return (
@@ -68,7 +66,7 @@ export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = p
         .map((metric, index) => {
           return (
             <Style.GraphContainer margin={`0 0 ${getSpacing(4)} 0`} key={index}>
-              <MetricGraph fullscreen={false} auditResults={auditResults} metrics={[metric]} onExpandClick={openGraphModal} showOnlyLastWeek={true}/>
+              <MetricGraph fullscreen={false} auditResults={auditResults} metrics={[metric]} onExpandClick={openGraphModal} showOnlyLastWeek={true} />
             </Style.GraphContainer>
           );
         })}

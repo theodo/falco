@@ -10,14 +10,14 @@ import { Area, AreaChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } f
 import { METRICS } from 'redux/auditResults/constants';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
 import { colorUsage, fontFamily, fontSize, getSpacing } from 'stylesheet';
-import Style from './MetricGraph.style';
+import { ExpandButton, LegendTitle, MetricInfoIconContainer, MetricLegend, TooltipDate, TooltipValue } from './MetricGraph.style';
 
 export interface OwnProps {
   fullscreen: boolean;
   auditResults: AuditResultsAsGraphData;
   metrics: MetricType[];
 
-  onExpandClick? : (metric: MetricType) => () => void;
+  onExpandClick?: (metric: MetricType) => () => void;
   showOnlyLastWeek: boolean;
 }
 
@@ -41,7 +41,7 @@ const MetricGraph: React.FunctionComponent<Props> = ({
   const renderLegend = (legendProps: { payload: Array<{ value: MetricType }> }) => {
     const { payload } = legendProps;
     return payload.map((entry, index) => (
-      <Style.Legend
+      <MetricLegend
         margin={
           fullscreen
             ? `0 0 ${getSpacing(10)} ${getSpacing(4)}`
@@ -50,28 +50,28 @@ const MetricGraph: React.FunctionComponent<Props> = ({
         key={index}
         ref={legendRef}
       >
-          <Style.LegendTitle fullscreen={fullscreen}>
-            {intl.formatMessage({ id: `Metrics.${entry.value}.name` })}
-          </Style.LegendTitle>
-          {!fullscreen && (
-            <Style.MetricInfoIconContainer
-              title={intl.formatMessage({ id: `components.MetricGraph.metric_info_title` })}
-              margin={`0 0 0 ${getSpacing(2)}`}
-              onClick={toggleMetricInfoTooltipVisibility}
-              ref={metricInfoIconContainerRef}
-            >
-              <Information color={colorUsage.metricInformationIcon} />
-            </Style.MetricInfoIconContainer>
-          )}
+        <LegendTitle fullscreen={fullscreen}>
+          {intl.formatMessage({ id: `Metrics.${entry.value}.name` })}
+        </LegendTitle>
+        {!fullscreen && (
+          <MetricInfoIconContainer
+            title={intl.formatMessage({ id: `components.MetricGraph.metric_info_title` })}
+            margin={`0 0 0 ${getSpacing(2)}`}
+            onClick={toggleMetricInfoTooltipVisibility}
+            ref={metricInfoIconContainerRef}
+          >
+            <Information color={colorUsage.metricInformationIcon} />
+          </MetricInfoIconContainer>
+        )}
         {!fullscreen && onExpandClick !== undefined && (
-          <Style.ExpandButton
+          <ExpandButton
             onClick={onExpandClick(metrics[0])}
             onMouseEnter={displayExpandTooltip}
             onMouseLeave={hideExpandTooltip}
             ref={expandButtonRef}
           >
             <Expand color={colorUsage.graphModalToggleButton} />
-          </Style.ExpandButton>
+          </ExpandButton>
         )}
         {isExpandTooltipVisible && (
           <MetricTooltip parentRef={legendRef} initiatorRef={expandButtonRef}>
@@ -83,7 +83,7 @@ const MetricGraph: React.FunctionComponent<Props> = ({
             <FormattedMessage id={`Metrics.${entry.value}.description`} />
           </MetricTooltip>
         )}
-      </Style.Legend>
+      </MetricLegend>
     ));
   };
 
@@ -119,10 +119,10 @@ const MetricGraph: React.FunctionComponent<Props> = ({
         },
       );
       return (
-        <Style.Tooltip key={index}>
-          <Style.TooltipValue>{getFormattedValue(dataType, entry.value)}</Style.TooltipValue>
-          <Style.TooltipDate>{formattedDate}</Style.TooltipDate>
-        </Style.Tooltip>
+        <Tooltip key={index}>
+          <TooltipValue>{getFormattedValue(dataType, entry.value)}</TooltipValue>
+          <TooltipDate>{formattedDate}</TooltipDate>
+        </Tooltip>
       );
     });
   };
@@ -164,17 +164,19 @@ const MetricGraph: React.FunctionComponent<Props> = ({
   const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000;
   const sevenDaysAgo = today - oneWeekInMilliseconds;
   const oldestAuditResultWithinLastWeek = auditResults
-    ? auditResults.find(auditResult => {
-        return auditResult.date >= sevenDaysAgo;
-      })
+    ? auditResults.find(auditResult => (auditResult.date >= sevenDaysAgo))
     : null;
   const dateOfOldestAuditResultWithinLastWeek = oldestAuditResultWithinLastWeek
     ? oldestAuditResultWithinLastWeek.date
     : sevenDaysAgo;
 
+  const auditResultsToDisplay = auditResults
+    ? auditResults.filter(auditResult => fullscreen ? true : (auditResult.date >= sevenDaysAgo))
+    : null;
+
   return (
     <ResponsiveContainer width={'100%'} height={fullscreen ? window.innerHeight - 220 : '100%'}>
-      <AreaChart data={auditResults || undefined}>
+      <AreaChart data={auditResultsToDisplay || undefined}>
         <defs>
           <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor={colorUsage.graphLine} stopOpacity={0.8} />
