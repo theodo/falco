@@ -40,7 +40,7 @@ export const MetricInfoIconContainer = styled.div`
   cursor: pointer;
 `;
 
-export const Tooltip = styled.div`
+export const StyledTooltip = styled.div`
   height: 52px;
   width: 147px;
   border-radius: 8px;

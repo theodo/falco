@@ -10,7 +10,7 @@ import { Area, AreaChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } f
 import { METRICS } from 'redux/auditResults/constants';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
 import { colorUsage, fontFamily, fontSize, getSpacing } from 'stylesheet';
-import { ExpandButton, LegendTitle, MetricInfoIconContainer, MetricLegend, TooltipDate, TooltipValue } from './MetricGraph.style';
+import { ExpandButton, LegendTitle, MetricInfoIconContainer, MetricLegend, StyledTooltip, TooltipDate, TooltipValue } from './MetricGraph.style';
 
 export interface OwnProps {
   fullscreen: boolean;
@@ -119,10 +119,10 @@ const MetricGraph: React.FunctionComponent<Props> = ({
         },
       );
       return (
-        <Tooltip key={index}>
+        <StyledTooltip key={index}>
           <TooltipValue>{getFormattedValue(dataType, entry.value)}</TooltipValue>
           <TooltipDate>{formattedDate}</TooltipDate>
-        </Tooltip>
+        </StyledTooltip>
       );
     });
   };
