@@ -38,6 +38,7 @@ Go through this once when you install the project, you shouldn't need to do that
   ```bash
   make fixtures/load
   ```
+- Edit the .env file: replace the initial SECRET_KEY with a random string
 
 ## Start the app
 
