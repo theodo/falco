@@ -38,6 +38,9 @@ class Project(BaseModel):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ("name",)
+
 
 class Page(BaseModel):
     name = models.CharField(max_length=100)
