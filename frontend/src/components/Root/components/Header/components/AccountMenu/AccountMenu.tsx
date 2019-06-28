@@ -40,7 +40,7 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
         fetchUserRequest();
       }
     },
-    [isUserAuthenticated],
+    [isUserAuthenticated, fetchUserRequest],
   );
 
   React.useEffect(
@@ -49,7 +49,7 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
         fetchLastUpdateOfWhatsNewRequest();
       }
     },
-    [isUserAuthenticated],
+    [isUserAuthenticated, fetchLastUpdateOfWhatsNewRequest],
   );
 
   const capitalize = (word: any) => {

@@ -55,7 +55,7 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
         );
       }
     },
-    [headerContainerRef.current, accountMenuButtonRef.current],
+    [headerContainerRef, accountMenuButtonRef],
   );
 
   React.useEffect(
@@ -70,7 +70,7 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
         );
       }
     },
-    [headerContainerRef.current, projectsMenuButtonRef.current],
+    [headerContainerRef, projectsMenuButtonRef],
   );
 
   const toggleAccountMenuVisibility = (event: MouseEvent) => {

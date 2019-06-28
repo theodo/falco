@@ -39,7 +39,14 @@ const Project: React.FunctionComponent<Props> = ({
       setCurrentScriptStepId(undefined);
       fetchProjectRequest(match.params.projectId);
     },
-    [match.params.projectId],
+    [
+      match.params.projectId,
+      fetchProjectRequest,
+      setCurrentAuditParametersId,
+      setCurrentPageId,
+      setCurrentScriptId,
+      setCurrentScriptStepId,
+    ],
   );
 
   if (project === undefined) {

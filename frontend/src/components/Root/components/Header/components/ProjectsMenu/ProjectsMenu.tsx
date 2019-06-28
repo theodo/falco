@@ -51,7 +51,7 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
         fetchProjectsRequest();
       }
     },
-    [isUserAuthenticated],
+    [isUserAuthenticated, fetchProjectsRequest],
   );
 
   const renderCurrentProjectItem = () =>
