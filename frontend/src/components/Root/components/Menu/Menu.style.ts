@@ -115,7 +115,7 @@ export const MenuArrowContainer = styled.span`
 export const AuditStatusHistoryIcon = styled.span`
   height: 12px;
   width: 12px;
-  margin: 5px;
+  margin-right: 5px;
   background-color: ${(props: AuditStatusHistoryIconProps) => {
     switch (props.status) {
       case "SUCCESS":
@@ -135,3 +135,11 @@ export const AuditStatusHistoryIcon = styled.span`
   display: inline-block;
 `;
 /* stylelint-enable */
+
+
+export const AuditStatusHistoryIconContainer = styled.div`
+  min-width: 20px;
+  height: 100%;
+  display:flex;
+  align-items: center;
+`;
