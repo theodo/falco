@@ -9,8 +9,17 @@ import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
 
 import { history } from 'index';
-
-import Style from './Menu.style';
+import {
+  AuditParametersBlock,
+  AuditParametersTitle,
+  Audits,
+  Container,
+  MenuArrowContainer,
+  PageScriptItem,
+  PageScriptTitle,
+  PageScriptTitleBlock,
+  ProjectName,
+} from './Menu.style';
 
 interface AuditParametersOption {
   value: string;
@@ -45,7 +54,7 @@ export const Menu: React.FunctionComponent<Props> = ({
   scriptStepId,
 }) => {
   if (!project) {
-    return <Style.Container />;
+    return <Container />;
   }
 
   const pagesAndScripts = [
@@ -161,14 +170,14 @@ export const Menu: React.FunctionComponent<Props> = ({
   };
 
   return (
-    <Style.Container>
-      <Style.ProjectName>{project.name}</Style.ProjectName>
+    <Container>
+      <ProjectName>{project.name}</ProjectName>
 
       {project && 0 !== auditParametersSelectOptions.length && (
-        <Style.AuditParametersBlock>
-          <Style.AuditParametersTitle>
+        <AuditParametersBlock>
+          <AuditParametersTitle>
             <FormattedMessage id="Menu.audit_parameters_selection" />
-          </Style.AuditParametersTitle>
+          </AuditParametersTitle>
           <Select
             value={auditParametersSelectOptions.find(auditParametersOption => {
               return auditParametersOption.value === auditParametersId;
@@ -176,21 +185,21 @@ export const Menu: React.FunctionComponent<Props> = ({
             onChange={handleAuditParametersSelection}
             options={auditParametersSelectOptions}
           />
-        </Style.AuditParametersBlock>
+        </AuditParametersBlock>
       )}
-      <Style.Audits>Audits</Style.Audits>
+      <Audits>Audits</Audits>
       {pagesAndScripts.map((pageOrScript: PageOrScript) => {
         const badgeParams = getBadgeParams(pageOrScript);
         return (
-          <Style.PageScriptItem
+          <PageScriptItem
             key={pageOrScript.uuid}
             to={pageOrScript.linkPath}
             className={
               doesLinkPathCorrespondToUrl(pageOrScript.linkPath, currentURL) ? 'active' : ''
             }
           >
-            <Style.PageScriptTitleBlock>
-              <Style.PageScriptTitle>{pageOrScript.title}</Style.PageScriptTitle>
+            <PageScriptTitleBlock>
+              <PageScriptTitle>{pageOrScript.title}</PageScriptTitle>
               {pageOrScript.type && (
                 <Badge
                   backgroundColor={badgeParams.backgroundColor}
@@ -199,8 +208,8 @@ export const Menu: React.FunctionComponent<Props> = ({
                   text={badgeParams.text}
                 />
               )}
-            </Style.PageScriptTitleBlock>
-            <Style.MenuArrowContainer margin={`0 0 0 ${getSpacing(4)}`}>
+            </PageScriptTitleBlock>
+            <MenuArrowContainer margin={`0 0 0 ${getSpacing(4)}`}>
               <MenuArrow
                 color={
                   doesLinkPathCorrespondToUrl(pageOrScript.linkPath, currentURL)
@@ -208,10 +217,10 @@ export const Menu: React.FunctionComponent<Props> = ({
                     : colorUsage.menuArrow
                 }
               />
-            </Style.MenuArrowContainer>
-          </Style.PageScriptItem>
+            </MenuArrowContainer>
+          </PageScriptItem>
         );
       })}
-    </Style.Container>
+    </Container>
   );
 };
