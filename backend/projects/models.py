@@ -12,6 +12,7 @@ class Project(BaseModel):
     screenshot_url = models.CharField(max_length=1000, null=True, blank=True)
     members = models.ManyToManyField(User, blank=True, related_name="member_of")
     admins = models.ManyToManyField(User, blank=True, related_name="admin_of")
+    is_active = models.BooleanField(default=True)
 
     @property
     def latest_audit_at(self):

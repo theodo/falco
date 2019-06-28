@@ -14,7 +14,8 @@ from rest_framework.parsers import JSONParser
 def project_list(request):
     if request.method == "GET":
         projects = Project.objects.filter(
-            Q(Q(members__id=request.user.id) | Q(admins__id=request.user.id))
+            Q(Q(members__id=request.user.id) | Q(admins__id=request.user.id)),
+            is_active=True,
         )
         serializer = ProjectSerializer(projects, many=True)
         return JsonResponse(serializer.data, safe=False)
