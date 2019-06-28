@@ -10,38 +10,43 @@ from audits.serializers import AuditStatusHistorySerializer
 
 
 def get_latest_audit_status_histories(obj):
-    return AuditStatusHistorySerializer(
-        obj.audits.order_by("-created_at")
-        .first()
-        .audit_status_history.order_by("-created_at")
-        .first()
-    ).data
+    parameters_list = obj.project.audit_parameters_list.all()
+    return [
+        AuditStatusHistorySerializer(
+            obj.audits.filter(parameters=parameters)
+            .order_by("-created_at")
+            .first()
+            .audit_status_history.order_by("-created_at")
+            .first()
+        ).data
+        for parameters in parameters_list
+    ]
 
 
 class PageSerializer(serializers.ModelSerializer):
-    latest_audit_status_history = serializers.SerializerMethodField(
-        "resolve_latest_audit_status_history"
+    latest_audit_status_histories = serializers.SerializerMethodField(
+        "resolve_latest_audit_status_histories"
     )
 
-    def resolve_latest_audit_status_history(self, obj):
+    def resolve_latest_audit_status_histories(self, obj):
         return get_latest_audit_status_histories(obj)
 
     class Meta:
         model = Page
-        fields = ("uuid", "name", "url", "audits", "latest_audit_status_history")
+        fields = ("uuid", "name", "url", "audits", "latest_audit_status_histories")
 
 
 class ScriptSerializer(serializers.ModelSerializer):
-    latest_audit_status_history = serializers.SerializerMethodField(
-        "resolve_latest_audit_status_history"
+    latest_audit_status_histories = serializers.SerializerMethodField(
+        "resolve_latest_audit_status_histories"
     )
 
-    def resolve_latest_audit_status_history(self, obj):
+    def resolve_latest_audit_status_histories(self, obj):
         return get_latest_audit_status_histories(obj)
 
     class Meta:
         model = Script
-        fields = ("uuid", "name", "audits", "latest_audit_status_history")
+        fields = ("uuid", "name", "audits", "latest_audit_status_histories")
 
 
 class ProjectAuditParametersSerializer(serializers.ModelSerializer):
