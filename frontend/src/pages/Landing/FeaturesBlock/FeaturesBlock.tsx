@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import FalcoAnalysisImage from 'static/images/FalcoAnalysis.svg';
 import FalcoMonitoringImage from 'static/images/FalcoMonitoring.svg';
 import FalcoOptimisationImage from 'static/images/FalcoOptimisation.svg';
-import { getSpacing } from 'stylesheet';
 import Style from './FeaturesBlock.style';
 
 interface Props {

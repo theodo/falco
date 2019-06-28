@@ -1,5 +1,5 @@
 import groupBy from 'lodash/groupBy';
-import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import { ActionType, getType } from 'typesafe-actions';
 
 import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';

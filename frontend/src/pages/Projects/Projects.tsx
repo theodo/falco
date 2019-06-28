@@ -17,7 +17,7 @@ const Projects: React.FunctionComponent<Props> = props => {
   const { fetchProjectsRequest, projects } = props;
   React.useEffect(() => {
     fetchProjectsRequest();
-  }, []);
+  }, [fetchProjectsRequest]);
 
   if (null === projects) {
     return (

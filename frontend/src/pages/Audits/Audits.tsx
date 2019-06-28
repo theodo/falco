@@ -12,7 +12,14 @@ import { PageType, ScriptType } from 'redux/projects/types';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
 import AnalyticsBlock from './AnalyticsBlock';
-import { Container, PageTitle, PageTitleBlock, ScriptStepBlock, ScriptStepBlockTitle, Title } from './Audits.style';
+import {
+  Container,
+  PageTitle,
+  PageTitleBlock,
+  ScriptStepBlock,
+  ScriptStepBlockTitle,
+  Title,
+} from './Audits.style';
 import GraphsBlock from './GraphsBlock';
 
 interface ScriptStepOption {
@@ -72,7 +79,7 @@ export const Audits: React.FunctionComponent<Props> = ({
     () => {
       fetchProjectRequest(projectId);
     },
-    [projectId],
+    [projectId, fetchProjectRequest],
   );
 
   React.useEffect(
@@ -87,21 +94,34 @@ export const Audits: React.FunctionComponent<Props> = ({
         fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'script');
       }
     },
-    [auditParametersId, pageOrScriptId, page && page.uuid, script && script.uuid],
+    // eslint is disabled because the hook exhaustive-deps wants to add page and script as dependencies, but they rerender too much
+    // eslint-disable-next-line
+    [
+      auditParametersId,
+      pageOrScriptId,
+      fetchAuditResultsRequest,
+      // eslint-disable-next-line
+      page && page.uuid,
+      // eslint-disable-next-line
+      script && script.uuid,
+      setCurrentPageId,
+      setCurrentScriptId,
+    ],
   );
 
   React.useEffect(
     () => {
       setCurrentAuditParametersId(auditParametersId);
     },
-    [auditParametersId],
+    [auditParametersId, setCurrentAuditParametersId],
   );
 
   React.useEffect(
     () => {
       setCurrentScriptStepId(script && scriptStepId ? scriptStepId : undefined);
     },
-    [script && script.uuid, scriptStepId],
+    // eslint-disable-next-line
+    [script && script.uuid, scriptStepId, setCurrentScriptStepId],
   );
 
   if (project === undefined) {
@@ -210,16 +230,18 @@ export const Audits: React.FunctionComponent<Props> = ({
   const sortedAuditResultsIds = page
     ? sortedPageAuditResultsIds
     : script && sortedScriptAuditResultsIds
-      ? scriptStepId && sortedScriptAuditResultsIds[scriptStepId]
-        ? sortedScriptAuditResultsIds[scriptStepId]
-        : []
-      : null;
+    ? scriptStepId && sortedScriptAuditResultsIds[scriptStepId]
+      ? sortedScriptAuditResultsIds[scriptStepId]
+      : []
+    : null;
 
-  const scriptStepSelectOptions = Object.keys(scriptSteps)
-    .map(scriptStepKey => ({
-      value: scriptStepKey,
-      label: (scriptStepKey !== 'null' ? scriptStepKey : 0) + ' : ' + (scriptSteps[scriptStepKey] || "Unknown step"),
-    }));
+  const scriptStepSelectOptions = Object.keys(scriptSteps).map(scriptStepKey => ({
+    value: scriptStepKey,
+    label:
+      (scriptStepKey !== 'null' ? scriptStepKey : 0) +
+      ' : ' +
+      (scriptSteps[scriptStepKey] || 'Unknown step'),
+  }));
 
   const handleScriptStepSelection = (selectedOption: ValueType<ScriptStepOption | {}>) => {
     // Check needed to avoid TS2339 error
@@ -247,7 +269,9 @@ export const Audits: React.FunctionComponent<Props> = ({
           />
         )}
       </PageTitleBlock>
-      <Title><FormattedMessage id="Audits.title" /></Title>
+      <Title>
+        <FormattedMessage id="Audits.title" />
+      </Title>
       {script && 0 !== scriptStepSelectOptions.length && (
         <ScriptStepBlock>
           <ScriptStepBlockTitle>

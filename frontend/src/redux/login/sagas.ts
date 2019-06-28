@@ -19,7 +19,7 @@ export function* loginUser(action: ActionType<typeof loginUserRequest>) {
   try {
     yield put(loginUserClearError());
     // pause function is called to let enough time to animation on button to be seen
-    const [isAuthenticated, unused] = yield all([
+    const [isAuthenticated] = yield all([
       call(login, endpoint, action.payload),
       call(pause, 1000),
     ]);

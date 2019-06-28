@@ -1,5 +1,4 @@
 import Select from 'react-select';
-import { Props as ReactSelectProps } from 'react-select/lib/Select';
 import styled from 'styled-components';
 import { fontFamily, fontSize, lineHeight } from 'stylesheet';
 

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, MouseEvent, useState } from 'react';
+import React, { MouseEvent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import MetricTooltip from 'components/MetricTooltip';

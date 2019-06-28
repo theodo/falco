@@ -30,7 +30,7 @@ const MetricTooltip: React.FunctionComponent<Props> = ({ children, parentRef, in
           )}px`);
       }
     },
-    [parentRef.current, initiatorRef.current],
+    [parentRef, initiatorRef],
   );
 
   if (!(topPosition && leftPosition)) {
