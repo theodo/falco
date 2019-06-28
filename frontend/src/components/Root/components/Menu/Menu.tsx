@@ -13,6 +13,7 @@ import {
   AuditParametersBlock,
   AuditParametersTitle,
   Audits,
+  AuditStatusHistoryIcon,
   Container,
   MenuArrowContainer,
   PageScriptItem,
@@ -202,6 +203,10 @@ export const Menu: React.FunctionComponent<Props> = ({
             }
           >
             <PageScriptTitleBlock>
+              {
+                pageOrScript.latestAuditStatusHistory.status !== "SUCCESS" &&
+                <AuditStatusHistoryIcon status={pageOrScript.latestAuditStatusHistory.status} />
+              }
               <PageScriptTitle>{pageOrScript.title}</PageScriptTitle>
               {pageOrScript.type && (
                 <Badge

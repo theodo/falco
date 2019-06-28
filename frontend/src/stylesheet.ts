@@ -28,6 +28,7 @@ const colorPalette = {
   white200: 'rgba(255,255,255,0.1)',
   white500: '#ffffff',
   lightGreen: '#3bafa3',
+  successGreen: '#008000',
   black100: 'rgba(0, 0, 0, 0.2)',
   black200: 'rgba(0, 0, 0, 0.5)',
   red500: '#d8000c',
@@ -186,6 +187,10 @@ export const colorUsage = {
   scriptBadgeSelectedText: colorPalette.white500,
   scriptBadgeSelectedBackground: colorPalette.white200,
 
+  // AuditStatusHistoryIcon
+  auditStatusHistoryIconSuccess: colorPalette.successGreen,
+  auditStatusHistoryIconPending: colorPalette.accentYellow500,
+  auditStatusHistoryIconFailure: colorPalette.red500,
 
   // Not Found 404
   notFoundButtonBackground: colorPalette.grey500,
