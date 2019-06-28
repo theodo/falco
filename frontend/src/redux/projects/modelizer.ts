@@ -9,12 +9,12 @@ export const modelizeProject = (project: ApiProjectType): Record<string, Project
       uuid: page.uuid,
       url: page.url,
       name: page.name,
-      latestAuditStatusHistory: modelizeAuditStatusHistory(page.latest_audit_status_history),
+      latestAuditStatusHistories: page.latest_audit_status_histories.map(modelizeAuditStatusHistory),
     })),
     scripts: project.scripts.map(script => ({
       uuid: script.uuid,
       name: script.name,
-      latestAuditStatusHistory: modelizeAuditStatusHistory(script.latest_audit_status_history),
+      latestAuditStatusHistories: script.latest_audit_status_histories.map(modelizeAuditStatusHistory),
     })),
     auditParametersList: project.audit_parameters_list.map(auditParameters => ({
       uuid: auditParameters.uuid,

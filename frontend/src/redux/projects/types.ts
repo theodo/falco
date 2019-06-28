@@ -10,26 +10,26 @@ export interface PageType {
   name: string;
   url: string;
   uuid: string;
-  latestAuditStatusHistory: AuditStatusHistoryType;
+  latestAuditStatusHistories: AuditStatusHistoryType[];
 }
 
 export interface ApiPageType {
   name: string;
   url: string;
   uuid: string;
-  latest_audit_status_history: ApiAuditStatusHistoryType;
+  latest_audit_status_histories: ApiAuditStatusHistoryType[];
 }
 
 export interface ScriptType {
   uuid: string;
   name: string;
-  latestAuditStatusHistory: AuditStatusHistoryType;
+  latestAuditStatusHistories: AuditStatusHistoryType[];
 }
 
 export interface ApiScriptType {
   uuid: string;
   name: string;
-  latest_audit_status_history: ApiAuditStatusHistoryType;
+  latest_audit_status_histories: ApiAuditStatusHistoryType[];
 }
 
 export interface ProjectType {

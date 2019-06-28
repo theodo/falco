@@ -32,7 +32,7 @@ export interface PageOrScript {
   uuid: string;
   title: string;
   linkPath: string;
-  latestAuditStatusHistory: AuditStatusHistoryType;
+  latestAuditStatusHistories: AuditStatusHistoryType[];
   type: string;
 }
 
@@ -64,7 +64,7 @@ export const Menu: React.FunctionComponent<Props> = ({
     ...project.pages.map(page => ({
       uuid: page.uuid,
       title: page.name,
-      latestAuditStatusHistory: page.latestAuditStatusHistory,
+      latestAuditStatusHistories: page.latestAuditStatusHistories,
       linkPath: routeDefinitions.auditsDetails.path
         .replace(':projectId', project.uuid)
         .replace(':pageOrScriptId', page.uuid)
@@ -74,7 +74,7 @@ export const Menu: React.FunctionComponent<Props> = ({
     ...project.scripts.map(script => ({
       uuid: script.uuid,
       title: script.name,
-      latestAuditStatusHistory: script.latestAuditStatusHistory,
+      latestAuditStatusHistories: script.latestAuditStatusHistories,
       linkPath: routeDefinitions.auditsDetails.path
         .replace(':projectId', project.uuid)
         .replace(':pageOrScriptId', script.uuid)
@@ -195,6 +195,10 @@ export const Menu: React.FunctionComponent<Props> = ({
       <Audits>Audits</Audits>
       {pagesAndScripts.map((pageOrScript: PageOrScript) => {
         const badgeParams = getBadgeParams(pageOrScript);
+        const latestAuditStatusHistory = pageOrScript.latestAuditStatusHistories.find(
+          auditStatusHistory => (auditStatusHistory.auditParametersId === auditParametersId)
+        );
+        const latestAuditStatusHistoryStatus = latestAuditStatusHistory ? latestAuditStatusHistory.status : "ERROR"
         return (
           <PageScriptItem
             key={pageOrScript.uuid}
@@ -206,19 +210,19 @@ export const Menu: React.FunctionComponent<Props> = ({
             <PageScriptTitleBlock>
               <AuditStatusHistoryIconContainer>
                 {
-                  pageOrScript.latestAuditStatusHistory.status !== "SUCCESS" &&
+                  latestAuditStatusHistoryStatus !== "SUCCESS" &&
                   <AuditStatusHistoryIcon
-                    status={pageOrScript.latestAuditStatusHistory.status}
+                    status={latestAuditStatusHistoryStatus}
                     title={
                       (
-                        (pageOrScript.latestAuditStatusHistory.status === "ERROR")
+                        (latestAuditStatusHistoryStatus === "ERROR")
                         &&
                         intl.formatMessage({ id: `Audits.AuditStatusHistory.audit_failure` })
                       ) || (
                         (
-                          pageOrScript.latestAuditStatusHistory.status === "REQUESTED"
+                          latestAuditStatusHistoryStatus === "REQUESTED"
                           ||
-                          pageOrScript.latestAuditStatusHistory.status === "PENDING"
+                          latestAuditStatusHistoryStatus === "PENDING"
                         )
                         &&
                         intl.formatMessage({ id: `Audits.AuditStatusHistory.audit_running` })
