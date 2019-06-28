@@ -54,12 +54,14 @@ export interface AuditStatusHistoryType {
   createdAt: string;
   status: "SUCCESS" | "REQUESTED" | "PENDING" | "ERROR";
   details: string;
+  auditParametersId: string;
 }
 
 export interface ApiAuditStatusHistoryType {
   created_at: string;
   status: "SUCCESS" | "REQUESTED" | "PENDING" | "ERROR";
   details: string;
+  parameters: string;
 }
 
 export interface ApiProjectType {

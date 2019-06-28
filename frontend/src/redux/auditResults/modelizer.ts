@@ -77,6 +77,7 @@ export const modelizeAuditStatusHistory = (auditStatusHistory: ApiAuditStatusHis
   return {
     createdAt: auditStatusHistory.created_at,
     status: auditStatusHistory.status,
-    details: auditStatusHistory.details
+    details: auditStatusHistory.details,
+    auditParametersId: auditStatusHistory.parameters
   };
 }
