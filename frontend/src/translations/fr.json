@@ -106,7 +106,12 @@
     "lighthouse_note": "Note : les valeurs données par Lighthouse peuvent différer des valeurs du Dashboard, car l'environnement de l'audit Lighthouse est différent. Les diagnostics et opportunités sont toujours valables, bien que les gains indiqués puissent différer des résultats réels.",
     "lighthouse_performance": "Performance",
     "lighthouse_results": "Accéder au rapport",
-    "lighthouse_header": "Metrics"
+    "lighthouse_header": "Metrics",
+    "AuditStatusHistory": {
+      "last_audit_successful": "Le dernier audit a réussi",
+      "audit_running": "Un audit est en cours",
+      "audit_failure": "le dernier audit a échoué"
+    }
   },
   "Metrics": {
     "WPTMetricFirstViewTTI": {

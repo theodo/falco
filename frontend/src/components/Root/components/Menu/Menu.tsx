@@ -205,7 +205,26 @@ export const Menu: React.FunctionComponent<Props> = ({
             <PageScriptTitleBlock>
               {
                 pageOrScript.latestAuditStatusHistory.status !== "SUCCESS" &&
-                <AuditStatusHistoryIcon status={pageOrScript.latestAuditStatusHistory.status} />
+                <AuditStatusHistoryIcon
+                  status={pageOrScript.latestAuditStatusHistory.status}
+                  title={
+                    (
+                      (pageOrScript.latestAuditStatusHistory.status === "ERROR")
+                      &&
+                      intl.formatMessage({ id: `Audits.AuditStatusHistory.audit_failure` })
+                    ) || (
+                      (
+                        pageOrScript.latestAuditStatusHistory.status === "REQUESTED"
+                        ||
+                        pageOrScript.latestAuditStatusHistory.status === "PENDING"
+                      )
+                      &&
+                      intl.formatMessage({ id: `Audits.AuditStatusHistory.audit_running` })
+                    ) || (
+                      intl.formatMessage({ id: `Audits.AuditStatusHistory.audit_failure` })
+                    )
+                  }
+                />
               }
               <PageScriptTitle>{pageOrScript.title}</PageScriptTitle>
               {pageOrScript.type && (
