@@ -9,18 +9,22 @@ from rest_framework import serializers
 from audits.serializers import AuditStatusHistorySerializer
 
 
+def get_latest_audit_status_histories(obj):
+    return AuditStatusHistorySerializer(
+        obj.audits.order_by("-created_at")
+        .first()
+        .audit_status_history.order_by("-created_at")
+        .first()
+    ).data
+
+
 class PageSerializer(serializers.ModelSerializer):
     latest_audit_status_history = serializers.SerializerMethodField(
         "resolve_latest_audit_status_history"
     )
 
     def resolve_latest_audit_status_history(self, obj):
-        return AuditStatusHistorySerializer(
-            obj.audits.order_by("-created_at")
-            .first()
-            .audit_status_history.order_by("-created_at")
-            .first()
-        ).data
+        return get_latest_audit_status_histories(obj)
 
     class Meta:
         model = Page
@@ -33,12 +37,7 @@ class ScriptSerializer(serializers.ModelSerializer):
     )
 
     def resolve_latest_audit_status_history(self, obj):
-        return AuditStatusHistorySerializer(
-            obj.audits.order_by("-created_at")
-            .first()
-            .audit_status_history.order_by("-created_at")
-            .first()
-        ).data
+        return get_latest_audit_status_histories(obj)
 
     class Meta:
         model = Script
