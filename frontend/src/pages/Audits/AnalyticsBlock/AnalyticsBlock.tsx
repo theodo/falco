@@ -49,9 +49,9 @@ export const AnalyticsBlock: React.FunctionComponent<Props & InjectedIntlProps> 
   return (
     <Style.Container margin={blockMargin}>
       <WebPageTestBlock blockMargin={`0 0 ${getSpacing(4)} 0`} auditResults={auditResults} />
-      {auditResults[0].WPTMetricLighthousePerformance && (
+      {auditResults[0].WPTMetricLighthousePerformance ? (
         <LighthouseBlock lighthouseUrl={getLighthouseUrl()} lastAuditResult={auditResults[0]} />
-      )}
+      ) : null}
     </Style.Container>
   );
 };
