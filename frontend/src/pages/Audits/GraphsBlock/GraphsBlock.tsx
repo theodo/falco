@@ -27,6 +27,10 @@ export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = (
   metrics,
   blockMargin,
 }) => {
+  const [showMetricModal, toggleMetricModal] = React.useState(false);
+  const [showGraphModal, toggleGraphModal] = React.useState(false);
+  const [fullScreenedMetric, setFullScreenedMetric] = React.useState('' as MetricType);
+
   if (!auditResultIds || !auditResults) {
     return (
       <Style.Container margin={blockMargin}>
@@ -45,7 +49,6 @@ export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = (
     );
   }
 
-  const [showMetricModal, toggleMetricModal] = React.useState(false);
   const openMetricModal = () => {
     toggleMetricModal(true);
   };
@@ -53,8 +56,6 @@ export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = (
     toggleMetricModal(false);
   };
 
-  const [showGraphModal, toggleGraphModal] = React.useState(false);
-  const [fullScreenedMetric, setFullScreenedMetric] = React.useState('' as MetricType);
   const openGraphModal = (metric: MetricType) => () => {
     setFullScreenedMetric(metric);
     toggleGraphModal(true);
