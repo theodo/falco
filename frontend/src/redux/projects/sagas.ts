@@ -1,4 +1,4 @@
-import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import { makeGetRequest } from 'services/networking/request';
 import { ActionType, getType } from 'typesafe-actions';
 
@@ -21,7 +21,7 @@ function* fetchProjectFailedHandler(error: Error, actionPayload: Record<string, 
   yield put(fetchProjectError({ projectId: actionPayload.projectId, errorMessage: error.message }));
 }
 
-export function* fetchProjects(action: ActionType<typeof fetchProjectsRequest>) {
+export function* fetchProjects() {
   const endpoint = '/api/projects/';
   const { body: projects }: { body: ApiProjectType[] } = yield call(
     makeGetRequest,

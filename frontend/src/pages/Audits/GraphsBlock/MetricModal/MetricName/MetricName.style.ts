@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
+import { colorUsage, fontFamily, fontSize, lineHeight } from 'stylesheet';
 
 const Style = {
   MetricContainer: styled.div``,

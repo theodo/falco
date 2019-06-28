@@ -1,6 +1,5 @@
 import { AnyAction } from 'redux';
 import { persistReducer } from 'redux-persist';
-import { PersistState } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { ActionType, getType } from 'typesafe-actions';
 

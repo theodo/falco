@@ -4,7 +4,6 @@ import {
   fontFamily,
   fontSize,
   fontWeight,
-  getSpacing,
   lineHeight,
   zIndex,
 } from 'stylesheet';

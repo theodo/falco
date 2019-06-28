@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { colorUsage, getSpacing } from 'stylesheet';
 
 const Style = {
   Container: styled.div`

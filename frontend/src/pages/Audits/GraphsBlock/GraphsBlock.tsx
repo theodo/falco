@@ -21,8 +21,12 @@ interface Props extends OwnProps {
   metrics: MetricType[];
 }
 
-export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = ({ auditResults, auditResultIds, metrics, blockMargin }) => {
-
+export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = ({
+  auditResults,
+  auditResultIds,
+  metrics,
+  blockMargin,
+}) => {
   if (!auditResultIds || !auditResults) {
     return (
       <Style.Container margin={blockMargin}>
@@ -59,6 +63,24 @@ export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = (
     toggleGraphModal(false);
   };
 
+  if (!auditResultIds || !auditResults) {
+    return (
+      <Style.Container margin={blockMargin}>
+        <Loader />
+      </Style.Container>
+    );
+  }
+
+  if (0 === auditResultIds.length || 0 === auditResults.length) {
+    return (
+      <Style.Container margin={blockMargin}>
+        <ErrorMessage>
+          <FormattedMessage id="Audits.no_audit" />
+        </ErrorMessage>
+      </Style.Container>
+    );
+  }
+
   return (
     <Style.Container margin={blockMargin}>
       {(Object.keys(METRICS) as MetricType[])
@@ -66,7 +88,13 @@ export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = (
         .map((metric, index) => {
           return (
             <Style.GraphContainer margin={`0 0 ${getSpacing(4)} 0`} key={index}>
-              <MetricGraph fullscreen={false} auditResults={auditResults} metrics={[metric]} onExpandClick={openGraphModal} showOnlyLastWeek={true} />
+              <MetricGraph
+                fullscreen={false}
+                auditResults={auditResults}
+                metrics={[metric]}
+                onExpandClick={openGraphModal}
+                showOnlyLastWeek={true}
+              />
             </Style.GraphContainer>
           );
         })}
