@@ -4,7 +4,7 @@ import { MenuArrow } from 'icons';
 import React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { ValueType } from 'react-select/lib/types';
-import { ProjectType } from 'redux/projects/types';
+import { AuditStatusHistoryType, ProjectType } from 'redux/projects/types';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
 
@@ -30,6 +30,7 @@ export interface PageOrScript {
   uuid: string;
   title: string;
   linkPath: string;
+  latestAuditStatusHistory: AuditStatusHistoryType;
   type: string;
 }
 
@@ -61,6 +62,7 @@ export const Menu: React.FunctionComponent<Props> = ({
     ...project.pages.map(page => ({
       uuid: page.uuid,
       title: page.name,
+      latestAuditStatusHistory: page.latestAuditStatusHistory,
       linkPath: routeDefinitions.auditsDetails.path
         .replace(':projectId', project.uuid)
         .replace(':pageOrScriptId', page.uuid)
@@ -70,6 +72,7 @@ export const Menu: React.FunctionComponent<Props> = ({
     ...project.scripts.map(script => ({
       uuid: script.uuid,
       title: script.name,
+      latestAuditStatusHistory: script.latestAuditStatusHistory,
       linkPath: routeDefinitions.auditsDetails.path
         .replace(':projectId', project.uuid)
         .replace(':pageOrScriptId', script.uuid)
