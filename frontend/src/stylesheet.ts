@@ -28,11 +28,13 @@ const colorPalette = {
   white200: 'rgba(255,255,255,0.1)',
   white500: '#ffffff',
   lightGreen: '#3bafa3',
-  successGreen: '#008000',
+  successGreen: '#0CCE6B',
   black100: 'rgba(0, 0, 0, 0.2)',
   black200: 'rgba(0, 0, 0, 0.5)',
   red500: '#d8000c',
   red200: '#ffd2d2',
+  redFail: '#FF4E42',
+  orangeRunning: "#ffa400",
   transparent: 'rgba(0,0,0,0)',
 };
 
@@ -169,11 +171,11 @@ export const colorUsage = {
   webPageTestRadioButtonBackground: colorPalette.white500,
 
   // Lighthouse
-  lighthouseFail: '#FF4E42',
+  lighthouseFail: colorPalette.redFail,
   lighthouseFailSecondary: '#EB0F00',
-  lighthouseAverage: '#ffa400',
+  lighthouseAverage: colorPalette.orangeRunning,
   lighthouseAverageSecondary: '#D04900',
-  lighthousePass: '#0CCE6B',
+  lighthousePass: colorPalette.successGreen,
   lighthousePassSecondary: '#018642',
   lighthouseLineColor: '#ebebeb',
 
@@ -189,8 +191,8 @@ export const colorUsage = {
 
   // AuditStatusHistoryIcon
   auditStatusHistoryIconSuccess: colorPalette.successGreen,
-  auditStatusHistoryIconPending: colorPalette.accentYellow500,
-  auditStatusHistoryIconFailure: colorPalette.red500,
+  auditStatusHistoryIconPending: colorPalette.orangeRunning,
+  auditStatusHistoryIconFailure: colorPalette.redFail,
 
   // Not Found 404
   notFoundButtonBackground: colorPalette.grey500,
