@@ -222,7 +222,7 @@ def poll_audit_results(audit_uuid, json_url):
 
 @shared_task
 def request_all_audits():
-    pages = Page.objects.all(project__is_active=True).iterator()
+    pages = Page.objects.filter(project__is_active=True).iterator()
 
     for page in pages:
         audit_parameters_list = page.project.audit_parameters_list.all()
@@ -231,7 +231,7 @@ def request_all_audits():
             audit.save()
             request_audit.delay(audit.uuid)
 
-    scripts = Script.objects.all(project__is_active=True).iterator()
+    scripts = Script.objects.filter(project__is_active=True).iterator()
 
     for script in scripts:
         audit_parameters_list = script.project.audit_parameters_list.all()
