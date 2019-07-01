@@ -195,10 +195,12 @@ export const Menu: React.FunctionComponent<Props> = ({
       <Audits>Audits</Audits>
       {pagesAndScripts.map((pageOrScript: PageOrScript) => {
         const badgeParams = getBadgeParams(pageOrScript);
-        const latestAuditStatusHistory = pageOrScript.latestAuditStatusHistories.find(
+        const latestAuditStatusHistoryForCurrentAuditParameters = pageOrScript.latestAuditStatusHistories.find(
           auditStatusHistory => (auditStatusHistory.auditParametersId === auditParametersId)
         );
-        const latestAuditStatusHistoryStatus = latestAuditStatusHistory ? latestAuditStatusHistory.status : "ERROR"
+        const latestAuditStatusHistoryForCurrentAuditParametersStatus = latestAuditStatusHistoryForCurrentAuditParameters
+          ? latestAuditStatusHistoryForCurrentAuditParameters.status
+          : "ERROR"
         return (
           <PageScriptItem
             key={pageOrScript.uuid}
@@ -210,19 +212,19 @@ export const Menu: React.FunctionComponent<Props> = ({
             <PageScriptTitleBlock>
               <AuditStatusHistoryIconContainer>
                 {
-                  latestAuditStatusHistoryStatus !== "SUCCESS" &&
+                  latestAuditStatusHistoryForCurrentAuditParametersStatus !== "SUCCESS" &&
                   <AuditStatusHistoryIcon
-                    status={latestAuditStatusHistoryStatus}
+                    status={latestAuditStatusHistoryForCurrentAuditParametersStatus}
                     title={
                       (
-                        (latestAuditStatusHistoryStatus === "ERROR")
+                        (latestAuditStatusHistoryForCurrentAuditParametersStatus === "ERROR")
                         &&
                         intl.formatMessage({ id: `Audits.AuditStatusHistory.audit_failure` })
                       ) || (
                         (
-                          latestAuditStatusHistoryStatus === "REQUESTED"
+                          latestAuditStatusHistoryForCurrentAuditParametersStatus === "REQUESTED"
                           ||
-                          latestAuditStatusHistoryStatus === "PENDING"
+                          latestAuditStatusHistoryForCurrentAuditParametersStatus === "PENDING"
                         )
                         &&
                         intl.formatMessage({ id: `Audits.AuditStatusHistory.audit_running` })
