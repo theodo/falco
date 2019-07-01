@@ -111,31 +111,21 @@ export const MenuArrowContainer = styled.span`
   margin: ${(props: MenuArrowContainerProps) => (props.margin ? props.margin : '0')};
 `;
 
-/* stylelint-disable */
-// stylelint is blocking commit with background-color for no reason
+const COLOR_BY_STATUS = {
+  "SUCCESS": colorUsage.auditStatusHistoryIconSuccess,
+  "PENDING": colorUsage.auditStatusHistoryIconPending,
+  "REQUESTED": colorUsage.auditStatusHistoryIconPending,
+  "ERROR": colorUsage.auditStatusHistoryIconFailure,
+}
+
 export const AuditStatusHistoryIcon = styled.span<AuditStatusHistoryIconProps>`
   height: 12px;
   width: 12px;
   margin-right: 5px;
-  background-color: ${(props) => {
-    switch (props.status) {
-      case "SUCCESS":
-        return colorUsage.auditStatusHistoryIconSuccess;
-      case "PENDING":
-        return colorUsage.auditStatusHistoryIconPending;
-      case "REQUESTED":
-        return colorUsage.auditStatusHistoryIconPending;
-      case "ERROR":
-        return colorUsage.auditStatusHistoryIconFailure;
-      default:
-        return colorUsage.auditStatusHistoryIconFailure;
-    }
-  }
-  };
+  background-color: ${(props) => COLOR_BY_STATUS[props.status]};
   border-radius: 50%;
   display: inline-block;
 `;
-/* stylelint-enable */
 
 
 export const AuditStatusHistoryIconContainer = styled.div`
