@@ -113,11 +113,11 @@ export const MenuArrowContainer = styled.span`
 
 /* stylelint-disable */
 // stylelint is blocking commit with background-color for no reason
-export const AuditStatusHistoryIcon = styled.span`
+export const AuditStatusHistoryIcon = styled.span<AuditStatusHistoryIconProps>`
   height: 12px;
   width: 12px;
   margin-right: 5px;
-  background-color: ${(props: AuditStatusHistoryIconProps) => {
+  background-color: ${(props) => {
     switch (props.status) {
       case "SUCCESS":
         return colorUsage.auditStatusHistoryIconSuccess;
