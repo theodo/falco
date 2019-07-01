@@ -50,16 +50,18 @@ export interface AuditParametersAPIType {
   network_shape: string;
 }
 
+export type StatusType = "SUCCESS" | "REQUESTED" | "PENDING" | "ERROR";
+
 export interface AuditStatusHistoryType {
   createdAt: string;
-  status: "SUCCESS" | "REQUESTED" | "PENDING" | "ERROR";
+  status: StatusType;
   details: string;
   auditParametersId: string;
 }
 
 export interface ApiAuditStatusHistoryType {
   created_at: string;
-  status: "SUCCESS" | "REQUESTED" | "PENDING" | "ERROR";
+  status: StatusType;
   details: string;
   parameters: string;
 }

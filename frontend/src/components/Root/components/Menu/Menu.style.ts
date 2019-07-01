@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { StatusType } from 'redux/projects/types';
 import styled from 'styled-components';
 import {
   colorUsage,
@@ -15,7 +16,7 @@ interface MenuArrowContainerProps {
 }
 
 interface AuditStatusHistoryIconProps {
-  status: "SUCCESS" | "REQUESTED" | "PENDING" | "ERROR";
+  status: StatusType;
 }
 
 export const Container = styled.div`
