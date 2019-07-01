@@ -14,10 +14,12 @@ def get_latest_audit_status_histories(obj):
     return [
         AuditStatusHistorySerializer(
             obj.audits.filter(parameters=parameters)
-            .order_by("-created_at")
-            .first()
-            .audit_status_history.order_by("-created_at")
-            .first()
+            # get the latest audit for the given parameter
+            .order_by("created_at")
+            .last()
+            # for this audit, get the latest auditstatus
+            .audit_status_history.order_by("created_at")
+            .last()
         ).data
         for parameters in parameters_list
     ]
