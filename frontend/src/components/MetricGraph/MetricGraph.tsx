@@ -105,26 +105,28 @@ const MetricGraph: React.FunctionComponent<Props> = ({
     payload: Array<{ value: number; dataKey: MetricType }>;
   }) => {
     const { payload, label } = tooltipProps;
-    return payload.map((entry, index) => {
-      const dataType = METRICS[entry.dataKey].type;
-      const formattedDate = intl.formatMessage(
-        {
-          id: 'components.MetricGraph.tooltipDate',
-        },
-        {
-          day: dayjs(label)
-            .format('L')
-            .replace(new RegExp('[^.]?' + dayjs().format('YYYY') + '.?'), ''), // remove year
-          time: dayjs(label).format('LT'),
-        },
-      );
-      return (
-        <StyledTooltip key={index}>
-          <TooltipValue>{getFormattedValue(dataType, entry.value)}</TooltipValue>
-          <TooltipDate>{formattedDate}</TooltipDate>
-        </StyledTooltip>
-      );
-    });
+    return payload
+      ? payload.map((entry, index) => {
+        const dataType = METRICS[entry.dataKey].type;
+        const formattedDate = intl.formatMessage(
+          {
+            id: 'components.MetricGraph.tooltipDate',
+          },
+          {
+            day: dayjs(label)
+              .format('L')
+              .replace(new RegExp('[^.]?' + dayjs().format('YYYY') + '.?'), ''), // remove year
+            time: dayjs(label).format('LT'),
+          },
+        );
+        return (
+          <StyledTooltip key={index}>
+            <TooltipValue>{getFormattedValue(dataType, entry.value)}</TooltipValue>
+            <TooltipDate>{formattedDate}</TooltipDate>
+          </StyledTooltip>
+        );
+      })
+      : null;
   };
 
   const toggleMetricInfoTooltipVisibility = (event: MouseEvent) => {
