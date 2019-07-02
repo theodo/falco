@@ -1,5 +1,5 @@
 import { MetricType } from 'redux/auditResults/types';
-import { modelizePagesToById } from 'redux/entities/pages/modelizer';
+import { getPage } from 'redux/entities/pages/selectors';
 import { PageType } from 'redux/entities/pages/types';
 import { modelizeScripts } from 'redux/entities/projects/modelizer';
 import { ScriptType } from 'redux/entities/projects/types';
@@ -24,12 +24,10 @@ export const getCurrentPageId = (state: RootState): string | null => {
 
 export const getCurrentPage = (state: RootStateWithRouter): PageType | null => {
   const currentPageId = getCurrentPageId(state);
-  const currentProjectId = getCurrentProjectId(state);
-  return (
-    state.entities.projects.byId && state.entities.projects.byId[currentProjectId] && currentPageId
-      ? modelizePagesToById(state.entities.projects.byId[currentProjectId].pages)[currentPageId]
-      : null
-  )
+  if (!currentPageId) {
+    return null;
+  }
+  return getPage(state, currentPageId);
 }
 
 export const getCurrentPageName = (state: RootStateWithRouter): string => {
