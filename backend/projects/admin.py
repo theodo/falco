@@ -44,8 +44,8 @@ class ProjectAdmin(admin.ModelAdmin):
     inlines = [PageInline, ScriptInline, ProjectAuditParametersInline]
     exclude = ["screenshot_url"]
     filter_horizontal = ("members", "admins")
-
-    list_display = ("name", "project_actions", "created_at")
+    list_filter = ("is_active",)
+    list_display = ("name", "project_actions", "is_active", "created_at")
 
     def get_urls(self):
         current_urls = super().get_urls()
