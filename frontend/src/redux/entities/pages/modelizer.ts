@@ -9,6 +9,7 @@ export const modelizePage = (apiPage: ApiPageType): PageType => ({
     latestAuditStatusHistories: apiPage.latest_audit_status_histories.map(modelizeAuditStatusHistory),
 })
 
+// should be deleted once the refacto is complete
 export const modelizePagesToById = (pages: PageType[]): Record<string, PageType> => {
     return pages.reduce((pagesById, page) => {
         return {
@@ -18,6 +19,15 @@ export const modelizePagesToById = (pages: PageType[]): Record<string, PageType>
                 name: page.name,
                 url: page.url,
             },
+        };
+    }, {});
+};
+
+export const modelizeApiPagesToById = (pages: ApiPageType[]): Record<string, PageType> => {
+    return pages.reduce((pagesById, page) => {
+        return {
+            ...pagesById,
+            [page.uuid]: modelizePage(page),
         };
     }, {});
 };
