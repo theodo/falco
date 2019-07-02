@@ -8,12 +8,14 @@ import { combineReducers, Reducer } from 'redux';
 
 import { reducer as auditResults } from './auditResults';
 import { reducer as content } from './content';
+import { reducer as entities } from './entities'
 import { reducer as projects } from './entities/projects';
 import { reducer as lead } from './lead';
 import { reducer as login } from './login';
 import { reducer as parameters } from './parameters';
-import { RootAction, RootState } from './types';
 import { reducer as user } from './user';
+
+import { RootAction, RootState } from './types';
 
 /**
  * Creates the main reducer with the asynchronously loaded ones
