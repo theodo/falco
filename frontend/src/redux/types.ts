@@ -3,9 +3,9 @@ import { PersistPartial } from 'redux-persist/lib/persistReducer';
 import { LeadAction, LeadState } from 'redux/lead';
 import { AuditResultsAction, AuditResultsState } from './auditResults';
 import { ContentAction, ContentState } from './content';
+import { ProjectsAction, ProjectsState } from './entities/projects';
 import { LoginAction, LoginState } from './login';
 import { ParametersAction, ParametersState } from './parameters';
-import { ProjectsAction, ProjectsState } from './projects';
 import { UserAction, UserState } from './user';
 
 export type RootState = Readonly<{

@@ -8,10 +8,10 @@ import { combineReducers, Reducer } from 'redux';
 
 import { reducer as auditResults } from './auditResults';
 import { reducer as content } from './content';
+import { reducer as projects } from './entities/projects';
 import { reducer as lead } from './lead';
 import { reducer as login } from './login';
 import { reducer as parameters } from './parameters';
-import { reducer as projects } from './projects';
 import { RootAction, RootState } from './types';
 import { reducer as user } from './user';
 

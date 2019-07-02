@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { Redirect, RouteComponentProps } from 'react-router';
-import { ProjectType } from 'redux/projects/types';
+import { ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
 
 import ErrorMessage from 'components/ErrorMessage';

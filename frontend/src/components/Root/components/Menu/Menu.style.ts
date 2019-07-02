@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { StatusType } from 'redux/projects/types';
+import { StatusType } from 'redux/entities/projects/types';
 import styled from 'styled-components';
 import {
   colorUsage,

@@ -1,6 +1,6 @@
 import { MetricType } from 'redux/auditResults/types';
-import { modelizePages, modelizeScripts } from 'redux/projects/modelizer';
-import { PageType, ScriptType } from 'redux/projects/types';
+import { modelizePages, modelizeScripts } from 'redux/entities/projects/modelizer';
+import { PageType, ScriptType } from 'redux/entities/projects/types';
 import { getCurrentProjectId } from 'redux/selectors';
 import { RootState, RootStateWithRouter } from 'redux/types';
 

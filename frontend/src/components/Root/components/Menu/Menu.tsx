@@ -4,7 +4,7 @@ import { MenuArrow } from 'icons';
 import React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { ValueType } from 'react-select/lib/types';
-import { AuditStatusHistoryType, ProjectType } from 'redux/projects/types';
+import { AuditStatusHistoryType, ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
 

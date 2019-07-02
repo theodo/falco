@@ -6,7 +6,7 @@ import ErrorMessage from 'components/ErrorMessage';
 import MetricGraph from 'components/MetricGraph';
 import Close from 'icons/Close';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
-import { ProjectType } from 'redux/projects/types';
+import { ProjectType } from 'redux/entities/projects/types';
 import { colorUsage, zIndex } from 'stylesheet';
 import { CloseContainer, PageSubTitle, PageTitle } from './GraphModal.style';
 

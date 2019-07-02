@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Redirect, RouteComponentProps } from 'react-router';
 import { ValueType } from 'react-select/lib/types';
-import { AuditParametersType, ProjectType } from 'redux/projects/types';
+import { AuditParametersType, ProjectType } from 'redux/entities/projects/types';
 
 import Badge from 'components/Badge';
 import ErrorMessage from 'components/ErrorMessage';
 import Loader from 'components/Loader';
 import Select from 'components/Select';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
-import { PageType, ScriptType } from 'redux/projects/types';
+import { PageType, ScriptType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
 import AnalyticsBlock from './AnalyticsBlock';
@@ -230,10 +230,10 @@ export const Audits: React.FunctionComponent<Props> = ({
   const sortedAuditResultsIds = page
     ? sortedPageAuditResultsIds
     : script && sortedScriptAuditResultsIds
-    ? scriptStepId && sortedScriptAuditResultsIds[scriptStepId]
-      ? sortedScriptAuditResultsIds[scriptStepId]
-      : []
-    : null;
+      ? scriptStepId && sortedScriptAuditResultsIds[scriptStepId]
+        ? sortedScriptAuditResultsIds[scriptStepId]
+        : []
+      : null;
 
   const scriptStepSelectOptions = Object.keys(scriptSteps).map(scriptStepKey => ({
     value: scriptStepKey,

@@ -1,4 +1,4 @@
-import { AuditParametersType } from 'redux/projects/types';
+import { AuditParametersType } from 'redux/entities/projects/types';
 import { RootState } from 'redux/types';
 
 export const selectAuditParametersAsDict = (

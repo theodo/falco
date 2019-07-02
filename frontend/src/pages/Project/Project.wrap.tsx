@@ -8,7 +8,7 @@ import {
   setCurrentScriptStepId,
 } from 'redux/parameters';
 
-import { fetchProjectRequest } from 'redux/projects';
+import { fetchProjectRequest } from 'redux/entities/projects';
 import { RootState } from 'redux/types';
 
 import Project, { OwnProps } from './Project';
