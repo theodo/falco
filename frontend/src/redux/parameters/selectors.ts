@@ -3,7 +3,7 @@ import { getPage } from 'redux/entities/pages/selectors';
 import { PageType } from 'redux/entities/pages/types';
 import { modelizeScripts } from 'redux/entities/projects/modelizer';
 import { ScriptType } from 'redux/entities/projects/types';
-import { getCurrentProjectId } from 'redux/selectors';
+import { getCurrentProject, getCurrentProjectId } from 'redux/selectors';
 import { RootState, RootStateWithRouter } from 'redux/types';
 
 export const getMetricsToDisplay = (state: RootState): MetricType[] => {
@@ -57,3 +57,11 @@ export const getCurrentScriptName = (state: RootStateWithRouter): string => {
 export const getCurrentScriptStepId = (state: RootState): string | null => {
   return state.parameters.currentScriptStepId;
 };
+
+export const getCurrentProjectPages = (state: RootStateWithRouter): Array<PageType | null> => {
+  const currentProject = getCurrentProject(state);
+  if (!currentProject) {
+    return [];
+  }
+  return currentProject.pages.map(page => getPage(state, page.uuid)).filter(page => page !== null);
+}
