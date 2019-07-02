@@ -24,8 +24,8 @@ export const getCurrentPage = (state: RootStateWithRouter): PageType | null => {
   const currentPageId = getCurrentPageId(state);
   const currentProjectId = getCurrentProjectId(state);
   return (
-    state.projects.byId && state.projects.byId[currentProjectId] && currentPageId
-      ? modelizePages(state.projects.byId[currentProjectId].pages)[currentPageId]
+    state.entities.projects.byId && state.entities.projects.byId[currentProjectId] && currentPageId
+      ? modelizePages(state.entities.projects.byId[currentProjectId].pages)[currentPageId]
       : null
   )
 }
@@ -43,8 +43,8 @@ export const getCurrentScript = (state: RootStateWithRouter): ScriptType | null 
   const currentScriptId = getCurrentScriptId(state);
   const currentProjectId = getCurrentProjectId(state);
   return (
-    state.projects.byId && state.projects.byId[currentProjectId] && currentScriptId
-      ? modelizeScripts(state.projects.byId[currentProjectId].scripts)[currentScriptId]
+    state.entities.projects.byId && state.entities.projects.byId[currentProjectId] && currentScriptId
+      ? modelizeScripts(state.entities.projects.byId[currentProjectId].scripts)[currentScriptId]
       : null
   )
 }

@@ -21,16 +21,16 @@ import { fetchAuditResultsRequest } from 'redux/auditResults';
 import { Audits, OwnProps } from './Audits';
 
 const mapStateToProps = (state: RootState, props: OwnProps) => ({
-  project: state.projects.byId ? state.projects.byId[props.match.params.projectId] : undefined,
+  project: state.entities.projects.byId ? state.entities.projects.byId[props.match.params.projectId] : undefined,
   page:
-    state.projects.byId && state.projects.byId[props.match.params.projectId]
-      ? modelizePages(state.projects.byId[props.match.params.projectId].pages)[
+    state.entities.projects.byId && state.entities.projects.byId[props.match.params.projectId]
+      ? modelizePages(state.entities.projects.byId[props.match.params.projectId].pages)[
       props.match.params.pageOrScriptId
       ]
       : undefined,
   script:
-    state.projects.byId && state.projects.byId[props.match.params.projectId]
-      ? modelizeScripts(state.projects.byId[props.match.params.projectId].scripts)[
+    state.entities.projects.byId && state.entities.projects.byId[props.match.params.projectId]
+      ? modelizeScripts(state.entities.projects.byId[props.match.params.projectId].scripts)[
       props.match.params.pageOrScriptId
       ]
       : undefined,

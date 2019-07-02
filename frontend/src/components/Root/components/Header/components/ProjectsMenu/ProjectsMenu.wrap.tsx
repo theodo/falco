@@ -9,9 +9,9 @@ import { ProjectsMenu } from './ProjectsMenu';
 
 const mapStateToProps = (state: RootStateWithRouter) => ({
   currentProject: getCurrentProject(state),
-  projects: state.projects.byId
-    ? Object.keys(state.projects.byId).map(projectId =>
-      state.projects.byId ? state.projects.byId[projectId] : null,
+  projects: state.entities.projects.byId
+    ? Object.keys(state.entities.projects.byId).map(projectId =>
+      state.entities.projects.byId ? state.entities.projects.byId[projectId] : null,
     )
     : null,
   isUserAuthenticated: getIsAuthenticated(state),
