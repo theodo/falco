@@ -1,5 +1,4 @@
 import { modelizeAuditStatusHistory } from 'redux/auditResults/modelizer';
-import { PageType } from '../pages/types';
 import { ApiProjectType, ProjectType, ScriptType } from './types';
 
 export const modelizeProject = (project: ApiProjectType): Record<string, ProjectType> => ({
@@ -37,19 +36,6 @@ export const modelizeProjects = (projects: ApiProjectType[]) => {
     }),
     {},
   );
-};
-
-export const modelizePages = (pages: PageType[]): Record<string, PageType> => {
-  return pages.reduce((pagesById, page) => {
-    return {
-      ...pagesById,
-      [page.uuid]: {
-        uuid: page.uuid,
-        name: page.name,
-        url: page.url,
-      },
-    };
-  }, {});
 };
 
 export const modelizeScripts = (scripts: ScriptType[]): Record<string, ScriptType> => {

@@ -5,7 +5,7 @@ import {
   selectScriptAuditResultsIds,
 } from 'redux/auditResults/selectors';
 import { fetchProjectRequest } from 'redux/entities/projects';
-import { modelizePages, modelizeScripts } from 'redux/entities/projects/modelizer';
+import { modelizeScripts } from 'redux/entities/projects/modelizer';
 import { selectAuditParametersAsDict } from 'redux/entities/projects/selectors';
 import {
   setCurrentAuditParametersId,
@@ -18,13 +18,14 @@ import { RootState } from 'redux/types';
 import { injectIntl } from 'react-intl';
 import { Dispatch } from 'redux';
 import { fetchAuditResultsRequest } from 'redux/auditResults';
+import { modelizePagesToById } from 'redux/entities/pages/modelizer';
 import { Audits, OwnProps } from './Audits';
 
 const mapStateToProps = (state: RootState, props: OwnProps) => ({
   project: state.entities.projects.byId ? state.entities.projects.byId[props.match.params.projectId] : undefined,
   page:
     state.entities.projects.byId && state.entities.projects.byId[props.match.params.projectId]
-      ? modelizePages(state.entities.projects.byId[props.match.params.projectId].pages)[
+      ? modelizePagesToById(state.entities.projects.byId[props.match.params.projectId].pages)[
       props.match.params.pageOrScriptId
       ]
       : undefined,
