@@ -119,6 +119,7 @@ const COLOR_BY_STATUS = {
 }
 
 export const AuditStatusHistoryIcon = styled.span<AuditStatusHistoryIconProps>`
+  cursor: help;
   height: 12px;
   width: 12px;
   margin-right: 5px;
