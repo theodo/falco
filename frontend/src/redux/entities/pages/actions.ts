@@ -1,6 +1,7 @@
 import { createAsyncAction } from "typesafe-actions";
 import { PageType } from "./types";
 
+
 export const fetchPageAction = createAsyncAction(
     'Entities/Pages/FETCH_PAGE_REQUEST',
     'Entities/Pages/FETCH_PAGE_SUCCESS',
