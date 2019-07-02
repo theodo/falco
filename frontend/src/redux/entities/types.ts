@@ -1,7 +1,7 @@
 import { ProjectsAction, ProjectsState } from './projects';
 
 export type EntitiesState = Readonly<{
-    projects: ProjectsState;
+    projectsEntity: ProjectsState;
 }>;
 
 export type EntitiesAction = ProjectsAction;
