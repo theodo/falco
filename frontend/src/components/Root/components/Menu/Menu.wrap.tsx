@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {
   getCurrentAuditParametersId,
   getCurrentPageId,
+  getCurrentProjectPages,
   getCurrentScriptId,
   getCurrentScriptStepId,
 } from 'redux/parameters/selectors';
@@ -16,6 +17,7 @@ const mapStateToProps = (state: RootStateWithRouter) => ({
   currentURL: getCurrentURL(state),
   pageId: getCurrentPageId(state),
   project: getCurrentProject(state),
+  pages: getCurrentProjectPages(state),
   scriptId: getCurrentScriptId(state),
   scriptStepId: getCurrentScriptStepId(state),
 });

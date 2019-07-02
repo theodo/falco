@@ -9,6 +9,7 @@ import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
 
 import { history } from 'index';
+import { PageType } from 'redux/entities/pages/types';
 import {
   AuditParametersBlock,
   AuditParametersTitle,
@@ -40,6 +41,7 @@ export interface OwnProps {
   auditParametersId: string | null;
   pageId: string | null;
   project?: ProjectType;
+  pages: PageType[];
   scriptId: string | null;
   scriptStepId: string | null;
   currentURL: string;
@@ -53,6 +55,7 @@ export const Menu: React.FunctionComponent<Props> = ({
   intl,
   pageId,
   project,
+  pages,
   scriptId,
   scriptStepId,
 }) => {
@@ -61,7 +64,7 @@ export const Menu: React.FunctionComponent<Props> = ({
   }
 
   const pagesAndScripts = [
-    ...project.pages.map(page => ({
+    ...pages.map(page => ({
       uuid: page.uuid,
       title: page.name,
       latestAuditStatusHistories: page.latestAuditStatusHistories,

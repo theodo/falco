@@ -58,10 +58,11 @@ export const getCurrentScriptStepId = (state: RootState): string | null => {
   return state.parameters.currentScriptStepId;
 };
 
-export const getCurrentProjectPages = (state: RootStateWithRouter): Array<PageType | null> => {
+export const getCurrentProjectPages = (state: RootStateWithRouter): PageType[] => {
   const currentProject = getCurrentProject(state);
   if (!currentProject) {
     return [];
   }
-  return currentProject.pages.map(page => getPage(state, page.uuid)).filter(page => page !== null);
+  const pages = currentProject.pages.map(page => getPage(state, page.uuid));
+  return pages.filter((page): page is PageType => (page !== null));
 }
