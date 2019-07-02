@@ -13,9 +13,14 @@ class AuditSerializer(serializers.ModelSerializer):
 
 
 class AuditStatusHistorySerializer(serializers.ModelSerializer):
+    parameters = serializers.SerializerMethodField()
+
+    def get_parameters(self, obj):
+        return obj.audit.parameters.uuid
+
     class Meta:
         model = AuditStatusHistory
-        fields = ("created_at", "status", "details")
+        fields = ("created_at", "status", "details", "parameters")
 
 
 class AuditResultsSerializer(serializers.ModelSerializer):

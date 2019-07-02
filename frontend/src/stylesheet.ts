@@ -28,10 +28,13 @@ const colorPalette = {
   white200: 'rgba(255,255,255,0.1)',
   white500: '#ffffff',
   lightGreen: '#3bafa3',
+  auditSuccessGreen: '#0CCE6B',
   black100: 'rgba(0, 0, 0, 0.2)',
   black200: 'rgba(0, 0, 0, 0.5)',
   red500: '#d8000c',
   red200: '#ffd2d2',
+  auditFailRed: '#FF4E42',
+  auditRunningOrange: "#ffa400",
   transparent: 'rgba(0,0,0,0)',
 };
 
@@ -168,11 +171,11 @@ export const colorUsage = {
   webPageTestRadioButtonBackground: colorPalette.white500,
 
   // Lighthouse
-  lighthouseFail: '#FF4E42',
+  lighthouseFail: colorPalette.auditFailRed,
   lighthouseFailSecondary: '#EB0F00',
-  lighthouseAverage: '#ffa400',
+  lighthouseAverage: colorPalette.auditRunningOrange,
   lighthouseAverageSecondary: '#D04900',
-  lighthousePass: '#0CCE6B',
+  lighthousePass: colorPalette.auditSuccessGreen,
   lighthousePassSecondary: '#018642',
   lighthouseLineColor: '#ebebeb',
 
@@ -186,6 +189,10 @@ export const colorUsage = {
   scriptBadgeSelectedText: colorPalette.white500,
   scriptBadgeSelectedBackground: colorPalette.white200,
 
+  // AuditStatusHistoryIcon
+  auditStatusHistoryIconSuccess: colorPalette.auditSuccessGreen,
+  auditStatusHistoryIconPending: colorPalette.auditRunningOrange,
+  auditStatusHistoryIconFailure: colorPalette.auditFailRed,
 
   // Not Found 404
   notFoundButtonBackground: colorPalette.grey500,

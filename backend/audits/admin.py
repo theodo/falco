@@ -14,6 +14,7 @@ class AuditResultsInline(admin.TabularInline):
 
 class AuditAdmin(admin.ModelAdmin):
     inlines = [AuditStatusHistoryInline, AuditResultsInline]
+    list_filter = ("page__project", "script__project")
 
 
 admin.site.register(Audit, AuditAdmin)

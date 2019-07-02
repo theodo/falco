@@ -10,11 +10,26 @@ export interface PageType {
   name: string;
   url: string;
   uuid: string;
+  latestAuditStatusHistories: AuditStatusHistoryType[];
+}
+
+export interface ApiPageType {
+  name: string;
+  url: string;
+  uuid: string;
+  latest_audit_status_histories: ApiAuditStatusHistoryType[];
 }
 
 export interface ScriptType {
   uuid: string;
   name: string;
+  latestAuditStatusHistories: AuditStatusHistoryType[];
+}
+
+export interface ApiScriptType {
+  uuid: string;
+  name: string;
+  latest_audit_status_histories: ApiAuditStatusHistoryType[];
 }
 
 export interface ProjectType {
@@ -35,11 +50,27 @@ export interface AuditParametersAPIType {
   network_shape: string;
 }
 
+export type StatusType = "SUCCESS" | "REQUESTED" | "PENDING" | "ERROR";
+
+export interface AuditStatusHistoryType {
+  createdAt: string;
+  status: StatusType;
+  details: string;
+  auditParametersId: string;
+}
+
+export interface ApiAuditStatusHistoryType {
+  created_at: string;
+  status: StatusType;
+  details: string;
+  parameters: string;
+}
+
 export interface ApiProjectType {
   uuid: string;
   name: string;
-  pages: PageType[];
-  scripts: ScriptType[];
+  pages: ApiPageType[];
+  scripts: ApiScriptType[];
   audit_parameters_list: AuditParametersAPIType[];
   screenshot_url: string;
   latest_audit_at: string;

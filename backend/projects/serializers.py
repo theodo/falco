@@ -6,18 +6,49 @@ from projects.models import (
     Script,
 )
 from rest_framework import serializers
+from audits.serializers import AuditStatusHistorySerializer
+
+
+def get_latest_audit_status_histories(obj):
+    parameters_list = obj.project.audit_parameters_list.all()
+    return [
+        AuditStatusHistorySerializer(
+            obj.audits.filter(parameters=parameters)
+            # get the latest audit for the given parameter
+            .order_by("created_at")
+            .last()
+            # for this audit, get the latest auditstatus
+            .audit_status_history.order_by("created_at")
+            .last()
+        ).data
+        for parameters in parameters_list
+    ]
 
 
 class PageSerializer(serializers.ModelSerializer):
+    latest_audit_status_histories = serializers.SerializerMethodField(
+        "resolve_latest_audit_status_histories"
+    )
+
+    def resolve_latest_audit_status_histories(self, obj):
+        return get_latest_audit_status_histories(obj)
+
     class Meta:
         model = Page
-        fields = ("uuid", "name", "url", "audits")
+        fields = ("uuid", "name", "url", "audits", "latest_audit_status_histories")
 
 
 class ScriptSerializer(serializers.ModelSerializer):
+    latest_audit_status_histories = serializers.SerializerMethodField(
+        "resolve_latest_audit_status_histories"
+    )
+
+    def resolve_latest_audit_status_histories(self, obj):
+        return get_latest_audit_status_histories(obj)
+
     class Meta:
         model = Script
-        fields = ("uuid", "name", "audits")
+        fields = ("uuid", "name", "audits", "latest_audit_status_histories")
 
 
 class ProjectAuditParametersSerializer(serializers.ModelSerializer):
