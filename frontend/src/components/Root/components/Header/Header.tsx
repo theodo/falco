@@ -38,6 +38,7 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
   const [accountMenuRight, setAccountMenuRight] = React.useState('auto');
   const [isProjectsMenuVisible, setIsProjectsMenuVisible] = React.useState(false);
   const [projectsMenuRight, setProjectsMenuRight] = React.useState('auto');
+  const [MenuHasBeenPositionned, setMenuHasBeenPositionned] = React.useState(false);
 
   const headerContainerRef = React.useRef<HTMLDivElement>(null);
   const accountMenuButtonRef = React.useRef<HTMLLIElement>(null);
@@ -53,9 +54,10 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
             15,
           ) + 'px',
         );
+        setMenuHasBeenPositionned(true);
       }
     },
-    [headerContainerRef, accountMenuButtonRef],
+    [isAccountMenuVisible],
   );
 
   React.useEffect(
@@ -68,9 +70,10 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
             15,
           ) + 'px',
         );
+        setMenuHasBeenPositionned(true);
       }
     },
-    [headerContainerRef, projectsMenuButtonRef],
+    [isProjectsMenuVisible],
   );
 
   const toggleAccountMenuVisibility = (event: MouseEvent) => {
@@ -168,12 +171,12 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
       {shouldDisplayConnectedUserHeader && (
         <MenusContainer>
           <ProjectsMenu
-            isVisible={isProjectsMenuVisible}
+            isVisible={isProjectsMenuVisible && MenuHasBeenPositionned}
             position={'absolute'}
             right={projectsMenuRight}
           />
           <AccountMenu
-            isVisible={isAccountMenuVisible}
+            isVisible={isAccountMenuVisible && MenuHasBeenPositionned}
             position={'absolute'}
             right={accountMenuRight}
           />
