@@ -1,5 +1,6 @@
 import { modelizeAuditStatusHistory } from 'redux/auditResults/modelizer';
-import { ApiProjectType, ProjectType, ScriptType } from './types';
+import { ScriptType } from '../scripts/types';
+import { ApiProjectType, ProjectType } from './types';
 
 export const modelizeProject = (project: ApiProjectType): Record<string, ProjectType> => ({
   [project.uuid]: {

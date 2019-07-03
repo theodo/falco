@@ -2,7 +2,7 @@ import { MetricType } from 'redux/auditResults/types';
 import { getPage } from 'redux/entities/pages/selectors';
 import { PageType } from 'redux/entities/pages/types';
 import { modelizeScripts } from 'redux/entities/projects/modelizer';
-import { ScriptType } from 'redux/entities/projects/types';
+import { ScriptType } from 'redux/entities/scripts/types';
 import { getCurrentProject, getCurrentProjectId } from 'redux/selectors';
 import { RootState, RootStateWithRouter } from 'redux/types';
 
