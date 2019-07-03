@@ -7,4 +7,13 @@ export const modelizeAuditParameters = (apiAuditParameters: ApiAuditParametersTy
     location: apiAuditParameters.location,
     browser: apiAuditParameters.browser,
     networkShape: apiAuditParameters.network_shape,
-})
+});
+
+export const modelizeApiAuditParametersListToById = (apiAuditParametersList: ApiAuditParametersType[]): Record<string, AuditParametersType> => {
+    return apiAuditParametersList.reduce((auditParametersById, auditParameters) => {
+        return {
+            ...auditParametersById,
+            [auditParameters.uuid]: modelizeAuditParameters(auditParameters),
+        };
+    }, {});
+};

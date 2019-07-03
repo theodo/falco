@@ -4,6 +4,9 @@ import { ActionType, getType } from 'typesafe-actions';
 
 import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
 
+import { fetchAuditParametersAction } from '../auditParameters/actions';
+import { modelizeApiAuditParametersListToById } from '../auditParameters/modelizer';
+import { ApiAuditParametersType } from '../auditParameters/types';
 import { fetchPageAction } from '../pages';
 import { modelizeApiPagesToById } from '../pages/modelizer';
 import { ApiPageType } from '../pages/types';
@@ -37,14 +40,19 @@ export function* fetchProjects() {
   );
   yield put(fetchPageAction.success({
     byId: modelizeApiPagesToById(projects.reduce((apiPages: ApiPageType[], project: ApiProjectType) => {
-      return apiPages.concat(project.pages)
-    }, []))
-  }))
+      return apiPages.concat(project.pages);
+    }, [])),
+  }));
   yield put(fetchScriptAction.success({
     byId: modelizeApiScriptsToById(projects.reduce((apiScripts: ApiScriptType[], project: ApiProjectType) => {
-      return apiScripts.concat(project.scripts)
-    }, []))
-  }))
+      return apiScripts.concat(project.scripts);
+    }, [])),
+  }));
+  yield put(fetchAuditParametersAction.success({
+    byId: modelizeApiAuditParametersListToById(projects.reduce((apiAuditParametersList: ApiAuditParametersType[], project: ApiProjectType) => {
+      return apiAuditParametersList.concat(project.audit_parameters_list);
+    }, [])),
+  }));
   yield put(fetchProjectSuccess({ byId: modelizeProjects(projects) }));
 }
 
