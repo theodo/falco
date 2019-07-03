@@ -35,7 +35,6 @@ export function* fetchProjects() {
     true,
     null,
   );
-  yield put(fetchProjectSuccess({ byId: modelizeProjects(projects) }));
   yield put(fetchPageAction.success({
     byId: modelizeApiPagesToById(projects.reduce((apiPages: ApiPageType[], project: ApiProjectType) => {
       return apiPages.concat(project.pages)
@@ -46,6 +45,7 @@ export function* fetchProjects() {
       return apiScripts.concat(project.scripts)
     }, []))
   }))
+  yield put(fetchProjectSuccess({ byId: modelizeProjects(projects) }));
 }
 
 export function* fetchProject(action: ActionType<typeof fetchProjectRequest>) {
