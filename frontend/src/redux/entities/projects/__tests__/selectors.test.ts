@@ -1,5 +1,4 @@
 import { state } from '__fixtures__/state';
-import * as selectors from 'redux/selectors';
 import { selectAuditParametersAsDict } from '../selectors';
 
 const firstProjectId = '1234';
@@ -22,7 +21,7 @@ const firstProjectSecondParameters = {
 const firstProject = {
   uuid: firstProjectId,
   name: 'Project #1',
-  pages: [],
+  pagesIds: [],
   scripts: [],
   auditParametersList: [firstProjectFirstParameters, firstProjectSecondParameters],
   screenshotUrl: 'path/to/screenshot/1',
@@ -49,7 +48,7 @@ const secondProjectSecondParameters = {
 const secondProject = {
   uuid: secondProjectId,
   name: 'Project #2',
-  pages: [],
+  pagesIds: [],
   scripts: [],
   auditParametersList: [secondProjectFirstParameters, secondProjectSecondParameters],
   screenshotUrl: 'path/to/screenshot/2',
@@ -58,12 +57,14 @@ const secondProject = {
 
 const initialState = {
   ...state,
-  projects: {
-    byId: {
-      [firstProjectId]: { ...firstProject },
-      [secondProjectId]: { ...secondProject },
+  entities: {
+    projects: {
+      byId: {
+        [firstProjectId]: { ...firstProject },
+        [secondProjectId]: { ...secondProject },
+      },
     },
-  },
+  }
 };
 
 describe('Project selectors', () => {

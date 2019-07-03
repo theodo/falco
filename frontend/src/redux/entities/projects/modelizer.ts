@@ -1,16 +1,11 @@
 import { modelizeAuditStatusHistory } from 'redux/auditResults/modelizer';
-import { ApiProjectType, PageType, ProjectType, ScriptType } from './types';
+import { ApiProjectType, ProjectType, ScriptType } from './types';
 
 export const modelizeProject = (project: ApiProjectType): Record<string, ProjectType> => ({
   [project.uuid]: {
     uuid: project.uuid,
     name: project.name,
-    pages: project.pages.map(page => ({
-      uuid: page.uuid,
-      url: page.url,
-      name: page.name,
-      latestAuditStatusHistories: page.latest_audit_status_histories.map(modelizeAuditStatusHistory),
-    })),
+    pagesIds: project.pages.map(page => page.uuid),
     scripts: project.scripts.map(script => ({
       uuid: script.uuid,
       name: script.name,
@@ -36,19 +31,6 @@ export const modelizeProjects = (projects: ApiProjectType[]) => {
     }),
     {},
   );
-};
-
-export const modelizePages = (pages: PageType[]): Record<string, PageType> => {
-  return pages.reduce((pagesById, page) => {
-    return {
-      ...pagesById,
-      [page.uuid]: {
-        uuid: page.uuid,
-        name: page.name,
-        url: page.url,
-      },
-    };
-  }, {});
 };
 
 export const modelizeScripts = (scripts: ScriptType[]): Record<string, ScriptType> => {

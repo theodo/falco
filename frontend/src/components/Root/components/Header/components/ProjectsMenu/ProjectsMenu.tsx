@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
-import { ProjectType } from 'redux/projects/types';
+import { ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
 import { getSpacing } from 'stylesheet';
 

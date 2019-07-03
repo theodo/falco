@@ -1,23 +1,11 @@
+import { ApiPageType, PageType } from "../pages/types";
+
 export interface AuditParametersType {
   uuid: string;
   name: string;
   location: string;
   browser: string;
   networkShape: string;
-}
-
-export interface PageType {
-  name: string;
-  url: string;
-  uuid: string;
-  latestAuditStatusHistories: AuditStatusHistoryType[];
-}
-
-export interface ApiPageType {
-  name: string;
-  url: string;
-  uuid: string;
-  latest_audit_status_histories: ApiAuditStatusHistoryType[];
 }
 
 export interface ScriptType {
@@ -35,7 +23,7 @@ export interface ApiScriptType {
 export interface ProjectType {
   uuid: string;
   name: string;
-  pages: PageType[];
+  pagesIds: string[];
   scripts: ScriptType[];
   screenshotUrl: string;
   latestAuditAt: string;

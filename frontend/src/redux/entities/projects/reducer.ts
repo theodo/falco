@@ -25,7 +25,7 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
         ...state,
         byId: {
           ...state.byId,
-          ...action.payload.byId,
+          ...typedAction.payload.byId,
         },
       };
     case getType(fetchProjectError):
@@ -33,7 +33,9 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
         ...state,
         byId: {
           ...state.byId,
-          ...{ [action.payload.projectId]: null },
+          ...(
+            typedAction.payload.projectId && { [typedAction.payload.projectId]: null }
+          ),
         },
       };
     default:

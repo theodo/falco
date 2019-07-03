@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-import { ApiAuditStatusHistoryType, AuditStatusHistoryType } from 'redux/projects/types';
+import { ApiAuditStatusHistoryType, AuditStatusHistoryType } from 'redux/entities/projects/types';
 import { ApiAuditResultType, AuditResultType } from './types';
 
 export const modelizeAuditResultsForPage = (

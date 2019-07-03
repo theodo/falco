@@ -4,6 +4,9 @@ import { ActionType, getType } from 'typesafe-actions';
 
 import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
 
+import { fetchPageAction } from '../pages';
+import { modelizeApiPagesToById } from '../pages/modelizer';
+import { ApiPageType } from '../pages/types';
 import {
   fetchProjectError,
   fetchProjectRequest,
@@ -30,6 +33,11 @@ export function* fetchProjects() {
     null,
   );
   yield put(fetchProjectSuccess({ byId: modelizeProjects(projects) }));
+  yield put(fetchPageAction.success({
+    byId: modelizeApiPagesToById(projects.reduce((apiPages: ApiPageType[], project: ApiProjectType) => {
+      return apiPages.concat(project.pages)
+    }, []))
+  }))
 }
 
 export function* fetchProject(action: ActionType<typeof fetchProjectRequest>) {

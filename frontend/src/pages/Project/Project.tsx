@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { Redirect, RouteComponentProps } from 'react-router';
-import { ProjectType } from 'redux/projects/types';
+import { ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
 
 import ErrorMessage from 'components/ErrorMessage';
@@ -72,10 +72,10 @@ const Project: React.FunctionComponent<Props> = ({
     project.uuid,
   );
 
-  if (project.pages.length > 0) {
+  if (project.pagesIds.length > 0) {
     firstPageOrScriptLocation = firstPageOrScriptLocation.replace(
       ':pageOrScriptId',
-      project.pages[0].uuid,
+      project.pagesIds[0],
     );
   } else if (project.scripts.length > 0) {
     firstPageOrScriptLocation = firstPageOrScriptLocation.replace(

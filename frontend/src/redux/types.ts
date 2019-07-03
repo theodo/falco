@@ -3,16 +3,20 @@ import { PersistPartial } from 'redux-persist/lib/persistReducer';
 import { LeadAction, LeadState } from 'redux/lead';
 import { AuditResultsAction, AuditResultsState } from './auditResults';
 import { ContentAction, ContentState } from './content';
+import { PagesAction, PagesState } from './entities/pages';
+import { ProjectsAction, ProjectsState } from './entities/projects';
 import { LoginAction, LoginState } from './login';
 import { ParametersAction, ParametersState } from './parameters';
-import { ProjectsAction, ProjectsState } from './projects';
 import { UserAction, UserState } from './user';
 
 export type RootState = Readonly<{
   lead: LeadState;
   login: LoginState & PersistPartial;
   parameters: ParametersState & PersistPartial;
-  projects: ProjectsState;
+  entities: {
+    projects: ProjectsState;
+    pages: PagesState;
+  };
   auditResults: AuditResultsState;
   user: UserState;
   content: ContentState & PersistPartial;
@@ -25,6 +29,7 @@ export type RootAction =
   | LoginAction
   | ParametersAction
   | ProjectsAction
+  | PagesAction
   | AuditResultsAction
   | UserAction
   | ContentAction;

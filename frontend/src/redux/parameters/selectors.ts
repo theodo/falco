@@ -1,7 +1,9 @@
 import { MetricType } from 'redux/auditResults/types';
-import { modelizePages, modelizeScripts } from 'redux/projects/modelizer';
-import { PageType, ScriptType } from 'redux/projects/types';
-import { getCurrentProjectId } from 'redux/selectors';
+import { getPage } from 'redux/entities/pages/selectors';
+import { PageType } from 'redux/entities/pages/types';
+import { modelizeScripts } from 'redux/entities/projects/modelizer';
+import { ScriptType } from 'redux/entities/projects/types';
+import { getCurrentProject, getCurrentProjectId } from 'redux/selectors';
 import { RootState, RootStateWithRouter } from 'redux/types';
 
 export const getMetricsToDisplay = (state: RootState): MetricType[] => {
@@ -22,12 +24,10 @@ export const getCurrentPageId = (state: RootState): string | null => {
 
 export const getCurrentPage = (state: RootStateWithRouter): PageType | null => {
   const currentPageId = getCurrentPageId(state);
-  const currentProjectId = getCurrentProjectId(state);
-  return (
-    state.projects.byId && state.projects.byId[currentProjectId] && currentPageId
-      ? modelizePages(state.projects.byId[currentProjectId].pages)[currentPageId]
-      : null
-  )
+  if (!currentPageId) {
+    return null;
+  }
+  return getPage(state, currentPageId);
 }
 
 export const getCurrentPageName = (state: RootStateWithRouter): string => {
@@ -43,8 +43,8 @@ export const getCurrentScript = (state: RootStateWithRouter): ScriptType | null 
   const currentScriptId = getCurrentScriptId(state);
   const currentProjectId = getCurrentProjectId(state);
   return (
-    state.projects.byId && state.projects.byId[currentProjectId] && currentScriptId
-      ? modelizeScripts(state.projects.byId[currentProjectId].scripts)[currentScriptId]
+    state.entities.projects.byId && state.entities.projects.byId[currentProjectId] && currentScriptId
+      ? modelizeScripts(state.entities.projects.byId[currentProjectId].scripts)[currentScriptId]
       : null
   )
 }
@@ -57,3 +57,12 @@ export const getCurrentScriptName = (state: RootStateWithRouter): string => {
 export const getCurrentScriptStepId = (state: RootState): string | null => {
   return state.parameters.currentScriptStepId;
 };
+
+export const getCurrentProjectPages = (state: RootStateWithRouter): PageType[] => {
+  const currentProject = getCurrentProject(state);
+  if (!currentProject) {
+    return [];
+  }
+  const pages = currentProject.pagesIds.map(pageId => getPage(state, pageId));
+  return pages.filter((page): page is PageType => (page !== null));
+}
