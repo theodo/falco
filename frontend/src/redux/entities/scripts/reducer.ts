@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { ActionType } from "typesafe-actions";
+import { ActionType, getType } from "typesafe-actions";
 import { fetchScriptAction } from "./actions";
 import { ScriptType } from "./types";
 
@@ -15,9 +15,19 @@ const initialState: ScriptsState = {
 }
 
 const reducer = (state: ScriptsState = initialState, action: AnyAction) => {
-    // const typedAction = action as ScriptsAction;
-
-    return state;
+    const typedAction = action as ScriptsAction;
+    switch (typedAction.type) {
+        case getType(fetchScriptAction.success):
+            return {
+                ...state,
+                byId: {
+                    ...state.byId,
+                    ...typedAction.payload.byId,
+                }
+            };
+        default:
+            return state;
+    }
 };
 
 export default reducer;
