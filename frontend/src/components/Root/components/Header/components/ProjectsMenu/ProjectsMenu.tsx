@@ -24,7 +24,7 @@ import {
 } from './ProjectsMenu.style';
 
 interface OwnProps {
-  currentProject: ProjectType | undefined;
+  currentProject?: ProjectType | null;
   fetchProjectsRequest: () => void;
   isVisible: boolean;
   position?: string;

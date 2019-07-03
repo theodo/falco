@@ -18,7 +18,7 @@ type Props = {
   setCurrentPageId: (pageId: string | null | undefined) => void;
   setCurrentScriptId: (scriptId: string | null | undefined) => void;
   setCurrentScriptStepId: (scriptStepId: string | null | undefined) => void;
-  project?: ProjectType;
+  project?: ProjectType | null;
 } & OwnProps &
   InjectedIntlProps;
 
