@@ -64,3 +64,12 @@ export const getCurrentProjectPages = (state: RootStateWithRouter): PageType[] =
   const pages = currentProject.pagesIds.map(pageId => getPage(state, pageId));
   return pages.filter((page): page is PageType => (page !== null));
 }
+
+export const getCurrentProjectScripts = (state: RootStateWithRouter): ScriptType[] => {
+  const currentProject = getCurrentProject(state);
+  if (!currentProject) {
+    return [];
+  }
+  const scripts = currentProject.scripts.map(script => getScript(state, script.uuid));
+  return scripts.filter((script): script is ScriptType => (script !== null));
+}
