@@ -9,12 +9,13 @@ import {
 } from 'redux/parameters';
 
 import { fetchProjectRequest } from 'redux/entities/projects';
-import { RootState } from 'redux/types';
+import { RootStateWithRouter } from 'redux/types';
 
-import Project, { OwnProps } from './Project';
+import { getCurrentProject } from 'redux/selectors';
+import Project from './Project';
 
-const mapStateToProps = (state: RootState, props: OwnProps) => ({
-  project: state.entities.projects.byId ? state.entities.projects.byId[props.match.params.projectId] : undefined,
+const mapStateToProps = (state: RootStateWithRouter) => ({
+  project: getCurrentProject(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

@@ -13,16 +13,17 @@ import {
   setCurrentScriptId,
   setCurrentScriptStepId,
 } from 'redux/parameters';
-import { RootState } from 'redux/types';
+import { RootStateWithRouter } from 'redux/types';
 
 import { injectIntl } from 'react-intl';
 import { Dispatch } from 'redux';
 import { fetchAuditResultsRequest } from 'redux/auditResults';
 import { getPage } from 'redux/entities/pages/selectors';
+import { getCurrentProject } from 'redux/selectors';
 import { Audits, OwnProps } from './Audits';
 
-const mapStateToProps = (state: RootState, props: OwnProps) => ({
-  project: state.entities.projects.byId ? state.entities.projects.byId[props.match.params.projectId] : undefined,
+const mapStateToProps = (state: RootStateWithRouter, props: OwnProps) => ({
+  project: getCurrentProject(state),
   page:
     getPage(state, props.match.params.pageOrScriptId) || undefined,
   script:
