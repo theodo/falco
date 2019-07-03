@@ -1,9 +1,10 @@
 import { AnyAction } from "redux";
 import { ActionType } from "typesafe-actions";
+import { fetchScriptAction } from "./actions";
 import { ScriptType } from "./types";
 
 
-export type ScriptsAction = ActionType<never>;
+export type ScriptsAction = ActionType<typeof fetchScriptAction>;
 
 export type ScriptsState = Readonly<{
     byId: Readonly<Record<string, ScriptType>> | null;
@@ -14,7 +15,7 @@ const initialState: ScriptsState = {
 }
 
 const reducer = (state: ScriptsState = initialState, action: AnyAction) => {
-    // const typedAction = action as PagesAction;
+    // const typedAction = action as ScriptsAction;
 
     return state;
 };
