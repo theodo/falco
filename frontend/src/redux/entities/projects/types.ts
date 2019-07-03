@@ -10,7 +10,7 @@ export interface ProjectType {
   scriptsIds: string[];
   screenshotUrl: string;
   latestAuditAt: string;
-  auditParametersList: AuditParametersType[];
+  auditParametersIds: string[];
 }
 
 export type StatusType = "SUCCESS" | "REQUESTED" | "PENDING" | "ERROR";

@@ -168,7 +168,7 @@ export const Audits: React.FunctionComponent<Props> = ({
     );
   }
 
-  if (0 === project.auditParametersList.length) {
+  if (0 === project.auditParametersIds.length) {
     return (
       <Container>
         <ErrorMessage>

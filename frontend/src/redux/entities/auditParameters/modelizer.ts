@@ -1,7 +1,7 @@
 import { ApiAuditParametersType, AuditParametersType } from "./types";
 
 
-export const modelizeAuditParameters = (apiAuditParameters: ApiAuditParametersType): AuditParametersType => ({
+const modelizeAuditParameters = (apiAuditParameters: ApiAuditParametersType): AuditParametersType => ({
     uuid: apiAuditParameters.uuid,
     name: apiAuditParameters.name,
     location: apiAuditParameters.location,

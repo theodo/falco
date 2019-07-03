@@ -8,8 +8,8 @@ export const getProjectAuditParameters = (state: RootState, projectId: string): 
     if (!project) {
         return [];
     }
-    return project.auditParametersList
-        .map(auditParameters => getAuditParameters(state, auditParameters.uuid))
+    return project.auditParametersIds
+        .map(auditParametersId => getAuditParameters(state, auditParametersId))
         .filter((auditParameters): auditParameters is AuditParametersType => auditParameters !== null);
 };
 
