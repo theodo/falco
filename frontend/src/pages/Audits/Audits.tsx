@@ -39,8 +39,8 @@ export type OwnProps = {} & RouteComponentProps<{
 
 type Props = {
   project?: ProjectType | null;
-  page?: PageType;
-  script?: ScriptType;
+  page?: PageType | null;
+  script?: ScriptType | null;
   auditParameters: Record<string, AuditParametersType>;
   scriptSteps: Record<string, string>;
   sortedPageAuditResultsIds: string[] | null;

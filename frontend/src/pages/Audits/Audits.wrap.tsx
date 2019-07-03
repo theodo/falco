@@ -24,8 +24,8 @@ import { Audits, OwnProps } from './Audits';
 
 const mapStateToProps = (state: RootState, props: OwnProps) => ({
   project: getProject(state, props.match.params.projectId),
-  page: getPage(state, props.match.params.pageOrScriptId) || undefined,
-  script: getScript(state, props.match.params.pageOrScriptId) || undefined,
+  page: getPage(state, props.match.params.pageOrScriptId),
+  script: getScript(state, props.match.params.pageOrScriptId),
   auditParameters: getProjectAuditParametersById(state, props.match.params.projectId),
   sortedPageAuditResultsIds: selectPageAuditResultsIds(
     state,

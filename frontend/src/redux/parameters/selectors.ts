@@ -32,7 +32,7 @@ export const getCurrentPageId = (state: RootState): string | null => {
   return state.parameters.currentPageId;
 };
 
-export const getCurrentPage = (state: RootStateWithRouter): PageType | null => {
+export const getCurrentPage = (state: RootStateWithRouter): PageType | null | undefined => {
   const currentPageId = getCurrentPageId(state);
   if (!currentPageId) {
     return null;
@@ -49,7 +49,7 @@ export const getCurrentScriptId = (state: RootState): string | null => {
   return state.parameters.currentScriptId;
 };
 
-export const getCurrentScript = (state: RootStateWithRouter): ScriptType | null => {
+export const getCurrentScript = (state: RootStateWithRouter): ScriptType | null | undefined => {
   const currentScriptId = getCurrentScriptId(state);
   if (!currentScriptId) {
     return null;
@@ -77,7 +77,7 @@ export const getCurrentProjectPages = (state: RootStateWithRouter): PageType[] =
     return [];
   };
   const pages = currentProject.pagesIds.map(pageId => getPage(state, pageId));
-  return pages.filter((page): page is PageType => (page !== null));
+  return pages.filter((page): page is PageType => (page !== null && page !== undefined));
 };
 
 export const getCurrentProjectScripts = (state: RootStateWithRouter): ScriptType[] => {
@@ -86,7 +86,7 @@ export const getCurrentProjectScripts = (state: RootStateWithRouter): ScriptType
     return [];
   };
   const scripts = currentProject.scriptsIds.map(scriptId => getScript(state, scriptId));
-  return scripts.filter((script): script is ScriptType => (script !== null));
+  return scripts.filter((script): script is ScriptType => (script !== null && script !== undefined));
 };
 
 export const getCurrentProjectAuditParameters = (state: RootStateWithRouter): AuditParametersType[] => {
