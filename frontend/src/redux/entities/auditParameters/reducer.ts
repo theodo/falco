@@ -1,9 +1,10 @@
 import { AnyAction } from "redux";
 import { ActionType } from "typesafe-actions";
+import { fetchAuditParametersAction } from "./actions";
 import { AuditParametersType } from "./types";
 
 
-export type AuditParametersAction = ActionType<never>;
+export type AuditParametersAction = ActionType<typeof fetchAuditParametersAction>;
 
 export type AuditParametersState = Readonly<{
     byId: Readonly<Record<string, AuditParametersType>> | null;
