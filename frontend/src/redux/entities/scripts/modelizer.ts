@@ -2,7 +2,7 @@ import { modelizeAuditStatusHistory } from "redux/auditResults/modelizer";
 import { ApiScriptType, ScriptType } from "./types";
 
 
-export const modelizeScript = (apiScript: ApiScriptType): ScriptType => ({
+const modelizeScript = (apiScript: ApiScriptType): ScriptType => ({
     uuid: apiScript.uuid,
     name: apiScript.name,
     latestAuditStatusHistories: apiScript.latest_audit_status_histories.map(modelizeAuditStatusHistory),

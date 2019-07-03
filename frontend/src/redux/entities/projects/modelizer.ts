@@ -1,4 +1,3 @@
-import { modelizeScript } from '../scripts/modelizer';
 import { ApiProjectType, ProjectType } from './types';
 
 export const modelizeProject = (project: ApiProjectType): Record<string, ProjectType> => ({
@@ -6,7 +5,7 @@ export const modelizeProject = (project: ApiProjectType): Record<string, Project
     uuid: project.uuid,
     name: project.name,
     pagesIds: project.pages.map(page => page.uuid),
-    scripts: project.scripts.map(modelizeScript),
+    scriptsIds: project.scripts.map(script => script.uuid),
     auditParametersList: project.audit_parameters_list.map(auditParameters => ({
       uuid: auditParameters.uuid,
       name: auditParameters.name,

@@ -1,5 +1,5 @@
 import { ApiPageType } from "../pages/types";
-import { ApiScriptType, ScriptType } from "../scripts/types";
+import { ApiScriptType } from "../scripts/types";
 
 export interface AuditParametersType {
   uuid: string;
@@ -13,7 +13,7 @@ export interface ProjectType {
   uuid: string;
   name: string;
   pagesIds: string[];
-  scripts: ScriptType[];
+  scriptsIds: string[];
   screenshotUrl: string;
   latestAuditAt: string;
   auditParametersList: AuditParametersType[];

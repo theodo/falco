@@ -77,10 +77,10 @@ const Project: React.FunctionComponent<Props> = ({
       ':pageOrScriptId',
       project.pagesIds[0],
     );
-  } else if (project.scripts.length > 0) {
+  } else if (project.scriptsIds.length > 0) {
     firstPageOrScriptLocation = firstPageOrScriptLocation.replace(
       ':pageOrScriptId',
-      project.scripts[0].uuid,
+      project.scriptsIds[0],
     );
   } else {
     return (

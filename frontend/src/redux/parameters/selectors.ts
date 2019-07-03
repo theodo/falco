@@ -70,6 +70,6 @@ export const getCurrentProjectScripts = (state: RootStateWithRouter): ScriptType
   if (!currentProject) {
     return [];
   }
-  const scripts = currentProject.scripts.map(script => getScript(state, script.uuid));
+  const scripts = currentProject.scriptsIds.map(scriptId => getScript(state, scriptId));
   return scripts.filter((script): script is ScriptType => (script !== null));
 }
