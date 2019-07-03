@@ -18,13 +18,22 @@ export const state = {
     displayedMetrics: {},
     _persist: {} as PersistState
   },
-  projects: {
-    byId: null,
+  entities: {
+    projects: {
+      byId: null,
+    },
+    pages: {
+      byId: null,
+    }
   },
   auditResults: {
     byAuditId: {},
     sortedByPageId: {},
     sortedByScriptId: {},
+  },
+  content: {
+    lastUpdateOfWhatsNew: null,
+    lastClickOnWhatsNew: null,
   },
   user: null,
 };
