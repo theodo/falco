@@ -10,6 +10,7 @@ import { colorUsage, getSpacing } from 'stylesheet';
 
 import { history } from 'index';
 import { PageType } from 'redux/entities/pages/types';
+import { ScriptType } from 'redux/entities/scripts/types';
 import {
   AuditParametersBlock,
   AuditParametersTitle,
@@ -42,6 +43,7 @@ export interface OwnProps {
   pageId: string | null;
   project?: ProjectType;
   pages: PageType[];
+  scripts: ScriptType[];
   scriptId: string | null;
   scriptStepId: string | null;
   currentURL: string;
@@ -56,6 +58,7 @@ export const Menu: React.FunctionComponent<Props> = ({
   pageId,
   project,
   pages,
+  scripts,
   scriptId,
   scriptStepId,
 }) => {
@@ -74,7 +77,7 @@ export const Menu: React.FunctionComponent<Props> = ({
         .replace(':auditParametersId', auditParametersId ? auditParametersId : ''),
       type: 'PAGE',
     })),
-    ...project.scripts.map(script => ({
+    ...scripts.map(script => ({
       uuid: script.uuid,
       title: script.name,
       latestAuditStatusHistories: script.latestAuditStatusHistories,
