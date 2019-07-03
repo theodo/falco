@@ -1,3 +1,4 @@
+import { modelizeAuditParameters } from '../auditParameters/modelizer';
 import { ApiProjectType, ProjectType } from './types';
 
 export const modelizeProject = (project: ApiProjectType): Record<string, ProjectType> => ({
@@ -6,13 +7,7 @@ export const modelizeProject = (project: ApiProjectType): Record<string, Project
     name: project.name,
     pagesIds: project.pages.map(page => page.uuid),
     scriptsIds: project.scripts.map(script => script.uuid),
-    auditParametersList: project.audit_parameters_list.map(auditParameters => ({
-      uuid: auditParameters.uuid,
-      name: auditParameters.name,
-      location: auditParameters.location,
-      browser: auditParameters.browser,
-      networkShape: auditParameters.network_shape,
-    })),
+    auditParametersList: project.audit_parameters_list.map(modelizeAuditParameters),
     screenshotUrl: project.screenshot_url,
     latestAuditAt: project.latest_audit_at,
   },
