@@ -63,6 +63,6 @@ export const getCurrentProjectPages = (state: RootStateWithRouter): PageType[] =
   if (!currentProject) {
     return [];
   }
-  const pages = currentProject.pages.map(page => getPage(state, page.uuid));
+  const pages = currentProject.pagesIds.map(pageId => getPage(state, pageId));
   return pages.filter((page): page is PageType => (page !== null));
 }

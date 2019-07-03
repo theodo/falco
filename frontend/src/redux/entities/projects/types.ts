@@ -23,7 +23,7 @@ export interface ApiScriptType {
 export interface ProjectType {
   uuid: string;
   name: string;
-  pages: PageType[];
+  pagesIds: string[];
   scripts: ScriptType[];
   screenshotUrl: string;
   latestAuditAt: string;

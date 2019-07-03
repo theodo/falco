@@ -144,7 +144,7 @@ export const Audits: React.FunctionComponent<Props> = ({
   }
 
   if (
-    (!project.pages || 0 === project.pages.length) &&
+    (!project.pagesIds || 0 === project.pagesIds.length) &&
     (!project.scripts || 0 === project.scripts.length)
   ) {
     return (

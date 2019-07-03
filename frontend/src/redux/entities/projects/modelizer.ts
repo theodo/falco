@@ -1,12 +1,11 @@
 import { modelizeAuditStatusHistory } from 'redux/auditResults/modelizer';
-import { modelizePage } from '../pages/modelizer';
 import { ApiProjectType, ProjectType, ScriptType } from './types';
 
 export const modelizeProject = (project: ApiProjectType): Record<string, ProjectType> => ({
   [project.uuid]: {
     uuid: project.uuid,
     name: project.name,
-    pages: project.pages.map(modelizePage),
+    pagesIds: project.pages.map(page => page.uuid),
     scripts: project.scripts.map(script => ({
       uuid: script.uuid,
       name: script.name,
