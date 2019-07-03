@@ -20,6 +20,14 @@ export const getCurrentAuditParametersId = (state: RootState): string | null => 
   return state.parameters.currentAuditParametersId;
 };
 
+export const getCurrentAuditParameters = (state: RootState): AuditParametersType | null => {
+  const currentAuditParametersId = getCurrentAuditParametersId(state);
+  if (!currentAuditParametersId) {
+    return null;
+  }
+  return state.entities.auditParameters.byId && state.entities.auditParameters.byId[currentAuditParametersId];
+}
+
 export const getCurrentPageId = (state: RootState): string | null => {
   return state.parameters.currentPageId;
 };
