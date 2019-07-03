@@ -7,6 +7,9 @@ import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
 import { fetchPageAction } from '../pages';
 import { modelizeApiPagesToById } from '../pages/modelizer';
 import { ApiPageType } from '../pages/types';
+import { fetchScriptAction } from '../scripts';
+import { modelizeApiScriptsToById } from '../scripts/modelizer';
+import { ApiScriptType } from '../scripts/types';
 import {
   fetchProjectError,
   fetchProjectRequest,
@@ -36,6 +39,11 @@ export function* fetchProjects() {
   yield put(fetchPageAction.success({
     byId: modelizeApiPagesToById(projects.reduce((apiPages: ApiPageType[], project: ApiProjectType) => {
       return apiPages.concat(project.pages)
+    }, []))
+  }))
+  yield put(fetchScriptAction.success({
+    byId: modelizeApiScriptsToById(projects.reduce((apiScripts: ApiScriptType[], project: ApiProjectType) => {
+      return apiScripts.concat(project.scripts)
     }, []))
   }))
 }
