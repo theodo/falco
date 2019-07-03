@@ -1,13 +1,7 @@
+import { ApiAuditParametersType, AuditParametersType } from "../auditparameters/types";
 import { ApiPageType } from "../pages/types";
 import { ApiScriptType } from "../scripts/types";
 
-export interface AuditParametersType {
-  uuid: string;
-  name: string;
-  location: string;
-  browser: string;
-  networkShape: string;
-}
 
 export interface ProjectType {
   uuid: string;
@@ -17,14 +11,6 @@ export interface ProjectType {
   screenshotUrl: string;
   latestAuditAt: string;
   auditParametersList: AuditParametersType[];
-}
-
-export interface AuditParametersAPIType {
-  uuid: string;
-  name: string;
-  location: string;
-  browser: string;
-  network_shape: string;
 }
 
 export type StatusType = "SUCCESS" | "REQUESTED" | "PENDING" | "ERROR";
@@ -48,7 +34,7 @@ export interface ApiProjectType {
   name: string;
   pages: ApiPageType[];
   scripts: ApiScriptType[];
-  audit_parameters_list: AuditParametersAPIType[];
+  audit_parameters_list: ApiAuditParametersType[];
   screenshot_url: string;
   latest_audit_at: string;
 }
