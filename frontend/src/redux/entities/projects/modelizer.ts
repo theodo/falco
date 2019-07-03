@@ -1,5 +1,4 @@
 import { modelizeAuditStatusHistory } from 'redux/auditResults/modelizer';
-import { ScriptType } from '../scripts/types';
 import { ApiProjectType, ProjectType } from './types';
 
 export const modelizeProject = (project: ApiProjectType): Record<string, ProjectType> => ({
@@ -32,16 +31,4 @@ export const modelizeProjects = (projects: ApiProjectType[]) => {
     }),
     {},
   );
-};
-
-export const modelizeScripts = (scripts: ScriptType[]): Record<string, ScriptType> => {
-  return scripts.reduce((scriptsById, script) => {
-    return {
-      ...scriptsById,
-      [script.uuid]: {
-        uuid: script.uuid,
-        name: script.name,
-      },
-    };
-  }, {});
 };
