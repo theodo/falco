@@ -1,4 +1,6 @@
 import { MetricType } from 'redux/auditResults/types';
+import { getProjectAuditParameters } from 'redux/entities/auditParameters/selectors';
+import { AuditParametersType } from 'redux/entities/auditParameters/types';
 import { getPage } from 'redux/entities/pages/selectors';
 import { PageType } from 'redux/entities/pages/types';
 import { getScript } from 'redux/entities/scripts/selectors';
@@ -60,7 +62,7 @@ export const getCurrentProjectPages = (state: RootStateWithRouter): PageType[] =
   const currentProject = getCurrentProject(state);
   if (!currentProject) {
     return [];
-  }
+  };
   const pages = currentProject.pagesIds.map(pageId => getPage(state, pageId));
   return pages.filter((page): page is PageType => (page !== null));
 }
@@ -69,7 +71,15 @@ export const getCurrentProjectScripts = (state: RootStateWithRouter): ScriptType
   const currentProject = getCurrentProject(state);
   if (!currentProject) {
     return [];
-  }
+  };
   const scripts = currentProject.scriptsIds.map(scriptId => getScript(state, scriptId));
   return scripts.filter((script): script is ScriptType => (script !== null));
+}
+
+export const getCurrentProjectAuditParameters = (state: RootStateWithRouter): AuditParametersType[] => {
+  const currentProject = getCurrentProject(state);
+  if (!currentProject) {
+    return [];
+  };
+  return getProjectAuditParameters(state, currentProject.uuid);
 }
