@@ -5,6 +5,7 @@ import { AuditResultsAction, AuditResultsState } from './auditResults';
 import { ContentAction, ContentState } from './content';
 import { PagesAction, PagesState } from './entities/pages';
 import { ProjectsAction, ProjectsState } from './entities/projects';
+import { ScriptsAction, ScriptsState } from './entities/scripts';
 import { LoginAction, LoginState } from './login';
 import { ParametersAction, ParametersState } from './parameters';
 import { UserAction, UserState } from './user';
@@ -16,6 +17,7 @@ export type RootState = Readonly<{
   entities: {
     projects: ProjectsState;
     pages: PagesState;
+    scripts: ScriptsState;
   };
   auditResults: AuditResultsState;
   user: UserState;
@@ -30,6 +32,7 @@ export type RootAction =
   | ParametersAction
   | ProjectsAction
   | PagesAction
+  | ScriptsAction
   | AuditResultsAction
   | UserAction
   | ContentAction;

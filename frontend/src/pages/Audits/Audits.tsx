@@ -9,7 +9,7 @@ import Loader from 'components/Loader';
 import Select from 'components/Select';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { PageType } from 'redux/entities/pages/types';
-import { ScriptType } from 'redux/entities/projects/types';
+import { ScriptType } from 'redux/entities/scripts/types';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
 import AnalyticsBlock from './AnalyticsBlock';
@@ -145,7 +145,7 @@ export const Audits: React.FunctionComponent<Props> = ({
 
   if (
     (!project.pagesIds || 0 === project.pagesIds.length) &&
-    (!project.scripts || 0 === project.scripts.length)
+    (!project.scriptsIds || 0 === project.scriptsIds.length)
   ) {
     return (
       <Container>
