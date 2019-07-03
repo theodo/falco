@@ -1,5 +1,5 @@
 import { state } from '__fixtures__/state';
-import { selectAuditParametersAsDict } from '../selectors';
+import { getProjectAuditParametersById } from 'redux/entities/auditParameters/selectors';
 
 const firstProjectId = '1234';
 const firstProjectFirstParametersId = `${firstProjectId}-1234`;
@@ -68,13 +68,13 @@ const initialState = {
 };
 
 describe('Project selectors', () => {
-  describe('selectAuditParametersAsDict function', () => {
+  describe('getProjectAuditParametersById function', () => {
     it('Should return the an empty object when the projectId does not exist in the projects store', () => {
-      expect(selectAuditParametersAsDict(initialState, 'UnknownProject')).toEqual({});
+      expect(getProjectAuditParametersById(initialState, 'UnknownProject')).toEqual({});
     });
 
     it('Should return an object containing all audit parameters for specified projectId', () => {
-      expect(selectAuditParametersAsDict(initialState, secondProjectId)).toEqual({
+      expect(getProjectAuditParametersById(initialState, secondProjectId)).toEqual({
         [secondProjectFirstParametersId]: secondProjectFirstParameters,
         [secondProjectSecondParametersId]: secondProjectSecondParameters,
       });
