@@ -1,4 +1,4 @@
-import { ApiAuditParametersType, AuditParametersType } from "../auditparameters/types";
+import { ApiAuditParametersType, AuditParametersType } from "../auditParameters/types";
 import { ApiPageType } from "../pages/types";
 import { ApiScriptType } from "../scripts/types";
 
