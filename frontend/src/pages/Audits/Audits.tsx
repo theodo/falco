@@ -158,7 +158,7 @@ export const Audits: React.FunctionComponent<Props> = ({
     );
   }
 
-  if (!page && !script) {
+  if (page === null && script === null) {
     return (
       <Container>
         <ErrorMessage>
