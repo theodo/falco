@@ -142,6 +142,8 @@ export const Menu: React.FunctionComponent<Props> = ({
       {pagesAndScripts.map((pageOrScript: PageOrScript) =>
         <MenuPageScriptItem
           key={pageOrScript.uuid}
+          pageId={pageOrScript.type === "PAGE" ? pageOrScript.uuid : undefined}
+          scriptId={pageOrScript.type === "SCRIPT" ? pageOrScript.uuid : undefined}
           latestAuditStatusHistories={pageOrScript.latestAuditStatusHistories}
           title={pageOrScript.title}
           linkPath={pageOrScript.linkPath}

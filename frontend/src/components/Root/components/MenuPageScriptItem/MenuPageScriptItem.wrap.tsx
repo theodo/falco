@@ -5,9 +5,14 @@ import { getCurrentProjectId, getCurrentURL } from 'redux/selectors';
 import { RootStateWithRouter } from 'redux/types';
 import { MenuPageScriptItem } from './MenuPageScriptItem';
 
+import { getPage } from 'redux/entities/pages/selectors';
+import { getScript } from 'redux/entities/scripts/selectors';
+import { OwnProps } from './MenuPageScriptItem';
 
-const mapStateToProps = (state: RootStateWithRouter) => ({
+const mapStateToProps = (state: RootStateWithRouter, props: OwnProps) => ({
   projectId: getCurrentProjectId(state),
+  page: getPage(state, props.pageId || ""),
+  script: getScript(state, props.scriptId || ""),
   auditParametersId: getCurrentAuditParametersId(state),
   currentURL: getCurrentURL(state),
 });

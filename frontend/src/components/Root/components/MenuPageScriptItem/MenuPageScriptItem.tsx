@@ -3,16 +3,17 @@ import React from 'react';
 import Badge from 'components/Badge';
 import { MenuArrow } from 'icons';
 import { InjectedIntlProps } from 'react-intl';
+import { PageType } from 'redux/entities/pages/types';
 import { AuditStatusHistoryType } from 'redux/entities/projects/types';
+import { ScriptType } from 'redux/entities/scripts/types';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
 import { AuditStatusHistoryIcon, AuditStatusHistoryIconContainer, MenuArrowContainer, PageScriptItem, PageScriptTitle, PageScriptTitleBlock } from './MenuPageScriptItem.style';
 
 
 export interface OwnProps {
-  projectId: string;
-  currentURL: string;
-  auditParametersId: string | null;
+  pageId?: string;
+  scriptId?: string;
   latestAuditStatusHistories: AuditStatusHistoryType[];
   title: string;
   linkPath: string;
@@ -20,9 +21,19 @@ export interface OwnProps {
   key: string;
 };
 
-export const MenuPageScriptItem: React.FunctionComponent<OwnProps & InjectedIntlProps> = ({
+interface Props extends OwnProps {
+  projectId: string;
+  page?: PageType | null;
+  script?: ScriptType | null;
+  currentURL: string;
+  auditParametersId: string | null;
+}
+
+export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlProps> = ({
   intl,
   projectId,
+  page,
+  script,
   currentURL,
   auditParametersId,
   latestAuditStatusHistories,
