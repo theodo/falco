@@ -47,8 +47,6 @@ type Props = OwnProps & InjectedIntlProps;
 
 export const Menu: React.FunctionComponent<Props> = ({
   auditParametersId,
-  currentURL,
-  intl,
   pageId,
   project,
   pages,

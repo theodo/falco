@@ -7,7 +7,7 @@ import { ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
 import { PageOrScript } from '../Menu/Menu';
-import { AuditStatusHistoryIcon, AuditStatusHistoryIconContainer, MenuArrowContainer, PageScriptItem, PageScriptTitle, PageScriptTitleBlock } from '../Menu/Menu.style';
+import { AuditStatusHistoryIcon, AuditStatusHistoryIconContainer, MenuArrowContainer, PageScriptItem, PageScriptTitle, PageScriptTitleBlock } from './MenuPageScriptItem.style';
 
 
 export interface OwnProps {
