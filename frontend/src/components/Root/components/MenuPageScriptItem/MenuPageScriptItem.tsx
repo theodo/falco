@@ -4,20 +4,16 @@ import Badge from 'components/Badge';
 import { MenuArrow } from 'icons';
 import { InjectedIntlProps } from 'react-intl';
 import { PageType } from 'redux/entities/pages/types';
-import { AuditStatusHistoryType } from 'redux/entities/projects/types';
 import { ScriptType } from 'redux/entities/scripts/types';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
+import { PageOrScript } from '../Menu/Menu';
 import { AuditStatusHistoryIcon, AuditStatusHistoryIconContainer, MenuArrowContainer, PageScriptItem, PageScriptTitle, PageScriptTitleBlock } from './MenuPageScriptItem.style';
 
 
 export interface OwnProps {
   pageId?: string;
   scriptId?: string;
-  latestAuditStatusHistories: AuditStatusHistoryType[];
-  title: string;
-  linkPath: string;
-  pageOrScriptType: string;
   key: string;
 };
 
@@ -27,7 +23,7 @@ interface Props extends OwnProps {
   script?: ScriptType | null;
   currentURL: string;
   auditParametersId: string | null;
-}
+};
 
 export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlProps> = ({
   intl,
@@ -36,11 +32,31 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
   script,
   currentURL,
   auditParametersId,
-  latestAuditStatusHistories,
-  title,
-  linkPath,
-  pageOrScriptType,
 }) => {
+
+  const pageOrScript: PageOrScript | undefined = page ? ({
+    uuid: page.uuid,
+    title: page.name,
+    latestAuditStatusHistories: page.latestAuditStatusHistories,
+    linkPath: routeDefinitions.auditsDetails.path
+      .replace(':projectId', projectId)
+      .replace(':pageOrScriptId', page.uuid)
+      .replace(':auditParametersId', auditParametersId ? auditParametersId : ''),
+    type: 'PAGE',
+  }) : script ? ({
+    uuid: script.uuid,
+    title: script.name,
+    latestAuditStatusHistories: script.latestAuditStatusHistories,
+    linkPath: routeDefinitions.auditsDetails.path
+      .replace(':projectId', projectId)
+      .replace(':pageOrScriptId', script.uuid)
+      .replace(':auditParametersId', auditParametersId ? auditParametersId : ''),
+    type: 'SCRIPT',
+  }) : undefined;
+
+  if (!pageOrScript) {
+    return null;
+  }
 
   const linkPathCorrespondsToUrl = (
     projectId &&
@@ -50,11 +66,11 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
         .replace(':pageOrScriptId/audit-parameters/:auditParametersId', ''),
     )
   )
-    ? currentURL.startsWith(linkPath)
-    : linkPath === currentURL;
+    ? currentURL.startsWith(pageOrScript.linkPath)
+    : pageOrScript.linkPath === currentURL;
 
   const getBadgeParams = () => {
-    if ('PAGE' === pageOrScriptType) {
+    if ('PAGE' === pageOrScript.type) {
       const badgeText = intl.formatMessage({ id: `Menu.page_badge` });
       if (linkPathCorrespondsToUrl) {
         return {
@@ -69,7 +85,7 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
           text: badgeText,
         };
       }
-    } else if ('SCRIPT' === pageOrScriptType) {
+    } else if ('SCRIPT' === pageOrScript.type) {
       const badgeText = intl.formatMessage({ id: `Menu.script_badge` });
       if (linkPathCorrespondsToUrl) {
         return {
@@ -93,7 +109,7 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
   };
   const badgeParams = getBadgeParams();
 
-  const latestAuditStatusHistoryForCurrentAuditParameters = latestAuditStatusHistories.find(
+  const latestAuditStatusHistoryForCurrentAuditParameters = pageOrScript.latestAuditStatusHistories.find(
     auditStatusHistory => (auditStatusHistory.auditParametersId === auditParametersId)
   );
   const latestAuditStatusHistoryForCurrentAuditParametersStatus = latestAuditStatusHistoryForCurrentAuditParameters
@@ -101,7 +117,7 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
     : "ERROR"
   return (
     <PageScriptItem
-      to={linkPath}
+      to={pageOrScript.linkPath}
       className={
         linkPathCorrespondsToUrl ? 'active' : ''
       }
@@ -133,9 +149,9 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
           }
         </AuditStatusHistoryIconContainer>
         <>
-          <PageScriptTitle>{title}</PageScriptTitle>
+          <PageScriptTitle>{pageOrScript.title}</PageScriptTitle>
         </>
-        {pageOrScriptType && (
+        {pageOrScript.type && (
           <Badge
             backgroundColor={badgeParams.backgroundColor}
             color={badgeParams.color}
