@@ -4,8 +4,6 @@ import {
   getCurrentAuditParametersId,
   getCurrentPageId,
   getCurrentProjectAuditParameters,
-  getCurrentProjectPages,
-  getCurrentProjectScripts,
   getCurrentScriptId,
   getCurrentScriptStepId,
 } from 'redux/parameters/selectors';
@@ -17,12 +15,10 @@ import { Menu } from './Menu';
 const mapStateToProps = (state: RootStateWithRouter) => ({
   auditParametersId: getCurrentAuditParametersId(state),
   currentURL: getCurrentURL(state),
-  pageId: getCurrentPageId(state),
+  currentPageId: getCurrentPageId(state),
   project: getCurrentProject(state),
-  pages: getCurrentProjectPages(state),
   auditParametersList: getCurrentProjectAuditParameters(state),
-  scripts: getCurrentProjectScripts(state),
-  scriptId: getCurrentScriptId(state),
+  currentScriptId: getCurrentScriptId(state),
   scriptStepId: getCurrentScriptStepId(state),
 });
 

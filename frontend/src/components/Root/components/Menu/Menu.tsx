@@ -7,8 +7,6 @@ import { routeDefinitions } from 'routes';
 
 import { history } from 'index';
 import { AuditParametersType } from 'redux/entities/auditParameters/types';
-import { PageType } from 'redux/entities/pages/types';
-import { ScriptType } from 'redux/entities/scripts/types';
 import MenuPageScriptItem from '../MenuPageScriptItem';
 import {
   AuditParametersBlock,
@@ -33,12 +31,10 @@ export interface PageOrScript {
 
 export interface OwnProps {
   auditParametersId: string | null;
-  pageId: string | null;
+  currentPageId: string | null;
   project?: ProjectType;
-  pages: PageType[];
-  scripts: ScriptType[];
   auditParametersList: AuditParametersType[],
-  scriptId: string | null;
+  currentScriptId: string | null;
   scriptStepId: string | null;
   currentURL: string;
 }
@@ -47,40 +43,15 @@ type Props = OwnProps & InjectedIntlProps;
 
 export const Menu: React.FunctionComponent<Props> = ({
   auditParametersId,
-  pageId,
+  currentPageId,
   project,
-  pages,
-  scripts,
   auditParametersList,
-  scriptId,
+  currentScriptId,
   scriptStepId,
 }) => {
   if (!project) {
     return <Container />;
-  }
-
-  const pagesAndScripts = [
-    ...pages.map(page => ({
-      uuid: page.uuid,
-      title: page.name,
-      latestAuditStatusHistories: page.latestAuditStatusHistories,
-      linkPath: routeDefinitions.auditsDetails.path
-        .replace(':projectId', project.uuid)
-        .replace(':pageOrScriptId', page.uuid)
-        .replace(':auditParametersId', auditParametersId ? auditParametersId : ''),
-      type: 'PAGE',
-    })),
-    ...scripts.map(script => ({
-      uuid: script.uuid,
-      title: script.name,
-      latestAuditStatusHistories: script.latestAuditStatusHistories,
-      linkPath: routeDefinitions.auditsDetails.path
-        .replace(':projectId', project.uuid)
-        .replace(':pageOrScriptId', script.uuid)
-        .replace(':auditParametersId', auditParametersId ? auditParametersId : ''),
-      type: 'SCRIPT',
-    })),
-  ];
+  };
 
   const auditParametersSelectOptions = auditParametersList.map(auditParameters => ({
     value: auditParameters.uuid,
@@ -92,26 +63,26 @@ export const Menu: React.FunctionComponent<Props> = ({
   ) => {
     // Check needed to avoid TS2339 error
     if (selectedOption && 'value' in selectedOption && auditParametersId) {
-      if (pageId) {
+      if (currentPageId) {
         history.push(
           routeDefinitions.auditsDetails.path
             .replace(':projectId', project.uuid)
-            .replace(':pageOrScriptId', pageId)
+            .replace(':pageOrScriptId', currentPageId)
             .replace(':auditParametersId', selectedOption.value),
         );
-      } else if (scriptId) {
+      } else if (currentScriptId) {
         if (!scriptStepId) {
           history.push(
             routeDefinitions.auditsDetails.path
               .replace(':projectId', project.uuid)
-              .replace(':pageOrScriptId', scriptId)
+              .replace(':pageOrScriptId', currentScriptId)
               .replace(':auditParametersId', selectedOption.value),
           );
         } else {
           history.push(
             routeDefinitions.auditsScriptDetails.path
               .replace(':projectId', project.uuid)
-              .replace(':pageOrScriptId', scriptId)
+              .replace(':pageOrScriptId', currentScriptId)
               .replace(':auditParametersId', selectedOption.value)
               .replace(':scriptStepId', scriptStepId),
           );
@@ -139,11 +110,16 @@ export const Menu: React.FunctionComponent<Props> = ({
         </AuditParametersBlock>
       )}
       <Audits>Audits</Audits>
-      {pagesAndScripts.map((pageOrScript: PageOrScript) =>
+      {project.pagesIds.map((pageId: string) =>
         <MenuPageScriptItem
-          key={pageOrScript.uuid}
-          pageId={pageOrScript.type === "PAGE" ? pageOrScript.uuid : undefined}
-          scriptId={pageOrScript.type === "SCRIPT" ? pageOrScript.uuid : undefined}
+          key={pageId}
+          pageId={pageId}
+        />
+      )}
+      {project.scriptsIds.map((scriptId: string) =>
+        <MenuPageScriptItem
+          key={scriptId}
+          scriptId={scriptId}
         />
       )}
     </Container>

@@ -71,24 +71,6 @@ export const getCurrentProjectName = (state: RootStateWithRouter): string => {
   return currentProject ? currentProject.name : "";
 };
 
-export const getCurrentProjectPages = (state: RootStateWithRouter): PageType[] => {
-  const currentProject = getCurrentProject(state);
-  if (!currentProject) {
-    return [];
-  };
-  const pages = currentProject.pagesIds.map(pageId => getPage(state, pageId));
-  return pages.filter((page): page is PageType => (page !== null && page !== undefined));
-};
-
-export const getCurrentProjectScripts = (state: RootStateWithRouter): ScriptType[] => {
-  const currentProject = getCurrentProject(state);
-  if (!currentProject) {
-    return [];
-  };
-  const scripts = currentProject.scriptsIds.map(scriptId => getScript(state, scriptId));
-  return scripts.filter((script): script is ScriptType => (script !== null && script !== undefined));
-};
-
 export const getCurrentProjectAuditParameters = (state: RootStateWithRouter): AuditParametersType[] => {
   const currentProject = getCurrentProject(state);
   if (!currentProject) {
