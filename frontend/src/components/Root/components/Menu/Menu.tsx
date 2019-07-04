@@ -144,6 +144,9 @@ export const Menu: React.FunctionComponent<Props> = ({
           key={pageOrScript.uuid}
           pageOrScript={pageOrScript}
           latestAuditStatusHistories={pageOrScript.latestAuditStatusHistories}
+          title={pageOrScript.title}
+          linkPath={pageOrScript.linkPath}
+          pageOrScriptType={pageOrScript.type}
         />
       )}
     </Container>

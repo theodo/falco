@@ -16,6 +16,9 @@ export interface OwnProps {
   pageOrScript: PageOrScript;
   auditParametersId: string | null;
   latestAuditStatusHistories: AuditStatusHistoryType[];
+  title: string;
+  linkPath: string;
+  pageOrScriptType: string;
   key: string;
 };
 
@@ -26,9 +29,12 @@ export const MenuPageScriptItem: React.FunctionComponent<OwnProps & InjectedIntl
   pageOrScript,
   auditParametersId,
   latestAuditStatusHistories,
+  title,
+  linkPath,
+  pageOrScriptType,
 }) => {
 
-  const doesLinkPathCorrespondToUrl = (linkPath: string, url: string) => {
+  const doesLinkPathCorrespondToUrl = (linkPathTemporary: string, url: string) => {
     if (
       projectId &&
       url.startsWith(
@@ -37,9 +43,9 @@ export const MenuPageScriptItem: React.FunctionComponent<OwnProps & InjectedIntl
           .replace(':pageOrScriptId/audit-parameters/:auditParametersId', ''),
       )
     ) {
-      return url.startsWith(linkPath);
+      return url.startsWith(linkPathTemporary);
     }
-    return linkPath === url;
+    return linkPathTemporary === url;
   };
 
   const getBadgeParams = (scriptOrPage: PageOrScript) => {
@@ -92,9 +98,9 @@ export const MenuPageScriptItem: React.FunctionComponent<OwnProps & InjectedIntl
     : "ERROR"
   return (
     <PageScriptItem
-      to={pageOrScript.linkPath}
+      to={linkPath}
       className={
-        doesLinkPathCorrespondToUrl(pageOrScript.linkPath, currentURL) ? 'active' : ''
+        doesLinkPathCorrespondToUrl(linkPath, currentURL) ? 'active' : ''
       }
     >
       <PageScriptTitleBlock>
@@ -124,9 +130,9 @@ export const MenuPageScriptItem: React.FunctionComponent<OwnProps & InjectedIntl
           }
         </AuditStatusHistoryIconContainer>
         <>
-          <PageScriptTitle>{pageOrScript.title}</PageScriptTitle>
+          <PageScriptTitle>{title}</PageScriptTitle>
         </>
-        {pageOrScript.type && (
+        {pageOrScriptType && (
           <Badge
             backgroundColor={badgeParams.backgroundColor}
             color={badgeParams.color}
@@ -138,7 +144,7 @@ export const MenuPageScriptItem: React.FunctionComponent<OwnProps & InjectedIntl
       <MenuArrowContainer margin={`0 0 0 ${getSpacing(4)}`}>
         <MenuArrow
           color={
-            doesLinkPathCorrespondToUrl(pageOrScript.linkPath, currentURL)
+            doesLinkPathCorrespondToUrl(linkPath, currentURL)
               ? colorUsage.menuArrowSelected
               : colorUsage.menuArrow
           }
