@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
 
-import { ApiAuditStatusHistoryType, AuditStatusHistoryType } from 'redux/entities/auditStatusHistories/types';
 import { ApiAuditResultType, AuditResultType } from './types';
 
 export const modelizeAuditResultsForPage = (
@@ -71,13 +70,4 @@ export const getSortAuditResultsId = (auditResults: AuditResultType[]) => {
         secondAuditResult.createdAt.valueOf() - firstAuditResult.createdAt.valueOf(),
     )
     .map(auditResult => auditResult.auditId);
-};
-
-export const modelizeAuditStatusHistory = (auditStatusHistory: ApiAuditStatusHistoryType): AuditStatusHistoryType => {
-  return {
-    createdAt: auditStatusHistory.created_at,
-    status: auditStatusHistory.status,
-    details: auditStatusHistory.details,
-    auditParametersId: auditStatusHistory.parameters
-  };
 };

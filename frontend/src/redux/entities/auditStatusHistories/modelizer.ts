@@ -1,0 +1,10 @@
+import { ApiAuditStatusHistoryType, AuditStatusHistoryType } from "./types";
+
+export const modelizeAuditStatusHistory = (auditStatusHistory: ApiAuditStatusHistoryType): AuditStatusHistoryType => {
+    return {
+        createdAt: auditStatusHistory.created_at,
+        status: auditStatusHistory.status,
+        details: auditStatusHistory.details,
+        auditParametersId: auditStatusHistory.parameters
+    };
+};

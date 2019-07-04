@@ -1,4 +1,4 @@
-import { modelizeAuditStatusHistory } from "redux/auditResults/modelizer";
+import { modelizeAuditStatusHistory } from "../auditStatusHistories/modelizer";
 import { ApiScriptType, ScriptType } from "./types";
 
 
