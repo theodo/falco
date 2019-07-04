@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-import { ApiAuditStatusHistoryType, AuditStatusHistoryType } from 'redux/entities/projects/types';
+import { ApiAuditStatusHistoryType, AuditStatusHistoryType } from 'redux/entities/auditStatusHistories/types';
 import { ApiAuditResultType, AuditResultType } from './types';
 
 export const modelizeAuditResultsForPage = (
@@ -80,4 +80,4 @@ export const modelizeAuditStatusHistory = (auditStatusHistory: ApiAuditStatusHis
     details: auditStatusHistory.details,
     auditParametersId: auditStatusHistory.parameters
   };
-}
+};

@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
-import { StatusType } from "redux/entities/projects/types";
+import { StatusType } from "redux/entities/auditStatusHistories/types";
 import styled from "styled-components";
 import { colorUsage, fontSize, fontWeight, getSpacing, lineHeight } from "stylesheet";
 
 interface AuditStatusHistoryIconProps {
-    status: StatusType;
+  status: StatusType;
 };
 
 interface MenuArrowContainerProps {
-    margin?: string;
+  margin?: string;
 };
 
 export const PageScriptItem = styled(Link)`
@@ -50,10 +50,10 @@ export const PageScriptTitle = styled.div`
 `;
 
 const COLOR_BY_STATUS = {
-    "SUCCESS": colorUsage.auditStatusHistoryIconSuccess,
-    "PENDING": colorUsage.auditStatusHistoryIconPending,
-    "REQUESTED": colorUsage.auditStatusHistoryIconPending,
-    "ERROR": colorUsage.auditStatusHistoryIconFailure,
+  "SUCCESS": colorUsage.auditStatusHistoryIconSuccess,
+  "PENDING": colorUsage.auditStatusHistoryIconPending,
+  "REQUESTED": colorUsage.auditStatusHistoryIconPending,
+  "ERROR": colorUsage.auditStatusHistoryIconFailure,
 };
 
 export const AuditStatusHistoryIcon = styled.span<AuditStatusHistoryIconProps>`

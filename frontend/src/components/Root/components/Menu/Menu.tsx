@@ -1,12 +1,13 @@
 import Select from 'components/Select';
+import { history } from 'index';
 import React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { ValueType } from 'react-select/lib/types';
-import { AuditStatusHistoryType, ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
 
-import { history } from 'index';
 import { AuditParametersType } from 'redux/entities/auditParameters/types';
+import { AuditStatusHistoryType } from 'redux/entities/auditStatusHistories/types';
+import { ProjectType } from 'redux/entities/projects/types';
 import MenuPageScriptItem from '../MenuPageScriptItem';
 import {
   AuditParametersBlock,
