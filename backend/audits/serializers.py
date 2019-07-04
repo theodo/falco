@@ -20,7 +20,7 @@ class AuditStatusHistorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AuditStatusHistory
-        fields = ("created_at", "status", "details", "parameters")
+        fields = ("uuid", "created_at", "status", "details", "parameters")
 
 
 class AuditResultsSerializer(serializers.ModelSerializer):
