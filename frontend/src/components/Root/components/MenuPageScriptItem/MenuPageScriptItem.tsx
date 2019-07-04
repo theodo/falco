@@ -15,11 +15,10 @@ export interface OwnProps {
   currentURL: string;
   pageOrScript: PageOrScript;
   auditParametersId: string | null;
+  key: string;
 };
 
-type Props = OwnProps & InjectedIntlProps;
-
-export const MenuPageScriptItem: React.FunctionComponent<Props> = ({
+export const MenuPageScriptItem: React.FunctionComponent<OwnProps & InjectedIntlProps> = ({
   intl,
   project,
   currentURL,

@@ -1,28 +1,20 @@
-import Badge from 'components/Badge';
 import Select from 'components/Select';
-import { MenuArrow } from 'icons';
 import React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { ValueType } from 'react-select/lib/types';
 import { AuditStatusHistoryType, ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
-import { colorUsage, getSpacing } from 'stylesheet';
 
 import { history } from 'index';
 import { AuditParametersType } from 'redux/entities/auditParameters/types';
 import { PageType } from 'redux/entities/pages/types';
 import { ScriptType } from 'redux/entities/scripts/types';
+import MenuPageScriptItem from '../MenuPageScriptItem';
 import {
   AuditParametersBlock,
   AuditParametersTitle,
   Audits,
-  AuditStatusHistoryIcon,
-  AuditStatusHistoryIconContainer,
   Container,
-  MenuArrowContainer,
-  PageScriptItem,
-  PageScriptTitle,
-  PageScriptTitleBlock,
   ProjectName,
 } from './Menu.style';
 
@@ -92,59 +84,6 @@ export const Menu: React.FunctionComponent<Props> = ({
     })),
   ];
 
-  const getBadgeParams = (pageOrScript: PageOrScript) => {
-    if ('PAGE' === pageOrScript.type) {
-      const badgeText = intl.formatMessage({ id: `Menu.page_badge` });
-      if (doesLinkPathCorrespondToUrl(pageOrScript.linkPath, currentURL)) {
-        return {
-          backgroundColor: colorUsage.pageBadgeSelectedBackground,
-          color: colorUsage.pageBadgeSelectedText,
-          text: badgeText,
-        };
-      } else {
-        return {
-          backgroundColor: colorUsage.pageBadgeBackground,
-          color: colorUsage.pageBadgeText,
-          text: badgeText,
-        };
-      }
-    } else if ('SCRIPT' === pageOrScript.type) {
-      const badgeText = intl.formatMessage({ id: `Menu.script_badge` });
-      if (doesLinkPathCorrespondToUrl(pageOrScript.linkPath, currentURL)) {
-        return {
-          backgroundColor: colorUsage.scriptBadgeSelectedBackground,
-          color: colorUsage.scriptBadgeSelectedText,
-          text: badgeText,
-        };
-      } else {
-        return {
-          backgroundColor: colorUsage.scriptBadgeBackground,
-          color: colorUsage.scriptBadgeText,
-          text: badgeText,
-        };
-      }
-    }
-    return {
-      backgroundColor: '',
-      color: '',
-      text: '',
-    };
-  };
-
-  const doesLinkPathCorrespondToUrl = (linkPath: string, url: string) => {
-    if (
-      project &&
-      url.startsWith(
-        routeDefinitions.auditsDetails.path
-          .replace(':projectId', project.uuid)
-          .replace(':pageOrScriptId/audit-parameters/:auditParametersId', ''),
-      )
-    ) {
-      return url.startsWith(linkPath);
-    }
-    return linkPath === url;
-  };
-
   const auditParametersSelectOptions = auditParametersList.map(auditParameters => ({
     value: auditParameters.uuid,
     label: auditParameters.name,
@@ -202,72 +141,12 @@ export const Menu: React.FunctionComponent<Props> = ({
         </AuditParametersBlock>
       )}
       <Audits>Audits</Audits>
-      {pagesAndScripts.map((pageOrScript: PageOrScript) => {
-        const badgeParams = getBadgeParams(pageOrScript);
-        const latestAuditStatusHistoryForCurrentAuditParameters = pageOrScript.latestAuditStatusHistories.find(
-          auditStatusHistory => (auditStatusHistory.auditParametersId === auditParametersId)
-        );
-        const latestAuditStatusHistoryForCurrentAuditParametersStatus = latestAuditStatusHistoryForCurrentAuditParameters
-          ? latestAuditStatusHistoryForCurrentAuditParameters.status
-          : "ERROR"
-        return (
-          <PageScriptItem
-            key={pageOrScript.uuid}
-            to={pageOrScript.linkPath}
-            className={
-              doesLinkPathCorrespondToUrl(pageOrScript.linkPath, currentURL) ? 'active' : ''
-            }
-          >
-            <PageScriptTitleBlock>
-              <AuditStatusHistoryIconContainer>
-                {
-                  latestAuditStatusHistoryForCurrentAuditParametersStatus !== "SUCCESS" &&
-                  <AuditStatusHistoryIcon
-                    status={latestAuditStatusHistoryForCurrentAuditParametersStatus}
-                    title={
-                      (
-                        (latestAuditStatusHistoryForCurrentAuditParametersStatus === "ERROR")
-                        &&
-                        intl.formatMessage({ id: `Audits.AuditStatusHistory.audit_failure` })
-                      ) || (
-                        (
-                          latestAuditStatusHistoryForCurrentAuditParametersStatus === "REQUESTED"
-                          ||
-                          latestAuditStatusHistoryForCurrentAuditParametersStatus === "PENDING"
-                        )
-                        &&
-                        intl.formatMessage({ id: `Audits.AuditStatusHistory.audit_running` })
-                      ) || (
-                        intl.formatMessage({ id: `Audits.AuditStatusHistory.audit_failure` })
-                      )
-                    }
-                  />
-                }
-              </AuditStatusHistoryIconContainer>
-              <>
-                <PageScriptTitle>{pageOrScript.title}</PageScriptTitle>
-              </>
-              {pageOrScript.type && (
-                <Badge
-                  backgroundColor={badgeParams.backgroundColor}
-                  color={badgeParams.color}
-                  margin={`0 0 0 ${getSpacing(4)}`}
-                  text={badgeParams.text}
-                />
-              )}
-            </PageScriptTitleBlock>
-            <MenuArrowContainer margin={`0 0 0 ${getSpacing(4)}`}>
-              <MenuArrow
-                color={
-                  doesLinkPathCorrespondToUrl(pageOrScript.linkPath, currentURL)
-                    ? colorUsage.menuArrowSelected
-                    : colorUsage.menuArrow
-                }
-              />
-            </MenuArrowContainer>
-          </PageScriptItem>
-        );
-      })}
+      {pagesAndScripts.map((pageOrScript: PageOrScript) =>
+        <MenuPageScriptItem
+          key={pageOrScript.uuid}
+          pageOrScript={pageOrScript}
+        />
+      )}
     </Container>
   );
 };
