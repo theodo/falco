@@ -31,24 +31,21 @@ export const MenuPageScriptItem: React.FunctionComponent<OwnProps & InjectedIntl
   pageOrScriptType,
 }) => {
 
-  const doesLinkPathCorrespondToUrl = (linkPathTemporary: string, url: string) => {
-    if (
-      projectId &&
-      url.startsWith(
-        routeDefinitions.auditsDetails.path
-          .replace(':projectId', projectId)
-          .replace(':pageOrScriptId/audit-parameters/:auditParametersId', ''),
-      )
-    ) {
-      return url.startsWith(linkPathTemporary);
-    }
-    return linkPathTemporary === url;
-  };
+  const linkPathCorrespondsToUrl = (
+    projectId &&
+    currentURL.startsWith(
+      routeDefinitions.auditsDetails.path
+        .replace(':projectId', projectId)
+        .replace(':pageOrScriptId/audit-parameters/:auditParametersId', ''),
+    )
+  )
+    ? currentURL.startsWith(linkPath)
+    : linkPath === currentURL;
 
   const getBadgeParams = () => {
     if ('PAGE' === pageOrScriptType) {
       const badgeText = intl.formatMessage({ id: `Menu.page_badge` });
-      if (doesLinkPathCorrespondToUrl(linkPath, currentURL)) {
+      if (linkPathCorrespondsToUrl) {
         return {
           backgroundColor: colorUsage.pageBadgeSelectedBackground,
           color: colorUsage.pageBadgeSelectedText,
@@ -63,7 +60,7 @@ export const MenuPageScriptItem: React.FunctionComponent<OwnProps & InjectedIntl
       }
     } else if ('SCRIPT' === pageOrScriptType) {
       const badgeText = intl.formatMessage({ id: `Menu.script_badge` });
-      if (doesLinkPathCorrespondToUrl(linkPath, currentURL)) {
+      if (linkPathCorrespondsToUrl) {
         return {
           backgroundColor: colorUsage.scriptBadgeSelectedBackground,
           color: colorUsage.scriptBadgeSelectedText,
@@ -83,10 +80,8 @@ export const MenuPageScriptItem: React.FunctionComponent<OwnProps & InjectedIntl
       text: '',
     };
   };
-
-
-
   const badgeParams = getBadgeParams();
+
   const latestAuditStatusHistoryForCurrentAuditParameters = latestAuditStatusHistories.find(
     auditStatusHistory => (auditStatusHistory.auditParametersId === auditParametersId)
   );
@@ -97,7 +92,7 @@ export const MenuPageScriptItem: React.FunctionComponent<OwnProps & InjectedIntl
     <PageScriptItem
       to={linkPath}
       className={
-        doesLinkPathCorrespondToUrl(linkPath, currentURL) ? 'active' : ''
+        linkPathCorrespondsToUrl ? 'active' : ''
       }
     >
       <PageScriptTitleBlock>
@@ -141,7 +136,7 @@ export const MenuPageScriptItem: React.FunctionComponent<OwnProps & InjectedIntl
       <MenuArrowContainer margin={`0 0 0 ${getSpacing(4)}`}>
         <MenuArrow
           color={
-            doesLinkPathCorrespondToUrl(linkPath, currentURL)
+            linkPathCorrespondsToUrl
               ? colorUsage.menuArrowSelected
               : colorUsage.menuArrow
           }
