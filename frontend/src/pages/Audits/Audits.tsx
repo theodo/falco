@@ -39,9 +39,9 @@ export type OwnProps = {} & RouteComponentProps<{
 
 type Props = {
   project?: ProjectType | null;
-  page?: PageType;
-  script?: ScriptType;
-  auditParameters: Record<string, AuditParametersType>;
+  page?: PageType | null;
+  script?: ScriptType | null;
+  currentAuditParameters?: AuditParametersType | null;
   scriptSteps: Record<string, string>;
   sortedPageAuditResultsIds: string[] | null;
   sortedScriptAuditResultsIds: Record<string, string[]> | null;
@@ -59,7 +59,7 @@ type Props = {
   InjectedIntlProps;
 
 export const Audits: React.FunctionComponent<Props> = ({
-  auditParameters,
+  currentAuditParameters,
   fetchProjectRequest,
   history,
   intl,
@@ -127,7 +127,9 @@ export const Audits: React.FunctionComponent<Props> = ({
     [script && script.uuid, scriptStepId, setCurrentScriptStepId],
   );
 
-  if (project === undefined) {
+  // we set a loader if the project hasn't been loaded from the server or if the page or the script haven't been
+  // loaded (one of them must be defined when the page is active)
+  if (project === undefined || (page === undefined && script === undefined)) {
     return (
       <Container>
         <Loader />
@@ -158,7 +160,7 @@ export const Audits: React.FunctionComponent<Props> = ({
     );
   }
 
-  if (!page && !script) {
+  if (page === null && script === null) {
     return (
       <Container>
         <ErrorMessage>
@@ -178,7 +180,7 @@ export const Audits: React.FunctionComponent<Props> = ({
     );
   }
 
-  if (!auditParameters[auditParametersId]) {
+  if (currentAuditParameters === null) {
     return (
       <Container>
         <ErrorMessage>

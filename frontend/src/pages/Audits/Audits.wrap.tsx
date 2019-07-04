@@ -17,16 +17,16 @@ import { RootState } from 'redux/types';
 import { injectIntl } from 'react-intl';
 import { Dispatch } from 'redux';
 import { fetchAuditResultsRequest } from 'redux/auditResults';
-import { getProjectAuditParametersById } from 'redux/entities/auditParameters/selectors';
+import { getAuditParameters } from 'redux/entities/auditParameters/selectors';
 import { getPage } from 'redux/entities/pages/selectors';
 import { getScript } from 'redux/entities/scripts/selectors';
 import { Audits, OwnProps } from './Audits';
 
 const mapStateToProps = (state: RootState, props: OwnProps) => ({
   project: getProject(state, props.match.params.projectId),
-  page: getPage(state, props.match.params.pageOrScriptId) || undefined,
-  script: getScript(state, props.match.params.pageOrScriptId) || undefined,
-  auditParameters: getProjectAuditParametersById(state, props.match.params.projectId),
+  page: getPage(state, props.match.params.pageOrScriptId),
+  script: getScript(state, props.match.params.pageOrScriptId),
+  currentAuditParameters: getAuditParameters(state, props.match.params.auditParametersId),
   sortedPageAuditResultsIds: selectPageAuditResultsIds(
     state,
     props.match.params.auditParametersId,
