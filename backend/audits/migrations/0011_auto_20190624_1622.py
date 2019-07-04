@@ -5,69 +5,67 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('audits', '0010_auto_20190410_2241'),
-    ]
+    dependencies = [("audits", "0010_auto_20190410_2241")]
 
     operations = [
         migrations.AddField(
-            model_name='auditresults',
-            name='lh_metric_first_contentful_paint_displayed_value',
+            model_name="auditresults",
+            name="lh_metric_first_contentful_paint_displayed_value",
             field=models.CharField(blank=True, max_length=100, null=True),
         ),
         migrations.AddField(
-            model_name='auditresults',
-            name='lh_metric_first_contentful_paint_score',
+            model_name="auditresults",
+            name="lh_metric_first_contentful_paint_score",
             field=models.FloatField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='auditresults',
-            name='lh_metric_first_cpu_idle_displayed_value',
+            model_name="auditresults",
+            name="lh_metric_first_cpu_idle_displayed_value",
             field=models.CharField(blank=True, max_length=100, null=True),
         ),
         migrations.AddField(
-            model_name='auditresults',
-            name='lh_metric_first_cpu_idle_score',
+            model_name="auditresults",
+            name="lh_metric_first_cpu_idle_score",
             field=models.FloatField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='auditresults',
-            name='lh_metric_first_meaningful_paint_displayed_value',
+            model_name="auditresults",
+            name="lh_metric_first_meaningful_paint_displayed_value",
             field=models.CharField(blank=True, max_length=100, null=True),
         ),
         migrations.AddField(
-            model_name='auditresults',
-            name='lh_metric_first_meaningful_paint_score',
+            model_name="auditresults",
+            name="lh_metric_first_meaningful_paint_score",
             field=models.FloatField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='auditresults',
-            name='lh_metric_max_potential_first_input_delay_displayed_value',
+            model_name="auditresults",
+            name="lh_metric_max_potential_first_input_delay_displayed_value",
             field=models.CharField(blank=True, max_length=100, null=True),
         ),
         migrations.AddField(
-            model_name='auditresults',
-            name='lh_metric_max_potential_first_input_delay_score',
+            model_name="auditresults",
+            name="lh_metric_max_potential_first_input_delay_score",
             field=models.FloatField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='auditresults',
-            name='lh_metric_speed_index_displayed_value',
+            model_name="auditresults",
+            name="lh_metric_speed_index_displayed_value",
             field=models.CharField(blank=True, max_length=100, null=True),
         ),
         migrations.AddField(
-            model_name='auditresults',
-            name='lh_metric_speed_index_score',
+            model_name="auditresults",
+            name="lh_metric_speed_index_score",
             field=models.FloatField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='auditresults',
-            name='lh_metric_tti_displayed_value',
+            model_name="auditresults",
+            name="lh_metric_tti_displayed_value",
             field=models.CharField(blank=True, max_length=100, null=True),
         ),
         migrations.AddField(
-            model_name='auditresults',
-            name='lh_metric_tti_score',
+            model_name="auditresults",
+            name="lh_metric_tti_score",
             field=models.FloatField(blank=True, null=True),
         ),
     ]

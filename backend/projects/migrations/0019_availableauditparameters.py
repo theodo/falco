@@ -6,24 +6,28 @@ import uuid
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('projects', '0018_projectauditparameters_name'),
-    ]
+    dependencies = [("projects", "0018_projectauditparameters_name")]
 
     operations = [
         migrations.CreateModel(
-            name='AvailableAuditParameters',
+            name="AvailableAuditParameters",
             fields=[
-                ('uuid', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('browser', models.CharField(max_length=100)),
-                ('location', models.CharField(max_length=100)),
-                ('location_label', models.CharField(max_length=100)),
-                ('location_group', models.CharField(max_length=100)),
+                (
+                    "uuid",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                ("browser", models.CharField(max_length=100)),
+                ("location", models.CharField(max_length=100)),
+                ("location_label", models.CharField(max_length=100)),
+                ("location_group", models.CharField(max_length=100)),
             ],
-            options={
-                'ordering': ('location', 'browser'),
-            },
-        ),
+            options={"ordering": ("location", "browser")},
+        )
     ]

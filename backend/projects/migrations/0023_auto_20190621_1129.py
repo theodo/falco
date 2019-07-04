@@ -8,18 +8,22 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('projects', '0022_availableauditparameters_is_active'),
+        ("projects", "0022_availableauditparameters_is_active"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='project',
-            name='admins',
-            field=models.ManyToManyField(blank=True, related_name='admin_of', to=settings.AUTH_USER_MODEL),
+            model_name="project",
+            name="admins",
+            field=models.ManyToManyField(
+                blank=True, related_name="admin_of", to=settings.AUTH_USER_MODEL
+            ),
         ),
         migrations.AlterField(
-            model_name='project',
-            name='members',
-            field=models.ManyToManyField(blank=True, related_name='member_of', to=settings.AUTH_USER_MODEL),
+            model_name="project",
+            name="members",
+            field=models.ManyToManyField(
+                blank=True, related_name="member_of", to=settings.AUTH_USER_MODEL
+            ),
         ),
     ]

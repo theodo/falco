@@ -7,26 +7,59 @@ import uuid
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('projects', '0004_project_wpt_api_key'),
-    ]
+    dependencies = [("projects", "0004_project_wpt_api_key")]
 
     operations = [
         migrations.CreateModel(
-            name='ProjectAuditParameters',
+            name="ProjectAuditParameters",
             fields=[
-                ('uuid', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('browser', models.CharField(max_length=100)),
-                ('location', models.CharField(max_length=100)),
-                ('network_shape', models.CharField(choices=[('Cable', 'Cable'), ('DSL', 'DSL'), ('3GSlow', '3GSlow'), ('3G', '3G'), ('3GFast', '3GFast'), ('4G', '4G'), ('LTE', 'LTE'), ('Edge', 'Edge'), ('2G', '2G'), ('Dial', 'Dial'), ('FIOS', 'FIOS'), ('Native', 'Native'), ('custom', 'custom')], max_length=20)),
-                ('project', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='audit_parameters_list', to='projects.Project')),
+                (
+                    "uuid",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                ("browser", models.CharField(max_length=100)),
+                ("location", models.CharField(max_length=100)),
+                (
+                    "network_shape",
+                    models.CharField(
+                        choices=[
+                            ("Cable", "Cable"),
+                            ("DSL", "DSL"),
+                            ("3GSlow", "3GSlow"),
+                            ("3G", "3G"),
+                            ("3GFast", "3GFast"),
+                            ("4G", "4G"),
+                            ("LTE", "LTE"),
+                            ("Edge", "Edge"),
+                            ("2G", "2G"),
+                            ("Dial", "Dial"),
+                            ("FIOS", "FIOS"),
+                            ("Native", "Native"),
+                            ("custom", "custom"),
+                        ],
+                        max_length=20,
+                    ),
+                ),
+                (
+                    "project",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="audit_parameters_list",
+                        to="projects.Project",
+                    ),
+                ),
             ],
             options={
-                'ordering': ('-created_at',),
-                'get_latest_by': 'created_at',
-                'abstract': False,
+                "ordering": ("-created_at",),
+                "get_latest_by": "created_at",
+                "abstract": False,
             },
-        ),
+        )
     ]

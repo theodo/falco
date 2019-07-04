@@ -6,14 +6,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('projects', '0010_auto_20190416_1913'),
-    ]
+    dependencies = [("projects", "0010_auto_20190416_1913")]
 
     operations = [
         migrations.AlterField(
-            model_name='project',
-            name='members',
+            model_name="project",
+            name="members",
             field=models.ManyToManyField(blank=True, to=settings.AUTH_USER_MODEL),
-        ),
+        )
     ]

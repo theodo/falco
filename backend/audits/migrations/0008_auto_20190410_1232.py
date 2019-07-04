@@ -7,19 +7,31 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('projects', '0008_auto_20190410_1232'),
-        ('audits', '0007_audit_parameters'),
+        ("projects", "0008_auto_20190410_1232"),
+        ("audits", "0007_audit_parameters"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='audit',
-            name='script',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='audits', to='projects.Script'),
+            model_name="audit",
+            name="script",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="audits",
+                to="projects.Script",
+            ),
         ),
         migrations.AlterField(
-            model_name='audit',
-            name='page',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='audits', to='projects.Page'),
+            model_name="audit",
+            name="page",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="audits",
+                to="projects.Page",
+            ),
         ),
     ]

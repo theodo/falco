@@ -8,22 +8,29 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='WhatsNew',
+            name="WhatsNew",
             fields=[
-                ('uuid', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('last_update_newsletter', models.DateField()),
+                (
+                    "uuid",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                ("last_update_newsletter", models.DateField()),
             ],
             options={
-                'ordering': ('-created_at',),
-                'get_latest_by': 'created_at',
-                'abstract': False,
+                "ordering": ("-created_at",),
+                "get_latest_by": "created_at",
+                "abstract": False,
             },
-        ),
+        )
     ]

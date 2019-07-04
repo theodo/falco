@@ -13,28 +13,20 @@ def set_default_value(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('projects', '0020_projectauditparameters_configuration'),
-    ]
+    dependencies = [("projects", "0020_projectauditparameters_configuration")]
 
     operations = [
         migrations.AlterField(
-            model_name='projectauditparameters',
-            name='browser',
+            model_name="projectauditparameters",
+            name="browser",
             field=models.CharField(max_length=100, null=True),
         ),
         migrations.AlterField(
-            model_name='projectauditparameters',
-            name='location',
+            model_name="projectauditparameters",
+            name="location",
             field=models.CharField(max_length=100, null=True),
         ),
         migrations.RunPython(migrations.RunPython.noop, reverse_code=set_default_value),
-        migrations.RemoveField(
-            model_name='projectauditparameters',
-            name='browser',
-        ),
-        migrations.RemoveField(
-            model_name='projectauditparameters',
-            name='location',
-        ),
+        migrations.RemoveField(model_name="projectauditparameters", name="browser"),
+        migrations.RemoveField(model_name="projectauditparameters", name="location"),
     ]

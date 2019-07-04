@@ -5,15 +5,13 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('audits', '0005_auto_20190218_1333'),
-    ]
+    dependencies = [("audits", "0005_auto_20190218_1333")]
 
     operations = [
         migrations.AddField(
-            model_name='auditresults',
-            name='wpt_results_user_url',
-            field=models.CharField(default='', max_length=1000),
+            model_name="auditresults",
+            name="wpt_results_user_url",
+            field=models.CharField(default="", max_length=1000),
             preserve_default=False,
-        ),
+        )
     ]

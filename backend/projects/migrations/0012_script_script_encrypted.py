@@ -6,15 +6,13 @@ import fernet_fields.fields
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('projects', '0011_auto_20190416_1924'),
-    ]
+    dependencies = [("projects", "0011_auto_20190416_1924")]
 
     operations = [
         migrations.AddField(
-            model_name='script',
-            name='script_encrypted',
-            field=fernet_fields.fields.EncryptedTextField(default=''),
+            model_name="script",
+            name="script_encrypted",
+            field=fernet_fields.fields.EncryptedTextField(default=""),
             preserve_default=False,
-        ),
+        )
     ]

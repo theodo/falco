@@ -5,15 +5,13 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('projects', '0017_delete_rollbacktest'),
-    ]
+    dependencies = [("projects", "0017_delete_rollbacktest")]
 
     operations = [
         migrations.AddField(
-            model_name='projectauditparameters',
-            name='name',
-            field=models.CharField(default='', max_length=100),
+            model_name="projectauditparameters",
+            name="name",
+            field=models.CharField(default="", max_length=100),
             preserve_default=False,
-        ),
+        )
     ]

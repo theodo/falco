@@ -5,13 +5,6 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('projects', '0013_custom_duplicate_script_script_encrypted'),
-    ]
+    dependencies = [("projects", "0013_custom_duplicate_script_script_encrypted")]
 
-    operations = [
-        migrations.RemoveField(
-            model_name='script',
-            name='script',
-        ),
-    ]
+    operations = [migrations.RemoveField(model_name="script", name="script")]
