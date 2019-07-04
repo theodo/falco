@@ -94,7 +94,7 @@ export const getCurrentProjectAuditParameters = (state: RootStateWithRouter): Au
   if (!currentProject) {
     return [];
   };
-  return getProjectAuditParameters(state, currentProject.uuid);
+  return getProjectAuditParameters(state, currentProject.uuid) || [];
 };
 
 export const getCurrentAuditParametersName = (state: RootStateWithRouter): string => {

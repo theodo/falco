@@ -41,7 +41,7 @@ type Props = {
   project?: ProjectType | null;
   page?: PageType | null;
   script?: ScriptType | null;
-  auditParameters: Record<string, AuditParametersType>;
+  currentAuditParameters?: AuditParametersType | null;
   scriptSteps: Record<string, string>;
   sortedPageAuditResultsIds: string[] | null;
   sortedScriptAuditResultsIds: Record<string, string[]> | null;
@@ -59,7 +59,7 @@ type Props = {
   InjectedIntlProps;
 
 export const Audits: React.FunctionComponent<Props> = ({
-  auditParameters,
+  currentAuditParameters,
   fetchProjectRequest,
   history,
   intl,
@@ -178,7 +178,7 @@ export const Audits: React.FunctionComponent<Props> = ({
     );
   }
 
-  if (!auditParameters[auditParametersId]) {
+  if (currentAuditParameters === null) {
     return (
       <Container>
         <ErrorMessage>
