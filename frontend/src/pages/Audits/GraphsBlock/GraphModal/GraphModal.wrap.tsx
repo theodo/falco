@@ -3,14 +3,13 @@ import { connect } from 'react-redux';
 
 import GraphModal from './GraphModal';
 
-import { getCurrentAuditParameters, getCurrentPageName, getCurrentScriptName } from 'redux/parameters/selectors';
+import { getCurrentAuditParametersName, getCurrentPageName, getCurrentProjectName, getCurrentScriptName } from 'redux/parameters/selectors';
 
-import { getCurrentProject } from 'redux/selectors';
 import { RootStateWithRouter } from 'redux/types';
 
 const mapStateToProps = (state: RootStateWithRouter) => ({
-  currentAuditParameters: getCurrentAuditParameters(state),
-  project: getCurrentProject(state),
+  currentAuditParametersName: getCurrentAuditParametersName(state),
+  projectName: getCurrentProjectName(state),
   pageName: getCurrentPageName(state),
   scriptName: getCurrentScriptName(state),
 });

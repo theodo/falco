@@ -66,6 +66,11 @@ export const getCurrentScriptStepId = (state: RootState): string | null => {
   return state.parameters.currentScriptStepId;
 };
 
+export const getCurrentProjectName = (state: RootStateWithRouter): string => {
+  const currentProject = getCurrentProject(state);
+  return currentProject ? currentProject.name : "";
+};
+
 export const getCurrentProjectPages = (state: RootStateWithRouter): PageType[] => {
   const currentProject = getCurrentProject(state);
   if (!currentProject) {
@@ -90,4 +95,9 @@ export const getCurrentProjectAuditParameters = (state: RootStateWithRouter): Au
     return [];
   };
   return getProjectAuditParameters(state, currentProject.uuid);
+};
+
+export const getCurrentAuditParametersName = (state: RootStateWithRouter): string => {
+  const currentAuditParameters = getCurrentAuditParameters(state);
+  return currentAuditParameters ? currentAuditParameters.name : "";
 };

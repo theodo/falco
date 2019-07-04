@@ -6,16 +6,14 @@ import ErrorMessage from 'components/ErrorMessage';
 import MetricGraph from 'components/MetricGraph';
 import Close from 'icons/Close';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
-import { AuditParametersType } from 'redux/entities/auditParameters/types';
-import { ProjectType } from 'redux/entities/projects/types';
 import { colorUsage, zIndex } from 'stylesheet';
 import { CloseContainer, PageSubTitle, PageTitle } from './GraphModal.style';
 
 export interface OwnProps {
-  project?: ProjectType;
+  projectName: string;
   pageName: string;
   scriptName: string;
-  currentAuditParameters: AuditParametersType | null;
+  currentAuditParametersName: string;
 }
 
 interface Props {
@@ -31,12 +29,12 @@ const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> 
   show,
   close,
   intl,
-  project,
+  projectName,
   pageName,
   scriptName,
-  currentAuditParameters,
+  currentAuditParametersName,
 }) => {
-  if (!project) {
+  if (!projectName) {
     return (
       <ErrorMessage>
         <FormattedMessage id="Projects.no_project_error" />
@@ -53,8 +51,6 @@ const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> 
   }
 
   const pageOrScriptName = pageName || scriptName;
-
-  const currentAuditParametersName = currentAuditParameters ? currentAuditParameters.name : '';
 
   const modalStyles = {
     content: {
@@ -93,7 +89,7 @@ const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> 
       appElement={document.querySelector('#root') as HTMLElement}
     >
       <>
-        <PageTitle>{project.name + ' / ' + pageOrScriptName}</PageTitle>
+        <PageTitle>{projectName + ' / ' + pageOrScriptName}</PageTitle>
         {auditResults && auditResults[0] && auditResults[0].scriptStepName && (
           <PageSubTitle>{auditResults[0].scriptStepName}</PageSubTitle>
         )}
