@@ -3,6 +3,7 @@ import React from 'react';
 import Badge from 'components/Badge';
 import { MenuArrow } from 'icons';
 import { InjectedIntlProps } from 'react-intl';
+import { AuditStatusHistoryType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
 import { PageOrScript } from '../Menu/Menu';
@@ -14,6 +15,7 @@ export interface OwnProps {
   currentURL: string;
   pageOrScript: PageOrScript;
   auditParametersId: string | null;
+  latestAuditStatusHistories: AuditStatusHistoryType[];
   key: string;
 };
 
@@ -23,6 +25,7 @@ export const MenuPageScriptItem: React.FunctionComponent<OwnProps & InjectedIntl
   currentURL,
   pageOrScript,
   auditParametersId,
+  latestAuditStatusHistories,
 }) => {
 
   const doesLinkPathCorrespondToUrl = (linkPath: string, url: string) => {
@@ -81,7 +84,7 @@ export const MenuPageScriptItem: React.FunctionComponent<OwnProps & InjectedIntl
 
 
   const badgeParams = getBadgeParams(pageOrScript);
-  const latestAuditStatusHistoryForCurrentAuditParameters = pageOrScript.latestAuditStatusHistories.find(
+  const latestAuditStatusHistoryForCurrentAuditParameters = latestAuditStatusHistories.find(
     auditStatusHistory => (auditStatusHistory.auditParametersId === auditParametersId)
   );
   const latestAuditStatusHistoryForCurrentAuditParametersStatus = latestAuditStatusHistoryForCurrentAuditParameters
