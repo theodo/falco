@@ -34,7 +34,7 @@ else
 fi
 
 # Run black and get the output and return code
-black=$(black --exclude /venv/ --diff --check backend/.)
+black=$(black --exclude venv --diff --check backend/.)
 ret_code=$?
 
 if [ $ret_code != 0 ]; then
