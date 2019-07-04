@@ -99,3 +99,11 @@ In the top left of the interface, click on 'create' the 'new collection'
 
 ### Create a request
 Do not forget to save the request in the collection and check in the 'Authorization' tab of the request that the authorization type is 'Inherit from parent'
+
+## Solving the Celery Beat `ERROR: Pidfile (celerybeat.pid) already exists.` error
+
+If you encounter this error (whether after a `make backend/start` or `docker-compose restart celerybeat`), run the following command to fix it:
+
+```
+rm backend/celerybreat.pid
+```
