@@ -3,7 +3,6 @@ import React from 'react';
 import Badge from 'components/Badge';
 import { MenuArrow } from 'icons';
 import { InjectedIntlProps } from 'react-intl';
-import { ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
 import { PageOrScript } from '../Menu/Menu';
@@ -11,7 +10,7 @@ import { AuditStatusHistoryIcon, AuditStatusHistoryIconContainer, MenuArrowConta
 
 
 export interface OwnProps {
-  project?: ProjectType;
+  projectId: string;
   currentURL: string;
   pageOrScript: PageOrScript;
   auditParametersId: string | null;
@@ -20,7 +19,7 @@ export interface OwnProps {
 
 export const MenuPageScriptItem: React.FunctionComponent<OwnProps & InjectedIntlProps> = ({
   intl,
-  project,
+  projectId,
   currentURL,
   pageOrScript,
   auditParametersId,
@@ -28,10 +27,10 @@ export const MenuPageScriptItem: React.FunctionComponent<OwnProps & InjectedIntl
 
   const doesLinkPathCorrespondToUrl = (linkPath: string, url: string) => {
     if (
-      project &&
+      projectId &&
       url.startsWith(
         routeDefinitions.auditsDetails.path
-          .replace(':projectId', project.uuid)
+          .replace(':projectId', projectId)
           .replace(':pageOrScriptId/audit-parameters/:auditParametersId', ''),
       )
     ) {
@@ -90,7 +89,6 @@ export const MenuPageScriptItem: React.FunctionComponent<OwnProps & InjectedIntl
     : "ERROR"
   return (
     <PageScriptItem
-      key={pageOrScript.uuid}
       to={pageOrScript.linkPath}
       className={
         doesLinkPathCorrespondToUrl(pageOrScript.linkPath, currentURL) ? 'active' : ''
