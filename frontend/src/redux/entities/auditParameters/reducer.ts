@@ -28,8 +28,6 @@ const reducer = (state: AuditParametersState = initialState, action: AnyAction) 
         default:
             return state;
     }
-
-
 };
 
 export default reducer;

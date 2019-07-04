@@ -26,7 +26,7 @@ export const getCurrentAuditParameters = (state: RootState): AuditParametersType
     return null;
   }
   return state.entities.auditParameters.byId && state.entities.auditParameters.byId[currentAuditParametersId];
-}
+};
 
 export const getCurrentPageId = (state: RootState): string | null => {
   return state.parameters.currentPageId;
@@ -38,12 +38,12 @@ export const getCurrentPage = (state: RootStateWithRouter): PageType | null => {
     return null;
   }
   return getPage(state, currentPageId);
-}
+};
 
 export const getCurrentPageName = (state: RootStateWithRouter): string => {
   const currentPage = getCurrentPage(state);
   return currentPage ? currentPage.name : "";
-}
+};
 
 export const getCurrentScriptId = (state: RootState): string | null => {
   return state.parameters.currentScriptId;
@@ -55,12 +55,12 @@ export const getCurrentScript = (state: RootStateWithRouter): ScriptType | null 
     return null;
   }
   return getScript(state, currentScriptId);
-}
+};
 
 export const getCurrentScriptName = (state: RootStateWithRouter): string => {
   const currentScript = getCurrentScript(state);
   return currentScript ? currentScript.name : "";
-}
+};
 
 export const getCurrentScriptStepId = (state: RootState): string | null => {
   return state.parameters.currentScriptStepId;
@@ -73,7 +73,7 @@ export const getCurrentProjectPages = (state: RootStateWithRouter): PageType[] =
   };
   const pages = currentProject.pagesIds.map(pageId => getPage(state, pageId));
   return pages.filter((page): page is PageType => (page !== null));
-}
+};
 
 export const getCurrentProjectScripts = (state: RootStateWithRouter): ScriptType[] => {
   const currentProject = getCurrentProject(state);
@@ -82,7 +82,7 @@ export const getCurrentProjectScripts = (state: RootStateWithRouter): ScriptType
   };
   const scripts = currentProject.scriptsIds.map(scriptId => getScript(state, scriptId));
   return scripts.filter((script): script is ScriptType => (script !== null));
-}
+};
 
 export const getCurrentProjectAuditParameters = (state: RootStateWithRouter): AuditParametersType[] => {
   const currentProject = getCurrentProject(state);
@@ -90,4 +90,4 @@ export const getCurrentProjectAuditParameters = (state: RootStateWithRouter): Au
     return [];
   };
   return getProjectAuditParameters(state, currentProject.uuid);
-}
+};
