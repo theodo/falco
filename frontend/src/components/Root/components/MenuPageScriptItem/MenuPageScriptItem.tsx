@@ -6,14 +6,12 @@ import { InjectedIntlProps } from 'react-intl';
 import { AuditStatusHistoryType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
-import { PageOrScript } from '../Menu/Menu';
 import { AuditStatusHistoryIcon, AuditStatusHistoryIconContainer, MenuArrowContainer, PageScriptItem, PageScriptTitle, PageScriptTitleBlock } from './MenuPageScriptItem.style';
 
 
 export interface OwnProps {
   projectId: string;
   currentURL: string;
-  pageOrScript: PageOrScript;
   auditParametersId: string | null;
   latestAuditStatusHistories: AuditStatusHistoryType[];
   title: string;
@@ -26,7 +24,6 @@ export const MenuPageScriptItem: React.FunctionComponent<OwnProps & InjectedIntl
   intl,
   projectId,
   currentURL,
-  pageOrScript,
   auditParametersId,
   latestAuditStatusHistories,
   title,
@@ -48,10 +45,10 @@ export const MenuPageScriptItem: React.FunctionComponent<OwnProps & InjectedIntl
     return linkPathTemporary === url;
   };
 
-  const getBadgeParams = (scriptOrPage: PageOrScript) => {
-    if ('PAGE' === scriptOrPage.type) {
+  const getBadgeParams = () => {
+    if ('PAGE' === pageOrScriptType) {
       const badgeText = intl.formatMessage({ id: `Menu.page_badge` });
-      if (doesLinkPathCorrespondToUrl(scriptOrPage.linkPath, currentURL)) {
+      if (doesLinkPathCorrespondToUrl(linkPath, currentURL)) {
         return {
           backgroundColor: colorUsage.pageBadgeSelectedBackground,
           color: colorUsage.pageBadgeSelectedText,
@@ -64,9 +61,9 @@ export const MenuPageScriptItem: React.FunctionComponent<OwnProps & InjectedIntl
           text: badgeText,
         };
       }
-    } else if ('SCRIPT' === scriptOrPage.type) {
+    } else if ('SCRIPT' === pageOrScriptType) {
       const badgeText = intl.formatMessage({ id: `Menu.script_badge` });
-      if (doesLinkPathCorrespondToUrl(scriptOrPage.linkPath, currentURL)) {
+      if (doesLinkPathCorrespondToUrl(linkPath, currentURL)) {
         return {
           backgroundColor: colorUsage.scriptBadgeSelectedBackground,
           color: colorUsage.scriptBadgeSelectedText,
@@ -89,7 +86,7 @@ export const MenuPageScriptItem: React.FunctionComponent<OwnProps & InjectedIntl
 
 
 
-  const badgeParams = getBadgeParams(pageOrScript);
+  const badgeParams = getBadgeParams();
   const latestAuditStatusHistoryForCurrentAuditParameters = latestAuditStatusHistories.find(
     auditStatusHistory => (auditStatusHistory.auditParametersId === auditParametersId)
   );
