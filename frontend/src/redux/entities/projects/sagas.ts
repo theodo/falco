@@ -7,6 +7,9 @@ import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
 import { fetchAuditParametersAction } from '../auditParameters/actions';
 import { modelizeApiAuditParametersListToById } from '../auditParameters/modelizer';
 import { ApiAuditParametersType } from '../auditParameters/types';
+import { fetchAuditStatusHistoriesAction } from '../auditStatusHistories';
+import { modelizeApiAuditStatusHistoriesToById } from '../auditStatusHistories/modelizer';
+import { ApiAuditStatusHistoryType } from '../auditStatusHistories/types';
 import { fetchPageAction } from '../pages';
 import { modelizeApiPagesToById } from '../pages/modelizer';
 import { ApiPageType } from '../pages/types';
@@ -53,8 +56,19 @@ export function* fetchProjects() {
       return apiAuditParametersList.concat(project.audit_parameters_list);
     }, [])),
   }));
+  yield put(fetchAuditStatusHistoriesAction.success({
+    byId: modelizeApiAuditStatusHistoriesToById(projects.reduce((apiAuditStatusHistories: ApiAuditStatusHistoryType[], project: ApiProjectType) => {
+      return apiAuditStatusHistories
+        .concat(project.pages.reduce((pageStatusHistories: ApiAuditStatusHistoryType[], page: ApiPageType) => {
+          return pageStatusHistories.concat(page.latest_audit_status_histories);
+        }, []))
+        .concat(project.scripts.reduce((scriptStatusHistories: ApiAuditStatusHistoryType[], script: ApiScriptType) => {
+          return scriptStatusHistories.concat(script.latest_audit_status_histories);
+        }, []));
+    }, [])),
+  }));
   yield put(fetchProjectSuccess({ byId: modelizeProjects(projects) }));
-}
+};
 
 export function* fetchProject(action: ActionType<typeof fetchProjectRequest>) {
   const endpoint = `/api/projects/${action.payload.projectId}/`;
@@ -76,4 +90,4 @@ export default function* projectsSaga() {
     getType(fetchProjectsRequest),
     handleAPIExceptions(fetchProjects, fetchProjectsFailedHandler),
   );
-}
+};

@@ -9,3 +9,10 @@ export const modelizeAuditStatusHistory = (auditStatusHistory: ApiAuditStatusHis
         auditParametersId: auditStatusHistory.parameters
     };
 };
+
+export const modelizeApiAuditStatusHistoriesToById = (apiAuditStatusHistories: ApiAuditStatusHistoryType[]): Record<string, AuditStatusHistoryType> => {
+    return apiAuditStatusHistories.reduce((auditStatusHistoriesById, apiAuditStatusHistory) => ({
+        ...auditStatusHistoriesById,
+        [apiAuditStatusHistory.uuid]: modelizeAuditStatusHistory(apiAuditStatusHistory),
+    }), {});
+};
