@@ -92,10 +92,10 @@ const Project: React.FunctionComponent<Props> = ({
     );
   }
 
-  if (0 !== project.auditParametersList.length) {
+  if (0 !== project.auditParametersIds.length) {
     firstPageOrScriptLocation = firstPageOrScriptLocation.replace(
       ':auditParametersId',
-      project.auditParametersList[0].uuid,
+      project.auditParametersIds[0],
     );
   } else {
     return (

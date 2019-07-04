@@ -1,15 +1,17 @@
 import * as React from 'react';
 import { Redirect, RouteComponentProps } from 'react-router';
 import { ValueType } from 'react-select/lib/types';
-import { AuditParametersType, ProjectType } from 'redux/entities/projects/types';
+
+import { AuditParametersType } from 'redux/entities/auditParameters/types';
+import { PageType } from 'redux/entities/pages/types';
+import { ProjectType } from 'redux/entities/projects/types';
+import { ScriptType } from 'redux/entities/scripts/types';
 
 import Badge from 'components/Badge';
 import ErrorMessage from 'components/ErrorMessage';
 import Loader from 'components/Loader';
 import Select from 'components/Select';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
-import { PageType } from 'redux/entities/pages/types';
-import { ScriptType } from 'redux/entities/scripts/types';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
 import AnalyticsBlock from './AnalyticsBlock';
@@ -166,7 +168,7 @@ export const Audits: React.FunctionComponent<Props> = ({
     );
   }
 
-  if (0 === project.auditParametersList.length) {
+  if (0 === project.auditParametersIds.length) {
     return (
       <Container>
         <ErrorMessage>
