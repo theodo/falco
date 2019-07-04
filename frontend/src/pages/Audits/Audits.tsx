@@ -127,7 +127,9 @@ export const Audits: React.FunctionComponent<Props> = ({
     [script && script.uuid, scriptStepId, setCurrentScriptStepId],
   );
 
-  if (project === undefined) {
+  // we set a loader if the project hasn't been loaded from the server or if the page or the script haven't been
+  // loaded (one of them must be defined when the page is active)
+  if (project === undefined || (page === undefined && script === undefined)) {
     return (
       <Container>
         <Loader />
