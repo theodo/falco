@@ -1,5 +1,9 @@
-import { createAsyncAction } from "typesafe-actions";
+import { createAsyncAction, createStandardAction } from "typesafe-actions";
 import { AuditStatusHistoryType } from "./types";
+
+export const pollAuditStatusHistoriesAction = createStandardAction('auditStatusHistories/POLL_AUDIT_STATUS_HISTORY')<{
+    auditId: string;
+}>();
 
 export const fetchAuditStatusHistoriesAction = createAsyncAction(
     'auditStatusHistories/FETCH_AUDIT_STATUS_HISTORIES_REQUEST',
@@ -16,4 +20,5 @@ export const fetchAuditStatusHistoriesAction = createAsyncAction(
 
 export default {
     fetchAuditStatusHistoriesAction,
+    pollAuditStatusHistoriesAction,
 }
