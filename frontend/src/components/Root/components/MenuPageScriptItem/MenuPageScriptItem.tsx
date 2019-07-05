@@ -102,9 +102,9 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
       }
     }
     return {
-      backgroundColor: '',
-      color: '',
-      text: '',
+      backgroundColor: 'inherit',
+      color: 'inherit',
+      text: 'inherit',
     };
   };
   const badgeParams = getBadgeParams();
