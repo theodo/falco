@@ -58,7 +58,7 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
     return null;
   }
 
-  const linkPathCorrespondsToUrl = (
+  const linkPathMatchesUrl = (
     projectId &&
     currentURL.startsWith(
       routeDefinitions.auditsDetails.path
@@ -72,7 +72,7 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
   const getBadgeParams = () => {
     if ('PAGE' === pageOrScript.type) {
       const badgeText = intl.formatMessage({ id: `Menu.page_badge` });
-      if (linkPathCorrespondsToUrl) {
+      if (linkPathMatchesUrl) {
         return {
           backgroundColor: colorUsage.pageBadgeSelectedBackground,
           color: colorUsage.pageBadgeSelectedText,
@@ -87,7 +87,7 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
       }
     } else if ('SCRIPT' === pageOrScript.type) {
       const badgeText = intl.formatMessage({ id: `Menu.script_badge` });
-      if (linkPathCorrespondsToUrl) {
+      if (linkPathMatchesUrl) {
         return {
           backgroundColor: colorUsage.scriptBadgeSelectedBackground,
           color: colorUsage.scriptBadgeSelectedText,
@@ -119,7 +119,7 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
     <PageScriptItem
       to={pageOrScript.linkPath}
       className={
-        linkPathCorrespondsToUrl ? 'active' : ''
+        linkPathMatchesUrl ? 'active' : ''
       }
     >
       <PageScriptTitleBlock>
@@ -163,7 +163,7 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
       <MenuArrowContainer margin={`0 0 0 ${getSpacing(4)}`}>
         <MenuArrow
           color={
-            linkPathCorrespondsToUrl
+            linkPathMatchesUrl
               ? colorUsage.menuArrowSelected
               : colorUsage.menuArrow
           }
