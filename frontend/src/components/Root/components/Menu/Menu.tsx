@@ -6,7 +6,6 @@ import { ValueType } from 'react-select/lib/types';
 import { routeDefinitions } from 'routes';
 
 import { AuditParametersType } from 'redux/entities/auditParameters/types';
-import { AuditStatusHistoryType } from 'redux/entities/auditStatusHistories/types';
 import { ProjectType } from 'redux/entities/projects/types';
 import MenuPageScriptItem from '../MenuPageScriptItem';
 import {
@@ -20,15 +19,7 @@ import {
 interface AuditParametersOption {
   value: string;
   label: string;
-}
-
-export interface PageOrScriptType {
-  uuid: string;
-  title: string;
-  linkPath: string;
-  latestAuditStatusHistories: AuditStatusHistoryType[];
-  type: string;
-}
+};
 
 export interface OwnProps {
   auditParametersId: string | null;
@@ -38,7 +29,7 @@ export interface OwnProps {
   currentScriptId: string | null;
   scriptStepId: string | null;
   currentURL: string;
-}
+};
 
 type Props = OwnProps & InjectedIntlProps;
 
