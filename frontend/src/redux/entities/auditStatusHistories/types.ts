@@ -6,6 +6,7 @@ export interface AuditStatusHistoryType {
     status: StatusType;
     details: string;
     auditParametersId: string;
+    auditId: string;
 };
 
 export interface ApiAuditStatusHistoryType {
@@ -13,7 +14,8 @@ export interface ApiAuditStatusHistoryType {
     created_at: string;
     status: StatusType;
     details: string;
-    parameters: string;
+    parameters_id: string;
     page_id: string;
     script_id: string;
+    audit_id: string;
 };
