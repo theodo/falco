@@ -16,3 +16,12 @@ export const modelizeApiAuditStatusHistoriesToById = (apiAuditStatusHistories: A
         [apiAuditStatusHistory.uuid]: modelizeAuditStatusHistory(apiAuditStatusHistory),
     }), {});
 };
+
+export const modelizeApiAuditStatusHistoriesToByPageOrScriptIdAndAuditParametersId =
+    (apiAuditStatusHistories: ApiAuditStatusHistoryType[]): Record<string, string> => {
+        return apiAuditStatusHistories.reduce((auditStatusHistoriesByPageOrScriptIdAndAuditParametersId, apiAuditStatusHistory) => ({
+            ...auditStatusHistoriesByPageOrScriptIdAndAuditParametersId,
+            // will change at the end of the PR
+            [apiAuditStatusHistory.uuid]: apiAuditStatusHistory.uuid,
+        }), {});
+    };
