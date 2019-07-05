@@ -25,7 +25,11 @@ const reducer = (state: AuditStatusHistoriesState = initialState, action: AnyAct
                 byId: {
                     ...state.byId,
                     ...typedAction.payload.byId,
-                }
+                },
+                byPageOrScriptIdAndAuditParametersId: {
+                    ...state.byPageOrScriptIdAndAuditParametersId,
+                    ...typedAction.payload.byPageOrScriptIdAndAuditParametersId,
+                },
             };
         default:
             return state;

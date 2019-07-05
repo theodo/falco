@@ -66,6 +66,7 @@ export function* fetchProjects() {
           return scriptStatusHistories.concat(script.latest_audit_status_histories);
         }, []));
     }, [])),
+    byPageOrScriptIdAndAuditParametersId: {},
   }));
   yield put(fetchProjectSuccess({ byId: modelizeProjects(projects) }));
 };
