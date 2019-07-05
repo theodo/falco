@@ -6,14 +6,16 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('projects', '0002_page'),
-    ]
+    dependencies = [("projects", "0002_page")]
 
     operations = [
         migrations.AlterField(
-            model_name='page',
-            name='project',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='pages', to='projects.Project'),
-        ),
+            model_name="page",
+            name="project",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="pages",
+                to="projects.Project",
+            ),
+        )
     ]

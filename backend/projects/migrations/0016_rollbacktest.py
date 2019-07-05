@@ -6,23 +6,29 @@ import uuid
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('projects', '0015_auto_20190423_1536'),
-    ]
+    dependencies = [("projects", "0015_auto_20190423_1536")]
 
     operations = [
         migrations.CreateModel(
-            name='RollbackTest',
+            name="RollbackTest",
             fields=[
-                ('uuid', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('rollback', models.CharField(max_length=100)),
+                (
+                    "uuid",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                ("rollback", models.CharField(max_length=100)),
             ],
             options={
-                'ordering': ('-created_at',),
-                'get_latest_by': 'created_at',
-                'abstract': False,
+                "ordering": ("-created_at",),
+                "get_latest_by": "created_at",
+                "abstract": False,
             },
-        ),
+        )
     ]

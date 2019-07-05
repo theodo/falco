@@ -5,14 +5,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('projects', '0006_auto_20190309_2149'),
-    ]
+    dependencies = [("projects", "0006_auto_20190309_2149")]
 
     operations = [
         migrations.AddField(
-            model_name='project',
-            name='screenshot_url',
+            model_name="project",
+            name="screenshot_url",
             field=models.CharField(max_length=1000, null=True),
-        ),
+        )
     ]

@@ -8,22 +8,32 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Lead',
+            name="Lead",
             fields=[
-                ('uuid', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('email', models.EmailField(max_length=254, verbose_name='email address')),
+                (
+                    "uuid",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                (
+                    "email",
+                    models.EmailField(max_length=254, verbose_name="email address"),
+                ),
             ],
             options={
-                'ordering': ('-created_at',),
-                'get_latest_by': 'created_at',
-                'abstract': False,
+                "ordering": ("-created_at",),
+                "get_latest_by": "created_at",
+                "abstract": False,
             },
-        ),
+        )
     ]

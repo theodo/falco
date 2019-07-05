@@ -9,23 +9,36 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ('projects', '0003_auto_20190206_1338'),
-    ]
+    dependencies = [("projects", "0003_auto_20190206_1338")]
 
     operations = [
         migrations.CreateModel(
-            name='Audit',
+            name="Audit",
             fields=[
-                ('uuid', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('page', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='audits', to='projects.Page')),
+                (
+                    "uuid",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                (
+                    "page",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="audits",
+                        to="projects.Page",
+                    ),
+                ),
             ],
             options={
-                'ordering': ('-created_at',),
-                'get_latest_by': 'created_at',
-                'abstract': False,
+                "ordering": ("-created_at",),
+                "get_latest_by": "created_at",
+                "abstract": False,
             },
-        ),
+        )
     ]

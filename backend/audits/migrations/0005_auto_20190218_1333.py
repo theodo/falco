@@ -5,14 +5,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('audits', '0004_auto_20190218_1313'),
-    ]
+    dependencies = [("audits", "0004_auto_20190218_1313")]
 
     operations = [
         migrations.AlterField(
-            model_name='auditresults',
-            name='wpt_metric_lighthouse_performance',
+            model_name="auditresults",
+            name="wpt_metric_lighthouse_performance",
             field=models.FloatField(blank=True, null=True),
-        ),
+        )
     ]

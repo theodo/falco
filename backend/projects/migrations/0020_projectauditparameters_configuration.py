@@ -11,10 +11,7 @@ def generate_configuration_from_browser_and_location(apps, schema_editor):
         configuration, _ = AvailableAuditParameters.objects.get_or_create(
             browser=row.browser,
             location=row.location,
-            defaults={
-                "location_label": row.location,
-                "location_group": "Unknown",
-            },
+            defaults={"location_label": row.location, "location_group": "Unknown"},
         )
         row.configuration = configuration
         row.save()
@@ -30,20 +27,29 @@ def generate_browser_and_location_from_configuration(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("projects", "0019_availableauditparameters"),
-    ]
+    dependencies = [("projects", "0019_availableauditparameters")]
 
     operations = [
         migrations.AddField(
             model_name="projectauditparameters",
             name="configuration",
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT, to="projects.AvailableAuditParameters"),
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.PROTECT,
+                to="projects.AvailableAuditParameters",
+            ),
         ),
-        migrations.RunPython(generate_configuration_from_browser_and_location, reverse_code=generate_browser_and_location_from_configuration),
+        migrations.RunPython(
+            generate_configuration_from_browser_and_location,
+            reverse_code=generate_browser_and_location_from_configuration,
+        ),
         migrations.AlterField(
             model_name="projectauditparameters",
             name="configuration",
-            field=models.ForeignKey(null=False, on_delete=django.db.models.deletion.PROTECT, to="projects.AvailableAuditParameters"),
+            field=models.ForeignKey(
+                null=False,
+                on_delete=django.db.models.deletion.PROTECT,
+                to="projects.AvailableAuditParameters",
+            ),
         ),
     ]
