@@ -1,10 +1,10 @@
-import { ApiAuditStatusHistoryType, AuditStatusHistoryType } from "../auditStatusHistories/types";
+import { ApiAuditStatusHistoryType } from "../auditStatusHistories/types";
 
 export interface PageType {
     name: string;
     url: string;
     uuid: string;
-    latestAuditStatusHistories: AuditStatusHistoryType[];
+    latestAuditStatusHistoriesIds: string[];
 };
 
 export interface ApiPageType {

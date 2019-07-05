@@ -1,4 +1,3 @@
-import { modelizeAuditStatusHistory } from "../auditStatusHistories/modelizer";
 import { ApiPageType, PageType } from "./types";
 
 
@@ -6,8 +5,8 @@ const modelizePage = (apiPage: ApiPageType): PageType => ({
     uuid: apiPage.uuid,
     url: apiPage.url,
     name: apiPage.name,
-    latestAuditStatusHistories: apiPage.latest_audit_status_histories.map(modelizeAuditStatusHistory),
-})
+    latestAuditStatusHistoriesIds: apiPage.latest_audit_status_histories.map(apiAuditStatusHistory => apiAuditStatusHistory.uuid),
+});
 
 export const modelizeApiPagesToById = (pages: ApiPageType[]): Record<string, PageType> => {
     return pages.reduce((pagesById, page) => {

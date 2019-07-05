@@ -1,9 +1,9 @@
-import { ApiAuditStatusHistoryType, AuditStatusHistoryType } from "../auditStatusHistories/types";
+import { ApiAuditStatusHistoryType } from "../auditStatusHistories/types";
 
 export interface ScriptType {
     uuid: string;
     name: string;
-    latestAuditStatusHistories: AuditStatusHistoryType[];
+    latestAuditStatusHistoriesIds: string[];
 };
 
 export interface ApiScriptType {
