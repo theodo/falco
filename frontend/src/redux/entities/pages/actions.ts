@@ -3,9 +3,9 @@ import { PageType } from "./types";
 
 
 export const fetchPageAction = createAsyncAction(
-    'Entities/Pages/FETCH_PAGE_REQUEST',
-    'Entities/Pages/FETCH_PAGE_SUCCESS',
-    'Entities/Pages/FETCH_PAGE_FAILURE',
+    'pages/FETCH_PAGE_REQUEST',
+    'pages/FETCH_PAGE_SUCCESS',
+    'pages/FETCH_PAGE_FAILURE',
 )<{}, { byId: Record<string, PageType>; }, { errorMessage: string }>();
 
 export default {
