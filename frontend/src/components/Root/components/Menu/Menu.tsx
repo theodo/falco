@@ -21,7 +21,7 @@ interface AuditParametersOption {
   label: string;
 }
 
-export interface PageOrScript {
+export interface PageOrScriptType {
   uuid: string;
   title: string;
   linkPath: string;

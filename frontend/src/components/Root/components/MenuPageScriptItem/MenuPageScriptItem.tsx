@@ -7,7 +7,7 @@ import { PageType } from 'redux/entities/pages/types';
 import { ScriptType } from 'redux/entities/scripts/types';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
-import { PageOrScript } from '../Menu/Menu';
+import { PageOrScriptType } from '../Menu/Menu';
 import { AuditStatusHistoryIcon, AuditStatusHistoryIconContainer, MenuArrowContainer, PageScriptItem, PageScriptTitle, PageScriptTitleBlock } from './MenuPageScriptItem.style';
 
 
@@ -34,7 +34,7 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
   auditParametersId,
 }) => {
 
-  const pageOrScript: PageOrScript | undefined = page ? ({
+  const pageOrScript: PageOrScriptType | undefined = page ? ({
     uuid: page.uuid,
     title: page.name,
     latestAuditStatusHistories: page.latestAuditStatusHistories,
