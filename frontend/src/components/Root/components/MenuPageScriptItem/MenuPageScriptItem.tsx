@@ -70,7 +70,7 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
     : pageOrScript.linkPath === currentURL;
 
   const getBadgeParams = () => {
-    if ('PAGE' === pageOrScript.type) {
+    if (pageOrScript.type === 'PAGE') {
       const badgeText = intl.formatMessage({ id: `Menu.page_badge` });
       if (linkPathMatchesUrl) {
         return {
@@ -85,7 +85,7 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
           text: badgeText,
         };
       }
-    } else if ('SCRIPT' === pageOrScript.type) {
+    } else if (pageOrScript.type === 'SCRIPT') {
       const badgeText = intl.formatMessage({ id: `Menu.script_badge` });
       if (linkPathMatchesUrl) {
         return {
