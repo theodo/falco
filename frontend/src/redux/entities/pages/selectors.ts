@@ -10,14 +10,12 @@ export const getPage = (state: RootState, pageId: string): PageType | null | und
 };
 
 export const getPageLatestAuditStatusHistory = (state: RootState, pageId: string): AuditStatusHistoryType | undefined | null => {
-    const page = getPage(state, pageId);
     const auditParametersId = getCurrentAuditParametersId(state);
-    if (!page) {
+    if (!auditParametersId) {
         return null;
     };
-    return page.latestAuditStatusHistoriesIds
-        .map(auditStatusHistoryId => getAuditStatusHistory(state, auditStatusHistoryId))
-        .find(
-            auditStatusHistory => Boolean(auditStatusHistory && auditStatusHistory.auditParametersId === auditParametersId)
-        );
+    const auditStatusHistoryId = state.entities.auditStatusHistories.byPageOrScriptIdAndAuditParametersId
+        ? state.entities.auditStatusHistories.byPageOrScriptIdAndAuditParametersId[`${pageId}--${auditParametersId}`] || ""
+        : "";
+    return getAuditStatusHistory(state, auditStatusHistoryId);
 };

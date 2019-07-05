@@ -10,14 +10,12 @@ export const getScript = (state: RootState, scriptId: string): ScriptType | null
 };
 
 export const getScriptLatestAuditStatusHistory = (state: RootState, scriptId: string): AuditStatusHistoryType | undefined | null => {
-    const script = getScript(state, scriptId);
     const auditParametersId = getCurrentAuditParametersId(state);
-    if (!script) {
+    if (!auditParametersId) {
         return null;
     };
-    return script.latestAuditStatusHistoriesIds
-        .map(auditStatusHistoryId => getAuditStatusHistory(state, auditStatusHistoryId))
-        .find(
-            auditStatusHistory => Boolean(auditStatusHistory && auditStatusHistory.auditParametersId === auditParametersId)
-        );
+    const auditStatusHistoryId = state.entities.auditStatusHistories.byPageOrScriptIdAndAuditParametersId
+        ? state.entities.auditStatusHistories.byPageOrScriptIdAndAuditParametersId[`${scriptId}--${auditParametersId}`] || ""
+        : "";
+    return getAuditStatusHistory(state, auditStatusHistoryId);
 };
