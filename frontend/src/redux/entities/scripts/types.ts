@@ -3,7 +3,6 @@ import { ApiAuditStatusHistoryType } from "../auditStatusHistories/types";
 export interface ScriptType {
     uuid: string;
     name: string;
-    latestAuditStatusHistoriesIds: string[];
 };
 
 export interface ApiScriptType {
