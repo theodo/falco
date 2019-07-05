@@ -5,6 +5,8 @@ export const pollAuditStatusHistoriesAction = createStandardAction('auditStatusH
     auditId: string;
 }>();
 
+export const stopPollingAuditStatusHistoriesAction = createStandardAction('auditStatusHistories/STOP_POLLING_AUDIT_STATUS_HISTORY')<{}>();
+
 export const fetchAuditStatusHistoriesAction = createAsyncAction(
     'auditStatusHistories/FETCH_AUDIT_STATUS_HISTORIES_REQUEST',
     'auditStatusHistories/FETCH_AUDIT_STATUS_HISTORIES_SUCCESS',
@@ -21,4 +23,5 @@ export const fetchAuditStatusHistoriesAction = createAsyncAction(
 export default {
     fetchAuditStatusHistoriesAction,
     pollAuditStatusHistoriesAction,
+    stopPollingAuditStatusHistoriesAction,
 }
