@@ -21,7 +21,6 @@ export const modelizeApiAuditStatusHistoriesToByPageOrScriptIdAndAuditParameters
     (apiAuditStatusHistories: ApiAuditStatusHistoryType[]): Record<string, string> => {
         return apiAuditStatusHistories.reduce((auditStatusHistoriesByPageOrScriptIdAndAuditParametersId, apiAuditStatusHistory) => ({
             ...auditStatusHistoriesByPageOrScriptIdAndAuditParametersId,
-            // will change at the end of the PR
-            [apiAuditStatusHistory.uuid]: apiAuditStatusHistory.uuid,
+            [`${apiAuditStatusHistory.page_id || apiAuditStatusHistory.script_id}--${apiAuditStatusHistory.parameters}`]: apiAuditStatusHistory.uuid,
         }), {});
     };

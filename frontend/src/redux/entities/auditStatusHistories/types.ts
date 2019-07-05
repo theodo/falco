@@ -14,4 +14,6 @@ export interface ApiAuditStatusHistoryType {
     status: StatusType;
     details: string;
     parameters: string;
+    page_id: string;
+    script_id: string;
 };
