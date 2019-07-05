@@ -14,13 +14,29 @@ class AuditSerializer(serializers.ModelSerializer):
 
 class AuditStatusHistorySerializer(serializers.ModelSerializer):
     parameters = serializers.SerializerMethodField()
+    page_id = serializers.SerializerMethodField()
+    script_id = serializers.SerializerMethodField()
 
     def get_parameters(self, obj):
         return obj.audit.parameters.uuid
 
+    def get_page_id(self, obj):
+        return obj.audit.page.uuid if obj.audit.page else ""
+
+    def get_script_id(self, obj):
+        return obj.audit.script.uuid if obj.audit.script else ""
+
     class Meta:
         model = AuditStatusHistory
-        fields = ("uuid", "created_at", "status", "details", "parameters")
+        fields = (
+            "uuid",
+            "created_at",
+            "status",
+            "details",
+            "parameters",
+            "page_id",
+            "script_id",
+        )
 
 
 class AuditResultsSerializer(serializers.ModelSerializer):
