@@ -8,10 +8,12 @@ export type AuditStatusHistoriesAction = ActionType<typeof fetchAuditStatusHisto
 
 export type AuditStatusHistoriesState = Readonly<{
     byId: Readonly<Record<string, AuditStatusHistoryType>> | null;
+    byPageOrScriptIdAndAuditParametersId: Readonly<Record<string, string>> | null;
 }>;
 
 const initialState: AuditStatusHistoriesState = {
     byId: null,
+    byPageOrScriptIdAndAuditParametersId: null,
 };
 
 const reducer = (state: AuditStatusHistoriesState = initialState, action: AnyAction) => {
