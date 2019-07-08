@@ -9,20 +9,29 @@ from rest_framework import serializers
 from audits.serializers import AuditStatusHistorySerializer
 
 
+def get_latest_audit_status_data_for_audit_parameters(obj, parameters):
+    # get the latest audit for the given parameter
+    latest_audit = (
+        obj.audits.filter(parameters=parameters).order_by("created_at").last()
+    )
+    if latest_audit:
+        # for this audit, get the latest auditstatus
+        return AuditStatusHistorySerializer(
+            latest_audit.audit_status_history.order_by("created_at").last()
+        ).data
+    return AuditStatusHistorySerializer().data
+
+
 def get_latest_audit_status_histories(obj):
     parameters_list = obj.project.audit_parameters_list.all()
-    return [
-        AuditStatusHistorySerializer(
-            obj.audits.filter(parameters=parameters)
-            # get the latest audit for the given parameter
-            .order_by("created_at")
-            .last()
-            # for this audit, get the latest auditstatus
-            .audit_status_history.order_by("created_at")
-            .last()
-        ).data
-        for parameters in parameters_list
-    ]
+    return list(
+        map(
+            lambda parameters: get_latest_audit_status_data_for_audit_parameters(
+                obj, parameters
+            ),
+            parameters_list,
+        )
+    )
 
 
 class PageSerializer(serializers.ModelSerializer):
