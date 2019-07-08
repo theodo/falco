@@ -1,28 +1,18 @@
-import Badge from 'components/Badge';
 import Select from 'components/Select';
-import { MenuArrow } from 'icons';
 import React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { ValueType } from 'react-select/lib/types';
 import { AuditStatusHistoryType, ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
-import { colorUsage, getSpacing } from 'stylesheet';
 
 import { history } from 'index';
 import { AuditParametersType } from 'redux/entities/auditParameters/types';
-import { PageType } from 'redux/entities/pages/types';
-import { ScriptType } from 'redux/entities/scripts/types';
+import MenuPageScriptItem from '../MenuPageScriptItem';
 import {
   AuditParametersBlock,
   AuditParametersTitle,
   Audits,
-  AuditStatusHistoryIcon,
-  AuditStatusHistoryIconContainer,
   Container,
-  MenuArrowContainer,
-  PageScriptItem,
-  PageScriptTitle,
-  PageScriptTitleBlock,
   ProjectName,
 } from './Menu.style';
 
@@ -31,7 +21,7 @@ interface AuditParametersOption {
   label: string;
 }
 
-export interface PageOrScript {
+export interface PageOrScriptType {
   uuid: string;
   title: string;
   linkPath: string;
@@ -41,12 +31,10 @@ export interface PageOrScript {
 
 export interface OwnProps {
   auditParametersId: string | null;
-  pageId: string | null;
+  currentPageId: string | null;
   project?: ProjectType;
-  pages: PageType[];
-  scripts: ScriptType[];
   auditParametersList: AuditParametersType[],
-  scriptId: string | null;
+  currentScriptId: string | null;
   scriptStepId: string | null;
   currentURL: string;
 }
@@ -55,94 +43,14 @@ type Props = OwnProps & InjectedIntlProps;
 
 export const Menu: React.FunctionComponent<Props> = ({
   auditParametersId,
-  currentURL,
-  intl,
-  pageId,
+  currentPageId,
   project,
-  pages,
-  scripts,
   auditParametersList,
-  scriptId,
+  currentScriptId,
   scriptStepId,
 }) => {
   if (!project) {
     return <Container />;
-  }
-
-  const pagesAndScripts = [
-    ...pages.map(page => ({
-      uuid: page.uuid,
-      title: page.name,
-      latestAuditStatusHistories: page.latestAuditStatusHistories,
-      linkPath: routeDefinitions.auditsDetails.path
-        .replace(':projectId', project.uuid)
-        .replace(':pageOrScriptId', page.uuid)
-        .replace(':auditParametersId', auditParametersId ? auditParametersId : ''),
-      type: 'PAGE',
-    })),
-    ...scripts.map(script => ({
-      uuid: script.uuid,
-      title: script.name,
-      latestAuditStatusHistories: script.latestAuditStatusHistories,
-      linkPath: routeDefinitions.auditsDetails.path
-        .replace(':projectId', project.uuid)
-        .replace(':pageOrScriptId', script.uuid)
-        .replace(':auditParametersId', auditParametersId ? auditParametersId : ''),
-      type: 'SCRIPT',
-    })),
-  ];
-
-  const getBadgeParams = (pageOrScript: PageOrScript) => {
-    if ('PAGE' === pageOrScript.type) {
-      const badgeText = intl.formatMessage({ id: `Menu.page_badge` });
-      if (doesLinkPathCorrespondToUrl(pageOrScript.linkPath, currentURL)) {
-        return {
-          backgroundColor: colorUsage.pageBadgeSelectedBackground,
-          color: colorUsage.pageBadgeSelectedText,
-          text: badgeText,
-        };
-      } else {
-        return {
-          backgroundColor: colorUsage.pageBadgeBackground,
-          color: colorUsage.pageBadgeText,
-          text: badgeText,
-        };
-      }
-    } else if ('SCRIPT' === pageOrScript.type) {
-      const badgeText = intl.formatMessage({ id: `Menu.script_badge` });
-      if (doesLinkPathCorrespondToUrl(pageOrScript.linkPath, currentURL)) {
-        return {
-          backgroundColor: colorUsage.scriptBadgeSelectedBackground,
-          color: colorUsage.scriptBadgeSelectedText,
-          text: badgeText,
-        };
-      } else {
-        return {
-          backgroundColor: colorUsage.scriptBadgeBackground,
-          color: colorUsage.scriptBadgeText,
-          text: badgeText,
-        };
-      }
-    }
-    return {
-      backgroundColor: '',
-      color: '',
-      text: '',
-    };
-  };
-
-  const doesLinkPathCorrespondToUrl = (linkPath: string, url: string) => {
-    if (
-      project &&
-      url.startsWith(
-        routeDefinitions.auditsDetails.path
-          .replace(':projectId', project.uuid)
-          .replace(':pageOrScriptId/audit-parameters/:auditParametersId', ''),
-      )
-    ) {
-      return url.startsWith(linkPath);
-    }
-    return linkPath === url;
   };
 
   const auditParametersSelectOptions = auditParametersList.map(auditParameters => ({
@@ -155,26 +63,26 @@ export const Menu: React.FunctionComponent<Props> = ({
   ) => {
     // Check needed to avoid TS2339 error
     if (selectedOption && 'value' in selectedOption && auditParametersId) {
-      if (pageId) {
+      if (currentPageId) {
         history.push(
           routeDefinitions.auditsDetails.path
             .replace(':projectId', project.uuid)
-            .replace(':pageOrScriptId', pageId)
+            .replace(':pageOrScriptId', currentPageId)
             .replace(':auditParametersId', selectedOption.value),
         );
-      } else if (scriptId) {
+      } else if (currentScriptId) {
         if (!scriptStepId) {
           history.push(
             routeDefinitions.auditsDetails.path
               .replace(':projectId', project.uuid)
-              .replace(':pageOrScriptId', scriptId)
+              .replace(':pageOrScriptId', currentScriptId)
               .replace(':auditParametersId', selectedOption.value),
           );
         } else {
           history.push(
             routeDefinitions.auditsScriptDetails.path
               .replace(':projectId', project.uuid)
-              .replace(':pageOrScriptId', scriptId)
+              .replace(':pageOrScriptId', currentScriptId)
               .replace(':auditParametersId', selectedOption.value)
               .replace(':scriptStepId', scriptStepId),
           );
@@ -202,72 +110,18 @@ export const Menu: React.FunctionComponent<Props> = ({
         </AuditParametersBlock>
       )}
       <Audits>Audits</Audits>
-      {pagesAndScripts.map((pageOrScript: PageOrScript) => {
-        const badgeParams = getBadgeParams(pageOrScript);
-        const latestAuditStatusHistoryForCurrentAuditParameters = pageOrScript.latestAuditStatusHistories.find(
-          auditStatusHistory => (auditStatusHistory.auditParametersId === auditParametersId)
-        );
-        const latestAuditStatusHistoryForCurrentAuditParametersStatus = latestAuditStatusHistoryForCurrentAuditParameters
-          ? latestAuditStatusHistoryForCurrentAuditParameters.status
-          : "ERROR"
-        return (
-          <PageScriptItem
-            key={pageOrScript.uuid}
-            to={pageOrScript.linkPath}
-            className={
-              doesLinkPathCorrespondToUrl(pageOrScript.linkPath, currentURL) ? 'active' : ''
-            }
-          >
-            <PageScriptTitleBlock>
-              <AuditStatusHistoryIconContainer>
-                {
-                  latestAuditStatusHistoryForCurrentAuditParametersStatus !== "SUCCESS" &&
-                  <AuditStatusHistoryIcon
-                    status={latestAuditStatusHistoryForCurrentAuditParametersStatus}
-                    title={
-                      (
-                        (latestAuditStatusHistoryForCurrentAuditParametersStatus === "ERROR")
-                        &&
-                        intl.formatMessage({ id: `Audits.AuditStatusHistory.audit_failure` })
-                      ) || (
-                        (
-                          latestAuditStatusHistoryForCurrentAuditParametersStatus === "REQUESTED"
-                          ||
-                          latestAuditStatusHistoryForCurrentAuditParametersStatus === "PENDING"
-                        )
-                        &&
-                        intl.formatMessage({ id: `Audits.AuditStatusHistory.audit_running` })
-                      ) || (
-                        intl.formatMessage({ id: `Audits.AuditStatusHistory.audit_failure` })
-                      )
-                    }
-                  />
-                }
-              </AuditStatusHistoryIconContainer>
-              <>
-                <PageScriptTitle>{pageOrScript.title}</PageScriptTitle>
-              </>
-              {pageOrScript.type && (
-                <Badge
-                  backgroundColor={badgeParams.backgroundColor}
-                  color={badgeParams.color}
-                  margin={`0 0 0 ${getSpacing(4)}`}
-                  text={badgeParams.text}
-                />
-              )}
-            </PageScriptTitleBlock>
-            <MenuArrowContainer margin={`0 0 0 ${getSpacing(4)}`}>
-              <MenuArrow
-                color={
-                  doesLinkPathCorrespondToUrl(pageOrScript.linkPath, currentURL)
-                    ? colorUsage.menuArrowSelected
-                    : colorUsage.menuArrow
-                }
-              />
-            </MenuArrowContainer>
-          </PageScriptItem>
-        );
-      })}
+      {project.pagesIds.map((pageId: string) =>
+        <MenuPageScriptItem
+          key={pageId}
+          pageId={pageId}
+        />
+      )}
+      {project.scriptsIds.map((scriptId: string) =>
+        <MenuPageScriptItem
+          key={scriptId}
+          scriptId={scriptId}
+        />
+      )}
     </Container>
   );
 };
