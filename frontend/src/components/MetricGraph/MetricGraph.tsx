@@ -6,7 +6,7 @@ import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import { Information } from 'icons';
 import Expand from 'icons/Expand';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
-import { Area, AreaChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { Area, AreaChart, Legend, LegendProps, ResponsiveContainer, Tooltip, TooltipProps, XAxis, YAxis } from 'recharts';
 import { METRICS } from 'redux/auditResults/constants';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
 import { colorUsage, fontFamily, fontSize, getSpacing } from 'stylesheet';
@@ -38,8 +38,11 @@ const MetricGraph: React.FunctionComponent<Props> = ({
   const metricInfoIconContainerRef = React.useRef<HTMLDivElement>(null);
   const expandButtonRef = React.useRef<HTMLDivElement>(null);
 
-  const renderLegend = (legendProps: { payload: Array<{ value: MetricType }> }) => {
-    const { payload } = legendProps;
+  const renderLegend = (props: LegendProps) => {
+    const { payload } = props;
+    if (!payload) {
+      return null;
+    };
     return payload.map((entry, index) => (
       <MetricLegend
         margin={
@@ -100,14 +103,14 @@ const MetricGraph: React.FunctionComponent<Props> = ({
 
   dayjs.extend(LocalizedFormat).locale(intl.locale);
 
-  const renderTooltip = (tooltipProps: {
-    label: number;
-    payload: Array<{ value: number; dataKey: MetricType }>;
-  }) => {
+  const renderTooltip = (tooltipProps: TooltipProps) => {
     const { payload, label } = tooltipProps;
+    if (!payload) {
+      return null;
+    };
     return payload
       ? payload.map((entry, index) => {
-        const dataType = METRICS[entry.dataKey].type;
+        const dataType = METRICS[entry.dataKey as MetricType].type;
         const formattedDate = intl.formatMessage(
           {
             id: 'components.MetricGraph.tooltipDate',
@@ -121,7 +124,7 @@ const MetricGraph: React.FunctionComponent<Props> = ({
         );
         return (
           <StyledTooltip key={index}>
-            <TooltipValue>{getFormattedValue(dataType, entry.value)}</TooltipValue>
+            <TooltipValue>{getFormattedValue(dataType, entry.value as number)}</TooltipValue>
             <TooltipDate>{formattedDate}</TooltipDate>
           </StyledTooltip>
         );
