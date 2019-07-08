@@ -15,7 +15,10 @@ export const getPageLatestAuditStatusHistory = (state: RootState, pageId: string
         return null;
     };
     const auditStatusHistoryId = state.entities.auditStatusHistories.byPageOrScriptIdAndAuditParametersId
-        ? state.entities.auditStatusHistories.byPageOrScriptIdAndAuditParametersId[`${pageId}--${auditParametersId}`] || ""
+        ? state.entities.auditStatusHistories.byPageOrScriptIdAndAuditParametersId[pageId]
+            ? state.entities.auditStatusHistories.byPageOrScriptIdAndAuditParametersId[pageId][auditParametersId]
+            : ""
+            || ""
         : "";
     return getAuditStatusHistory(state, auditStatusHistoryId);
 };

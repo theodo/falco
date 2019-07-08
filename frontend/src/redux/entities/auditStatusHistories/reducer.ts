@@ -8,7 +8,7 @@ export type AuditStatusHistoriesAction = ActionType<typeof fetchAuditStatusHisto
 
 export type AuditStatusHistoriesState = Readonly<{
     byId: Readonly<Record<string, AuditStatusHistoryType>> | null;
-    byPageOrScriptIdAndAuditParametersId: Readonly<Record<string, string>> | null;
+    byPageOrScriptIdAndAuditParametersId: Readonly<Record<string, Record<string, string>>> | null;
 }>;
 
 const initialState: AuditStatusHistoriesState = {
