@@ -57,9 +57,6 @@ function* watchPollAuditStatusHistories() {
     while (true) {
         const pollAction: ActionType<typeof pollAuditStatusHistoriesAction> = yield take(pollAuditStatusHistoriesAction);
         const auditId = pollAction.payload.auditId;
-        if (!auditId) {
-            return;
-        }
         yield race({
             continuePolling: fork(pollAuditStatusHistories, auditId),
             stopPolling: take(stopPollingAuditStatusHistoriesAction)

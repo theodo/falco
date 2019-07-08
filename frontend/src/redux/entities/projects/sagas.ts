@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { all, call, put, takeEvery } from 'redux-saga/effects';
 import { makeGetRequest } from 'services/networking/request';
 import { ActionType, getType } from 'typesafe-actions';
 
@@ -7,7 +7,7 @@ import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
 import { fetchAuditParametersAction } from '../auditParameters/actions';
 import { modelizeApiAuditParametersListToById } from '../auditParameters/modelizer';
 import { ApiAuditParametersType } from '../auditParameters/types';
-import { fetchAuditStatusHistoriesAction } from '../auditStatusHistories';
+import { fetchAuditStatusHistoriesAction, pollAuditStatusHistoriesAction } from '../auditStatusHistories';
 import {
   modelizeApiAuditStatusHistoriesToById,
   modelizeApiAuditStatusHistoriesToByPageOrScriptIdAndAuditParametersId,
@@ -73,6 +73,12 @@ export function* fetchProjects() {
     byId: modelizeApiAuditStatusHistoriesToById(allApiAuditStatusHistories),
     byPageOrScriptIdAndAuditParametersId: modelizeApiAuditStatusHistoriesToByPageOrScriptIdAndAuditParametersId(allApiAuditStatusHistories),
   }));
+  // launch polling for all non-success and non-error auditStatusHistories
+  yield all(allApiAuditStatusHistories.map(
+    apiAuditStatusHistory => (apiAuditStatusHistory.status === "PENDING" || apiAuditStatusHistory.status === "REQUESTED")
+      ? put(pollAuditStatusHistoriesAction({ auditId: apiAuditStatusHistory.audit_id }))
+      : call(() => null)
+  ));
   yield put(fetchProjectSuccess({ byId: modelizeProjects(projects) }));
 };
 
