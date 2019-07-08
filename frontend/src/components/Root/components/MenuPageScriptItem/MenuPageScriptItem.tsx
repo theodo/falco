@@ -56,8 +56,10 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
 
   if (!pageOrScript) {
     return null;
-  }
+  };
 
+  // we determine here if the current URL is the one of the combination project/pageOrScript/auditParameters
+  // in this case the item must be visually different in order to show the user that this is the viewed page or script
   const linkPathMatchesUrl = (
     projectId &&
     currentURL.startsWith(
