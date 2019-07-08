@@ -20,8 +20,14 @@ export const modelizeApiAuditStatusHistoriesToById = (apiAuditStatusHistories: A
 
 export const modelizeApiAuditStatusHistoriesToByPageOrScriptIdAndAuditParametersId =
     (apiAuditStatusHistories: ApiAuditStatusHistoryType[]): Record<string, string> => {
-        return apiAuditStatusHistories.reduce((auditStatusHistoriesByPageOrScriptIdAndAuditParametersId, apiAuditStatusHistory) => ({
-            ...auditStatusHistoriesByPageOrScriptIdAndAuditParametersId,
-            [apiAuditStatusHistory.page_id || apiAuditStatusHistory.script_id]: { [apiAuditStatusHistory.parameters_id]: apiAuditStatusHistory.uuid }
-        }), {});
+        return apiAuditStatusHistories.reduce(
+            (auditStatusHistoriesByPageOrScriptIdAndAuditParametersId: Record<string, Record<string, string>>, apiAuditStatusHistory: ApiAuditStatusHistoryType) => ({
+                ...auditStatusHistoriesByPageOrScriptIdAndAuditParametersId,
+                [apiAuditStatusHistory.page_id || apiAuditStatusHistory.script_id]: {
+                    ...auditStatusHistoriesByPageOrScriptIdAndAuditParametersId[apiAuditStatusHistory.page_id || apiAuditStatusHistory.script_id],
+                    [apiAuditStatusHistory.parameters_id]: apiAuditStatusHistory.uuid,
+                },
+            }),
+            {},
+        );
     };
