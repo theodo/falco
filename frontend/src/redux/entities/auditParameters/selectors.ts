@@ -15,4 +15,4 @@ export const getProjectAuditParameters = (state: RootState, projectId: string): 
 
 export const getAuditParameters = (state: RootState, auditParametersId: string): AuditParametersType | null | undefined => {
     return state.entities.auditParameters.byId ? state.entities.auditParameters.byId[auditParametersId] : undefined;
-}
+};

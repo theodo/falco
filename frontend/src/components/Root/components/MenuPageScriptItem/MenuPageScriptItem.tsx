@@ -3,11 +3,11 @@ import React from 'react';
 import Badge from 'components/Badge';
 import { MenuArrow } from 'icons';
 import { InjectedIntlProps } from 'react-intl';
+import { AuditStatusHistoryType } from 'redux/entities/auditStatusHistories/types';
 import { PageType } from 'redux/entities/pages/types';
 import { ScriptType } from 'redux/entities/scripts/types';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
-import { PageOrScriptType } from '../Menu/Menu';
 import { AuditStatusHistoryIcon, AuditStatusHistoryIconContainer, MenuArrowContainer, PageScriptItem, PageScriptTitle, PageScriptTitleBlock } from './MenuPageScriptItem.style';
 
 
@@ -17,10 +17,20 @@ export interface OwnProps {
   key: string;
 };
 
+export interface PageOrScriptType {
+  uuid: string;
+  title: string;
+  linkPath: string;
+  latestAuditStatusHistory?: AuditStatusHistoryType | null;
+  type: string;
+};
+
 interface Props extends OwnProps {
   projectId: string;
   page?: PageType | null;
   script?: ScriptType | null;
+  pageLatestAuditStatusHistory?: AuditStatusHistoryType | null;
+  scriptLatestAuditStatusHistory?: AuditStatusHistoryType | null;
   currentURL: string;
   auditParametersId: string | null;
 };
@@ -30,6 +40,8 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
   projectId,
   page,
   script,
+  pageLatestAuditStatusHistory,
+  scriptLatestAuditStatusHistory,
   currentURL,
   auditParametersId,
 }) => {
@@ -37,7 +49,7 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
   const pageOrScript: PageOrScriptType | undefined = page ? ({
     uuid: page.uuid,
     title: page.name,
-    latestAuditStatusHistories: page.latestAuditStatusHistories,
+    latestAuditStatusHistory: pageLatestAuditStatusHistory,
     linkPath: routeDefinitions.auditsDetails.path
       .replace(':projectId', projectId)
       .replace(':pageOrScriptId', page.uuid)
@@ -46,7 +58,7 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
   }) : script ? ({
     uuid: script.uuid,
     title: script.name,
-    latestAuditStatusHistories: script.latestAuditStatusHistories,
+    latestAuditStatusHistory: scriptLatestAuditStatusHistory,
     linkPath: routeDefinitions.auditsDetails.path
       .replace(':projectId', projectId)
       .replace(':pageOrScriptId', script.uuid)
@@ -111,11 +123,8 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
   };
   const badgeParams = getBadgeParams();
 
-  const latestAuditStatusHistoryForCurrentAuditParameters = pageOrScript.latestAuditStatusHistories.find(
-    auditStatusHistory => (auditStatusHistory.auditParametersId === auditParametersId)
-  );
-  const latestAuditStatusHistoryForCurrentAuditParametersStatus = latestAuditStatusHistoryForCurrentAuditParameters
-    ? latestAuditStatusHistoryForCurrentAuditParameters.status
+  const latestAuditStatusHistoryStatus = pageOrScript.latestAuditStatusHistory
+    ? pageOrScript.latestAuditStatusHistory.status
     : "ERROR"
   return (
     <PageScriptItem
@@ -127,19 +136,19 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
       <PageScriptTitleBlock>
         <AuditStatusHistoryIconContainer>
           {
-            latestAuditStatusHistoryForCurrentAuditParametersStatus !== "SUCCESS" &&
+            latestAuditStatusHistoryStatus !== "SUCCESS" &&
             <AuditStatusHistoryIcon
-              status={latestAuditStatusHistoryForCurrentAuditParametersStatus}
+              status={latestAuditStatusHistoryStatus}
               title={
                 (
-                  (latestAuditStatusHistoryForCurrentAuditParametersStatus === "ERROR")
+                  (latestAuditStatusHistoryStatus === "ERROR")
                   &&
                   intl.formatMessage({ id: `Audits.AuditStatusHistory.audit_failure` })
                 ) || (
                   (
-                    latestAuditStatusHistoryForCurrentAuditParametersStatus === "REQUESTED"
+                    latestAuditStatusHistoryStatus === "REQUESTED"
                     ||
-                    latestAuditStatusHistoryForCurrentAuditParametersStatus === "PENDING"
+                    latestAuditStatusHistoryStatus === "PENDING"
                   )
                   &&
                   intl.formatMessage({ id: `Audits.AuditStatusHistory.audit_running` })

@@ -1,12 +1,12 @@
 import Select from 'components/Select';
+import { history } from 'index';
 import React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { ValueType } from 'react-select/lib/types';
-import { AuditStatusHistoryType, ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
 
-import { history } from 'index';
 import { AuditParametersType } from 'redux/entities/auditParameters/types';
+import { ProjectType } from 'redux/entities/projects/types';
 import MenuPageScriptItem from '../MenuPageScriptItem';
 import {
   AuditParametersBlock,
@@ -19,15 +19,7 @@ import {
 interface AuditParametersOption {
   value: string;
   label: string;
-}
-
-export interface PageOrScriptType {
-  uuid: string;
-  title: string;
-  linkPath: string;
-  latestAuditStatusHistories: AuditStatusHistoryType[];
-  type: string;
-}
+};
 
 export interface OwnProps {
   auditParametersId: string | null;
@@ -37,7 +29,7 @@ export interface OwnProps {
   currentScriptId: string | null;
   scriptStepId: string | null;
   currentURL: string;
-}
+};
 
 type Props = OwnProps & InjectedIntlProps;
 
