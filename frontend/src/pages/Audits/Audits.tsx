@@ -45,7 +45,7 @@ type Props = {
   scriptSteps: Record<string, string>;
   sortedPageAuditResultsIds: string[] | null;
   sortedScriptAuditResultsIds: Record<string, string[]> | null;
-  fetchProjectRequest: (projectId: string) => void;
+  fetchProjectsRequest: (projectId: string) => void;
   fetchAuditResultsRequest: (
     auditParametersId: string,
     pageOrScriptId: string,
@@ -60,7 +60,7 @@ type Props = {
 
 export const Audits: React.FunctionComponent<Props> = ({
   currentAuditParameters,
-  fetchProjectRequest,
+  fetchProjectsRequest,
   history,
   intl,
   match,
@@ -80,9 +80,12 @@ export const Audits: React.FunctionComponent<Props> = ({
 
   React.useEffect(
     () => {
-      fetchProjectRequest(projectId);
+      // only fetch the project here if it hasn't been done by <Project /> before
+      if (project === undefined) {
+        fetchProjectsRequest(projectId);
+      };
     },
-    [projectId, fetchProjectRequest],
+    [project, projectId, fetchProjectsRequest],
   );
 
   React.useEffect(
