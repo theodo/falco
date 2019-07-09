@@ -24,13 +24,15 @@ import {
   fetchProjectSuccess,
 } from './actions';
 import { modelizeProjects } from './modelizer';
-import { ApiFirstProjectType, ApiProjectType } from './types';
+import { ApiProjectResponseType, ApiProjectType } from './types';
 
 
-function* fetchProjects() {
+function* fetchProjects(action: ActionType<typeof fetchProjectsRequest>) {
   try {
-    const firstProjectEndpoint = '/api/projects/first';
-    const { body: firstProject }: { body: ApiFirstProjectType } = yield call(
+    const firstProjectEndpoint = action.payload.currentProjectId
+      ? `/api/projects/${action.payload.currentProjectId}/`
+      : '/api/projects/first';
+    const { body: firstProject }: { body: ApiProjectResponseType } = yield call(
       makeGetRequest,
       firstProjectEndpoint,
       true,
@@ -58,13 +60,13 @@ function* fetchProjects() {
 function* fetchProject(action: ActionType<typeof fetchProjectRequest>) {
   try {
     const endpoint = `/api/projects/${action.payload.projectId}/`;
-    const { body: project }: { body: ApiProjectType } = yield call(
+    const { body: projectResponse }: { body: ApiProjectResponseType } = yield call(
       makeGetRequest,
       endpoint,
       true,
       null,
     );
-    yield saveProjectsToStore([project]);
+    yield saveProjectsToStore([projectResponse.project]);
   } catch (error) {
     yield put(fetchProjectError({ projectId: action.payload.projectId, errorMessage: error.toString() }));
   }

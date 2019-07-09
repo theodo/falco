@@ -54,8 +54,11 @@ def project_detail(request, project_uuid):
     check_if_member_of_project(request.user.id, project.uuid)
 
     if request.method == "GET":
+        projects = get_user_projects(request.user.id)
         serializer = ProjectSerializer(project)
-        return JsonResponse(serializer.data)
+        return JsonResponse(
+            {"project": serializer.data, "has_siblings": projects.count() > 1}
+        )
 
     elif request.method == "PUT":
         check_if_admin_of_project(request.user.id, project.uuid)

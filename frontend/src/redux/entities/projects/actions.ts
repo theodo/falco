@@ -2,7 +2,9 @@ import { createStandardAction } from 'typesafe-actions';
 
 import { ProjectType } from './types';
 
-export const fetchProjectsRequest = createStandardAction('projects/FETCH_PROJECTS_REQUEST')<{}>();
+export const fetchProjectsRequest = createStandardAction('projects/FETCH_PROJECTS_REQUEST')<{
+  currentProjectId?: string;
+}>();
 export const fetchProjectRequest = createStandardAction('projects/FETCH_PROJECT_REQUEST')<{
   projectId: string;
 }>();

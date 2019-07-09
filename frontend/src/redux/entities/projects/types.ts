@@ -23,7 +23,7 @@ export interface ApiProjectType {
   latest_audit_at: string;
 };
 
-export interface ApiFirstProjectType {
+export interface ApiProjectResponseType {
   project: ApiProjectType;
   has_siblings: boolean;
 };
