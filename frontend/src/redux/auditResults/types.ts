@@ -1,5 +1,19 @@
 import dayjs from 'dayjs';
 
+export interface ApiAuditType {
+  uuid: string;
+  parameters: string;
+  page: string | null;
+  script: string | null;
+};
+
+export interface AuditType {
+  uuid: string;
+  auditParameters: string;
+  pageId: string | null;
+  scriptId: string | null;
+};
+
 export interface AuditResultType {
   auditId: string;
   createdAt: dayjs.Dayjs;
