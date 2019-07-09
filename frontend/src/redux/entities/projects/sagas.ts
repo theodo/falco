@@ -24,11 +24,24 @@ import {
   fetchProjectSuccess,
 } from './actions';
 import { modelizeProjects } from './modelizer';
-import { ApiProjectType } from './types';
+import { ApiFirstProjectType, ApiProjectType } from './types';
 
 
 function* fetchProjects() {
   try {
+    const firstProjectEndpoint = '/api/projects/first';
+    const { body: firstProject }: { body: ApiFirstProjectType } = yield call(
+      makeGetRequest,
+      firstProjectEndpoint,
+      true,
+      null,
+    );
+    yield saveProjectsToStore([firstProject.project]);
+    // if the user has no other project, do not fetch them
+    if (!firstProject.has_siblings) {
+      return;
+    };
+
     const endpoint = '/api/projects/';
     const { body: projects }: { body: ApiProjectType[] } = yield call(
       makeGetRequest,
