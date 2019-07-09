@@ -1,5 +1,6 @@
 import { delay } from "redux-saga";
 import { call, fork, put, race, take, takeEvery } from 'redux-saga/effects'
+import { fetchAuditResultsRequest } from "redux/auditResults";
 import { makeGetRequest } from "services/networking/request";
 import { ActionType, getType } from "typesafe-actions";
 import { fetchAuditStatusHistoriesAction, pollAuditStatusHistoriesAction, stopPollingAuditStatusHistoriesAction } from "./actions";
@@ -40,7 +41,9 @@ function* pollAuditStatusHistories(auditId: string) {
 
         const pollingIsFinished = (auditStatusHistory.status === "SUCCESS" || auditStatusHistory.status === "ERROR");
         if (pollingIsFinished) {
-            yield put(stopPollingAuditStatusHistoriesAction({}));
+            yield put(stopPollingAuditStatusHistoriesAction({
+                lastAuditStatusHistory: auditStatusHistory,
+            }));
         }
         else {
             // wait for 10 seconds before the next polling
@@ -51,6 +54,15 @@ function* pollAuditStatusHistories(auditId: string) {
         yield put(fetchAuditStatusHistoriesAction.failure({ errorMessage: error.toString() }));
         return;
     };
+};
+
+function* fetchAuditResultsAfterPolling(action: ActionType<typeof stopPollingAuditStatusHistoriesAction>) {
+    const auditStatusHistory = action.payload.lastAuditStatusHistory;
+    yield put(fetchAuditResultsRequest({
+        auditParametersId: auditStatusHistory.parameters_id,
+        pageOrScriptId: auditStatusHistory.page_id || auditStatusHistory.script_id,
+        type: auditStatusHistory.page_id ? 'page' : 'script',
+    }))
 };
 
 function* watchPollAuditStatusHistories() {
@@ -68,6 +80,10 @@ export default function* auditStatusHistoriesSagas() {
     yield takeEvery(
         getType(fetchAuditStatusHistoriesAction.request),
         fetchAuditStatusHistories,
+    );
+    yield takeEvery(
+        getType(stopPollingAuditStatusHistoriesAction),
+        fetchAuditResultsAfterPolling,
     );
     yield watchPollAuditStatusHistories();
 };
