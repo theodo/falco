@@ -21,6 +21,7 @@ import {
   fetchProjectError,
   fetchProjectRequest,
   fetchProjectsRequest,
+  fetchProjectsSuccess,
   fetchProjectSuccess,
 } from './actions';
 import { modelizeProjects } from './modelizer';
