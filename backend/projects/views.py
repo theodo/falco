@@ -9,14 +9,17 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.parsers import JSONParser
 
 
+def get_user_projects(user_id):
+    return Project.objects.filter(
+        Q(Q(members__id=user_id) | Q(admins__id=user_id)), is_active=True
+    )
+
+
 @api_view(["GET", "POST"])
 @permission_classes([permissions.IsAuthenticated])
 def project_list(request):
     if request.method == "GET":
-        projects = Project.objects.filter(
-            Q(Q(members__id=request.user.id) | Q(admins__id=request.user.id)),
-            is_active=True,
-        )
+        projects = get_user_projects(request.user.id)
         serializer = ProjectSerializer(projects, many=True)
         return JsonResponse(serializer.data, safe=False)
     elif request.method == "POST":
@@ -30,6 +33,18 @@ def project_list(request):
                 status=status.HTTP_201_CREATED,
             )
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["GET"])
+@permission_classes([permissions.IsAuthenticated])
+def first_project(request):
+    """returns the first project of the user, and if he has others
+    This will speed up the loading of the first project page"""
+    projects = get_user_projects(request.user.id)
+    serializer = ProjectSerializer(projects.first())
+    return JsonResponse(
+        {"project": serializer.data, "has_siblings": projects.count() > 1}
+    )
 
 
 @api_view(["GET", "PUT", "DELETE"])
