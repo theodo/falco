@@ -2,6 +2,7 @@ import { all, call, put, takeEvery } from 'redux-saga/effects';
 import { makeGetRequest } from 'services/networking/request';
 import { ActionType, getType } from 'typesafe-actions';
 
+import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
 import { fetchAuditParametersAction } from '../auditParameters/actions';
 import { modelizeApiAuditParametersListToById } from '../auditParameters/modelizer';
 import { ApiAuditParametersType } from '../auditParameters/types';
@@ -21,59 +22,65 @@ import {
   fetchProjectError,
   fetchProjectRequest,
   fetchProjectsRequest,
-  fetchProjectsSuccess,
   fetchProjectSuccess,
+  saveFetchedProjects,
 } from './actions';
 import { modelizeProjects } from './modelizer';
 import { ApiProjectResponseType, ApiProjectType } from './types';
 
+function* fetchProjectsFailedHandler(error: Error, actionPayload: Record<string, any>) {
+  yield put(fetchProjectError({ projectId: actionPayload.currentProjectId, errorMessage: error.message }));
+};
+
+function* fetchProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
+  yield put(fetchProjectError({ projectId: actionPayload.projectId, errorMessage: error.message }));
+};
 
 function* fetchProjects(action: ActionType<typeof fetchProjectsRequest>) {
-  try {
-    const firstProjectEndpoint = action.payload.currentProjectId
-      ? `/api/projects/${action.payload.currentProjectId}/`
-      : '/api/projects/first';
-    const { body: firstProject }: { body: ApiProjectResponseType } = yield call(
-      makeGetRequest,
-      firstProjectEndpoint,
-      true,
-      null,
-    );
-    yield saveProjectsToStore([firstProject.project]);
-    // if the user has no other project, do not fetch them
-    if (!firstProject.has_siblings) {
-      return;
-    };
-
-    const endpoint = '/api/projects/';
-    const { body: projects }: { body: ApiProjectType[] } = yield call(
-      makeGetRequest,
-      endpoint,
-      true,
-      null,
-    );
-    yield saveProjectsToStore(projects);
-  } catch (error) {
-    yield put(fetchProjectError({ projectId: action.payload.currentProjectId || null, errorMessage: error.toString() }));
+  const firstProjectEndpoint = action.payload.currentProjectId
+    ? `/api/projects/${action.payload.currentProjectId}/`
+    : '/api/projects/first';
+  const { body: firstProject }: { body: ApiProjectResponseType } = yield call(
+    makeGetRequest,
+    firstProjectEndpoint,
+    true,
+    null,
+  );
+  // if the returned project is empty, put an empty state for projects
+  if (firstProject.project.uuid) {
+    yield put(saveFetchedProjects({ projects: [firstProject.project] }));
+  } else {
+    yield put(fetchProjectError({ projectId: null, errorMessage: "No project returned" }));
+    return;
   }
+  // if the user has no other project, do not fetch them
+  if (!firstProject.has_siblings) {
+    return;
+  };
+
+  const endpoint = '/api/projects/';
+  const { body: projects }: { body: ApiProjectType[] } = yield call(
+    makeGetRequest,
+    endpoint,
+    true,
+    null,
+  );
+  yield put(saveFetchedProjects({ projects }));
 };
 
 function* fetchProject(action: ActionType<typeof fetchProjectRequest>) {
-  try {
-    const endpoint = `/api/projects/${action.payload.projectId}/`;
-    const { body: projectResponse }: { body: ApiProjectResponseType } = yield call(
-      makeGetRequest,
-      endpoint,
-      true,
-      null,
-    );
-    yield saveProjectsToStore([projectResponse.project]);
-  } catch (error) {
-    yield put(fetchProjectError({ projectId: action.payload.projectId, errorMessage: error.toString() }));
-  }
+  const endpoint = `/api/projects/${action.payload.projectId}/`;
+  const { body: projectResponse }: { body: ApiProjectResponseType } = yield call(
+    makeGetRequest,
+    endpoint,
+    true,
+    null,
+  );
+  yield put(saveFetchedProjects({ projects: [projectResponse.project] }));
 };
 
-function* saveProjectsToStore(projects: ApiProjectType[]) {
+function* saveProjectsToStore(action: ActionType<typeof saveFetchedProjects>) {
+  const projects = action.payload.projects;
   yield put(fetchPageAction.success({
     byId: modelizeApiPagesToById(projects.reduce((apiPages: ApiPageType[], project: ApiProjectType) => {
       return apiPages.concat(project.pages);
@@ -117,10 +124,14 @@ function* saveProjectsToStore(projects: ApiProjectType[]) {
 export default function* projectsSaga() {
   yield takeEvery(
     getType(fetchProjectRequest),
-    fetchProject,
+    handleAPIExceptions(fetchProject, fetchProjectFailedHandler),
   );
   yield takeEvery(
     getType(fetchProjectsRequest),
-    fetchProjects,
+    handleAPIExceptions(fetchProjects, fetchProjectsFailedHandler),
+  );
+  yield takeEvery(
+    getType(saveFetchedProjects),
+    saveProjectsToStore,
   );
 };
