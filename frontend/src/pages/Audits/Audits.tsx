@@ -93,11 +93,15 @@ export const Audits: React.FunctionComponent<Props> = ({
       if (page) {
         setCurrentPageId(pageOrScriptId ? pageOrScriptId : undefined);
         setCurrentScriptId(undefined);
-        fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'page');
+        if (!sortedPageAuditResultsIds) {
+          fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'page');
+        };
       } else if (script) {
         setCurrentPageId(undefined);
         setCurrentScriptId(pageOrScriptId ? pageOrScriptId : undefined);
-        fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'script');
+        if (!sortedScriptAuditResultsIds) {
+          fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'script');
+        };
       }
     },
     // eslint is disabled because the hook exhaustive-deps wants to add page and script as dependencies, but they rerender too much
@@ -112,6 +116,8 @@ export const Audits: React.FunctionComponent<Props> = ({
       script && script.uuid,
       setCurrentPageId,
       setCurrentScriptId,
+      sortedPageAuditResultsIds,
+      sortedScriptAuditResultsIds,
     ],
   );
 
