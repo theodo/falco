@@ -58,7 +58,7 @@ export const Audits = styled.div`
 `;
 
 export const LaunchAuditsButton = styled.span`
-  width: 170px;
+  width: 250px;
   padding: ${getSpacing(2)} ${getSpacing(0)};
   margin-left: ${getSpacing(3)};
   margin-bottom: ${getSpacing(4)};
