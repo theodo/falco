@@ -6,7 +6,8 @@ import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
 import { fetchAuditParametersAction } from '../auditParameters/actions';
 import { modelizeApiAuditParametersListToById } from '../auditParameters/modelizer';
 import { ApiAuditParametersType } from '../auditParameters/types';
-import { fetchAuditStatusHistoriesAction, pollAuditStatusHistoriesAction } from '../auditStatusHistories';
+import { pollAuditStatusAction } from '../audits';
+import { fetchAuditStatusHistoriesAction } from '../auditStatusHistories';
 import { modelizeApiAuditStatusHistoriesToByPageOrScriptIdAndAuditParametersId } from '../auditStatusHistories/modelizer';
 import { ApiAuditStatusHistoryType } from '../auditStatusHistories/types';
 import { fetchPageAction } from '../pages';
@@ -112,8 +113,8 @@ function* saveProjectsToStore(action: ActionType<typeof saveFetchedProjects>) {
   // launch polling for all non-success and non-error auditStatusHistories
   yield all(allApiAuditStatusHistories.map(
     apiAuditStatusHistory => (apiAuditStatusHistory.status === "PENDING" || apiAuditStatusHistory.status === "REQUESTED")
-      ? put(pollAuditStatusHistoriesAction({ auditId: apiAuditStatusHistory.audit_id }))
       // the all() effect requires effect types for all its children, so we use this useless call effect
+      ? put(pollAuditStatusAction({ auditId: apiAuditStatusHistory.audit_id }))
       : call(() => null)
   ));
   yield put(fetchProjectSuccess({ byId: modelizeProjects(projects) }));

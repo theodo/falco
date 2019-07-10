@@ -3,7 +3,8 @@ import { call, fork, put, race, take, takeEvery } from 'redux-saga/effects'
 import { fetchAuditResultsRequest } from "redux/auditResults";
 import { makeGetRequest } from "services/networking/request";
 import { ActionType, getType } from "typesafe-actions";
-import { fetchAuditStatusHistoriesAction, pollAuditStatusHistoriesAction, stopPollingAuditStatusHistoriesAction } from "./actions";
+import { pollAuditStatusAction, stopPollingAuditStatusAction } from "../audits";
+import { fetchAuditStatusHistoriesAction } from "./actions";
 import { modelizeApiAuditStatusHistoriesToByPageOrScriptIdAndAuditParametersId } from "./modelizer";
 import { ApiAuditStatusHistoryType } from "./types";
 
@@ -37,14 +38,14 @@ function* pollAuditStatusHistories(auditId: string) {
 
         const pollingIsFinished = (auditStatusHistory.status === "SUCCESS" || auditStatusHistory.status === "ERROR");
         if (pollingIsFinished) {
-            yield put(stopPollingAuditStatusHistoriesAction({
+            yield put(stopPollingAuditStatusAction({
                 lastAuditStatusHistory: auditStatusHistory,
             }));
         }
         else {
             // wait for 10 seconds before the next polling
             yield call(delay, 10000);
-            yield put(pollAuditStatusHistoriesAction({ auditId }))
+            yield put(pollAuditStatusAction({ auditId }))
         };
     } catch (error) {
         yield put(fetchAuditStatusHistoriesAction.failure({ errorMessage: error.toString() }));
@@ -52,7 +53,7 @@ function* pollAuditStatusHistories(auditId: string) {
     };
 };
 
-function* fetchAuditResultsAfterPolling(action: ActionType<typeof stopPollingAuditStatusHistoriesAction>) {
+function* fetchAuditResultsAfterPolling(action: ActionType<typeof stopPollingAuditStatusAction>) {
     const auditStatusHistory = action.payload.lastAuditStatusHistory;
     yield put(fetchAuditResultsRequest({
         auditParametersId: auditStatusHistory.parameters_id,
@@ -64,11 +65,11 @@ function* fetchAuditResultsAfterPolling(action: ActionType<typeof stopPollingAud
 function* watchPollAuditStatusHistories() {
     // inspired by https://gist.github.com/ellismarkf/d2824ea9d668c4c00af5112633f91a1d
     while (true) {
-        const pollAction: ActionType<typeof pollAuditStatusHistoriesAction> = yield take(pollAuditStatusHistoriesAction);
+        const pollAction: ActionType<typeof pollAuditStatusAction> = yield take(pollAuditStatusAction);
         const auditId = pollAction.payload.auditId;
         yield race({
             continuePolling: fork(pollAuditStatusHistories, auditId),
-            stopPolling: take(stopPollingAuditStatusHistoriesAction)
+            stopPolling: take(stopPollingAuditStatusAction)
         });
     };
 };
@@ -79,7 +80,7 @@ export default function* auditStatusHistoriesSagas() {
         fetchAuditStatusHistories,
     );
     yield takeEvery(
-        getType(stopPollingAuditStatusHistoriesAction),
+        getType(stopPollingAuditStatusAction),
         fetchAuditResultsAfterPolling,
     );
     yield watchPollAuditStatusHistories();
