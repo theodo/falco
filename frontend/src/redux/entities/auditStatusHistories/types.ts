@@ -7,6 +7,8 @@ export interface AuditStatusHistoryType {
     details: string;
     auditParametersId: string;
     auditId: string;
+    pageId: string | null;
+    scriptId: string | null;
 };
 
 export interface ApiAuditStatusHistoryType {

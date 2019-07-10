@@ -1,5 +1,5 @@
 import { createAsyncAction, createStandardAction } from "typesafe-actions";
-import { ApiAuditStatusHistoryType } from "../auditStatusHistories/types";
+import { AuditStatusHistoryType } from "../auditStatusHistories/types";
 import { AuditType } from "./types";
 
 export const pollAuditStatusAction = createStandardAction('audits/POLL_AUDIT_STATUS')<{
@@ -8,7 +8,7 @@ export const pollAuditStatusAction = createStandardAction('audits/POLL_AUDIT_STA
 }>();
 
 export const stopPollingAuditStatusAction = createStandardAction('audits/STOP_POLLING_AUDIT_STATUS')<{
-    lastAuditStatusHistory: ApiAuditStatusHistoryType;
+    lastAuditStatusHistory: AuditStatusHistoryType;
 }>();
 
 export const launchAuditAction = createAsyncAction(

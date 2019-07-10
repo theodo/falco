@@ -5,7 +5,7 @@ import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
 import { makeGetRequest, makePostRequest } from 'services/networking/request';
 import { ActionType, getType } from "typesafe-actions";
 import { fetchAuditStatusHistoriesAction } from '../auditStatusHistories';
-import { modelizeApiAuditStatusHistoriesToByPageOrScriptIdAndAuditParametersId } from '../auditStatusHistories/modelizer';
+import { modelizeApiAuditStatusHistoriesToByPageOrScriptIdAndAuditParametersId, modelizeAuditStatusHistory } from '../auditStatusHistories/modelizer';
 import { ApiAuditStatusHistoryType } from '../auditStatusHistories/types';
 import { launchAuditAction, pollAuditStatusAction, stopPollingAuditStatusAction } from "./actions";
 import { modelizeAudit } from './modelizer';
@@ -50,7 +50,7 @@ function* pollAuditStatusHistories(auditId: string, pageOrScriptId: string) {
         const pollingIsFinished = (auditStatusHistory.status === "SUCCESS" || auditStatusHistory.status === "ERROR");
         if (pollingIsFinished) {
             yield put(stopPollingAuditStatusAction({
-                lastAuditStatusHistory: auditStatusHistory,
+                lastAuditStatusHistory: modelizeAuditStatusHistory(auditStatusHistory),
             }));
         }
         else {
@@ -66,9 +66,9 @@ function* pollAuditStatusHistories(auditId: string, pageOrScriptId: string) {
 function* fetchAuditResultsAfterPolling(action: ActionType<typeof stopPollingAuditStatusAction>) {
     const auditStatusHistory = action.payload.lastAuditStatusHistory;
     yield put(fetchAuditResultsRequest({
-        auditParametersId: auditStatusHistory.parameters_id,
-        pageOrScriptId: auditStatusHistory.page_id || auditStatusHistory.script_id,
-        type: auditStatusHistory.page_id ? 'page' : 'script',
+        auditParametersId: auditStatusHistory.auditParametersId,
+        pageOrScriptId: auditStatusHistory.pageId || auditStatusHistory.scriptId || "",
+        type: auditStatusHistory.pageId ? 'page' : 'script',
     }))
 };
 

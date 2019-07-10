@@ -8,6 +8,8 @@ export const modelizeAuditStatusHistory = (auditStatusHistory: ApiAuditStatusHis
         details: auditStatusHistory.details,
         auditParametersId: auditStatusHistory.parameters_id,
         auditId: auditStatusHistory.audit_id,
+        pageId: auditStatusHistory.page_id,
+        scriptId: auditStatusHistory.script_id,
     };
 };
 
