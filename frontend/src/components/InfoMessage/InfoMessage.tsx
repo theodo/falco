@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { ErrorMessageContainer } from './ErrorMessage.style';
+import { InfoMessageContainer } from './InfoMessage.style';
 
 interface Props {
   children?: ReactNode;
@@ -8,11 +8,11 @@ interface Props {
   fontSize?: string;
   margin?: string;
   padding?: string;
-}
+};
 
-const ErrorMessage: React.FunctionComponent<Props> = ({ children, color, backgroundColor, fontSize, margin, padding }) => {
+const InfoMessage: React.FunctionComponent<Props> = ({ children, color, backgroundColor, fontSize, margin, padding }) => {
   return (
-    <ErrorMessageContainer
+    <InfoMessageContainer
       color={color}
       backgroundColor={backgroundColor}
       fontSize={fontSize}
@@ -20,8 +20,8 @@ const ErrorMessage: React.FunctionComponent<Props> = ({ children, color, backgro
       padding={padding}
     >
       {children}
-    </ErrorMessageContainer>
+    </InfoMessageContainer>
   );
 };
 
-export default ErrorMessage;
+export default InfoMessage;

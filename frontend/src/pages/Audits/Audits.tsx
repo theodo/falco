@@ -9,9 +9,11 @@ import { ScriptType } from 'redux/entities/scripts/types';
 
 import Badge from 'components/Badge';
 import ErrorMessage from 'components/ErrorMessage';
+import InfoMessage from 'components/InfoMessage';
 import Loader from 'components/Loader';
 import Select from 'components/Select';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { AuditStatusHistoryType } from 'redux/entities/auditStatusHistories/types';
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
@@ -47,6 +49,9 @@ type Props = {
   sortedPageAuditResultsIds: string[] | null;
   sortedScriptAuditResultsIds: Record<string, string[]> | null;
   fetchProjectsRequest: (projectId: string) => void;
+  pageAuditStatusHistory?: AuditStatusHistoryType | null;
+  scriptAuditStatusHistory?: AuditStatusHistoryType | null;
+  fetchProjectRequest: (projectId: string) => void;
   fetchAuditResultsRequest: (
     auditParametersId: string,
     pageOrScriptId: string,
@@ -71,6 +76,8 @@ export const Audits: React.FunctionComponent<Props> = ({
   scriptSteps,
   sortedPageAuditResultsIds,
   sortedScriptAuditResultsIds,
+  pageAuditStatusHistory,
+  scriptAuditStatusHistory,
   fetchAuditResultsRequest,
   setCurrentAuditParametersId,
   setCurrentPageId,
@@ -232,6 +239,8 @@ export const Audits: React.FunctionComponent<Props> = ({
 
   const pageOrScriptName = page ? page.name : script ? script.name : '';
 
+  const latestAuditStatusHistory = pageAuditStatusHistory ? pageAuditStatusHistory : scriptAuditStatusHistory;
+
   const badgeParams = getBadgeParams();
 
   const sortedAuditResultsIds = page
@@ -276,6 +285,15 @@ export const Audits: React.FunctionComponent<Props> = ({
           />
         )}
       </PageTitleBlock>
+      {
+        latestAuditStatusHistory && (
+          latestAuditStatusHistory.status === "ERROR"
+            ? <ErrorMessage>{latestAuditStatusHistory.details}</ErrorMessage>
+            : (latestAuditStatusHistory.status === "REQUESTED" || latestAuditStatusHistory.status === "PENDING")
+              ? <InfoMessage>{latestAuditStatusHistory.details}</InfoMessage>
+              : null
+        )
+      }
       <Title>
         <FormattedMessage id="Audits.title" />
       </Title>
