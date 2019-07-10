@@ -1,5 +1,5 @@
 import { createAsyncAction } from "typesafe-actions";
-import { AuditTypeAndId } from "./types";
+import { AuditType } from "./types";
 
 export const launchAuditAction = createAsyncAction(
     'auditResults/LAUNCH_AUDIT_REQUEST',
@@ -7,7 +7,7 @@ export const launchAuditAction = createAsyncAction(
     'auditResults/LAUNCH_AUDIT_FAILURE',
 )<
     { projectId: string; },
-    { audits: AuditTypeAndId[]; },
+    { audits: AuditType[]; },
     { errorMessage: string; }
 >();
 

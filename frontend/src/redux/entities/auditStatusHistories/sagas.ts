@@ -8,7 +8,7 @@ import { modelizeApiAuditStatusHistoriesToById, modelizeApiAuditStatusHistoriesT
 import { ApiAuditStatusHistoryType } from "./types";
 
 
-export function* fetchAuditStatusHistories(action: ActionType<typeof fetchAuditStatusHistoriesAction.request>) {
+function* fetchAuditStatusHistories(action: ActionType<typeof fetchAuditStatusHistoriesAction.request>) {
     try {
         const endpoint = `/api/audits/${action.payload.auditId}/status`;
         const { body: auditStatusHistory }: { body: ApiAuditStatusHistoryType } = yield call(

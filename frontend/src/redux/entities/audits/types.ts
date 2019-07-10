@@ -4,6 +4,13 @@ export interface AuditTypeAndId {
     type: 'page' | 'script';
 };
 
+export interface AuditType {
+    uuid: string;
+    auditParametersId: string;
+    pageId: string | null;
+    scriptId: string | null;
+};
+
 export interface ApiAuditType {
     uuid: string;
     parameters: string;

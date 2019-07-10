@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { ActionType, getType } from "typesafe-actions";
+import { ActionType } from "typesafe-actions";
 import { launchAuditAction } from "./actions";
 import { AuditTypeAndId } from "./types";
 
