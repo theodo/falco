@@ -4,6 +4,7 @@ import { AuditType } from "./types";
 
 export const pollAuditStatusAction = createStandardAction('audits/POLL_AUDIT_STATUS')<{
     auditId: string;
+    pageOrScriptId: string;
 }>();
 
 export const stopPollingAuditStatusAction = createStandardAction('audits/STOP_POLLING_AUDIT_STATUS')<{

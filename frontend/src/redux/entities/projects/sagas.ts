@@ -113,8 +113,11 @@ function* saveProjectsToStore(action: ActionType<typeof saveFetchedProjects>) {
   // launch polling for all non-success and non-error auditStatusHistories
   yield all(allApiAuditStatusHistories.map(
     apiAuditStatusHistory => (apiAuditStatusHistory.status === "PENDING" || apiAuditStatusHistory.status === "REQUESTED")
+      ? put(pollAuditStatusAction({
+        auditId: apiAuditStatusHistory.audit_id,
+        pageOrScriptId: apiAuditStatusHistory.page_id || apiAuditStatusHistory.script_id,
+      }))
       // the all() effect requires effect types for all its children, so we use this useless call effect
-      ? put(pollAuditStatusAction({ auditId: apiAuditStatusHistory.audit_id }))
       : call(() => null)
   ));
   yield put(fetchProjectSuccess({ byId: modelizeProjects(projects) }));

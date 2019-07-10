@@ -26,7 +26,10 @@ function* launchAuditsSaga(action: ActionType<typeof launchAuditAction.request>)
     );
 
     // launch auditsStatusHistories polling
-    yield all(apiAuditsList.map(apiAudit => put(pollAuditStatusAction({ auditId: apiAudit.uuid }))));
+    yield all(apiAuditsList.map(apiAudit => put(pollAuditStatusAction({
+        auditId: apiAudit.uuid,
+        pageOrScriptId: apiAudit.page || apiAudit.script || "",
+    }))));
 
     // signal lauch success (useless for now, will be used to prevent double audits launch)
     yield put(launchAuditAction.success({
@@ -34,7 +37,7 @@ function* launchAuditsSaga(action: ActionType<typeof launchAuditAction.request>)
     }));
 };
 
-function* pollAuditStatusHistories(auditId: string) {
+function* pollAuditStatusHistories(auditId: string, pageOrScriptId: string) {
     try {
         const endpoint = `/api/audits/${auditId}/status`;
         const { body: auditStatusHistory }: { body: ApiAuditStatusHistoryType } = yield call(makeGetRequest, endpoint, true, null);
@@ -53,7 +56,7 @@ function* pollAuditStatusHistories(auditId: string) {
         else {
             // wait for 10 seconds before the next polling
             yield call(delay, 10000);
-            yield put(pollAuditStatusAction({ auditId }))
+            yield put(pollAuditStatusAction({ auditId, pageOrScriptId }))
         };
     } catch (error) {
         yield put(fetchAuditStatusHistoriesAction.failure({ errorMessage: error.toString() }));
@@ -73,9 +76,9 @@ function* watchPollAuditStatusHistories() {
     // inspired by https://gist.github.com/ellismarkf/d2824ea9d668c4c00af5112633f91a1d
     while (true) {
         const pollAction: ActionType<typeof pollAuditStatusAction> = yield take(pollAuditStatusAction);
-        const auditId = pollAction.payload.auditId;
+        const { auditId, pageOrScriptId } = pollAction.payload;
         yield race({
-            continuePolling: fork(pollAuditStatusHistories, auditId),
+            continuePolling: fork(pollAuditStatusHistories, auditId, pageOrScriptId),
             stopPolling: take(stopPollingAuditStatusAction)
         });
     };
