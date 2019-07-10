@@ -1,10 +1,14 @@
 import { AnyAction } from "redux";
 import { ActionType } from "typesafe-actions";
-import { launchAuditAction } from "./actions";
+import { launchAuditAction, pollAuditStatusAction, stopPollingAuditStatusAction } from "./actions";
 import { AuditTypeAndId } from "./types";
 
 
-export type AuditsAction = ActionType<typeof launchAuditAction>;
+export type AuditsAction = ActionType<
+    | typeof launchAuditAction
+    | typeof pollAuditStatusAction
+    | typeof stopPollingAuditStatusAction
+>;
 
 export type AuditsState = Readonly<{
     byId: Readonly<Record<string, AuditTypeAndId>> | null;
