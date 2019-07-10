@@ -45,16 +45,18 @@ def request_audit(request):
 @permission_classes([permissions.IsAuthenticated])
 def audit_status(request, audit_uuid):
     if request.method == "GET":
-        latest_audit_status = AuditStatusHistory.objects.filter(
-            audit=audit_uuid
-        ).order_by("-created_at")[0]
+        latest_audit_status = (
+            AuditStatusHistory.objects.filter(audit=audit_uuid)
+            .order_by("-created_at")
+            .first()
+        )
 
-        if latest_audit_status.audit.page is not None:
+        if latest_audit_status and latest_audit_status.audit.page is not None:
             check_if_member_of_project(
                 request.user.id, latest_audit_status.audit.page.project.uuid
             )
 
-        if latest_audit_status.audit.script is not None:
+        if latest_audit_status and latest_audit_status.audit.script is not None:
             check_if_member_of_project(
                 request.user.id, latest_audit_status.audit.script.project.uuid
             )
