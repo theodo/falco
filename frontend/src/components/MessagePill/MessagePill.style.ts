@@ -29,4 +29,11 @@ export const MessagePillContainer = styled.div`
   padding: ${(props: Props) => props.padding || getSpacing(3)};
   margin: ${(props: Props) => props.margin || getSpacing(8)};
   font-size: ${(props: Props) => props.fontSize || fontSize.bodyText};
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const MessageCloseContainer = styled.div`
+  text-align: right;
+  cursor: pointer;
 `;
