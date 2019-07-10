@@ -7,12 +7,10 @@ import { AuditStatusHistoryType } from "./types";
 export type AuditStatusHistoriesAction = ActionType<typeof fetchAuditStatusHistoriesAction>;
 
 export type AuditStatusHistoriesState = Readonly<{
-    byId: Readonly<Record<string, AuditStatusHistoryType>> | null;
-    byPageOrScriptIdAndAuditParametersId: Readonly<Record<string, Record<string, string>>> | null;
+    byPageOrScriptIdAndAuditParametersId: Readonly<Record<string, Record<string, AuditStatusHistoryType>>> | null;
 }>;
 
 const initialState: AuditStatusHistoriesState = {
-    byId: null,
     byPageOrScriptIdAndAuditParametersId: null,
 };
 
@@ -22,10 +20,6 @@ const reducer = (state: AuditStatusHistoriesState = initialState, action: AnyAct
         case getType(fetchAuditStatusHistoriesAction.success):
             return {
                 ...state,
-                byId: {
-                    ...state.byId,
-                    ...typedAction.payload.byId,
-                },
                 byPageOrScriptIdAndAuditParametersId: {
                     ...state.byPageOrScriptIdAndAuditParametersId,
                     ...typedAction.payload.byPageOrScriptIdAndAuditParametersId,

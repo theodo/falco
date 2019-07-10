@@ -4,7 +4,7 @@ import { fetchAuditResultsRequest } from "redux/auditResults";
 import { makeGetRequest } from "services/networking/request";
 import { ActionType, getType } from "typesafe-actions";
 import { fetchAuditStatusHistoriesAction, pollAuditStatusHistoriesAction, stopPollingAuditStatusHistoriesAction } from "./actions";
-import { modelizeApiAuditStatusHistoriesToById, modelizeApiAuditStatusHistoriesToByPageOrScriptIdAndAuditParametersId } from "./modelizer";
+import { modelizeApiAuditStatusHistoriesToByPageOrScriptIdAndAuditParametersId } from "./modelizer";
 import { ApiAuditStatusHistoryType } from "./types";
 
 
@@ -18,7 +18,6 @@ function* fetchAuditStatusHistories(action: ActionType<typeof fetchAuditStatusHi
             null,
         );
         yield put(fetchAuditStatusHistoriesAction.success({
-            byId: modelizeApiAuditStatusHistoriesToById([auditStatusHistory]),
             byPageOrScriptIdAndAuditParametersId: modelizeApiAuditStatusHistoriesToByPageOrScriptIdAndAuditParametersId([auditStatusHistory]),
         }));
     } catch (error) {
@@ -33,7 +32,6 @@ function* pollAuditStatusHistories(auditId: string) {
 
         // save the response to the store before continuing the polling
         yield put(fetchAuditStatusHistoriesAction.success({
-            byId: modelizeApiAuditStatusHistoriesToById([auditStatusHistory]),
             byPageOrScriptIdAndAuditParametersId: modelizeApiAuditStatusHistoriesToByPageOrScriptIdAndAuditParametersId([auditStatusHistory]),
         }));
 

@@ -11,21 +11,14 @@ export const modelizeAuditStatusHistory = (auditStatusHistory: ApiAuditStatusHis
     };
 };
 
-export const modelizeApiAuditStatusHistoriesToById = (apiAuditStatusHistories: ApiAuditStatusHistoryType[]): Record<string, AuditStatusHistoryType> => {
-    return apiAuditStatusHistories.reduce((auditStatusHistoriesById, apiAuditStatusHistory) => ({
-        ...auditStatusHistoriesById,
-        [apiAuditStatusHistory.uuid]: modelizeAuditStatusHistory(apiAuditStatusHistory),
-    }), {});
-};
-
 export const modelizeApiAuditStatusHistoriesToByPageOrScriptIdAndAuditParametersId =
-    (apiAuditStatusHistories: ApiAuditStatusHistoryType[]): Record<string, string> => {
+    (apiAuditStatusHistories: ApiAuditStatusHistoryType[]): Record<string, Record<string, AuditStatusHistoryType>> => {
         return apiAuditStatusHistories.reduce(
-            (auditStatusHistoriesByPageOrScriptIdAndAuditParametersId: Record<string, Record<string, string>>, apiAuditStatusHistory: ApiAuditStatusHistoryType) => ({
+            (auditStatusHistoriesByPageOrScriptIdAndAuditParametersId: Record<string, Record<string, AuditStatusHistoryType>>, apiAuditStatusHistory: ApiAuditStatusHistoryType) => ({
                 ...auditStatusHistoriesByPageOrScriptIdAndAuditParametersId,
                 [apiAuditStatusHistory.page_id || apiAuditStatusHistory.script_id]: {
                     ...auditStatusHistoriesByPageOrScriptIdAndAuditParametersId[apiAuditStatusHistory.page_id || apiAuditStatusHistory.script_id],
-                    [apiAuditStatusHistory.parameters_id]: apiAuditStatusHistory.uuid,
+                    [apiAuditStatusHistory.parameters_id]: modelizeAuditStatusHistory(apiAuditStatusHistory),
                 },
             }),
             {},

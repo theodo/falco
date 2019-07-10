@@ -1,6 +1,5 @@
 import { getCurrentAuditParametersId } from "redux/parameters/selectors";
 import { RootState } from "redux/types";
-import { getAuditStatusHistory } from "../auditStatusHistories/selectors";
 import { AuditStatusHistoryType } from "../auditStatusHistories/types";
 import { PageType } from "./types";
 
@@ -14,11 +13,10 @@ export const getPageLatestAuditStatusHistory = (state: RootState, pageId: string
     if (!auditParametersId) {
         return null;
     };
-    const auditStatusHistoryId = state.entities.auditStatusHistories.byPageOrScriptIdAndAuditParametersId
+    return state.entities.auditStatusHistories.byPageOrScriptIdAndAuditParametersId
         ? state.entities.auditStatusHistories.byPageOrScriptIdAndAuditParametersId[pageId]
             ? state.entities.auditStatusHistories.byPageOrScriptIdAndAuditParametersId[pageId][auditParametersId]
-            : ""
-            || ""
-        : "";
-    return getAuditStatusHistory(state, auditStatusHistoryId);
+            : null
+            || null
+        : null;
 };
