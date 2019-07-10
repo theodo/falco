@@ -1,22 +1,8 @@
-import { createAsyncAction, createStandardAction } from 'typesafe-actions';
+import { createStandardAction } from 'typesafe-actions';
 
-import { AuditResultType, AuditType } from './types';
+import { AuditTypeAndId } from 'redux/entities/audits/types';
+import { AuditResultType } from './types';
 
-interface AuditTypeAndId {
-  auditParametersId: string;
-  pageOrScriptId: string;
-  type: 'page' | 'script';
-};
-
-export const launchAudit = createAsyncAction(
-  'auditResults/LAUNCH_AUDIT_REQUEST',
-  'auditResults/LAUNCH_AUDIT_SUCCESS',
-  'auditResults/LAUNCH_AUDIT_FAILURE',
-)<
-  { projectId: string; },
-  { audits: AuditType[]; },
-  { errorMessage: string; }
->();
 
 export const fetchAuditResultsRequest = createStandardAction(
   'auditResults/FETCH_AUDIT_RESULTS_REQUEST',
@@ -40,5 +26,4 @@ export default {
   fetchAuditResultsRequest,
   fetchAuditResultsSuccess,
   fetchAuditResultsError,
-  launchAudit,
 };
