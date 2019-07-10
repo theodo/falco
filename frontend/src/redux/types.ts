@@ -4,6 +4,7 @@ import { LeadAction, LeadState } from 'redux/lead';
 import { AuditResultsAction, AuditResultsState } from './auditResults';
 import { ContentAction, ContentState } from './content';
 import { AuditParametersAction, AuditParametersState } from './entities/auditParameters';
+import { AuditsAction, AuditsState } from './entities/audits';
 import { AuditStatusHistoriesAction, AuditStatusHistoriesState } from './entities/auditStatusHistories/reducer';
 import { PagesAction, PagesState } from './entities/pages';
 import { ProjectsAction, ProjectsState } from './entities/projects';
@@ -20,6 +21,7 @@ export type RootState = Readonly<{
     projects: ProjectsState;
     pages: PagesState;
     scripts: ScriptsState;
+    audits: AuditsState;
     auditParameters: AuditParametersState;
     auditStatusHistories: AuditStatusHistoriesState;
   };
@@ -37,6 +39,7 @@ export type RootAction =
   | ProjectsAction
   | PagesAction
   | ScriptsAction
+  | AuditsAction
   | AuditParametersAction
   | AuditStatusHistoriesAction
   | AuditResultsAction
