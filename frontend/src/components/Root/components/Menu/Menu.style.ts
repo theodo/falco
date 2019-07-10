@@ -56,3 +56,24 @@ export const Audits = styled.div`
   font-weight: ${fontWeight.h3Text};
   padding: 0 ${getSpacing(3)} ${getSpacing(4)} ${getSpacing(3)};
 `;
+
+export const LaunchAuditsButton = styled.span`
+  width: 170px;
+  padding: ${getSpacing(2)} ${getSpacing(0)};
+  margin-left: ${getSpacing(3)};
+  margin-bottom: ${getSpacing(4)};
+  align-self: center;
+  border-radius: 6px;
+  color: ${colorUsage.webPageTestLinkButtonText};
+  background-color: ${colorUsage.menuLauchAuditsButtonBackground};
+  font-family: ${fontFamily.mainSans};
+  font-size: ${fontSize.webPageTestLink};
+  font-weight: ${fontWeight.webPageTestLink};
+  line-height: ${lineHeight.webPageTestLink};
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+`;

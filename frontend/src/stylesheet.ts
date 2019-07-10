@@ -106,6 +106,7 @@ export const colorUsage = {
   menuArrow: colorPalette.grey800,
   menuArrowSelected: colorPalette.white500,
   menuLinkHover: colorPalette.primary500,
+  menuLauchAuditsButtonBackground: colorPalette.accentGreen500,
 
   // Landing Page
   landingPageGlobalBackground: colorPalette.grey100,
