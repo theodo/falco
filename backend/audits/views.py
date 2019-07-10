@@ -27,11 +27,21 @@ def request_audit(request):
             for page in project.pages.all():
                 audit = Audit.objects.create(page=page, parameters=audit_parameters)
                 task_request_audit.delay(audit.uuid)
+                AuditStatusHistory.objects.create(
+                    audit=audit,
+                    status="REQUESTED",
+                    details="Audit was created in database",
+                )
                 created_audits.append(audit)
 
             for script in project.scripts.all():
                 audit = Audit.objects.create(script=script, parameters=audit_parameters)
                 task_request_audit.delay(audit.uuid)
+                AuditStatusHistory.objects.create(
+                    audit=audit,
+                    status="REQUESTED",
+                    details="Audit was created in database",
+                )
                 created_audits.append(audit)
 
         created_audit_serializers = AuditSerializer(created_audits, many=True)
