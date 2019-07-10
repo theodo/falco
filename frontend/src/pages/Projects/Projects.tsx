@@ -4,8 +4,8 @@ import { Redirect } from 'react-router';
 import { ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
 
-import ErrorMessage from 'components/ErrorMessage';
 import Loader from 'components/Loader';
+import MessagePill from 'components/MessagePill';
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import Style from './Projects.style';
 
@@ -28,9 +28,9 @@ const Projects: React.FunctionComponent<Props> = ({ fetchProjectsRequest, projec
   if (0 === projects.length) {
     return (
       <Style.Container>
-        <ErrorMessage>
+        <MessagePill messageType="error">
           <FormattedMessage id="Projects.no_project_error" />
-        </ErrorMessage>
+        </MessagePill>
       </Style.Container>
     );
   }

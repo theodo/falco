@@ -1,10 +1,10 @@
-import ErrorMessage from 'components/ErrorMessage';
 import { InjectedFormikProps } from 'formik';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
 
 import Input from 'components/Input';
+import MessagePill from 'components/MessagePill';
 import { fontSize, getSpacing } from 'stylesheet';
 import Style from './LeadForm.style';
 import { FormValues } from './service';
@@ -78,13 +78,14 @@ const LeadForm: React.FunctionComponent<
         </Style.SubmitButton>
       </Style.LeadForm>
       {leadSubmissionStatus === 'failed' && (
-        <ErrorMessage
+        <MessagePill
+          messageType="error"
           margin={`${getSpacing(4)} ${getSpacing(4)} 0 ${getSpacing(4)}`}
           padding={`${getSpacing(3)}`}
           fontSize={fontSize.leadSubmitErrorMessage}
         >
           <FormattedMessage id={'Landing.introduction_block.leadForm.submit_failed'} />
-        </ErrorMessage>
+        </MessagePill>
       )}
     </Style.Container>
   );

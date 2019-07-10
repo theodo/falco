@@ -5,8 +5,8 @@ import { ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
 import { getSpacing } from 'stylesheet';
 
-import ErrorMessage from 'components/ErrorMessage';
 import Loader from 'components/Loader';
+import MessagePill from 'components/MessagePill';
 import {
   Container,
   CurrentProjectItem,
@@ -100,9 +100,9 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
     if (0 === projects.length) {
       return (
         <Container position={position} right={right}>
-          <ErrorMessage>
+          <MessagePill messageType="error">
             <FormattedMessage id="Projects.no_project_error" />
-          </ErrorMessage>
+          </MessagePill>
         </Container>
       );
     }

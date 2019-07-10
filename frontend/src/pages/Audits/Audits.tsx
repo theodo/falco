@@ -8,9 +8,8 @@ import { ProjectType } from 'redux/entities/projects/types';
 import { ScriptType } from 'redux/entities/scripts/types';
 
 import Badge from 'components/Badge';
-import ErrorMessage from 'components/ErrorMessage';
-import InfoMessage from 'components/InfoMessage';
 import Loader from 'components/Loader';
+import MessagePill from 'components/MessagePill';
 import Select from 'components/Select';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { AuditStatusHistoryType } from 'redux/entities/auditStatusHistories/types';
@@ -149,9 +148,9 @@ export const Audits: React.FunctionComponent<Props> = ({
   if (project === null) {
     return (
       <Container>
-        <ErrorMessage>
+        <MessagePill messageType="error">
           <FormattedMessage id="Project.project_error" />
-        </ErrorMessage>
+        </MessagePill>
       </Container>
     );
   }
@@ -162,9 +161,9 @@ export const Audits: React.FunctionComponent<Props> = ({
   ) {
     return (
       <Container>
-        <ErrorMessage>
+        <MessagePill messageType="error">
           <FormattedMessage id="Project.no_page_or_script_error" />
-        </ErrorMessage>
+        </MessagePill>
       </Container>
     );
   }
@@ -172,9 +171,9 @@ export const Audits: React.FunctionComponent<Props> = ({
   if (page === null && script === null) {
     return (
       <Container>
-        <ErrorMessage>
+        <MessagePill messageType="error">
           <FormattedMessage id="Audits.page_or_script_unavailable" />
-        </ErrorMessage>
+        </MessagePill>
       </Container>
     );
   }
@@ -182,9 +181,9 @@ export const Audits: React.FunctionComponent<Props> = ({
   if (0 === project.auditParametersIds.length) {
     return (
       <Container>
-        <ErrorMessage>
+        <MessagePill messageType="error">
           <FormattedMessage id="Project.no_audit_parameters_error" />
-        </ErrorMessage>
+        </MessagePill>
       </Container>
     );
   }
@@ -192,9 +191,9 @@ export const Audits: React.FunctionComponent<Props> = ({
   if (currentAuditParameters === null) {
     return (
       <Container>
-        <ErrorMessage>
+        <MessagePill messageType="error">
           <FormattedMessage id="Audits.audit_parameters_unavailable" />
-        </ErrorMessage>
+        </MessagePill>
       </Container>
     );
   }
@@ -288,9 +287,9 @@ export const Audits: React.FunctionComponent<Props> = ({
       {
         latestAuditStatusHistory && (
           latestAuditStatusHistory.status === "ERROR"
-            ? <ErrorMessage>{latestAuditStatusHistory.details}</ErrorMessage>
+            ? <MessagePill messageType="error">{latestAuditStatusHistory.details}</MessagePill>
             : (latestAuditStatusHistory.status === "REQUESTED" || latestAuditStatusHistory.status === "PENDING")
-              ? <InfoMessage>{latestAuditStatusHistory.details}</InfoMessage>
+              ? <MessagePill messageType="info">{latestAuditStatusHistory.details}</MessagePill>
               : null
         )
       }

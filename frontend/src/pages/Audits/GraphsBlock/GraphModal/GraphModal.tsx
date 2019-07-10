@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import Modal from 'react-modal';
 
-import ErrorMessage from 'components/ErrorMessage';
+import MessagePill from 'components/MessagePill';
 import MetricGraph from 'components/MetricGraph';
 import Close from 'icons/Close';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
@@ -36,17 +36,17 @@ const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> 
 }) => {
   if (!projectName) {
     return (
-      <ErrorMessage>
+      <MessagePill messageType="error">
         <FormattedMessage id="Projects.no_project_error" />
-      </ErrorMessage>
+      </MessagePill>
     );
   }
 
   if (!pageName && !scriptName) {
     return (
-      <ErrorMessage>
+      <MessagePill messageType="error">
         <FormattedMessage id="Projects.no_page_or_script_error" />
-      </ErrorMessage>
+      </MessagePill>
     );
   }
 
