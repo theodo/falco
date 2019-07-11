@@ -38,7 +38,8 @@ def project_list(request):
 @api_view(["GET"])
 @permission_classes([permissions.IsAuthenticated])
 def first_project(request):
-    """returns the first project of the user, and if he has others
+    """returns the first project of the user, a boolean that indicates whether
+    the user has other projects.
     This will speed up the loading of the first project page"""
     projects = get_user_projects(request.user.id)
     serializer = ProjectSerializer(projects.first())

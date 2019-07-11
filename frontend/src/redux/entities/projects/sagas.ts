@@ -37,6 +37,9 @@ function* fetchProjectFailedHandler(error: Error, actionPayload: Record<string, 
 };
 
 function* fetchProjects(action: ActionType<typeof fetchProjectsRequest>) {
+  // this sagas will use a sort of lazy loading to start loading one project first, in order to speed
+  // up the performance. If the user is on a specific project, then we start by loading this project.
+  // on the contrary if the users requests all projects, then we load one at first with the /api/projects/first endpoint
   const firstProjectEndpoint = action.payload.currentProjectId
     ? `/api/projects/${action.payload.currentProjectId}/`
     : '/api/projects/first';
