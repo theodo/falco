@@ -44,7 +44,7 @@ class PageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Page
-        fields = ("uuid", "name", "url", "audits", "latest_audit_status_histories")
+        fields = ("uuid", "name", "url", "latest_audit_status_histories")
 
 
 class ScriptSerializer(serializers.ModelSerializer):
@@ -57,7 +57,7 @@ class ScriptSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Script
-        fields = ("uuid", "name", "audits", "latest_audit_status_histories")
+        fields = ("uuid", "name", "latest_audit_status_histories")
 
 
 class ProjectAuditParametersSerializer(serializers.ModelSerializer):
