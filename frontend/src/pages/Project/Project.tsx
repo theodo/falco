@@ -6,6 +6,7 @@ import { routeDefinitions } from 'routes';
 
 import ErrorMessage from 'components/ErrorMessage';
 import Loader from 'components/Loader';
+import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import Style from './Project.style';
 
 export type OwnProps = {} & RouteComponentProps<{
@@ -31,21 +32,17 @@ const Project: React.FunctionComponent<Props> = ({
   setCurrentScriptId,
   setCurrentScriptStepId,
 }) => {
+
+  useFetchProjectIfUndefined(fetchProjectsRequest, match.params.projectId, project);
+
   React.useEffect(
     () => {
       setCurrentAuditParametersId(undefined);
       setCurrentPageId(undefined);
       setCurrentScriptId(undefined);
       setCurrentScriptStepId(undefined);
-      // only fetch the projects if it hasn't been done by the Projects component
-      if (project === undefined) {
-        fetchProjectsRequest(match.params.projectId);
-      };
     },
     [
-      project,
-      match.params.projectId,
-      fetchProjectsRequest,
       setCurrentAuditParametersId,
       setCurrentPageId,
       setCurrentScriptId,

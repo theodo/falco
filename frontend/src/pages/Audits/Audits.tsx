@@ -12,6 +12,7 @@ import ErrorMessage from 'components/ErrorMessage';
 import Loader from 'components/Loader';
 import Select from 'components/Select';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
 import AnalyticsBlock from './AnalyticsBlock';
@@ -78,15 +79,7 @@ export const Audits: React.FunctionComponent<Props> = ({
 }) => {
   const { projectId, pageOrScriptId, auditParametersId, scriptStepId } = match.params;
 
-  React.useEffect(
-    () => {
-      // only fetch the project here if it hasn't been done by <Project /> before
-      if (project === undefined) {
-        fetchProjectsRequest(projectId);
-      };
-    },
-    [project, projectId, fetchProjectsRequest],
-  );
+  useFetchProjectIfUndefined(fetchProjectsRequest, projectId, project);
 
   React.useEffect(
     () => {
