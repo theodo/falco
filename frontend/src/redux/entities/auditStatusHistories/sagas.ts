@@ -23,10 +23,8 @@ export function* fetchAuditStatusHistories(action: ActionType<typeof fetchAuditS
         }));
     } catch (error) {
         yield put(fetchAuditStatusHistoriesAction.failure({ errorMessage: error.toString() }));
-        return;
     };
 };
-
 
 function* pollAuditStatusHistories(auditId: string) {
     try {
@@ -66,6 +64,7 @@ function* fetchAuditResultsAfterPolling(action: ActionType<typeof stopPollingAud
 };
 
 function* watchPollAuditStatusHistories() {
+    // inspired by https://gist.github.com/ellismarkf/d2824ea9d668c4c00af5112633f91a1d
     while (true) {
         const pollAction: ActionType<typeof pollAuditStatusHistoriesAction> = yield take(pollAuditStatusHistoriesAction);
         const auditId = pollAction.payload.auditId;
