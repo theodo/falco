@@ -17,6 +17,8 @@ from rest_framework.decorators import api_view, permission_classes
 @permission_classes([permissions.IsAuthenticated])
 def request_audit(request):
     if request.method == "POST":
+        # this is a POST request, but since the project id is in the url
+        # (for log purposes), we access it via request.GET
         project_uuid = request.GET.get("project", "")
         check_if_member_of_project(request.user.id, project_uuid)
         project = get_object_or_404(Project, pk=project_uuid)
