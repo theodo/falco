@@ -57,8 +57,9 @@ export const Audits = styled.div`
   padding: 0 ${getSpacing(3)} ${getSpacing(4)} ${getSpacing(3)};
 `;
 
-export const LaunchAuditsButton = styled.span`
+export const LaunchAuditsButton = styled.button`
   width: 250px;
+  border: none;
   padding: ${getSpacing(2)} ${getSpacing(0)};
   margin-left: ${getSpacing(3)};
   margin-bottom: ${getSpacing(4)};
