@@ -77,6 +77,7 @@ export function* fetchProjects() {
   yield all(allApiAuditStatusHistories.map(
     apiAuditStatusHistory => (apiAuditStatusHistory.status === "PENDING" || apiAuditStatusHistory.status === "REQUESTED")
       ? put(pollAuditStatusHistoriesAction({ auditId: apiAuditStatusHistory.audit_id }))
+      // the all() effect requires effect types for all its children, so we use this useless call effect
       : call(() => null)
   ));
   yield put(fetchProjectSuccess({ byId: modelizeProjects(projects) }));
