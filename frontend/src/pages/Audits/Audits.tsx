@@ -12,6 +12,7 @@ import ErrorMessage from 'components/ErrorMessage';
 import Loader from 'components/Loader';
 import Select from 'components/Select';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
 import AnalyticsBlock from './AnalyticsBlock';
@@ -45,7 +46,7 @@ type Props = {
   scriptSteps: Record<string, string>;
   sortedPageAuditResultsIds: string[] | null;
   sortedScriptAuditResultsIds: Record<string, string[]> | null;
-  fetchProjectRequest: (projectId: string) => void;
+  fetchProjectsRequest: (projectId: string) => void;
   fetchAuditResultsRequest: (
     auditParametersId: string,
     pageOrScriptId: string,
@@ -60,7 +61,7 @@ type Props = {
 
 export const Audits: React.FunctionComponent<Props> = ({
   currentAuditParameters,
-  fetchProjectRequest,
+  fetchProjectsRequest,
   history,
   intl,
   match,
@@ -78,23 +79,22 @@ export const Audits: React.FunctionComponent<Props> = ({
 }) => {
   const { projectId, pageOrScriptId, auditParametersId, scriptStepId } = match.params;
 
-  React.useEffect(
-    () => {
-      fetchProjectRequest(projectId);
-    },
-    [projectId, fetchProjectRequest],
-  );
+  useFetchProjectIfUndefined(fetchProjectsRequest, projectId, project);
 
   React.useEffect(
     () => {
       if (page) {
         setCurrentPageId(pageOrScriptId ? pageOrScriptId : undefined);
         setCurrentScriptId(undefined);
-        fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'page');
+        if (!sortedPageAuditResultsIds) {
+          fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'page');
+        };
       } else if (script) {
         setCurrentPageId(undefined);
         setCurrentScriptId(pageOrScriptId ? pageOrScriptId : undefined);
-        fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'script');
+        if (!sortedScriptAuditResultsIds) {
+          fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'script');
+        };
       }
     },
     // eslint is disabled because the hook exhaustive-deps wants to add page and script as dependencies, but they rerender too much
@@ -109,6 +109,8 @@ export const Audits: React.FunctionComponent<Props> = ({
       script && script.uuid,
       setCurrentPageId,
       setCurrentScriptId,
+      sortedPageAuditResultsIds,
+      sortedScriptAuditResultsIds,
     ],
   );
 

@@ -6,6 +6,7 @@ import { routeDefinitions } from 'routes';
 
 import ErrorMessage from 'components/ErrorMessage';
 import Loader from 'components/Loader';
+import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import Style from './Projects.style';
 
 type Props = {
@@ -13,11 +14,8 @@ type Props = {
   projects: Array<ProjectType | null> | null;
 } & InjectedIntlProps;
 
-const Projects: React.FunctionComponent<Props> = props => {
-  const { fetchProjectsRequest, projects } = props;
-  React.useEffect(() => {
-    fetchProjectsRequest();
-  }, [fetchProjectsRequest]);
+const Projects: React.FunctionComponent<Props> = ({ fetchProjectsRequest, projects }) => {
+  useFetchProjectIfUndefined(fetchProjectsRequest, "", undefined);
 
   if (null === projects) {
     return (

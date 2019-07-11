@@ -4,7 +4,7 @@ import {
   selectPageAuditResultsIds,
   selectScriptAuditResultsIds,
 } from 'redux/auditResults/selectors';
-import { fetchProjectRequest } from 'redux/entities/projects';
+import { fetchProjectsRequest } from 'redux/entities/projects';
 import { getProject } from 'redux/entities/projects/selectors';
 import {
   setCurrentAuditParametersId,
@@ -50,7 +50,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     pageOrScriptId: string,
     type: 'page' | 'script',
   ) => dispatch(fetchAuditResultsRequest({ auditParametersId, pageOrScriptId, type })),
-  fetchProjectRequest: (projectId: string) => dispatch(fetchProjectRequest({ projectId })),
+  fetchProjectsRequest: (projectId: string) => dispatch(fetchProjectsRequest({ currentProjectId: projectId })),
   setCurrentAuditParametersId: (auditParametersId: string | null | undefined) =>
     dispatch(setCurrentAuditParametersId({ auditParametersId })),
   setCurrentPageId: (pageId: string | null | undefined) => dispatch(setCurrentPageId({ pageId })),

@@ -25,35 +25,22 @@ import {
 
 interface OwnProps {
   currentProject?: ProjectType | null;
-  fetchProjectsRequest: () => void;
   isVisible: boolean;
   position?: string;
   projects: Array<ProjectType | null> | null;
   right?: string | null;
-  isUserAuthenticated: boolean;
 }
 
 type Props = OwnProps & InjectedIntlProps;
 
 export const ProjectsMenu: React.FunctionComponent<Props> = ({
   currentProject,
-  fetchProjectsRequest,
   intl,
   isVisible,
   position,
   projects,
   right,
-  isUserAuthenticated,
 }) => {
-  React.useEffect(
-    () => {
-      if (isUserAuthenticated) {
-        fetchProjectsRequest();
-      }
-    },
-    [isUserAuthenticated, fetchProjectsRequest],
-  );
-
   const renderCurrentProjectItem = () =>
     currentProject && (
       <CurrentProjectItem>

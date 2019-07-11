@@ -3,7 +3,6 @@ import { makeGetRequest } from 'services/networking/request';
 import { ActionType, getType } from 'typesafe-actions';
 
 import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
-
 import { fetchAuditParametersAction } from '../auditParameters/actions';
 import { modelizeApiAuditParametersListToById } from '../auditParameters/modelizer';
 import { ApiAuditParametersType } from '../auditParameters/types';
@@ -24,19 +23,44 @@ import {
   fetchProjectRequest,
   fetchProjectsRequest,
   fetchProjectSuccess,
+  saveFetchedProjects,
 } from './actions';
-import { modelizeProject, modelizeProjects } from './modelizer';
-import { ApiProjectType } from './types';
+import { modelizeProjects } from './modelizer';
+import { ApiProjectResponseType, ApiProjectType } from './types';
 
-function* fetchProjectsFailedHandler(error: Error) {
-  yield put(fetchProjectError({ projectId: null, errorMessage: error.message }));
-}
+function* fetchProjectsFailedHandler(error: Error, actionPayload: Record<string, any>) {
+  yield put(fetchProjectError({ projectId: actionPayload.currentProjectId, errorMessage: error.message }));
+};
 
 function* fetchProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
   yield put(fetchProjectError({ projectId: actionPayload.projectId, errorMessage: error.message }));
-}
+};
 
-export function* fetchProjects() {
+function* fetchProjects(action: ActionType<typeof fetchProjectsRequest>) {
+  // this sagas will use a sort of lazy loading to start loading one project first, in order to speed
+  // up the performance. If the user is on a specific project, then we start by loading this project.
+  // on the contrary if the users requests all projects, then we load one at first with the /api/projects/first endpoint
+  const firstProjectEndpoint = action.payload.currentProjectId
+    ? `/api/projects/${action.payload.currentProjectId}/`
+    : '/api/projects/first';
+  const { body: firstProject }: { body: ApiProjectResponseType } = yield call(
+    makeGetRequest,
+    firstProjectEndpoint,
+    true,
+    null,
+  );
+  // if the returned project is empty, put an empty state for projects
+  if (firstProject.project.uuid) {
+    yield put(saveFetchedProjects({ projects: [firstProject.project] }));
+  } else {
+    yield put(fetchProjectError({ projectId: null, errorMessage: "No project returned" }));
+    return;
+  }
+  // if the user has no other project, do not fetch them
+  if (!firstProject.has_siblings) {
+    return;
+  };
+
   const endpoint = '/api/projects/';
   const { body: projects }: { body: ApiProjectType[] } = yield call(
     makeGetRequest,
@@ -44,6 +68,22 @@ export function* fetchProjects() {
     true,
     null,
   );
+  yield put(saveFetchedProjects({ projects }));
+};
+
+function* fetchProject(action: ActionType<typeof fetchProjectRequest>) {
+  const endpoint = `/api/projects/${action.payload.projectId}/`;
+  const { body: projectResponse }: { body: ApiProjectResponseType } = yield call(
+    makeGetRequest,
+    endpoint,
+    true,
+    null,
+  );
+  yield put(saveFetchedProjects({ projects: [projectResponse.project] }));
+};
+
+function* saveProjectsToStore(action: ActionType<typeof saveFetchedProjects>) {
+  const projects = action.payload.projects;
   yield put(fetchPageAction.success({
     byId: modelizeApiPagesToById(projects.reduce((apiPages: ApiPageType[], project: ApiProjectType) => {
       return apiPages.concat(project.pages);
@@ -83,16 +123,6 @@ export function* fetchProjects() {
   yield put(fetchProjectSuccess({ byId: modelizeProjects(projects) }));
 };
 
-export function* fetchProject(action: ActionType<typeof fetchProjectRequest>) {
-  const endpoint = `/api/projects/${action.payload.projectId}/`;
-  const { body: project }: { body: ApiProjectType } = yield call(
-    makeGetRequest,
-    endpoint,
-    true,
-    null,
-  );
-  yield put(fetchProjectSuccess({ byId: modelizeProject(project) }));
-}
 
 export default function* projectsSaga() {
   yield takeEvery(
@@ -102,5 +132,9 @@ export default function* projectsSaga() {
   yield takeEvery(
     getType(fetchProjectsRequest),
     handleAPIExceptions(fetchProjects, fetchProjectsFailedHandler),
+  );
+  yield takeEvery(
+    getType(saveFetchedProjects),
+    saveProjectsToStore,
   );
 };

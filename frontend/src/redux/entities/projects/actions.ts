@@ -1,8 +1,13 @@
 import { createStandardAction } from 'typesafe-actions';
 
-import { ProjectType } from './types';
+import { ApiProjectType, ProjectType } from './types';
 
-export const fetchProjectsRequest = createStandardAction('projects/FETCH_PROJECTS_REQUEST')<{}>();
+export const fetchProjectsRequest = createStandardAction('projects/FETCH_PROJECTS_REQUEST')<{
+  currentProjectId?: string;
+}>();
+export const saveFetchedProjects = createStandardAction('projects/SAVE_FETCHED_PROJECTS')<{
+  projects: ApiProjectType[];
+}>();
 export const fetchProjectRequest = createStandardAction('projects/FETCH_PROJECT_REQUEST')<{
   projectId: string;
 }>();

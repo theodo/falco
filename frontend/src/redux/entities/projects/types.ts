@@ -11,7 +11,7 @@ export interface ProjectType {
   screenshotUrl: string;
   latestAuditAt: string;
   auditParametersIds: string[];
-}
+};
 
 export interface ApiProjectType {
   uuid: string;
@@ -21,4 +21,9 @@ export interface ApiProjectType {
   audit_parameters_list: ApiAuditParametersType[];
   screenshot_url: string;
   latest_audit_at: string;
-}
+};
+
+export interface ApiProjectResponseType {
+  project: ApiProjectType;
+  has_siblings: boolean;
+};

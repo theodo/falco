@@ -8,7 +8,7 @@ import {
   setCurrentScriptStepId,
 } from 'redux/parameters';
 
-import { fetchProjectRequest } from 'redux/entities/projects';
+import { fetchProjectsRequest } from 'redux/entities/projects';
 import { RootState } from 'redux/types';
 
 import { getProject } from 'redux/entities/projects/selectors';
@@ -19,7 +19,7 @@ const mapStateToProps = (state: RootState, props: OwnProps) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  fetchProjectRequest: (projectId: string) => dispatch(fetchProjectRequest({ projectId })),
+  fetchProjectsRequest: (projectId: string) => dispatch(fetchProjectsRequest({ currentProjectId: projectId })),
   setCurrentAuditParametersId: (auditParametersId: string | null | undefined) =>
     dispatch(setCurrentAuditParametersId({ auditParametersId })),
   setCurrentPageId: (pageId: string | null | undefined) => dispatch(setCurrentPageId({ pageId })),

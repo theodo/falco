@@ -6,6 +6,7 @@ import { routeDefinitions } from 'routes';
 
 import ErrorMessage from 'components/ErrorMessage';
 import Loader from 'components/Loader';
+import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import Style from './Project.style';
 
 export type OwnProps = {} & RouteComponentProps<{
@@ -13,7 +14,7 @@ export type OwnProps = {} & RouteComponentProps<{
 }>;
 
 type Props = {
-  fetchProjectRequest: (projectId: string) => void;
+  fetchProjectsRequest: (projectId: string) => void;
   setCurrentAuditParametersId: (auditParametersId: string | null | undefined) => void;
   setCurrentPageId: (pageId: string | null | undefined) => void;
   setCurrentScriptId: (scriptId: string | null | undefined) => void;
@@ -23,7 +24,7 @@ type Props = {
   InjectedIntlProps;
 
 const Project: React.FunctionComponent<Props> = ({
-  fetchProjectRequest,
+  fetchProjectsRequest,
   project,
   match,
   setCurrentAuditParametersId,
@@ -31,17 +32,17 @@ const Project: React.FunctionComponent<Props> = ({
   setCurrentScriptId,
   setCurrentScriptStepId,
 }) => {
+
+  useFetchProjectIfUndefined(fetchProjectsRequest, match.params.projectId, project);
+
   React.useEffect(
     () => {
       setCurrentAuditParametersId(undefined);
       setCurrentPageId(undefined);
       setCurrentScriptId(undefined);
       setCurrentScriptStepId(undefined);
-      fetchProjectRequest(match.params.projectId);
     },
     [
-      match.params.projectId,
-      fetchProjectRequest,
       setCurrentAuditParametersId,
       setCurrentPageId,
       setCurrentScriptId,
