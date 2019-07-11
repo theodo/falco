@@ -17,7 +17,7 @@ def request_audit(audit_uuid):
     audit = Audit.objects.get(uuid=audit_uuid)
     parameters = audit.parameters
     audit_status_requested = AuditStatusHistory(
-        audit=audit, status=AvailableStatuses.REQUESTED.value
+        audit=audit, status=AvailableStatuses.REQUESTED.value, details="Audit requested"
     )
 
     audit_status_requested.save()
