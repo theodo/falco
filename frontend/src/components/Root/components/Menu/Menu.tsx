@@ -5,8 +5,10 @@ import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { ValueType } from 'react-select/lib/types';
 import { routeDefinitions } from 'routes';
 
+import MessagePill from 'components/MessagePill';
 import { AuditParametersType } from 'redux/entities/auditParameters/types';
 import { ProjectType } from 'redux/entities/projects/types';
+import { getSpacing } from 'stylesheet';
 import MenuPageScriptItem from '../MenuPageScriptItem';
 import {
   AuditParametersBlock,
@@ -29,7 +31,7 @@ export interface OwnProps {
   auditParametersList: AuditParametersType[],
   currentScriptId: string | null;
   scriptStepId: string | null;
-  currentURL: string;
+  runningAudits: string[];
   lauchAudits: (projectId: string) => void;
 };
 
@@ -42,8 +44,11 @@ export const Menu: React.FunctionComponent<Props> = ({
   auditParametersList,
   currentScriptId,
   scriptStepId,
+  runningAudits,
   lauchAudits,
 }) => {
+  const [auditCanBeLaunched, setAuditCanBeLaunched] = React.useState(true);
+
   if (!project) {
     return <Container />;
   };
@@ -91,15 +96,34 @@ export const Menu: React.FunctionComponent<Props> = ({
       <ProjectName>{project.name}</ProjectName>
 
       {project &&
-        <LaunchAuditsButton
-          onClick={
-            () => lauchAudits(project.uuid)
-          }
-        >
-          <FormattedMessage id="Menu.launch_audits" />
-        </LaunchAuditsButton>
+        (runningAudits.length === 0 && auditCanBeLaunched)
+        ? (
+          <LaunchAuditsButton
+            onClick={
+              () => {
+                setAuditCanBeLaunched(false);
+                lauchAudits(project.uuid);
+                // wait 1 second before it is possible to launch another audit
+                // this is intended to stop several audits being launched at once
+                setTimeout(() => setAuditCanBeLaunched(true), 1000);
+              }
+            }
+          >
+            <FormattedMessage id="Menu.launch_audits" />
+          </LaunchAuditsButton>
+        )
+        :
+        (runningAudits.length !== 0)
+          ? (
+            <MessagePill
+              messageType="info"
+              margin={getSpacing(3)}
+            >
+              <FormattedMessage id="Menu.running_audits_number" values={{ number: runningAudits.length }} />
+            </MessagePill>
+          )
+          : null
       }
-
       {project && 0 !== auditParametersSelectOptions.length && (
         <AuditParametersBlock>
           <AuditParametersTitle>
