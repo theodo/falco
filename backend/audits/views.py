@@ -1,4 +1,4 @@
-from audits.models import Audit, AuditResults, AuditStatusHistory
+from audits.models import Audit, AuditResults, AuditStatusHistory, AvailableStatuses
 from audits.serializers import (
     AuditResultsSerializer,
     AuditSerializer,
@@ -28,8 +28,8 @@ def request_audit(request, project_uuid):
                 task_request_audit.delay(audit.uuid)
                 AuditStatusHistory.objects.create(
                     audit=audit,
-                    status="REQUESTED",
-                    details="Audit was created in database",
+                    status=AvailableStatuses.REQUESTED.value,
+                    details="Audit created in database",
                 )
                 created_audits.append(audit)
 
@@ -38,8 +38,8 @@ def request_audit(request, project_uuid):
                 task_request_audit.delay(audit.uuid)
                 AuditStatusHistory.objects.create(
                     audit=audit,
-                    status="REQUESTED",
-                    details="Audit was created in database",
+                    status=AvailableStatuses.REQUESTED.value,
+                    details="Audit created in database",
                 )
                 created_audits.append(audit)
 

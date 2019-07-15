@@ -1,5 +1,15 @@
-import { createAsyncAction } from "typesafe-actions";
+import { createAsyncAction, createStandardAction } from "typesafe-actions";
+import { AuditStatusHistoryType } from "../auditStatusHistories/types";
 import { AuditType } from "./types";
+
+export const pollAuditStatusAction = createStandardAction('audits/POLL_AUDIT_STATUS')<{
+    auditId: string;
+    pageOrScriptId: string;
+}>();
+
+export const stopPollingAuditStatusAction = createStandardAction('audits/STOP_POLLING_AUDIT_STATUS')<{
+    lastAuditStatusHistory: AuditStatusHistoryType;
+}>();
 
 export const launchAuditAction = createAsyncAction(
     'audits/LAUNCH_AUDIT_REQUEST',
@@ -13,4 +23,6 @@ export const launchAuditAction = createAsyncAction(
 
 export default {
     launchAuditAction,
+    pollAuditStatusAction,
+    stopPollingAuditStatusAction,
 }

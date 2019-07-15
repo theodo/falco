@@ -1,13 +1,5 @@
-import { createAsyncAction, createStandardAction } from "typesafe-actions";
-import { ApiAuditStatusHistoryType, AuditStatusHistoryType } from "./types";
-
-export const pollAuditStatusHistoriesAction = createStandardAction('auditStatusHistories/POLL_AUDIT_STATUS_HISTORY')<{
-    auditId: string;
-}>();
-
-export const stopPollingAuditStatusHistoriesAction = createStandardAction('auditStatusHistories/STOP_POLLING_AUDIT_STATUS_HISTORY')<{
-    lastAuditStatusHistory: ApiAuditStatusHistoryType;
-}>();
+import { createAsyncAction } from "typesafe-actions";
+import { AuditStatusHistoryType } from "./types";
 
 export const fetchAuditStatusHistoriesAction = createAsyncAction(
     'auditStatusHistories/FETCH_AUDIT_STATUS_HISTORIES_REQUEST',
@@ -23,6 +15,4 @@ export const fetchAuditStatusHistoriesAction = createAsyncAction(
 
 export default {
     fetchAuditStatusHistoriesAction,
-    pollAuditStatusHistoriesAction,
-    stopPollingAuditStatusHistoriesAction,
 }

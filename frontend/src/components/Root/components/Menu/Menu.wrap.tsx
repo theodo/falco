@@ -4,6 +4,7 @@ import {
   getCurrentAuditParametersId,
   getCurrentPageId,
   getCurrentProjectAuditParameters,
+  getCurrentProjectRunningAudits,
   getCurrentScriptId,
   getCurrentScriptStepId,
 } from 'redux/parameters/selectors';
@@ -11,17 +12,17 @@ import { RootStateWithRouter } from 'redux/types';
 
 import { Dispatch } from 'redux';
 import { launchAuditAction } from 'redux/entities/audits';
-import { getCurrentProject, getCurrentURL } from 'redux/selectors';
+import { getCurrentProject } from 'redux/selectors';
 import { Menu } from './Menu';
 
 const mapStateToProps = (state: RootStateWithRouter) => ({
   auditParametersId: getCurrentAuditParametersId(state),
-  currentURL: getCurrentURL(state),
   currentPageId: getCurrentPageId(state),
   project: getCurrentProject(state),
   auditParametersList: getCurrentProjectAuditParameters(state),
   currentScriptId: getCurrentScriptId(state),
   scriptStepId: getCurrentScriptStepId(state),
+  runningAudits: getCurrentProjectRunningAudits(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

@@ -69,7 +69,8 @@
     "audit_parameters_selection": "Environnement des audits",
     "page_badge": "PAGE",
     "script_badge": "SCRIPT",
-    "launch_audits": "Lancer les audits manuellement"
+    "launch_audits": "Lancer les audits manuellement",
+    "running_audits_number": "{number} {number,plural,one {audit} other {audits}} en cours"
   },
   "Project": {
     "project_error": "Vous ne semblez pas avoir accès à ce projet.\n\nMerci de réessayer ou de vous rapprocher de votre administrateur pour obtenir l'accès.",
