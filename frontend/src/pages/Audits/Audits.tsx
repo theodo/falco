@@ -237,7 +237,11 @@ export const Audits: React.FunctionComponent<Props> = ({
 
   const pageOrScriptName = page ? page.name : script ? script.name : '';
 
-  const latestAuditStatusHistory = pageAuditStatusHistory ? pageAuditStatusHistory : scriptAuditStatusHistory;
+  const latestAuditStatusHistory = page
+    ? pageAuditStatusHistory
+    : script
+      ? scriptAuditStatusHistory
+      : null;
 
   const badgeParams = getBadgeParams();
 
