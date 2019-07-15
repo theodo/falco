@@ -63,6 +63,7 @@ export const LaunchAuditsButton = styled.button`
   padding: ${getSpacing(2)} ${getSpacing(0)};
   margin-left: ${getSpacing(3)};
   margin-bottom: ${getSpacing(4)};
+  margin-top: ${getSpacing(2)};
   align-self: center;
   border-radius: 6px;
   color: ${colorUsage.menuLauchAuditsButtonText};
@@ -76,5 +77,4 @@ export const LaunchAuditsButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
 `;
