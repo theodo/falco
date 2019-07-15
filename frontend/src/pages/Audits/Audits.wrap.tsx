@@ -38,7 +38,7 @@ const mapStateToProps = (state: RootState, props: OwnProps) => ({
     props.match.params.pageOrScriptId,
   ),
   pageAuditStatusHistory: getPageLatestAuditStatusHistory(state, props.match.params.pageOrScriptId),
-  ScriptAuditStatusHistory: getScriptLatestAuditStatusHistory(state, props.match.params.pageOrScriptId),
+  scriptAuditStatusHistory: getScriptLatestAuditStatusHistory(state, props.match.params.pageOrScriptId),
   scriptSteps: selectAuditScriptSteps(
     state,
     props.match.params.auditParametersId,

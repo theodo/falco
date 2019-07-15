@@ -50,7 +50,6 @@ type Props = {
   fetchProjectsRequest: (projectId: string) => void;
   pageAuditStatusHistory?: AuditStatusHistoryType | null;
   scriptAuditStatusHistory?: AuditStatusHistoryType | null;
-  fetchProjectRequest: (projectId: string) => void;
   fetchAuditResultsRequest: (
     auditParametersId: string,
     pageOrScriptId: string,
