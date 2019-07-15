@@ -1,8 +1,8 @@
 import React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 
-import ErrorMessage from 'components/ErrorMessage';
 import Loader from 'components/Loader';
+import MessagePill from 'components/MessagePill';
 import { AuditResultType } from 'redux/auditResults/types';
 import { getWPTAuditId } from 'services/utils';
 import { getSpacing } from 'stylesheet';
@@ -33,9 +33,9 @@ export const AnalyticsBlock: React.FunctionComponent<Props & InjectedIntlProps> 
   if (0 === auditResultIds.length || 0 === auditResults.length) {
     return (
       <Style.Container margin={blockMargin}>
-        <ErrorMessage>
+        <MessagePill messageType="error">
           <FormattedMessage id="Audits.no_audit" />
-        </ErrorMessage>
+        </MessagePill>
       </Style.Container>
     );
   }

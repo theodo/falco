@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import ErrorMessage from 'components/ErrorMessage';
 import Loader from 'components/Loader';
+import MessagePill from 'components/MessagePill';
 import MetricGraph from 'components/MetricGraph';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { METRICS } from 'redux/auditResults/constants';
@@ -42,9 +42,9 @@ export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = (
   if (0 === auditResultIds.length || 0 === auditResults.length) {
     return (
       <Style.Container margin={blockMargin}>
-        <ErrorMessage>
+        <MessagePill messageType="error">
           <FormattedMessage id="Audits.no_audit" />
-        </ErrorMessage>
+        </MessagePill>
       </Style.Container>
     );
   }
@@ -75,9 +75,9 @@ export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = (
   if (0 === auditResultIds.length || 0 === auditResults.length) {
     return (
       <Style.Container margin={blockMargin}>
-        <ErrorMessage>
+        <MessagePill messageType="error">
           <FormattedMessage id="Audits.no_audit" />
-        </ErrorMessage>
+        </MessagePill>
       </Style.Container>
     );
   }

@@ -8,10 +8,11 @@ import { ProjectType } from 'redux/entities/projects/types';
 import { ScriptType } from 'redux/entities/scripts/types';
 
 import Badge from 'components/Badge';
-import ErrorMessage from 'components/ErrorMessage';
 import Loader from 'components/Loader';
+import MessagePill from 'components/MessagePill';
 import Select from 'components/Select';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { AuditStatusHistoryType } from 'redux/entities/auditStatusHistories/types';
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
@@ -47,6 +48,8 @@ type Props = {
   sortedPageAuditResultsIds: string[] | null;
   sortedScriptAuditResultsIds: Record<string, string[]> | null;
   fetchProjectsRequest: (projectId: string) => void;
+  pageAuditStatusHistory?: AuditStatusHistoryType | null;
+  scriptAuditStatusHistory?: AuditStatusHistoryType | null;
   fetchAuditResultsRequest: (
     auditParametersId: string,
     pageOrScriptId: string,
@@ -71,6 +74,8 @@ export const Audits: React.FunctionComponent<Props> = ({
   scriptSteps,
   sortedPageAuditResultsIds,
   sortedScriptAuditResultsIds,
+  pageAuditStatusHistory,
+  scriptAuditStatusHistory,
   fetchAuditResultsRequest,
   setCurrentAuditParametersId,
   setCurrentPageId,
@@ -142,9 +147,9 @@ export const Audits: React.FunctionComponent<Props> = ({
   if (project === null) {
     return (
       <Container>
-        <ErrorMessage>
+        <MessagePill messageType="error">
           <FormattedMessage id="Project.project_error" />
-        </ErrorMessage>
+        </MessagePill>
       </Container>
     );
   }
@@ -155,9 +160,9 @@ export const Audits: React.FunctionComponent<Props> = ({
   ) {
     return (
       <Container>
-        <ErrorMessage>
+        <MessagePill messageType="error">
           <FormattedMessage id="Project.no_page_or_script_error" />
-        </ErrorMessage>
+        </MessagePill>
       </Container>
     );
   }
@@ -165,9 +170,9 @@ export const Audits: React.FunctionComponent<Props> = ({
   if (page === null && script === null) {
     return (
       <Container>
-        <ErrorMessage>
+        <MessagePill messageType="error">
           <FormattedMessage id="Audits.page_or_script_unavailable" />
-        </ErrorMessage>
+        </MessagePill>
       </Container>
     );
   }
@@ -175,9 +180,9 @@ export const Audits: React.FunctionComponent<Props> = ({
   if (0 === project.auditParametersIds.length) {
     return (
       <Container>
-        <ErrorMessage>
+        <MessagePill messageType="error">
           <FormattedMessage id="Project.no_audit_parameters_error" />
-        </ErrorMessage>
+        </MessagePill>
       </Container>
     );
   }
@@ -185,9 +190,9 @@ export const Audits: React.FunctionComponent<Props> = ({
   if (currentAuditParameters === null) {
     return (
       <Container>
-        <ErrorMessage>
+        <MessagePill messageType="error">
           <FormattedMessage id="Audits.audit_parameters_unavailable" />
-        </ErrorMessage>
+        </MessagePill>
       </Container>
     );
   }
@@ -231,6 +236,12 @@ export const Audits: React.FunctionComponent<Props> = ({
   };
 
   const pageOrScriptName = page ? page.name : script ? script.name : '';
+
+  const latestAuditStatusHistory = page
+    ? pageAuditStatusHistory
+    : script
+      ? scriptAuditStatusHistory
+      : null;
 
   const badgeParams = getBadgeParams();
 
@@ -276,6 +287,15 @@ export const Audits: React.FunctionComponent<Props> = ({
           />
         )}
       </PageTitleBlock>
+      {
+        latestAuditStatusHistory && (
+          latestAuditStatusHistory.status === "ERROR"
+            ? <MessagePill messageType="error">{latestAuditStatusHistory.details}</MessagePill>
+            : (latestAuditStatusHistory.status === "REQUESTED" || latestAuditStatusHistory.status === "PENDING")
+              ? <MessagePill messageType="info">{latestAuditStatusHistory.details}</MessagePill>
+              : null
+        )
+      }
       <Title>
         <FormattedMessage id="Audits.title" />
       </Title>

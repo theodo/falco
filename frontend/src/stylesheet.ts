@@ -31,6 +31,8 @@ const colorPalette = {
   auditSuccessGreen: '#0CCE6B',
   black100: 'rgba(0, 0, 0, 0.2)',
   black200: 'rgba(0, 0, 0, 0.5)',
+  orange500: "#ffa400",
+  orange200: "#ffe3b2",
   red500: '#d8000c',
   red200: '#ffd2d2',
   auditFailRed: '#FF4E42',
@@ -62,6 +64,8 @@ export const colorUsage = {
   // Popin
   popinErrorText: colorPalette.red500,
   popinErrorBackground: colorPalette.red200,
+  popinInfoText: colorPalette.orange500,
+  popinInfoBackground: colorPalette.orange200,
 
   // Button
   cancelButtonText: colorPalette.primary500,

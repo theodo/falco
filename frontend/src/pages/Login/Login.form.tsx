@@ -1,13 +1,13 @@
 import { InjectedFormikProps } from 'formik';
 import React from 'react';
 
-import ErrorMessage from 'components/ErrorMessage';
 import Input from 'components/Input';
 import { FormattedMessage } from 'react-intl';
 import { Redirect, RouteComponentProps } from 'react-router';
 import { routeDefinitions } from 'routes';
 import { getSpacing } from 'stylesheet';
 
+import MessagePill from 'components/MessagePill';
 import Styles from './Login.style';
 import { FormValues } from './service';
 
@@ -86,9 +86,9 @@ const InnerLoginForm: React.FunctionComponent<
           />
         </Styles.InputFieldContainer>
         {loginError && (
-          <ErrorMessage margin={`0 0 ${getSpacing(5)} 0`} padding={`${getSpacing(3)}`}>
+          <MessagePill messageType="error" margin={`0 0 ${getSpacing(5)} 0`} padding={`${getSpacing(3)}`}>
             <FormattedMessage id="Login.login_error" />
-          </ErrorMessage>
+          </MessagePill>
         )}
         <Styles.ConnectButton type="submit" className={submitButtonParameters.className}>
           <Styles.ConnectButtonContent>

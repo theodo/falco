@@ -18,8 +18,8 @@ import { injectIntl } from 'react-intl';
 import { Dispatch } from 'redux';
 import { fetchAuditResultsRequest } from 'redux/auditResults';
 import { getAuditParameters } from 'redux/entities/auditParameters/selectors';
-import { getPage } from 'redux/entities/pages/selectors';
-import { getScript } from 'redux/entities/scripts/selectors';
+import { getPage, getPageLatestAuditStatusHistory } from 'redux/entities/pages/selectors';
+import { getScript, getScriptLatestAuditStatusHistory } from 'redux/entities/scripts/selectors';
 import { Audits, OwnProps } from './Audits';
 
 const mapStateToProps = (state: RootState, props: OwnProps) => ({
@@ -37,6 +37,8 @@ const mapStateToProps = (state: RootState, props: OwnProps) => ({
     props.match.params.auditParametersId,
     props.match.params.pageOrScriptId,
   ),
+  pageAuditStatusHistory: getPageLatestAuditStatusHistory(state, props.match.params.pageOrScriptId),
+  scriptAuditStatusHistory: getScriptLatestAuditStatusHistory(state, props.match.params.pageOrScriptId),
   scriptSteps: selectAuditScriptSteps(
     state,
     props.match.params.auditParametersId,

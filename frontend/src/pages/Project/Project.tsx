@@ -4,8 +4,8 @@ import { Redirect, RouteComponentProps } from 'react-router';
 import { ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
 
-import ErrorMessage from 'components/ErrorMessage';
 import Loader from 'components/Loader';
+import MessagePill from 'components/MessagePill';
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import Style from './Project.style';
 
@@ -61,9 +61,9 @@ const Project: React.FunctionComponent<Props> = ({
   if (project === null) {
     return (
       <Style.Container>
-        <ErrorMessage>
+        <MessagePill messageType="error">
           <FormattedMessage id="Project.project_error" />
-        </ErrorMessage>
+        </MessagePill>
       </Style.Container>
     );
   }
@@ -86,9 +86,9 @@ const Project: React.FunctionComponent<Props> = ({
   } else {
     return (
       <Style.Container>
-        <ErrorMessage>
+        <MessagePill messageType="error">
           <FormattedMessage id="Project.no_page_or_script_error" />
-        </ErrorMessage>
+        </MessagePill>
       </Style.Container>
     );
   }
@@ -101,9 +101,9 @@ const Project: React.FunctionComponent<Props> = ({
   } else {
     return (
       <Style.Container>
-        <ErrorMessage>
+        <MessagePill messageType="error">
           <FormattedMessage id="Project.no_audit_parameters_error" />
-        </ErrorMessage>
+        </MessagePill>
       </Style.Container>
     );
   }
