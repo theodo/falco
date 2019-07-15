@@ -70,7 +70,7 @@
     "page_badge": "PAGE",
     "script_badge": "SCRIPT",
     "launch_audits": "Launch audits manually",
-    "running_audits_number": "{number} running audit(s)"
+    "running_audits_number": "{number} running {number,plural,one {audit} other {audits}}"
   },
   "Project": {
     "project_error": "It seems that you are not authorized to access this project.\n\nPlease try again or contact your administrator to get granted.",
