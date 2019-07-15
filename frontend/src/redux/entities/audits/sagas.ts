@@ -13,7 +13,7 @@ function* launchAuditsFailedHandler(error: Error) {
 };
 
 function* launchAuditsSaga(action: ActionType<typeof launchAuditAction.request>) {
-    const endpoint = `/api/audits/request?project=${action.payload.projectId}`;
+    const endpoint = `/api/audits/${action.payload.projectId}/request`;
     const { body: apiAuditsList }: { body: ApiAuditType[] } = yield call(
         makePostRequest,
         endpoint,
