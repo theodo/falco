@@ -9,6 +9,8 @@ import {
 } from 'redux/parameters/selectors';
 import { RootStateWithRouter } from 'redux/types';
 
+import { Dispatch } from 'redux';
+import { launchAuditAction } from 'redux/entities/audits';
 import { getCurrentProject, getCurrentURL } from 'redux/selectors';
 import { Menu } from './Menu';
 
@@ -22,7 +24,9 @@ const mapStateToProps = (state: RootStateWithRouter) => ({
   scriptStepId: getCurrentScriptStepId(state),
 });
 
-const mapDispatchToProps = null;
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  lauchAudits: (projectId: string) => dispatch(launchAuditAction.request({ projectId })),
+});
 
 export default connect(
   mapStateToProps,

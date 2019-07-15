@@ -4,11 +4,11 @@ import { fetchAuditResultsRequest } from "redux/auditResults";
 import { makeGetRequest } from "services/networking/request";
 import { ActionType, getType } from "typesafe-actions";
 import { fetchAuditStatusHistoriesAction, pollAuditStatusHistoriesAction, stopPollingAuditStatusHistoriesAction } from "./actions";
-import { modelizeApiAuditStatusHistoriesToById, modelizeApiAuditStatusHistoriesToByPageOrScriptIdAndAuditParametersId } from "./modelizer";
+import { modelizeApiAuditStatusHistoriesToByPageOrScriptIdAndAuditParametersId } from "./modelizer";
 import { ApiAuditStatusHistoryType } from "./types";
 
 
-export function* fetchAuditStatusHistories(action: ActionType<typeof fetchAuditStatusHistoriesAction.request>) {
+function* fetchAuditStatusHistories(action: ActionType<typeof fetchAuditStatusHistoriesAction.request>) {
     try {
         const endpoint = `/api/audits/${action.payload.auditId}/status`;
         const { body: auditStatusHistory }: { body: ApiAuditStatusHistoryType } = yield call(
@@ -18,7 +18,6 @@ export function* fetchAuditStatusHistories(action: ActionType<typeof fetchAuditS
             null,
         );
         yield put(fetchAuditStatusHistoriesAction.success({
-            byId: modelizeApiAuditStatusHistoriesToById([auditStatusHistory]),
             byPageOrScriptIdAndAuditParametersId: modelizeApiAuditStatusHistoriesToByPageOrScriptIdAndAuditParametersId([auditStatusHistory]),
         }));
     } catch (error) {
@@ -33,7 +32,6 @@ function* pollAuditStatusHistories(auditId: string) {
 
         // save the response to the store before continuing the polling
         yield put(fetchAuditStatusHistoriesAction.success({
-            byId: modelizeApiAuditStatusHistoriesToById([auditStatusHistory]),
             byPageOrScriptIdAndAuditParametersId: modelizeApiAuditStatusHistoriesToByPageOrScriptIdAndAuditParametersId([auditStatusHistory]),
         }));
 

@@ -1,12 +1,8 @@
 import { createStandardAction } from 'typesafe-actions';
 
+import { AuditTypeAndId } from 'redux/entities/audits/types';
 import { AuditResultType } from './types';
 
-interface AuditTypeAndId {
-  auditParametersId: string;
-  pageOrScriptId: string;
-  type: 'page' | 'script';
-}
 
 export const fetchAuditResultsRequest = createStandardAction(
   'auditResults/FETCH_AUDIT_RESULTS_REQUEST',

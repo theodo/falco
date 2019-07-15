@@ -16,8 +16,7 @@ export const fetchAuditStatusHistoriesAction = createAsyncAction(
 )<
     { auditId: string; },
     {
-        byId: Record<string, AuditStatusHistoryType>;
-        byPageOrScriptIdAndAuditParametersId: Readonly<Record<string, string>>;
+        byPageOrScriptIdAndAuditParametersId: Readonly<Record<string, Record<string, AuditStatusHistoryType>>>;
     },
     { errorMessage: string }
 >();

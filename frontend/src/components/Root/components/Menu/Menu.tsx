@@ -13,6 +13,7 @@ import {
   AuditParametersTitle,
   Audits,
   Container,
+  LaunchAuditsButton,
   ProjectName,
 } from './Menu.style';
 
@@ -29,6 +30,7 @@ export interface OwnProps {
   currentScriptId: string | null;
   scriptStepId: string | null;
   currentURL: string;
+  lauchAudits: (projectId: string) => void;
 };
 
 type Props = OwnProps & InjectedIntlProps;
@@ -40,6 +42,7 @@ export const Menu: React.FunctionComponent<Props> = ({
   auditParametersList,
   currentScriptId,
   scriptStepId,
+  lauchAudits,
 }) => {
   if (!project) {
     return <Container />;
@@ -86,6 +89,16 @@ export const Menu: React.FunctionComponent<Props> = ({
   return (
     <Container>
       <ProjectName>{project.name}</ProjectName>
+
+      {project &&
+        <LaunchAuditsButton
+          onClick={
+            () => lauchAudits(project.uuid)
+          }
+        >
+          <FormattedMessage id="Menu.launch_audits" />
+        </LaunchAuditsButton>
+      }
 
       {project && 0 !== auditParametersSelectOptions.length && (
         <AuditParametersBlock>

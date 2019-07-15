@@ -7,10 +7,7 @@ import { fetchAuditParametersAction } from '../auditParameters/actions';
 import { modelizeApiAuditParametersListToById } from '../auditParameters/modelizer';
 import { ApiAuditParametersType } from '../auditParameters/types';
 import { fetchAuditStatusHistoriesAction, pollAuditStatusHistoriesAction } from '../auditStatusHistories';
-import {
-  modelizeApiAuditStatusHistoriesToById,
-  modelizeApiAuditStatusHistoriesToByPageOrScriptIdAndAuditParametersId,
-} from '../auditStatusHistories/modelizer';
+import { modelizeApiAuditStatusHistoriesToByPageOrScriptIdAndAuditParametersId } from '../auditStatusHistories/modelizer';
 import { ApiAuditStatusHistoryType } from '../auditStatusHistories/types';
 import { fetchPageAction } from '../pages';
 import { modelizeApiPagesToById } from '../pages/modelizer';
@@ -110,7 +107,6 @@ function* saveProjectsToStore(action: ActionType<typeof saveFetchedProjects>) {
       }, []));
   }, []);
   yield put(fetchAuditStatusHistoriesAction.success({
-    byId: modelizeApiAuditStatusHistoriesToById(allApiAuditStatusHistories),
     byPageOrScriptIdAndAuditParametersId: modelizeApiAuditStatusHistoriesToByPageOrScriptIdAndAuditParametersId(allApiAuditStatusHistories),
   }));
   // launch polling for all non-success and non-error auditStatusHistories

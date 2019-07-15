@@ -68,7 +68,8 @@
   "Menu": {
     "audit_parameters_selection": "Audits environment",
     "page_badge": "PAGE",
-    "script_badge": "SCRIPT"
+    "script_badge": "SCRIPT",
+    "launch_audits": "Launch audits manually"
   },
   "Project": {
     "project_error": "It seems that you are not authorized to access this project.\n\nPlease try again or contact your administrator to get granted.",
