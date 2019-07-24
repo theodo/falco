@@ -81,6 +81,10 @@ class AuditResults(BaseModel):
     wpt_metric_repeat_view_time_to_first_byte = models.IntegerField(
         blank=True, null=True
     )
+    wpt_metric_first_view_visually_complete = models.IntegerField(blank=True, null=True)
+    wpt_metric_repeat_view_visually_complete = models.IntegerField(
+        blank=True, null=True
+    )
     wpt_metric_lighthouse_performance = models.FloatField(blank=True, null=True)
     script_step_name = models.CharField(max_length=100, blank=True, null=True)
     script_step_number = models.IntegerField(blank=True, null=True)
