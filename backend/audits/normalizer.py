@@ -79,6 +79,12 @@ def format_wpt_json_results_for_page(data):
         "wpt_metric_repeat_view_time_to_first_byte": data["median"]["repeatView"][
             "TTFB"
         ],
+        "wpt_metric_first_view_visually_complete": data["median"]["firstView"][
+            "visualComplete"
+        ],
+        "wpt_metric_repeat_view_visually_complete": data["median"]["repeatView"][
+            "visualComplete"
+        ],
         "wpt_metric_lighthouse_performance": data["median"]["firstView"].get(
             "lighthouse.Performance"
         ),

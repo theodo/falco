@@ -145,6 +145,12 @@ def poll_audit_results(audit_uuid, json_url):
                     wpt_metric_repeat_view_time_to_first_byte=formatted_results[
                         "wpt_metric_repeat_view_time_to_first_byte"
                     ],
+                    wpt_metric_first_view_visually_complete=formatted_results[
+                        "wpt_metric_first_view_visually_complete"
+                    ],
+                    wpt_metric_repeat_view_visually_complete=formatted_results[
+                        "wpt_metric_repeat_view_visually_complete"
+                    ],
                     wpt_metric_lighthouse_performance=formatted_results[
                         "wpt_metric_lighthouse_performance"
                     ],
