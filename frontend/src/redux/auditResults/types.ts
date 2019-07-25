@@ -19,6 +19,8 @@ export interface AuditResultType {
   WPTMetricRepeatViewFirstContentfulPaint: number;
   WPTMetricFirstViewTimeToFirstByte: number;
   WPTMetricRepeatViewTimeToFirstByte: number;
+  WPTMetricFirstViewVisuallyComplete: number;
+  WPTMetricRepeatViewVisuallyComplete: number;
   WPTMetricLighthousePerformance: number;
   scriptStepName: string | null;
   scriptStepNumber: string | null;
@@ -71,6 +73,8 @@ export type MetricType =
   | 'WPTMetricRepeatViewFirstContentfulPaint'
   | 'WPTMetricFirstViewTimeToFirstByte'
   | 'WPTMetricRepeatViewTimeToFirstByte'
+  | 'WPTMetricFirstViewVisuallyComplete'
+  | 'WPTMetricRepeatViewVisuallyComplete'
   | 'WPTMetricLighthousePerformance';
 
 export type LighthouseMetricType =
@@ -110,6 +114,8 @@ export interface ApiAuditResultType {
   wpt_metric_repeat_view_first_contentful_paint: number;
   wpt_metric_first_view_time_to_first_byte: number;
   wpt_metric_repeat_view_time_to_first_byte: number;
+  wpt_metric_first_view_visually_complete: number;
+  wpt_metric_repeat_view_visually_complete: number;
   wpt_metric_lighthouse_performance: number;
   script_step_name: string;
   script_step_number: number;

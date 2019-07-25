@@ -18,5 +18,7 @@ export const METRICS: Record<MetricType, MetricConstantForGraph> = {
   WPTMetricRepeatViewFirstContentfulPaint: { type: 'time', colorDark: colors.yellow[800], colorLight: colors.yellow[100] },
   WPTMetricFirstViewTimeToFirstByte: { type: 'time', colorDark: colors.amber[800], colorLight: colors.amber[100] },
   WPTMetricRepeatViewTimeToFirstByte: { type: 'time', colorDark: colors.orange[800], colorLight: colors.orange[100] },
+  WPTMetricFirstViewVisuallyComplete: { type: 'time', colorDark: colors.lightBlue[800], colorLight: colors.lightBlue[100] },
+  WPTMetricRepeatViewVisuallyComplete: { type: 'time', colorDark: colors.orange[800], colorLight: colors.orange[100] },
   WPTMetricLighthousePerformance: { type: 'percent', colorDark: colors.deepOrange[800], colorLight: colors.deepOrange[100] },
 };
