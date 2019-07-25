@@ -172,6 +172,14 @@
       "name": "Time to First Byte (Repeat View)",
       "description": "Moment où le navigateur reçoit le premier octet de la part du serveur, habituellement du HTML (lorsque l'on retourne sur le site)"
     },
+    "WPTMetricFirstViewVisuallyComplete": {
+      "name": "Visually Complete (First View)",
+      "description": "Moment où 100% des pixels de la page ont atteint leur position finale (lors de la première visite du site)"
+    },
+    "WPTMetricRepeatViewVisuallyComplete": {
+      "name": "Visually Complete (Repeat View)",
+      "description": "Moment où 100% des pixels de la page ont atteint leur position finale (lorsque l'on retourne sur le site)"
+    },
     "WPTMetricLighthousePerformance": {
       "name": "Lighthouse Performance Score",
       "description": "Aggrège un ensemble des autres métriques de performance, simule un appareil de milieu de gamme et des conditions réseau défavorables.\nMesuré via Dev Tools ou https://web.dev/fast"

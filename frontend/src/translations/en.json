@@ -118,7 +118,7 @@
   "Metrics": {
     "WPTMetricFirstViewTTI": {
       "name": "TTI - Time To Interactive (First View)",
-      "description": "Triggered when CPU computations and network requests are few and far between (for first visit on website)"
+      "description": "Triggered when CPU computations and network requests are few and far between (for the first visit on website)"
     },
     "WPTMetricRepeatViewTTI": {
       "name": "TTI - Time To Interactive (Repeat View)",
@@ -126,7 +126,7 @@
     },
     "WPTMetricFirstViewSpeedIndex": {
       "name": "Speed Index (First View)",
-      "description": "Triggered when pixels of the page reach their final position (for first visit on website)"
+      "description": "Triggered when pixels of the page reach their final position (for the first visit on website)"
     },
     "WPTMetricRepeatViewSpeedIndex": {
       "name": "Speed Index (Repeat View)",
@@ -134,7 +134,7 @@
     },
     "WPTMetricFirstViewFirstPaint": {
       "name": "First Paint (First View)",
-      "description": "Triggered when the first pixel is drawn on the screen (for first visit on website)"
+      "description": "Triggered when the first pixel is drawn on the screen (for the first visit on website)"
     },
     "WPTMetricRepeatViewFirstPaint": {
       "name": "First Paint (Repeat View)",
@@ -142,7 +142,7 @@
     },
     "WPTMetricFirstViewFirstMeaningfulPaint": {
       "name": "First Meaningful Paint (First View)",
-      "description": "Triggered when the “hero” element of the page (a big element at the top center) is visible (for first visit on website)"
+      "description": "Triggered when the “hero” element of the page (a big element at the top center) is visible (for the first visit on website)"
     },
     "WPTMetricRepeatViewFirstMeaningfulPaint": {
       "name": "First Meaningful Paint (Repeat View)",
@@ -150,7 +150,7 @@
     },
     "WPTMetricFirstViewLoadTime": {
       "name": "Load Time (First View)",
-      "description": "Triggered when network is quiet and page is fully loaded (for first visit on website)"
+      "description": "Triggered when network is quiet and page is fully loaded (for the first visit on website)"
     },
     "WPTMetricRepeatViewLoadTime": {
       "name": "Load Time (Repeat View)",
@@ -158,7 +158,7 @@
     },
     "WPTMetricFirstViewFirstContentfulPaint": {
       "name": "First Contentful Paint (First View)",
-      "description": "Triggered when the first DOM element (text, image, ...) is drawn on the screen (for first visit on website)"
+      "description": "Triggered when the first DOM element (text, image, ...) is drawn on the screen (for the first visit on website)"
     },
     "WPTMetricRepeatViewFirstContentfulPaint": {
       "name": "First Contentful Paint (Repeat View)",
@@ -166,11 +166,19 @@
     },
     "WPTMetricFirstViewTimeToFirstByte": {
       "name": "Time to First Byte (First View)",
-      "description": "Triggered when the browser receives the first byte from the server, usually HTML (for first visit on website)"
+      "description": "Triggered when the browser receives the first byte from the server, usually HTML (for the first visit on website)"
     },
     "WPTMetricRepeatViewTimeToFirstByte": {
       "name": "Time to First Byte (Repeat View)",
       "description": "Triggered when the browser receives the first byte from the server, usually HTML (when coming back to website)"
+    },
+    "WPTMetricFirstViewVisuallyComplete": {
+      "name": "Visually Complete (First View)",
+      "description": "Triggered when 100% of the pixels on the page reached their final position (for the first visit on website)"
+    },
+    "WPTMetricRepeatViewVisuallyComplete": {
+      "name": "Visually Complete (Repeat View)",
+      "description": "Triggered when 100% of the pixels on the page reached their final position (for the first visit on website)"
     },
     "WPTMetricLighthousePerformance": {
       "name": "Lighthouse Performance Score",

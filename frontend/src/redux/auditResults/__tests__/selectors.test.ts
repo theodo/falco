@@ -32,6 +32,8 @@ const pageAuditResult = {
     WPTMetricRepeatViewFirstContentfulPaint: pageAuditResultValue,
     WPTMetricFirstViewTimeToFirstByte: pageAuditResultValue,
     WPTMetricRepeatViewTimeToFirstByte: pageAuditResultValue,
+    WPTMetricFirstViewVisuallyComplete: pageAuditResultValue,
+    WPTMetricRepeatViewVisuallyComplete: pageAuditResultValue,
     WPTMetricLighthousePerformance: pageAuditResultValue,
     scriptStepName: null,
     scriptStepNumber: null,

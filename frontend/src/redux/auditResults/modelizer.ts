@@ -31,6 +31,8 @@ export const modelizeAuditResultsForPage = (
           auditResult.wpt_metric_repeat_view_first_contentful_paint,
         WPTMetricFirstViewTimeToFirstByte: auditResult.wpt_metric_first_view_time_to_first_byte,
         WPTMetricRepeatViewTimeToFirstByte: auditResult.wpt_metric_repeat_view_time_to_first_byte,
+        WPTMetricFirstViewVisuallyComplete: auditResult.wpt_metric_first_view_visually_complete,
+        WPTMetricRepeatViewVisuallyComplete: auditResult.wpt_metric_repeat_view_visually_complete,
         WPTMetricLighthousePerformance: auditResult.wpt_metric_lighthouse_performance,
         scriptStepName: auditResult.script_step_name,
         scriptStepNumber: auditResult.script_step_number,
