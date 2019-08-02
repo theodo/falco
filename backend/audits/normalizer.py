@@ -168,6 +168,12 @@ def format_wpt_json_results_for_script(data):
                 "wpt_metric_repeat_view_time_to_first_byte": repeat_view_step_data[
                     "TTFB"
                 ],
+                "wpt_metric_first_view_visually_complete": first_view_step_data[
+                    "visualComplete"
+                ],
+                "wpt_metric_repeat_view_visually_complete": repeat_view_step_data[
+                    "visualComplete"
+                ],
                 "wpt_metric_lighthouse_performance": first_view_step_data.get(
                     "lighthouse.Performance"
                 ),
