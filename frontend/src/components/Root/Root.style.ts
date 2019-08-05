@@ -31,7 +31,7 @@ export const Page = styled.div`
   background-color: ${colorUsage.defaultContentBackground};
 
   @media only screen and (max-width: ${responsiveThreshold}) {
-    width: 320px;
+    width: 100%;
     margin: auto;
   }
 `;

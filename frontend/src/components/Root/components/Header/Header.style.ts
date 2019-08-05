@@ -25,7 +25,7 @@ export const HeaderMenu = styled.div<MenuProps>`
   background-color: ${props => props.shouldDisplayConnectedUserHeader && colorUsage.menuBackground};
 
   @media only screen and (max-width: ${responsiveThreshold}) {
-    width: 320px;
+    width: 100%;
     padding: 0;
   }
 `;
@@ -36,6 +36,7 @@ export const HeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
   z-index: ${zIndex.header};
+  width: 100%;
 
   @media only screen and (max-width: ${responsiveThreshold}) {
     position: absolute;
