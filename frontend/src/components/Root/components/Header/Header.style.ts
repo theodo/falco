@@ -48,6 +48,7 @@ export const HeaderBlock = styled.header<HeaderProps>`
   background-color: ${colorUsage.headerFakeBackground};
   height: 100px;
   display: flex;
+  justify-content: space-between;
   transition: box-shadow 0.3s ease-in-out;
   box-shadow: ${props => props.shouldHaveShadow && `0 10px 5px -2px ${colorUsage.headerShadowBox}`};
 
@@ -88,7 +89,6 @@ export const HeaderContent = styled.div<HeaderProps>`
   justify-content: flex-end;
   padding-left: ${getSpacing(8)};
   padding-right: ${getSpacing(22)};
-  width: 800px;
   transition: box-shadow 0.3s ease-in-out;
   box-shadow: ${props => props.shouldHaveShadow && `0 10px 5px -2px ${colorUsage.headerShadowBox}`};
 
