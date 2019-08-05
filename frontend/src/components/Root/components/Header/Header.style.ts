@@ -20,7 +20,7 @@ interface HeaderProps {
 
 export const HeaderMenu = styled.div<MenuProps>`
   display: flex;
-  padding-left: ${getSpacing(22)};
+  padding-left: ${getSpacing(10)};
   width: 380px;
   background-color: ${props => props.shouldDisplayConnectedUserHeader && colorUsage.menuBackground};
 
