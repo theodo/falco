@@ -14,7 +14,7 @@ export const Container = styled.div`
   top: 100px;
   z-index: ${zIndex.menu};
   background-color: ${colorUsage.menuBackground};
-  padding-left: ${getSpacing(22)};
+  padding-left: ${getSpacing(10)};
   padding-top: ${getSpacing(4)};
   width: 380px;
   height: 100%;

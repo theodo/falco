@@ -372,7 +372,7 @@ export const zIndex = {
 export const getSpacing = (multiplier: number): string =>
   `${multiplier * SPACING_UNIT}${MEASUREMENT_UNIT}`;
 
-export const responsiveThreshold = '1240px';
+export const responsiveThreshold = '460px';
 
 // Material UI - theme, do not declare constant inside this object
 export const muiTheme = createMuiTheme({

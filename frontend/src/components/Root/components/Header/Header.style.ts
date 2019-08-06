@@ -20,12 +20,12 @@ interface HeaderProps {
 
 export const HeaderMenu = styled.div<MenuProps>`
   display: flex;
-  padding-left: ${getSpacing(22)};
+  padding-left: ${getSpacing(10)};
   width: 380px;
   background-color: ${props => props.shouldDisplayConnectedUserHeader && colorUsage.menuBackground};
 
   @media only screen and (max-width: ${responsiveThreshold}) {
-    width: 320px;
+    width: 100%;
     padding: 0;
   }
 `;
@@ -36,6 +36,7 @@ export const HeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
   z-index: ${zIndex.header};
+  width: 100%;
 
   @media only screen and (max-width: ${responsiveThreshold}) {
     position: absolute;
@@ -47,6 +48,7 @@ export const HeaderBlock = styled.header<HeaderProps>`
   background-color: ${colorUsage.headerFakeBackground};
   height: 100px;
   display: flex;
+  justify-content: space-between;
   transition: box-shadow 0.3s ease-in-out;
   box-shadow: ${props => props.shouldHaveShadow && `0 10px 5px -2px ${colorUsage.headerShadowBox}`};
 
@@ -87,7 +89,6 @@ export const HeaderContent = styled.div<HeaderProps>`
   justify-content: flex-end;
   padding-left: ${getSpacing(8)};
   padding-right: ${getSpacing(22)};
-  width: 800px;
   transition: box-shadow 0.3s ease-in-out;
   box-shadow: ${props => props.shouldHaveShadow && `0 10px 5px -2px ${colorUsage.headerShadowBox}`};
 
