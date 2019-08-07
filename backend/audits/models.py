@@ -1,5 +1,6 @@
 from enum import Enum
 from core.models import BaseModel
+from django.contrib.postgres.fields import JSONField
 from django.db import models
 from projects.models import Page, ProjectAuditParameters, Script
 from django.utils import timezone
@@ -7,6 +8,8 @@ from django.utils import timezone
 
 class AvailableStatuses(Enum):  # A subclass of Enum
     REQUESTED = "REQUESTED"
+    QUEUEING = "QUEUEING"
+    RUNNING = "RUNNING"
     PENDING = "PENDING"
     ERROR = "ERROR"
     SUCCESS = "SUCCESS"
@@ -49,6 +52,7 @@ class AuditStatusHistory(BaseModel):
         choices=[(status.name, status.value) for status in AvailableStatuses],
     )
     details = models.CharField(max_length=1000)
+    info = JSONField(null=True)
 
 
 class AuditResults(BaseModel):

@@ -3,10 +3,11 @@ from urllib.parse import parse_qs, urlparse
 import logging
 import requests
 
+from audits.wpt_utils.status_and_info_extracter import extract_status_and_info
 from audits.models import Audit, AuditResults, AuditStatusHistory, AvailableStatuses
 from celery import shared_task
 from projects.models import NetworkShapeOptions, Page, Script, AvailableAuditParameters
-from audits.normalizer import (
+from audits.wpt_utils.normalizer import (
     format_wpt_json_results_for_page,
     format_wpt_json_results_for_script,
 )
@@ -43,12 +44,12 @@ def request_audit(audit_uuid):
     r = requests.post("https://www.webpagetest.org/runtest.php", params=payload)
     response = r.json()
     if response["statusCode"] == 200:
-        audit_status_pending = AuditStatusHistory(
+        audit_status_queueing = AuditStatusHistory(
             audit=audit,
-            status=AvailableStatuses.PENDING.value,
+            status=AvailableStatuses.QUEUEING.value,
             details=str(response["data"]),
         )
-        audit_status_pending.save()
+        audit_status_queueing.save()
         poll_audit_results.apply_async(
             (audit_uuid, response["data"]["jsonUrl"]), countdown=15
         )
@@ -76,12 +77,12 @@ def poll_audit_results(audit_uuid, json_url):
     response = r.json()
     status_code = response.get("statusCode") or response["data"].get("statusCode")
     if status_code in [100, 101]:
-        audit_status_pending = AuditStatusHistory(
-            audit=audit,
-            status=AvailableStatuses.PENDING.value,
-            details=str(response["data"]["statusText"]),
+        api_response = str(response["data"]["statusText"])
+        status, info = extract_status_and_info(api_response)
+        audit_status_requested = AuditStatusHistory(
+            audit=audit, status=status, details=api_response, info=info
         )
-        audit_status_pending.save()
+        audit_status_requested.save()
         poll_audit_results.apply_async((audit_uuid, json_url), countdown=15)
     elif status_code == 200:
         parsed_url = urlparse(json_url)
