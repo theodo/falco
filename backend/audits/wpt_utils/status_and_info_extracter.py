@@ -23,7 +23,7 @@ def extract_status_and_info(api_response):
         if api_response == "Waiting at the front of the queue...":
             info["positionInQueue"] = 0
             return (status, json.dumps(info))
-        queueing_test = re.search("Waiting behind (.+?) other tests...", api_response)
+        queueing_test = re.search("Waiting behind (.+?) other test", api_response)
         if queueing_test:
             info["positionInQueue"] = queueing_test.group(1)
         return (status, json.dumps(info))
