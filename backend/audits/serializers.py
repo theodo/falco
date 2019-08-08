@@ -37,6 +37,7 @@ class AuditStatusHistorySerializer(serializers.ModelSerializer):
             "page_id",
             "script_id",
             "audit_id",
+            "info",
         )
 
 
