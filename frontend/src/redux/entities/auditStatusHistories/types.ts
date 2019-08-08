@@ -1,4 +1,20 @@
-export type StatusType = "SUCCESS" | "REQUESTED" | "PENDING" | "ERROR";
+export const auditStatus = {
+    success: "SUCCESS",
+    error: "ERROR",
+    requested: "REQUESTED",
+    pending: "PENDING",
+    queuing: "QUEUEING",
+    running: "RUNNING"
+}
+
+export type StatusType = "SUCCESS" | "REQUESTED" | "PENDING" | "QUEUEING" | "RUNNING" | "ERROR";
+
+interface AuditStatusHistoryInfoType {
+    completedTests: string;
+    positionInQueue: string;
+    runningTime: string;
+    totalTests: string;
+}
 
 export interface AuditStatusHistoryType {
     uuid: string;
@@ -9,6 +25,7 @@ export interface AuditStatusHistoryType {
     auditId: string;
     pageId: string | null;
     scriptId: string | null;
+    info: AuditStatusHistoryInfoType | null
 };
 
 export interface ApiAuditStatusHistoryType {
@@ -20,4 +37,5 @@ export interface ApiAuditStatusHistoryType {
     page_id: string;
     script_id: string;
     audit_id: string;
+    info: string | null
 };

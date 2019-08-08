@@ -112,7 +112,12 @@
     "AuditStatusHistory": {
       "last_audit_successful": "Le dernier audit a réussi",
       "audit_running": "Un audit est en cours",
-      "audit_failure": "le dernier audit a échoué"
+      "audit_failure": "Le dernier audit a échoué :(",
+      "audit_requested": "Audit demandé",
+      "audit_in_queue": "Audit en file d'attente",
+      "audit_in_queue_behind": "Audit en file d'attente derrière {positionInQueue} {positionInQueue,plural,one {test} other {tests}}",
+      "audit_started": "Audit en cours depuis {runningTime} secondes",
+      "audit_tests_running": "Audit en cours, {completedTests} {completedTests,plural,one {test exécuté} other {tests exécutés}} sur {totalTests}"
     }
   },
   "Metrics": {

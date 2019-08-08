@@ -12,7 +12,7 @@ import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
 import Select from 'components/Select';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
-import { AuditStatusHistoryType } from 'redux/entities/auditStatusHistories/types';
+import { auditStatus, AuditStatusHistoryType } from 'redux/entities/auditStatusHistories/types';
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
@@ -235,6 +235,32 @@ export const Audits: React.FunctionComponent<Props> = ({
     };
   };
 
+  const getLastAuditMessage = (auditStatusHistory: AuditStatusHistoryType) => {
+    switch(auditStatusHistory.status) {
+      case auditStatus.requested:
+        return <FormattedMessage id="Audits.AuditStatusHistory.audit_requested" />;
+      case auditStatus.queuing:
+        return auditStatusHistory.info && auditStatusHistory.info.positionInQueue 
+          ? <FormattedMessage id="Audits.AuditStatusHistory.audit_in_queue_behind" values={{ positionInQueue: auditStatusHistory.info.positionInQueue }}/>
+          : <FormattedMessage id="Audits.AuditStatusHistory.audit_in_queue" />
+      case auditStatus.running:
+        if(auditStatusHistory.info && auditStatusHistory.info.runningTime) {
+          return <FormattedMessage id="Audits.AuditStatusHistory.audit_started" values={{ runningTime: auditStatusHistory.info.runningTime }}/>
+        } else if(auditStatusHistory.info && auditStatusHistory.info.totalTests && auditStatusHistory.info.completedTests) {
+          return (
+          <FormattedMessage 
+            id="Audits.AuditStatusHistory.audit_tests_running" 
+            values={{
+              completedTests: auditStatusHistory.info.completedTests,
+              totalTests: auditStatusHistory.info.totalTests,
+            }}
+          />
+          )
+      }
+    }
+    return <FormattedMessage id="Audits.AuditStatusHistory.audit_in_queue" />
+  }
+
   const pageOrScriptName = page ? page.name : script ? script.name : '';
 
   const latestAuditStatusHistory = page
@@ -288,13 +314,11 @@ export const Audits: React.FunctionComponent<Props> = ({
         )}
       </PageTitleBlock>
       {
-        latestAuditStatusHistory && (
-          latestAuditStatusHistory.status === "ERROR"
-            ? <MessagePill messageType="error">{latestAuditStatusHistory.details}</MessagePill>
-            : (latestAuditStatusHistory.status === "REQUESTED" || latestAuditStatusHistory.status === "PENDING")
-              ? <MessagePill messageType="info">{latestAuditStatusHistory.details}</MessagePill>
-              : null
-        )
+        latestAuditStatusHistory && (auditStatus.error === latestAuditStatusHistory.status
+        ? <MessagePill messageType="error">
+            <FormattedMessage id="Audits.AuditStatusHistory.audit_failure" />;
+          </MessagePill>
+        : <MessagePill messageType="info">{getLastAuditMessage(latestAuditStatusHistory)}</MessagePill>)
       }
       <Title>
         <FormattedMessage id="Audits.title" />
