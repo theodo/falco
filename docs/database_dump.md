@@ -16,7 +16,7 @@ Go to `File/Data Sources` and add a Postgres database. Fill in the Host and Port
 Test your connection, download drivers if needed, and you're done ! You now have access to the production database from Datagrip.
 
 ## Copy databases
-Enter your database: `databases/postgres/schemas/public/tables`. Select needed tables. You might want to select them in the order in which you will need to add them, as the export will be in that order. For Falco, the nedded bases are the ones in the `initial_dump.sql` script, in the same order. Then with a right clik, in `Dump Data to File` select `Single File`, `Skip computed columns` and `Overwrite existing files`. Then in the same menu, click `SQL Insert`. It will generate a SQL file.
+Enter your database: `databases/falco/schemas/public/tables`. Select needed tables. You might want to select them in the order in which you will need to add them, as the export will be in that order. For Falco, the nedded bases are the ones in the `initial_dump.sql` script, in the same order. Then with a right clik, in `Dump Data to File` select `Single File`, `Skip computed columns` and `Overwrite existing files`. Then in the same menu, click `SQL Insert`. It will generate a SQL file.
 
 ## Cut access to production database
 As we allowed access to production database, now that we have needed data, we need to cut the access ! Just revert the steps to restore to initial settings.
