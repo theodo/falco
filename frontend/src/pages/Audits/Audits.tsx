@@ -314,11 +314,12 @@ export const Audits: React.FunctionComponent<Props> = ({
         )}
       </PageTitleBlock>
       {
-        latestAuditStatusHistory && (auditStatus.error === latestAuditStatusHistory.status
-        ? <MessagePill messageType="error">
-            <FormattedMessage id="Audits.AuditStatusHistory.audit_failure" />;
-          </MessagePill>
-        : <MessagePill messageType="info">{getLastAuditMessage(latestAuditStatusHistory)}</MessagePill>)
+        latestAuditStatusHistory && auditStatus.success !== latestAuditStatusHistory.status &&
+          (auditStatus.error === latestAuditStatusHistory.status
+            ? <MessagePill messageType="error">
+                <FormattedMessage id="Audits.AuditStatusHistory.audit_failure" />;
+              </MessagePill>
+            : <MessagePill messageType="info">{getLastAuditMessage(latestAuditStatusHistory)}</MessagePill>)
       }
       <Title>
         <FormattedMessage id="Audits.title" />
