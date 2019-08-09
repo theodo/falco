@@ -252,8 +252,10 @@ def request_all_audits():
 def clean_old_audit_statuses():
     for audit in Audit.objects.all():
         statuses = AuditStatusHistory.objects.filter(audit=audit)
-        if "SUCCESS" in statuses.values_list("status", flat=True):
-            statuses.filter(status="PENDING").delete()
+        if AvailableStatuses.SUCCESS.value in statuses.values_list("status", flat=True):
+            statuses.filter(status=AvailableStatuses.PENDING.value).delete()
+            statuses.filter(status=AvailableStatuses.QUEUEING.value).delete()
+            statuses.filter(status=AvailableStatuses.RUNNING.value).delete()
 
 
 @shared_task
