@@ -10,7 +10,7 @@ export const modelizeAuditStatusHistory = (auditStatusHistory: ApiAuditStatusHis
         auditId: auditStatusHistory.audit_id,
         pageId: auditStatusHistory.page_id,
         scriptId: auditStatusHistory.script_id,
-        info: JSON.parse(auditStatusHistory.info)
+        info: auditStatusHistory.info ? JSON.parse(auditStatusHistory.info) : null
     };
 };
 

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { StatusType } from "redux/entities/auditStatusHistories/types";
+import { auditStatus, StatusType } from "redux/entities/auditStatusHistories/types";
 import styled from "styled-components";
 import { colorUsage, fontSize, fontWeight, getSpacing, lineHeight } from "stylesheet";
 
@@ -50,10 +50,12 @@ export const PageScriptTitle = styled.div`
 `;
 
 const COLOR_BY_STATUS = {
-  "SUCCESS": colorUsage.auditStatusHistoryIconSuccess,
-  "PENDING": colorUsage.auditStatusHistoryIconPending,
-  "REQUESTED": colorUsage.auditStatusHistoryIconPending,
-  "ERROR": colorUsage.auditStatusHistoryIconFailure,
+  [auditStatus.success]: colorUsage.auditStatusHistoryIconSuccess,
+  [auditStatus.running]: colorUsage.auditStatusHistoryIconPending,
+  [auditStatus.queuing]: colorUsage.auditStatusHistoryIconPending,
+  [auditStatus.pending]: colorUsage.auditStatusHistoryIconPending,
+  [auditStatus.requested]: colorUsage.auditStatusHistoryIconPending,
+  [auditStatus.error]: colorUsage.auditStatusHistoryIconFailure,
 };
 
 export const AuditStatusHistoryIcon = styled.span<AuditStatusHistoryIconProps>`
