@@ -54,6 +54,8 @@ type Props = {
     auditParametersId: string,
     pageOrScriptId: string,
     type: 'page' | 'script',
+    fromDate?: Date,
+    toDate?: Date
   ) => void;
   setCurrentAuditParametersId: (auditParametersId: string | null | undefined) => void;
   setCurrentPageId: (pageId: string | null | undefined) => void;
@@ -88,17 +90,19 @@ export const Audits: React.FunctionComponent<Props> = ({
 
   React.useEffect(
     () => {
+      const fromDate = new Date();
+      fromDate.setDate(fromDate.getDate() - 7 );
       if (page) {
         setCurrentPageId(pageOrScriptId ? pageOrScriptId : undefined);
         setCurrentScriptId(undefined);
         if (!sortedPageAuditResultsIds) {
-          fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'page');
+          fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'page', fromDate);
         };
       } else if (script) {
         setCurrentPageId(undefined);
         setCurrentScriptId(pageOrScriptId ? pageOrScriptId : undefined);
         if (!sortedScriptAuditResultsIds) {
-          fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'script');
+          fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'script', fromDate);
         };
       }
     },

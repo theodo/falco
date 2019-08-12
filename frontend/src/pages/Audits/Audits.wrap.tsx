@@ -51,7 +51,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     auditParametersId: string,
     pageOrScriptId: string,
     type: 'page' | 'script',
-  ) => dispatch(fetchAuditResultsRequest({ auditParametersId, pageOrScriptId, type })),
+    fromDate?: Date,
+    toDate?: Date
+  ) => dispatch(fetchAuditResultsRequest({ auditParametersId, pageOrScriptId, type, fromDate, toDate })),
   fetchProjectsRequest: (projectId: string) => dispatch(fetchProjectsRequest({ currentProjectId: projectId })),
   setCurrentAuditParametersId: (auditParametersId: string | null | undefined) =>
     dispatch(setCurrentAuditParametersId({ auditParametersId })),

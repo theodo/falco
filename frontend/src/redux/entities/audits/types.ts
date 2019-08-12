@@ -2,6 +2,8 @@ export interface AuditTypeAndId {
     auditParametersId: string;
     pageOrScriptId: string;
     type: 'page' | 'script';
+    fromDate?: Date;
+    toDate?: Date;
 };
 
 export interface AuditType {
