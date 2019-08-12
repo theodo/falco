@@ -1,3 +1,5 @@
+import datetime
+
 from audits.models import Audit, AuditResults, AuditStatusHistory, AvailableStatuses
 from audits.serializers import (
     AuditResultsSerializer,
@@ -102,13 +104,25 @@ def audits_results(request):
         page_uuid = request.GET.get("page")
         script_uuid = request.GET.get("script")
         audit_parameters_uuid = request.GET.get("audit_parameters")
+        from_date_param = request.GET.get("from_date")
+        to_date_param = request.GET.get("to_date")
+        epoch = datetime.date(1970, 1, 1)
+        from_date = (
+            from_date_param and datetime.datetime.strptime(from_date_param, "%Y-%m-%d")
+        ) or epoch
+        to_date = (
+            to_date_param and datetime.datetime.strptime(to_date_param, "%Y-%m-%d")
+        ) or datetime.datetime.now()
         if page_uuid is not None:
             page = get_object_or_404(Page, pk=page_uuid)
             check_if_member_of_project(request.user.id, page.project.uuid)
             audits = Audit.objects.filter(page=page_uuid)
             if audit_parameters_uuid:
                 audits = audits.filter(parameters=audit_parameters_uuid)
-            audits_results = AuditResults.objects.filter(audit__in=audits)
+            audits_results = AuditResults.objects.filter(audit__in=audits).filter(
+                created_at__gte=from_date,
+                created_at__lte=(to_date + datetime.timedelta(days=1)),
+            )
             serializer = AuditResultsSerializer(audits_results, many=True)
         elif script_uuid is not None:
             script = get_object_or_404(Script, pk=script_uuid)
