@@ -19,6 +19,16 @@ export interface OwnProps {
 interface Props extends OwnProps {
   auditResults: AuditResultsAsGraphData;
   metrics: MetricType[];
+  auditParametersId: string;
+  pageOrScriptId: string;
+  auditType: 'page' | 'script';
+  fetchAuditResultsRequest: (
+    auditParametersId: string,
+    pageOrScriptId: string,
+    type: 'page' | 'script',
+    fromDate?: Date,
+    toDate?: Date
+  ) => void;
 }
 
 export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = ({
@@ -26,28 +36,14 @@ export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = (
   auditResultIds,
   metrics,
   blockMargin,
+  auditParametersId,
+  pageOrScriptId,
+  auditType,
+  fetchAuditResultsRequest
 }) => {
   const [showMetricModal, toggleMetricModal] = React.useState(false);
   const [showGraphModal, toggleGraphModal] = React.useState(false);
   const [fullScreenedMetric, setFullScreenedMetric] = React.useState('' as MetricType);
-
-  if (!auditResultIds || !auditResults) {
-    return (
-      <Style.Container margin={blockMargin}>
-        <Loader />
-      </Style.Container>
-    );
-  }
-
-  if (0 === auditResultIds.length || 0 === auditResults.length) {
-    return (
-      <Style.Container margin={blockMargin}>
-        <MessagePill messageType="error">
-          <FormattedMessage id="Audits.no_audit" />
-        </MessagePill>
-      </Style.Container>
-    );
-  }
 
   const openMetricModal = () => {
     toggleMetricModal(true);
@@ -57,6 +53,7 @@ export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = (
   };
 
   const openGraphModal = (metric: MetricType) => () => {
+    fetchAuditResultsRequest(auditParametersId, pageOrScriptId, auditType)
     setFullScreenedMetric(metric);
     toggleGraphModal(true);
   };
