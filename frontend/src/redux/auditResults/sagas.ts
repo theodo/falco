@@ -22,8 +22,8 @@ export function* fetchAuditResults(action: ActionType<typeof fetchAuditResultsRe
   const { auditParametersId, pageOrScriptId, type, toDate, fromDate} = action.payload;
   const payload: { audit_parameters: string; page?: string; script?: string, from_date?: string, to_date?: string } = {
     audit_parameters: auditParametersId,
-    from_date: fromDate ? `${fromDate.getFullYear()}-${fromDate.getMonth() + 1}-${fromDate.getDate()}` : undefined,
-    to_date: toDate ? `${toDate.getFullYear()}-${toDate.getMonth() + 1}-${toDate.getDate()}` : undefined
+    from_date: fromDate ? fromDate.format('YYYY-MM-DD') : undefined,
+    to_date: toDate ? toDate.format('YYYY-MM-DD') : undefined
   };
   switch (type) {
     case 'page':

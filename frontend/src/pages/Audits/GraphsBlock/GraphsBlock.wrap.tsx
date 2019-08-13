@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -26,8 +27,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     auditParametersId: string,
     pageOrScriptId: string,
     type: 'page' | 'script',
-    fromDate?: Date,
-    toDate?: Date
+    fromDate?: dayjs.Dayjs,
+    toDate?: dayjs.Dayjs
   ) => dispatch(fetchAuditResultsRequest({ auditParametersId, pageOrScriptId, type, fromDate, toDate }))
 });
 

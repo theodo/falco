@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import * as React from 'react';
 
 import Loader from 'components/Loader';
@@ -26,8 +27,8 @@ interface Props extends OwnProps {
     auditParametersId: string,
     pageOrScriptId: string,
     type: 'page' | 'script',
-    fromDate?: Date,
-    toDate?: Date
+    fromDate?: dayjs.Dayjs,
+    toDate?: dayjs.Dayjs
   ) => void;
 }
 

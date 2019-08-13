@@ -1,9 +1,11 @@
+import dayjs from 'dayjs';
+
 export interface AuditTypeAndId {
     auditParametersId: string;
     pageOrScriptId: string;
     type: 'page' | 'script';
-    fromDate?: Date;
-    toDate?: Date;
+    fromDate?: dayjs.Dayjs;
+    toDate?: dayjs.Dayjs;
 };
 
 export interface AuditType {
