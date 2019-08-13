@@ -27,6 +27,7 @@ export const state = {
     }
   },
   auditResults: {
+    isLoading: false,
     byAuditId: {},
     sortedByPageId: {},
     sortedByScriptId: {},

@@ -5,6 +5,7 @@ import GraphModal from './GraphModal';
 
 import { getCurrentAuditParametersName, getCurrentPageName, getCurrentProjectName, getCurrentScriptName } from 'redux/parameters/selectors';
 
+import { isAuditResultLoading } from 'redux/auditResults/selectors';
 import { RootStateWithRouter } from 'redux/types';
 
 const mapStateToProps = (state: RootStateWithRouter) => ({
@@ -12,6 +13,7 @@ const mapStateToProps = (state: RootStateWithRouter) => ({
   projectName: getCurrentProjectName(state),
   pageName: getCurrentPageName(state),
   scriptName: getCurrentScriptName(state),
+  isLoading: isAuditResultLoading(state),
 });
 const mapDispatchToProps = null;
 

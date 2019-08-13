@@ -71,6 +71,7 @@ const initialScriptAuditResult = {
 };
 
 const initialState: AuditResultsState = {
+  isLoading: false,
   byAuditId: { ...initialPageAuditResult, ...initialScriptAuditResult },
   sortedByPageId: {
     [initialPageId]: {

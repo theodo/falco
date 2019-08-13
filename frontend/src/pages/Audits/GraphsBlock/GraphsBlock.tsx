@@ -44,6 +44,21 @@ export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = (
   const [showMetricModal, toggleMetricModal] = React.useState(false);
   const [showGraphModal, toggleGraphModal] = React.useState(false);
   const [fullScreenedMetric, setFullScreenedMetric] = React.useState('' as MetricType);
+  const [hasRequestedFullData, setHasRequestedFullData] = React.useState(false);
+
+  React.useEffect(
+    () => {
+      setHasRequestedFullData(false);
+    },
+    [pageOrScriptId]
+  )
+  
+  const fetchFullDataRequest = () => {
+    if(!hasRequestedFullData) {
+      fetchAuditResultsRequest(auditParametersId, pageOrScriptId, auditType);
+      setHasRequestedFullData(true);
+    }
+  }
 
   const openMetricModal = () => {
     toggleMetricModal(true);
@@ -53,7 +68,7 @@ export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = (
   };
 
   const openGraphModal = (metric: MetricType) => () => {
-    fetchAuditResultsRequest(auditParametersId, pageOrScriptId, auditType)
+    fetchFullDataRequest();
     setFullScreenedMetric(metric);
     toggleGraphModal(true);
   };
