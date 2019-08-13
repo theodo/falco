@@ -261,7 +261,7 @@ def clean_old_audit_statuses():
 @shared_task
 def get_wpt_audit_configurations():
     """gets all the available locations from WPT"""
-    response = requests.get("https://www.webpagetest.org/getLocations.php?f=json")
+    response = requests.get("https://www.webpagetest.org/getLocations.php?f=json&k=A")
 
     if response.status_code != 200:
         logging.error("Invalid response from WebPageTest API: non-200 response code")
