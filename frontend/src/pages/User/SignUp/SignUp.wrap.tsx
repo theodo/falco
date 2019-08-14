@@ -2,22 +2,22 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
 import { Dispatch } from 'redux';
-import { getIsAuthenticated, getIsSubmitting, getLoginError } from 'redux/login';
-import { loginUserRequest } from 'redux/login/actions';
+import { getIsAuthenticated } from 'redux/login';
 import { RootState } from 'redux/types';
 
+import { getIsSubmitting, getSignUpError, signUpUserRequest } from 'redux/sign-up';
 import { FormValues } from './service';
 import SignUpFormContainer from './SignUp';
 
 const mapStateToProps = (state: RootState) => ({
-  SignUpError: getLoginError(state),
+  signUpError: getSignUpError(state),
   isUserAuthenticated: getIsAuthenticated(state),
   isSubmittingFromStore: getIsSubmitting(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  SignUp: (values: FormValues, originLocation: string | undefined) =>
-    dispatch(loginUserRequest({ ...values, originLocation })),
+  signUp: (values: FormValues, originLocation: string | undefined) =>
+    dispatch(signUpUserRequest({ ...values, originLocation })),
 });
 
 export default withRouter(

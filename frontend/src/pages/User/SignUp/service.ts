@@ -2,12 +2,12 @@ import { RouteComponentProps } from 'react-router';
 
 export interface FormValues {
   username: string;
-  email?: string;
+  email: string;
   password: string;
 }
 
 interface SignUpServiceStateProps {
-  loginError: string | null;
+  signUpError: string | null;
   isUserAuthenticated: boolean;
   isSubmittingFromStore: boolean;
 }

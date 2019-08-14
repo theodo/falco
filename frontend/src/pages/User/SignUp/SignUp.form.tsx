@@ -32,17 +32,17 @@ interface InnerSignUpFormProps {
   */
   touched: {
     username?: boolean;
-    email?: string;
+    email?: boolean;
     password?: boolean;
   };
-  SignUp: (values: FormValues, originLocation: string | undefined) => void;
-  SignUpError: string | null;
+  signUp: (values: FormValues, originLocation: string | undefined) => void;
+  signUpError: string | null;
 }
 
 const InnerSignUpForm: React.FunctionComponent<
   InjectedFormikProps<InnerSignUpFormProps & RouteComponentProps, FormValues>
 > = props => {
-  const { errors, touched, isUserAuthenticated, isSubmittingFromStore, SignUpError } = props;
+  const { errors, touched, isUserAuthenticated, isSubmittingFromStore, signUpError } = props;
 
   if (isUserAuthenticated) {
     return <Redirect to={routeDefinitions.projectsList.path} />;
@@ -97,7 +97,7 @@ const InnerSignUpForm: React.FunctionComponent<
             disabled={isSubmittingFromStore}
           />
         </Styles.InputFieldContainer>
-        {SignUpError && (
+        {signUpError && (
           <MessagePill messageType="error" margin={`0 0 ${getSpacing(5)} 0`} padding={`${getSpacing(3)}`}>
             <FormattedMessage id="SignUp.sign_up_error" />
           </MessagePill>

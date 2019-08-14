@@ -7,9 +7,10 @@ import { sagas as auditStatusHistoriesSagas } from 'redux/entities/auditStatusHi
 import { sagas as projectsSagas } from 'redux/entities/projects';
 import { sagas as leadSagas } from 'redux/lead';
 import { sagas as loginSagas } from 'redux/login';
+import { sagas as signUpSagas } from 'redux/sign-up';
 import { sagas as userSagas } from 'redux/user';
 
 // single entry point to start all Sagas at once
 export default function* rootSaga() {
-  yield all([leadSagas(), loginSagas(), projectsSagas(), auditsSagas(), auditResultsSagas(), userSagas(), contentSagas(), auditStatusHistoriesSagas()]);
+  yield all([leadSagas(), loginSagas(), signUpSagas(), projectsSagas(), auditsSagas(), auditResultsSagas(), userSagas(), contentSagas(), auditStatusHistoriesSagas()]);
 }
