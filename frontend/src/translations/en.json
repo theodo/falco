@@ -61,9 +61,20 @@
     "password_label": "Password",
     "connect_button": "LOG IN",
     "connect_button_running": "LOGGING IN",
-    "error_username_required": "You must type username",
+    "error_username_required": "You must provide a username",
     "error_password_required": "You must type password",
     "login_error": "Those credentials seem incorrect.\nPlease try again."
+  },
+  "SignUp": {
+    "username_label": "Username",
+    "email_label": "Email address",
+    "password_label": "Password",
+    "connect_button": "SIGN UP",
+    "connect_button_running": "SIGNING UP",
+    "error_username_required": "You must provide a username",
+    "error_email_required": "You must provide an email address",
+    "error_password_required": "You must provide a password",
+    "sign_up_error": "Unable to sign you up.\nPlease try again."
   },
   "Menu": {
     "audit_parameters_selection": "Audits environment",
