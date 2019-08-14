@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import * as React from 'react';
 
 import Loader from 'components/Loader';
@@ -19,6 +20,16 @@ export interface OwnProps {
 interface Props extends OwnProps {
   auditResults: AuditResultsAsGraphData;
   metrics: MetricType[];
+  auditParametersId: string;
+  pageOrScriptId: string;
+  auditType: 'page' | 'script';
+  fetchAuditResultsRequest: (
+    auditParametersId: string,
+    pageOrScriptId: string,
+    type: 'page' | 'script',
+    fromDate?: dayjs.Dayjs,
+    toDate?: dayjs.Dayjs
+  ) => void;
 }
 
 export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = ({
@@ -26,27 +37,28 @@ export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = (
   auditResultIds,
   metrics,
   blockMargin,
+  auditParametersId,
+  pageOrScriptId,
+  auditType,
+  fetchAuditResultsRequest
 }) => {
   const [showMetricModal, toggleMetricModal] = React.useState(false);
   const [showGraphModal, toggleGraphModal] = React.useState(false);
   const [fullScreenedMetric, setFullScreenedMetric] = React.useState('' as MetricType);
+  const [hasRequestedFullData, setHasRequestedFullData] = React.useState(false);
 
-  if (!auditResultIds || !auditResults) {
-    return (
-      <Style.Container margin={blockMargin}>
-        <Loader />
-      </Style.Container>
-    );
-  }
-
-  if (0 === auditResultIds.length || 0 === auditResults.length) {
-    return (
-      <Style.Container margin={blockMargin}>
-        <MessagePill messageType="error">
-          <FormattedMessage id="Audits.no_audit" />
-        </MessagePill>
-      </Style.Container>
-    );
+  React.useEffect(
+    () => {
+      setHasRequestedFullData(false);
+    },
+    [pageOrScriptId]
+  )
+  
+  const fetchFullDataRequest = () => {
+    if(!hasRequestedFullData) {
+      fetchAuditResultsRequest(auditParametersId, pageOrScriptId, auditType);
+      setHasRequestedFullData(true);
+    }
   }
 
   const openMetricModal = () => {
@@ -57,6 +69,7 @@ export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = (
   };
 
   const openGraphModal = (metric: MetricType) => () => {
+    fetchFullDataRequest();
     setFullScreenedMetric(metric);
     toggleGraphModal(true);
   };

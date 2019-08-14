@@ -91,6 +91,7 @@ export const HeaderContent = styled.div<HeaderProps>`
   padding-right: ${getSpacing(22)};
   transition: box-shadow 0.3s ease-in-out;
   box-shadow: ${props => props.shouldHaveShadow && `0 10px 5px -2px ${colorUsage.headerShadowBox}`};
+  width: calc(100% - 580px);
 
   @media only screen and (max-width: ${responsiveThreshold}) {
     display: none;

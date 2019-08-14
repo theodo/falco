@@ -11,6 +11,7 @@ import Badge from 'components/Badge';
 import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
 import Select from 'components/Select';
+import dayjs from 'dayjs';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { auditStatus, AuditStatusHistoryType } from 'redux/entities/auditStatusHistories/types';
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
@@ -54,6 +55,8 @@ type Props = {
     auditParametersId: string,
     pageOrScriptId: string,
     type: 'page' | 'script',
+    fromDate?: dayjs.Dayjs,
+    toDate?: dayjs.Dayjs
   ) => void;
   setCurrentAuditParametersId: (auditParametersId: string | null | undefined) => void;
   setCurrentPageId: (pageId: string | null | undefined) => void;
@@ -88,17 +91,18 @@ export const Audits: React.FunctionComponent<Props> = ({
 
   React.useEffect(
     () => {
+      const fromDate = dayjs().subtract(7, 'day');
       if (page) {
         setCurrentPageId(pageOrScriptId ? pageOrScriptId : undefined);
         setCurrentScriptId(undefined);
         if (!sortedPageAuditResultsIds) {
-          fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'page');
+          fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'page', fromDate);
         };
       } else if (script) {
         setCurrentPageId(undefined);
         setCurrentScriptId(pageOrScriptId ? pageOrScriptId : undefined);
         if (!sortedScriptAuditResultsIds) {
-          fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'script');
+          fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'script', fromDate);
         };
       }
     },

@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { fetchAuditResultsSuccess } from '../actions';
+import { fetchAuditResultsRequest, fetchAuditResultsSuccess } from '../actions';
 import reducer, { AuditResultsState } from '../reducer';
 
 const initialPageAuditParametersId = '1111';
@@ -71,6 +71,7 @@ const initialScriptAuditResult = {
 };
 
 const initialState: AuditResultsState = {
+  isLoading: false,
   byAuditId: { ...initialPageAuditResult, ...initialScriptAuditResult },
   sortedByPageId: {
     [initialPageId]: {
@@ -214,15 +215,45 @@ describe('AuditResults reducer', () => {
         expect(reducer(initialState, action)).toEqual(expectedState);
       });
     });
-  });
 
-  describe('For audit results of `script` type', () => {
-    it('When scriptId already exists, should add audit results in existing key', () => {
+    describe('For audit results of `script` type', () => {
+      it('When scriptId already exists, should add audit results in existing key', () => {
+        const action = fetchAuditResultsSuccess({
+          byAuditId: newScriptAuditResultModelized,
+          auditParametersId: newScriptAuditParametersId,
+          pageId: undefined,
+          scriptId: initialScriptId,
+          sortedAuditResultsIds: { [newScriptAuditStepNumber]: [newScriptAuditResultId] },
+        });
+        const expectedState = {
+          ...initialState,
+          byAuditId: {
+            ...initialState.byAuditId,
+            ...newScriptAuditResultModelized,
+          },
+          sortedByScriptId: {
+            ...initialState.sortedByScriptId,
+            [initialScriptId]: {
+              byAuditParametersId: {
+                ...initialState.sortedByScriptId[initialScriptId].byAuditParametersId,
+                [newScriptAuditParametersId]: {
+                  [newScriptAuditStepNumber]: [newScriptAuditResultId],
+                },
+              },
+            },
+          },
+        };
+
+        expect(reducer(initialState, action)).toEqual(expectedState);
+      });
+    });
+
+    it('When scriptId does not exist, should create key in store and add audit results in this new key', () => {
       const action = fetchAuditResultsSuccess({
         byAuditId: newScriptAuditResultModelized,
         auditParametersId: newScriptAuditParametersId,
         pageId: undefined,
-        scriptId: initialScriptId,
+        scriptId: newScriptId,
         sortedAuditResultsIds: { [newScriptAuditStepNumber]: [newScriptAuditResultId] },
       });
       const expectedState = {
@@ -233,9 +264,8 @@ describe('AuditResults reducer', () => {
         },
         sortedByScriptId: {
           ...initialState.sortedByScriptId,
-          [initialScriptId]: {
+          [newScriptId]: {
             byAuditParametersId: {
-              ...initialState.sortedByScriptId[initialScriptId].byAuditParametersId,
               [newScriptAuditParametersId]: {
                 [newScriptAuditStepNumber]: [newScriptAuditResultId],
               },
@@ -248,32 +278,19 @@ describe('AuditResults reducer', () => {
     });
   });
 
-  it('When scriptId does not exist, should create key in store and add audit results in this new key', () => {
-    const action = fetchAuditResultsSuccess({
-      byAuditId: newScriptAuditResultModelized,
-      auditParametersId: newScriptAuditParametersId,
-      pageId: undefined,
-      scriptId: newScriptId,
-      sortedAuditResultsIds: { [newScriptAuditStepNumber]: [newScriptAuditResultId] },
+  describe('FETCH_AUDIT_RESULTS_REQUEST case', () => {
+    it('should set isLoading variable in state to true', () => {
+      const action = fetchAuditResultsRequest({  
+        auditParametersId: '',
+        pageOrScriptId: '',
+        type: 'page'});
+  
+      const expectedState = {
+        ... initialState,
+        isLoading: true
+      }
+  
+      expect(reducer(initialState, action)).toEqual(expectedState);
     });
-    const expectedState = {
-      ...initialState,
-      byAuditId: {
-        ...initialState.byAuditId,
-        ...newScriptAuditResultModelized,
-      },
-      sortedByScriptId: {
-        ...initialState.sortedByScriptId,
-        [newScriptId]: {
-          byAuditParametersId: {
-            [newScriptAuditParametersId]: {
-              [newScriptAuditStepNumber]: [newScriptAuditResultId],
-            },
-          },
-        },
-      },
-    };
-
-    expect(reducer(initialState, action)).toEqual(expectedState);
   });
 });

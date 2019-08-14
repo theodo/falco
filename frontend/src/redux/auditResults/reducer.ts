@@ -1,18 +1,22 @@
 import { AnyAction } from 'redux';
 import { ActionType, getType } from 'typesafe-actions';
 
-import { fetchAuditResultsSuccess } from './actions';
+import { fetchAuditResultsRequest, fetchAuditResultsSuccess } from './actions';
 import { AuditResultType, SortedPageAuditResultIds, SortedScriptAuditResultIds } from './types';
 
-export type AuditResultsAction = ActionType<typeof fetchAuditResultsSuccess>;
+export type AuditResultsAction = ActionType<
+  | typeof fetchAuditResultsRequest
+  | typeof fetchAuditResultsSuccess
+>;
 
 export type AuditResultsState = Readonly<{
+  isLoading: boolean,
   byAuditId: Readonly<Record<string, AuditResultType>>;
   sortedByPageId: Record<string, SortedPageAuditResultIds>;
   sortedByScriptId: Record<string, SortedScriptAuditResultIds>;
 }>;
 
-const initialState: AuditResultsState = { byAuditId: {}, sortedByPageId: {}, sortedByScriptId: {} };
+const initialState: AuditResultsState = { isLoading: false, byAuditId: {}, sortedByPageId: {}, sortedByScriptId: {} };
 
 const reducer = (state: AuditResultsState = initialState, action: AnyAction) => {
   const typedAction = action as AuditResultsAction;
@@ -67,7 +71,13 @@ const reducer = (state: AuditResultsState = initialState, action: AnyAction) => 
         sortedByScriptId: {
           ...newSortedByScriptId,
         },
+        isLoading: false
       };
+    case getType(fetchAuditResultsRequest):
+      return {
+        ...state,
+        isLoading: true
+      }
     default:
       return state;
   }

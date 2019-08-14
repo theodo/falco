@@ -1,11 +1,18 @@
+import dayjs from 'dayjs';
+import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { fetchAuditResultsRequest } from 'redux/auditResults';
 import {
   selectAuditScriptSteps,
   selectPageAuditResultsIds,
   selectScriptAuditResultsIds,
 } from 'redux/auditResults/selectors';
+import { getAuditParameters } from 'redux/entities/auditParameters/selectors';
+import { getPage, getPageLatestAuditStatusHistory } from 'redux/entities/pages/selectors';
 import { fetchProjectsRequest } from 'redux/entities/projects';
 import { getProject } from 'redux/entities/projects/selectors';
+import { getScript, getScriptLatestAuditStatusHistory } from 'redux/entities/scripts/selectors';
 import {
   setCurrentAuditParametersId,
   setCurrentPageId,
@@ -13,13 +20,6 @@ import {
   setCurrentScriptStepId,
 } from 'redux/parameters';
 import { RootState } from 'redux/types';
-
-import { injectIntl } from 'react-intl';
-import { Dispatch } from 'redux';
-import { fetchAuditResultsRequest } from 'redux/auditResults';
-import { getAuditParameters } from 'redux/entities/auditParameters/selectors';
-import { getPage, getPageLatestAuditStatusHistory } from 'redux/entities/pages/selectors';
-import { getScript, getScriptLatestAuditStatusHistory } from 'redux/entities/scripts/selectors';
 import { Audits, OwnProps } from './Audits';
 
 const mapStateToProps = (state: RootState, props: OwnProps) => ({
@@ -51,7 +51,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     auditParametersId: string,
     pageOrScriptId: string,
     type: 'page' | 'script',
-  ) => dispatch(fetchAuditResultsRequest({ auditParametersId, pageOrScriptId, type })),
+    fromDate?: dayjs.Dayjs,
+    toDate?: dayjs.Dayjs
+  ) => dispatch(fetchAuditResultsRequest({ auditParametersId, pageOrScriptId, type, fromDate, toDate })),
   fetchProjectsRequest: (projectId: string) => dispatch(fetchProjectsRequest({ currentProjectId: projectId })),
   setCurrentAuditParametersId: (auditParametersId: string | null | undefined) =>
     dispatch(setCurrentAuditParametersId({ auditParametersId })),

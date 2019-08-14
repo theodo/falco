@@ -87,3 +87,7 @@ export const selectScriptAuditResultsIds = (
   }
   return null;
 };
+
+export const isAuditResultLoading = (state: RootState): boolean => {
+  return state.auditResults.isLoading;
+};

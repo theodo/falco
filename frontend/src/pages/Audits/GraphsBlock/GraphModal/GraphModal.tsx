@@ -2,6 +2,7 @@ import React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import Modal from 'react-modal';
 
+import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
 import MetricGraph from 'components/MetricGraph';
 import Close from 'icons/Close';
@@ -20,6 +21,7 @@ interface Props {
   metric: MetricType;
   auditResults: AuditResultsAsGraphData;
   show: boolean;
+  isLoading: boolean;
   close: () => void;
 }
 
@@ -33,6 +35,7 @@ const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> 
   pageName,
   scriptName,
   currentAuditParametersName,
+  isLoading
 }) => {
   if (!projectName) {
     return (
@@ -101,12 +104,15 @@ const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> 
       >
         <Close color={colorUsage.graphModalToggleButton} />
       </CloseContainer>
-      <MetricGraph
-        fullscreen={true}
-        auditResults={auditResults}
-        metrics={[metric]}
-        showOnlyLastWeek={false}
-      />
+      {isLoading 
+        ? <Loader /> 
+        : <MetricGraph
+            fullscreen={true}
+            auditResults={auditResults}
+            metrics={[metric]}
+            showOnlyLastWeek={false}
+        />
+      }
     </Modal>
   );
 };
