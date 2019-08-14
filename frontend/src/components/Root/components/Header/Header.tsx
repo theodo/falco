@@ -27,11 +27,13 @@ import {
 interface Props {
   currentURL: string;
   shouldDisplayWhatsNewNotification: boolean;
+  isUserAuthenticated: boolean,
 }
 
 export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
   currentURL,
   shouldDisplayWhatsNewNotification,
+  isUserAuthenticated,
   intl,
 }) => {
   const [isAccountMenuVisible, setIsAccountMenuVisible] = React.useState(false);
@@ -115,8 +117,7 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
   };
 
   const isLandingPage = currentURL === routeDefinitions.landing.path;
-  const isLoginPage = currentURL === routeDefinitions.login.path;
-  const shouldDisplayConnectedUserHeader = !isLandingPage && !isLoginPage;
+  const shouldDisplayConnectedUserHeader = isUserAuthenticated;
 
   const [scrollPosition, setScrollPostition] = useState(0);
   window.addEventListener('scroll', () => {

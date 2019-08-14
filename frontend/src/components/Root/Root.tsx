@@ -20,13 +20,13 @@ addLocaleData([...fr, ...en]);
 
 // Your component own properties
 interface Props extends RouteComponentProps<any> {
+  isUserAuthenticated: boolean;
   children: ReactNode;
 }
 
-const Root: React.FunctionComponent<Props> = ({ children, location }) => {
+const Root: React.FunctionComponent<Props> = ({ children, location, isUserAuthenticated }) => {
   const isLandingPage = location.pathname === routeDefinitions.landing.path;
-  const isLoginPage = location.pathname === routeDefinitions.login.path;
-  const shouldDisplayMenu = !isLandingPage && !isLoginPage;
+  const shouldDisplayMenu = isUserAuthenticated;
 
   const userLanguage =
     (navigator.languages && navigator.languages[0]) || navigator.language || 'fr';
@@ -39,7 +39,7 @@ const Root: React.FunctionComponent<Props> = ({ children, location }) => {
       <PageContainer>
         <PageBackground isLandingPage={isLandingPage} />
         <Page>
-          <Header />
+          <Header isUserAuthenticated={isUserAuthenticated}/>
           <Body>
             {shouldDisplayMenu && <Menu />}
             <Content shouldDisplayMenu={shouldDisplayMenu}>{children}</Content>
