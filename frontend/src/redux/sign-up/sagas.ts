@@ -1,9 +1,7 @@
-import { push } from 'connected-react-router';
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import { pause } from 'services/utils';
 import { ActionType, getType } from 'typesafe-actions';
 
-import { routeDefinitions } from 'routes';
 import { makePostRequest } from 'services/networking/request';
 
 import { loginUserRequest } from 'redux/login';
