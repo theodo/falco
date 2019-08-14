@@ -6,6 +6,7 @@ import { ActionType, getType } from 'typesafe-actions';
 import { routeDefinitions } from 'routes';
 import { makePostRequest } from 'services/networking/request';
 
+import { loginUserRequest } from 'redux/login';
 import {
   signUpUserClearError,
   signUpUserError,
@@ -23,10 +24,7 @@ export function* signUpUser(action: ActionType<typeof signUpUserRequest>) {
       call(pause, 1000),
     ]);
     yield put(signUpUserSuccess());
-    const urlToRedirect = action.payload.originLocation
-      ? action.payload.originLocation
-      : routeDefinitions.projectsList.path;
-    yield put(push(urlToRedirect));
+    yield put(loginUserRequest(action.payload))
   } catch (error) {
     yield put(signUpUserError({ errorMessage: error.message }));
   }
