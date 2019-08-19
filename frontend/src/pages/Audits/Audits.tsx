@@ -321,7 +321,7 @@ export const Audits: React.FunctionComponent<Props> = ({
         latestAuditStatusHistory && auditStatus.success !== latestAuditStatusHistory.status &&
           (auditStatus.error === latestAuditStatusHistory.status
             ? <MessagePill messageType="error">
-                <FormattedMessage id="Audits.AuditStatusHistory.audit_failure" />;
+                <FormattedMessage id="Audits.AuditStatusHistory.audit_failure" />
               </MessagePill>
             : <MessagePill messageType="info">{getLastAuditMessage(latestAuditStatusHistory)}</MessagePill>)
       }
