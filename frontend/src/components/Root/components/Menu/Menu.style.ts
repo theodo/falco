@@ -17,7 +17,9 @@ export const Container = styled.div`
   padding-left: ${getSpacing(10)};
   padding-top: ${getSpacing(4)};
   width: 380px;
-  height: 100%;
+  height: calc(100% - 120px);
+  display: flex;
+  flex-direction: column;
 `;
 
 export const ProjectName = styled.div`
@@ -26,10 +28,11 @@ export const ProjectName = styled.div`
   font-family: ${fontFamily.mainSans};
   font-size: ${fontSize.h2Text};
   font-weight: ${fontWeight.h2Text};
-  margin-bottom: ${getSpacing(4)};
+  margin-bottom: ${getSpacing(3)};
   padding: 0 ${getSpacing(3)};
-  overflow: hidden;
+  overflow-x: hidden;
   text-overflow: ellipsis;
+  min-height: fit-content;
 `;
 
 export const AuditParametersBlock = styled.div`
@@ -57,6 +60,10 @@ export const Audits = styled.div`
   padding: 0 ${getSpacing(3)} ${getSpacing(4)} ${getSpacing(3)};
 `;
 
+export const AuditsAndScriptsContainer = styled.div`
+  overflow: scroll;
+`;
+
 export const LaunchAuditsButton = styled.button`
   width: 250px;
   border: none;
@@ -64,7 +71,7 @@ export const LaunchAuditsButton = styled.button`
   margin-left: ${getSpacing(3)};
   margin-bottom: ${getSpacing(4)};
   margin-top: ${getSpacing(2)};
-  align-self: center;
+  align-self: flex-start;
   border-radius: 6px;
   color: ${colorUsage.menuLauchAuditsButtonText};
   background-color: ${colorUsage.menuLauchAuditsButtonBackground};
