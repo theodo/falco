@@ -14,9 +14,10 @@ import {
   AuditParametersBlock,
   AuditParametersTitle,
   Audits,
+  AuditsAndScriptsContainer,
   Container,
   LaunchAuditsButton,
-  ProjectName,
+  ProjectName
 } from './Menu.style';
 
 interface AuditParametersOption {
@@ -139,18 +140,20 @@ export const Menu: React.FunctionComponent<Props> = ({
         </AuditParametersBlock>
       )}
       <Audits>Audits</Audits>
-      {project.pagesIds.map((pageId: string) =>
-        <MenuPageScriptItem
-          key={pageId}
-          pageId={pageId}
-        />
-      )}
-      {project.scriptsIds.map((scriptId: string) =>
-        <MenuPageScriptItem
-          key={scriptId}
-          scriptId={scriptId}
-        />
-      )}
+      <AuditsAndScriptsContainer>
+        {project.pagesIds.map((pageId: string) =>
+          <MenuPageScriptItem
+            key={pageId}
+            pageId={pageId}
+          />
+        )}
+        {project.scriptsIds.map((scriptId: string) =>
+          <MenuPageScriptItem
+            key={scriptId}
+            scriptId={scriptId}
+          />
+        )}
+      </AuditsAndScriptsContainer>
     </Container>
   );
 };
