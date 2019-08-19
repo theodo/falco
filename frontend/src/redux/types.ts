@@ -11,11 +11,13 @@ import { ProjectsAction, ProjectsState } from './entities/projects';
 import { ScriptsAction, ScriptsState } from './entities/scripts';
 import { LoginAction, LoginState } from './login';
 import { ParametersAction, ParametersState } from './parameters';
+import { SignUpAction, SignUpState } from './sign-up';
 import { UserAction, UserState } from './user';
 
 export type RootState = Readonly<{
   lead: LeadState;
   login: LoginState & PersistPartial;
+  signUp: SignUpState;
   parameters: ParametersState & PersistPartial;
   entities: {
     projects: ProjectsState;
@@ -35,6 +37,7 @@ export type RootStateWithRouter = RootState & Readonly<{ router: RouterState }>;
 export type RootAction =
   | LeadAction
   | LoginAction
+  | SignUpAction
   | ParametersAction
   | ProjectsAction
   | PagesAction

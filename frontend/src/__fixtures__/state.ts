@@ -10,6 +10,10 @@ export const state = {
     isSubmitting: false,
     _persist: {} as PersistState
   },
+  signUp: {
+    signUpError: 'some sign up error message',
+    isSubmitting: false,
+  },
   parameters: {
     currentAuditParametersId: null,
     currentPageId: null,

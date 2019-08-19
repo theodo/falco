@@ -8,7 +8,8 @@ import { getIsAuthenticated } from 'redux/login/selectors';
 
 const Audits = lazy(() => import('./pages/Audits'));
 const Landing = lazy(() => import('./pages/Landing'));
-const Login = lazy(() => import('./pages/Login'));
+const Login = lazy(() => import('./pages/User/Login'));
+const SignUp = lazy(() => import('./pages/User/SignUp'));
 const Project = lazy(() => import('./pages/Project'));
 const Projects = lazy(() => import('./pages/Projects'));
 
@@ -35,6 +36,13 @@ export const routeDefinitions: Record<string, RouteDefinition> = {
   login: {
     path: '/login',
     component: Login,
+    exact: true,
+    strict: false,
+    isAuthenticated: false,
+  },
+  signUp: {
+    path: '/sign-up',
+    component: SignUp,
     exact: true,
     strict: false,
     isAuthenticated: false,

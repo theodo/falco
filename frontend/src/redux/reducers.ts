@@ -12,6 +12,7 @@ import { reducer as entities } from './entities'
 import { reducer as lead } from './lead';
 import { reducer as login } from './login';
 import { reducer as parameters } from './parameters';
+import { reducer as signUp } from './sign-up';
 import { reducer as user } from './user';
 
 import { RootAction, RootState } from './types';
@@ -31,5 +32,6 @@ export default function createReducer(asyncReducers: {
     auditResults,
     content,
     user,
+    signUp,
   });
 }

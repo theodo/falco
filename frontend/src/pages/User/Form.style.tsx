@@ -15,7 +15,7 @@ const Styles = {
     flex-direction: column;
   `,
 
-  LoginForm: styled(Form)`
+  Form: styled(Form)`
     display: flex;
     flex-direction: column;
     align-items: center;

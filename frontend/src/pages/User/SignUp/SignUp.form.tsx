@@ -8,12 +8,13 @@ import { routeDefinitions } from 'routes';
 import { getSpacing } from 'stylesheet';
 
 import MessagePill from 'components/MessagePill';
-import Styles from './Login.style';
+import Styles from '../Form.style';
 import { FormValues } from './service';
 
-interface InnerLoginFormProps {
+interface InnerSignUpFormProps {
   errors: {
     username?: string;
+    email?: string;
     password?: string;
   };
   isUserAuthenticated: boolean;
@@ -21,26 +22,27 @@ interface InnerLoginFormProps {
   /*
     isSubmittingFromStore:
     ----------------------
-      This prop is used to know if login form is currently being submitted to backend, and make
+      This prop is used to know if SignUp form is currently being submitted to backend, and make
       connect button disabled/enabled according to this "submitting" state.
       This prop needs to be injected from store, and can not be managed internally in component,
-      because we need to wait for login API call response before making connect button enabled
-      again, call which is managed in login saga.
+      because we need to wait for SignUp API call response before making connect button enabled
+      again, call which is managed in SignUp saga.
       This prop can not be simply named isSubmitting because this name is already used internally
       by Formik component.
   */
   touched: {
     username?: boolean;
+    email?: boolean;
     password?: boolean;
   };
-  login: (values: FormValues, originLocation: string | undefined) => void;
-  loginError: string | null;
+  signUp: (values: FormValues, originLocation: string | undefined) => void;
+  signUpError: string | null;
 }
 
-const InnerLoginForm: React.FunctionComponent<
-  InjectedFormikProps<InnerLoginFormProps & RouteComponentProps, FormValues>
+const InnerSignUpForm: React.FunctionComponent<
+  InjectedFormikProps<InnerSignUpFormProps & RouteComponentProps, FormValues>
 > = props => {
-  const { errors, touched, isUserAuthenticated, isSubmittingFromStore, loginError } = props;
+  const { errors, touched, isUserAuthenticated, isSubmittingFromStore, signUpError } = props;
 
   if (isUserAuthenticated) {
     return <Redirect to={routeDefinitions.projectsList.path} />;
@@ -50,12 +52,12 @@ const InnerLoginForm: React.FunctionComponent<
     if (isSubmittingFromStore) {
       return {
         className: 'submittingRequest',
-        translationKey: 'Login.connect_button_running',
+        translationKey: 'SignUp.connect_button_running',
       };
     } else {
       return {
         className: 'normal',
-        translationKey: 'Login.connect_button',
+        translationKey: 'SignUp.connect_button',
       };
     }
   };
@@ -64,12 +66,12 @@ const InnerLoginForm: React.FunctionComponent<
 
   return (
     <Styles.Container>
-      <Styles.LoginForm>
+      <Styles.Form>
         <Styles.InputFieldContainer margin={`0 0 ${getSpacing(5)} 0`}>
           <Styles.InputField
             type="text"
             name="username"
-            label={'Login.username_label'}
+            label={'SignUp.username_label'}
             component={Input}
             error={touched.username && errors.username}
             disabled={isSubmittingFromStore}
@@ -77,17 +79,27 @@ const InnerLoginForm: React.FunctionComponent<
         </Styles.InputFieldContainer>
         <Styles.InputFieldContainer margin={`0 0 ${getSpacing(5)} 0`}>
           <Styles.InputField
+            type="email"
+            name="email"
+            label={'SignUp.email_label'}
+            component={Input}
+            error={touched.email && errors.email}
+            disabled={isSubmittingFromStore}
+          />
+        </Styles.InputFieldContainer>
+        <Styles.InputFieldContainer margin={`0 0 ${getSpacing(5)} 0`}>
+          <Styles.InputField
             type="password"
             name="password"
-            label={'Login.password_label'}
+            label={'SignUp.password_label'}
             component={Input}
             error={touched.password && errors.password}
             disabled={isSubmittingFromStore}
           />
         </Styles.InputFieldContainer>
-        {loginError && (
+        {signUpError && (
           <MessagePill messageType="error" margin={`0 0 ${getSpacing(5)} 0`} padding={`${getSpacing(3)}`}>
-            <FormattedMessage id="Login.login_error" />
+            <FormattedMessage id="SignUp.sign_up_error" />
           </MessagePill>
         )}
         <Styles.ConnectButton type="submit" className={submitButtonParameters.className}>
@@ -96,9 +108,9 @@ const InnerLoginForm: React.FunctionComponent<
             <FormattedMessage id={submitButtonParameters.translationKey} />
           </Styles.ConnectButtonContent>
         </Styles.ConnectButton>
-      </Styles.LoginForm>
+      </Styles.Form>
     </Styles.Container>
   );
 };
 
-export default InnerLoginForm;
+export default InnerSignUpForm;
