@@ -207,6 +207,12 @@
     "lighthouseFirstCPUIdle": "First CPU Idle",
     "lighthouseMaxPotentialFirstInputDelay": "Max Potential First Input Delay"
   },
+  "Welcome": {
+    "title": "Welcome to Falco !",
+    "noProject": "You don't have access to any project for now.",
+    "createProject": "To create a new project, please contact Jaafar (jaafarr@theodo.fr) or Nicolas (nicolasgo@theodo.fr).",
+    "joinProject": "To join an existing project, please contact the project administrator."
+  },
   "components": {
     "MetricGraph": {
       "tooltipDate": "On {day} at {time}",

@@ -42,3 +42,4 @@ Developers (see [contributors](../../graphs/contributors)):
 - **Etienne Grall** (etienneg@theodo.fr)
 - **Vincent Larrat** (vincentla@theodo.fr)
 - **François Farge** (francoisf@theodo.fr)
+- **Guillaume Cornet** (guillaumec@theodo.fr)

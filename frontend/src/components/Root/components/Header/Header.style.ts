@@ -11,7 +11,7 @@ import {
 } from 'stylesheet';
 
 interface MenuProps {
-  shouldDisplayConnectedUserHeader: boolean;
+  isMenuDisplayed: boolean;
 }
 
 interface HeaderProps {
@@ -22,7 +22,7 @@ export const HeaderMenu = styled.div<MenuProps>`
   display: flex;
   padding-left: ${getSpacing(10)};
   width: 380px;
-  background-color: ${props => props.shouldDisplayConnectedUserHeader && colorUsage.menuBackground};
+  background-color: ${props => props.isMenuDisplayed && colorUsage.menuBackground};
 
   @media only screen and (max-width: ${responsiveThreshold}) {
     width: 100%;
