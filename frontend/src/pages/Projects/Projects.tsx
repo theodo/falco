@@ -6,6 +6,7 @@ import { routeDefinitions } from 'routes';
 
 import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
+import Welcome from 'components/Welcome';
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import Style from './Projects.style';
 
@@ -28,9 +29,7 @@ const Projects: React.FunctionComponent<Props> = ({ fetchProjectsRequest, projec
   if (0 === projects.length) {
     return (
       <Style.Container>
-        <MessagePill messageType="error">
-          <FormattedMessage id="Projects.no_project_error" />
-        </MessagePill>
+        <Welcome />
       </Style.Container>
     );
   }
