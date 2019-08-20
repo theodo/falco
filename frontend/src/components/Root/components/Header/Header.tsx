@@ -28,12 +28,14 @@ interface Props {
   currentURL: string;
   shouldDisplayWhatsNewNotification: boolean;
   isUserAuthenticated: boolean,
+  isMenuDisplayed: boolean
 }
 
 export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
   currentURL,
   shouldDisplayWhatsNewNotification,
   isUserAuthenticated,
+  isMenuDisplayed,
   intl,
 }) => {
   const [isAccountMenuVisible, setIsAccountMenuVisible] = React.useState(false);
@@ -127,7 +129,7 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
   return (
     <HeaderContainer ref={headerContainerRef}>
       <HeaderBlock shouldHaveShadow={isLandingPage && scrollPosition > 10}>
-        <HeaderMenu shouldDisplayConnectedUserHeader={shouldDisplayConnectedUserHeader}>
+        <HeaderMenu isMenuDisplayed={isMenuDisplayed}>
           <LogoContainer
             title={
               shouldDisplayConnectedUserHeader
