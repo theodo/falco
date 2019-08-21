@@ -5,7 +5,7 @@ import Style from './Welcome.style';
 type Props = {
 } & InjectedIntlProps;
 
-const Welcome: React.FunctionComponent<Props> = ({ }) => {
+const Welcome: React.FunctionComponent<Props> = () => {
     return (
       <Style.WelcomeBlockContainer>
         <Style.WelcomeBlockTitle>

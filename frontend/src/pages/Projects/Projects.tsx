@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { InjectedIntlProps } from 'react-intl';
 import { Redirect } from 'react-router';
 import { ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
 
 import Loader from 'components/Loader';
-import MessagePill from 'components/MessagePill';
 import Welcome from 'components/Welcome';
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import Style from './Projects.style';
