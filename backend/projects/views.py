@@ -1,4 +1,5 @@
-from django.http import JsonResponse
+from core.models import User
+from django.http import HttpResponse, JsonResponse
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from projects.models import Page, Project
@@ -126,3 +127,30 @@ def project_page_detail(request, project_uuid, page_uuid):
         check_if_admin_of_project(request.user.id, project.id)
         page.delete()
         return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(["POST"])
+@permission_classes([permissions.IsAuthenticated])
+def project_members(request, project_uuid):
+    project = get_object_or_404(Project, pk=project_uuid)
+    check_if_admin_of_project(request.user.id, project.uuid)
+
+    data = JSONParser().parse(request)
+    if "user_id" in data:
+        if not Project.objects.filter(uuid=project_uuid, members__id=data["user_id"]):
+            user = User.objects.filter(id=data["user_id"])
+            if not user:
+                return HttpResponse(
+                    "No user found with this id", status=status.HTTP_404_NOT_FOUND
+                )
+            project = Project.objects.filter(uuid=project_uuid).first()
+            project.members.add(user.first())
+            serializer = ProjectSerializer(project)
+            return JsonResponse(serializer.data)
+        return HttpResponse(
+            "The user is already a member of the project",
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+    return HttpResponse(
+        "You must provide a user_id", status=status.HTTP_400_BAD_REQUEST
+    )
