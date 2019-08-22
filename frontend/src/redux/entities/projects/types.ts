@@ -1,3 +1,4 @@
+import { ApiUser, User } from "redux/user/types";
 import { ApiAuditParametersType } from "../auditParameters/types";
 import { ApiPageType } from "../pages/types";
 import { ApiScriptType } from "../scripts/types";
@@ -11,6 +12,8 @@ export interface ProjectType {
   screenshotUrl: string;
   latestAuditAt: string;
   auditParametersIds: string[];
+  members: User[];
+  admins: User[]
 };
 
 export interface ApiProjectType {
@@ -21,6 +24,8 @@ export interface ApiProjectType {
   audit_parameters_list: ApiAuditParametersType[];
   screenshot_url: string;
   latest_audit_at: string;
+  members: ApiUser[];
+  admins: ApiUser[];
 };
 
 export interface ApiProjectResponseType {

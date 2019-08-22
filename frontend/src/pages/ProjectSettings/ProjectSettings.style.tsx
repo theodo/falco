@@ -42,7 +42,6 @@ ProjectMembersBlock: styled.div`
   border: solid 1px ${colorUsage.projectMembersContainerBorder};
   margin: ${getSpacing(4)} 0;
   border-radius: 3px;
-  min-height: 200px;
   font-family: ${fontFamily.mainSans};
   font-size: ${fontSize.inputText};
   line-height: ${lineHeight.inputText};

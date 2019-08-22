@@ -8,6 +8,7 @@ import { routeDefinitions } from 'routes';
 import MessagePill from 'components/MessagePill';
 import { AuditParametersType } from 'redux/entities/auditParameters/types';
 import { ProjectType } from 'redux/entities/projects/types';
+import { UserState } from 'redux/user';
 import { getSpacing } from 'stylesheet';
 import MenuPageScriptItem from '../MenuPageScriptItem';
 import {
@@ -27,6 +28,7 @@ interface AuditParametersOption {
 };
 
 export interface OwnProps {
+  user: UserState;
   auditParametersId: string | null;
   currentPageId: string | null;
   project?: ProjectType;
@@ -40,6 +42,7 @@ export interface OwnProps {
 type Props = OwnProps & InjectedIntlProps;
 
 export const Menu: React.FunctionComponent<Props> = ({
+  user,
   auditParametersId,
   currentPageId,
   project,
@@ -140,13 +143,13 @@ export const Menu: React.FunctionComponent<Props> = ({
           />
         </AuditParametersBlock>
       )}
-      <ProjectSettingsLink
+      {user && project.admins.map(admin => admin.username).includes(user.username) && <ProjectSettingsLink
         key={project.uuid}
         to={routeDefinitions.projectSettings.path.replace(':projectId', project.uuid)}
         margin={`0 0 ${getSpacing(4)} ${getSpacing(4)}`}
       >
         <FormattedMessage id="Menu.manage_project_settings" />
-      </ProjectSettingsLink>
+      </ProjectSettingsLink>}
       <Audits>Audits</Audits>
       <AuditsAndScriptsContainer>
         {project.pagesIds.map((pageId: string) =>
