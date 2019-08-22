@@ -5,6 +5,15 @@ from core.models import User
 
 
 class CustomUserAdmin(UserAdmin):
+    list_display = (
+        "username",
+        "email",
+        "first_name",
+        "last_name",
+        "is_staff",
+        "last_visited_at",
+    )
+
     add_fieldsets = (
         (
             None,
