@@ -81,7 +81,8 @@
     "page_badge": "PAGE",
     "script_badge": "SCRIPT",
     "launch_audits": "Launch audits manually",
-    "running_audits_number": "{number} running {number,plural,one {audit} other {audits}}"
+    "running_audits_number": "{number} running {number,plural,one {audit} other {audits}}",
+    "manage_project_settings": "Manage project settings →"
   },
   "Project": {
     "project_error": "It seems that you are not authorized to access this project.\n\nPlease try again or contact your administrator to get granted.",
@@ -91,6 +92,10 @@
   "Projects": {
     "no_project_error": "It seems that you have no access to any project.\n\nPlease try again or contact your administrator to get granted.",
     "title": "Projects"
+  },
+  "ProjectSettings": {
+    "settings": "Settings",
+    "project_members": "Project members"
   },
   "Audits": {
     "title": "Dashboard for the last week",

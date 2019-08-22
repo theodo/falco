@@ -17,7 +17,8 @@ import {
   AuditsAndScriptsContainer,
   Container,
   LaunchAuditsButton,
-  ProjectName
+  ProjectName,
+  ProjectSettingsLink
 } from './Menu.style';
 
 interface AuditParametersOption {
@@ -139,6 +140,13 @@ export const Menu: React.FunctionComponent<Props> = ({
           />
         </AuditParametersBlock>
       )}
+      <ProjectSettingsLink
+        key={project.uuid}
+        to={routeDefinitions.projectSettings.path.replace(':projectId', project.uuid)}
+        margin={`0 0 ${getSpacing(4)} ${getSpacing(4)}`}
+      >
+        <FormattedMessage id="Menu.manage_project_settings" />
+      </ProjectSettingsLink>
       <Audits>Audits</Audits>
       <AuditsAndScriptsContainer>
         {project.pagesIds.map((pageId: string) =>
