@@ -7,7 +7,9 @@ import Badge from 'components/Badge';
 import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
-import { User } from 'redux/user/types';
+import { modelizeUser } from 'redux/user/modelizer';
+import { ApiUser, User } from 'redux/user/types';
+import { makeGetRequest } from 'services/networking/request';
 import { colorUsage } from 'stylesheet';
 import Style from './ProjectSettings.style';
 
@@ -27,14 +29,38 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
   intl,
   project,
 }) => {
-
   interface DisplayedUser {
     isAdmin: boolean,
+    id: string,
     emailAddress: string,
     username: string
   }
 
   useFetchProjectIfUndefined(fetchProjectsRequest, match.params.projectId, project);
+
+  const [allUsers, setAllUsers] = React.useState([]);
+
+  const fetchAllUsers = () => {
+    const request = makeGetRequest('/api/core/user/all', true);
+    request
+      .then((response) => {
+        if(response) { 
+          setAllUsers(response.body.map((apiUser:ApiUser) => modelizeUser(apiUser)));
+        }
+      })
+  }
+
+  React.useEffect(
+    () => {
+      fetchAllUsers();
+    },
+    [],
+  );
+
+  const projectMembersSelectOptions = allUsers && allUsers.map((member: User) => ({
+    value: member.id,
+    label: member.username,
+  }));
 
   const mergeAdminsAndMembers = (admins: User[], members: User[]) =>
   {
@@ -81,6 +107,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
       </Style.PageSubTitle>
       <Style.SelectUser
         placeholder={intl.formatMessage({ id: "ProjectSettings.add_member" })}
+        options={projectMembersSelectOptions}
       />
       <Style.ProjectMembersBlock>
         {mergeAdminsAndMembers(project.admins, project.members).map((user: DisplayedUser) => 
