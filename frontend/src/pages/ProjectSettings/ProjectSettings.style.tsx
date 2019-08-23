@@ -55,6 +55,16 @@ ProjectMemberContainer: styled.div`
   align-items: center;
   padding: 0 20px;
 
+  :first-child {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+
+  :last-child {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
+
   :nth-child(odd){
     background-color: ${colorUsage.oddProjectMemberBackground};
   }
