@@ -9,6 +9,7 @@ export type UserState = Readonly<{
   firstName: string;
   lastName: string;
   emailAddress: string;
+  username: string;
 } | null>;
 
 const initialState: UserState = null;

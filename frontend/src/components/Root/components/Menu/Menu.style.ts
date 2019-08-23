@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   colorUsage,
@@ -8,6 +9,10 @@ import {
   lineHeight,
   zIndex,
 } from 'stylesheet';
+
+interface ItemWithMarginProps {
+  margin?: string;
+}
 
 export const Container = styled.div`
   position: fixed;
@@ -84,4 +89,12 @@ export const LaunchAuditsButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const ProjectSettingsLink = styled(Link)`
+  color: ${colorUsage.metricsSettingsText};
+  font-size: ${fontSize.link};
+  line-height: ${lineHeight.link};
+  text-decoration: none;
+  margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
 `;

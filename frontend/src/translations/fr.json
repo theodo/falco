@@ -82,7 +82,8 @@
     "page_badge": "PAGE",
     "script_badge": "SCRIPT",
     "launch_audits": "Lancer les audits manuellement",
-    "running_audits_number": "{number} {number,plural,one {audit} other {audits}} en cours"
+    "running_audits_number": "{number} {number,plural,one {audit} other {audits}} en cours",
+    "manage_project_settings": "Gérer les paramètres du projet →"
   },
   "Project": {
     "project_error": "Vous ne semblez pas avoir accès à ce projet.\n\nMerci de réessayer ou de vous rapprocher de votre administrateur pour obtenir l'accès.",
@@ -92,6 +93,11 @@
   "Projects": {
     "no_project_error": "Vous ne semblez avoir accès à aucun projet.\n\nMerci de réessayer ou de vous rapprocher de votre administrateur pour obtenir l'accès à votre projet.",
     "title": "Projets"
+  },
+  "ProjectSettings": {
+    "settings": "Paramètres",
+    "project_members": "Membres du projet",
+    "admin": "Admin"
   },
   "Audits": {
     "title": "Dashboard sur la dernière semaine",

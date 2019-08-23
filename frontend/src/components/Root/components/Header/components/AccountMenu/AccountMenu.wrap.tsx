@@ -7,10 +7,11 @@ import { getShouldDisplayWhatsNewNotification } from 'redux/content/selectors';
 import { getIsAuthenticated, logoutUserRequest } from 'redux/login';
 import { RootState } from 'redux/types';
 import { fetchUserRequest } from 'redux/user';
+import { getUser } from 'redux/user/selectors';
 import { AccountMenu } from './AccountMenu';
 
 const mapStateToProps = (state: RootState) => ({
-  user: state.user,
+  user: getUser(state),
   isUserAuthenticated: getIsAuthenticated(state),
   shouldDisplayWhatsNewNotification: getShouldDisplayWhatsNewNotification(state),
 });

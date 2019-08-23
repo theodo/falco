@@ -169,6 +169,15 @@ export const colorUsage = {
   projectsMenuItemSnapshotBorder: colorPalette.grey800,
   projectsMenuItemStar: colorPalette.accentYellow500,
 
+  // Project Settings
+  projectMembersContainerBorder: colorPalette.grey500,
+  oddProjectMemberBackground: colorPalette.grey200,
+  adminBadgeText: colorPalette.accentGreen500,
+  adminBadgeBackground: colorPalette.accentGreen200,
+  adminBadgeSelectedText: colorPalette.white500,
+  adminBadgeSelectedBackground: colorPalette.white200,
+  deleteMemberIconColor: colorPalette.grey800,
+
   // WebPageTest
   webPageTestLinkButtonBackground: colorPalette.primary500,
   webPageTestLinkButtonText: colorPalette.white500,
