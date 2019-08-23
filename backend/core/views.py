@@ -12,3 +12,11 @@ def user_infos(request):
     user = get_object_or_404(User, pk=request.user.id)
     serializer = UserSerializer(user)
     return JsonResponse(serializer.data)
+
+
+@api_view(["GET"])
+@permission_classes([permissions.IsAuthenticated])
+def all_users(request):
+    users = User.objects
+    serializer = UserSerializer(users, many=True)
+    return JsonResponse(serializer.data, safe=False)
