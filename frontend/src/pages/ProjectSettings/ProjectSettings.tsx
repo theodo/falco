@@ -25,6 +25,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
   fetchProjectsRequest,
   match,
   project,
+  intl
 }) => {
 
   interface DisplayedUser {
@@ -87,7 +88,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
               {user.isAdmin && <Badge
                 backgroundColor={colorUsage.adminBadgeBackground}
                 color={colorUsage.adminBadgeText}
-                text="ADMIN"
+                text={intl.formatMessage({id: "ProjectSettings.admin"}).toUpperCase()}
               />}
             </Style.MemberAdminBadgeContainer>
             <Style.MemberAdminCloseContainer />

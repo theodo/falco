@@ -96,7 +96,8 @@
   },
   "ProjectSettings": {
     "settings": "Paramètres",
-    "project_members": "Membres du projet"
+    "project_members": "Membres du projet",
+    "admin": "Admin"
   },
   "Audits": {
     "title": "Dashboard sur la dernière semaine",
