@@ -1,3 +1,4 @@
+import Select from 'components/Select';
 import styled from 'styled-components';
 import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
@@ -36,6 +37,13 @@ PageSubTitle: styled.div`
   font-family: ${fontFamily.mainSans};
   font-size: ${fontSize.h3Text};
   font-weight: ${fontWeight.h3Text};
+`,
+
+SelectUser: styled(Select)`
+  margin-top: ${getSpacing(4)};
+  font-family: ${fontFamily.mainSans};
+  font-size: ${fontSize.inputSelectText};
+  line-height: ${lineHeight.inputSelectText};
 `,
 
 ProjectMembersBlock: styled.div`

@@ -24,8 +24,8 @@ type Props = {
 const ProjectSettings: React.FunctionComponent<Props> = ({
   fetchProjectsRequest,
   match,
+  intl,
   project,
-  intl
 }) => {
 
   interface DisplayedUser {
@@ -79,6 +79,9 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
       <Style.PageSubTitle>
         <FormattedMessage id="ProjectSettings.project_members"/>
       </Style.PageSubTitle>
+      <Style.SelectUser
+        placeholder={intl.formatMessage({ id: "ProjectSettings.add_member" })}
+      />
       <Style.ProjectMembersBlock>
         {mergeAdminsAndMembers(project.admins, project.members).map((user: DisplayedUser) => 
           <Style.ProjectMemberContainer key={user.username}>
