@@ -19,6 +19,7 @@ import { ApiScriptType } from '../scripts/types';
 import {
   addMemberToProjectError,
   addMemberToProjectRequest,
+  addMemberToProjectSuccess,
   fetchProjectError,
   fetchProjectRequest,
   fetchProjectsRequest,
@@ -88,13 +89,13 @@ function* fetchProject(action: ActionType<typeof fetchProjectRequest>) {
 
 function* addMemberToProject(action: ActionType<typeof addMemberToProjectRequest>) {
   const endpoint = `/api/projects/${action.payload.projectId}/members`;
-  const { body: projectResponse }: { body: ApiProjectResponseType } = yield call(
+  const { body: projectResponse }: { body: ApiProjectType } = yield call(
     makePostRequest,
     endpoint,
     true,
     { user_id: action.payload.userId },
   );
-  yield put(fetchProjectSuccess({ byId: modelizeProject(projectResponse.project) }));
+  yield put(addMemberToProjectSuccess({ byId: modelizeProject(projectResponse) }));
 };
 
 function* saveProjectsToStore(action: ActionType<typeof saveFetchedProjects>) {

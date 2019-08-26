@@ -15,6 +15,9 @@ export const addMemberToProjectRequest = createStandardAction('projects/ADD_MEMB
   projectId: string;
   userId: string;
 }>();
+export const addMemberToProjectSuccess = createStandardAction('projects/ADD_MEMBER_TO_PROJECT_SUCCESS')<{
+  byId: Record<string, ProjectType>;
+}>();
 export const fetchProjectSuccess = createStandardAction('projects/FETCH_PROJECT_SUCCESS')<{
   byId: Record<string, ProjectType>;
 }>();
