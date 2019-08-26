@@ -96,6 +96,7 @@
   "ProjectSettings": {
     "settings": "Settings",
     "project_members": "Project members",
+    "member_in_project": " (Already in project)",
     "admin": "Admin",
     "add_member": "Add user..."
   },

@@ -25,7 +25,7 @@ import {
   fetchProjectSuccess,
   saveFetchedProjects,
 } from './actions';
-import { modelizeProjects } from './modelizer';
+import { modelizeProject, modelizeProjects } from './modelizer';
 import { ApiProjectResponseType, ApiProjectType } from './types';
 
 function* fetchProjectsFailedHandler(error: Error, actionPayload: Record<string, any>) {
@@ -94,7 +94,7 @@ function* addMemberToProject(action: ActionType<typeof addMemberToProjectRequest
     true,
     { user_id: action.payload.userId },
   );
-  yield put(saveFetchedProjects({ projects: [projectResponse.project] }));
+  yield put(fetchProjectSuccess({ byId: modelizeProject(projectResponse.project) }));
 };
 
 function* saveProjectsToStore(action: ActionType<typeof saveFetchedProjects>) {

@@ -42,11 +42,13 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
   interface UserOption {
     value: string;
     label: string;
+    disabled: boolean;
   };
 
   useFetchProjectIfUndefined(fetchProjectsRequest, match.params.projectId, project);
 
   const [allUsers, setAllUsers] = React.useState([]);
+  const [projectUsers, setProjectUsers]: [DisplayedUser[], any] = React.useState([]);
 
   const fetchAllUsers = () => {
     const request = makeGetRequest('/api/core/user/all', true);
@@ -57,6 +59,15 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
         }
       })
   }
+
+  React.useEffect(
+    () => {
+      if(project) {
+        setProjectUsers(mergeAdminsAndMembers(project.admins, project.members))
+      }
+    },
+    [project],
+  );
 
   React.useEffect(
     () => {
@@ -71,10 +82,15 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
     }
   }
 
-  const projectMembersSelectOptions = allUsers && allUsers.map((member: User) => ({
-    value: member.id,
-    label: member.username,
-  }));
+  const projectMembersSelectOptions = allUsers && projectUsers && allUsers.map((member: User) => {
+    const memberInProject = projectUsers.map((projectUser: DisplayedUser) => projectUser.id).includes(member.id);
+
+    return {
+      value: member.id,
+      label: member.username + (memberInProject ? intl.formatMessage({ id: 'ProjectSettings.member_in_project'}) : ''),
+      disabled: memberInProject,
+    }
+  }).sort((a, b) => +a.disabled - +b.disabled);
 
   const mergeAdminsAndMembers = (admins: User[], members: User[]) =>
   {
@@ -123,9 +139,10 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
         placeholder={intl.formatMessage({ id: "ProjectSettings.add_member" })}
         options={projectMembersSelectOptions}
         onChange={onChange}
+        isOptionDisabled={(option: UserOption) => option.disabled}
       />
       <Style.ProjectMembersBlock>
-        {mergeAdminsAndMembers(project.admins, project.members).map((user: DisplayedUser) => 
+        {projectUsers.map((user: DisplayedUser) => 
           <Style.ProjectMemberContainer key={user.username}>
             <Style.MemberUsername>{user.username}</Style.MemberUsername>
             <Style.MemberEmail>{user.emailAddress}</Style.MemberEmail>
