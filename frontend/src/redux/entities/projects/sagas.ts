@@ -1,5 +1,5 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
-import { makeGetRequest } from 'services/networking/request';
+import { makeGetRequest, makePostRequest } from 'services/networking/request';
 import { ActionType, getType } from 'typesafe-actions';
 
 import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
@@ -17,6 +17,8 @@ import { fetchScriptAction } from '../scripts';
 import { modelizeApiScriptsToById } from '../scripts/modelizer';
 import { ApiScriptType } from '../scripts/types';
 import {
+  addMemberToProjectError,
+  addMemberToProjectRequest,
   fetchProjectError,
   fetchProjectRequest,
   fetchProjectsRequest,
@@ -32,6 +34,10 @@ function* fetchProjectsFailedHandler(error: Error, actionPayload: Record<string,
 
 function* fetchProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
   yield put(fetchProjectError({ projectId: actionPayload.projectId, errorMessage: error.message }));
+};
+
+function* addMemberToProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
+  yield put(addMemberToProjectError({ projectId: actionPayload.projectId, errorMessage: error.message }));
 };
 
 function* fetchProjects(action: ActionType<typeof fetchProjectsRequest>) {
@@ -76,6 +82,17 @@ function* fetchProject(action: ActionType<typeof fetchProjectRequest>) {
     endpoint,
     true,
     null,
+  );
+  yield put(saveFetchedProjects({ projects: [projectResponse.project] }));
+};
+
+function* addMemberToProject(action: ActionType<typeof addMemberToProjectRequest>) {
+  const endpoint = `/api/projects/${action.payload.projectId}/members`;
+  const { body: projectResponse }: { body: ApiProjectResponseType } = yield call(
+    makePostRequest,
+    endpoint,
+    true,
+    { user_id: action.payload.userId },
   );
   yield put(saveFetchedProjects({ projects: [projectResponse.project] }));
 };
@@ -128,6 +145,10 @@ export default function* projectsSaga() {
   yield takeEvery(
     getType(fetchProjectRequest),
     handleAPIExceptions(fetchProject, fetchProjectFailedHandler),
+  );
+  yield takeEvery(
+    getType(addMemberToProjectRequest),
+    handleAPIExceptions(addMemberToProject, addMemberToProjectFailedHandler),
   );
   yield takeEvery(
     getType(fetchProjectsRequest),

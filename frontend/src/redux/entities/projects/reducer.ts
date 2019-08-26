@@ -1,10 +1,15 @@
 import { AnyAction } from 'redux';
 import { ActionType, getType } from 'typesafe-actions';
 
-import { fetchProjectError, fetchProjectsRequest, fetchProjectSuccess } from './actions';
+import { addMemberToProjectRequest, fetchProjectError, fetchProjectsRequest, fetchProjectSuccess } from './actions';
 import { ProjectType } from './types';
 
-export type ProjectsAction = ActionType<typeof fetchProjectsRequest | typeof fetchProjectSuccess | typeof fetchProjectError>;
+export type ProjectsAction = ActionType<
+  typeof fetchProjectsRequest | 
+  typeof addMemberToProjectRequest | 
+  typeof fetchProjectSuccess | 
+  typeof fetchProjectError
+>;
 
 export type ProjectsState = Readonly<{
   byId: Readonly<Record<string, ProjectType>> | null;

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
+import { ValueType } from 'react-select/lib/types';
 import { ProjectType } from 'redux/entities/projects/types';
 
 import Badge from 'components/Badge';
@@ -18,6 +19,7 @@ export type OwnProps = {} & RouteComponentProps<{
 }>;
 
 type Props = {
+  addMemberToProject: (projectId: string, userId: string) => void;
   fetchProjectsRequest: (projectId: string) => void;
   project?: ProjectType | null;
 } & OwnProps &
@@ -25,6 +27,7 @@ type Props = {
 
 const ProjectSettings: React.FunctionComponent<Props> = ({
   fetchProjectsRequest,
+  addMemberToProject,
   match,
   intl,
   project,
@@ -35,6 +38,11 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
     emailAddress: string,
     username: string
   }
+
+  interface UserOption {
+    value: string;
+    label: string;
+  };
 
   useFetchProjectIfUndefined(fetchProjectsRequest, match.params.projectId, project);
 
@@ -56,6 +64,12 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
     },
     [],
   );
+
+  const onChange = (selectedOption: ValueType<UserOption | {}>) => {
+    if(selectedOption && 'value' in selectedOption && selectedOption.value && project) {
+      addMemberToProject(project.uuid, selectedOption.value);
+    }
+  }
 
   const projectMembersSelectOptions = allUsers && allUsers.map((member: User) => ({
     value: member.id,
@@ -108,6 +122,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
       <Style.SelectUser
         placeholder={intl.formatMessage({ id: "ProjectSettings.add_member" })}
         options={projectMembersSelectOptions}
+        onChange={onChange}
       />
       <Style.ProjectMembersBlock>
         {mergeAdminsAndMembers(project.admins, project.members).map((user: DisplayedUser) => 
