@@ -3,4 +3,4 @@ from core import views
 
 app_name = "core"
 
-urlpatterns = [path("user", views.user_infos), path("user/all", views.all_users)]
+urlpatterns = [path("user", views.user_infos), path("users", views.all_users)]

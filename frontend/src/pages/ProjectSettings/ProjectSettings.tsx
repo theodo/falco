@@ -51,7 +51,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
   const [projectUsers, setProjectUsers]: [DisplayedUser[], any] = React.useState([]);
 
   const fetchAllUsers = () => {
-    const request = makeGetRequest('/api/core/user/all', true);
+    const request = makeGetRequest('/api/core/users', true);
     request
       .then((response) => {
         if(response) { 
@@ -77,7 +77,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
   );
 
   const onChange = (selectedOption: ValueType<UserOption | {}>) => {
-    if(selectedOption && 'value' in selectedOption && selectedOption.value && project) {
+    if(selectedOption && 'value' in selectedOption && project) {
       addMemberToProject(project.uuid, selectedOption.value);
     }
   }
@@ -90,7 +90,8 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
       label: member.username + (memberInProject ? intl.formatMessage({ id: 'ProjectSettings.member_in_project'}) : ''),
       disabled: memberInProject,
     }
-  }).sort((a, b) => +a.disabled - +b.disabled);
+  }).sort((a, b) => +a.disabled - +b.disabled); // display the disabled elements at the end :
+  // we cast the disabled properties to int using the + operator and we make the difference between the two.
 
   const mergeAdminsAndMembers = (admins: User[], members: User[]) =>
   {
