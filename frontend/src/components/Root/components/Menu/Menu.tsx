@@ -36,7 +36,7 @@ export interface OwnProps {
   currentScriptId: string | null;
   scriptStepId: string | null;
   runningAudits: string[];
-  lauchAudits: (projectId: string) => void;
+  launchAudits: (projectId: string) => void;
 };
 
 type Props = OwnProps & InjectedIntlProps;
@@ -50,7 +50,7 @@ export const Menu: React.FunctionComponent<Props> = ({
   currentScriptId,
   scriptStepId,
   runningAudits,
-  lauchAudits,
+  launchAudits,
 }) => {
   const [auditCanBeLaunched, setAuditCanBeLaunched] = React.useState(true);
 
@@ -107,7 +107,7 @@ export const Menu: React.FunctionComponent<Props> = ({
             onClick={
               () => {
                 setAuditCanBeLaunched(false);
-                lauchAudits(project.uuid);
+                launchAudits(project.uuid);
                 // wait 1 second before it is possible to launch another audit
                 // this is intended to stop several audits being launched at once
                 setTimeout(() => setAuditCanBeLaunched(true), 1000);

@@ -28,7 +28,7 @@ const mapStateToProps = (state: RootStateWithRouter) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  lauchAudits: (projectId: string) => dispatch(launchAuditAction.request({ projectId })),
+  launchAudits: (projectId: string) => dispatch(launchAuditAction.request({ projectId })),
 });
 
 export default connect(

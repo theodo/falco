@@ -110,8 +110,8 @@ export const colorUsage = {
   menuArrow: colorPalette.grey800,
   menuArrowSelected: colorPalette.white500,
   menuLinkHover: colorPalette.primary500,
-  menuLauchAuditsButtonBackground: colorPalette.accentGreen500,
-  menuLauchAuditsButtonText: colorPalette.white500,
+  menuLaunchAuditsButtonBackground: colorPalette.accentGreen500,
+  menuLaunchAuditsButtonText: colorPalette.white500,
 
   // Landing Page
   landingPageGlobalBackground: colorPalette.grey100,
@@ -242,7 +242,7 @@ export const fontSize = {
 
   // Menu
   menuLink: '20px',
-  menuLauchAuditsButtonText: '14px',
+  menuLaunchAuditsButtonText: '14px',
 
   // Landing
   leadSubmitErrorMessage: '13px',
@@ -292,7 +292,7 @@ export const lineHeight = {
 
   // Menu
   menuLink: '27px',
-  menuLauchAuditsButtonText: '18px',
+  menuLaunchAuditsButtonText: '18px',
 
   // Audits
   auditLink: '27px',
@@ -335,7 +335,7 @@ export const fontWeight = {
 
   // Menu
   menuLink: 'bold',
-  menuLauchAuditsButtonText: 'bold',
+  menuLaunchAuditsButtonText: 'bold',
 
   // Landing
   landingTheodoLink: 'bold',

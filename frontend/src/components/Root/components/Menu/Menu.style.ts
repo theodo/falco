@@ -78,12 +78,12 @@ export const LaunchAuditsButton = styled.button`
   margin-top: ${getSpacing(2)};
   align-self: flex-start;
   border-radius: 6px;
-  color: ${colorUsage.menuLauchAuditsButtonText};
-  background-color: ${colorUsage.menuLauchAuditsButtonBackground};
+  color: ${colorUsage.menuLaunchAuditsButtonText};
+  background-color: ${colorUsage.menuLaunchAuditsButtonBackground};
   font-family: ${fontFamily.mainSans};
-  font-size: ${fontSize.menuLauchAuditsButtonText};
-  font-weight: ${fontWeight.menuLauchAuditsButtonText};
-  line-height: ${lineHeight.menuLauchAuditsButtonText};
+  font-size: ${fontSize.menuLaunchAuditsButtonText};
+  font-weight: ${fontWeight.menuLaunchAuditsButtonText};
+  line-height: ${lineHeight.menuLaunchAuditsButtonText};
   cursor: pointer;
   text-decoration: none;
   display: flex;

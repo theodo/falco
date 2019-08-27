@@ -31,7 +31,7 @@ function* launchAuditsSaga(action: ActionType<typeof launchAuditAction.request>)
         pageOrScriptId: apiAudit.page || apiAudit.script || "",
     }))));
 
-    // signal lauch success (useless for now, will be used to prevent double audits launch)
+    // signal launch success (useless for now, will be used to prevent double audits launch)
     yield put(launchAuditAction.success({
         audits: apiAuditsList.map(modelizeAudit),
     }));
