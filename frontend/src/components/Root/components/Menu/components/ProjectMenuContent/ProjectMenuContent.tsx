@@ -10,7 +10,7 @@ import { AuditParametersType } from 'redux/entities/auditParameters/types';
 import { ProjectType } from 'redux/entities/projects/types';
 import { UserState } from 'redux/user';
 import { getSpacing } from 'stylesheet';
-import MenuPageScriptItem from '../../MenuPageScriptItem';
+import MenuPageScriptItem from '../../../MenuPageScriptItem';
 import {
   AuditParametersBlock,
   AuditParametersTitle,

@@ -2,7 +2,8 @@ import React from 'react';
 import { InjectedIntlProps } from 'react-intl';
 
 import { ProjectType } from 'redux/entities/projects/types';
-import { ProjectMenuContent, ProjectSettingsMenuContent } from '.';
+import ProjectMenuContent from './components/ProjectMenuContent';
+import ProjectSettingsMenuContent from './components/ProjectSettingsMenuContent';
 import {
   Container,
 } from './Menu.style';
