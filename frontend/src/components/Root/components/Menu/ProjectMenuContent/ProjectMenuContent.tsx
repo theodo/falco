@@ -31,7 +31,7 @@ export interface OwnProps {
   user: UserState;
   auditParametersId: string | null;
   currentPageId: string | null;
-  project?: ProjectType;
+  project: ProjectType;
   auditParametersList: AuditParametersType[],
   currentScriptId: string | null;
   scriptStepId: string | null;
@@ -53,10 +53,6 @@ export const ProjectMenuContent: React.FunctionComponent<Props> = ({
   launchAudits,
 }) => {
   const [auditCanBeLaunched, setAuditCanBeLaunched] = React.useState(true);
-
-  if (!project) {
-    return <Container />;
-  };
 
   const auditParametersSelectOptions = auditParametersList.map(auditParameters => ({
     value: auditParameters.uuid,
@@ -100,8 +96,7 @@ export const ProjectMenuContent: React.FunctionComponent<Props> = ({
     <Container>
       <ProjectName>{project.name}</ProjectName>
 
-      {project &&
-        (runningAudits.length === 0 && auditCanBeLaunched)
+      {(runningAudits.length === 0 && auditCanBeLaunched)
         ? (
           <LaunchAuditsButton
             onClick={
@@ -129,7 +124,7 @@ export const ProjectMenuContent: React.FunctionComponent<Props> = ({
           )
           : null
       }
-      {project && 0 !== auditParametersSelectOptions.length && (
+      {0 !== auditParametersSelectOptions.length && (
         <AuditParametersBlock>
           <AuditParametersTitle>
             <FormattedMessage id="Menu.audit_parameters_selection" />
