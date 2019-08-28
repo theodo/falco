@@ -13,6 +13,11 @@ export interface OwnProps {
   currentURL: string;
 };
 
+const PageTypes = {
+  project: 'project',
+  projectSettings: 'projectSettings'
+}
+
 type Props = OwnProps & InjectedIntlProps;
 
 export const Menu: React.FunctionComponent<Props> = ({
@@ -20,11 +25,15 @@ export const Menu: React.FunctionComponent<Props> = ({
   currentURL,
 }) => {
 
-  const [isSettingsPage, setSettingsPage] = React.useState(false)
+  const [pageType, setPageType] = React.useState(PageTypes.project)
 
   React.useEffect(
     () => {
-      setSettingsPage(null !== currentURL.match(/\/project\/[a-fA-F0-9-]*\/settings/));
+      if(null !== currentURL.match(/\/project\/[a-fA-F0-9-]*\/settings/)) {
+        setPageType(PageTypes.projectSettings)
+      } else {
+        setPageType(PageTypes.project)
+      };
     },
     [currentURL]
   );
@@ -33,11 +42,22 @@ export const Menu: React.FunctionComponent<Props> = ({
     return <Container />;
   };
 
-  return (
-    <Container>
-      {isSettingsPage && <ProjectSettingsMenuContent project={project} />}
-
-      {!isSettingsPage && <ProjectMenuContent project={project}/>}
-    </Container>
-  );
+  switch(pageType) {
+    case PageTypes.projectSettings:
+      return (
+        <Container>
+          <ProjectSettingsMenuContent project={project} />
+        </Container>
+      )
+      case PageTypes.project:
+        return (
+        <Container>
+          <ProjectMenuContent project={project} />
+        </Container>
+      )
+      default:
+        return (
+        <Container />
+      )
+  }
 };
