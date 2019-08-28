@@ -7,7 +7,6 @@ import {
   fontWeight,
   getSpacing,
   lineHeight,
-  zIndex,
 } from 'stylesheet';
 
 interface ItemWithMarginProps {
@@ -15,14 +14,9 @@ interface ItemWithMarginProps {
 }
 
 export const Container = styled.div`
-  position: fixed;
-  top: 100px;
-  z-index: ${zIndex.menu};
-  background-color: ${colorUsage.menuBackground};
-  padding-left: ${getSpacing(10)};
-  padding-top: ${getSpacing(4)};
-  width: 380px;
-  height: calc(100% - 120px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const ProjectName = styled.div`
