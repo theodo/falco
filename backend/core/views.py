@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from core.models import User
-from core.serializers import UserSerializer
+from core.serializers import UserSerializer, UserIdAndNameSerializer
 from rest_framework import permissions
 from rest_framework.decorators import api_view, permission_classes
 
@@ -18,5 +18,5 @@ def user_infos(request):
 @permission_classes([permissions.IsAuthenticated])
 def all_users(request):
     users = User.objects
-    serializer = UserSerializer(users, many=True)
+    serializer = UserIdAndNameSerializer(users, many=True)
     return JsonResponse(serializer.data, safe=False)
