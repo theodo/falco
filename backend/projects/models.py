@@ -11,6 +11,9 @@ class Project(BaseModel):
     wpt_api_key = models.CharField(max_length=100)
     screenshot_url = models.CharField(max_length=1000, null=True, blank=True)
     members = models.ManyToManyField(User, blank=True, related_name="member_of")
+    members_new = models.ManyToManyField(
+        User, blank=True, related_name="member_new_of", through="ProjectMemberRole"
+    )
     admins = models.ManyToManyField(User, blank=True, related_name="admin_of")
     is_active = models.BooleanField(default=True)
 
@@ -41,6 +44,15 @@ class Project(BaseModel):
 
     class Meta:
         ordering = ("name",)
+
+
+class ProjectMemberRole(BaseModel):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_admin = models.BooleanField(default=False)
+
+    class Meta:
+        unique_together = ("project", "user")
 
 
 class Page(BaseModel):

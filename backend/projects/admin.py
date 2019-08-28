@@ -9,6 +9,7 @@ from django.template.response import TemplateResponse
 
 from projects.forms import ManualAuditForm
 from projects.models import (
+    ProjectMemberRole,
     Page,
     Project,
     ProjectAuditParameters,
@@ -40,8 +41,18 @@ class ProjectAuditParametersInline(admin.TabularInline):
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
+class ProjectMemberRoleInline(admin.TabularInline):
+    model = ProjectMemberRole
+    extra = 1
+
+
 class ProjectAdmin(admin.ModelAdmin):
-    inlines = [PageInline, ScriptInline, ProjectAuditParametersInline]
+    inlines = [
+        ProjectMemberRoleInline,
+        PageInline,
+        ScriptInline,
+        ProjectAuditParametersInline,
+    ]
     exclude = ["screenshot_url"]
     filter_horizontal = ("members", "admins")
     list_filter = ("is_active",)
