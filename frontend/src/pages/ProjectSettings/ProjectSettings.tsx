@@ -126,7 +126,8 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
         value={selectOption}
       />}
       <Style.ProjectMembersBlock>
-        {project.projectMembers.map((projectMember: ProjectMember) => 
+        { // display admins first : see higher for an explanation of this sorting method
+          project.projectMembers.sort((a, b) => +b.isAdmin - +a.isAdmin).map((projectMember: ProjectMember) =>
           <Style.ProjectMemberContainer key={projectMember.username}>
             <Style.MemberUsername>{projectMember.username}</Style.MemberUsername>
             <Style.MemberEmail>{projectMember.emailAddress}</Style.MemberEmail>
