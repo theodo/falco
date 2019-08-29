@@ -2,7 +2,7 @@ from core.models import User
 from django.http import HttpResponse, JsonResponse
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from projects.models import Page, Project
+from projects.models import Page, Project, ProjectMemberRole
 from projects.serializers import PageSerializer, ProjectSerializer
 from projects.permissions import check_if_member_of_project, check_if_admin_of_project
 from rest_framework import permissions, status
@@ -137,14 +137,16 @@ def project_members(request, project_uuid):
 
     data = JSONParser().parse(request)
     if "user_id" in data:
-        if not Project.objects.filter(uuid=project_uuid, members__id=data["user_id"]):
+        if not ProjectMemberRole.objects.filter(
+            project_id=project_uuid, user_id=data["user_id"]
+        ):
             user = User.objects.filter(id=data["user_id"])
             if not user:
                 return HttpResponse(
                     "No user found with this id", status=status.HTTP_404_NOT_FOUND
                 )
             project = Project.objects.filter(uuid=project_uuid).first()
-            project.members.add(user.first())
+            project.members_new.add(user.first(), through_defaults={"is_admin": False})
             serializer = ProjectSerializer(project)
             return JsonResponse(serializer.data)
         return HttpResponse(
