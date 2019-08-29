@@ -126,6 +126,25 @@ def project_page_detail(request, project_uuid, page_uuid):
         return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
 
 
+@api_view(["DELETE"])
+@permission_classes([permissions.IsAuthenticated])
+def project_member_detail(request, project_uuid, user_id):
+    project = get_object_or_404(Project, pk=project_uuid)
+    check_if_admin_of_project(request.user.id, project.uuid)
+
+    project_member = ProjectMemberRole.objects.filter(
+        project_id=project_uuid, user_id=user_id
+    )
+
+    if not project_member:
+        return HttpResponse(
+            "No project member was found", status=status.HTTP_404_NOT_FOUND
+        )
+
+    project_member.delete()
+    return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
+
+
 @api_view(["POST"])
 @permission_classes([permissions.IsAuthenticated])
 def project_members(request, project_uuid):
