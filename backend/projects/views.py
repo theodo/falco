@@ -1,6 +1,5 @@
 from core.models import User
 from django.http import HttpResponse, JsonResponse
-from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from projects.models import Page, Project, ProjectMemberRole
 from projects.serializers import PageSerializer, ProjectSerializer
@@ -11,9 +10,7 @@ from rest_framework.parsers import JSONParser
 
 
 def get_user_projects(user_id):
-    return Project.objects.filter(
-        Q(Q(members__id=user_id) | Q(admins__id=user_id)), is_active=True
-    )
+    return Project.objects.filter(members_new__id=user_id, is_active=True)
 
 
 @api_view(["GET", "POST"])

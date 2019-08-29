@@ -1,5 +1,4 @@
-import { modelizeUser } from 'redux/user/modelizer';
-import { ApiProjectType, ProjectType } from './types';
+import { ApiProjectMember, ApiProjectType, ProjectMember, ProjectType } from './types';
 
 export const modelizeProject = (project: ApiProjectType): Record<string, ProjectType> => ({
   [project.uuid]: {
@@ -10,9 +9,15 @@ export const modelizeProject = (project: ApiProjectType): Record<string, Project
     auditParametersIds: project.audit_parameters_list.map(auditParameters => auditParameters.uuid),
     screenshotUrl: project.screenshot_url,
     latestAuditAt: project.latest_audit_at,
-    members: project.members.map(ApiUser => modelizeUser(ApiUser)),
-    admins: project.admins.map(ApiUser => modelizeUser(ApiUser))
+    projectMembers: project.project_members.map(apiProjectMember => modelizeProjectMember(apiProjectMember))
   },
+});
+
+export const modelizeProjectMember = (projectMember: ApiProjectMember): ProjectMember => ({
+  id: projectMember.id,
+  emailAddress: projectMember.email,
+  username: projectMember.username,
+  isAdmin: projectMember.is_admin
 });
 
 export const modelizeProjects = (projects: ApiProjectType[]) => {
