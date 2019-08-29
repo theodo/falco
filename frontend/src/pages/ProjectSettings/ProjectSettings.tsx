@@ -8,6 +8,7 @@ import Badge from 'components/Badge';
 import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
+import { UserState } from 'redux/user';
 import { modelizeUser } from 'redux/user/modelizer';
 import { ApiUser, User } from 'redux/user/types';
 import { makeGetRequest } from 'services/networking/request';
@@ -19,6 +20,7 @@ export type OwnProps = {} & RouteComponentProps<{
 }>;
 
 type Props = {
+  currentUser: UserState,
   addMemberToProject: (projectId: string, userId: string) => void;
   fetchProjectsRequest: (projectId: string) => void;
   project?: ProjectType | null;
@@ -31,6 +33,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
   match,
   intl,
   project,
+  currentUser
 }) => {
   interface DisplayedUser {
     isAdmin: boolean,
@@ -47,6 +50,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
 
   useFetchProjectIfUndefined(fetchProjectsRequest, match.params.projectId, project);
 
+  const [selectOption, setSelectOption]: [ValueType<UserOption | {}>, any] = React.useState(null);
   const [allUsers, setAllUsers] = React.useState([]);
   const [projectUsers, setProjectUsers]: [DisplayedUser[], any] = React.useState([]);
 
@@ -60,6 +64,14 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
       })
   }
 
+
+  React.useEffect(
+    () => {
+      fetchAllUsers();
+    },
+    [],
+  );
+
   React.useEffect(
     () => {
       if(project) {
@@ -71,12 +83,13 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
 
   React.useEffect(
     () => {
-      fetchAllUsers();
+      setSelectOption(null);
     },
-    [],
+    [projectUsers],
   );
 
   const onChange = (selectedOption: ValueType<UserOption | {}>) => {
+    setSelectOption(selectedOption);
     if(selectedOption && 'value' in selectedOption && project) {
       addMemberToProject(project.uuid, selectedOption.value);
     }
@@ -136,12 +149,13 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
       <Style.PageSubTitle>
         <FormattedMessage id="ProjectSettings.project_members"/>
       </Style.PageSubTitle>
-      <Style.SelectUser
+      {currentUser && project.admins.map(admin => admin.username).includes(currentUser.username) && <Style.SelectUser
         placeholder={intl.formatMessage({ id: "ProjectSettings.add_member" })}
         options={projectMembersSelectOptions}
         onChange={onChange}
         isOptionDisabled={(option: UserOption) => option.disabled}
-      />
+        value={selectOption}
+      />}
       <Style.ProjectMembersBlock>
         {projectUsers.map((user: DisplayedUser) => 
           <Style.ProjectMemberContainer key={user.username}>
