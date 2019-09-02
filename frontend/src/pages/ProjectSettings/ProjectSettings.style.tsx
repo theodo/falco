@@ -1,4 +1,5 @@
 import Select from 'components/Select';
+import Close from 'icons/Close';
 import styled from 'styled-components';
 import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
@@ -79,19 +80,25 @@ ProjectMemberContainer: styled.div`
 `,
 
 MemberUsername: styled.div`
-  width: 25%
+  width: 25%;
 `,
 
 MemberEmail: styled.div`
-  width: 50%
+  width: 50%;
 `,
 
 MemberAdminBadgeContainer: styled.div`
-  width: 20%
+  width: 20%;
 `,
 
-MemberAdminCloseContainer: styled.div`
-  width: 5%
+MemberAdminDeleteContainer: styled.div`
+  width: 5%;
+  display: flex;
+  flex-direction: row-reverse;
+`,
+
+MemberAdminDeleteIcon: styled(Close)`
+  cursor: pointer;
 `,
 };
 

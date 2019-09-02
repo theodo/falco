@@ -138,7 +138,13 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
                 text={intl.formatMessage({id: "ProjectSettings.admin"}).toUpperCase()}
               />}
             </Style.MemberAdminBadgeContainer>
-            <Style.MemberAdminCloseContainer />
+            <Style.MemberAdminDeleteContainer>
+                {currentUser && projectMember.username !== currentUser.username && <Style.MemberAdminDeleteIcon
+                  color={colorUsage.deleteMemberIconColor}
+                  width="13px"
+                  strokeWidth="20"
+                />}
+            </Style.MemberAdminDeleteContainer >
           </Style.ProjectMemberContainer>
         )}
       </Style.ProjectMembersBlock>

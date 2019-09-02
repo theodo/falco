@@ -4,6 +4,7 @@ interface Props {
   color: string;
   width?: string;
   height?: string;
+  strokeWidth?: string;
 }
 
 export default class Close extends React.Component<Props> {
@@ -21,13 +22,13 @@ export default class Close extends React.Component<Props> {
             d="M2.04268536,73.9573146 L74.1217669,1.87823315"
             id="Path-2"
             stroke={this.props.color}
-            strokeWidth="4"
+            strokeWidth={this.props.strokeWidth || "4"}
           />
           <path
             d="M2.04268536,73.9573146 L74.1217669,1.87823315"
             id="Path-2"
             stroke={this.props.color}
-            strokeWidth="4"
+            strokeWidth={this.props.strokeWidth || "4"}
             transform="translate(38.500000, 37.500000) scale(-1, 1) translate(-38.500000, -37.500000) "
           />
         </g>
