@@ -14,7 +14,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for project in Project.objects.all():
-            project.admins.add(*list(User.objects.filter(is_superuser=True)))
+            project.members_new.add(
+                *list(User.objects.filter(is_superuser=True)),
+                through_defaults={"is_admin": True}
+            )
             project.wpt_api_key = (
                 options.get("key") if options.get("key") else "---TO CHANGE---"
             )

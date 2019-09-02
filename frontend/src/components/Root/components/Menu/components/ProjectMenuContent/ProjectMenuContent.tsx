@@ -9,6 +9,7 @@ import MessagePill from 'components/MessagePill';
 import { AuditParametersType } from 'redux/entities/auditParameters/types';
 import { ProjectType } from 'redux/entities/projects/types';
 import { UserState } from 'redux/user';
+import { isUserAdminOfProject } from 'services/utils';
 import { getSpacing } from 'stylesheet';
 import MenuPageScriptItem from '../../../MenuPageScriptItem';
 import {
@@ -138,7 +139,7 @@ export const ProjectMenuContent: React.FunctionComponent<Props> = ({
           />
         </AuditParametersBlock>
       )}
-      {user && project.admins.map(admin => admin.username).includes(user.username) && <ProjectSettingsLink
+      {isUserAdminOfProject(user, project) && <ProjectSettingsLink
         key={project.uuid}
         to={routeDefinitions.projectSettings.path.replace(':projectId', project.uuid)}
         margin={`0 0 ${getSpacing(4)} ${getSpacing(4)}`}

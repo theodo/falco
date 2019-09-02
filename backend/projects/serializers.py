@@ -3,6 +3,7 @@ from projects.models import (
     Page,
     Project,
     ProjectAuditParameters,
+    ProjectMemberRole,
     Script,
 )
 from rest_framework import serializers
@@ -80,12 +81,25 @@ class ProjectAuditParametersSerializer(serializers.ModelSerializer):
         fields = ("uuid", "name", "location", "browser", "network_shape")
 
 
+class ProjectMemberRoleSerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField(source="user.id")
+    username = serializers.ReadOnlyField(source="user.username")
+    email = serializers.ReadOnlyField(source="user.email")
+
+    class Meta:
+        model = ProjectMemberRole
+        fields = ("id", "email", "username", "is_admin")
+
+
 class ProjectSerializer(serializers.ModelSerializer):
     pages = PageSerializer(many=True)
     scripts = ScriptSerializer(many=True)
     audit_parameters_list = ProjectAuditParametersSerializer(many=True)
     members = UserSerializer(many=True)
     admins = UserSerializer(many=True)
+    project_members = ProjectMemberRoleSerializer(
+        source="projectmemberrole_set", many=True
+    )
 
     class Meta:
         model = Project
@@ -94,6 +108,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "name",
             "members",
             "admins",
+            "project_members",
             "pages",
             "scripts",
             "audit_parameters_list",

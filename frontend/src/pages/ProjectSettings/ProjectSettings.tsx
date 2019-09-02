@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
 import { ValueType } from 'react-select/lib/types';
-import { ProjectType } from 'redux/entities/projects/types';
+import { ProjectMember, ProjectType } from 'redux/entities/projects/types';
 
 import Badge from 'components/Badge';
 import Loader from 'components/Loader';
@@ -12,6 +12,7 @@ import { UserState } from 'redux/user';
 import { modelizeUser } from 'redux/user/modelizer';
 import { ApiUser, User } from 'redux/user/types';
 import { makeGetRequest } from 'services/networking/request';
+import { isUserAdminOfProject } from 'services/utils';
 import { colorUsage } from 'stylesheet';
 import Style from './ProjectSettings.style';
 
@@ -35,12 +36,6 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
   project,
   currentUser
 }) => {
-  interface DisplayedUser {
-    isAdmin: boolean,
-    id: string,
-    emailAddress: string,
-    username: string
-  }
 
   interface UserOption {
     value: string;
@@ -52,7 +47,6 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
 
   const [selectOption, setSelectOption]: [ValueType<UserOption | {}>, any] = React.useState(null);
   const [allUsers, setAllUsers] = React.useState([]);
-  const [projectUsers, setProjectUsers]: [DisplayedUser[], any] = React.useState([]);
 
   const fetchAllUsers = () => {
     const request = makeGetRequest('/api/core/users', true);
@@ -74,18 +68,9 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
 
   React.useEffect(
     () => {
-      if(project) {
-        setProjectUsers(mergeAdminsAndMembers(project.admins, project.members))
-      }
-    },
-    [project],
-  );
-
-  React.useEffect(
-    () => {
       setSelectOption(null);
     },
-    [projectUsers],
+    [project],
   );
 
   const onChange = (selectedOption: ValueType<UserOption | {}>) => {
@@ -95,32 +80,16 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
     }
   }
 
-  const projectMembersSelectOptions = allUsers && projectUsers && allUsers.map((member: User) => {
-    const memberInProject = projectUsers.map((projectUser: DisplayedUser) => projectUser.id).includes(member.id);
+  const projectMembersSelectOptions = allUsers && project && allUsers.map((user: User) => {
+    const memberInProject = project.projectMembers.map((projectMember: ProjectMember) => projectMember.id).includes(user.id);
 
     return {
-      value: member.id,
-      label: member.username + (memberInProject ? intl.formatMessage({ id: 'ProjectSettings.member_in_project'}) : ''),
+      value: user.id,
+      label: user.username + (memberInProject ? intl.formatMessage({ id: 'ProjectSettings.member_in_project'}) : ''),
       disabled: memberInProject,
     }
   }).sort((a, b) => +a.disabled - +b.disabled); // display the disabled elements at the end :
   // we cast the disabled properties to int using the + operator and we make the difference between the two.
-
-  const mergeAdminsAndMembers = (admins: User[], members: User[]) =>
-  {
-    const allMembers: DisplayedUser[] = [];
-    const adminUsernames: string[] = [];
-    admins.forEach(admin => {
-      allMembers.push({...admin, isAdmin: true})
-      adminUsernames.push(admin.username)
-    })
-    members.forEach(member => {
-      if(!adminUsernames.includes(member.username)) {
-        allMembers.push({...member, isAdmin: false})
-      }
-    })
-    return allMembers;
-  }
 
   if (project === undefined) {
     return (
@@ -149,7 +118,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
       <Style.PageSubTitle>
         <FormattedMessage id="ProjectSettings.project_members"/>
       </Style.PageSubTitle>
-      {currentUser && project.admins.map(admin => admin.username).includes(currentUser.username) && <Style.SelectUser
+      {isUserAdminOfProject(currentUser, project) && <Style.SelectUser
         placeholder={intl.formatMessage({ id: "ProjectSettings.add_member" })}
         options={projectMembersSelectOptions}
         onChange={onChange}
@@ -157,12 +126,13 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
         value={selectOption}
       />}
       <Style.ProjectMembersBlock>
-        {projectUsers.map((user: DisplayedUser) => 
-          <Style.ProjectMemberContainer key={user.username}>
-            <Style.MemberUsername>{user.username}</Style.MemberUsername>
-            <Style.MemberEmail>{user.emailAddress}</Style.MemberEmail>
+        { // display admins first : see higher for an explanation of this sorting method
+          project.projectMembers.sort((a, b) => +b.isAdmin - +a.isAdmin).map((projectMember: ProjectMember) =>
+          <Style.ProjectMemberContainer key={projectMember.username}>
+            <Style.MemberUsername>{projectMember.username}</Style.MemberUsername>
+            <Style.MemberEmail>{projectMember.emailAddress}</Style.MemberEmail>
             <Style.MemberAdminBadgeContainer>
-              {user.isAdmin && <Badge
+              {projectMember.isAdmin && <Badge
                 backgroundColor={colorUsage.adminBadgeBackground}
                 color={colorUsage.adminBadgeText}
                 text={intl.formatMessage({id: "ProjectSettings.admin"}).toUpperCase()}
