@@ -97,8 +97,20 @@ MemberAdminDeleteContainer: styled.div`
   flex-direction: row-reverse;
 `,
 
-MemberAdminDeleteIcon: styled(Close)`
+MemberAdminDeleteButton: styled.button`
   cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  padding: 2px;
+  background: inherit;
+
+  &:hover {
+    opacity: 0.5;
+    background: white;
+    transition-duration: 0.2s;
+  }
 `,
 };
 

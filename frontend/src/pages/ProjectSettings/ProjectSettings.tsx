@@ -7,6 +7,7 @@ import { ProjectMember, ProjectType } from 'redux/entities/projects/types';
 import Badge from 'components/Badge';
 import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
+import Close from 'icons/Close';
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import { UserState } from 'redux/user';
 import { modelizeUser } from 'redux/user/modelizer';
@@ -23,6 +24,7 @@ export type OwnProps = {} & RouteComponentProps<{
 type Props = {
   currentUser: UserState,
   addMemberToProject: (projectId: string, userId: string) => void;
+  removeMemberOfProjectRequest: (projectId: string, userId: string) => void;
   fetchProjectsRequest: (projectId: string) => void;
   project?: ProjectType | null;
 } & OwnProps &
@@ -31,6 +33,7 @@ type Props = {
 const ProjectSettings: React.FunctionComponent<Props> = ({
   fetchProjectsRequest,
   addMemberToProject,
+  removeMemberOfProjectRequest,
   match,
   intl,
   project,
@@ -139,11 +142,14 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
               />}
             </Style.MemberAdminBadgeContainer>
             <Style.MemberAdminDeleteContainer>
-                {currentUser && projectMember.username !== currentUser.username && <Style.MemberAdminDeleteIcon
-                  color={colorUsage.deleteMemberIconColor}
-                  width="13px"
-                  strokeWidth="20"
-                />}
+                {currentUser && isUserAdminOfProject(currentUser, project) && projectMember.username !== currentUser.username && 
+                  (<Style.MemberAdminDeleteButton onClick={() => removeMemberOfProjectRequest(project.uuid, projectMember.id)}>
+                    <Close
+                      color={colorUsage.deleteMemberIconColor}
+                      width="13px"
+                      strokeWidth="20"
+                    />
+                  </Style.MemberAdminDeleteButton>)}
             </Style.MemberAdminDeleteContainer >
           </Style.ProjectMemberContainer>
         )}

@@ -1,12 +1,13 @@
 import { AnyAction } from 'redux';
 import { ActionType, getType } from 'typesafe-actions';
 
-import { addMemberToProjectSuccess, fetchProjectError, fetchProjectsRequest, fetchProjectSuccess } from './actions';
-import { ProjectType } from './types';
+import { addMemberToProjectSuccess, deleteMemberOfProjectSuccess, fetchProjectError, fetchProjectsRequest, fetchProjectSuccess } from './actions';
+import { ProjectMember, ProjectType } from './types';
 
 export type ProjectsAction = ActionType<
   typeof fetchProjectsRequest | 
   typeof addMemberToProjectSuccess | 
+  typeof deleteMemberOfProjectSuccess |
   typeof fetchProjectSuccess | 
   typeof fetchProjectError
 >;
@@ -39,6 +40,23 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
         byId: {
           ...state.byId,
           ...typedAction.payload.byId,
+        },
+      };
+    case getType(deleteMemberOfProjectSuccess):
+      if(!state.byId) { return state };
+
+      const filteredMembers = state.byId[typedAction.payload.projectId].projectMembers.filter((member: ProjectMember) => {
+        return member.id !== typedAction.payload.userId;
+      });
+
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [typedAction.payload.projectId]: {
+            ...state.byId[typedAction.payload.projectId],
+            projectMembers: filteredMembers
+          }
         },
       };
     case getType(fetchProjectError):

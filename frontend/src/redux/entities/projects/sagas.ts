@@ -1,5 +1,5 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
-import { makeGetRequest, makePostRequest } from 'services/networking/request';
+import { makeDeleteRequest, makeGetRequest, makePostRequest } from 'services/networking/request';
 import { ActionType, getType } from 'typesafe-actions';
 
 import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
@@ -20,6 +20,9 @@ import {
   addMemberToProjectError,
   addMemberToProjectRequest,
   addMemberToProjectSuccess,
+  deleteMemberOfProjectError,
+  deleteMemberOfProjectRequest,
+  deleteMemberOfProjectSuccess,
   fetchProjectError,
   fetchProjectRequest,
   fetchProjectsRequest,
@@ -39,6 +42,14 @@ function* fetchProjectFailedHandler(error: Error, actionPayload: Record<string, 
 
 function* addMemberToProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
   yield put(addMemberToProjectError({ projectId: actionPayload.projectId, errorMessage: error.message }));
+};
+
+function* deleteMemberOfProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
+  yield put(deleteMemberOfProjectError({
+    projectId: actionPayload.projectId,
+    userId: actionPayload.userId,
+    errorMessage: error.message
+  }));
 };
 
 function* fetchProjects(action: ActionType<typeof fetchProjectsRequest>) {
@@ -98,6 +109,16 @@ function* addMemberToProject(action: ActionType<typeof addMemberToProjectRequest
   yield put(addMemberToProjectSuccess({ byId: modelizeProject(projectResponse) }));
 };
 
+function* deleteMemberOfProject(action: ActionType<typeof deleteMemberOfProjectRequest>) {
+  const endpoint = `/api/projects/${action.payload.projectId}/members/${action.payload.userId}`;
+  yield call(
+    makeDeleteRequest,
+    endpoint,
+    true,
+  );
+  yield put(deleteMemberOfProjectSuccess({ projectId: action.payload.projectId, userId: action.payload.userId }));
+};
+
 function* saveProjectsToStore(action: ActionType<typeof saveFetchedProjects>) {
   const projects = action.payload.projects;
   yield put(fetchPageAction.success({
@@ -150,6 +171,10 @@ export default function* projectsSaga() {
   yield takeEvery(
     getType(addMemberToProjectRequest),
     handleAPIExceptions(addMemberToProject, addMemberToProjectFailedHandler),
+  );
+  yield takeEvery(
+    getType(deleteMemberOfProjectRequest),
+    handleAPIExceptions(deleteMemberOfProject, deleteMemberOfProjectFailedHandler),
   );
   yield takeEvery(
     getType(fetchProjectsRequest),
