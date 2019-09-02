@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { RootState } from 'redux/types';
 
-import { addMemberToProjectRequest, fetchProjectsRequest } from 'redux/entities/projects';
+import { addMemberToProjectRequest, deleteMemberOfProjectRequest, fetchProjectsRequest } from 'redux/entities/projects';
 import { getProject } from 'redux/entities/projects/selectors';
 import { getUser } from 'redux/user/selectors';
 import ProjectSettings, { OwnProps } from './ProjectSettings';
@@ -16,6 +16,7 @@ const mapStateToProps = (state: RootState, props: OwnProps) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   fetchProjectsRequest: (projectId: string) => dispatch(fetchProjectsRequest({ currentProjectId: projectId })),
   addMemberToProject: (projectId: string, userId: string) => dispatch(addMemberToProjectRequest({ projectId, userId })),
+  removeMemberOfProjectRequest: (projectId: string, userId: string) => dispatch(deleteMemberOfProjectRequest({ projectId, userId })),
 });
 
 export default connect(
