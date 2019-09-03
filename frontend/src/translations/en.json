@@ -132,7 +132,7 @@
     "AuditStatusHistory": {
       "last_audit_successful": "The last audit was successful",
       "audit_running": "An audit is currently running",
-      "audit_failure": "The last audit failed :(",
+      "audit_failure": "The last audit failed",
       "audit_requested": "Audit requested",
       "audit_in_queue": "Waiting in queue",
       "audit_in_queue_behind": "Waiting in queue behind {positionInQueue} {positionInQueue,plural,one {test} other {tests}}",

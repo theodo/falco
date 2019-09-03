@@ -7,7 +7,6 @@ from projects.models import (
     Script,
 )
 from rest_framework import serializers
-from core.serializers import UserSerializer
 from audits.serializers import AuditStatusHistorySerializer
 
 
@@ -95,8 +94,6 @@ class ProjectSerializer(serializers.ModelSerializer):
     pages = PageSerializer(many=True)
     scripts = ScriptSerializer(many=True)
     audit_parameters_list = ProjectAuditParametersSerializer(many=True)
-    members = UserSerializer(many=True)
-    admins = UserSerializer(many=True)
     project_members = ProjectMemberRoleSerializer(
         source="projectmemberrole_set", many=True
     )
