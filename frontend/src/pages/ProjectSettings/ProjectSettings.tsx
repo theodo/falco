@@ -7,6 +7,7 @@ import { ProjectMember, ProjectType } from 'redux/entities/projects/types';
 import Badge from 'components/Badge';
 import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
+import ToggleButton from 'components/ToggleButton';
 import Close from 'icons/Close';
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import { UserState } from 'redux/user';
@@ -135,11 +136,17 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
             <Style.MemberUsername>{projectMember.username}</Style.MemberUsername>
             <Style.MemberEmail>{projectMember.emailAddress}</Style.MemberEmail>
             <Style.MemberAdminBadgeContainer>
-              {projectMember.isAdmin && <Badge
-                backgroundColor={colorUsage.adminBadgeBackground}
-                color={colorUsage.adminBadgeText}
-                text={intl.formatMessage({id: "ProjectSettings.admin"}).toUpperCase()}
-              />}
+              {isUserAdminOfProject(currentUser, project)
+                ? <ToggleButton 
+                  onChange={() => "tata"}
+                  checked={projectMember.isAdmin}
+                  label={intl.formatMessage({id: "ProjectSettings.admin"})}
+                />
+                : projectMember.isAdmin && <Badge
+                  backgroundColor={colorUsage.adminBadgeBackground}
+                  color={colorUsage.adminBadgeText}
+                  text={intl.formatMessage({id: "ProjectSettings.admin"}).toUpperCase()}
+                />}
             </Style.MemberAdminBadgeContainer>
             <Style.MemberAdminDeleteContainer>
                 {currentUser && isUserAdminOfProject(currentUser, project) && projectMember.username !== currentUser.username && 
