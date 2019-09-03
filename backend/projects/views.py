@@ -2,7 +2,11 @@ from core.models import User
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
 from projects.models import Page, Project, ProjectMemberRole
-from projects.serializers import PageSerializer, ProjectSerializer
+from projects.serializers import (
+    PageSerializer,
+    ProjectSerializer,
+    ProjectMemberRoleSerializer,
+)
 from projects.permissions import check_if_member_of_project, check_if_admin_of_project
 from rest_framework import permissions, status
 from rest_framework.decorators import api_view, permission_classes
@@ -126,7 +130,7 @@ def project_page_detail(request, project_uuid, page_uuid):
         return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
 
 
-@api_view(["DELETE"])
+@api_view(["PUT", "DELETE"])
 @permission_classes([permissions.IsAuthenticated])
 def project_member_detail(request, project_uuid, user_id):
     project = get_object_or_404(Project, pk=project_uuid)
@@ -141,8 +145,20 @@ def project_member_detail(request, project_uuid, user_id):
             "No project member was found", status=status.HTTP_404_NOT_FOUND
         )
 
-    project_member.delete()
-    return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
+    if request.method == "PUT":
+        data = JSONParser().parse(request)
+        if "is_admin" in data and type(data["is_admin"]) is bool:
+            project_member.update(is_admin=data["is_admin"])
+            serializer = ProjectMemberRoleSerializer(project_member.first())
+            return JsonResponse(serializer.data)
+        return HttpResponse(
+            "Please provide a valid 'is_admin' value.",
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    elif request.method == "DELETE":
+        project_member.delete()
+        return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(["POST"])
