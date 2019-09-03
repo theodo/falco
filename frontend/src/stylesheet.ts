@@ -216,7 +216,7 @@ export const colorUsage = {
   // ToggleButton
   ToggleButtonActiveBackground: colorPalette.accentGreen500,
   ToggleButtonDisabledBackground: colorPalette.grey500,
-  ToggleButtonActiveLabelColor: colorPalette.grey800,
+  ToggleButtonActiveLabelColor: colorPalette.accentGreen500,
   ToggleButtonDisabledLabelColor: colorPalette.grey500
 };
 

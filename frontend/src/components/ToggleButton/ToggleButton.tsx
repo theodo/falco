@@ -7,22 +7,16 @@ export interface OwnProps {
   onChange: () => void;
   checked: boolean;
   label: string;
+  disabled: boolean
 }
 
 const ToggleButton: React.FunctionComponent<OwnProps> = ({
   onChange,
   checked,
-  label
+  label,
+  disabled
 }) => {
-  const [isChecked, setChecked] = React.useState(checked)
-
-  const handleChange = () => {
-    setChecked(!isChecked);
-  }
-
   return (
-
-
     <ToggleButtonContainer>
       <Switch
         onColor={colorUsage.ToggleButtonActiveBackground}
@@ -30,10 +24,11 @@ const ToggleButton: React.FunctionComponent<OwnProps> = ({
         handleDiameter={20}
         uncheckedIcon={false}
         checkedIcon={false}
-        onChange={handleChange}
-        checked={isChecked}
+        onChange={onChange}
+        checked={checked}
+        disabled={disabled}
       />
-      <ToggleButtonLabel checked={isChecked}>{label}</ToggleButtonLabel>
+      <ToggleButtonLabel checked={checked}>{label}</ToggleButtonLabel>
     </ToggleButtonContainer>
   )
 };

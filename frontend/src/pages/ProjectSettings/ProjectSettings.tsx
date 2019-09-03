@@ -26,6 +26,7 @@ type Props = {
   currentUser: UserState,
   addMemberToProject: (projectId: string, userId: string) => void;
   removeMemberOfProjectRequest: (projectId: string, userId: string) => void;
+  editMemberOfProjectRequest: (projectId: string, userId: string, isAdmin: boolean) => void;
   fetchProjectsRequest: (projectId: string) => void;
   project?: ProjectType | null;
 } & OwnProps &
@@ -35,6 +36,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
   fetchProjectsRequest,
   addMemberToProject,
   removeMemberOfProjectRequest,
+  editMemberOfProjectRequest,
   match,
   intl,
   project,
@@ -138,8 +140,9 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
             <Style.MemberAdminBadgeContainer>
               {isUserAdminOfProject(currentUser, project)
                 ? <ToggleButton 
-                  onChange={() => "tata"}
+                  onChange={() => editMemberOfProjectRequest(project.uuid, projectMember.id, !projectMember.isAdmin)}
                   checked={projectMember.isAdmin}
+                  disabled={null !== currentUser && projectMember.username === currentUser.username}
                   label={intl.formatMessage({id: "ProjectSettings.admin"})}
                 />
                 : projectMember.isAdmin && <Badge

@@ -23,6 +23,16 @@ export const deleteMemberOfProjectSuccess = createStandardAction('projects/DELET
   projectId: string;
   userId: string;
 }>();
+export const editMemberOfProjectRequest = createStandardAction('projects/EDIT_MEMBER_OF_PROJECT_REQUEST')<{
+  projectId: string;
+  userId: string;
+  isAdmin: boolean;
+}>();
+export const editMemberOfProjectSuccess = createStandardAction('projects/EDIT_MEMBER_OF_PROJECT_SUCCESS')<{
+  projectId: string;
+  userId: string;
+  isAdmin: boolean;
+}>();
 export const addMemberToProjectSuccess = createStandardAction('projects/ADD_MEMBER_TO_PROJECT_SUCCESS')<{
   byId: Record<string, ProjectType>;
 }>();
@@ -42,6 +52,11 @@ export const deleteMemberOfProjectError = createStandardAction('projects/DELETE_
   userId: string | null;
   errorMessage: string;
 }>();
+export const editMemberOfProjectError = createStandardAction('projects/DELETE_MEMBER_OF_PROJECT_ERROR')<{
+  projectId: string | null;
+  userId: string | null;
+  errorMessage: string;
+}>();
 
 export default {
   addMemberToProjectRequest,
@@ -49,6 +64,9 @@ export default {
   deleteMemberOfProjectRequest,
   deleteMemberOfProjectSuccess,
   deleteMemberOfProjectError,
+  editMemberOfProjectRequest,
+  editMemberOfProjectSuccess,
+  editMemberOfProjectError,
   fetchProjectRequest,
   fetchProjectsRequest,
   fetchProjectSuccess,
