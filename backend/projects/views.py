@@ -14,7 +14,7 @@ from rest_framework.parsers import JSONParser
 
 
 def get_user_projects(user_id):
-    return Project.objects.filter(members_new__id=user_id, is_active=True)
+    return Project.objects.filter(members__id=user_id, is_active=True)
 
 
 @api_view(["GET", "POST"])
@@ -178,7 +178,7 @@ def project_members(request, project_uuid):
                     "No user found with this id", status=status.HTTP_404_NOT_FOUND
                 )
             project = Project.objects.filter(uuid=project_uuid).first()
-            project.members_new.add(user.first(), through_defaults={"is_admin": False})
+            project.members.add(user.first(), through_defaults={"is_admin": False})
             serializer = ProjectSerializer(project)
             return JsonResponse(serializer.data)
         return HttpResponse(

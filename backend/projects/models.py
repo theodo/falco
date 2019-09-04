@@ -10,8 +10,8 @@ class Project(BaseModel):
     name = models.CharField(max_length=100)
     wpt_api_key = models.CharField(max_length=100)
     screenshot_url = models.CharField(max_length=1000, null=True, blank=True)
-    members_new = models.ManyToManyField(
-        User, blank=True, related_name="member_new_of", through="ProjectMemberRole"
+    members = models.ManyToManyField(
+        User, blank=True, related_name="member_of", through="ProjectMemberRole"
     )
     is_active = models.BooleanField(default=True)
 
