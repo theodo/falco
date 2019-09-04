@@ -52,6 +52,7 @@ class ProjectMemberRole(BaseModel):
     is_admin = models.BooleanField(default=False)
 
     class Meta:
+        ordering = ("-is_admin", "-created_at")
         unique_together = ("project", "user")
 
 

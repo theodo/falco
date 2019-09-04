@@ -103,8 +103,6 @@ class ProjectSerializer(serializers.ModelSerializer):
         fields = (
             "uuid",
             "name",
-            "members",
-            "admins",
             "project_members",
             "pages",
             "scripts",

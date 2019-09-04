@@ -31,7 +31,7 @@ const changeAdminStatusOfMember = (project: ProjectType, userId: string, isAdmin
       return member;
     };
 
-    return {... member, isAdmin}
+    return {...member, isAdmin}
   });
 }
 

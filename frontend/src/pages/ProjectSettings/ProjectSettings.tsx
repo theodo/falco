@@ -105,7 +105,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
     );
   }
 
-  if (project === null) {
+  if (project === null || currentUser === null) {
     return (
       <Style.Container>
         <MessagePill messageType="error">
@@ -132,37 +132,38 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
         value={selectOption}
       />}
       <Style.ProjectMembersBlock>
-        { // display admins first : see higher for an explanation of this sorting method
-          project.projectMembers.sort((a, b) => +b.isAdmin - +a.isAdmin).map((projectMember: ProjectMember) =>
-          <Style.ProjectMemberContainer key={projectMember.username}>
-            <Style.MemberUsername>{projectMember.username}</Style.MemberUsername>
-            <Style.MemberEmail>{projectMember.emailAddress}</Style.MemberEmail>
-            <Style.MemberAdminBadgeContainer>
-              {isUserAdminOfProject(currentUser, project)
-                ? <ToggleButton 
-                  onChange={() => editMemberOfProjectRequest(project.uuid, projectMember.id, !projectMember.isAdmin)}
-                  checked={projectMember.isAdmin}
-                  disabled={null !== currentUser && projectMember.username === currentUser.username}
-                  label={intl.formatMessage({id: "ProjectSettings.admin"})}
-                />
-                : projectMember.isAdmin && <Badge
-                  backgroundColor={colorUsage.adminBadgeBackground}
-                  color={colorUsage.adminBadgeText}
-                  text={intl.formatMessage({id: "ProjectSettings.admin"}).toUpperCase()}
-                />}
-            </Style.MemberAdminBadgeContainer>
-            <Style.MemberAdminDeleteContainer>
-                {currentUser && isUserAdminOfProject(currentUser, project) && projectMember.username !== currentUser.username && 
-                  (<Style.MemberAdminDeleteButton onClick={() => removeMemberOfProjectRequest(project.uuid, projectMember.id)}>
-                    <Close
-                      color={colorUsage.deleteMemberIconColor}
-                      width="13px"
-                      strokeWidth="20"
-                    />
-                  </Style.MemberAdminDeleteButton>)}
-            </Style.MemberAdminDeleteContainer >
-          </Style.ProjectMemberContainer>
-        )}
+        { // place current user first : see https://stackoverflow.com/questions/23921683/javascript-move-an-item-of-an-array-to-the-front
+          project.projectMembers.sort((a, b) => a.username === currentUser.username ? -1 : b.username === currentUser.username ? 1 : 0)
+          .map((projectMember: ProjectMember) =>
+            <Style.ProjectMemberContainer key={projectMember.username}>
+              <Style.MemberUsername>{projectMember.username}</Style.MemberUsername>
+              <Style.MemberEmail>{projectMember.emailAddress}</Style.MemberEmail>
+              <Style.MemberAdminBadgeContainer>
+                {isUserAdminOfProject(currentUser, project)
+                  ? <ToggleButton 
+                    onChange={() => editMemberOfProjectRequest(project.uuid, projectMember.id, !projectMember.isAdmin)}
+                    checked={projectMember.isAdmin}
+                    disabled={projectMember.username === currentUser.username}
+                    label={intl.formatMessage({id: "ProjectSettings.admin"})}
+                  />
+                  : projectMember.isAdmin && <Badge
+                    backgroundColor={colorUsage.adminBadgeBackground}
+                    color={colorUsage.adminBadgeText}
+                    text={intl.formatMessage({id: "ProjectSettings.admin"}).toUpperCase()}
+                  />}
+              </Style.MemberAdminBadgeContainer>
+              <Style.MemberAdminDeleteContainer>
+                  {isUserAdminOfProject(currentUser, project) && projectMember.username !== currentUser.username && 
+                    (<Style.MemberAdminDeleteButton onClick={() => removeMemberOfProjectRequest(project.uuid, projectMember.id)}>
+                      <Close
+                        color={colorUsage.deleteMemberIconColor}
+                        width="13px"
+                        strokeWidth="20"
+                      />
+                    </Style.MemberAdminDeleteButton>)}
+              </Style.MemberAdminDeleteContainer >
+            </Style.ProjectMemberContainer>
+          )}
       </Style.ProjectMembersBlock>
     </Style.Container>
   );
