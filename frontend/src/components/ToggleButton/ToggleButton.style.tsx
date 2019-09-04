@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { colorUsage, getSpacing, } from 'stylesheet';
+import { getSpacing } from 'stylesheet';
 
 interface ToggleButtonProps {
-  checked: boolean;
+  color: string;
+  disabled: boolean;
 }
 
 export const ToggleButtonContainer= styled.label`
@@ -14,9 +15,7 @@ export const ToggleButtonLabel = styled.span`
   margin-left: ${getSpacing(1)};
   font-weight: bold;
   text-transform: uppercase;
-  color: ${(props: ToggleButtonProps) => props.checked 
-    ? colorUsage.ToggleButtonActiveLabelColor
-    : colorUsage.ToggleButtonDisabledLabelColor
-  };
+  color: ${(props: ToggleButtonProps) => props.color};
   transition-duration: 0.4s;
+  opacity: ${(props: ToggleButtonProps) => props.disabled ? 0.5 : 1}
 `

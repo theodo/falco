@@ -28,7 +28,11 @@ const ToggleButton: React.FunctionComponent<OwnProps> = ({
         checked={checked}
         disabled={disabled}
       />
-      <ToggleButtonLabel checked={checked}>{label}</ToggleButtonLabel>
+      <ToggleButtonLabel
+        color={checked ? colorUsage.ToggleButtonActiveLabelColor : colorUsage.ToggleButtonDisabledLabelColor}
+        disabled={disabled}
+      >{label}
+      </ToggleButtonLabel>
     </ToggleButtonContainer>
   )
 };
