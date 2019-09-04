@@ -53,7 +53,7 @@ class ProjectAdmin(admin.ModelAdmin):
         ScriptInline,
         ProjectAuditParametersInline,
     ]
-    exclude = ["screenshot_url", "members", "admins"]
+    exclude = ["screenshot_url"]
     list_filter = ("is_active",)
     list_display = ("name", "project_actions", "is_active", "created_at")
 
