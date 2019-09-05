@@ -19,15 +19,15 @@ export type ProjectsState = Readonly<{
 
 const initialState: ProjectsState = { byId: null };
 
-const getAllMembersExceptOne = (project: ProjectType, userId: string) => {
+const getAllMembersExceptTargetMember = (project: ProjectType, targetMemberId: string) => {
   return project.projectMembers.filter((member: ProjectMember) => {
-    return member.id !== userId;
+    return member.id !== targetMemberId;
   });
 }
 
-const changeAdminStatusOfMember = (project: ProjectType, userId: string, isAdmin: boolean) => {
+const getAllMembersWithUpdatedAdminStatusForTargetMember = (project: ProjectType, targetMemberId: string, isAdmin: boolean) => {
   return project.projectMembers.map((member: ProjectMember) => {
-    if(member.id !== userId) {
+    if(member.id !== targetMemberId) {
       return member;
     };
 
@@ -68,14 +68,14 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
           ...state.byId,
           [typedAction.payload.projectId]: {
             ...state.byId[typedAction.payload.projectId],
-            projectMembers: getAllMembersExceptOne(state.byId[typedAction.payload.projectId], typedAction.payload.userId),
+            projectMembers: getAllMembersExceptTargetMember(state.byId[typedAction.payload.projectId], typedAction.payload.userId),
           }
         },
       };
       case getType(editMemberOfProjectSuccess):
         if(!state.byId) { return state };
   
-        const filteredMembers = changeAdminStatusOfMember(
+        const updatedMembers = getAllMembersWithUpdatedAdminStatusForTargetMember(
           state.byId[typedAction.payload.projectId],
           typedAction.payload.userId,
           typedAction.payload.isAdmin
@@ -87,7 +87,7 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
             ...state.byId,
             [typedAction.payload.projectId]: {
               ...state.byId[typedAction.payload.projectId],
-              projectMembers: filteredMembers
+              projectMembers: updatedMembers
             }
           },
         };

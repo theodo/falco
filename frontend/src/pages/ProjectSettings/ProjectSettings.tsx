@@ -115,6 +115,9 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
     );
   }
 
+  // place current user first : see https://stackoverflow.com/questions/23921683/javascript-move-an-item-of-an-array-to-the-front
+  const projectMembersWithCurrentUserFirst = project.projectMembers.sort((a, b) => a.username === currentUser.username ? -1 : b.username === currentUser.username ? 1 : 0)
+
   return (
     <Style.Container>
       <Style.PageTitle>{project.name}</Style.PageTitle>
@@ -132,9 +135,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
         value={selectOption}
       />}
       <Style.ProjectMembersBlock>
-        { // place current user first : see https://stackoverflow.com/questions/23921683/javascript-move-an-item-of-an-array-to-the-front
-          project.projectMembers.sort((a, b) => a.username === currentUser.username ? -1 : b.username === currentUser.username ? 1 : 0)
-          .map((projectMember: ProjectMember) =>
+        {projectMembersWithCurrentUserFirst.map((projectMember: ProjectMember) =>
             <Style.ProjectMemberContainer key={projectMember.username}>
               <Style.MemberUsername>{projectMember.username}</Style.MemberUsername>
               <Style.MemberEmail>{projectMember.emailAddress}</Style.MemberEmail>
