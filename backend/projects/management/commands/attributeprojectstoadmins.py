@@ -14,7 +14,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for project in Project.objects.all():
-            project.members_new.add(
+            project.members.add(
                 *list(User.objects.filter(is_superuser=True)),
                 through_defaults={"is_admin": True}
             )
