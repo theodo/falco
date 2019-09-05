@@ -1,8 +1,8 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
+import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
 import { makeDeleteRequest, makeGetRequest, makePostRequest, makePutRequest } from 'services/networking/request';
 import { ActionType, getType } from 'typesafe-actions';
 
-import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
 import { fetchAuditParametersAction } from '../auditParameters/actions';
 import { modelizeApiAuditParametersListToById } from '../auditParameters/modelizer';
 import { ApiAuditParametersType } from '../auditParameters/types';
@@ -31,6 +31,7 @@ import {
   fetchProjectsRequest,
   fetchProjectSuccess,
   saveFetchedProjects,
+  setToastrDisplay,
 } from './actions';
 import { modelizeProject, modelizeProjects } from './modelizer';
 import { ApiProjectResponseType, ApiProjectType } from './types';
@@ -45,6 +46,7 @@ function* fetchProjectFailedHandler(error: Error, actionPayload: Record<string, 
 
 function* addMemberToProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
   yield put(addMemberToProjectError({ projectId: actionPayload.projectId, errorMessage: error.message }));
+  yield put(setToastrDisplay({ toastrDisplay: 'addMemberError' }));
 };
 
 function* deleteMemberOfProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
@@ -110,6 +112,7 @@ function* fetchProject(action: ActionType<typeof fetchProjectRequest>) {
 };
 
 function* addMemberToProject(action: ActionType<typeof addMemberToProjectRequest>) {
+  yield put(setToastrDisplay({ toastrDisplay: '' }));
   const endpoint = `/api/projects/${action.payload.projectId}/members`;
   const { body: projectResponse }: { body: ApiProjectType } = yield call(
     makePostRequest,
@@ -118,6 +121,7 @@ function* addMemberToProject(action: ActionType<typeof addMemberToProjectRequest
     { user_id: action.payload.userId },
   );
   yield put(addMemberToProjectSuccess({ byId: modelizeProject(projectResponse) }));
+  yield put(setToastrDisplay({ toastrDisplay: 'addMemberSuccess' }));
 };
 
 function* deleteMemberOfProject(action: ActionType<typeof deleteMemberOfProjectRequest>) {

@@ -2,13 +2,14 @@ import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
 import { ValueType } from 'react-select/lib/types';
-import { ProjectMember, ProjectType } from 'redux/entities/projects/types';
+import { ProjectMember, ProjectType, ToastrDisplayType } from 'redux/entities/projects/types';
 
 import Badge from 'components/Badge';
 import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
 import ToggleButton from 'components/ToggleButton';
 import Close from 'icons/Close';
+import { toastr } from 'react-redux-toastr';
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import { UserState } from 'redux/user';
 import { modelizeUser } from 'redux/user/modelizer';
@@ -29,6 +30,8 @@ type Props = {
   editMemberOfProjectRequest: (projectId: string, userId: string, isAdmin: boolean) => void;
   fetchProjectsRequest: (projectId: string) => void;
   project?: ProjectType | null;
+  toastrDisplay: ToastrDisplayType;
+  setToastrDisplay: (toastrDisplay: ToastrDisplayType) => void;
 } & OwnProps &
   InjectedIntlProps;
 
@@ -40,7 +43,9 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
   match,
   intl,
   project,
-  currentUser
+  currentUser,
+  toastrDisplay,
+  setToastrDisplay
 }) => {
 
   interface UserOption {
@@ -64,7 +69,6 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
       })
   }
 
-
   React.useEffect(
     () => {
       fetchAllUsers();
@@ -77,6 +81,30 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
       setSelectOption(null);
     },
     [project],
+  );
+
+  React.useEffect(
+    () => {
+      if('' !== toastrDisplay) {
+        switch(toastrDisplay) {
+          case "addMemberSuccess":
+            toastr.success(
+              intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
+              intl.formatMessage({'id': 'Toastr.ProjectSettings.add_member_success_message'}),
+            );
+            break;
+          case "addMemberError":
+            toastr.error(
+              intl.formatMessage({'id': 'Toastr.ProjectSettings.error_title'}),
+              intl.formatMessage({'id': 'Toastr.ProjectSettings.error_message'}),
+            );
+            break;
+        }
+
+        setToastrDisplay('');
+      }
+    },
+    [toastrDisplay, setToastrDisplay, intl],
   );
 
   const onChange = (selectedOption: ValueType<UserOption | {}>) => {
