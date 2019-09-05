@@ -6,6 +6,7 @@
 import { LocationChangeAction, RouterState } from 'connected-react-router';
 import { combineReducers, Reducer } from 'redux';
 
+import { reducer as toastr } from 'react-redux-toastr'
 import { reducer as auditResults } from './auditResults';
 import { reducer as content } from './content';
 import { reducer as entities } from './entities'
@@ -33,5 +34,6 @@ export default function createReducer(asyncReducers: {
     content,
     user,
     signUp,
+    toastr
   });
 }

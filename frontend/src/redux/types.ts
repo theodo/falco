@@ -1,4 +1,5 @@
 import { RouterState } from 'connected-react-router';
+import { ToastrState } from 'react-redux-toastr';
 import { PersistPartial } from 'redux-persist/lib/persistReducer';
 import { LeadAction, LeadState } from 'redux/lead';
 import { AuditResultsAction, AuditResultsState } from './auditResults';
@@ -30,6 +31,7 @@ export type RootState = Readonly<{
   auditResults: AuditResultsState;
   user: UserState;
   content: ContentState & PersistPartial;
+  toastr: ToastrState;
 }>;
 // This type allows url fetching from anywhere without modifying the RootState
 export type RootStateWithRouter = RootState & Readonly<{ router: RouterState }>;
