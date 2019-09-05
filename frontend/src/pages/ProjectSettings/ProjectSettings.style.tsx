@@ -9,6 +9,7 @@ const Style = {
     flex-direction: column;
     padding: 0;
     margin: 0;
+    width: 800px;
   `,
 
   PageTitle: styled.div`

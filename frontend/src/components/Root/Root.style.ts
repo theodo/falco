@@ -26,7 +26,7 @@ PageBackground.displayName = 'PageBackground';
 export const Page = styled.div`
   height: 100%;
   font-family: ${fontFamily.mainSans};
-  width: 1440px;
+  width: 100%;
   margin: auto;
   background-color: ${colorUsage.defaultContentBackground};
 
@@ -43,11 +43,14 @@ Body.displayName = 'Body';
 export const Content = styled.div<ContentProps>`
   position: relative;
   top: 100px;
-  left: ${props => (props.shouldDisplayMenu ? '490px' : '0')};
+  left: ${props => (props.shouldDisplayMenu ? '430px' : '0')};
   padding-left: ${props => (props.shouldDisplayMenu ? getSpacing(8) : '0')};
   padding-right: ${props => (props.shouldDisplayMenu ? getSpacing(22) : '0')};
   padding-top: ${getSpacing(4)};
-  width: ${props => (props.shouldDisplayMenu ? '800px' : '100%')};
+  width: ${props => (props.shouldDisplayMenu ? 'calc(100% - 490px)' : '100%')};
   background-color: ${colorUsage.defaultContentBackground};
+  display: flex;
+  justify-content: center;
+  min-width: 800px;
 `;
 Content.displayName = 'Content';
