@@ -1,13 +1,14 @@
 import { AnyAction } from 'redux';
 import { ActionType, getType } from 'typesafe-actions';
 
-import { addMemberToProjectSuccess, deleteMemberOfProjectSuccess, fetchProjectError, fetchProjectsRequest, fetchProjectSuccess } from './actions';
+import { addMemberToProjectSuccess, deleteMemberOfProjectSuccess, editMemberOfProjectSuccess, fetchProjectError, fetchProjectsRequest, fetchProjectSuccess } from './actions';
 import { ProjectMember, ProjectType } from './types';
 
 export type ProjectsAction = ActionType<
   typeof fetchProjectsRequest | 
   typeof addMemberToProjectSuccess | 
   typeof deleteMemberOfProjectSuccess |
+  typeof editMemberOfProjectSuccess |
   typeof fetchProjectSuccess | 
   typeof fetchProjectError
 >;
@@ -17,6 +18,22 @@ export type ProjectsState = Readonly<{
 }>;
 
 const initialState: ProjectsState = { byId: null };
+
+const getAllMembersExceptTargetMember = (project: ProjectType, targetMemberId: string) => {
+  return project.projectMembers.filter((member: ProjectMember) => {
+    return member.id !== targetMemberId;
+  });
+}
+
+const getAllMembersWithUpdatedAdminStatusForTargetMember = (project: ProjectType, targetMemberId: string, isAdmin: boolean) => {
+  return project.projectMembers.map((member: ProjectMember) => {
+    if(member.id !== targetMemberId) {
+      return member;
+    };
+
+    return {...member, isAdmin}
+  });
+}
 
 const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
   const typedAction = action as ProjectsAction;
@@ -45,20 +62,35 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
     case getType(deleteMemberOfProjectSuccess):
       if(!state.byId) { return state };
 
-      const filteredMembers = state.byId[typedAction.payload.projectId].projectMembers.filter((member: ProjectMember) => {
-        return member.id !== typedAction.payload.userId;
-      });
-
       return {
         ...state,
         byId: {
           ...state.byId,
           [typedAction.payload.projectId]: {
             ...state.byId[typedAction.payload.projectId],
-            projectMembers: filteredMembers
+            projectMembers: getAllMembersExceptTargetMember(state.byId[typedAction.payload.projectId], typedAction.payload.userId),
           }
         },
       };
+      case getType(editMemberOfProjectSuccess):
+        if(!state.byId) { return state };
+  
+        const updatedMembers = getAllMembersWithUpdatedAdminStatusForTargetMember(
+          state.byId[typedAction.payload.projectId],
+          typedAction.payload.userId,
+          typedAction.payload.isAdmin
+        );
+
+        return {
+          ...state,
+          byId: {
+            ...state.byId,
+            [typedAction.payload.projectId]: {
+              ...state.byId[typedAction.payload.projectId],
+              projectMembers: updatedMembers
+            }
+          },
+        };
     case getType(fetchProjectError):
       return {
         ...state,

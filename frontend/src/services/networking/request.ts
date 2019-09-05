@@ -82,6 +82,20 @@ export const makePostRequest = async (endpoint: string, needsAuthentication: boo
   }
 };
 
+export const makePutRequest = async (endpoint: string, needsAuthentication: boolean, data: {}) => {
+  const putRequest = request
+    .put(`${baseUrl}${endpoint}`)
+    .send(data)
+    .set('Accept', 'application/json');
+  if (needsAuthentication) {
+    return await checkAccessToken(() => {
+      return putRequest.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+    });
+  } else {
+    return putRequest;
+  }
+};
+
 export const makeDeleteRequest = async (endpoint: string, needsAuthentication: boolean) => {
   const deleteRequest = request
     .delete(`${baseUrl}${endpoint}`)

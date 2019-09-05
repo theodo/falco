@@ -1,5 +1,5 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
-import { makeDeleteRequest, makeGetRequest, makePostRequest } from 'services/networking/request';
+import { makeDeleteRequest, makeGetRequest, makePostRequest, makePutRequest } from 'services/networking/request';
 import { ActionType, getType } from 'typesafe-actions';
 
 import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
@@ -23,6 +23,9 @@ import {
   deleteMemberOfProjectError,
   deleteMemberOfProjectRequest,
   deleteMemberOfProjectSuccess,
+  editMemberOfProjectError,
+  editMemberOfProjectRequest,
+  editMemberOfProjectSuccess,
   fetchProjectError,
   fetchProjectRequest,
   fetchProjectsRequest,
@@ -46,6 +49,14 @@ function* addMemberToProjectFailedHandler(error: Error, actionPayload: Record<st
 
 function* deleteMemberOfProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
   yield put(deleteMemberOfProjectError({
+    projectId: actionPayload.projectId,
+    userId: actionPayload.userId,
+    errorMessage: error.message
+  }));
+};
+
+function* editMemberOfProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
+  yield put(editMemberOfProjectError({
     projectId: actionPayload.projectId,
     userId: actionPayload.userId,
     errorMessage: error.message
@@ -119,6 +130,21 @@ function* deleteMemberOfProject(action: ActionType<typeof deleteMemberOfProjectR
   yield put(deleteMemberOfProjectSuccess({ projectId: action.payload.projectId, userId: action.payload.userId }));
 };
 
+function* editMemberOfProject(action: ActionType<typeof editMemberOfProjectRequest>) {
+  const endpoint = `/api/projects/${action.payload.projectId}/members/${action.payload.userId}`;
+  yield call(
+    makePutRequest,
+    endpoint,
+    true,
+    { is_admin: action.payload.isAdmin }
+  );
+  yield put(editMemberOfProjectSuccess({ 
+    projectId: action.payload.projectId, 
+    userId: action.payload.userId, 
+    isAdmin: action.payload.isAdmin
+  }));
+};
+
 function* saveProjectsToStore(action: ActionType<typeof saveFetchedProjects>) {
   const projects = action.payload.projects;
   yield put(fetchPageAction.success({
@@ -171,6 +197,10 @@ export default function* projectsSaga() {
   yield takeEvery(
     getType(addMemberToProjectRequest),
     handleAPIExceptions(addMemberToProject, addMemberToProjectFailedHandler),
+  );
+  yield takeEvery(
+    getType(editMemberOfProjectRequest),
+    handleAPIExceptions(editMemberOfProject, editMemberOfProjectFailedHandler),
   );
   yield takeEvery(
     getType(deleteMemberOfProjectRequest),

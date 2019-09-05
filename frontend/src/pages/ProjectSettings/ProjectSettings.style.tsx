@@ -1,5 +1,4 @@
 import Select from 'components/Select';
-import Close from 'icons/Close';
 import styled from 'styled-components';
 import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
@@ -85,11 +84,13 @@ MemberUsername: styled.div`
 `,
 
 MemberEmail: styled.div`
-  width: 50%;
+  width: 30%;
 `,
 
 MemberAdminBadgeContainer: styled.div`
-  width: 20%;
+  width: 40%;
+  display:flex;
+  justify-content: center;
 `,
 
 MemberAdminDeleteContainer: styled.div`

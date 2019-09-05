@@ -212,6 +212,12 @@ export const colorUsage = {
   // Not Found 404
   notFoundButtonBackground: colorPalette.grey500,
   notFoundButtonText: colorPalette.white500,
+
+  // ToggleButton
+  ToggleButtonActiveBackground: colorPalette.accentGreen500,
+  ToggleButtonDisabledBackground: colorPalette.grey500,
+  ToggleButtonActiveLabelColor: colorPalette.accentGreen500,
+  ToggleButtonDisabledLabelColor: colorPalette.grey500
 };
 
 export const fontFamily = {
