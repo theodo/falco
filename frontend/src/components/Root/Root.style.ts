@@ -47,7 +47,7 @@ export const Content = styled.div<ContentProps>`
   padding-left: ${props => (props.shouldDisplayMenu ? getSpacing(8) : '0')};
   padding-right: ${props => (props.shouldDisplayMenu ? getSpacing(22) : '0')};
   padding-top: ${getSpacing(4)};
-  width: ${props => (props.shouldDisplayMenu ? 'calc(100% - 490px)' : '100%')};
+  width: ${props => (props.shouldDisplayMenu ? 'calc(100% - 580px)' : '100%')};
   background-color: ${colorUsage.defaultContentBackground};
   display: flex;
   justify-content: center;
