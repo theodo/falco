@@ -1,4 +1,4 @@
-import { ProjectType } from 'redux/entities/projects/types';
+import { ProjectType, ToastrDisplayType } from 'redux/entities/projects/types';
 import { RootState } from 'redux/types';
 
 export const hasProjects = (state: RootState): boolean => {
@@ -25,3 +25,7 @@ export const getProject = (state: RootState, projectId: string): ProjectType | n
   }
   return state.entities.projects.byId && state.entities.projects.byId[projectId];
 };
+
+export const getToastrDisplay = (state: RootState): ToastrDisplayType => {
+  return state.entities.projects.toastrDisplay;
+}

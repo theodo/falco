@@ -223,6 +223,14 @@
     "createProject": "Pour créer un nouveau projet, veuillez contacter Jaafar (jaafarr@theodo.fr) ou Nicolas (nicolasgo@theodo.fr).",
     "joinProject": "Pour rejoindre un projet existant, veuillez contacter l'administrateur du projet."
   },
+  "Toastr": {
+    "ProjectSettings":{
+      "success_title": "Succès",
+      "error_title": "Échec",
+      "error_message": "Une erreur est survenue, veuillez réessayer",
+      "add_member_success_message": "L'utilisateur a bien été ajouté au projet"
+    }
+  },
   "components": {
     "MetricGraph": {
       "tooltipDate": "Le {day} à {time}",

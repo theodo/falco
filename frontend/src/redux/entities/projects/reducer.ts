@@ -1,23 +1,32 @@
 import { AnyAction } from 'redux';
 import { ActionType, getType } from 'typesafe-actions';
-
-import { addMemberToProjectSuccess, deleteMemberOfProjectSuccess, editMemberOfProjectSuccess, fetchProjectError, fetchProjectsRequest, fetchProjectSuccess } from './actions';
-import { ProjectMember, ProjectType } from './types';
+import {
+  addMemberToProjectSuccess,
+  deleteMemberOfProjectSuccess,
+  editMemberOfProjectSuccess,
+  fetchProjectError,
+  fetchProjectsRequest,
+  fetchProjectSuccess,
+  setToastrDisplay
+} from './actions';
+import { ProjectMember, ProjectType, ToastrDisplayType } from './types';
 
 export type ProjectsAction = ActionType<
-  typeof fetchProjectsRequest | 
-  typeof addMemberToProjectSuccess | 
+  typeof fetchProjectsRequest |
+  typeof addMemberToProjectSuccess |
   typeof deleteMemberOfProjectSuccess |
   typeof editMemberOfProjectSuccess |
   typeof fetchProjectSuccess | 
-  typeof fetchProjectError
+  typeof fetchProjectError |
+  typeof setToastrDisplay
 >;
 
 export type ProjectsState = Readonly<{
+  toastrDisplay: ToastrDisplayType
   byId: Readonly<Record<string, ProjectType>> | null;
 }>;
 
-const initialState: ProjectsState = { byId: null };
+const initialState: ProjectsState = { toastrDisplay: '', byId: null };
 
 const getAllMembersExceptTargetMember = (project: ProjectType, targetMemberId: string) => {
   return project.projectMembers.filter((member: ProjectMember) => {
@@ -38,6 +47,11 @@ const getAllMembersWithUpdatedAdminStatusForTargetMember = (project: ProjectType
 const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
   const typedAction = action as ProjectsAction;
   switch (typedAction.type) {
+    case getType(setToastrDisplay):
+      return {
+        ...state,
+        toastrDisplay: typedAction.payload.toastrDisplay,
+      };
     case getType(fetchProjectsRequest):
       return {
         ...state,

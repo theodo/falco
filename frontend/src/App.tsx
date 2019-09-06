@@ -4,6 +4,7 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 import { ConnectedRouter } from 'connected-react-router';
 import { History } from 'history';
 import { Provider } from 'react-redux';
+import ReduxToastr from 'react-redux-toastr';
 import { Route } from 'react-router';
 import { Store } from 'redux';
 import { Persistor } from 'redux-persist';
@@ -33,6 +34,14 @@ const App: React.FunctionComponent<Props> = ({ history, persistor, store }) => (
           <Route path="/" render={() => <RootComponentWithRoutes store={store.getState()} />} />
         </ConnectedRouter>
       </PersistGate>
+      <ReduxToastr
+        timeOut={4000}
+        newestOnTop={false}
+        preventDuplicates
+        transitionIn="fadeIn"
+        transitionOut="fadeOut"
+        closeOnToastrClick
+      />
     </MuiThemeProvider>
   </Provider>
 );
