@@ -52,5 +52,11 @@ export const Content = styled.div<ContentProps>`
   display: flex;
   justify-content: center;
   min-width: 800px;
+  flex-direction: column;
+  align-items: center;
+
+  @media only screen and (max-width: ${responsiveThreshold}) {
+    min-width: unset;
+  }
 `;
 Content.displayName = 'Content';
