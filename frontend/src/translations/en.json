@@ -99,7 +99,8 @@
     "project_members": "Project members",
     "member_in_project": " (Already in project)",
     "admin": "Admin",
-    "add_member": "Add user..."
+    "add_member": "Add user...",
+    "member_not_on_falco": "User not on Falco ? You can send them the following link so that they can create their account : "
   },
   "Audits": {
     "title": "Dashboard for the last week",
