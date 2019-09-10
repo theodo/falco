@@ -165,7 +165,8 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
       <Style.InviteUserLink>
         {intl.formatMessage({id: "ProjectSettings.member_not_on_falco"})}
         <a href="/sign-up">
-          {`${process.env.REACT_APP_API_BASE_URL || ''}/sign-up`}
+          { // small hack to get the page for the proper environment
+            `${window.location.href.match(/https?:\/\/[^/]+/)}/sign-up`}
         </a>
       </Style.InviteUserLink>
       <Style.ProjectMembersBlock>
