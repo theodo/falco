@@ -162,6 +162,12 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
         isOptionDisabled={(option: UserOption) => option.disabled}
         value={selectOption}
       />}
+      <Style.InviteUserLink>
+        {intl.formatMessage({id: "ProjectSettings.member_not_on_falco"})}
+        <a href="/sign-up">
+          {`${process.env.REACT_APP_API_BASE_URL || ''}/sign-up`}
+        </a>
+      </Style.InviteUserLink>
       <Style.ProjectMembersBlock>
         {projectMembersWithCurrentUserFirst.map((projectMember: ProjectMember) =>
             <Style.ProjectMemberContainer key={projectMember.username}>

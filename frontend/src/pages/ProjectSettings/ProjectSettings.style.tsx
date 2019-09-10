@@ -47,6 +47,15 @@ SelectUser: styled(Select)`
   line-height: ${lineHeight.inputSelectText};
 `,
 
+InviteUserLink: styled.div`
+  margin-top: ${getSpacing(4)};
+  line-height: ${lineHeight.bodyText};
+  color: ${colorUsage.bodyText};
+  font-family: ${fontFamily.mainSans};
+  font-size: ${fontSize.bodyText};
+  font-weight: ${fontWeight.bodyText};
+`,
+
 ProjectMembersBlock: styled.div`
   border: solid 1px ${colorUsage.projectMembersContainerBorder};
   margin: ${getSpacing(4)} 0;
