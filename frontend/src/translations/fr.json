@@ -98,7 +98,13 @@
   "ProjectSettings": {
     "settings": "Paramètres",
     "project_members": "Membres du projet",
+    "pages": "Pages du projet",
+    "page_name": "Nom de la page",
+    "page_url": "Url de la page",
     "member_in_project": " (Déjà ajouté au projet)",
+    "member_username": "Nom d'utilisateur",
+    "member_email": "Adresse email",
+    "member_status": "Statut",
     "admin": "Admin",
     "add_member": "Ajouter un utilisateur...",
     "member_not_on_falco": "L'utilisateur n'est pas sur Falco ? Vous pouvez envoyer le lien suivant afin qu'il crée son compte : "
@@ -229,7 +235,8 @@
       "success_title": "Succès",
       "error_title": "Échec",
       "error_message": "Une erreur est survenue, veuillez réessayer",
-      "add_member_success_message": "L'utilisateur a bien été ajouté au projet"
+      "add_member_success_message": "L'utilisateur a bien été ajouté au projet",
+      "edit_page_success_message": "La page a bien été modifiée"
     }
   },
   "components": {

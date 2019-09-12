@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
 import { ValueType } from 'react-select/lib/types';
-import { ProjectMember, ProjectType, ToastrDisplayType } from 'redux/entities/projects/types';
+import { ProjectMember, ProjectToastrDisplayType, ProjectType } from 'redux/entities/projects/types';
 
 import Badge from 'components/Badge';
 import Loader from 'components/Loader';
@@ -17,6 +17,7 @@ import { ApiUser, User } from 'redux/user/types';
 import { makeGetRequest } from 'services/networking/request';
 import { isUserAdminOfProject } from 'services/utils';
 import { colorUsage } from 'stylesheet';
+import PageRow, { PageRowHeader } from './Components/PageRow';
 import Style from './ProjectSettings.style';
 
 export type OwnProps = {} & RouteComponentProps<{
@@ -30,8 +31,8 @@ type Props = {
   editMemberOfProjectRequest: (projectId: string, userId: string, isAdmin: boolean) => void;
   fetchProjectsRequest: (projectId: string) => void;
   project?: ProjectType | null;
-  toastrDisplay: ToastrDisplayType;
-  setToastrDisplay: (toastrDisplay: ToastrDisplayType) => void;
+  toastrDisplay: ProjectToastrDisplayType;
+  setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
 } & OwnProps &
   InjectedIntlProps;
 
@@ -45,7 +46,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
   project,
   currentUser,
   toastrDisplay,
-  setToastrDisplay
+  setProjectToastrDisplay
 }) => {
 
   interface UserOption {
@@ -87,6 +88,12 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
     () => {
       if('' !== toastrDisplay) {
         switch(toastrDisplay) {
+          case "editPageSuccess":
+            toastr.success(
+              intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
+              intl.formatMessage({'id': 'Toastr.ProjectSettings.edit_page_success_message'}),
+            );
+            break;
           case "addMemberSuccess":
             toastr.success(
               intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
@@ -94,6 +101,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
             );
             break;
           case "addMemberError":
+          case "editPageError":
             toastr.error(
               intl.formatMessage({'id': 'Toastr.ProjectSettings.error_title'}),
               intl.formatMessage({'id': 'Toastr.ProjectSettings.error_message'}),
@@ -101,10 +109,10 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
             break;
         }
 
-        setToastrDisplay('');
+        setProjectToastrDisplay('');
       }
     },
-    [toastrDisplay, setToastrDisplay, intl],
+    [toastrDisplay, setProjectToastrDisplay, intl],
   );
 
   const onChange = (selectedOption: ValueType<UserOption | {}>) => {
@@ -169,9 +177,16 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
             `${window.location.href.match(/https?:\/\/[^/]+/)}/sign-up`}
         </a>
       </Style.InviteUserLink>
-      <Style.ProjectMembersBlock>
+      <Style.ProjectSettingsBlock>
+        <Style.ElementContainer>
+          <Style.MemberUsername>{intl.formatMessage({ id: "ProjectSettings.member_username"})}</Style.MemberUsername>
+          <Style.MemberEmail>{intl.formatMessage({ id: "ProjectSettings.member_email"})}</Style.MemberEmail>
+          <Style.MemberAdminBadgeContainer>
+            {intl.formatMessage({ id: "ProjectSettings.member_status"})}
+          </Style.MemberAdminBadgeContainer>
+        </Style.ElementContainer>
         {projectMembersWithCurrentUserFirst.map((projectMember: ProjectMember) =>
-            <Style.ProjectMemberContainer key={projectMember.username}>
+            <Style.ElementContainer key={projectMember.username}>
               <Style.MemberUsername>{projectMember.username}</Style.MemberUsername>
               <Style.MemberEmail>{projectMember.emailAddress}</Style.MemberEmail>
               <Style.MemberAdminBadgeContainer>
@@ -198,9 +213,25 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
                       />
                     </Style.MemberAdminDeleteButton>)}
               </Style.MemberAdminDeleteContainer >
-            </Style.ProjectMemberContainer>
+            </Style.ElementContainer>
           )}
-      </Style.ProjectMembersBlock>
+      </Style.ProjectSettingsBlock>
+      <Style.PageSubTitle>
+        <FormattedMessage id="ProjectSettings.pages"/>
+      </Style.PageSubTitle>
+      <Style.ProjectSettingsBlock>
+        <Style.ElementContainer>
+          <PageRowHeader />
+        </Style.ElementContainer>
+        {project.pagesIds.map(pageId => (
+          <Style.ElementContainer key={pageId}>
+            <PageRow
+              disabled={!isUserAdminOfProject(currentUser, project)}
+              projectId={project.uuid}
+              pageId={pageId}
+            />
+          </Style.ElementContainer>))}
+      </Style.ProjectSettingsBlock>
     </Style.Container>
   );
 }

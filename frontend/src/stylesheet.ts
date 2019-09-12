@@ -170,7 +170,8 @@ export const colorUsage = {
   projectsMenuItemStar: colorPalette.accentYellow500,
 
   // Project Settings
-  projectMembersContainerBorder: colorPalette.grey500,
+  projectSettingsContainerBorder: colorPalette.grey500,
+  editableRowInputBorder: colorPalette.grey500,
   oddProjectMemberBackground: colorPalette.grey200,
   adminBadgeText: colorPalette.accentGreen500,
   adminBadgeBackground: colorPalette.accentGreen200,

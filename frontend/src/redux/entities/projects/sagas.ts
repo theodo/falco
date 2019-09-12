@@ -10,8 +10,8 @@ import { pollAuditStatusAction } from '../audits';
 import { fetchAuditStatusHistoriesAction } from '../auditStatusHistories';
 import { modelizeApiAuditStatusHistoriesToByPageOrScriptIdAndAuditParametersId } from '../auditStatusHistories/modelizer';
 import { ApiAuditStatusHistoryType } from '../auditStatusHistories/types';
-import { fetchPageAction } from '../pages';
-import { modelizeApiPagesToById } from '../pages/modelizer';
+import { editPageError, editPageRequest, editPageSuccess, fetchPageAction } from '../pages';
+import { modelizeApiPagesToById, modelizePage } from '../pages/modelizer';
 import { ApiPageType } from '../pages/types';
 import { fetchScriptAction } from '../scripts';
 import { modelizeApiScriptsToById } from '../scripts/modelizer';
@@ -31,7 +31,7 @@ import {
   fetchProjectsRequest,
   fetchProjectSuccess,
   saveFetchedProjects,
-  setToastrDisplay,
+  setProjectToastrDisplay,
 } from './actions';
 import { modelizeProject, modelizeProjects } from './modelizer';
 import { ApiProjectResponseType, ApiProjectType } from './types';
@@ -46,7 +46,7 @@ function* fetchProjectFailedHandler(error: Error, actionPayload: Record<string, 
 
 function* addMemberToProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
   yield put(addMemberToProjectError({ projectId: actionPayload.projectId, errorMessage: error.message }));
-  yield put(setToastrDisplay({ toastrDisplay: 'addMemberError' }));
+  yield put(setProjectToastrDisplay({ toastrDisplay: 'addMemberError' }));
 };
 
 function* deleteMemberOfProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
@@ -63,6 +63,14 @@ function* editMemberOfProjectFailedHandler(error: Error, actionPayload: Record<s
     userId: actionPayload.userId,
     errorMessage: error.message
   }));
+};
+
+function* editPageFailedHandler(error: Error, actionPayload: Record<string, any>) {
+  yield put(editPageError({
+    projectId: actionPayload.projectId,
+    page: actionPayload.page
+  }));
+  yield put(setProjectToastrDisplay({ toastrDisplay: 'editPageError' }));
 };
 
 function* fetchProjects(action: ActionType<typeof fetchProjectsRequest>) {
@@ -112,7 +120,7 @@ function* fetchProject(action: ActionType<typeof fetchProjectRequest>) {
 };
 
 function* addMemberToProject(action: ActionType<typeof addMemberToProjectRequest>) {
-  yield put(setToastrDisplay({ toastrDisplay: '' }));
+  yield put(setProjectToastrDisplay({ toastrDisplay: '' }));
   const endpoint = `/api/projects/${action.payload.projectId}/members`;
   const { body: projectResponse }: { body: ApiProjectType } = yield call(
     makePostRequest,
@@ -121,7 +129,7 @@ function* addMemberToProject(action: ActionType<typeof addMemberToProjectRequest
     { user_id: action.payload.userId },
   );
   yield put(addMemberToProjectSuccess({ byId: modelizeProject(projectResponse) }));
-  yield put(setToastrDisplay({ toastrDisplay: 'addMemberSuccess' }));
+  yield put(setProjectToastrDisplay({ toastrDisplay: 'addMemberSuccess' }));
 };
 
 function* deleteMemberOfProject(action: ActionType<typeof deleteMemberOfProjectRequest>) {
@@ -147,6 +155,18 @@ function* editMemberOfProject(action: ActionType<typeof editMemberOfProjectReque
     userId: action.payload.userId, 
     isAdmin: action.payload.isAdmin
   }));
+};
+
+function* editPage(action: ActionType<typeof editPageRequest>) {
+  const endpoint = `/api/projects/${action.payload.projectId}/pages/${action.payload.page.uuid}`;
+  const { body: pageResponse }: { body: ApiPageType } = yield call(
+    makePutRequest,
+    endpoint,
+    true,
+    { name: action.payload.page.name, url: action.payload.page.url }
+  );
+  yield put(editPageSuccess({page: modelizePage(pageResponse)}));
+  yield put(setProjectToastrDisplay({ toastrDisplay: 'editPageSuccess' }));
 };
 
 function* saveProjectsToStore(action: ActionType<typeof saveFetchedProjects>) {
@@ -205,6 +225,10 @@ export default function* projectsSaga() {
   yield takeEvery(
     getType(editMemberOfProjectRequest),
     handleAPIExceptions(editMemberOfProject, editMemberOfProjectFailedHandler),
+  );
+  yield takeEvery(
+    getType(editPageRequest),
+    handleAPIExceptions(editPage, editPageFailedHandler),
   );
   yield takeEvery(
     getType(deleteMemberOfProjectRequest),

@@ -45,7 +45,10 @@ export interface ApiProjectResponseType {
   has_siblings: boolean;
 };
 
-export type ToastrDisplayType =
+export type ProjectToastrDisplayType =
 | ''
 | 'addMemberSuccess'
 | 'addMemberError'
+| 'editPageSuccess'
+| 'editPageError'
+

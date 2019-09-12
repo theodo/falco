@@ -56,8 +56,8 @@ InviteUserLink: styled.div`
   font-weight: ${fontWeight.bodyText};
 `,
 
-ProjectMembersBlock: styled.div`
-  border: solid 1px ${colorUsage.projectMembersContainerBorder};
+ProjectSettingsBlock: styled.div`
+  border: solid 1px ${colorUsage.projectSettingsContainerBorder};
   margin: ${getSpacing(4)} 0;
   border-radius: 3px;
   font-family: ${fontFamily.mainSans};
@@ -66,7 +66,7 @@ ProjectMembersBlock: styled.div`
   color: ${colorUsage.inputText};
 `,
 
-ProjectMemberContainer: styled.div`
+ElementContainer: styled.div`
   height: 40px;
   display: flex;
   flex-direction: row;
@@ -76,6 +76,9 @@ ProjectMemberContainer: styled.div`
   :first-child {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
+    border-bottom: solid 1px ${colorUsage.projectSettingsContainerBorder};
+    background-color: ${colorUsage.oddProjectMemberBackground};
+    font-weight: bold;
   }
 
   :last-child {

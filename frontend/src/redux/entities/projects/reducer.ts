@@ -7,9 +7,9 @@ import {
   fetchProjectError,
   fetchProjectsRequest,
   fetchProjectSuccess,
-  setToastrDisplay
+  setProjectToastrDisplay
 } from './actions';
-import { ProjectMember, ProjectType, ToastrDisplayType } from './types';
+import { ProjectMember, ProjectToastrDisplayType, ProjectType } from './types';
 
 export type ProjectsAction = ActionType<
   typeof fetchProjectsRequest |
@@ -18,11 +18,11 @@ export type ProjectsAction = ActionType<
   typeof editMemberOfProjectSuccess |
   typeof fetchProjectSuccess | 
   typeof fetchProjectError |
-  typeof setToastrDisplay
+  typeof setProjectToastrDisplay
 >;
 
 export type ProjectsState = Readonly<{
-  toastrDisplay: ToastrDisplayType
+  toastrDisplay: ProjectToastrDisplayType
   byId: Readonly<Record<string, ProjectType>> | null;
 }>;
 
@@ -47,7 +47,7 @@ const getAllMembersWithUpdatedAdminStatusForTargetMember = (project: ProjectType
 const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
   const typedAction = action as ProjectsAction;
   switch (typedAction.type) {
-    case getType(setToastrDisplay):
+    case getType(setProjectToastrDisplay):
       return {
         ...state,
         toastrDisplay: typedAction.payload.toastrDisplay,

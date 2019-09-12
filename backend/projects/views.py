@@ -116,7 +116,7 @@ def project_page_detail(request, project_uuid, page_uuid):
         return JsonResponse(serializer.data)
 
     elif request.method == "PUT":
-        check_if_admin_of_project(request.user.id, project.id)
+        check_if_admin_of_project(request.user.id, project.uuid)
         data = JSONParser().parse(request)
         serializer = PageSerializer(page, data=data)
         if serializer.is_valid():

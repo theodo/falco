@@ -1,6 +1,6 @@
 import { createStandardAction } from 'typesafe-actions';
 
-import { ApiProjectType, ProjectType, ToastrDisplayType } from './types';
+import { ApiProjectType, ProjectToastrDisplayType, ProjectType } from './types';
 
 export const fetchProjectsRequest = createStandardAction('projects/FETCH_PROJECTS_REQUEST')<{
   currentProjectId?: string;
@@ -57,8 +57,8 @@ export const editMemberOfProjectError = createStandardAction('projects/DELETE_ME
   userId: string | null;
   errorMessage: string;
 }>();
-export const setToastrDisplay = createStandardAction('projects/SET_TOASTR_DISPLAY')<{
-  toastrDisplay: ToastrDisplayType;
+export const setProjectToastrDisplay = createStandardAction('projects/SET_TOASTR_DISPLAY')<{
+  toastrDisplay: ProjectToastrDisplayType;
 }>();
 
 export default {
@@ -74,5 +74,5 @@ export default {
   fetchProjectsRequest,
   fetchProjectSuccess,
   fetchProjectError,
-  setToastrDisplay
+  setProjectToastrDisplay
 };

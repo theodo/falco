@@ -1,7 +1,7 @@
 import { ApiPageType, PageType } from "./types";
 
 
-const modelizePage = (apiPage: ApiPageType): PageType => ({
+export const modelizePage = (apiPage: ApiPageType): PageType => ({
     uuid: apiPage.uuid,
     url: apiPage.url,
     name: apiPage.name,
