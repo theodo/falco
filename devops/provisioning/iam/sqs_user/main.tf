@@ -5,10 +5,10 @@ resource "aws_iam_user" "sqs" {
 }
 
 resource "aws_iam_access_key" "sqs" {
-  user = "${aws_iam_user.sqs.name}"
+  user = aws_iam_user.sqs.name
 }
 
 resource "aws_iam_user_policy_attachment" "sqs" {
-  user       = "${aws_iam_user.sqs.name}"
+  user       = aws_iam_user.sqs.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonSQSFullAccess"
 }

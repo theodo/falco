@@ -1,7 +1,7 @@
 resource "aws_acm_certificate" "main" {
   count = "${var.https_domain != "" ? 1 : 0}"
 
-  domain_name       = "${var.https_domain}"
+  domain_name       = var.https_domain
   validation_method = "EMAIL"
 
   lifecycle {
@@ -12,5 +12,5 @@ resource "aws_acm_certificate" "main" {
 resource "aws_acm_certificate_validation" "main" {
   count = "${var.https_domain != "" ? 1 : 0}"
 
-  certificate_arn = "${aws_acm_certificate.main.arn}"
+  certificate_arn = aws_acm_certificate.main.arn
 }

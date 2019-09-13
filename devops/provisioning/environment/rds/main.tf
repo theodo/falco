@@ -10,7 +10,7 @@ resource "aws_security_group" "db" {
     from_port       = 5432
     to_port         = 5432
     protocol        = "tcp"
-    security_groups = ["${var.ingress_sg}"]
+    security_groups = [var.ingress_sg]
   }
 }
 
@@ -19,20 +19,20 @@ resource "aws_db_instance" "main" {
   engine         = "postgres"
   engine_version = 10.6
 
-  name     = "${var.project_name}"
-  username = "${var.project_name}"
-  password = "${random_string.db_password.result}"
+  name     = var.project_name
+  username = var.project_name
+  password = random_string.db_password.result
 
-  allocated_storage           = "${var.allocated_storage}"
+  allocated_storage           = var.allocated_storage
   allow_major_version_upgrade = false
   auto_minor_version_upgrade  = true
   backup_retention_period     = 7
   final_snapshot_identifier   = "${var.project_name}-${var.environment}-${md5(timestamp())}"
-  instance_class              = "${var.instance_class}"
+  instance_class              = var.instance_class
   multi_az                    = "${var.environment == "production"}"
   publicly_accessible         = false
   skip_final_snapshot         = false
   storage_encrypted           = false
   storage_type                = "gp2"
-  vpc_security_group_ids      = ["${aws_security_group.db.id}"]
+  vpc_security_group_ids      = [aws_security_group.db.id]
 }

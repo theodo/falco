@@ -22,7 +22,7 @@ resource "aws_security_group" "instances" {
 
 resource "aws_security_group" "sqs" {
   name   = "${var.project_name}-${var.environment}-sqs"
-  vpc_id = "${var.vpc}"
+  vpc_id = var.vpc
 
   ingress {
     from_port   = 443
@@ -40,11 +40,11 @@ resource "aws_security_group" "sqs" {
 }
 
 resource "aws_vpc_endpoint" "sqs" {
-  vpc_id            = "${var.vpc}"
+  vpc_id            = var.vpc
   service_name      = "com.amazonaws.${var.region}.sqs"
   vpc_endpoint_type = "Interface"
 
   security_group_ids = [
-    "${aws_security_group.sqs.id}",
+    aws_security_group.sqs.id,
   ]
 }
