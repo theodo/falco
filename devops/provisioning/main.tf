@@ -62,7 +62,7 @@ module "env_staging" {
   eb_instance_profile                = module.iam.deploy_user_aws_iam_instance_profile_name
   eb_key_pair                        = aws_key_pair.main.key_name
   db_allocated_storage               = 5
-  db_instance_class                  = "db.t2.micro"
+  db_instance_class                  = "db.t2.small"
   vpc                                = data.aws_vpc.default.id
   vpc_subnets                        = data.aws_subnet_ids.default.ids
   sqs_user_aws_iam_access_key_id     = module.iam.sqs_user_aws_iam_access_key_id
@@ -79,7 +79,7 @@ module "env_production" {
   eb_instance_profile                = module.iam.deploy_user_aws_iam_instance_profile_name
   eb_key_pair                        = aws_key_pair.main.key_name
   db_allocated_storage               = 5
-  db_instance_class                  = "db.t2.micro"
+  db_instance_class                  = "db.t2.small"
   https_domain                       = "getfal.co"
   vpc                                = data.aws_vpc.default.id
   vpc_subnets                        = data.aws_subnet_ids.default.ids
