@@ -24,15 +24,18 @@ def get_latest_audit_status_data_for_audit_parameters(obj, parameters):
 
 
 def get_latest_audit_status_histories(obj):
-    parameters_list = obj.project.audit_parameters_list.all()
-    return list(
-        map(
-            lambda parameters: get_latest_audit_status_data_for_audit_parameters(
-                obj, parameters
-            ),
-            parameters_list,
+    if hasattr(obj, "project"):
+        parameters_list = obj.project.audit_parameters_list.all()
+        return list(
+            map(
+                lambda parameters: get_latest_audit_status_data_for_audit_parameters(
+                    obj, parameters
+                ),
+                parameters_list,
+            )
         )
-    )
+
+    return list()
 
 
 class PageSerializer(serializers.ModelSerializer):

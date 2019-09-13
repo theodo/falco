@@ -89,7 +89,7 @@ def project_page_list(request, project_uuid):
         serializer = PageSerializer(pages, many=True)
         return JsonResponse(serializer.data, safe=False)
     elif request.method == "POST":
-        check_if_admin_of_project(request.user.id, project.id)
+        check_if_admin_of_project(request.user.id, project.uuid)
         data = JSONParser().parse(request)
         serializer = PageSerializer(data=data)
         if serializer.is_valid():
