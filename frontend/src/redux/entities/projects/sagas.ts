@@ -20,6 +20,9 @@ import {
   addMemberToProjectError,
   addMemberToProjectRequest,
   addMemberToProjectSuccess,
+  addPageToProjectError,
+  addPageToProjectRequest,
+  addPageToProjectSuccess,
   deleteMemberOfProjectError,
   deleteMemberOfProjectRequest,
   deleteMemberOfProjectSuccess,
@@ -47,6 +50,11 @@ function* fetchProjectFailedHandler(error: Error, actionPayload: Record<string, 
 function* addMemberToProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
   yield put(addMemberToProjectError({ projectId: actionPayload.projectId, errorMessage: error.message }));
   yield put(setProjectToastrDisplay({ toastrDisplay: 'addMemberError' }));
+};
+
+function* addPageToProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
+  yield put(addPageToProjectError({ projectId: actionPayload.projectId, errorMessage: error.message }));
+  yield put(setProjectToastrDisplay({ toastrDisplay: 'addPageError' }));
 };
 
 function* deleteMemberOfProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
@@ -130,6 +138,24 @@ function* addMemberToProject(action: ActionType<typeof addMemberToProjectRequest
   );
   yield put(addMemberToProjectSuccess({ byId: modelizeProject(projectResponse) }));
   yield put(setProjectToastrDisplay({ toastrDisplay: 'addMemberSuccess' }));
+};
+
+function* addPageToProject(action: ActionType<typeof addPageToProjectRequest>) {
+  yield put(setProjectToastrDisplay({ toastrDisplay: '' }));
+  const endpoint = `/api/projects/${action.payload.projectId}/pages`;
+  const { body: pageResponse }: { body: ApiPageType } = yield call(
+    makePostRequest,
+    endpoint,
+    true,
+    { name: action.payload.pageName, url: action.payload.pageUrl },
+  );
+  yield put(addPageToProjectSuccess({ projectId: action.payload.projectId, page: modelizePage(pageResponse) }));
+  yield put(fetchPageAction.success({
+    byId: {
+      [pageResponse.uuid]: modelizePage(pageResponse)
+    },
+  }));
+  yield put(setProjectToastrDisplay({ toastrDisplay: 'addPageSuccess' }));
 };
 
 function* deleteMemberOfProject(action: ActionType<typeof deleteMemberOfProjectRequest>) {
@@ -225,6 +251,10 @@ export default function* projectsSaga() {
   yield takeEvery(
     getType(editMemberOfProjectRequest),
     handleAPIExceptions(editMemberOfProject, editMemberOfProjectFailedHandler),
+  );
+  yield takeEvery(
+    getType(addPageToProjectRequest),
+    handleAPIExceptions(addPageToProject, addPageToProjectFailedHandler),
   );
   yield takeEvery(
     getType(editPageRequest),

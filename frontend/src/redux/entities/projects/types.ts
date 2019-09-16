@@ -51,4 +51,6 @@ export type ProjectToastrDisplayType =
 | 'addMemberError'
 | 'editPageSuccess'
 | 'editPageError'
+| 'addPageSuccess'
+| 'addPageError'
 

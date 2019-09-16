@@ -1,5 +1,6 @@
 import { createStandardAction } from 'typesafe-actions';
 
+import { PageType } from '../pages/types';
 import { ApiProjectType, ProjectToastrDisplayType, ProjectType } from './types';
 
 export const fetchProjectsRequest = createStandardAction('projects/FETCH_PROJECTS_REQUEST')<{
@@ -10,6 +11,11 @@ export const saveFetchedProjects = createStandardAction('projects/SAVE_FETCHED_P
 }>();
 export const fetchProjectRequest = createStandardAction('projects/FETCH_PROJECT_REQUEST')<{
   projectId: string;
+}>();
+export const addPageToProjectRequest = createStandardAction('projects/ADD_PAGE_TO_PROJECT_REQUEST')<{
+  projectId: string;
+  pageName: string;
+  pageUrl: string;
 }>();
 export const addMemberToProjectRequest = createStandardAction('projects/ADD_MEMBER_TO_PROJECT_REQUEST')<{
   projectId: string;
@@ -36,6 +42,10 @@ export const editMemberOfProjectSuccess = createStandardAction('projects/EDIT_ME
 export const addMemberToProjectSuccess = createStandardAction('projects/ADD_MEMBER_TO_PROJECT_SUCCESS')<{
   byId: Record<string, ProjectType>;
 }>();
+export const addPageToProjectSuccess = createStandardAction('projects/ADD_PAGE_TO_PROJECT_SUCCESS')<{
+  projectId: string;
+  page: PageType;
+}>();
 export const fetchProjectSuccess = createStandardAction('projects/FETCH_PROJECT_SUCCESS')<{
   byId: Record<string, ProjectType>;
 }>();
@@ -44,6 +54,10 @@ export const fetchProjectError = createStandardAction('projects/FETCH_PROJECT_ER
   errorMessage: string;
 }>();
 export const addMemberToProjectError = createStandardAction('projects/ADD_MEMBER_TO_PROJECT_ERROR')<{
+  projectId: string | null;
+  errorMessage: string;
+}>();
+export const addPageToProjectError = createStandardAction('projects/ADD_PAGE_TO_PROJECT_ERROR')<{
   projectId: string | null;
   errorMessage: string;
 }>();
@@ -64,6 +78,8 @@ export const setProjectToastrDisplay = createStandardAction('projects/SET_TOASTR
 export default {
   addMemberToProjectRequest,
   addMemberToProjectError,
+  addPageToProjectRequest,
+  addPageToProjectError,
   deleteMemberOfProjectRequest,
   deleteMemberOfProjectSuccess,
   deleteMemberOfProjectError,
