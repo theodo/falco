@@ -5,6 +5,7 @@ resource "random_string" "db_password" {
 
 resource "aws_security_group" "db" {
   name = "${var.project_name}-${var.environment}-database"
+  vpc_id = var.vpc
 
   ingress {
     from_port       = 5432
@@ -14,7 +15,15 @@ resource "aws_security_group" "db" {
   }
 
   tags = local.common_tags
+}
 
+resource "aws_db_subnet_group" "main" {
+  name       = "${var.project_name}-${var.environment}-db_subnet"
+  subnet_ids = var.vpc_private_subnets
+
+  tags = merge(local.common_tags, {
+    Name = "${var.project_name}-${var.environment}-db_subnet"
+  })
 }
 
 resource "aws_db_instance" "main" {
@@ -30,6 +39,7 @@ resource "aws_db_instance" "main" {
   allow_major_version_upgrade = false
   auto_minor_version_upgrade  = true
   backup_retention_period     = 7
+  db_subnet_group_name        = aws_db_subnet_group.main.name
   final_snapshot_identifier   = "${var.project_name}-${var.environment}-${md5(timestamp())}"
   instance_class              = var.instance_class
   multi_az                    = false

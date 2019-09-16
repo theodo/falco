@@ -29,3 +29,7 @@ output "AWS_ACCESS_KEY_ID" {
 output "AWS_SECRET_ACCESS_KEY" {
   value = module.iam.deploy_user_aws_iam_secret_access_key
 }
+
+output "bastion_ip" {
+  value = module.vpc.bastion_ip
+}

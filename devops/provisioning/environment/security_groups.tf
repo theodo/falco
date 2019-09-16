@@ -1,9 +1,13 @@
 resource "aws_security_group" "lb" {
   name = "${var.project_name}-${var.environment}-lb"
+  vpc_id = var.vpc
+
+  tags = local.common_tags
 }
 
 resource "aws_security_group" "instances" {
   name = "${var.project_name}-${var.environment}-instances"
+  vpc_id = var.vpc
 
   ingress {
     from_port   = 22

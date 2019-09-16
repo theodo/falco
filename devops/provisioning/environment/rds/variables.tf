@@ -12,6 +12,12 @@ variable "instance_class" {
 
 variable "ingress_sg" {}
 
+variable "vpc" {}
+
+variable "vpc_private_subnets" {
+  type = "list"
+}
+
 variable "tags" {
   type    = map(string)
   default = {}

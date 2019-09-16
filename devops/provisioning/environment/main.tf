@@ -15,6 +15,8 @@ module "rds" {
   environment       = var.environment
   allocated_storage = var.db_allocated_storage
   instance_class    = var.db_instance_class
+  vpc                 = var.vpc
+  vpc_private_subnets = var.vpc_private_subnets
   ingress_sg        = aws_security_group.instances.id
 }
 
@@ -87,7 +89,13 @@ resource "aws_elastic_beanstalk_environment" "main" {
   setting {
     namespace = "aws:ec2:vpc"
     name      = "Subnets"
-    value     = "${join(",", var.vpc_subnets)}"
+    value     = "${join(",", var.vpc_private_subnets)}"
+  }
+
+  setting {
+    namespace = "aws:ec2:vpc"
+    name      = "ELBSubnets"
+    value     = join(",", var.vpc_public_subnets)
   }
 
   setting {

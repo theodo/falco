@@ -47,6 +47,14 @@ resource "aws_ecr_repository" "static" {
   tags = local.common_tags
 }
 
+module "vpc" {
+  source = "./vpc"
+
+  project_name = var.project_name
+  key_pair     = aws_key_pair.main.key_name
+  tags         = local.common_tags
+}
+
 module "iam" {
   source         = "iam"
   region         = var.region
@@ -65,10 +73,13 @@ module "env_staging" {
   eb_key_pair                        = aws_key_pair.main.key_name
   db_allocated_storage               = 5
   db_instance_class                  = "db.t2.small"
-  vpc                                = data.aws_vpc.default.id
-  vpc_subnets                        = data.aws_subnet_ids.default.ids
+  vpc                                = module.vpc.vpc_id
+  vpc_public_subnets                 = module.vpc.public_subnets
+  vpc_private_subnets                = module.vpc.private_subnets
+  bastion_sg                         = module.vpc.bastion_sg
   sqs_user_aws_iam_access_key_id     = module.iam.sqs_user_aws_iam_access_key_id
   sqs_user_aws_iam_secret_access_key = module.iam.sqs_user_aws_iam_secret_access_key
+
 
   tags = local.common_tags
 }
@@ -85,10 +96,13 @@ module "env_production" {
   db_allocated_storage               = 5
   db_instance_class                  = "db.t2.small"
   https_domain                       = "getfal.co"
-  vpc                                = data.aws_vpc.default.id
-  vpc_subnets                        = data.aws_subnet_ids.default.ids
+  vpc                                = module.vpc.vpc_id
+  vpc_public_subnets                 = module.vpc.public_subnets
+  vpc_private_subnets                = module.vpc.private_subnets
+  bastion_sg                         = module.vpc.bastion_sg
   sqs_user_aws_iam_access_key_id     = module.iam.sqs_user_aws_iam_access_key_id
   sqs_user_aws_iam_secret_access_key = module.iam.sqs_user_aws_iam_secret_access_key
+
 
   tags = local.common_tags
 }

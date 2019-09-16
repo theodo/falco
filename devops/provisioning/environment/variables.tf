@@ -30,9 +30,14 @@ variable "https_domain" {
 
 variable "vpc" {}
 
-variable "vpc_subnets" {
+variable "vpc_public_subnets" {
   type = "list"
 }
+
+variable "vpc_private_subnets" {
+  type = "list"
+}
+
 
 variable "sqs_user_aws_iam_access_key_id" {}
 
