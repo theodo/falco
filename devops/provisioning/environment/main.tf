@@ -23,6 +23,7 @@ module "s3" {
 
   project_name = var.project_name
   environment  = var.environment
+  tags         = local.common_tags
 }
 
 module "sqs" {
@@ -30,6 +31,7 @@ module "sqs" {
 
   project_name = var.project_name
   environment  = var.environment
+  tags         = local.common_tags
 }
 
 resource "aws_elastic_beanstalk_environment" "main" {
@@ -37,6 +39,8 @@ resource "aws_elastic_beanstalk_environment" "main" {
   application         = var.eb_application
   cname_prefix        = "${var.project_name}-${var.environment}"
   solution_stack_name = data.aws_elastic_beanstalk_solution_stack.multi_docker.name
+
+  tags = local.common_tags
 
   setting {
     namespace = "aws:autoscaling:launchconfiguration"

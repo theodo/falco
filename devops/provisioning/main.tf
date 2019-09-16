@@ -17,6 +17,8 @@ provider "aws" {
 resource "aws_key_pair" "main" {
   key_name   = var.project_name
   public_key = file("../eb.pem.pub")
+
+  tags = local.common_tags
 }
 
 resource "aws_elastic_beanstalk_application" "main" {
@@ -67,6 +69,8 @@ module "env_staging" {
   vpc_subnets                        = data.aws_subnet_ids.default.ids
   sqs_user_aws_iam_access_key_id     = module.iam.sqs_user_aws_iam_access_key_id
   sqs_user_aws_iam_secret_access_key = module.iam.sqs_user_aws_iam_secret_access_key
+
+  tags = local.common_tags
 }
 
 module "env_production" {
@@ -85,4 +89,6 @@ module "env_production" {
   vpc_subnets                        = data.aws_subnet_ids.default.ids
   sqs_user_aws_iam_access_key_id     = module.iam.sqs_user_aws_iam_access_key_id
   sqs_user_aws_iam_secret_access_key = module.iam.sqs_user_aws_iam_secret_access_key
+
+  tags = local.common_tags
 }

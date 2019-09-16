@@ -11,3 +11,8 @@ variable "instance_class" {
 }
 
 variable "ingress_sg" {}
+
+variable "tags" {
+  type    = map(string)
+  default = {}
+}

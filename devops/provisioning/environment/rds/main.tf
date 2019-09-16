@@ -12,6 +12,9 @@ resource "aws_security_group" "db" {
     protocol        = "tcp"
     security_groups = [var.ingress_sg]
   }
+
+  tags = local.common_tags
+
 }
 
 resource "aws_db_instance" "main" {
@@ -35,4 +38,6 @@ resource "aws_db_instance" "main" {
   storage_encrypted           = true
   storage_type                = "gp2"
   vpc_security_group_ids      = [aws_security_group.db.id]
+
+  tags = local.common_tags
 }

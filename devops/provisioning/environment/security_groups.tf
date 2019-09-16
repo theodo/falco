@@ -18,6 +18,8 @@ resource "aws_security_group" "instances" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags = local.common_tags
 }
 
 resource "aws_security_group" "sqs" {
@@ -37,6 +39,8 @@ resource "aws_security_group" "sqs" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags = local.common_tags
 }
 
 resource "aws_vpc_endpoint" "sqs" {
@@ -47,4 +51,6 @@ resource "aws_vpc_endpoint" "sqs" {
   security_group_ids = [
     aws_security_group.sqs.id,
   ]
+
+  tags = local.common_tags
 }
