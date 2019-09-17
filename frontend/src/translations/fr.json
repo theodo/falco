@@ -62,7 +62,6 @@
     "connect_button": "SE CONNECTER",
     "connect_button_running": "CONNEXION EN COURS",
     "error_username_required": "Vous devez fournir un nom d'utilisateur",
-    "error_email_required": "Vous devez fournir une adresse email",
     "error_password_required": "Vous devez fournir un mot de passe",
     "login_error": "Ces identifiants ne semblent pas corrects.\nVeuillez réessayer."
   },
