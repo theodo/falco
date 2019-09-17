@@ -29,7 +29,7 @@
       ],
       "Effect": "Allow",
       "Resource": [
-        "arn:aws:ecr:${region}:${account_id}:repository/${application_name}/*"
+        "arn:aws:ecr:${region}:${account_id}:repository/${project_name}/*"
       ]
     },
     {
@@ -39,10 +39,10 @@
       "Effect": "Allow",
       "Resource": [
         "arn:aws:elasticbeanstalk:*::solutionstack/*",
-        "arn:aws:elasticbeanstalk:${region}:${account_id}:application/${application_name}",
-        "arn:aws:elasticbeanstalk:${region}:${account_id}:applicationversion/${application_name}/*",
-        "arn:aws:elasticbeanstalk:${region}:${account_id}:environment/${application_name}/*",
-        "arn:aws:elasticbeanstalk:${region}:${account_id}:template/${application_name}/*"
+        "arn:aws:elasticbeanstalk:${region}:${account_id}:application/${project_name}",
+        "arn:aws:elasticbeanstalk:${region}:${account_id}:applicationversion/${project_name}/*",
+        "arn:aws:elasticbeanstalk:${region}:${account_id}:environment/${project_name}/*",
+        "arn:aws:elasticbeanstalk:${region}:${account_id}:template/${project_name}/*"
       ]
     },
     {
@@ -83,7 +83,7 @@
       ],
       "Effect": "Allow",
       "Resource": [
-        "arn:aws:iam::${account_id}:role/${role}"
+        "arn:aws:iam::${account_id}:role/${project_name}"
       ]
     }
   ]

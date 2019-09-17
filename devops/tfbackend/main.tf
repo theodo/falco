@@ -1,6 +1,6 @@
 provider "aws" {
   region  = var.region
-  profile = var.project_name
+  profile = "${var.project_name}-provision"
 }
 
 module "terraform_state_backend" {

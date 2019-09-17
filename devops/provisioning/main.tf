@@ -17,6 +17,11 @@ provider "aws" {
 resource "aws_key_pair" "main" {
   key_name   = var.project_name
   public_key = file("../eb.pem.pub")
+}
+
+resource "aws_kms_key" "main" {
+  description         = var.project_name
+  enable_key_rotation = true
 
   tags = local.common_tags
 }
@@ -55,53 +60,47 @@ module "vpc" {
   tags         = local.common_tags
 }
 
-module "iam" {
-  source         = "iam"
-  region         = var.region
-  project_name   = var.project_name
-  eb_application = aws_elastic_beanstalk_application.main.name
-}
-
 module "env_staging" {
-  source = "environment"
+  source = "./environment"
 
   region                             = var.region
   project_name                       = var.project_name
   environment                        = "staging"
   eb_application                     = aws_elastic_beanstalk_application.main.name
-  eb_instance_profile                = module.iam.deploy_user_aws_iam_instance_profile_name
+  eb_instance_profile                = aws_iam_instance_profile.main.name
   eb_key_pair                        = aws_key_pair.main.key_name
   db_allocated_storage               = 5
   db_instance_class                  = "db.t2.small"
+  kms_key_id                         = aws_kms_key.main.arn
   vpc                                = module.vpc.vpc_id
   vpc_public_subnets                 = module.vpc.public_subnets
   vpc_private_subnets                = module.vpc.private_subnets
   bastion_sg                         = module.vpc.bastion_sg
-  sqs_user_aws_iam_access_key_id     = module.iam.sqs_user_aws_iam_access_key_id
-  sqs_user_aws_iam_secret_access_key = module.iam.sqs_user_aws_iam_secret_access_key
+  sqs_user_aws_iam_access_key_id     = aws_iam_access_key.sqs.id
+  sqs_user_aws_iam_secret_access_key = aws_iam_access_key.sqs.secret
 
 
   tags = local.common_tags
 }
 
 module "env_production" {
-  source = "environment"
+  source = "./environment"
 
   region                             = var.region
   project_name                       = var.project_name
   environment                        = "production"
   eb_application                     = aws_elastic_beanstalk_application.main.name
-  eb_instance_profile                = module.iam.deploy_user_aws_iam_instance_profile_name
+  eb_instance_profile                = aws_iam_instance_profile.main.name
   eb_key_pair                        = aws_key_pair.main.key_name
   db_allocated_storage               = 5
   db_instance_class                  = "db.t2.small"
-  https_domain                       = "getfal.co"
+  kms_key_id                         = aws_kms_key.main.arn
   vpc                                = module.vpc.vpc_id
   vpc_public_subnets                 = module.vpc.public_subnets
   vpc_private_subnets                = module.vpc.private_subnets
   bastion_sg                         = module.vpc.bastion_sg
-  sqs_user_aws_iam_access_key_id     = module.iam.sqs_user_aws_iam_access_key_id
-  sqs_user_aws_iam_secret_access_key = module.iam.sqs_user_aws_iam_secret_access_key
+  sqs_user_aws_iam_access_key_id     = aws_iam_access_key.sqs.id
+  sqs_user_aws_iam_secret_access_key = aws_iam_access_key.sqs.secret
 
 
   tags = local.common_tags

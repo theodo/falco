@@ -5,7 +5,3 @@ variable "region" {
 variable "project_name" {
   default = "falco-new"
 }
-
-variable "force_destroy" {
-  default = false
-}

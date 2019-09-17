@@ -23,11 +23,11 @@ output "STATIC_REPO_URL" {
 }
 
 output "AWS_ACCESS_KEY_ID" {
-  value = module.iam.deploy_user_aws_iam_access_key_id
+  value = aws_iam_access_key.sqs.id
 }
 
 output "AWS_SECRET_ACCESS_KEY" {
-  value = module.iam.deploy_user_aws_iam_secret_access_key
+  value = aws_iam_access_key.sqs.secret
 }
 
 output "bastion_ip" {

@@ -9,7 +9,7 @@ resource "random_string" "secret_key" {
 }
 
 module "rds" {
-  source = "rds"
+  source = "./rds"
 
   project_name      = var.project_name
   environment       = var.environment
@@ -21,7 +21,7 @@ module "rds" {
 }
 
 module "s3" {
-  source = "s3"
+  source = "./s3"
 
   project_name = var.project_name
   environment  = var.environment
@@ -29,7 +29,7 @@ module "s3" {
 }
 
 module "sqs" {
-  source = "sqs"
+  source = "./sqs"
 
   project_name = var.project_name
   environment  = var.environment

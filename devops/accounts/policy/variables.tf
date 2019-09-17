@@ -1,5 +1,4 @@
+variable "file" {}
+variable "name" {}
 variable "project_name" {}
-
 variable "region" {}
-
-variable "eb_application" {}
