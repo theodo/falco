@@ -215,7 +215,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
                   {isUserAdminOfProject(currentUser, project) && projectMember.username !== currentUser.username && 
                     (<Style.MemberAdminDeleteButton onClick={() => removeMemberOfProjectRequest(project.uuid, projectMember.id)}>
                       <Close
-                        color={colorUsage.deleteMemberIconColor}
+                        color={colorUsage.projectSettingsIconColor}
                         width="13px"
                         strokeWidth="20"
                       />
@@ -239,11 +239,11 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
               pageId={pageId}
             />
           </Style.ElementContainer>))}
-        <Style.ElementContainer>
-          <AddPageRow 
-            projectId={project.uuid}
-          />
-        </Style.ElementContainer>
+          {isUserAdminOfProject(currentUser, project) && <Style.ElementContainer>
+            <AddPageRow 
+              projectId={project.uuid}
+            />
+          </Style.ElementContainer>}
       </Style.ProjectSettingsBlock>
     </Style.Container>
   );

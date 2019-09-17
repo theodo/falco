@@ -21,7 +21,7 @@ const addInputStyle = `
   border: solid 1px ${colorUsage.editableRowInputBorder};
   border-radius: 3px;
   background-color: white;
-  height: 90%;
+  height: 80%;
 
   :focus {
     box-shadow: 0 2px 2px 0 ${colorUsage.editableRowInputBorder};
@@ -75,6 +75,23 @@ export const EditUrlInput = styled.input`
   ${editableInputStyle}
   width: 70%;
 `;
+
+export const AddPageButtonContainer = styled.div`
+  display: ${(props: AddInputProps) => props.isAdding? "none" : "flex"};
+  align-items: center;
+  cursor: pointer;
+  margin: auto;
+
+  &:hover {
+    opacity: 0.5;
+    background: white;
+    transition-duration: 0.2s;
+  };
+`;
+
+export const AddPageButtonLabel = styled.div`
+  margin-left: ${getSpacing(4)};
+`
 
 export const EditButtonContainer = styled.div`
   width: 5%;

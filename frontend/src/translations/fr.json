@@ -99,13 +99,16 @@
     "project_members": "Membres du projet",
     "pages": "Pages du projet",
     "page_name": "Nom de la page",
+    "page_name_placeholder": "Nom",
     "page_url": "Url de la page",
+    "page_url_placeholder": "Url",
     "member_in_project": " (Déjà ajouté au projet)",
     "member_username": "Nom d'utilisateur",
     "member_email": "Adresse email",
     "member_status": "Statut",
     "admin": "Admin",
     "add_member": "Ajouter un utilisateur...",
+    "add_page": "Ajouter une page au projet",
     "member_not_on_falco": "L'utilisateur n'est pas sur Falco ? Vous pouvez envoyer le lien suivant afin qu'il crée son compte : "
   },
   "Audits": {

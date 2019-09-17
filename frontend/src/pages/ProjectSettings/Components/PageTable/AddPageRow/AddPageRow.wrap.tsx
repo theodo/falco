@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 
+import { injectIntl } from 'react-intl';
 import { Dispatch } from 'redux';
 import { addPageToProjectRequest } from 'redux/entities/projects';
 import { AddPageRow } from './AddPageRow';
@@ -12,4 +13,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export default connect(
   null,
   mapDispatchToProps,
-)(AddPageRow);
+)(injectIntl(AddPageRow));
