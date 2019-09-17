@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { PageType } from 'redux/entities/pages/types';
-import { NameInput, UrlInput } from './PageRow.style';
+import { EditNameInput, EditUrlInput } from '../PageTable.style';
 
 export interface  OwnProps {
   pageId: string,
@@ -58,13 +58,13 @@ export const PageRow: React.FunctionComponent<Props> = ({
 
   return (
     <React.Fragment>
-      <NameInput
+      <EditNameInput
         disabled={disabled}
         value={pageName}
         onChange={handleNameChange}
         onBlur={handleBlur}
       />
-      <UrlInput
+      <EditUrlInput
         disabled={disabled}
         value={pageUrl}
         onChange={handleUrlChange}

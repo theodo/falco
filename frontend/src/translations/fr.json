@@ -236,7 +236,8 @@
       "error_title": "Échec",
       "error_message": "Une erreur est survenue, veuillez réessayer",
       "add_member_success_message": "L'utilisateur a bien été ajouté au projet",
-      "edit_page_success_message": "La page a bien été modifiée"
+      "edit_page_success_message": "La page a bien été modifiée",
+      "add_page_success_message": "La page a bien été créée"
     }
   },
   "components": {

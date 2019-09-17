@@ -17,7 +17,8 @@ import { ApiUser, User } from 'redux/user/types';
 import { makeGetRequest } from 'services/networking/request';
 import { isUserAdminOfProject } from 'services/utils';
 import { colorUsage } from 'stylesheet';
-import PageRow, { PageRowHeader } from './Components/PageRow';
+import PageRow, { PageRowHeader } from './Components/PageTable';
+import { AddPageRow } from './Components/PageTable';
 import Style from './ProjectSettings.style';
 
 export type OwnProps = {} & RouteComponentProps<{
@@ -238,6 +239,11 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
               pageId={pageId}
             />
           </Style.ElementContainer>))}
+        <Style.ElementContainer>
+          <AddPageRow 
+            projectId={project.uuid}
+          />
+        </Style.ElementContainer>
       </Style.ProjectSettingsBlock>
     </Style.Container>
   );
