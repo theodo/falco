@@ -177,7 +177,7 @@ export const colorUsage = {
   adminBadgeBackground: colorPalette.accentGreen200,
   adminBadgeSelectedText: colorPalette.white500,
   adminBadgeSelectedBackground: colorPalette.white200,
-  deleteMemberIconColor: colorPalette.grey800,
+  projectSettingsIconColor: colorPalette.grey800,
 
   // WebPageTest
   webPageTestLinkButtonBackground: colorPalette.primary500,

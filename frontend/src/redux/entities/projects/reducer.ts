@@ -2,6 +2,7 @@ import { AnyAction } from 'redux';
 import { ActionType, getType } from 'typesafe-actions';
 import {
   addMemberToProjectSuccess,
+  addPageToProjectSuccess,
   deleteMemberOfProjectSuccess,
   editMemberOfProjectSuccess,
   fetchProjectError,
@@ -14,6 +15,7 @@ import { ProjectMember, ProjectToastrDisplayType, ProjectType } from './types';
 export type ProjectsAction = ActionType<
   typeof fetchProjectsRequest |
   typeof addMemberToProjectSuccess |
+  typeof addPageToProjectSuccess |
   typeof deleteMemberOfProjectSuccess |
   typeof editMemberOfProjectSuccess |
   typeof fetchProjectSuccess | 
@@ -71,6 +73,19 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
         byId: {
           ...state.byId,
           ...typedAction.payload.byId,
+        },
+      };
+    case getType(addPageToProjectSuccess):
+      if(!state.byId) { return state };
+
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [typedAction.payload.projectId]: {
+            ...state.byId[typedAction.payload.projectId],
+            pagesIds: [...state.byId[typedAction.payload.projectId].pagesIds, typedAction.payload.page.uuid]
+          }
         },
       };
     case getType(deleteMemberOfProjectSuccess):

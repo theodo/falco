@@ -99,13 +99,16 @@
     "project_members": "Project members",
     "pages": "Pages",
     "page_name": "Page name",
+    "page_name_placeholder": "Name",
     "page_url": "Page url",
+    "page_url_placeholder": "Url",
     "member_in_project": " (Already in project)",
     "member_username": "Username",
     "member_email": "Email",
     "member_status": "Status",
     "admin": "Admin",
     "add_member": "Add user...",
+    "add_page": "Add page to project",
     "member_not_on_falco": "User not on Falco ? You can send them the following link so that they can create their account : "
   },
   "Audits": {
@@ -228,6 +231,16 @@
     "noProject": "You don't have access to any project for now.",
     "createProject": "To create a new project, please contact Jaafar (jaafarr@theodo.fr) or Nicolas (nicolasgo@theodo.fr).",
     "joinProject": "To join an existing project, please contact the project administrator."
+  },
+  "Toastr": {
+    "ProjectSettings":{
+      "success_title": "Success",
+      "error_title": "Failure",
+      "error_message": "An error occured, please try again",
+      "add_member_success_message": "The user has been added successfully to the project",
+      "edit_page_success_message": "The page has been edited successfully",
+      "add_page_success_message": "The page has been created successfully"
+    }
   },
   "components": {
     "MetricGraph": {

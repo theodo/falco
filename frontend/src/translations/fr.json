@@ -62,7 +62,6 @@
     "connect_button": "SE CONNECTER",
     "connect_button_running": "CONNEXION EN COURS",
     "error_username_required": "Vous devez fournir un nom d'utilisateur",
-    "error_email_required": "Vous devez fournir une adresse email",
     "error_password_required": "Vous devez fournir un mot de passe",
     "login_error": "Ces identifiants ne semblent pas corrects.\nVeuillez réessayer."
   },
@@ -100,13 +99,16 @@
     "project_members": "Membres du projet",
     "pages": "Pages du projet",
     "page_name": "Nom de la page",
+    "page_name_placeholder": "Nom",
     "page_url": "Url de la page",
+    "page_url_placeholder": "Url",
     "member_in_project": " (Déjà ajouté au projet)",
     "member_username": "Nom d'utilisateur",
     "member_email": "Adresse email",
     "member_status": "Statut",
     "admin": "Admin",
     "add_member": "Ajouter un utilisateur...",
+    "add_page": "Ajouter une page au projet",
     "member_not_on_falco": "L'utilisateur n'est pas sur Falco ? Vous pouvez envoyer le lien suivant afin qu'il crée son compte : "
   },
   "Audits": {
@@ -236,7 +238,8 @@
       "error_title": "Échec",
       "error_message": "Une erreur est survenue, veuillez réessayer",
       "add_member_success_message": "L'utilisateur a bien été ajouté au projet",
-      "edit_page_success_message": "La page a bien été modifiée"
+      "edit_page_success_message": "La page a bien été modifiée",
+      "add_page_success_message": "La page a bien été créée"
     }
   },
   "components": {

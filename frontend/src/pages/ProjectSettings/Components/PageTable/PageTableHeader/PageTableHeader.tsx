@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
-import { NameHeader, UrlHeader } from './PageRow.style';
+import { NameHeader, UrlHeader } from '../PageTable.style';
 
 export const PageRowHeader: React.FunctionComponent<InjectedIntlProps> = ({
     intl
