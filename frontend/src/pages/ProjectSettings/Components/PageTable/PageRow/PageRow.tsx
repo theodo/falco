@@ -1,5 +1,7 @@
 import Close from 'icons/Close';
 import * as React from 'react';
+import { InjectedIntlProps } from 'react-intl';
+import { toastr } from 'react-redux-toastr';
 import { PageType } from 'redux/entities/pages/types';
 import { colorUsage } from 'stylesheet';
 import { EditNameInput, EditUrlInput, PageDeleteButton, PageDeleteContainer } from '../PageTable.style';
@@ -14,7 +16,7 @@ type Props = {
   page?: PageType | null,
   editPageRequest: (projectId: string, page: PageType) => void,
   deletePageOfProjectRequest: (projectId: string, pageId: string) => void;
-} & OwnProps;
+} & OwnProps & InjectedIntlProps;
 
 export const PageRow: React.FunctionComponent<Props> = ({
   pageId,
@@ -22,7 +24,8 @@ export const PageRow: React.FunctionComponent<Props> = ({
   projectId,
   editPageRequest,
   disabled,
-  deletePageOfProjectRequest
+  deletePageOfProjectRequest,
+  intl
   }) => {
   const [pageName, setPageName] = React.useState('');
   const [pageUrl, setPageUrl] = React.useState('')
@@ -57,6 +60,13 @@ export const PageRow: React.FunctionComponent<Props> = ({
     setPageUrl(e.currentTarget.value)
   }
 
+  const handlePageDeletion = (currentProjectId: string, targetPageId: string) => {
+    toastr.confirm(intl.formatMessage({ id: 'Toastr.ProjectSettings.delete_page_confirm_question'}), 
+    {
+      onOk: () => deletePageOfProjectRequest(currentProjectId, targetPageId)
+    })
+  }
+
   if(null === page || undefined === page) {
     return(null);
   };
@@ -76,7 +86,7 @@ export const PageRow: React.FunctionComponent<Props> = ({
         onBlur={handleBlur}
       />
       <PageDeleteContainer>
-        <PageDeleteButton onClick={() => deletePageOfProjectRequest(projectId, pageId)}>
+        <PageDeleteButton onClick={() => handlePageDeletion(projectId, pageId)}>
           <Close
             color={colorUsage.projectSettingsIconColor}
             width="13px"

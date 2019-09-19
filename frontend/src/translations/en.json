@@ -240,7 +240,8 @@
       "add_member_success_message": "The user has been added successfully to the project",
       "edit_page_success_message": "The page has been edited successfully",
       "add_page_success_message": "The page has been created successfully",
-      "delete_page_success_message": "The page has been deleted successfully"
+      "delete_page_success_message": "The page has been deleted successfully",
+      "delete_page_confirm_question": "Do you really want to delete the page ?"
     }
   },
   "components": {
