@@ -74,6 +74,7 @@ function* deletePageOfProjectFailedHandler(error: Error, actionPayload: Record<s
     pageId: actionPayload.pageId,
     errorMessage: error.message
   }));
+  yield put(setProjectToastrDisplay({ toastrDisplay: 'deletePageError' }));
 };
 
 function* editMemberOfProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
@@ -187,6 +188,7 @@ function* deletePageOfProject(action: ActionType<typeof deletePageOfProjectReque
     true,
   );
   yield put(deletePageOfProjectSuccess({ projectId: action.payload.projectId, pageId: action.payload.pageId }));
+  yield put(setProjectToastrDisplay({ toastrDisplay: 'deletePageSuccess' }));
 };
 
 function* editMemberOfProject(action: ActionType<typeof editMemberOfProjectRequest>) {
