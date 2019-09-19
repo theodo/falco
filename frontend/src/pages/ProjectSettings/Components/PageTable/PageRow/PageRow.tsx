@@ -1,6 +1,8 @@
+import Close from 'icons/Close';
 import * as React from 'react';
 import { PageType } from 'redux/entities/pages/types';
-import { EditNameInput, EditUrlInput } from '../PageTable.style';
+import { colorUsage } from 'stylesheet';
+import { EditNameInput, EditUrlInput, PageDeleteButton, PageDeleteContainer } from '../PageTable.style';
 
 export interface  OwnProps {
   pageId: string,
@@ -10,14 +12,17 @@ export interface  OwnProps {
 
 type Props = {
   page?: PageType | null,
-  editPageRequest: (projectId: string, page: PageType) => void,  
+  editPageRequest: (projectId: string, page: PageType) => void,
+  deletePageOfProjectRequest: (projectId: string, pageId: string) => void;
 } & OwnProps;
 
 export const PageRow: React.FunctionComponent<Props> = ({
+  pageId,
   page,
   projectId,
   editPageRequest,
-  disabled
+  disabled,
+  deletePageOfProjectRequest
   }) => {
   const [pageName, setPageName] = React.useState('');
   const [pageUrl, setPageUrl] = React.useState('')
@@ -70,6 +75,15 @@ export const PageRow: React.FunctionComponent<Props> = ({
         onChange={handleUrlChange}
         onBlur={handleBlur}
       />
+      <PageDeleteContainer>
+        <PageDeleteButton onClick={() => deletePageOfProjectRequest(projectId, pageId)}>
+          <Close
+            color={colorUsage.projectSettingsIconColor}
+            width="13px"
+            strokeWidth="20"
+          />
+        </PageDeleteButton>
+      </PageDeleteContainer >
     </React.Fragment>
   )
 }
