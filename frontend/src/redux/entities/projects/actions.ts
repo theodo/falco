@@ -17,6 +17,14 @@ export const addPageToProjectRequest = createStandardAction('projects/ADD_PAGE_T
   pageName: string;
   pageUrl: string;
 }>();
+export const deletePageOfProjectRequest = createStandardAction('projects/DELETE_PAGE_OF_PROJECT_REQUEST')<{
+  projectId: string;
+  pageId: string;
+}>();
+export const deletePageOfProjectSuccess = createStandardAction('projects/DELETE_PAGE_OF_PROJECT_SUCCESS')<{
+  projectId: string;
+  pageId: string;
+}>();
 export const addMemberToProjectRequest = createStandardAction('projects/ADD_MEMBER_TO_PROJECT_REQUEST')<{
   projectId: string;
   userId: string;
@@ -66,6 +74,11 @@ export const deleteMemberOfProjectError = createStandardAction('projects/DELETE_
   userId: string | null;
   errorMessage: string;
 }>();
+export const deletePageOfProjectError = createStandardAction('projects/DELETE_PAGE_OF_PROJECT_ERROR')<{
+  projectId: string | null;
+  pageId: string | null;
+  errorMessage: string;
+}>();
 export const editMemberOfProjectError = createStandardAction('projects/DELETE_MEMBER_OF_PROJECT_ERROR')<{
   projectId: string | null;
   userId: string | null;
@@ -80,6 +93,9 @@ export default {
   addMemberToProjectError,
   addPageToProjectRequest,
   addPageToProjectError,
+  deletePageOfProjectRequest,
+  deletePageOfProjectSuccess,
+  deletePageOfProjectError,
   deleteMemberOfProjectRequest,
   deleteMemberOfProjectSuccess,
   deleteMemberOfProjectError,
