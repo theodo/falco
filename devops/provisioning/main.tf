@@ -1,17 +1,17 @@
 terraform {
   backend "s3" {
-    region         = "eu-west-3"
-    bucket         = "falco-main-terraform-state"
-    dynamodb_table = "falco-main-terraform-state-lock"
+    region         = "eu-west-2"
+    bucket         = "falco-new-main-terraform-state"
+    dynamodb_table = "falco-new-main-terraform-state-lock"
     key            = "terraform.tfstate"
     encrypt        = true
-    profile        = "falco"
+    profile        = "falco-new-provision"
   }
 }
 
 provider "aws" {
   region  = var.region
-  profile = var.project_name
+  profile = "${var.project_name}-provision"
 }
 
 resource "aws_key_pair" "main" {

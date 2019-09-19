@@ -1,7 +1,7 @@
 variable "region" {
-  default = "eu-west-3"
+  default = "eu-west-2"
 }
 
 variable "project_name" {
-  default = "falco"
+  default = "falco-new"
 }
