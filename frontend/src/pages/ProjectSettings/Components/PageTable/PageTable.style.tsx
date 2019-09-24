@@ -114,3 +114,25 @@ export const EditButton = styled.button`
     transition-duration: 0.2s;
   }
 `;
+
+export const PageDeleteContainer = styled.div`
+  width: 5%;
+  display: flex;
+  flex-direction: row-reverse;
+`;
+
+export const PageDeleteButton = styled.button`
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  padding: 2px;
+  background: inherit;
+
+  &:hover {
+    opacity: 0.5;
+    background: white;
+    transition-duration: 0.2s;
+  }
+`;

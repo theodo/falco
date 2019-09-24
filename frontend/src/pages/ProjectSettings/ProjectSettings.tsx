@@ -107,9 +107,16 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
               intl.formatMessage({'id': 'Toastr.ProjectSettings.add_page_success_message'}),
             );
             break;
+          case "deletePageSuccess":
+            toastr.success(
+              intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
+              intl.formatMessage({'id': 'Toastr.ProjectSettings.delete_page_success_message'}),
+            );
+            break;
           case "addMemberError":
           case "editPageError":
           case "addPageError":
+          case "deletePageError":
             toastr.error(
               intl.formatMessage({'id': 'Toastr.ProjectSettings.error_title'}),
               intl.formatMessage({'id': 'Toastr.ProjectSettings.error_message'}),
