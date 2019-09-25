@@ -31,8 +31,8 @@ resource "aws_db_instance" "main" {
   engine         = "postgres"
   engine_version = 10.6
 
-  name     = var.project_name
-  username = var.project_name
+  name     = replace(var.project_name, "-", "")
+  username = replace(var.project_name, "-", "")
   password = random_string.db_password.result
 
   allocated_storage           = var.allocated_storage

@@ -82,16 +82,3 @@ resource "aws_iam_instance_profile" "main" {
   role = aws_iam_role.main.name
 }
 
-resource "aws_iam_user" "sqs" {
-  name = "${var.project_name}-sqs"
-}
-
-resource "aws_iam_access_key" "sqs" {
-  user = aws_iam_user.sqs.name
-}
-
-resource "aws_iam_user_policy_attachment" "sqs" {
-  user       = aws_iam_user.sqs.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonSQSFullAccess"
-}
-

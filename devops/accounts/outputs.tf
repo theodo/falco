@@ -21,3 +21,15 @@ output "DEPLOY_AWS_ACCESS_KEY_ID" {
 output "DEPLOY_AWS_SECRET_ACCESS_KEY" {
   value = aws_iam_access_key.deploy.secret
 }
+
+output "sqs_profile_name" {
+  value = aws_iam_user.sqs.id
+}
+
+output "SQS_AWS_ACCESS_KEY_ID" {
+  value = aws_iam_access_key.sqs.id
+}
+
+output "SQS_AWS_SECRET_ACCESS_KEY" {
+  value = aws_iam_access_key.sqs.secret
+}

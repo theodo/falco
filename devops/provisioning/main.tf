@@ -12,6 +12,7 @@ terraform {
 provider "aws" {
   region  = var.region
   profile = "${var.project_name}-provision"
+  version = "~> 2.11"
 }
 
 resource "aws_key_pair" "main" {
@@ -27,7 +28,7 @@ resource "aws_kms_key" "main" {
 }
 
 resource "aws_elastic_beanstalk_application" "main" {
-  name = var.project_name
+  name = "${var.project_name}"
 
   tags = local.common_tags
 }
@@ -40,10 +41,14 @@ resource "aws_ecr_repository" "backend" {
 
 resource "aws_ecr_repository" "celeryworker" {
   name = "${var.project_name}/celeryworker"
+
+  tags = local.common_tags
 }
 
 resource "aws_ecr_repository" "celerybeat" {
   name = "${var.project_name}/celerybeat"
+
+  tags = local.common_tags
 }
 
 resource "aws_ecr_repository" "static" {
@@ -76,8 +81,8 @@ module "env_staging" {
   vpc_public_subnets                 = module.vpc.public_subnets
   vpc_private_subnets                = module.vpc.private_subnets
   bastion_sg                         = module.vpc.bastion_sg
-  sqs_user_aws_iam_access_key_id     = aws_iam_access_key.sqs.id
-  sqs_user_aws_iam_secret_access_key = aws_iam_access_key.sqs.secret
+  sqs_user_aws_iam_access_key_id     = var.sqs_user_aws_iam_access_key_id
+  sqs_user_aws_iam_secret_access_key = var.sqs_user_aws_iam_secret_access_key
 
 
   tags = local.common_tags
@@ -99,8 +104,8 @@ module "env_production" {
   vpc_public_subnets                 = module.vpc.public_subnets
   vpc_private_subnets                = module.vpc.private_subnets
   bastion_sg                         = module.vpc.bastion_sg
-  sqs_user_aws_iam_access_key_id     = aws_iam_access_key.sqs.id
-  sqs_user_aws_iam_secret_access_key = aws_iam_access_key.sqs.secret
+  sqs_user_aws_iam_access_key_id     = var.sqs_user_aws_iam_access_key_id
+  sqs_user_aws_iam_secret_access_key = var.sqs_user_aws_iam_secret_access_key
 
 
   tags = local.common_tags

@@ -16,7 +16,7 @@ resource "aws_resourcegroups_group" "main" {
   "TagFilters": [
     {
       "Key": "Project",
-      "Values": [var.project_name]
+      "Values": ["${var.project_name}"]
     }
   ]
 }

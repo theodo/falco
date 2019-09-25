@@ -55,6 +55,6 @@ resource "aws_vpc_endpoint" "sqs" {
   security_group_ids = [
     aws_security_group.sqs.id,
   ]
-
+  
   tags = local.common_tags
 }

@@ -15,17 +15,14 @@
         "elasticloadbalancing:*",
         "logs:*",
         "resource-groups:*",
-        "rds:*"
+        "rds:*",
+        "sqs:*"
       ],
       "Effect": "Allow",
-      "Resource": [
-        "*"
-      ]
+      "Resource": ["*"]
     },
     {
-      "Action": [
-        "iam:*"
-      ],
+      "Action": ["iam:*"],
       "Effect": "Allow",
       "Resource": [
         "arn:aws:iam::${account_id}:instance-profile/${project_name}",
@@ -52,14 +49,10 @@
         "kms:UpdateKeyDescription"
       ],
       "Effect": "Allow",
-      "Resource": [
-        "*"
-      ]
+      "Resource": ["*"]
     },
     {
-      "Action": [
-        "s3:*"
-      ],
+      "Action": ["s3:*"],
       "Effect": "Allow",
       "Resource": [
         "arn:aws:s3:::*",

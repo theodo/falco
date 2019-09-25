@@ -68,3 +68,18 @@ resource "aws_iam_user_policy_attachment" "deploy_attachment" {
   user       = aws_iam_user.deploy.name
   policy_arn = module.deploy_policy.arn
 }
+
+# SQS User
+
+resource "aws_iam_user" "sqs" {
+  name = "${var.project_name}-sqs"
+}
+
+resource "aws_iam_access_key" "sqs" {
+  user = aws_iam_user.sqs.name
+}
+
+resource "aws_iam_user_policy_attachment" "sqs" {
+  user       = aws_iam_user.sqs.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSQSFullAccess"
+}
