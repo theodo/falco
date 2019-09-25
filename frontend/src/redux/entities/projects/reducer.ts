@@ -4,6 +4,7 @@ import {
   addMemberToProjectSuccess,
   addPageToProjectSuccess,
   deleteMemberOfProjectSuccess,
+  deletePageOfProjectSuccess,
   editMemberOfProjectSuccess,
   fetchProjectError,
   fetchProjectsRequest,
@@ -17,6 +18,7 @@ export type ProjectsAction = ActionType<
   typeof addMemberToProjectSuccess |
   typeof addPageToProjectSuccess |
   typeof deleteMemberOfProjectSuccess |
+  typeof deletePageOfProjectSuccess |
   typeof editMemberOfProjectSuccess |
   typeof fetchProjectSuccess | 
   typeof fetchProjectError |
@@ -29,6 +31,12 @@ export type ProjectsState = Readonly<{
 }>;
 
 const initialState: ProjectsState = { toastrDisplay: '', byId: null };
+
+const getAllPagesIdsExceptTargetPageId = (project: ProjectType, targetPageId: string) => {
+  return project.pagesIds.filter((pageId: string) => {
+    return pageId !== targetPageId;
+  });
+}
 
 const getAllMembersExceptTargetMember = (project: ProjectType, targetMemberId: string) => {
   return project.projectMembers.filter((member: ProjectMember) => {
@@ -85,6 +93,19 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
           [typedAction.payload.projectId]: {
             ...state.byId[typedAction.payload.projectId],
             pagesIds: [...state.byId[typedAction.payload.projectId].pagesIds, typedAction.payload.page.uuid]
+          }
+        },
+      };
+    case getType(deletePageOfProjectSuccess):
+      if(!state.byId) { return state };
+
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [typedAction.payload.projectId]: {
+            ...state.byId[typedAction.payload.projectId],
+            pagesIds: getAllPagesIdsExceptTargetPageId(state.byId[typedAction.payload.projectId], typedAction.payload.pageId),
           }
         },
       };

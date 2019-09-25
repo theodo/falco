@@ -26,6 +26,9 @@ import {
   deleteMemberOfProjectError,
   deleteMemberOfProjectRequest,
   deleteMemberOfProjectSuccess,
+  deletePageOfProjectError,
+  deletePageOfProjectRequest,
+  deletePageOfProjectSuccess,
   editMemberOfProjectError,
   editMemberOfProjectRequest,
   editMemberOfProjectSuccess,
@@ -63,6 +66,15 @@ function* deleteMemberOfProjectFailedHandler(error: Error, actionPayload: Record
     userId: actionPayload.userId,
     errorMessage: error.message
   }));
+};
+
+function* deletePageOfProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
+  yield put(deletePageOfProjectError({
+    projectId: actionPayload.projectId,
+    pageId: actionPayload.pageId,
+    errorMessage: error.message
+  }));
+  yield put(setProjectToastrDisplay({ toastrDisplay: 'deletePageError' }));
 };
 
 function* editMemberOfProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
@@ -168,6 +180,17 @@ function* deleteMemberOfProject(action: ActionType<typeof deleteMemberOfProjectR
   yield put(deleteMemberOfProjectSuccess({ projectId: action.payload.projectId, userId: action.payload.userId }));
 };
 
+function* deletePageOfProject(action: ActionType<typeof deletePageOfProjectRequest>) {
+  const endpoint = `/api/projects/${action.payload.projectId}/pages/${action.payload.pageId}`;
+  yield call(
+    makeDeleteRequest,
+    endpoint,
+    true,
+  );
+  yield put(deletePageOfProjectSuccess({ projectId: action.payload.projectId, pageId: action.payload.pageId }));
+  yield put(setProjectToastrDisplay({ toastrDisplay: 'deletePageSuccess' }));
+};
+
 function* editMemberOfProject(action: ActionType<typeof editMemberOfProjectRequest>) {
   const endpoint = `/api/projects/${action.payload.projectId}/members/${action.payload.userId}`;
   yield call(
@@ -263,6 +286,10 @@ export default function* projectsSaga() {
   yield takeEvery(
     getType(deleteMemberOfProjectRequest),
     handleAPIExceptions(deleteMemberOfProject, deleteMemberOfProjectFailedHandler),
+  );
+  yield takeEvery(
+    getType(deletePageOfProjectRequest),
+    handleAPIExceptions(deletePageOfProject, deletePageOfProjectFailedHandler),
   );
   yield takeEvery(
     getType(fetchProjectsRequest),

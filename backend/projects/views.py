@@ -125,7 +125,7 @@ def project_page_detail(request, project_uuid, page_uuid):
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == "DELETE":
-        check_if_admin_of_project(request.user.id, project.id)
+        check_if_admin_of_project(request.user.id, project.uuid)
         page.delete()
         return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
 
