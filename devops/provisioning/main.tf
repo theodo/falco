@@ -17,7 +17,7 @@ provider "aws" {
 
 resource "aws_key_pair" "main" {
   key_name   = var.project_name
-  public_key = file("../eb.pem.pub")
+  public_key = file("../falco-new.pem.pub")
 }
 
 resource "aws_kms_key" "main" {

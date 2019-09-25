@@ -5,3 +5,5 @@ postgres-data/
 backend/celerybeat-schedule
 backend/celerybeat.pid
 backend/venv/
+devops/falco-new.pem
+devops/falco-new.pem.pub
