@@ -194,20 +194,20 @@ workflows:
   version: 2
   stack:
     jobs:
-      - backend
-      - frontend
+      # - backend
+      # - frontend
       - deploy-staging:
           requires:
-            - frontend
-            - backend
+          # - frontend
+          # - backend
           filters:
             branches:
               only:
                 - master
       - deploy-production:
           requires:
-            - frontend
-            - backend
+          # - frontend
+          # - backend
           filters:
             branches:
               only:
