@@ -4,8 +4,8 @@ branch-defaults:
   production:
     environment: production
 global:
-  application_name: falco
-  default_region: eu-west-3
+  application_name: falco-new
+  default_region: eu-west-2
   sc: git
   workspace_type: Application
 deploy:

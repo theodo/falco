@@ -9,57 +9,63 @@ resource "random_string" "secret_key" {
 }
 
 module "rds" {
-  source = "rds"
+  source = "./rds"
 
-  project_name      = "${var.project_name}"
-  environment       = "${var.environment}"
-  allocated_storage = "${var.db_allocated_storage}"
-  instance_class    = "${var.db_instance_class}"
-  ingress_sg        = "${aws_security_group.instances.id}"
+  project_name      = var.project_name
+  environment       = var.environment
+  allocated_storage = var.db_allocated_storage
+  instance_class    = var.db_instance_class
+  vpc                 = var.vpc
+  vpc_private_subnets = var.vpc_private_subnets
+  ingress_sg        = aws_security_group.instances.id
 }
 
 module "s3" {
-  source = "s3"
+  source = "./s3"
 
-  project_name = "${var.project_name}"
-  environment  = "${var.environment}"
+  project_name = var.project_name
+  environment  = var.environment
+  tags         = local.common_tags
 }
 
 module "sqs" {
-  source = "sqs"
+  source = "./sqs"
 
-  project_name = "${var.project_name}"
-  environment  = "${var.environment}"
+  project_name = var.project_name
+  environment  = var.environment
+  tags         = local.common_tags
 }
 
 resource "aws_elastic_beanstalk_environment" "main" {
-  name                = "${var.environment}"
-  application         = "${var.eb_application}"
+  name                = var.environment
+  application         = var.eb_application
   cname_prefix        = "${var.project_name}-${var.environment}"
-  solution_stack_name = "${data.aws_elastic_beanstalk_solution_stack.multi_docker.name}"
+  solution_stack_name = data.aws_elastic_beanstalk_solution_stack.multi_docker.name
+
+  tags = local.common_tags
 
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "EC2KeyName"
-    value     = "${var.eb_key_pair}"
+    value     = var.eb_key_pair
   }
 
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "IamInstanceProfile"
-    value     = "${var.eb_instance_profile}"
+    value     = var.eb_instance_profile
   }
 
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "InstanceType"
-    value     = "${var.eb_instance_type}"
+    value     = var.eb_instance_type
   }
 
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "SecurityGroups"
-    value     = "${aws_security_group.instances.id}"
+    value     = aws_security_group.instances.id
   }
 
   setting {
@@ -77,13 +83,19 @@ resource "aws_elastic_beanstalk_environment" "main" {
   setting {
     namespace = "aws:ec2:vpc"
     name      = "VPCId"
-    value     = "${var.vpc}"
+    value     = var.vpc
   }
 
   setting {
     namespace = "aws:ec2:vpc"
     name      = "Subnets"
-    value     = "${join(",", var.vpc_subnets)}"
+    value     = "${join(",", var.vpc_private_subnets)}"
+  }
+
+  setting {
+    namespace = "aws:ec2:vpc"
+    name      = "ELBSubnets"
+    value     = join(",", var.vpc_public_subnets)
   }
 
   setting {
@@ -95,7 +107,7 @@ resource "aws_elastic_beanstalk_environment" "main" {
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "DATABASE_URL"
-    value     = "${module.rds.url}"
+    value     = module.rds.url
   }
 
   setting {
@@ -113,7 +125,7 @@ resource "aws_elastic_beanstalk_environment" "main" {
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "SECRET_KEY"
-    value     = "${random_string.secret_key.result}"
+    value     = random_string.secret_key.result
   }
 
   setting {
@@ -131,7 +143,7 @@ resource "aws_elastic_beanstalk_environment" "main" {
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "CELERY_TASK_DEFAULT_QUEUE"
-    value     = "${module.sqs.sqs_queue_name}"
+    value     = module.sqs.sqs_queue_name
   }
 
   setting {
@@ -191,7 +203,7 @@ resource "aws_elastic_beanstalk_environment" "main" {
   setting {
     namespace = "aws:elb:loadbalancer"
     name      = "SecurityGroups"
-    value     = "${aws_security_group.lb.id}"
+    value     = aws_security_group.lb.id
   }
 
   setting {

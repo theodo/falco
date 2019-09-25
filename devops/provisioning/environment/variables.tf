@@ -28,12 +28,29 @@ variable "https_domain" {
   default = ""
 }
 
+variable "eb_log_dir" {
+  default = "/var/log/falco-new"
+}
+
+variable "kms_key_id" {}
+
 variable "vpc" {}
 
-variable "vpc_subnets" {
+variable "vpc_public_subnets" {
+  type = "list"
+}
+
+variable "vpc_private_subnets" {
   type = "list"
 }
 
 variable "sqs_user_aws_iam_access_key_id" {}
 
 variable "sqs_user_aws_iam_secret_access_key" {}
+
+variable "bastion_sg" {}
+
+variable "tags" {
+  type    = map(string)
+  default = {}
+}

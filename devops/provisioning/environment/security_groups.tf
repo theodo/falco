@@ -1,9 +1,13 @@
 resource "aws_security_group" "lb" {
   name = "${var.project_name}-${var.environment}-lb"
+  vpc_id = var.vpc
+
+  tags = local.common_tags
 }
 
 resource "aws_security_group" "instances" {
   name = "${var.project_name}-${var.environment}-instances"
+  vpc_id = var.vpc
 
   ingress {
     from_port   = 22
@@ -18,11 +22,13 @@ resource "aws_security_group" "instances" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags = local.common_tags
 }
 
 resource "aws_security_group" "sqs" {
   name   = "${var.project_name}-${var.environment}-sqs"
-  vpc_id = "${var.vpc}"
+  vpc_id = var.vpc
 
   ingress {
     from_port   = 443
@@ -37,14 +43,18 @@ resource "aws_security_group" "sqs" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags = local.common_tags
 }
 
 resource "aws_vpc_endpoint" "sqs" {
-  vpc_id            = "${var.vpc}"
+  vpc_id            = var.vpc
   service_name      = "com.amazonaws.${var.region}.sqs"
   vpc_endpoint_type = "Interface"
 
   security_group_ids = [
-    "${aws_security_group.sqs.id}",
+    aws_security_group.sqs.id,
   ]
+  
+  tags = local.common_tags
 }

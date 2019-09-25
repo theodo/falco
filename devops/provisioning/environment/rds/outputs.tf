@@ -1,25 +1,25 @@
 output "address" {
-  value = "${aws_db_instance.main.address}"
+  value = aws_db_instance.main.address
 }
 
 output "port" {
-  value = "${aws_db_instance.main.port}"
+  value = aws_db_instance.main.port
 }
 
 output "id" {
-  value = "${aws_db_instance.main.id}"
+  value = aws_db_instance.main.id
 }
 
 output "name" {
-  value = "${aws_db_instance.main.name}"
+  value = aws_db_instance.main.name
 }
 
 output "username" {
-  value = "${aws_db_instance.main.username}"
+  value = aws_db_instance.main.username
 }
 
 output "password" {
-  value = "${random_string.db_password.result}"
+  value = random_string.db_password.result
 }
 
 output "url" {
