@@ -30,7 +30,7 @@ parameters:
 
     - run:
         name: Authenticate with registry
-        command: $(aws ecr get-login --no-include-email --region eu-west-3)
+        command: $(aws ecr get-login --no-include-email --region eu-west-2)
 
     - run:
         name: Push docker images to registry
@@ -173,7 +173,7 @@ jobs:
       - image: docker:latest
 
     environment:
-      AWS_DEFAULT_REGION: eu-west-3
+      AWS_DEFAULT_REGION: eu-west-2
       ENV: staging
 
     steps: *deploy_steps
@@ -185,7 +185,7 @@ jobs:
       - image: docker:latest
 
     environment:
-      AWS_DEFAULT_REGION: eu-west-3
+      AWS_DEFAULT_REGION: eu-west-2
       ENV: production
 
     steps: *deploy_steps
