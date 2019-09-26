@@ -27,6 +27,6 @@ COPY --from=node /code/build /code/front/static/front
 RUN pipenv install --system --deploy
 
 # Collect statics
-RUN mkdir -p /var/log/falco
-RUN touch /var/log/falco/django.log
-RUN SECRET_KEY=itdoesntreallymatter LOG_PATH=/var/log/falco/django.log python ./manage.py collectstatic
+RUN mkdir -p /var/log/falco-new
+RUN touch /var/log/falco-new/django.log
+RUN SECRET_KEY=itdoesntreallymatter LOG_PATH=/var/log/falco-new/django.log python ./manage.py collectstatic
