@@ -15,7 +15,7 @@
       "mountPoints": [
         {
           "sourceVolume": "awseb-logs-backend",
-          "containerPath": "/var/log/falco-new"
+          "containerPath": "/var/log/falco"
         }
       ]
     },
@@ -27,7 +27,7 @@
       "mountPoints": [
         {
           "sourceVolume": "awseb-logs-celeryworker",
-          "containerPath": "/var/log/falco-new-celeryworker"
+          "containerPath": "/var/log/falco-celeryworker"
         }
       ]
     },
@@ -39,7 +39,7 @@
       "mountPoints": [
         {
           "sourceVolume": "awseb-logs-celerybeat",
-          "containerPath": "/var/log/falco-new-celerybeat"
+          "containerPath": "/var/log/falco-celerybeat"
         }
       ]
     },
