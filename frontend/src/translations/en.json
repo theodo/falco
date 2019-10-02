@@ -96,6 +96,8 @@
   },
   "ProjectSettings": {
     "settings": "Settings",
+    "general_settings": "General",
+    "name": "Project name",
     "project_members": "Project members",
     "pages": "Pages",
     "page_name": "Page name",
@@ -239,6 +241,7 @@
       "error_message": "An error occured, please try again",
       "add_member_success_message": "The user has been added successfully to the project",
       "edit_page_success_message": "The page has been edited successfully",
+      "edit_project_details_success": "The project has been edited successfully",
       "add_page_success_message": "The page has been created successfully",
       "delete_page_success_message": "The page has been deleted successfully",
       "delete_page_confirm_question": "Do you really want to delete the page ?"

@@ -126,6 +126,11 @@ MemberAdminDeleteButton: styled.button`
     transition-duration: 0.2s;
   }
 `,
+
+NameFieldContainer: styled.div`
+  margin-top: ${getSpacing(4)};
+  margin-bottom: ${getSpacing(4)};
+`
 };
 
 

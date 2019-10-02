@@ -66,7 +66,7 @@ def project_detail(request, project_uuid):
     elif request.method == "PUT":
         check_if_admin_of_project(request.user.id, project.uuid)
         data = JSONParser().parse(request)
-        serializer = ProjectSerializer(project, data=data)
+        serializer = ProjectSerializer(project, data=data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)

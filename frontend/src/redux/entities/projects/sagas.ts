@@ -32,6 +32,9 @@ import {
   editMemberOfProjectError,
   editMemberOfProjectRequest,
   editMemberOfProjectSuccess,
+  editProjectDetailsError,
+  editProjectDetailsRequest,
+  editProjectDetailsSuccess,
   fetchProjectError,
   fetchProjectRequest,
   fetchProjectsRequest,
@@ -261,6 +264,26 @@ function* saveProjectsToStore(action: ActionType<typeof saveFetchedProjects>) {
   yield put(fetchProjectSuccess({ byId: modelizeProjects(projects) }));
 };
 
+function* editProjectDetails(action: ActionType<typeof editProjectDetailsRequest>) {
+  const endpoint = `/api/projects/${action.payload.projectId}/`;
+  const { body: projectResponse }: { body: ApiProjectType } = yield call(
+    makePutRequest,
+    endpoint,
+    true,
+    { ...action.payload.project }
+  );
+  yield put(editProjectDetailsSuccess({ byId: modelizeProject(projectResponse) }));
+  yield put(setProjectToastrDisplay({ toastrDisplay: 'editProjectDetailsSuccess' }));
+};
+
+function* editProjectDetailsFailedHandler(error: Error, actionPayload: Record<string, any>) {
+  yield put(editProjectDetailsError({
+    projectId: actionPayload.projectId,
+    errorMessage: error.message
+  }));
+  yield put(setProjectToastrDisplay({ toastrDisplay: 'editProjectDetailsError' }));
+};
+
 
 export default function* projectsSaga() {
   yield takeEvery(
@@ -298,5 +321,9 @@ export default function* projectsSaga() {
   yield takeEvery(
     getType(saveFetchedProjects),
     saveProjectsToStore,
+  );
+  yield takeEvery(
+    getType(editProjectDetailsRequest),
+    handleAPIExceptions(editProjectDetails, editProjectDetailsFailedHandler),
   );
 };

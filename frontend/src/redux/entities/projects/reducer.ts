@@ -6,10 +6,11 @@ import {
   deleteMemberOfProjectSuccess,
   deletePageOfProjectSuccess,
   editMemberOfProjectSuccess,
+  editProjectDetailsSuccess,
   fetchProjectError,
   fetchProjectsRequest,
   fetchProjectSuccess,
-  setProjectToastrDisplay
+  setProjectToastrDisplay,
 } from './actions';
 import { ProjectMember, ProjectToastrDisplayType, ProjectType } from './types';
 
@@ -20,9 +21,10 @@ export type ProjectsAction = ActionType<
   typeof deleteMemberOfProjectSuccess |
   typeof deletePageOfProjectSuccess |
   typeof editMemberOfProjectSuccess |
-  typeof fetchProjectSuccess | 
+  typeof fetchProjectSuccess |
   typeof fetchProjectError |
-  typeof setProjectToastrDisplay
+  typeof setProjectToastrDisplay |
+  typeof editProjectDetailsSuccess
 >;
 
 export type ProjectsState = Readonly<{
@@ -149,6 +151,14 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
           ...(
             typedAction.payload.projectId && { [typedAction.payload.projectId]: null }
           ),
+        },
+      };
+    case getType(editProjectDetailsSuccess):
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          ...typedAction.payload.byId,
         },
       };
     default:
