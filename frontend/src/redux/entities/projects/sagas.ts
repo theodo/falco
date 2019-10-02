@@ -273,6 +273,7 @@ function* editProjectDetails(action: ActionType<typeof editProjectDetailsRequest
     { ...action.payload.project }
   );
   yield put(editProjectDetailsSuccess({ byId: modelizeProject(projectResponse) }));
+  yield put(setProjectToastrDisplay({ toastrDisplay: 'editProjectDetailsSuccess' }));
 };
 
 function* editProjectDetailsFailedHandler(error: Error, actionPayload: Record<string, any>) {
@@ -280,6 +281,7 @@ function* editProjectDetailsFailedHandler(error: Error, actionPayload: Record<st
     projectId: actionPayload.projectId,
     errorMessage: error.message
   }));
+  yield put(setProjectToastrDisplay({ toastrDisplay: 'editProjectDetailsError' }));
 };
 
 
