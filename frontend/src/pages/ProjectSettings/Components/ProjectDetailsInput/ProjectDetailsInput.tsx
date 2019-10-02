@@ -1,11 +1,11 @@
 import { InjectedFormikProps } from 'formik';
 import React from 'react';
 import { InjectedIntlProps } from 'react-intl';
-import Style from './Input.style';
+import Style from './ProjectDetailsInput.style';
 
 type Props = InjectedIntlProps & InjectedFormikProps<any, any>;
 
-export const Input: React.FunctionComponent<Props> = ({
+export const ProjectDetailsInput: React.FunctionComponent<Props> = ({
   intl,
   label,
   onChange,

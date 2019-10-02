@@ -17,9 +17,9 @@ import { ApiUser, User } from 'redux/user/types';
 import { makeGetRequest } from 'services/networking/request';
 import { isUserAdminOfProject } from 'services/utils';
 import { colorUsage } from 'stylesheet';
-import Input from './Components/Input';
 import PageRow, { PageRowHeader } from './Components/PageTable';
 import { AddPageRow } from './Components/PageTable';
+import ProjectDetailsInput from './Components/ProjectDetailsInput';
 import Style from './ProjectSettings.style';
 
 export type OwnProps = {} & RouteComponentProps<{
@@ -213,7 +213,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
         <FormattedMessage id="ProjectSettings.general_settings"/>
       </Style.PageSubTitle>
       <Style.NameFieldContainer>
-        <Input
+        <ProjectDetailsInput
           label="ProjectSettings.name"
           onChange={handleNameChange}
           onBlur={handleBlur}
