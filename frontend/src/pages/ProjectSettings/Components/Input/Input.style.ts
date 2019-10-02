@@ -11,6 +11,7 @@ import {
 const Styles = {
   Field: styled.div`
     display: flex;
+    align-items: center;
   `,
 
   Input: styled.input`
@@ -18,6 +19,11 @@ const Styles = {
     font-size: ${fontSize.inputText};
     line-height: ${lineHeight.inputText};
     color: ${colorUsage.inputText};
+    border: solid;
+    border-width: 1px;
+    border-radius: 2px;
+    margin-left: ${getSpacing(3)};
+    padding: ${getSpacing(1)};
   `,
 
   Label: styled.label`
