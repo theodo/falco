@@ -17,6 +17,7 @@ import { ApiUser, User } from 'redux/user/types';
 import { makeGetRequest } from 'services/networking/request';
 import { isUserAdminOfProject } from 'services/utils';
 import { colorUsage } from 'stylesheet';
+import Input from './Components/Input';
 import PageRow, { PageRowHeader } from './Components/PageTable';
 import { AddPageRow } from './Components/PageTable';
 import Style from './ProjectSettings.style';
@@ -34,6 +35,7 @@ type Props = {
   project?: ProjectType | null;
   toastrDisplay: ProjectToastrDisplayType;
   setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
+  editProjectDetailsRequest: (projectId: string, project: ProjectType) => void;
 } & OwnProps &
   InjectedIntlProps;
 
@@ -47,7 +49,8 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
   project,
   currentUser,
   toastrDisplay,
-  setProjectToastrDisplay
+  setProjectToastrDisplay,
+  editProjectDetailsRequest,
 }) => {
 
   interface UserOption {
@@ -60,16 +63,22 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
 
   const [selectOption, setSelectOption]: [ValueType<UserOption | {}>, any] = React.useState(null);
   const [allUsers, setAllUsers] = React.useState([]);
+  const [projectName, setProjectName] = React.useState('');
 
   const fetchAllUsers = () => {
     const request = makeGetRequest('/api/core/users', true);
     request
       .then((response) => {
-        if(response) { 
+        if(response) {
           setAllUsers(response.body.map((apiUser:ApiUser) => modelizeUser(apiUser)));
         }
       })
   }
+
+  React.useEffect(
+    () => setProjectName(project ? project.name : ''),
+    [project]
+  )
 
   React.useEffect(
     () => {
@@ -169,12 +178,36 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
   // place current user first : see https://stackoverflow.com/questions/23921683/javascript-move-an-item-of-an-array-to-the-front
   const projectMembersWithCurrentUserFirst = project.projectMembers.sort((a, b) => a.username === currentUser.username ? -1 : b.username === currentUser.username ? 1 : 0)
 
+  const handleNameChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
+    setProjectName(e.currentTarget.value)
+  }
+
+  const handleBlur = () => {
+    editProjectDetailsRequest(
+      project.uuid,
+      {...project,
+        name: projectName,
+      }
+    )
+  };
+
   return (
     <Style.Container>
       <Style.PageTitle>{project.name}</Style.PageTitle>
       <Style.Title>
         <FormattedMessage id="ProjectSettings.settings"/>
       </Style.Title>
+      <Style.PageSubTitle>
+        <FormattedMessage id="ProjectSettings.general_settings"/>
+      </Style.PageSubTitle>
+      <Style.NameFieldContainer>
+        <Input
+          label="ProjectSettings.name"
+          onChange={handleNameChange}
+          onBlur={handleBlur}
+          value={projectName}
+        />
+      </Style.NameFieldContainer>
       <Style.PageSubTitle>
         <FormattedMessage id="ProjectSettings.project_members"/>
       </Style.PageSubTitle>

@@ -87,6 +87,17 @@ export const editMemberOfProjectError = createStandardAction('projects/DELETE_ME
 export const setProjectToastrDisplay = createStandardAction('projects/SET_TOASTR_DISPLAY')<{
   toastrDisplay: ProjectToastrDisplayType;
 }>();
+export const editProjectDetailsRequest = createStandardAction('projects/EDIT_PROJECT_DETAILS_REQUEST')<{
+  projectId: string;
+  project: ProjectType;
+}>();
+export const editProjectDetailsError = createStandardAction('projects/EDIT_PROJECT_DETAILS_ERROR')<{
+  projectId: string | null;
+  errorMessage: string;
+}>();
+export const editProjectDetailsSuccess = createStandardAction('projects/EDIT_PROJECT_DETAILS_SUCCESS')<{
+  byId: Record<string, ProjectType>;
+}>();
 
 export default {
   addMemberToProjectRequest,
@@ -106,5 +117,8 @@ export default {
   fetchProjectsRequest,
   fetchProjectSuccess,
   fetchProjectError,
-  setProjectToastrDisplay
+  setProjectToastrDisplay,
+  editProjectDetailsRequest,
+  editProjectDetailsError,
+  editProjectDetailsSuccess,
 };

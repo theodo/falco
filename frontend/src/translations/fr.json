@@ -95,6 +95,8 @@
     "title": "Projets"
   },
   "ProjectSettings": {
+    "general_settings": "Général",
+    "name": "Nom du projet",
     "settings": "Paramètres",
     "project_members": "Membres du projet",
     "pages": "Pages du projet",
