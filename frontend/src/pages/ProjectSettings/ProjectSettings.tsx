@@ -238,6 +238,27 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
         />
       </Style.SettingsFieldContainer>
       <Style.PageSubTitle>
+        <FormattedMessage id="ProjectSettings.pages"/>
+      </Style.PageSubTitle>
+      <Style.ProjectSettingsBlock>
+        <Style.ElementContainer>
+          <PageRowHeader />
+        </Style.ElementContainer>
+        {project.pagesIds.map(pageId => (
+          <Style.ElementContainer key={pageId}>
+            <PageRow
+              disabled={!isUserAdminOfProject(currentUser, project)}
+              projectId={project.uuid}
+              pageId={pageId}
+            />
+          </Style.ElementContainer>))}
+          {isUserAdminOfProject(currentUser, project) && <Style.ElementContainer>
+            <AddPageRow
+              projectId={project.uuid}
+            />
+          </Style.ElementContainer>}
+      </Style.ProjectSettingsBlock>
+      <Style.PageSubTitle>
         <FormattedMessage id="ProjectSettings.project_members"/>
       </Style.PageSubTitle>
       {isUserAdminOfProject(currentUser, project) && <Style.SelectUser
@@ -292,27 +313,6 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
               </Style.MemberAdminDeleteContainer >
             </Style.ElementContainer>
           )}
-      </Style.ProjectSettingsBlock>
-      <Style.PageSubTitle>
-        <FormattedMessage id="ProjectSettings.pages"/>
-      </Style.PageSubTitle>
-      <Style.ProjectSettingsBlock>
-        <Style.ElementContainer>
-          <PageRowHeader />
-        </Style.ElementContainer>
-        {project.pagesIds.map(pageId => (
-          <Style.ElementContainer key={pageId}>
-            <PageRow
-              disabled={!isUserAdminOfProject(currentUser, project)}
-              projectId={project.uuid}
-              pageId={pageId}
-            />
-          </Style.ElementContainer>))}
-          {isUserAdminOfProject(currentUser, project) && <Style.ElementContainer>
-            <AddPageRow 
-              projectId={project.uuid}
-            />
-          </Style.ElementContainer>}
       </Style.ProjectSettingsBlock>
     </Style.Container>
   );
