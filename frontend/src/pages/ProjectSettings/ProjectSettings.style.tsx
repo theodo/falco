@@ -6,7 +6,7 @@ const Style = {
   Container: styled.div`
     display: flex;
     flex-direction: column;
-    padding: 0;
+    padding: 0 0 ${getSpacing(4)} 0;
     margin: 0;
     width: 800px;
   `,
@@ -58,7 +58,7 @@ InviteUserLink: styled.div`
 
 ProjectSettingsBlock: styled.div`
   border: solid 1px ${colorUsage.projectSettingsContainerBorder};
-  margin: ${getSpacing(4)} 0;
+  margin-top: ${getSpacing(4)};
   border-radius: 3px;
   font-family: ${fontFamily.mainSans};
   font-size: ${fontSize.inputText};
