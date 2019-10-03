@@ -38,6 +38,24 @@ def get_latest_audit_status_histories(obj):
     return list()
 
 
+class DynamicFieldsModelSerializer(serializers.ModelSerializer):
+    """
+    Project serializer extends this serializer to dynamically choose which fields to serialize
+    see https://www.django-rest-framework.org/api-guide/serializers/#dynamically-modifying-fields
+    """
+
+    def __init__(self, *args, **kwargs):
+        fields = kwargs.pop("fields", None)
+
+        super(DynamicFieldsModelSerializer, self).__init__(*args, **kwargs)
+
+        if fields is not None:
+            allowed = set(fields)
+            existing = set(self.fields)
+            for field_name in existing - allowed:
+                self.fields.pop(field_name)
+
+
 class PageSerializer(serializers.ModelSerializer):
     latest_audit_status_histories = serializers.SerializerMethodField(
         "resolve_latest_audit_status_histories"
@@ -93,7 +111,7 @@ class ProjectMemberRoleSerializer(serializers.ModelSerializer):
         fields = ("id", "email", "username", "is_admin")
 
 
-class ProjectSerializer(serializers.ModelSerializer):
+class ProjectSerializer(DynamicFieldsModelSerializer):
     pages = PageSerializer(many=True)
     scripts = ScriptSerializer(many=True)
     audit_parameters_list = ProjectAuditParametersSerializer(many=True)
@@ -112,4 +130,5 @@ class ProjectSerializer(serializers.ModelSerializer):
             "audit_parameters_list",
             "screenshot_url",
             "latest_audit_at",
+            "wpt_api_key",
         )

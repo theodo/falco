@@ -12,6 +12,7 @@ export interface ProjectType {
   latestAuditAt: string;
   auditParametersIds: string[];
   projectMembers: ProjectMember[];
+  wptApiKey: string;
 };
 
 export interface ApiProjectType {
@@ -23,6 +24,7 @@ export interface ApiProjectType {
   screenshot_url: string;
   latest_audit_at: string;
   project_members: ApiProjectMember[];
+  wpt_api_key: string;
 };
 
 export interface ProjectMember {

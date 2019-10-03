@@ -35,7 +35,7 @@ type Props = {
   project?: ProjectType | null;
   toastrDisplay: ProjectToastrDisplayType;
   setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
-  editProjectDetailsRequest: (projectId: string, project: ProjectType) => void;
+  editProjectDetailsRequest: (projectId: string, payload: {name: string, wpt_api_key: string}) => void;
 } & OwnProps &
   InjectedIntlProps;
 
@@ -64,6 +64,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
   const [selectOption, setSelectOption]: [ValueType<UserOption | {}>, any] = React.useState(null);
   const [allUsers, setAllUsers] = React.useState([]);
   const [projectName, setProjectName] = React.useState('');
+  const [projectApiKey, setProjectApiKey] = React.useState('');
 
   const fetchAllUsers = () => {
     const request = makeGetRequest('/api/core/users', true);
@@ -76,7 +77,10 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
   }
 
   React.useEffect(
-    () => setProjectName(project ? project.name : ''),
+    () => {
+      setProjectName(project ? project.name : '');
+      setProjectApiKey(project ? project.wptApiKey : '');
+    },
     [project]
   )
 
@@ -194,12 +198,17 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
     setProjectName(e.currentTarget.value)
   }
 
-  const handleBlur = () => {
+  const handleApiKeyChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
+    setProjectApiKey(e.currentTarget.value)
+  }
+
+  const sendEditRequestOnBlur = () => {
     editProjectDetailsRequest(
       project.uuid,
-      {...project,
+      {
         name: projectName,
-      }
+        wpt_api_key: projectApiKey,
+      },
     )
   };
 
@@ -212,14 +221,22 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
       <Style.PageSubTitle>
         <FormattedMessage id="ProjectSettings.general_settings"/>
       </Style.PageSubTitle>
-      <Style.NameFieldContainer>
+      <Style.SettingsFieldContainer>
         <ProjectDetailsInput
           label="ProjectSettings.name"
           onChange={handleNameChange}
-          onBlur={handleBlur}
+          onBlur={sendEditRequestOnBlur}
           value={projectName}
         />
-      </Style.NameFieldContainer>
+      </Style.SettingsFieldContainer>
+      <Style.SettingsFieldContainer>
+        <ProjectDetailsInput
+          label="ProjectSettings.wpt_key"
+          onChange={handleApiKeyChange}
+          onBlur={sendEditRequestOnBlur}
+          value={projectApiKey}
+        />
+      </Style.SettingsFieldContainer>
       <Style.PageSubTitle>
         <FormattedMessage id="ProjectSettings.project_members"/>
       </Style.PageSubTitle>

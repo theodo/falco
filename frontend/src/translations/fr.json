@@ -98,6 +98,7 @@
     "settings": "Paramètres",
     "general_settings": "Général",
     "name": "Nom du projet",
+    "wpt_key": "Clé API WebPageTest",
     "project_members": "Membres du projet",
     "pages": "Pages du projet",
     "page_name": "Nom de la page",

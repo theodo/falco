@@ -7,7 +7,11 @@ from projects.serializers import (
     ProjectSerializer,
     ProjectMemberRoleSerializer,
 )
-from projects.permissions import check_if_member_of_project, check_if_admin_of_project
+from projects.permissions import (
+    check_if_member_of_project,
+    check_if_admin_of_project,
+    is_admin_of_project,
+)
 from rest_framework import permissions, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.parsers import JSONParser
@@ -58,7 +62,24 @@ def project_detail(request, project_uuid):
 
     if request.method == "GET":
         projects = get_user_projects(request.user.id)
-        serializer = ProjectSerializer(project)
+        if is_admin_of_project(request.user.id, project.uuid):
+            serializer = ProjectSerializer(project)
+            return JsonResponse(
+                {"project": serializer.data, "has_siblings": projects.count() > 1}
+            )
+        serializer = ProjectSerializer(
+            project,
+            fields=(
+                "uuid",
+                "name",
+                "project_members",
+                "pages",
+                "scripts",
+                "audit_parameters_list",
+                "screenshot_url",
+                "latest_audit_at",
+            ),
+        )
         return JsonResponse(
             {"project": serializer.data, "has_siblings": projects.count() > 1}
         )

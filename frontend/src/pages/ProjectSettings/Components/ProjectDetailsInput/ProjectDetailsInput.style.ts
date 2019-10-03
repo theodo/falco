@@ -24,6 +24,7 @@ const Styles = {
     border-radius: 2px;
     margin-left: ${getSpacing(3)};
     padding: ${getSpacing(1)};
+    width: ${getSpacing(60)};
   `,
 
   Label: styled.label`
@@ -32,6 +33,7 @@ const Styles = {
     line-height: ${lineHeight.inputTextLabel};
     font-weight: ${fontWeight.inputTextLabel};
     color: ${colorUsage.inputTextLabel};
+    width: ${getSpacing(20)};
   `,
 };
 
