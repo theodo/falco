@@ -89,7 +89,7 @@ export const setProjectToastrDisplay = createStandardAction('projects/SET_TOASTR
 }>();
 export const editProjectDetailsRequest = createStandardAction('projects/EDIT_PROJECT_DETAILS_REQUEST')<{
   projectId: string;
-  project: ProjectType;
+  payload: { name: string, wpt_api_key: string };
 }>();
 export const editProjectDetailsError = createStandardAction('projects/EDIT_PROJECT_DETAILS_ERROR')<{
   projectId: string | null;

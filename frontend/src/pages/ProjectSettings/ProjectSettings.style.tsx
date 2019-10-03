@@ -28,8 +28,7 @@ Title: styled.div`
   font-family: ${fontFamily.mainSans};
   font-size: ${fontSize.h2Text};
   font-weight: ${fontWeight.h2Text};
-  margin-bottom: ${getSpacing(6)};
-  margin-top: ${getSpacing(4)};
+  margin-top: ${getSpacing(6)};
 `,
 
 PageSubTitle: styled.div`
@@ -38,6 +37,7 @@ PageSubTitle: styled.div`
   font-family: ${fontFamily.mainSans};
   font-size: ${fontSize.h3Text};
   font-weight: ${fontWeight.h3Text};
+  margin-top: ${getSpacing(4)};
 `,
 
 SelectUser: styled(Select)`
@@ -127,11 +127,9 @@ MemberAdminDeleteButton: styled.button`
   }
 `,
 
-NameFieldContainer: styled.div`
+SettingsFieldContainer: styled.div`
   margin-top: ${getSpacing(4)};
-  margin-bottom: ${getSpacing(4)};
-`
+`,
 };
-
 
 export default Style;

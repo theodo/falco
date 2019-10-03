@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   editMemberOfProjectRequest: (projectId: string, userId: string, isAdmin: boolean) =>
     dispatch(editMemberOfProjectRequest({ projectId, userId, isAdmin })),
   setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => dispatch(setProjectToastrDisplay({ toastrDisplay })),
-  editProjectDetailsRequest: (projectId: string, project: ProjectType) => dispatch(editProjectDetailsRequest({ projectId, project })),
+  editProjectDetailsRequest: (projectId: string, payload: {name: string, wpt_api_key: string}) => dispatch(editProjectDetailsRequest({ projectId, payload })),
 });
 
 export default connect(

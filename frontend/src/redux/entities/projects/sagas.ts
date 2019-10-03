@@ -270,7 +270,7 @@ function* editProjectDetails(action: ActionType<typeof editProjectDetailsRequest
     makePutRequest,
     endpoint,
     true,
-    { ...action.payload.project }
+    { ...action.payload.payload }
   );
   yield put(editProjectDetailsSuccess({ byId: modelizeProject(projectResponse) }));
   yield put(setProjectToastrDisplay({ toastrDisplay: 'editProjectDetailsSuccess' }));

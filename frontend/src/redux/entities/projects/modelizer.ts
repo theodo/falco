@@ -9,7 +9,8 @@ export const modelizeProject = (project: ApiProjectType): Record<string, Project
     auditParametersIds: project.audit_parameters_list.map(auditParameters => auditParameters.uuid),
     screenshotUrl: project.screenshot_url,
     latestAuditAt: project.latest_audit_at,
-    projectMembers: project.project_members.map(apiProjectMember => modelizeProjectMember(apiProjectMember))
+    projectMembers: project.project_members.map(apiProjectMember => modelizeProjectMember(apiProjectMember)),
+    wptApiKey: project.wpt_api_key
   },
 });
 
