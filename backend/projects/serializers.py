@@ -5,6 +5,7 @@ from projects.models import (
     ProjectAuditParameters,
     ProjectMemberRole,
     Script,
+    AvailableAuditParameters,
 )
 from rest_framework import serializers
 from audits.serializers import AuditStatusHistorySerializer
@@ -132,3 +133,9 @@ class ProjectSerializer(DynamicFieldsModelSerializer):
             "latest_audit_at",
             "wpt_api_key",
         )
+
+
+class AvailableAuditParameterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AvailableAuditParameters
+        fields = ("uuid", "browser", "location_label", "location_group")

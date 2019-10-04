@@ -1,12 +1,19 @@
 from core.models import User
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
-from projects.models import Page, Project, ProjectMemberRole, ProjectAuditParameters
+from projects.models import (
+    Page,
+    Project,
+    ProjectMemberRole,
+    ProjectAuditParameters,
+    AvailableAuditParameters,
+)
 from projects.serializers import (
     PageSerializer,
     ProjectSerializer,
     ProjectMemberRoleSerializer,
     ProjectAuditParametersSerializer,
+    AvailableAuditParameterSerializer,
 )
 from projects.permissions import (
     check_if_member_of_project,
@@ -267,3 +274,13 @@ def project_members(request, project_uuid):
     return HttpResponse(
         "You must provide a user_id", status=status.HTTP_400_BAD_REQUEST
     )
+
+
+@api_view(["GET"])
+@permission_classes([permissions.IsAuthenticated])
+def available_audit_parameters(request):
+    available_audit_parameters = AvailableAuditParameters.objects.filter(is_active=True)
+    serializer = AvailableAuditParameterSerializer(
+        available_audit_parameters, many=True
+    )
+    return JsonResponse(serializer.data, safe=False)
