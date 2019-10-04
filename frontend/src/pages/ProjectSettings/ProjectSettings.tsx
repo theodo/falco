@@ -17,6 +17,7 @@ import { ApiUser, User } from 'redux/user/types';
 import { makeGetRequest } from 'services/networking/request';
 import { isUserAdminOfProject } from 'services/utils';
 import { colorUsage } from 'stylesheet';
+import { AddAuditParameterRow } from './Components/AuditParameterTable'
 import PageRow, { PageRowHeader } from './Components/PageTable';
 import { AddPageRow } from './Components/PageTable';
 import ProjectDetailsInput from './Components/ProjectDetailsInput';
@@ -237,6 +238,23 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
           value={projectApiKey}
         />
       </Style.SettingsFieldContainer>
+      <Style.PageSubTitle>
+        <FormattedMessage id="ProjectSettings.project_audit_parameters"/>
+      </Style.PageSubTitle>
+      <Style.ProjectSettingsBlock>
+        <Style.ElementContainer>
+          <Style.AuditParameterName>{intl.formatMessage({ id: "ProjectSettings.audit_parameter_name"})}</Style.AuditParameterName>
+          <Style.Configuration>{intl.formatMessage({ id: "ProjectSettings.configuration"})}</Style.Configuration>
+          <Style.NetworkShape>
+            {intl.formatMessage({ id: "ProjectSettings.network_type"})}
+          </Style.NetworkShape>
+        </Style.ElementContainer>
+        {isUserAdminOfProject(currentUser, project) && <Style.ElementContainer>
+            <AddAuditParameterRow
+              projectId={project.uuid}
+            />
+          </Style.ElementContainer>}
+      </Style.ProjectSettingsBlock>
       <Style.PageSubTitle>
         <FormattedMessage id="ProjectSettings.pages"/>
       </Style.PageSubTitle>

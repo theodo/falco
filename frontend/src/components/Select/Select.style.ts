@@ -5,6 +5,7 @@ import { fontFamily, fontSize, lineHeight } from 'stylesheet';
 interface SelectProps {
   margin?: string;
   width?: string;
+  display?: string;
 }
 
 const StyledSelect = {
@@ -14,6 +15,7 @@ const StyledSelect = {
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.inputSelectText};
     line-height: ${lineHeight.inputSelectText};
+    display: ${(props: SelectProps) => (props.display ? props.display : 'visible')}
   `,
 };
 

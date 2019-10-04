@@ -91,6 +91,18 @@ ElementContainer: styled.div`
   }
 `,
 
+AuditParameterName: styled.div`
+  width: 40%;
+`,
+
+Configuration: styled.div`
+  width: 40%;
+`,
+
+NetworkShape: styled.div`
+  width: 20%;
+`,
+
 MemberUsername: styled.div`
   width: 25%;
 `,

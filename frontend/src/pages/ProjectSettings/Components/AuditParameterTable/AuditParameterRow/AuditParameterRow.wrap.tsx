@@ -1,0 +1,23 @@
+import { injectIntl } from 'react-intl';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { editAuditParameterRequest } from 'redux/entities/auditParameters';
+import { getAuditParameters } from 'redux/entities/auditParameters/selectors';
+import { AuditParametersType } from 'redux/entities/auditParameters/types';
+import { deleteAuditParameterOfProjectRequest } from 'redux/entities/projects';
+import { RootState } from 'redux/types';
+import { AuditParameterRow, OwnProps } from './AuditParameterRow';
+
+const mapStateToProps = (state: RootState, props: OwnProps) => ({
+  auditParameter: getAuditParameters(state, props.auditParameterId || ""),
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  editAuditParameterRequest: (projectId: string, auditParameter: {name: string, uuid: string}) => dispatch(editAuditParameterRequest({ projectId, auditParameter})),
+  deleteAuditParameterOfProjectRequest: (projectId: string, auditParameterId: string) => dispatch(deleteAuditParameterOfProjectRequest({ projectId, auditParameterId }))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(injectIntl(AuditParameterRow));

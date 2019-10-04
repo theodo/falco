@@ -1,5 +1,6 @@
 import { createStandardAction } from 'typesafe-actions';
 
+import { AuditParametersType } from '../auditParameters/types';
 import { PageType } from '../pages/types';
 import { ApiProjectType, ProjectToastrDisplayType, ProjectType } from './types';
 
@@ -98,6 +99,10 @@ export const editProjectDetailsError = createStandardAction('projects/EDIT_PROJE
 export const editProjectDetailsSuccess = createStandardAction('projects/EDIT_PROJECT_DETAILS_SUCCESS')<{
   byId: Record<string, ProjectType>;
 }>();
+export const addAuditParameterToProjectRequest = createStandardAction('projects/ADD_AUDIT_PARAMETER_TO_PROJECT_REQUEST')<{
+  projectId: string;
+  auditParameterName: string;
+}>();
 
 export default {
   addMemberToProjectRequest,
@@ -121,4 +126,5 @@ export default {
   editProjectDetailsRequest,
   editProjectDetailsError,
   editProjectDetailsSuccess,
+  addAuditParameterToProjectRequest,
 };
