@@ -1,11 +1,12 @@
 from core.models import User
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
-from projects.models import Page, Project, ProjectMemberRole
+from projects.models import Page, Project, ProjectMemberRole, ProjectAuditParameters
 from projects.serializers import (
     PageSerializer,
     ProjectSerializer,
     ProjectMemberRoleSerializer,
+    ProjectAuditParametersSerializer,
 )
 from projects.permissions import (
     check_if_member_of_project,
@@ -148,6 +149,63 @@ def project_page_detail(request, project_uuid, page_uuid):
     elif request.method == "DELETE":
         check_if_admin_of_project(request.user.id, project.uuid)
         page.delete()
+        return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(["GET", "POST"])
+@permission_classes([permissions.IsAuthenticated])
+def project_audit_parameter_list(request, project_uuid):
+    project = Project.objects.get(uuid=project_uuid)
+    check_if_member_of_project(request.user.id, project.uuid)
+
+    if request.method == "GET":
+        audit_parameters = project.audit_parameters.all()
+        serializer = ProjectAuditParametersSerializer(audit_parameters, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    elif request.method == "POST":
+        check_if_admin_of_project(request.user.id, project.uuid)
+        data = JSONParser().parse(request)
+        serializer = ProjectAuditParametersSerializer(data=data)
+        if serializer.is_valid():
+            audit_parameter = ProjectAuditParameters.objects.create(
+                project=project, **serializer.validated_data
+            )
+            audit_parameter.save()
+            return JsonResponse(
+                {"uuid": audit_parameter.uuid, **serializer.data},
+                status=status.HTTP_201_CREATED,
+            )
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["GET", "PUT", "DELETE"])
+@permission_classes([permissions.IsAuthenticated])
+def project_audit_parameters_detail(request, project_uuid, audit_parameters_uuid):
+    project = get_object_or_404(Project, pk=project_uuid)
+    audit_parameters = get_object_or_404(
+        ProjectAuditParameters, pk=audit_parameters_uuid
+    )
+    check_if_member_of_project(request.user.id, project.uuid)
+
+    if audit_parameters.project != project:
+        return JsonResponse({}, status=status.HTTP_400_BAD_REQUEST)
+
+    if request.method == "GET":
+        serializer = ProjectAuditParametersSerializer(audit_parameters)
+        return JsonResponse(serializer.data)
+
+    elif request.method == "PUT":
+        check_if_admin_of_project(request.user.id, project.uuid)
+        data = JSONParser().parse(request)
+        serializer = ProjectAuditParametersSerializer(audit_parameters, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == "DELETE":
+        check_if_admin_of_project(request.user.id, project.uuid)
+        audit_parameters.delete()
         return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
 
 
