@@ -15,7 +15,7 @@ ptvsd = "==4.2.8"
 pytz = "==2019.1"
 requests = "==2.21.0"
 djangorestframework = "==3.9.2"
-celery = {extras = ["sqs"],version = "==4.3.0"}
+celery = {extras = ["sqs", "redis"],version = "==4.3.0"}
 django-celery-beat = "==1.4.0"
 djangorestframework-simplejwt = "==4.3.0"
 djoser = "==1.5.1"
