@@ -1,0 +1,20 @@
+# First stage: collect static files in base image
+FROM node:8.12 AS node
+
+
+WORKDIR /code
+
+COPY . /code/
+ENV NODE_PATH /code/src
+RUN yarn
+RUN yarn build
+
+
+# Second stage: static files server
+FROM nginx:1.15
+
+# Custom config
+RUN rm /etc/nginx/conf.d/default.conf
+COPY .nginx.conf /etc/nginx/conf.d/falco.conf
+
+COPY /code/static /static

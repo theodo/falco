@@ -1,0 +1,18 @@
+setup:
+  addons:
+    - plan: heroku-postgresql
+      as: DATABASE
+    - plan: heroku-redis
+      as: REDIS
+build:
+  docker:
+    web: Dockerfile.heroku.backend
+    # static: frontend/Dockerfile.heroku.frontend
+    # celeryworker: devops/deployment/celeryworker/Dockerfile
+    # celerybeat: devops/deployment/celerybeat/Dockerfile
+release:
+  image: web
+  command:
+    - ./release_backend.sh
+run:
+  web: ./start_backend.sh

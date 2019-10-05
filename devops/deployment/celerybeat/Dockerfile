@@ -1,4 +1,4 @@
-FROM falco/base
+FROM base
 
-COPY ./celerybeat/start_beat.sh /code/
+COPY ./start_beat.sh /code/
 CMD ["sh", "/code/start_beat.sh"]

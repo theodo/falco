@@ -7,7 +7,7 @@ from celery import Celery
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "root.settings.dev")
 
-broker_url = os.environ["CELERY_BROKER_URL"]
+broker_url = os.environ["REDIS_URL"]
 
 app = Celery("root", broker=broker_url)
 # Using a string here means the worker doesn't have to serialize
