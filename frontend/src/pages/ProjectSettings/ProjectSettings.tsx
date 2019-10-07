@@ -17,7 +17,7 @@ import { ApiUser, User } from 'redux/user/types';
 import { makeGetRequest } from 'services/networking/request';
 import { isUserAdminOfProject } from 'services/utils';
 import { colorUsage } from 'stylesheet';
-import { AddAuditParameterRow } from './Components/AuditParameterTable'
+import AuditParameterRow, { AddAuditParameterRow } from './Components/AuditParameterTable'
 import PageRow, { PageRowHeader } from './Components/PageTable';
 import { AddPageRow } from './Components/PageTable';
 import ProjectDetailsInput from './Components/ProjectDetailsInput';
@@ -139,6 +139,18 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
                 intl.formatMessage({'id': 'Toastr.ProjectSettings.error_message'}),
               );
               break;
+            case "addAuditParameterSuccess":
+              toastr.success(
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.add_audit_parameter_to_project_success'}),
+              );
+              break;
+            case "addAuditParameterError":
+              toastr.success(
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.error_title'}),
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.error_message'}),
+              );
+              break;
           case "addMemberError":
           case "editPageError":
           case "addPageError":
@@ -249,6 +261,14 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
             {intl.formatMessage({ id: "ProjectSettings.network_type"})}
           </Style.NetworkShape>
         </Style.ElementContainer>
+        {project.auditParametersIds.map(auditParameterId => (
+          <Style.ElementContainer key={auditParameterId}>
+            <AuditParameterRow
+              disabled={!isUserAdminOfProject(currentUser, project)}
+              projectId={project.uuid}
+              auditParameterId={auditParameterId}
+            />
+          </Style.ElementContainer>))}
         {isUserAdminOfProject(currentUser, project) && <Style.ElementContainer>
             <AddAuditParameterRow
               projectId={project.uuid}

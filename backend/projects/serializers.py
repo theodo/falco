@@ -7,6 +7,7 @@ from projects.models import (
     Script,
     AvailableAuditParameters,
 )
+
 from rest_framework import serializers
 from audits.serializers import AuditStatusHistorySerializer
 
@@ -84,7 +85,7 @@ class ScriptSerializer(serializers.ModelSerializer):
 
 
 class ProjectAuditParametersSerializer(serializers.ModelSerializer):
-    network_shape = serializers.SerializerMethodField("resolve_network_shape")
+    # network_shape = serializers.SerializerMethodField("resolve_network_shape")
     location = serializers.SerializerMethodField("resolve_location")
     browser = serializers.SerializerMethodField("resolve_browser")
 

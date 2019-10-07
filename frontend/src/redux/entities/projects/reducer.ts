@@ -1,6 +1,7 @@
 import { AnyAction } from 'redux';
 import { ActionType, getType } from 'typesafe-actions';
 import {
+  addAuditParameterToProjectSuccess,
   addMemberToProjectSuccess,
   addPageToProjectSuccess,
   deleteMemberOfProjectSuccess,
@@ -24,7 +25,8 @@ export type ProjectsAction = ActionType<
   typeof fetchProjectSuccess |
   typeof fetchProjectError |
   typeof setProjectToastrDisplay |
-  typeof editProjectDetailsSuccess
+  typeof editProjectDetailsSuccess |
+  typeof addAuditParameterToProjectSuccess
 >;
 
 export type ProjectsState = Readonly<{
@@ -159,6 +161,19 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
         byId: {
           ...state.byId,
           ...typedAction.payload.byId,
+        },
+      };
+     case getType(addAuditParameterToProjectSuccess):
+        if(!state.byId) { return state };
+
+        return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [typedAction.payload.projectId]: {
+            ...state.byId[typedAction.payload.projectId],
+            auditParametersIds: [...state.byId[typedAction.payload.projectId].auditParametersIds, typedAction.payload.auditParameter.uuid]
+          }
         },
       };
     default:

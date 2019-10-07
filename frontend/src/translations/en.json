@@ -252,6 +252,7 @@
       "edit_page_success_message": "The page has been edited successfully",
       "edit_project_details_success": "The project has been edited successfully",
       "add_page_success_message": "The page has been created successfully",
+      "add_audit_parameter_to_project_success": "The audit parameter has been created successfully",
       "delete_page_success_message": "The page has been deleted successfully",
       "delete_page_confirm_question": "Do you really want to delete the page ?"
     }

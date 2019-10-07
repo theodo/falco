@@ -3,6 +3,7 @@ import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
 import { toastr } from 'react-redux-toastr';
 import { AuditParametersType } from 'redux/entities/auditParameters/types';
+import { availableNetworkShape } from 'redux/entities/auditParameters/types'
 import { colorUsage } from 'stylesheet';
 import { AuditParameterDeleteButton, AuditParameterDeleteContainer, EditBrowserInput, EditNameInput, EditNetworkShapeInput } from '../AuditParameterTable.style';
 
@@ -18,6 +19,11 @@ type Props = {
   deleteAuditParameterOfProjectRequest: (projectId: string, auditParameterId: string) => void;
 } & OwnProps & InjectedIntlProps;
 
+interface NetworkShapeOptionType {
+  label: string,
+  value: string,
+}
+
 export const AuditParameterRow: React.FunctionComponent<Props> = ({
   auditParameterId,
   auditParameter,
@@ -28,11 +34,20 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
   intl
   }) => {
   const [auditParameterName, setAuditParameterName] = React.useState('');
+  const [auditParameterBrowser, setAuditParameterBrowser] = React.useState('');
+  const [auditParameterNetworkShape, setAuditParameterNetworkShape] = React.useState('');
 
   React.useEffect(
     () => {
       if(auditParameter) {
         setAuditParameterName(auditParameter.name);
+        setAuditParameterBrowser(auditParameter.browser);
+        const networkShape = availableNetworkShape.find((networkShapeOption: NetworkShapeOptionType) => {
+          if (networkShapeOption.value === auditParameter.networkShape) {
+            return networkShapeOption
+          }
+        })
+        setAuditParameterNetworkShape(networkShape ? networkShape.label : '');
       }
     },
     [auditParameter],
@@ -74,13 +89,13 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
       />
       <EditBrowserInput
         disabled={disabled}
-        value={auditParameterName}
+        value={auditParameterBrowser}
         onChange={handleNameChange}
         onBlur={handleBlur}
       />
       <EditNetworkShapeInput
         disabled={disabled}
-        value={auditParameterName}
+        value={auditParameterNetworkShape}
         onChange={handleNameChange}
         onBlur={handleBlur}
       />

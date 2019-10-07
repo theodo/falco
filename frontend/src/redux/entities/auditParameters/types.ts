@@ -14,18 +14,18 @@ export interface ApiAuditParametersType {
     network_shape: string;
 }
 
-export enum NetworkShapeEnum {
-    CABLE = "Cable",
-    DSL = "DSL",
-    THREE_G_SLOW = "3GSlow",
-    THREE_G = "3G",
-    THREE_G_FAST = "3GFast",
-    FOUR_G = "4G",
-    LTE = "LTE",
-    EDGE = "Edge",
-    TWO_G = "2G",
-    DIAL = "Dial",
-    FIOS = "FIOS",
-    NATIVE = "Native",
-    CUSTOM = "custom",
-}
+export const availableNetworkShape = [
+    { label: "Cable", value: "CABLE" },
+    { label: "DSL", value: "DSL" },
+    { label: "3GSlow", value: "THREE_G_SLOW" },
+    { label: "3G", value: "THREE_G" },
+    { label: "3GFast", value: "THREE_G_FAST" },
+    { label: "4G", value: "FOUR_G" },
+    { label: "LTE", value: "LTE" },
+    { label: "Edge", value: "EDGE" },
+    { label: "2G", value: "TWO_G" },
+    { label: "Dial", value: "DIAL" },
+    { label: "FIOS", value: "FIOS" },
+    { label: "Native", value: "NATIVE" },
+    { label: "custom", value: "CUSTOM" },
+  ];

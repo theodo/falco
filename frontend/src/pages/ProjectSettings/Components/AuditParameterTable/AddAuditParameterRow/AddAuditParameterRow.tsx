@@ -1,7 +1,7 @@
 import { Add } from 'icons';
 import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
-import { NetworkShapeEnum } from 'redux/entities/auditParameters/types';
+import { availableNetworkShape } from 'redux/entities/auditParameters/types'
 import { makeGetRequest } from 'services/networking/request';
 import { colorUsage } from 'stylesheet';
 import { getSpacing } from 'stylesheet';
@@ -20,7 +20,7 @@ export interface ApiAvailableAuditParameters {
 }
 
 type Props = {
-  addAuditParameterToProjectRequest: (projectId: string, auditParameterName: string, auditParameterBrowser: string, auditParameterNetworkShape: string) => void,
+  addAuditParameterToProjectRequest: (projectId: string, auditParameterName: string, auditParameterNetworkShape: string, auditParameterConfigurationId: string) => void,
 } & OwnProps & InjectedIntlProps;
 
 const useFocus = (): [React.MutableRefObject<any>, () => void] => {
@@ -40,15 +40,15 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
   intl
   }) => {
   const [auditParameterName, setAuditParameterName] = React.useState('');
-  const [auditParameterBrowser, setAuditParameterBrowser] = React.useState('')
+  const [auditParameterConfigurationId, setAuditParameterConfigurationId] = React.useState('')
   const [auditParameterNetworkShape, setAuditParameterNetworkShape] = React.useState('')
-  const [availableAuditParameters, setAvailableAuditParameters] = React.useState<Array<{label: string, id: string}>>([])
+  const [availableAuditParameters, setAvailableAuditParameters] = React.useState<Array<{label: string, uuid: string}>>([])
   const [isAddingMode, setAddingMode] = React.useState(false);
   const [nameInputRef, setNameInputFocus] = useFocus();
 
   const modelizeAvailableAuditParameters = (apiAvailableAuditParameters: ApiAvailableAuditParameters) => ({
     label: `${apiAvailableAuditParameters.location_label}. ${apiAvailableAuditParameters.browser}`,
-    id: apiAvailableAuditParameters.uuid
+    uuid: apiAvailableAuditParameters.uuid,
   });
 
   const fetchAvailableAuditParameters = () => {
@@ -68,22 +68,6 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
     [],
   );
 
-  const availableNetworkShape = [
-    { label: NetworkShapeEnum.CABLE, value: NetworkShapeEnum.CABLE },
-    { label: NetworkShapeEnum.DSL, value: NetworkShapeEnum.DSL },
-    { label: NetworkShapeEnum.THREE_G_SLOW, value: NetworkShapeEnum.THREE_G_SLOW },
-    { label: NetworkShapeEnum.THREE_G, value: NetworkShapeEnum.THREE_G },
-    { label: NetworkShapeEnum.THREE_G_FAST, value: NetworkShapeEnum.THREE_G_FAST },
-    { label: NetworkShapeEnum.FOUR_G, value: NetworkShapeEnum.FOUR_G },
-    { label: NetworkShapeEnum.LTE, value: NetworkShapeEnum.LTE },
-    { label: NetworkShapeEnum.EDGE, value: NetworkShapeEnum.EDGE },
-    { label: NetworkShapeEnum.TWO_G, value: NetworkShapeEnum.TWO_G },
-    { label: NetworkShapeEnum.DIAL, value: NetworkShapeEnum.DIAL },
-    { label: NetworkShapeEnum.FIOS, value: NetworkShapeEnum.FIOS },
-    { label: NetworkShapeEnum.NATIVE, value: NetworkShapeEnum.NATIVE },
-    { label: NetworkShapeEnum.CUSTOM, value: NetworkShapeEnum.CUSTOM },
-  ]
-
   React.useEffect(
     () => {
       setNameInputFocus();
@@ -92,20 +76,20 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
   );
 
   const handleBlur = () => {
-    if(!auditParameterName && !auditParameterNetworkShape && !auditParameterBrowser) {
+    if(!auditParameterName && !auditParameterNetworkShape && !auditParameterConfigurationId) {
       setAddingMode(false);
     }
 
-    if(auditParameterName && auditParameterBrowser && auditParameterNetworkShape) {
+    if(auditParameterName && auditParameterConfigurationId && auditParameterNetworkShape) {
       addAuditParameterToProjectRequest(
         projectId,
         auditParameterName,
-        auditParameterBrowser,
         auditParameterNetworkShape,
+        auditParameterConfigurationId,
       );
 
       setAuditParameterName('');
-      setAuditParameterBrowser('');
+      setAuditParameterConfigurationId('');
       setAuditParameterNetworkShape('');
       setAddingMode(false);
     }
@@ -116,7 +100,7 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
   }
 
   const handleBrowserChange = (e: any) => {
-    setAuditParameterBrowser(e.id)
+    setAuditParameterConfigurationId(e.uuid)
   }
 
   const handleNetworkShapeChange = (e: any) => {
@@ -151,7 +135,7 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
       />
       <Select
         value={availableAuditParameters.find(auditParametersOption => {
-          return auditParametersOption.id === auditParameterBrowser;
+          return auditParametersOption.uuid === auditParameterConfigurationId;
         })}
         onChange={handleBrowserChange}
         options={availableAuditParameters}
