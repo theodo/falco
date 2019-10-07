@@ -2,12 +2,21 @@ import { Add } from 'icons';
 import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
 import { NetworkShapeEnum } from 'redux/entities/auditParameters/types';
+import { makeGetRequest } from 'services/networking/request';
 import { colorUsage } from 'stylesheet';
+import { getSpacing } from 'stylesheet';
 import Select from '../../../../../components/Select/Select';
-import { AddAuditParameterButtonContainer, AddAuditParameterButtonLabel, AddBrowserInput, AddNameInput, AddNetworkShapeInput } from '../AuditParameterTable.style';
+import { AddAuditParameterButtonContainer, AddAuditParameterButtonLabel, AddNameInput } from '../AuditParameterTable.style';
 
 export interface  OwnProps {
   projectId: string,
+}
+
+export interface ApiAvailableAuditParameters {
+  uuid: string,
+  browser: string,
+  location_label: string,
+  location_group: string,
 }
 
 type Props = {
@@ -33,23 +42,46 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
   const [auditParameterName, setAuditParameterName] = React.useState('');
   const [auditParameterBrowser, setAuditParameterBrowser] = React.useState('')
   const [auditParameterNetworkShape, setAuditParameterNetworkShape] = React.useState('')
+  const [availableAuditParameters, setAvailableAuditParameters] = React.useState<Array<{label: string, id: string}>>([])
   const [isAddingMode, setAddingMode] = React.useState(false);
   const [nameInputRef, setNameInputFocus] = useFocus();
 
+  const modelizeAvailableAuditParameters = (apiAvailableAuditParameters: ApiAvailableAuditParameters) => ({
+    label: `${apiAvailableAuditParameters.location_label}. ${apiAvailableAuditParameters.browser}`,
+    id: apiAvailableAuditParameters.uuid
+  });
+
+  const fetchAvailableAuditParameters = () => {
+    const request = makeGetRequest('/api/projects/available_audit_parameters', true);
+    request
+      .then((response) => {
+        if(response) {
+          setAvailableAuditParameters(response.body.map((apiAvailableAuditParameters: ApiAvailableAuditParameters) => modelizeAvailableAuditParameters(apiAvailableAuditParameters)));
+        }
+      })
+  }
+
+  React.useEffect(
+    () => {
+      fetchAvailableAuditParameters();
+    },
+    [],
+  );
+
   const availableNetworkShape = [
-    { value: NetworkShapeEnum.CABLE, label: NetworkShapeEnum.CABLE },
-    { value: NetworkShapeEnum.DSL, label: NetworkShapeEnum.DSL },
-    { value: NetworkShapeEnum.THREE_G_SLOW, label: NetworkShapeEnum.THREE_G_SLOW },
-    { value: NetworkShapeEnum.THREE_G, label: NetworkShapeEnum.THREE_G },
-    { value: NetworkShapeEnum.THREE_G_FAST, label: NetworkShapeEnum.THREE_G_FAST },
-    { value: NetworkShapeEnum.FOUR_G, label: NetworkShapeEnum.FOUR_G },
-    { value: NetworkShapeEnum.LTE, label: NetworkShapeEnum.LTE },
-    { value: NetworkShapeEnum.EDGE, label: NetworkShapeEnum.EDGE },
-    { value: NetworkShapeEnum.TWO_G, label: NetworkShapeEnum.TWO_G },
-    { value: NetworkShapeEnum.DIAL, label: NetworkShapeEnum.DIAL },
-    { value: NetworkShapeEnum.FIOS, label: NetworkShapeEnum.FIOS },
-    { value: NetworkShapeEnum.NATIVE, label: NetworkShapeEnum.NATIVE },
-    { value: NetworkShapeEnum.CUSTOM, label: NetworkShapeEnum.CUSTOM },
+    { label: NetworkShapeEnum.CABLE, value: NetworkShapeEnum.CABLE },
+    { label: NetworkShapeEnum.DSL, value: NetworkShapeEnum.DSL },
+    { label: NetworkShapeEnum.THREE_G_SLOW, value: NetworkShapeEnum.THREE_G_SLOW },
+    { label: NetworkShapeEnum.THREE_G, value: NetworkShapeEnum.THREE_G },
+    { label: NetworkShapeEnum.THREE_G_FAST, value: NetworkShapeEnum.THREE_G_FAST },
+    { label: NetworkShapeEnum.FOUR_G, value: NetworkShapeEnum.FOUR_G },
+    { label: NetworkShapeEnum.LTE, value: NetworkShapeEnum.LTE },
+    { label: NetworkShapeEnum.EDGE, value: NetworkShapeEnum.EDGE },
+    { label: NetworkShapeEnum.TWO_G, value: NetworkShapeEnum.TWO_G },
+    { label: NetworkShapeEnum.DIAL, value: NetworkShapeEnum.DIAL },
+    { label: NetworkShapeEnum.FIOS, value: NetworkShapeEnum.FIOS },
+    { label: NetworkShapeEnum.NATIVE, value: NetworkShapeEnum.NATIVE },
+    { label: NetworkShapeEnum.CUSTOM, value: NetworkShapeEnum.CUSTOM },
   ]
 
   React.useEffect(
@@ -60,7 +92,7 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
   );
 
   const handleBlur = () => {
-    if(!auditParameterName) {
+    if(!auditParameterName && !auditParameterNetworkShape && !auditParameterBrowser) {
       setAddingMode(false);
     }
 
@@ -83,17 +115,19 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
     setAuditParameterName(e.currentTarget.value)
   }
 
-  const handleBrowserChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
-    setAuditParameterBrowser(e.currentTarget.value)
+  const handleBrowserChange = (e: any) => {
+    setAuditParameterBrowser(e.id)
   }
 
-  const handleNetworkShapeChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
-    setAuditParameterNetworkShape(e.currentTarget.value)
+  const handleNetworkShapeChange = (e: any) => {
+    setAuditParameterNetworkShape(e.value)
   }
 
   const activateAddingMode = () => {
     setAddingMode(true);
   }
+
+  const selectMargin = `0 ${getSpacing(2)} 0 0`
 
   return (
     <React.Fragment>
@@ -116,22 +150,26 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
         placeholder={intl.formatMessage({id: 'ProjectSettings.audit_parameter_name_placeholder'})}
       />
       <Select
-        value={auditParameterBrowser}
+        value={availableAuditParameters.find(auditParametersOption => {
+          return auditParametersOption.id === auditParameterBrowser;
+        })}
         onChange={handleBrowserChange}
-        options={[]}
+        options={availableAuditParameters}
         display={isAddingMode ? 'visible' : 'none'}
         width="40%"
-        margin="0 10px 0 0"
+        margin={selectMargin}
         onBlur={handleBlur}
         placeholder={intl.formatMessage({id: 'ProjectSettings.audit_parameter_browser_placeholder'})}
       />
       <Select
-        value={auditParameterNetworkShape}
+        value={availableNetworkShape.find(auditParametersOption => {
+          return auditParametersOption.value === auditParameterNetworkShape;
+        })}
         onChange={handleNetworkShapeChange}
         options={availableNetworkShape}
         display={isAddingMode ? 'visible' : 'none'}
         width="20%"
-        margin="0 10px 0 0"
+        margin={selectMargin}
         onBlur={handleBlur}
         placeholder={intl.formatMessage({id: 'ProjectSettings.audit_parameter_network_shape_placeholder'})}
       />

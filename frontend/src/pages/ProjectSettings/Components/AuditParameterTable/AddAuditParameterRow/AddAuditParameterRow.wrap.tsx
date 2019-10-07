@@ -6,8 +6,8 @@ import { addAuditParameterToProjectRequest } from 'redux/entities/projects';
 import { AddAuditParameterRow } from './AddAuditParameterRow';
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  addAuditParameterToProjectRequest: (projectId: string, auditParameterName: string) =>
-    dispatch(addAuditParameterToProjectRequest({ projectId, auditParameterName}))
+  addAuditParameterToProjectRequest: (projectId: string, auditParameterName: string, auditParameterNetworkShape: string) =>
+    dispatch(addAuditParameterToProjectRequest({ projectId, auditParameterName, auditParameterNetworkShape}))
 });
 
 export default connect(

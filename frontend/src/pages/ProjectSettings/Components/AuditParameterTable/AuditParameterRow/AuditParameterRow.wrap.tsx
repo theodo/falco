@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { editAuditParameterRequest } from 'redux/entities/auditParameters';
 import { getAuditParameters } from 'redux/entities/auditParameters/selectors';
-import { AuditParametersType } from 'redux/entities/auditParameters/types';
 import { deleteAuditParameterOfProjectRequest } from 'redux/entities/projects';
 import { RootState } from 'redux/types';
 import { AuditParameterRow, OwnProps } from './AuditParameterRow';
