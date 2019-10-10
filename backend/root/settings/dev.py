@@ -8,10 +8,6 @@ FERNET_KEYS = [os.environ.get("DB_CYPHER_KEY")]
 DEBUG = True
 INTERNAL_IPS = ["127.0.0.1", "172.16.210.1"]
 
-INSTALLED_APPS = INSTALLED_APPS + ["debug_toolbar", "django_extensions"]
-
-MIDDLEWARE = MIDDLEWARE + ["debug_toolbar.middleware.DebugToolbarMiddleware"]
-
 # Uploaded files storage
 MEDIA_ROOT = "/uploads/"
 MEDIA_URL_PATH = "uploads/"
@@ -31,10 +27,6 @@ LOGGING = {
     "disable_existing_loggers": False,
     "handlers": {"console": {"class": "logging.StreamHandler", "stream": sys.stdout}},
     "root": {"handlers": ["console"], "level": "INFO"},
-}
-
-DEBUG_TOOLBAR_CONFIG = {
-    "SHOW_TOOLBAR_CALLBACK": lambda request: request.META["SERVER_NAME"] != "testserver"
 }
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

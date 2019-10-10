@@ -13,6 +13,23 @@ RUN yarn build
 # Second stage: build base backend
 FROM python:3.7
 
+
+RUN apt-get update && apt-get install -y \
+  bash \
+  vim \
+  curl \
+  openssh-server \
+  openssh-client
+
+ADD ./.profile.d /app/.profile.d
+RUN chmod a+x /app/.profile.d/heroku-exec.sh
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+
+ADD ./sh-wrapper.sh /bin/sh-wrapper.sh
+RUN chmod a+x /bin/sh-wrapper.sh
+RUN rm /bin/sh && ln -s /bin/sh-wrapper.sh /bin/sh
+
+
 ENV DJANGO_SETTINGS_MODULE root.settings.prod
 ENV PYTHONPATH /code
 ENV CELERY_BROKER_URL sqs://

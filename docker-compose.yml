@@ -9,10 +9,8 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
 
   backend:
-    build: ./backend/Dockerfile.local
+    build: .
     command: python /code/manage.py rundebugserver 0.0.0.0:80
-    volumes:
-      - ./backend:/code
     ports:
       - "8000:80"
       - "9000:9000"
@@ -28,7 +26,7 @@ services:
     image: redis
 
   celeryworker:
-    build: ./backend/Dockerfile.local
+    build: .
     volumes:
       - ./backend:/code
     links:
@@ -41,7 +39,7 @@ services:
     command: python /code/manage.py celery
 
   celerybeat:
-    build: ./backend/Dockerfile.local
+    build: .
     volumes:
       - ./backend:/code
     links:
