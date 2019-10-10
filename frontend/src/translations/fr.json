@@ -251,6 +251,8 @@
       "add_member_success_message": "L'utilisateur a bien été ajouté au projet",
       "edit_page_success_message": "La page a bien été modifiée",
       "edit_project_details_success": "Le projet a bien été modifié",
+      "add_audit_parameter_to_project_success": "Le paramètre d'audit a bien été créé",
+      "edit_audit_parameter_success": "Le paramètre d'audit a bien été modifié",
       "add_page_success_message": "La page a bien été créée",
       "delete_page_success_message": "La page a bien été supprimée",
       "delete_page_confirm_question": "Voulez-vous vraiment supprimer la page ?"

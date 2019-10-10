@@ -4,6 +4,7 @@ import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
 import { makeDeleteRequest, makeGetRequest, makePostRequest, makePutRequest } from 'services/networking/request';
 import { ActionType, getType } from 'typesafe-actions';
 import { editAuditParameterError, editAuditParameterRequest, editAuditParameterSuccess } from './actions';
+import { modelizeAuditParametersById } from './modelizer';
 import { ApiAuditParametersType } from './types'
 
 function* editAuditParameter(action: ActionType<typeof editAuditParameterRequest>) {
@@ -18,7 +19,7 @@ function* editAuditParameter(action: ActionType<typeof editAuditParameterRequest
       configuration_id: action.payload.auditParameter.configuration_id
     }
   );
-  yield put(editAuditParameterSuccess());
+  yield put(editAuditParameterSuccess({ byId: modelizeAuditParametersById(auditParameterResponse)}));
   yield put(setProjectToastrDisplay({ toastrDisplay: 'editAuditParameterSuccess' }));
 };
 

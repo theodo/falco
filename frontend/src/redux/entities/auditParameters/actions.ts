@@ -1,5 +1,5 @@
 import { createAsyncAction, createStandardAction } from "typesafe-actions";
-import { AuditParametersType } from "./types";
+import { ApiAuditParametersType, AuditParametersType } from "./types";
 
 export const fetchAuditParametersAction = createAsyncAction(
     'auditParameters/FETCH_AUDITPARAMETERS_REQUEST',
@@ -11,7 +11,9 @@ export const editAuditParameterRequest = createStandardAction('auditParameters/E
     projectId: string;
     auditParameter: {name: string, uuid: string, configuration_id: string, network_shape: string};
   }>();
-  export const editAuditParameterSuccess = createStandardAction('auditParameters/EDIT_AUDIT_PARAMETER_SUCCESS')<void>();
+  export const editAuditParameterSuccess = createStandardAction('auditParameters/EDIT_AUDIT_PARAMETER_SUCCESS')<{
+    byId: Record<string, AuditParametersType>;
+  }>();
   export const editAuditParameterError = createStandardAction('auditParameters/EDIT_AUDIT_PARAMETER_ERROR')<{
     projectId: string;
     errorMessage: string;

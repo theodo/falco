@@ -44,7 +44,6 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
   intl
   }) => {
   const [auditParameterName, setAuditParameterName] = React.useState('');
-  const [auditParameterBrowser, setAuditParameterBrowser] = React.useState('');
   const [auditParameterNetworkShape, setAuditParameterNetworkShape] = React.useState('');
   const [availableAuditParameters, setAvailableAuditParameters] = React.useState<Array<{label: string, uuid: string}>>([])
   const [auditParameterConfigurationId, setAuditParameterConfigurationId] = React.useState('')
@@ -76,7 +75,7 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
     () => {
       if(auditParameter) {
         setAuditParameterName(auditParameter.name);
-        setAuditParameterBrowser(auditParameter.configurationId);
+        setAuditParameterConfigurationId(auditParameter.configurationId);
         setAuditParameterNetworkShape(auditParameter.networkShape);
       }
     },
@@ -84,13 +83,13 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
     );
 
   const handleBlur = () => {
-    if(auditParameter && (auditParameterName !== auditParameter.name || auditParameterBrowser !== auditParameter.configurationId || auditParameter.networkShape !== auditParameterNetworkShape)) {
+    if(auditParameter && (auditParameterName !== auditParameter.name || auditParameterConfigurationId !== auditParameter.configurationId || auditParameter.networkShape !== auditParameterNetworkShape)) {
       editAuditParameterRequest(
         projectId,
         {
           uuid: auditParameter.uuid,
           name: auditParameterName,
-          configuration_id: auditParameterBrowser,
+          configuration_id: auditParameterConfigurationId,
           network_shape: auditParameterNetworkShape,
         })
       }
@@ -131,7 +130,7 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
       />
       <Select
         value={availableAuditParameters.find(auditParametersOption => {
-          return auditParametersOption.uuid === auditParameterBrowser;
+          return auditParametersOption.uuid === auditParameterConfigurationId;
         })}
         onChange={handleBrowserChange}
         options={availableAuditParameters}

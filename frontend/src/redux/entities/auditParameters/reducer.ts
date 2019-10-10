@@ -1,13 +1,14 @@
 import { AnyAction } from "redux";
 import { ActionType, getType } from "typesafe-actions";
 import { addAuditParameter } from "../projects/actions"
-import { fetchAuditParametersAction } from "./actions";
+import { editAuditParameterSuccess, fetchAuditParametersAction } from "./actions";
 import { AuditParametersType } from "./types";
 
 
 export type AuditParametersAction = ActionType<
 typeof fetchAuditParametersAction |
-typeof addAuditParameter
+typeof addAuditParameter |
+typeof editAuditParameterSuccess
 >;
 
 export type AuditParametersState = Readonly<{
@@ -30,6 +31,14 @@ const reducer = (state: AuditParametersState = initialState, action: AnyAction) 
                 }
             };
         case getType(addAuditParameter):
+            return {
+                ...state,
+                byId: {
+                    ...state.byId,
+                    ...typedAction.payload.byId,
+                }
+            };
+        case getType(editAuditParameterSuccess):
             return {
                 ...state,
                 byId: {
