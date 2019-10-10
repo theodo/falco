@@ -7,7 +7,6 @@ setup:
 build:
   docker:
     web: Dockerfile.heroku.backend
-    # static: frontend/Dockerfile.heroku.frontend
     # celeryworker: devops/deployment/celeryworker/Dockerfile
     # celerybeat: devops/deployment/celerybeat/Dockerfile
 release:
