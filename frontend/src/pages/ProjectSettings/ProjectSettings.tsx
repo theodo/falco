@@ -146,9 +146,21 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
               );
               break;
             case "addAuditParameterError":
-              toastr.success(
+              toastr.error(
                 intl.formatMessage({'id': 'Toastr.ProjectSettings.error_title'}),
                 intl.formatMessage({'id': 'Toastr.ProjectSettings.error_message'}),
+              );
+              break;
+            case "editAuditParameterSuccess":
+              toastr.success(
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.add_audit_parameter_to_project_success'}),
+              );
+              break;
+            case "editAuditParameterError":
+              toastr.error(
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.edit_audit_parameter_success'}),
               );
               break;
           case "addMemberError":
@@ -327,7 +339,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
               <Style.MemberEmail>{projectMember.emailAddress}</Style.MemberEmail>
               <Style.MemberAdminBadgeContainer>
                 {isUserAdminOfProject(currentUser, project)
-                  ? <ToggleButton 
+                  ? <ToggleButton
                     onChange={() => editMemberOfProjectRequest(project.uuid, projectMember.id, !projectMember.isAdmin)}
                     checked={projectMember.isAdmin}
                     disabled={projectMember.username === currentUser.username}
@@ -340,7 +352,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
                   />}
               </Style.MemberAdminBadgeContainer>
               <Style.MemberAdminDeleteContainer>
-                  {isUserAdminOfProject(currentUser, project) && projectMember.username !== currentUser.username && 
+                  {isUserAdminOfProject(currentUser, project) && projectMember.username !== currentUser.username &&
                     (<Style.MemberAdminDeleteButton onClick={() => removeMemberOfProjectRequest(project.uuid, projectMember.id)}>
                       <Close
                         color={colorUsage.projectSettingsIconColor}

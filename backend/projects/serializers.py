@@ -88,19 +88,27 @@ class ProjectAuditParametersSerializer(serializers.ModelSerializer):
     # network_shape = serializers.SerializerMethodField("resolve_network_shape")
     location = serializers.SerializerMethodField("resolve_location")
     browser = serializers.SerializerMethodField("resolve_browser")
+    location_label = serializers.SerializerMethodField("resolve_location_label")
+    configuration_uuid = serializers.SerializerMethodField("resolve_configuration")
 
     def resolve_network_shape(self, obj):
         return NetworkShapeOptions[obj.network_shape].value
 
+    def resolve_configuration(self, obj):
+        return obj.configuration.uuid
+
     def resolve_location(self, obj):
         return obj.configuration.location
+
+    def resolve_location_label(self, obj):
+        return obj.configuration.location_label
 
     def resolve_browser(self, obj):
         return obj.configuration.browser
 
     class Meta:
         model = ProjectAuditParameters
-        fields = ("uuid", "name", "location", "browser", "network_shape")
+        fields = ("uuid", "name", "location_label", "browser", "network_shape", "location", "configuration_uuid")
 
 
 class ProjectMemberRoleSerializer(serializers.ModelSerializer):

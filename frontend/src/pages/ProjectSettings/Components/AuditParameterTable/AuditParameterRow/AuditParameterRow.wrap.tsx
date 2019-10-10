@@ -12,7 +12,7 @@ const mapStateToProps = (state: RootState, props: OwnProps) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  editAuditParameterRequest: (projectId: string, auditParameter: {name: string, uuid: string}) => dispatch(editAuditParameterRequest({ projectId, auditParameter})),
+  editAuditParameterRequest: (projectId: string, auditParameter: {name: string, uuid: string, configuration_id: string, network_shape: string}) => dispatch(editAuditParameterRequest({ projectId, auditParameter })),
   deleteAuditParameterOfProjectRequest: (projectId: string, auditParameterId: string) => dispatch(deleteAuditParameterOfProjectRequest({ projectId, auditParameterId }))
 });
 
