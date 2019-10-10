@@ -3,9 +3,9 @@ cd /code
 SECRET_KEY=itdoesntreallymatter LOG_PATH=/var/log/falco/django.log python ./manage.py collectstatic
 
 # Migrate
-python ./manage.py migrate --noinput
+SECRET_KEY=itdoesntreallymatter python ./manage.py migrate --noinput
 
 # Create cache table
-python ./manage.py createcachetable
+SECRET_KEY=itdoesntreallymatter python ./manage.py createcachetable
 
 
