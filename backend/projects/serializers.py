@@ -1,5 +1,4 @@
 from projects.models import (
-    NetworkShapeOptions,
     Page,
     Project,
     ProjectAuditParameters,

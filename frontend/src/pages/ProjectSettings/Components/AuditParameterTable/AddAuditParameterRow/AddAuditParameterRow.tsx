@@ -70,7 +70,6 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
   }
 
   const handleBrowserChange = (e: any) => {
-    debugger
     setAuditParameterConfigurationId(e.uuid)
   }
 

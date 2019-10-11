@@ -167,11 +167,8 @@ def project_audit_parameter_list(request, project_uuid):
     data = JSONParser().parse(request)
     serializer = ProjectAuditParametersSerializer(data=data)
     if serializer.is_valid():
-        configuration = AvailableAuditParameters.objects.get(
-            uuid=data["configuration_id"]
-        )
         audit_parameter = ProjectAuditParameters.objects.create(
-            project=project, configuration=configuration, **serializer.validated_data
+            project=project, **serializer.validated_data
         )
         audit_parameter.save()
         serializer = ProjectAuditParametersSerializer(audit_parameter)

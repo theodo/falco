@@ -7,7 +7,7 @@ export const modelizeAuditParameters = (apiAuditParameters: ApiAuditParametersTy
     location: apiAuditParameters.location_label,
     browser: apiAuditParameters.browser,
     networkShape: apiAuditParameters.network_shape,
-    configurationId: apiAuditParameters.configuration_uuid,
+    configurationId: apiAuditParameters.configuration,
 });
 
 export const modelizeAuditParametersById = (apiAuditParameters: ApiAuditParametersType): Record<string, AuditParametersType> => ({
@@ -17,7 +17,7 @@ export const modelizeAuditParametersById = (apiAuditParameters: ApiAuditParamete
         location: apiAuditParameters.location_label,
         browser: apiAuditParameters.browser,
         networkShape: apiAuditParameters.network_shape,
-        configurationId: apiAuditParameters.configuration_uuid,
+        configurationId: apiAuditParameters.configuration,
     }
 });
 

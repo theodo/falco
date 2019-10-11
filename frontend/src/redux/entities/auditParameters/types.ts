@@ -14,5 +14,5 @@ export interface ApiAuditParametersType {
     location_label: string;
     browser: string;
     network_shape: string;
-    configuration_uuid: string;
+    configuration: string;
 }
