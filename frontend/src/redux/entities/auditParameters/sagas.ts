@@ -16,7 +16,7 @@ function* editAuditParameter(action: ActionType<typeof editAuditParameterRequest
     {
       name: action.payload.auditParameter.name,
       network_shape: action.payload.auditParameter.network_shape,
-      configuration_id: action.payload.auditParameter.configuration_id
+      configuration: action.payload.auditParameter.configuration_id
     }
   );
   yield put(editAuditParameterSuccess({ byId: modelizeAuditParametersById(auditParameterResponse)}));

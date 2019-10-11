@@ -84,18 +84,16 @@ class ScriptSerializer(serializers.ModelSerializer):
         fields = ("uuid", "name", "latest_audit_status_histories")
 
 
+class AvailableAuditParameterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AvailableAuditParameters
+        fields = ("uuid", "browser", "location_label", "location_group")
+
+
 class ProjectAuditParametersSerializer(serializers.ModelSerializer):
-    # network_shape = serializers.SerializerMethodField("resolve_network_shape")
     location = serializers.SerializerMethodField("resolve_location")
     browser = serializers.SerializerMethodField("resolve_browser")
     location_label = serializers.SerializerMethodField("resolve_location_label")
-    configuration_uuid = serializers.SerializerMethodField("resolve_configuration")
-
-    def resolve_network_shape(self, obj):
-        return NetworkShapeOptions[obj.network_shape].value
-
-    def resolve_configuration(self, obj):
-        return obj.configuration.uuid
 
     def resolve_location(self, obj):
         return obj.configuration.location
@@ -108,7 +106,15 @@ class ProjectAuditParametersSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProjectAuditParameters
-        fields = ("uuid", "name", "location_label", "browser", "network_shape", "location", "configuration_uuid")
+        fields = (
+            "uuid",
+            "name",
+            "location_label",
+            "browser",
+            "network_shape",
+            "location",
+            "configuration",
+        )
 
 
 class ProjectMemberRoleSerializer(serializers.ModelSerializer):
@@ -142,9 +148,3 @@ class ProjectSerializer(DynamicFieldsModelSerializer):
             "latest_audit_at",
             "wpt_api_key",
         )
-
-
-class AvailableAuditParameterSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AvailableAuditParameters
-        fields = ("uuid", "browser", "location_label", "location_group")

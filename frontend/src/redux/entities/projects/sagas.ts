@@ -298,7 +298,7 @@ function* addAuditParameterToProject(action: ActionType<typeof addAuditParameter
     endpoint,
     true,
     {
-      configuration_id: action.payload.auditParameterConfigurationId,
+      configuration: action.payload.auditParameterConfigurationId,
       network_shape: action.payload.auditParameterNetworkShape,
       name: action.payload.auditParameterName,
     },
