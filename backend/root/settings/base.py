@@ -130,6 +130,6 @@ USE_TZ = True
 STATIC_URL = "/static/"
 # Place static in the same location as webpack build files
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
-STATICFILES_DIRS = []
+STATICFILES_DIRS = ["/code/staticfiles"]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"

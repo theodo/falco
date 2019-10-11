@@ -10,7 +10,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 FERNET_KEYS = [os.environ.get("DB_CYPHER_KEY")]
 DEBUG = False
 
-ALLOWED_HOSTS = ["getfal.co", "staging.getfal.co"]
+ALLOWED_HOSTS = ["falco-nicolasgo.herokuapp.com"]
 
 if "ALLOWED_HOST" in os.environ:
     ALLOWED_HOSTS.append(os.environ.get("ALLOWED_HOST"))
