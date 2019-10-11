@@ -27,6 +27,9 @@ import {
   addPageToProjectError,
   addPageToProjectRequest,
   addPageToProjectSuccess,
+  deleteAuditParameterOfProjectError,
+  deleteAuditParameterOfProjectRequest,
+  deleteAuditParameterOfProjectSuccess,
   deleteMemberOfProjectError,
   deleteMemberOfProjectRequest,
   deleteMemberOfProjectSuccess,
@@ -317,6 +320,26 @@ function* addAuditParameterToProjectFailedHandler(error: Error, actionPayload: R
   yield put(setProjectToastrDisplay({ toastrDisplay: 'addAuditParameterError' }));
 };
 
+function* deleteAuditParameterOfProject(action: ActionType<typeof deleteAuditParameterOfProjectRequest>) {
+  const endpoint = `/api/projects/${action.payload.projectId}/audit_parameters/${action.payload.auditParameterId}`;
+  yield call(
+    makeDeleteRequest,
+    endpoint,
+    true,
+  );
+  yield put(deleteAuditParameterOfProjectSuccess({ projectId: action.payload.projectId, auditParameterId: action.payload.auditParameterId }));
+  yield put(setProjectToastrDisplay({ toastrDisplay: 'deleteAuditParameterSuccess' }));
+};
+
+function* deleteAuditParameterOfProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
+  yield put(deleteAuditParameterOfProjectError({
+    projectId: actionPayload.projectId,
+    errorMessage: error.message
+  }));
+  yield put(setProjectToastrDisplay({ toastrDisplay: 'deleteAuditParameterError' }));
+};
+
+
 export default function* projectsSaga() {
   yield takeEvery(
     getType(fetchProjectRequest),
@@ -361,5 +384,9 @@ export default function* projectsSaga() {
   yield takeEvery(
     getType(addAuditParameterToProjectRequest),
     handleAPIExceptions(addAuditParameterToProject, addAuditParameterToProjectFailedHandler),
+  );
+  yield takeEvery(
+    getType(deleteAuditParameterOfProjectRequest),
+    handleAPIExceptions(deleteAuditParameterOfProject, deleteAuditParameterOfProjectFailedHandler),
   );
 };

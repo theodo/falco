@@ -157,12 +157,14 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
                 intl.formatMessage({'id': 'Toastr.ProjectSettings.edit_audit_parameter_success'}),
               );
               break;
-            case "editAuditParameterError":
-              toastr.error(
-                intl.formatMessage({'id': 'Toastr.ProjectSettings.error_title'}),
-                intl.formatMessage({'id': 'Toastr.ProjectSettings.error_message'}),
+            case "deleteAuditParameterSuccess":
+              toastr.success(
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.delete_audit_parameter_success'}),
               );
               break;
+          case "deleteAuditParameterError":
+          case "editAuditParameterError":
           case "addMemberError":
           case "editPageError":
           case "addPageError":

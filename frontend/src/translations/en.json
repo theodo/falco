@@ -255,7 +255,8 @@
       "add_audit_parameter_to_project_success": "The audit parameter has been created successfully",
       "edit_audit_parameter_success": "The audit parameter has been edited successfully",
       "delete_page_success_message": "The page has been deleted successfully",
-      "delete_page_confirm_question": "Do you really want to delete the page ?"
+      "delete_page_confirm_question": "Do you really want to delete the page?",
+      "delete_auditParameter_confirm_question": "Do you really want to delete the audit parameter?"
     }
   },
   "components": {

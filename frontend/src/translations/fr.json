@@ -255,7 +255,8 @@
       "edit_audit_parameter_success": "Le paramètre d'audit a bien été modifié",
       "add_page_success_message": "La page a bien été créée",
       "delete_page_success_message": "La page a bien été supprimée",
-      "delete_page_confirm_question": "Voulez-vous vraiment supprimer la page ?"
+      "delete_page_confirm_question": "Voulez-vous vraiment supprimer la page ?",
+      "delete_auditParameter_confirm_question": "Voulez-vous vraiment supprimer le paramètre d'audit ?"
     }
   },
   "components": {
