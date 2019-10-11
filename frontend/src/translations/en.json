@@ -100,7 +100,7 @@
     "name": "Project name",
     "wpt_key": "WebPageTest API Key",
     "project_audit_parameters": "Project environments",
-    "audit_parameter_name": "Nom de l'environnement",
+    "audit_parameter_name": "Environment name",
     "configuration": "Configuration",
     "project_members": "Project members",
     "network_type": "Network type",
