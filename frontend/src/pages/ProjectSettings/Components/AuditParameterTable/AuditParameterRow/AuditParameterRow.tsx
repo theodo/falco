@@ -8,7 +8,7 @@ import { AuditParametersType } from 'redux/entities/auditParameters/types';
 import { makeGetRequest } from 'services/networking/request';
 import { colorUsage } from 'stylesheet';
 import { getSpacing } from 'stylesheet';
-import { AuditParameterDeleteButton, AuditParameterDeleteContainer, EditBrowserInput, EditNameInput, EditNetworkShapeInput } from '../AuditParameterTable.style';
+import { AuditParameterDeleteButton, AuditParameterDeleteContainer, EditNameInput } from '../AuditParameterTable.style';
 
 export interface  OwnProps {
   auditParameterId: string,

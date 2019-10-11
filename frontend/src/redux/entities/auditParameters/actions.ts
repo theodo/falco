@@ -1,5 +1,5 @@
 import { createAsyncAction, createStandardAction } from "typesafe-actions";
-import { ApiAuditParametersType, AuditParametersType } from "./types";
+import { AuditParametersType } from "./types";
 
 export const fetchAuditParametersAction = createAsyncAction(
     'auditParameters/FETCH_AUDITPARAMETERS_REQUEST',
