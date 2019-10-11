@@ -3,12 +3,11 @@ import Close from 'icons/Close';
 import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
 import { toastr } from 'react-redux-toastr';
-import { availableNetworkShape } from 'redux/entities/auditParameters/types'
 import { AuditParametersType } from 'redux/entities/auditParameters/types';
-import { makeGetRequest } from 'services/networking/request';
 import { colorUsage } from 'stylesheet';
 import { getSpacing } from 'stylesheet';
 import { AuditParameterDeleteButton, AuditParameterDeleteContainer, EditNameInput } from '../AuditParameterTable.style';
+import { availableNetworkShape, useAvailableAuditParameters } from '../common'
 
 export interface  OwnProps {
   auditParameterId: string,
@@ -16,23 +15,11 @@ export interface  OwnProps {
   disabled: boolean,
 }
 
-export interface ApiAvailableAuditParameters {
-  uuid: string,
-  browser: string,
-  location_label: string,
-  location_group: string,
-}
-
 type Props = {
   auditParameter?: AuditParametersType | null,
   editAuditParameterRequest: (projectId: string, auditParameter: {name: string, uuid: string, configuration_id: string, network_shape: string}) => void,
   deleteAuditParameterOfProjectRequest: (projectId: string, auditParameterId: string) => void;
 } & OwnProps & InjectedIntlProps;
-
-interface NetworkShapeOptionType {
-  label: string,
-  value: string,
-}
 
 export const AuditParameterRow: React.FunctionComponent<Props> = ({
   auditParameterId,
@@ -45,31 +32,8 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
   }) => {
   const [auditParameterName, setAuditParameterName] = React.useState('');
   const [auditParameterNetworkShape, setAuditParameterNetworkShape] = React.useState('');
-  const [availableAuditParameters, setAvailableAuditParameters] = React.useState<Array<{label: string, uuid: string}>>([])
   const [auditParameterConfigurationId, setAuditParameterConfigurationId] = React.useState('')
-
-
-  const modelizeAvailableAuditParameters = (apiAvailableAuditParameters: ApiAvailableAuditParameters) => ({
-    label: `${apiAvailableAuditParameters.location_label}. ${apiAvailableAuditParameters.browser}`,
-    uuid: apiAvailableAuditParameters.uuid,
-  });
-
-  const fetchAvailableAuditParameters = () => {
-    const request = makeGetRequest('/api/projects/available_audit_parameters', true);
-    request
-      .then((response) => {
-        if(response) {
-          setAvailableAuditParameters(response.body.map((apiAvailableAuditParameters: ApiAvailableAuditParameters) => modelizeAvailableAuditParameters(apiAvailableAuditParameters)));
-        }
-      })
-  }
-
-  React.useEffect(
-    () => {
-      fetchAvailableAuditParameters();
-    },
-    [],
-  );
+  const availableAuditParameters = useAvailableAuditParameters();
 
   React.useEffect(
     () => {

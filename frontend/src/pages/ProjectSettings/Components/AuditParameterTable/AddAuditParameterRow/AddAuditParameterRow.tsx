@@ -1,22 +1,14 @@
 import { Add } from 'icons';
 import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
-import { availableNetworkShape } from 'redux/entities/auditParameters/types'
-import { makeGetRequest } from 'services/networking/request';
 import { colorUsage } from 'stylesheet';
 import { getSpacing } from 'stylesheet';
 import Select from '../../../../../components/Select/Select';
 import { AddAuditParameterButtonContainer, AddAuditParameterButtonLabel, AddNameInput } from '../AuditParameterTable.style';
+import { availableNetworkShape, useAvailableAuditParameters } from '../common'
 
 export interface  OwnProps {
   projectId: string,
-}
-
-export interface ApiAvailableAuditParameters {
-  uuid: string,
-  browser: string,
-  location_label: string,
-  location_group: string,
 }
 
 type Props = {
@@ -42,31 +34,9 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
   const [auditParameterName, setAuditParameterName] = React.useState('');
   const [auditParameterConfigurationId, setAuditParameterConfigurationId] = React.useState('')
   const [auditParameterNetworkShape, setAuditParameterNetworkShape] = React.useState('')
-  const [availableAuditParameters, setAvailableAuditParameters] = React.useState<Array<{label: string, uuid: string}>>([])
   const [isAddingMode, setAddingMode] = React.useState(false);
   const [nameInputRef, setNameInputFocus] = useFocus();
-
-  const modelizeAvailableAuditParameters = (apiAvailableAuditParameters: ApiAvailableAuditParameters) => ({
-    label: `${apiAvailableAuditParameters.location_label}. ${apiAvailableAuditParameters.browser}`,
-    uuid: apiAvailableAuditParameters.uuid,
-  });
-
-  const fetchAvailableAuditParameters = () => {
-    const request = makeGetRequest('/api/projects/available_audit_parameters', true);
-    request
-      .then((response) => {
-        if(response) {
-          setAvailableAuditParameters(response.body.map((apiAvailableAuditParameters: ApiAvailableAuditParameters) => modelizeAvailableAuditParameters(apiAvailableAuditParameters)));
-        }
-      })
-  }
-
-  React.useEffect(
-    () => {
-      fetchAvailableAuditParameters();
-    },
-    [],
-  );
+  const availableAuditParameters = useAvailableAuditParameters();
 
   React.useEffect(
     () => {
@@ -100,6 +70,7 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
   }
 
   const handleBrowserChange = (e: any) => {
+    debugger
     setAuditParameterConfigurationId(e.uuid)
   }
 
