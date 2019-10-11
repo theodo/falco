@@ -105,7 +105,7 @@
     "network_type": "Type de réseau",
     "audit_parameter_name_placeholder": "Nom",
     "audit_parameter_network_shape_placeholder": "Type de réseau",
-    "audit_parameter_browser_placeholder": "Configuration",
+    "audit_parameter_configuration_placeholder": "Configuration",
     "add_audit_parameter": "Ajouter un paramètre d'audit au projet",
     "project_members": "Membres du projet",
     "pages": "Pages du projet",

@@ -106,7 +106,7 @@
     "network_type": "Network type",
     "audit_parameter_name_placeholder": "Name",
     "audit_parameter_network_shape_placeholder": "Network shape",
-    "audit_parameter_browser_placeholder": "Configuration",
+    "audit_parameter_configuration_placeholder": "Configuration",
     "add_audit_parameter": "Add audit parameter to project",
     "pages": "Pages",
     "page_name": "Page name",

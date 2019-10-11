@@ -69,7 +69,7 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
     setAuditParameterName(e.currentTarget.value)
   }
 
-  const handleBrowserChange = (e: any) => {
+  const handleConfigurationChange = (e: any) => {
     setAuditParameterConfigurationId(e.uuid)
   }
 
@@ -107,13 +107,13 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
         value={availableAuditParameters.find(auditParametersOption => {
           return auditParametersOption.uuid === auditParameterConfigurationId;
         })}
-        onChange={handleBrowserChange}
+        onChange={handleConfigurationChange}
         options={availableAuditParameters}
         display={isAddingMode ? 'visible' : 'none'}
         width="40%"
         margin={selectMargin}
         onBlur={handleBlur}
-        placeholder={intl.formatMessage({id: 'ProjectSettings.audit_parameter_browser_placeholder'})}
+        placeholder={intl.formatMessage({id: 'ProjectSettings.audit_parameter_configuration_placeholder'})}
       />
       <Select
         value={availableNetworkShape.find(auditParametersOption => {
