@@ -101,6 +101,8 @@
     "wpt_key": "WebPageTest API Key",
     "project_audit_parameters": "Project environments",
     "scripts": "Project's scripts",
+    "script": "Script",
+    "script_name": "Script's name",
     "audit_parameter_name": "Environment name",
     "configuration": "Configuration",
     "project_members": "Project members",

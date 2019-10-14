@@ -21,6 +21,7 @@ import AuditParameterRow, { AddAuditParameterRow } from './Components/AuditParam
 import PageRow, { PageRowHeader } from './Components/PageTable';
 import { AddPageRow } from './Components/PageTable';
 import ProjectDetailsInput from './Components/ProjectDetailsInput';
+import { ScriptTableHeader } from './Components/ScriptTable'
 import Style from './ProjectSettings.style';
 
 export type OwnProps = {} & RouteComponentProps<{
@@ -342,6 +343,11 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
       <Style.PageSubTitle>
         <FormattedMessage id="ProjectSettings.scripts"/>
       </Style.PageSubTitle>
+      <Style.ProjectSettingsBlock>
+        <Style.ElementContainer>
+          <ScriptTableHeader/>
+        </Style.ElementContainer>
+      </Style.ProjectSettingsBlock>
       <Style.PageSubTitle>
         <FormattedMessage id="ProjectSettings.project_members"/>
       </Style.PageSubTitle>

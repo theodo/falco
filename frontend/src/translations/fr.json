@@ -101,6 +101,8 @@
     "wpt_key": "Clé API WebPageTest",
     "project_audit_parameters": "Environnement du projet",
     "scripts": "Scripts du projet",
+    "script": "Script",
+    "script_name": "Nom du script",
     "audit_parameter_name": "Nom de l'environnement",
     "configuration": "Configuration",
     "network_type": "Type de réseau",
