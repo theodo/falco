@@ -18,7 +18,7 @@ export interface  OwnProps {
 type Props = {
   auditParameter?: AuditParametersType | null,
   editAuditParameterRequest: (projectId: string, auditParameter: {name: string, uuid: string, configuration_id: string, network_shape: string}) => void,
-  deleteAuditParameterOfProjectRequest: (projectId: string, auditParameterId: string) => void;
+  deleteAuditParameterFromProjectRequest: (projectId: string, auditParameterId: string) => void;
 } & OwnProps & InjectedIntlProps;
 
 export const AuditParameterRow: React.FunctionComponent<Props> = ({
@@ -27,7 +27,7 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
   projectId,
   editAuditParameterRequest,
   disabled,
-  deleteAuditParameterOfProjectRequest,
+  deleteAuditParameterFromProjectRequest,
   intl
   }) => {
   const [auditParameterName, setAuditParameterName] = React.useState('');
@@ -74,7 +74,7 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
   const handleAuditParameterDeletion = (currentProjectId: string, targetAuditParameterId: string) => {
     toastr.confirm(intl.formatMessage({ id: 'Toastr.ProjectSettings.delete_auditParameter_confirm_question'}),
     {
-      onOk: () => deleteAuditParameterOfProjectRequest(currentProjectId, targetAuditParameterId)
+      onOk: () => deleteAuditParameterFromProjectRequest(currentProjectId, targetAuditParameterId)
     })
   }
 

@@ -4,7 +4,7 @@ import {
   addAuditParameterToProjectSuccess,
   addMemberToProjectSuccess,
   addPageToProjectSuccess,
-  deleteAuditParameterOfProjectSuccess,
+  deleteAuditParameterFromProjectSuccess,
   deleteMemberOfProjectSuccess,
   deletePageOfProjectSuccess,
   editMemberOfProjectSuccess,
@@ -28,7 +28,7 @@ export type ProjectsAction = ActionType<
   typeof setProjectToastrDisplay |
   typeof editProjectDetailsSuccess |
   typeof addAuditParameterToProjectSuccess |
-  typeof deleteAuditParameterOfProjectSuccess
+  typeof deleteAuditParameterFromProjectSuccess
 >;
 
 export type ProjectsState = Readonly<{
@@ -184,7 +184,7 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
           }
         },
       };
-    case getType(deleteAuditParameterOfProjectSuccess):
+    case getType(deleteAuditParameterFromProjectSuccess):
       if(!state.byId) { return state };
 
       return {

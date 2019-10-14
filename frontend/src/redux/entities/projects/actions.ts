@@ -116,15 +116,15 @@ export const addAuditParameterToProjectError = createStandardAction('projects/AD
   projectId: string;
   errorMessage: string;
 }>();
-export const deleteAuditParameterOfProjectRequest = createStandardAction('projects/DELETE_AUDIT_PARAMETER_TO_PROJECT_REQUEST')<{
+export const deleteAuditParameterFromProjectRequest = createStandardAction('projects/DELETE_AUDIT_PARAMETER_TO_PROJECT_REQUEST')<{
   projectId: string;
   auditParameterId: string;
 }>();
-export const deleteAuditParameterOfProjectSuccess = createStandardAction('projects/DELETE_AUDIT_PARAMETER_TO_PROJECT_SUCCESS')<{
+export const deleteAuditParameterFromProjectSuccess = createStandardAction('projects/DELETE_AUDIT_PARAMETER_TO_PROJECT_SUCCESS')<{
   projectId: string;
   auditParameterId: string;
 }>();
-export const deleteAuditParameterOfProjectError = createStandardAction('projects/DELETE_AUDIT_PARAMETER_TO_PROJECT_ERROR')<{
+export const deleteAuditParameterFromProjectError = createStandardAction('projects/DELETE_AUDIT_PARAMETER_TO_PROJECT_ERROR')<{
   projectId: string;
   errorMessage: string;
 }>();
@@ -154,7 +154,7 @@ export default {
   addAuditParameterToProjectRequest,
   addAuditParameterToProjectSuccess,
   addAuditParameter,
-  deleteAuditParameterOfProjectRequest,
-  deleteAuditParameterOfProjectError,
-  deleteAuditParameterOfProjectSuccess,
+  deleteAuditParameterFromProjectRequest,
+  deleteAuditParameterFromProjectError,
+  deleteAuditParameterFromProjectSuccess,
 };

@@ -2,8 +2,7 @@ import Select from 'components/Select/Select';
 import { Add } from 'icons';
 import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
-import { colorUsage } from 'stylesheet';
-import { getSpacing } from 'stylesheet';
+import { colorUsage, getSpacing } from 'stylesheet';
 import { AddAuditParameterButtonContainer, AddAuditParameterButtonLabel, AddNameInput } from '../AuditParameterTable.style';
 import { availableNetworkShape, useAvailableAuditParameters } from '../common'
 

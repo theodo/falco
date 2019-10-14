@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { editAuditParameterRequest } from 'redux/entities/auditParameters';
 import { getAuditParameters } from 'redux/entities/auditParameters/selectors';
-import { deleteAuditParameterOfProjectRequest } from 'redux/entities/projects';
+import { deleteAuditParameterFromProjectRequest } from 'redux/entities/projects';
 import { RootState } from 'redux/types';
 import { AuditParameterRow, OwnProps } from './AuditParameterRow';
 
@@ -13,7 +13,7 @@ const mapStateToProps = (state: RootState, props: OwnProps) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   editAuditParameterRequest: (projectId: string, auditParameter: {name: string, uuid: string, configuration_id: string, network_shape: string}) => dispatch(editAuditParameterRequest({ projectId, auditParameter })),
-  deleteAuditParameterOfProjectRequest: (projectId: string, auditParameterId: string) => dispatch(deleteAuditParameterOfProjectRequest({ projectId, auditParameterId }))
+  deleteAuditParameterFromProjectRequest: (projectId: string, auditParameterId: string) => dispatch(deleteAuditParameterFromProjectRequest({ projectId, auditParameterId }))
 });
 
 export default connect(
