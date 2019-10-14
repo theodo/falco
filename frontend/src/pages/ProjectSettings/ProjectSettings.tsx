@@ -167,7 +167,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
 
     return {
       value: user.id,
-      label: user.username + (memberInProject ? intl.formatMessage({ id: 'ProjectSettings.member_in_project'}) : ''),
+      label: `${user.username} - ${user.emailAddress}` + (memberInProject ? intl.formatMessage({ id: 'ProjectSettings.member_in_project'}) : ''),
       disabled: memberInProject,
     }
   }).sort((a, b) => +a.disabled - +b.disabled); // display the disabled elements at the end :
