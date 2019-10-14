@@ -14,12 +14,8 @@ FROM python:3.7-alpine AS backend
 RUN apk add --no-cache vim curl openssh-server postgresql-dev  gcc python3-dev musl-dev libffi-dev openssl-dev libressl-dev curl-dev bash
 
 ADD ./.profile.d /app/.profile.d
-ADD ./sh-wrapper.sh /bin/sh-wrapper.sh
 
-RUN chmod a+x /app/.profile.d/heroku-exec.sh && \
-  chmod a+x /bin/sh-wrapper.sh && \
-  rm /bin/sh && \
-  ln -s /bin/sh-wrapper.sh /bin/sh
+RUN chmod a+x /app/.profile.d/heroku-exec.sh
 
 ENV DJANGO_SETTINGS_MODULE root.settings.prod
 ENV PYTHONPATH /code
@@ -43,4 +39,5 @@ RUN mkdir -p /var/log/falco && \
  mkdir -p /code/static && \
  mkdir -p /code/staticfiles && \
  touch /var/log/falco/django.log && \
- SECRET_KEY=itdoesntreallymatter LOG_PATH=/dev/stdout python ./manage.py collectstatic --no-input
+ SECRET_KEY=itdoesntreallymatter LOG_PATH=/dev/stdout python ./manage.py collectstatic --no-input && \
+ cp -R /code/staticfiles/* /code/static
