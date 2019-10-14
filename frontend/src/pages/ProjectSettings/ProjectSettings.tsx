@@ -340,6 +340,9 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
           </Style.ElementContainer>}
       </Style.ProjectSettingsBlock>
       <Style.PageSubTitle>
+        <FormattedMessage id="ProjectSettings.scripts"/>
+      </Style.PageSubTitle>
+      <Style.PageSubTitle>
         <FormattedMessage id="ProjectSettings.project_members"/>
       </Style.PageSubTitle>
       {isUserAdminOfProject(currentUser, project) && <Style.SelectUser
