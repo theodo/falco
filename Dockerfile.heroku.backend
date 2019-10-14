@@ -1,46 +1,46 @@
 # First stage: build front app
-FROM node:8.12 AS node
+FROM node:8.12-alpine AS node
 
 WORKDIR /code
 
-COPY ./frontend /code/
 ENV NODE_PATH /code/src
-RUN yarn
-RUN yarn build
+COPY ./frontend /code/
+RUN yarn && yarn build
 
 
-FROM python:3.7
+# Second stage: build base backend
+FROM python:3.7-alpine AS backend
 
-RUN apt-get update && apt-get install -y \
-  bash \
-  curl \
-  openssh-server \
-  openssh-client
+RUN apk add --no-cache vim curl openssh-server postgresql-dev  gcc python3-dev musl-dev libffi-dev openssl-dev libressl-dev curl-dev bash
 
 ADD ./.profile.d /app/.profile.d
-RUN chmod a+x /app/.profile.d/heroku-exec.sh
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
-
 ADD ./sh-wrapper.sh /bin/sh-wrapper.sh
-RUN chmod a+x /bin/sh-wrapper.sh
-RUN rm /bin/sh && ln -s /bin/sh-wrapper.sh /bin/sh
+
+RUN chmod a+x /app/.profile.d/heroku-exec.sh && \
+  chmod a+x /bin/sh-wrapper.sh && \
+  rm /bin/sh && \
+  ln -s /bin/sh-wrapper.sh /bin/sh
 
 ENV DJANGO_SETTINGS_MODULE root.settings.prod
 ENV PYTHONPATH /code
 ENV CELERY_BROKER_URL sqs://
 
-WORKDIR /code
-
-RUN pip install pipenv gunicorn
-
-COPY ./backend /code/
 COPY --from=node /code/build /code/front/static/front
 
+WORKDIR /code
+
+RUN pip3 install --no-cache-dir pipenv gunicorn
+
+COPY ./backend/Pipfile* /code/
 RUN pipenv install --system --deploy
 
-# Collect statics
-RUN mkdir -p /var/log/falco
-RUN touch /var/log/falco/django.log
+COPY ./backend /code/
 
-COPY ./release_backend.sh /code/
-COPY ./start_backend.sh /code/
+# Collect statics
+ENV STATIC_ROOT=/code/staticfiles
+
+RUN mkdir -p /var/log/falco && \
+ mkdir -p /code/static && \
+ mkdir -p /code/staticfiles && \
+ touch /var/log/falco/django.log && \
+ SECRET_KEY=itdoesntreallymatter LOG_PATH=/dev/stdout python ./manage.py collectstatic --no-input
