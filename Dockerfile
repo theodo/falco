@@ -26,6 +26,7 @@ RUN chmod a+x /app/.profile.d/heroku-exec.sh && \
 ENV DJANGO_SETTINGS_MODULE root.settings.prod
 ENV PYTHONPATH /code
 ENV CELERY_BROKER_URL sqs://
+ENV PIP_NO_CACHE_DIR true
 
 COPY --from=node /code/build /code/front/static/front
 
@@ -39,8 +40,6 @@ RUN pipenv install --system --deploy
 COPY ./backend /code/
 
 # Collect statics
-ENV STATIC_ROOT=/code/staticfiles
-
 RUN mkdir -p /var/log/falco && \
  mkdir -p /code/static && \
  touch /var/log/falco/django.log && \
