@@ -61,9 +61,6 @@ CACHES = {
     }
 }
 
-# Static files
-# STATICFILES_STORAGE = "core.storage.ManifestStorage"
-
 # Celery configuration
 
 CELERY_BROKER_TRANSPORT_OPTIONS = {"region": "eu-west-3"}
