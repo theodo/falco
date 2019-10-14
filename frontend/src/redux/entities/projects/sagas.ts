@@ -4,7 +4,7 @@ import { makeDeleteRequest, makeGetRequest, makePostRequest, makePutRequest } fr
 import { ActionType, getType } from 'typesafe-actions';
 
 import { fetchAuditParametersAction } from '../auditParameters/actions';
-import { modelizeApiAuditParametersListToById } from '../auditParameters/modelizer';
+import { modelizeApiAuditParametersListToById, modelizeAuditParameters } from '../auditParameters/modelizer';
 import { ApiAuditParametersType } from '../auditParameters/types';
 import { pollAuditStatusAction } from '../audits';
 import { fetchAuditStatusHistoriesAction } from '../auditStatusHistories';
@@ -17,12 +17,19 @@ import { fetchScriptAction } from '../scripts';
 import { modelizeApiScriptsToById } from '../scripts/modelizer';
 import { ApiScriptType } from '../scripts/types';
 import {
+  addAuditParameter,
+  addAuditParameterToProjectError,
+  addAuditParameterToProjectRequest,
+  addAuditParameterToProjectSuccess,
   addMemberToProjectError,
   addMemberToProjectRequest,
   addMemberToProjectSuccess,
   addPageToProjectError,
   addPageToProjectRequest,
   addPageToProjectSuccess,
+  deleteAuditParameterFromProjectError,
+  deleteAuditParameterFromProjectRequest,
+  deleteAuditParameterFromProjectSuccess,
   deleteMemberOfProjectError,
   deleteMemberOfProjectRequest,
   deleteMemberOfProjectSuccess,
@@ -202,9 +209,9 @@ function* editMemberOfProject(action: ActionType<typeof editMemberOfProjectReque
     true,
     { is_admin: action.payload.isAdmin }
   );
-  yield put(editMemberOfProjectSuccess({ 
-    projectId: action.payload.projectId, 
-    userId: action.payload.userId, 
+  yield put(editMemberOfProjectSuccess({
+    projectId: action.payload.projectId,
+    userId: action.payload.userId,
     isAdmin: action.payload.isAdmin
   }));
 };
@@ -284,6 +291,54 @@ function* editProjectDetailsFailedHandler(error: Error, actionPayload: Record<st
   yield put(setProjectToastrDisplay({ toastrDisplay: 'editProjectDetailsError' }));
 };
 
+function* addAuditParameterToProject(action: ActionType<typeof addAuditParameterToProjectRequest>) {
+  const endpoint = `/api/projects/${action.payload.projectId}/audit_parameters`;
+  const { body: auditParameterResponse }: { body: ApiAuditParametersType } = yield call(
+    makePostRequest,
+    endpoint,
+    true,
+    {
+      configuration: action.payload.auditParameterConfigurationId,
+      network_shape: action.payload.auditParameterNetworkShape,
+      name: action.payload.auditParameterName,
+    },
+  );
+  yield put(addAuditParameter({
+    byId: {
+      [auditParameterResponse.uuid]: modelizeAuditParameters(auditParameterResponse),
+    }
+  }));
+  yield put(addAuditParameterToProjectSuccess({
+    projectId: action.payload.projectId,
+    auditParameter: modelizeAuditParameters(auditParameterResponse)
+  }))
+  yield put(setProjectToastrDisplay({ toastrDisplay: 'addAuditParameterSuccess' }));
+};
+
+function* addAuditParameterToProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
+  yield put(addAuditParameterToProjectError({ projectId: actionPayload.projectId, errorMessage: error.message }));
+  yield put(setProjectToastrDisplay({ toastrDisplay: 'addAuditParameterError' }));
+};
+
+function* deleteAuditParameterFromProject(action: ActionType<typeof deleteAuditParameterFromProjectRequest>) {
+  const endpoint = `/api/projects/${action.payload.projectId}/audit_parameters/${action.payload.auditParameterId}`;
+  yield call(
+    makeDeleteRequest,
+    endpoint,
+    true,
+  );
+  yield put(deleteAuditParameterFromProjectSuccess({ projectId: action.payload.projectId, auditParameterId: action.payload.auditParameterId }));
+  yield put(setProjectToastrDisplay({ toastrDisplay: 'deleteAuditParameterSuccess' }));
+};
+
+function* deleteAuditParameterFromProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
+  yield put(deleteAuditParameterFromProjectError({
+    projectId: actionPayload.projectId,
+    errorMessage: error.message
+  }));
+  yield put(setProjectToastrDisplay({ toastrDisplay: 'deleteAuditParameterError' }));
+};
+
 
 export default function* projectsSaga() {
   yield takeEvery(
@@ -325,5 +380,13 @@ export default function* projectsSaga() {
   yield takeEvery(
     getType(editProjectDetailsRequest),
     handleAPIExceptions(editProjectDetails, editProjectDetailsFailedHandler),
+  );
+  yield takeEvery(
+    getType(addAuditParameterToProjectRequest),
+    handleAPIExceptions(addAuditParameterToProject, addAuditParameterToProjectFailedHandler),
+  );
+  yield takeEvery(
+    getType(deleteAuditParameterFromProjectRequest),
+    handleAPIExceptions(deleteAuditParameterFromProject, deleteAuditParameterFromProjectFailedHandler),
   );
 };

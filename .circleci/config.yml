@@ -116,11 +116,6 @@ jobs:
           working_directory: backend
           command: coverage run manage.py test
 
-      - run:
-          name: Check coverage
-          working_directory: backend
-          command: coverage report
-
       - save_cache:
           key: backend-{% templatetag openvariable %} .Branch {% templatetag closevariable %}-{% templatetag openvariable %} checksum "backend/Pipfile.lock" {% templatetag closevariable %}
           paths:

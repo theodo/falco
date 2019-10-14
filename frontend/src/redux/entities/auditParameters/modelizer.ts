@@ -1,12 +1,24 @@
 import { ApiAuditParametersType, AuditParametersType } from "./types";
 
 
-const modelizeAuditParameters = (apiAuditParameters: ApiAuditParametersType): AuditParametersType => ({
+export const modelizeAuditParameters = (apiAuditParameters: ApiAuditParametersType): AuditParametersType => ({
     uuid: apiAuditParameters.uuid,
     name: apiAuditParameters.name,
-    location: apiAuditParameters.location,
+    location: apiAuditParameters.location_label,
     browser: apiAuditParameters.browser,
     networkShape: apiAuditParameters.network_shape,
+    configurationId: apiAuditParameters.configuration,
+});
+
+export const modelizeAuditParametersById = (apiAuditParameters: ApiAuditParametersType): Record<string, AuditParametersType> => ({
+    [apiAuditParameters.uuid]: {
+        uuid: apiAuditParameters.uuid,
+        name: apiAuditParameters.name,
+        location: apiAuditParameters.location_label,
+        browser: apiAuditParameters.browser,
+        networkShape: apiAuditParameters.network_shape,
+        configurationId: apiAuditParameters.configuration,
+    }
 });
 
 export const modelizeApiAuditParametersListToById = (apiAuditParametersList: ApiAuditParametersType[]): Record<string, AuditParametersType> => {

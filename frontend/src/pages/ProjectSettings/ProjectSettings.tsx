@@ -17,6 +17,7 @@ import { ApiUser, User } from 'redux/user/types';
 import { makeGetRequest } from 'services/networking/request';
 import { isUserAdminOfProject } from 'services/utils';
 import { colorUsage } from 'stylesheet';
+import AuditParameterRow, { AddAuditParameterRow } from './Components/AuditParameterTable'
 import PageRow, { PageRowHeader } from './Components/PageTable';
 import { AddPageRow } from './Components/PageTable';
 import ProjectDetailsInput from './Components/ProjectDetailsInput';
@@ -59,12 +60,39 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
     disabled: boolean;
   };
 
+  interface ApiAvailableAuditParameters {
+    uuid: string,
+    browser: string,
+    location_label: string,
+    location_group: string,
+  }
+
+
   useFetchProjectIfUndefined(fetchProjectsRequest, match.params.projectId, project);
 
   const [selectOption, setSelectOption]: [ValueType<UserOption | {}>, any] = React.useState(null);
   const [allUsers, setAllUsers] = React.useState([]);
   const [projectName, setProjectName] = React.useState('');
   const [projectApiKey, setProjectApiKey] = React.useState('');
+  const [availableAuditParameters, setAvailableAuditParameters] = React.useState<Array<{label: string, uuid: string}>>([])
+
+  const modelizeAvailableAuditParameters = (apiAvailableAuditParameters: ApiAvailableAuditParameters) => ({
+    label: `${apiAvailableAuditParameters.location_label}. ${apiAvailableAuditParameters.browser}`,
+    uuid: apiAvailableAuditParameters.uuid,
+  });
+
+  React.useEffect(
+    () => {
+      const request = makeGetRequest('/api/projects/available_audit_parameters', true);
+      request
+      .then((response) => {
+        if(response) {
+          setAvailableAuditParameters(response.body.map((apiAvailableAuditParameters: ApiAvailableAuditParameters) => modelizeAvailableAuditParameters(apiAvailableAuditParameters)));
+        }
+      })
+    },
+    [],
+  );
 
   const fetchAllUsers = () => {
     const request = makeGetRequest('/api/core/users', true);
@@ -138,6 +166,32 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
                 intl.formatMessage({'id': 'Toastr.ProjectSettings.error_message'}),
               );
               break;
+            case "addAuditParameterSuccess":
+              toastr.success(
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.add_audit_parameter_to_project_success'}),
+              );
+              break;
+            case "addAuditParameterError":
+              toastr.error(
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.error_title'}),
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.error_message'}),
+              );
+              break;
+            case "editAuditParameterSuccess":
+              toastr.success(
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.edit_audit_parameter_success'}),
+              );
+              break;
+            case "deleteAuditParameterSuccess":
+              toastr.success(
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.delete_audit_parameter_success'}),
+              );
+              break;
+          case "deleteAuditParameterError":
+          case "editAuditParameterError":
           case "addMemberError":
           case "editPageError":
           case "addPageError":
@@ -238,6 +292,33 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
         />
       </Style.SettingsFieldContainer>
       <Style.PageSubTitle>
+        <FormattedMessage id="ProjectSettings.project_audit_parameters"/>
+      </Style.PageSubTitle>
+      <Style.ProjectSettingsBlock>
+        <Style.ElementContainer>
+          <Style.AuditParameterName>{intl.formatMessage({ id: "ProjectSettings.audit_parameter_name"})}</Style.AuditParameterName>
+          <Style.Configuration>{intl.formatMessage({ id: "ProjectSettings.configuration"})}</Style.Configuration>
+          <Style.NetworkShape>
+            {intl.formatMessage({ id: "ProjectSettings.network_type"})}
+          </Style.NetworkShape>
+        </Style.ElementContainer>
+        {project.auditParametersIds.map(auditParameterId => (
+          <Style.ElementContainer key={auditParameterId}>
+            <AuditParameterRow
+              disabled={!isUserAdminOfProject(currentUser, project)}
+              projectId={project.uuid}
+              auditParameterId={auditParameterId}
+              availableAuditParameters={availableAuditParameters}
+            />
+          </Style.ElementContainer>))}
+        {isUserAdminOfProject(currentUser, project) && <Style.ElementContainer>
+            <AddAuditParameterRow
+              projectId={project.uuid}
+              availableAuditParameters={availableAuditParameters}
+            />
+          </Style.ElementContainer>}
+      </Style.ProjectSettingsBlock>
+      <Style.PageSubTitle>
         <FormattedMessage id="ProjectSettings.pages"/>
       </Style.PageSubTitle>
       <Style.ProjectSettingsBlock>
@@ -289,7 +370,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
               <Style.MemberEmail>{projectMember.emailAddress}</Style.MemberEmail>
               <Style.MemberAdminBadgeContainer>
                 {isUserAdminOfProject(currentUser, project)
-                  ? <ToggleButton 
+                  ? <ToggleButton
                     onChange={() => editMemberOfProjectRequest(project.uuid, projectMember.id, !projectMember.isAdmin)}
                     checked={projectMember.isAdmin}
                     disabled={projectMember.username === currentUser.username}
@@ -302,7 +383,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
                   />}
               </Style.MemberAdminBadgeContainer>
               <Style.MemberAdminDeleteContainer>
-                  {isUserAdminOfProject(currentUser, project) && projectMember.username !== currentUser.username && 
+                  {isUserAdminOfProject(currentUser, project) && projectMember.username !== currentUser.username &&
                     (<Style.MemberAdminDeleteButton onClick={() => removeMemberOfProjectRequest(project.uuid, projectMember.id)}>
                       <Close
                         color={colorUsage.projectSettingsIconColor}

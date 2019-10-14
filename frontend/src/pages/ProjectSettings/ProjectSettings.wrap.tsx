@@ -5,7 +5,7 @@ import { RootState } from 'redux/types';
 
 import { addMemberToProjectRequest, deleteMemberOfProjectRequest, editMemberOfProjectRequest, editProjectDetailsRequest, fetchProjectsRequest, setProjectToastrDisplay } from 'redux/entities/projects';
 import { getProject, getProjectToastrDisplay } from 'redux/entities/projects/selectors';
-import { ProjectToastrDisplayType, ProjectType } from 'redux/entities/projects/types';
+import { ProjectToastrDisplayType } from 'redux/entities/projects/types';
 import { getUser } from 'redux/user/selectors';
 import ProjectSettings, { OwnProps } from './ProjectSettings';
 

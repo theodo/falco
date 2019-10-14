@@ -1,8 +1,10 @@
 import { AnyAction } from 'redux';
 import { ActionType, getType } from 'typesafe-actions';
 import {
+  addAuditParameterToProjectSuccess,
   addMemberToProjectSuccess,
   addPageToProjectSuccess,
+  deleteAuditParameterFromProjectSuccess,
   deleteMemberOfProjectSuccess,
   deletePageOfProjectSuccess,
   editMemberOfProjectSuccess,
@@ -24,7 +26,9 @@ export type ProjectsAction = ActionType<
   typeof fetchProjectSuccess |
   typeof fetchProjectError |
   typeof setProjectToastrDisplay |
-  typeof editProjectDetailsSuccess
+  typeof editProjectDetailsSuccess |
+  typeof addAuditParameterToProjectSuccess |
+  typeof deleteAuditParameterFromProjectSuccess
 >;
 
 export type ProjectsState = Readonly<{
@@ -37,6 +41,12 @@ const initialState: ProjectsState = { toastrDisplay: '', byId: null };
 const getAllPagesIdsExceptTargetPageId = (project: ProjectType, targetPageId: string) => {
   return project.pagesIds.filter((pageId: string) => {
     return pageId !== targetPageId;
+  });
+}
+
+const getAllAuditParametersIdsExceptTargetAuditParameterId = (project: ProjectType, targetAuditParameterId: string) => {
+  return project.auditParametersIds.filter((auditParameterId: string) => {
+    return auditParameterId !== targetAuditParameterId;
   });
 }
 
@@ -126,7 +136,7 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
       };
       case getType(editMemberOfProjectSuccess):
         if(!state.byId) { return state };
-  
+
         const updatedMembers = getAllMembersWithUpdatedAdminStatusForTargetMember(
           state.byId[typedAction.payload.projectId],
           typedAction.payload.userId,
@@ -159,6 +169,32 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
         byId: {
           ...state.byId,
           ...typedAction.payload.byId,
+        },
+      };
+     case getType(addAuditParameterToProjectSuccess):
+        if(!state.byId) { return state };
+
+        return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [typedAction.payload.projectId]: {
+            ...state.byId[typedAction.payload.projectId],
+            auditParametersIds: [...state.byId[typedAction.payload.projectId].auditParametersIds, typedAction.payload.auditParameter.uuid]
+          }
+        },
+      };
+    case getType(deleteAuditParameterFromProjectSuccess):
+      if(!state.byId) { return state };
+
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [typedAction.payload.projectId]: {
+            ...state.byId[typedAction.payload.projectId],
+            auditParametersIds: getAllAuditParametersIdsExceptTargetAuditParameterId(state.byId[typedAction.payload.projectId], typedAction.payload.auditParameterId),
+          }
         },
       };
     default:

@@ -99,6 +99,14 @@
     "general_settings": "Général",
     "name": "Nom du projet",
     "wpt_key": "Clé API WebPageTest",
+    "project_audit_parameters": "Environnement du projet",
+    "audit_parameter_name": "Nom de l'environnement",
+    "configuration": "Configuration",
+    "network_type": "Type de réseau",
+    "audit_parameter_name_placeholder": "Nom",
+    "audit_parameter_network_shape_placeholder": "Type de réseau",
+    "audit_parameter_configuration_placeholder": "Configuration",
+    "add_audit_parameter": "Ajouter un paramètre d'audit au projet",
     "project_members": "Membres du projet",
     "pages": "Pages du projet",
     "page_name": "Nom de la page",
@@ -243,9 +251,12 @@
       "add_member_success_message": "L'utilisateur a bien été ajouté au projet",
       "edit_page_success_message": "La page a bien été modifiée",
       "edit_project_details_success": "Le projet a bien été modifié",
+      "add_audit_parameter_to_project_success": "Le paramètre d'audit a bien été créé",
+      "edit_audit_parameter_success": "Le paramètre d'audit a bien été modifié",
       "add_page_success_message": "La page a bien été créée",
       "delete_page_success_message": "La page a bien été supprimée",
-      "delete_page_confirm_question": "Voulez-vous vraiment supprimer la page ?"
+      "delete_page_confirm_question": "Voulez-vous vraiment supprimer la page ?",
+      "delete_auditParameter_confirm_question": "Êtes-vous sûr de vouloir supprimer cette ligne? Les données d'audit associées ne pourront être récupérées."
     }
   },
   "components": {

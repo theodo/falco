@@ -1,5 +1,6 @@
 import { createStandardAction } from 'typesafe-actions';
 
+import { AuditParametersType } from '../auditParameters/types';
 import { PageType } from '../pages/types';
 import { ApiProjectType, ProjectToastrDisplayType, ProjectType } from './types';
 
@@ -98,6 +99,35 @@ export const editProjectDetailsError = createStandardAction('projects/EDIT_PROJE
 export const editProjectDetailsSuccess = createStandardAction('projects/EDIT_PROJECT_DETAILS_SUCCESS')<{
   byId: Record<string, ProjectType>;
 }>();
+export const addAuditParameterToProjectRequest = createStandardAction('projects/ADD_AUDIT_PARAMETER_TO_PROJECT_REQUEST')<{
+  projectId: string;
+  auditParameterName: string;
+  auditParameterNetworkShape: string;
+  auditParameterConfigurationId: string;
+}>();
+export const addAuditParameter = createStandardAction('projects/ADD_AUDIT_PARAMETER')<{
+  byId: Record<string, AuditParametersType>;
+}>();
+export const addAuditParameterToProjectSuccess = createStandardAction('projects/ADD_AUDIT_PARAMETER_TO_PROJECT_SUCCESS')<{
+  projectId: string;
+  auditParameter: AuditParametersType;
+}>();
+export const addAuditParameterToProjectError = createStandardAction('projects/ADD_AUDIT_PARAMETER_TO_PROJECT_ERROR')<{
+  projectId: string;
+  errorMessage: string;
+}>();
+export const deleteAuditParameterFromProjectRequest = createStandardAction('projects/DELETE_AUDIT_PARAMETER_TO_PROJECT_REQUEST')<{
+  projectId: string;
+  auditParameterId: string;
+}>();
+export const deleteAuditParameterFromProjectSuccess = createStandardAction('projects/DELETE_AUDIT_PARAMETER_TO_PROJECT_SUCCESS')<{
+  projectId: string;
+  auditParameterId: string;
+}>();
+export const deleteAuditParameterFromProjectError = createStandardAction('projects/DELETE_AUDIT_PARAMETER_TO_PROJECT_ERROR')<{
+  projectId: string;
+  errorMessage: string;
+}>();
 
 export default {
   addMemberToProjectRequest,
@@ -121,4 +151,10 @@ export default {
   editProjectDetailsRequest,
   editProjectDetailsError,
   editProjectDetailsSuccess,
+  addAuditParameterToProjectRequest,
+  addAuditParameterToProjectSuccess,
+  addAuditParameter,
+  deleteAuditParameterFromProjectRequest,
+  deleteAuditParameterFromProjectError,
+  deleteAuditParameterFromProjectSuccess,
 };

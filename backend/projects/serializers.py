@@ -1,11 +1,12 @@
 from projects.models import (
-    NetworkShapeOptions,
     Page,
     Project,
     ProjectAuditParameters,
     ProjectMemberRole,
     Script,
+    AvailableAuditParameters,
 )
+
 from rest_framework import serializers
 from audits.serializers import AuditStatusHistorySerializer
 
@@ -82,23 +83,37 @@ class ScriptSerializer(serializers.ModelSerializer):
         fields = ("uuid", "name", "latest_audit_status_histories")
 
 
+class AvailableAuditParameterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AvailableAuditParameters
+        fields = ("uuid", "browser", "location_label", "location_group")
+
+
 class ProjectAuditParametersSerializer(serializers.ModelSerializer):
-    network_shape = serializers.SerializerMethodField("resolve_network_shape")
     location = serializers.SerializerMethodField("resolve_location")
     browser = serializers.SerializerMethodField("resolve_browser")
-
-    def resolve_network_shape(self, obj):
-        return NetworkShapeOptions[obj.network_shape].value
+    location_label = serializers.SerializerMethodField("resolve_location_label")
 
     def resolve_location(self, obj):
         return obj.configuration.location
+
+    def resolve_location_label(self, obj):
+        return obj.configuration.location_label
 
     def resolve_browser(self, obj):
         return obj.configuration.browser
 
     class Meta:
         model = ProjectAuditParameters
-        fields = ("uuid", "name", "location", "browser", "network_shape")
+        fields = (
+            "uuid",
+            "name",
+            "location_label",
+            "browser",
+            "network_shape",
+            "location",
+            "configuration",
+        )
 
 
 class ProjectMemberRoleSerializer(serializers.ModelSerializer):
