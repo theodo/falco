@@ -4,10 +4,11 @@ import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
 import { colorUsage, getSpacing } from 'stylesheet';
 import { AddAuditParameterButtonContainer, AddAuditParameterButtonLabel, AddNameInput } from '../AuditParameterTable.style';
-import { availableNetworkShape, useAvailableAuditParameters } from '../common'
+import { availableNetworkShape } from '../common'
 
 export interface  OwnProps {
   projectId: string,
+  availableAuditParameters: Array<{uuid: string, label: string}>
 }
 
 type Props = {
@@ -28,6 +29,7 @@ const useFocus = (): [React.MutableRefObject<any>, () => void] => {
 export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
   projectId,
   addAuditParameterToProjectRequest,
+  availableAuditParameters,
   intl
   }) => {
   const [auditParameterName, setAuditParameterName] = React.useState('');
@@ -35,7 +37,6 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
   const [auditParameterNetworkShape, setAuditParameterNetworkShape] = React.useState('')
   const [isAddingMode, setAddingMode] = React.useState(false);
   const [nameInputRef, setNameInputFocus] = useFocus();
-  const availableAuditParameters = useAvailableAuditParameters();
 
   React.useEffect(
     () => {

@@ -60,12 +60,39 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
     disabled: boolean;
   };
 
+  interface ApiAvailableAuditParameters {
+    uuid: string,
+    browser: string,
+    location_label: string,
+    location_group: string,
+  }
+
+
   useFetchProjectIfUndefined(fetchProjectsRequest, match.params.projectId, project);
 
   const [selectOption, setSelectOption]: [ValueType<UserOption | {}>, any] = React.useState(null);
   const [allUsers, setAllUsers] = React.useState([]);
   const [projectName, setProjectName] = React.useState('');
   const [projectApiKey, setProjectApiKey] = React.useState('');
+  const [availableAuditParameters, setAvailableAuditParameters] = React.useState<Array<{label: string, uuid: string}>>([])
+
+  const modelizeAvailableAuditParameters = (apiAvailableAuditParameters: ApiAvailableAuditParameters) => ({
+    label: `${apiAvailableAuditParameters.location_label}. ${apiAvailableAuditParameters.browser}`,
+    uuid: apiAvailableAuditParameters.uuid,
+  });
+
+  React.useEffect(
+    () => {
+      const request = makeGetRequest('/api/projects/available_audit_parameters', true);
+      request
+      .then((response) => {
+        if(response) {
+          setAvailableAuditParameters(response.body.map((apiAvailableAuditParameters: ApiAvailableAuditParameters) => modelizeAvailableAuditParameters(apiAvailableAuditParameters)));
+        }
+      })
+    },
+    [],
+  );
 
   const fetchAllUsers = () => {
     const request = makeGetRequest('/api/core/users', true);
@@ -281,11 +308,13 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
               disabled={!isUserAdminOfProject(currentUser, project)}
               projectId={project.uuid}
               auditParameterId={auditParameterId}
+              availableAuditParameters={availableAuditParameters}
             />
           </Style.ElementContainer>))}
         {isUserAdminOfProject(currentUser, project) && <Style.ElementContainer>
             <AddAuditParameterRow
               projectId={project.uuid}
+              availableAuditParameters={availableAuditParameters}
             />
           </Style.ElementContainer>}
       </Style.ProjectSettingsBlock>

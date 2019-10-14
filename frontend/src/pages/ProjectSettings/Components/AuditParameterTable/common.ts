@@ -1,13 +1,3 @@
-import * as React from 'react';
-import { makeGetRequest } from 'services/networking/request';
-
-export interface ApiAvailableAuditParameters {
-  uuid: string,
-  browser: string,
-  location_label: string,
-  location_group: string,
-}
-
 export const availableNetworkShape = [
   { label: "Cable", value: "CABLE" },
   { label: "DSL", value: "DSL" },
@@ -23,25 +13,3 @@ export const availableNetworkShape = [
   { label: "Native", value: "NATIVE" },
   { label: "custom", value: "CUSTOM" },
 ];
-
-export const modelizeAvailableAuditParameters = (apiAvailableAuditParameters: ApiAvailableAuditParameters) => ({
-  label: `${apiAvailableAuditParameters.location_label}. ${apiAvailableAuditParameters.browser}`,
-  uuid: apiAvailableAuditParameters.uuid,
-});
-
-export const useAvailableAuditParameters = () => {
-  const [availableAuditParameters, setAvailableAuditParameters] = React.useState<Array<{label: string, uuid: string}>>([])
-  React.useEffect(
-    () => {
-      const request = makeGetRequest('/api/projects/available_audit_parameters', true);
-      request
-      .then((response) => {
-        if(response) {
-          setAvailableAuditParameters(response.body.map((apiAvailableAuditParameters: ApiAvailableAuditParameters) => modelizeAvailableAuditParameters(apiAvailableAuditParameters)));
-        }
-      })
-    },
-    [],
-  );
-  return availableAuditParameters;
-}

@@ -7,12 +7,13 @@ import { AuditParametersType } from 'redux/entities/auditParameters/types';
 import { colorUsage } from 'stylesheet';
 import { getSpacing } from 'stylesheet';
 import { AuditParameterDeleteButton, AuditParameterDeleteContainer, EditNameInput } from '../AuditParameterTable.style';
-import { availableNetworkShape, useAvailableAuditParameters } from '../common'
+import { availableNetworkShape } from '../common'
 
 export interface  OwnProps {
   auditParameterId: string,
   projectId: string,
   disabled: boolean,
+  availableAuditParameters: Array<{uuid: string, label: string}>
 }
 
 type Props = {
@@ -28,12 +29,12 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
   editAuditParameterRequest,
   disabled,
   deleteAuditParameterFromProjectRequest,
+  availableAuditParameters,
   intl
   }) => {
   const [auditParameterName, setAuditParameterName] = React.useState('');
   const [auditParameterNetworkShape, setAuditParameterNetworkShape] = React.useState('');
   const [auditParameterConfigurationId, setAuditParameterConfigurationId] = React.useState('')
-  const availableAuditParameters = useAvailableAuditParameters();
 
   React.useEffect(
     () => {
