@@ -42,5 +42,6 @@ COPY ./backend /code/
 ENV STATIC_ROOT=/code/staticfiles
 
 RUN mkdir -p /var/log/falco && \
+ mkdir -p /code/static && \
  touch /var/log/falco/django.log && \
  SECRET_KEY=itdoesntreallymatter LOG_PATH=/dev/stdout python ./manage.py collectstatic --no-input
