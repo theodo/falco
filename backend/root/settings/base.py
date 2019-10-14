@@ -129,7 +129,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_URL = "/static/"
 # Place static in the same location as webpack build files
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-STATICFILES_DIRS = ["/code/staticfiles"]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = [
+    '/code/staticfiles',
+    '/code/static'
+]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"

@@ -1,0 +1,14 @@
+.git
+.github
+
+**/node_modules/*
+.circleci
+.github
+design
+devops
+docs
+fixtures
+hooks
+postgres-data
+
+*.md
