@@ -26,3 +26,20 @@ export const ScriptHeader = styled.div`
   width: 75%;
 `;
 
+export const AddScriptButtonContainer = styled.div`
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+
+  &:hover {
+    opacity: 0.5;
+    background: white;
+    transition-duration: 0.2s;
+  };
+`;
+
+export const AddScriptButtonLabel = styled.div`
+  margin-left: ${getSpacing(4)};
+`

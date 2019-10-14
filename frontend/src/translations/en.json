@@ -103,6 +103,7 @@
     "scripts": "Project's scripts",
     "script": "Script",
     "script_name": "Script's name",
+    "script_modal_title": "Script creation",
     "audit_parameter_name": "Environment name",
     "configuration": "Configuration",
     "project_members": "Project members",

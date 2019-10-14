@@ -103,6 +103,7 @@
     "scripts": "Scripts du projet",
     "script": "Script",
     "script_name": "Nom du script",
+    "script_modal_title": "Création du script",
     "audit_parameter_name": "Nom de l'environnement",
     "configuration": "Configuration",
     "network_type": "Type de réseau",
