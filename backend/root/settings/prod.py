@@ -62,7 +62,7 @@ CACHES = {
 }
 
 # Static files
-STATICFILES_STORAGE = "core.storage.ManifestStorage"
+# STATICFILES_STORAGE = "core.storage.ManifestStorage"
 
 # Celery configuration
 
