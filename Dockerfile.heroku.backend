@@ -14,7 +14,6 @@ FROM python:3.7-alpine AS backend
 # Allow heroku exec
 RUN apk add --no-cache curl postgresql-dev openssh bash supervisor
 
-COPY supervisord.conf /etc/supervisord.conf
 
 ADD ./.profile.d /app/.profile.d
 ADD ./sh-wrapper.sh /bin/sh-wrapper.sh
@@ -49,5 +48,7 @@ RUN mkdir -p /var/log/falco && \
  mkdir -p /code/static && \
  touch /var/log/falco/django.log && \
  SECRET_KEY=itdoesntreallymatter LOG_PATH=/dev/stdout python ./manage.py collectstatic --no-input
+
+COPY supervisord.conf /etc/supervisord.conf
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]

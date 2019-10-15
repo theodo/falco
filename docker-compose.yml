@@ -12,7 +12,6 @@ services:
     build: .
     volumes:
       - ./backend:/code
-    command: python /code/manage.py rundebugserver 0.0.0.0:80
     ports:
       - "8000:80"
       - "9000:9000"
@@ -23,6 +22,7 @@ services:
       - .env
     environment:
       DATABASE_URL: "postgres://postgres@db:5432/postgres"
+      PORT: 80
 
   redis:
     image: redis
