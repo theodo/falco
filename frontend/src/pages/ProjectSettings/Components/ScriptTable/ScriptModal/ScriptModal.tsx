@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 
 import Close from 'icons/Close';
 import { colorUsage, zIndex } from 'stylesheet';
-import { CloseContainer, PageTitle } from './ScriptModal.style';
+import { CloseContainer, ConfirmButton, NameInput, PageTitle, ScriptInput } from './ScriptModal.style';
 
 
 interface Props {
@@ -30,6 +30,9 @@ export const ScriptModal: React.FunctionComponent<Props & InjectedIntlProps> = (
       transform: 'translate(-50%, -50%)',
       backgroundColor: `${colorUsage.metricsModalBackground}`,
       boxShadow: `0 0 8px 4px ${colorUsage.metricsModalShadow}`,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
     },
     overlay: {
       zIndex: `${zIndex.modal}`,
@@ -54,9 +57,11 @@ export const ScriptModal: React.FunctionComponent<Props & InjectedIntlProps> = (
       onAfterOpen={handleModalOpen}
       onAfterClose={handleModalClose}
     >
-      <>
-        <PageTitle>{intl.formatMessage({ id: `ProjectSettings.script_modal_title`})}</PageTitle>
-      </>
+      <PageTitle>{intl.formatMessage({ id: `ProjectSettings.script_modal_title`})}</PageTitle>
+      <NameInput placeholder={intl.formatMessage({ id: `ProjectSettings.script_name_placeholder`})}/>
+      <ScriptInput
+      />
+      <ConfirmButton>{intl.formatMessage({ id: `ProjectSettings.script_confirm_creation`})}</ConfirmButton>
       <CloseContainer
         onClick={close}
       >

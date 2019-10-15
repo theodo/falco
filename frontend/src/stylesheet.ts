@@ -178,6 +178,8 @@ export const colorUsage = {
   adminBadgeSelectedText: colorPalette.white500,
   adminBadgeSelectedBackground: colorPalette.white200,
   projectSettingsIconColor: colorPalette.grey800,
+  createScriptButtonBackground: colorPalette.accentGreen500,
+  createScriptButtonText: colorPalette.white500,
 
   // WebPageTest
   webPageTestLinkButtonBackground: colorPalette.primary500,
@@ -263,6 +265,9 @@ export const fontSize = {
   // Metrics
   metricTooltip: '12px',
 
+  // ProjectSettings
+  createScriptButtonText: '14px',
+
   // WebPageTest
   webPageTestLink: '14px',
 
@@ -309,6 +314,9 @@ export const lineHeight = {
 
   // Metrics
   metricTooltip: '16px',
+
+  // ProjectSettings
+  createScriptButtonText: '18px',
 
   // WebPageTest
   webPageTestLink: '18px',

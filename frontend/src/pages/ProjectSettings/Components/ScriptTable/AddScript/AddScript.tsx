@@ -27,7 +27,7 @@ export const AddScript: React.FunctionComponent<InjectedIntlProps> = ({
           strokeWidth="20"
         />
         <AddScriptButtonLabel>
-          {intl.formatMessage({id: 'ProjectSettings.add_audit_parameter'})}
+          {intl.formatMessage({id: 'ProjectSettings.add_script'})}
         </AddScriptButtonLabel>
       </AddScriptButtonContainer >
         <ScriptModal

@@ -4,6 +4,7 @@ import {
   fontFamily,
   fontSize,
   fontWeight,
+  getSpacing,
   lineHeight,
   zIndex,
 } from 'stylesheet';
@@ -29,13 +30,44 @@ export const PageTitle = styled.div`
   text-overflow: ellipsis;
 `;
 
-export const PageSubTitle = styled.div`
-  line-height: ${lineHeight.h3Text};
-  color: ${colorUsage.h3Text};
+export const ScriptInput = styled.textarea`
+  width: 100%;
+  font-family: ${fontFamily.mainMono};
+  resize: none;
+  height: 70%;
+  overflow-y: scroll;
+  margin-top: ${getSpacing(4)};
+`;
+
+export const NameInput = styled.input`
   font-family: ${fontFamily.mainSans};
-  font-size: ${fontSize.h3Text};
-  font-weight: ${fontWeight.h3Text};
-  text-align: center;
+  font-size: ${fontSize.inputText};
+  line-height: ${lineHeight.inputText};
+  color: ${colorUsage.inputText};
+  margin-top: ${getSpacing(4)};
   overflow: hidden;
   text-overflow: ellipsis;
+  border: solid 1px ${colorUsage.editableRowInputBorder};
+  border-radius: 3px;
+  background-color: ${colorUsage.createScriptButtonText};
+  width: 25%;
+  :focus {
+    box-shadow: 0 2px 2px 0 ${colorUsage.editableRowInputBorder};
+  }
+`;
+
+export const ConfirmButton = styled.button`
+  margin-top: ${getSpacing(4)};
+  width: 15%;
+  border: none;
+  padding: ${getSpacing(2)} ${getSpacing(0)};
+  border-radius: 6px;
+  color: ${colorUsage.createScriptButtonText};
+  background-color: ${colorUsage.createScriptButtonBackground};
+  font-family: ${fontFamily.mainSans};
+  font-size: ${fontSize.createScriptButtonText};
+  font-weight: bold;
+  line-height: ${lineHeight.createScriptButtonText};
+  cursor: pointer;
+  text-decoration: none;
 `;
