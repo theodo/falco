@@ -2,7 +2,67 @@
     "name": "falco-nicolasgo",
     "description": "A Heroku version of Falco",
     "repository": "https://github.com/theodo/falco",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Nginx_logo.svg",
+    "logo": "https://user-images.githubusercontent.com/2587348/51670042-0f2b6a80-1fc6-11e9-8080-c3195853ba62.png",
     "keywords": ["nginx", "docker", "proxy"],
-    "stack": "container"
+    "stack": "container",
+    "addons": ["heroku-postgresql:hobby-dev", "heroku-redis"],
+    "env": {
+      "DJANGO_SETTINGS_MODULE": "root.settings.dev",
+      "DB_CYPHER_KEY": {
+              "description": "This gets generated",
+              "generator": "secret"
+      },
+      "SECRET_KEY": {
+              "description": "This gets generated",
+              "generator": "secret"
+      },
+      "EMAIL_HOST": {
+              "description": "",
+              "value": "smtp.gmail.com"
+      },
+      "EMAIL_USER": {
+              "description": "",
+              "value": ""
+      },
+      "EMAIL_PASSWORD": {
+              "description": "",
+              "value": ""
+      },
+      "EMAIL_PORT": {
+              "description": "",
+              "value": "587"
+      },
+      "EMAIL_FROM": {
+              "description": "Who sends the mail",
+              "value": "dev@getfal.co"
+      },
+      "EMAIL_TO": {
+              "description": "Who should receive the mails",
+              "value": "dev@getfal.co"
+      },
+      "GOOGLE_ANALYTICS_ID": {
+              "description": "ID Google Analytics",
+              "value": ""
+      },
+      "ALLOWED_HOST": {
+              "description": "",
+              "value": ""
+      },
+      "MEDIA_BUCKET": {
+              "description": "",
+              "value": "falco-staging-media"
+      },
+      "PUBLIC_URL": {
+              "description": "",
+              "value": "/static/front"
+      },
+      "REACT_APP_API_BASE_URL": {
+              "description": "",
+              "value": ""
+      },
+      "WEBPAGETEST_API_KEY": {
+              "description": "",
+              "value": ""
+      }
+    }
   }

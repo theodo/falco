@@ -10,6 +10,8 @@ services:
 
   backend:
     build: .
+    volumes:
+      - ./backend:/code
     command: python /code/manage.py rundebugserver 0.0.0.0:80
     ports:
       - "8000:80"
