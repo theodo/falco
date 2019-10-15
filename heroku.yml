@@ -7,11 +7,13 @@ setup:
 build:
   docker:
     web: Dockerfile.heroku.backend
-    # celeryworker: devops/deployment/celeryworker/Dockerfile
-    # celerybeat: devops/deployment/celerybeat/Dockerfile
+    celeryworker: Dockerfile.heroku.backend
+    celerybeat: Dockerfile.heroku.backend
 release:
   image: web
   command:
     - ./release_backend.sh
 run:
-  web: /usr/bin/supervisord -c /etc/supervisord.conf
+  web: ./start_backend.sh
+  celeryworker: python /code/manage.py celery
+  celerybeat: celery -A root.celery beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
