@@ -42,8 +42,9 @@ export const ScriptModal: React.FunctionComponent<Props> = ({
       if (!response) {
         throw new Error("No response")
       }
-      addScript({ byId: modelizeScript(response.body)})
-      addScriptToProjectSuccess(projectId, modelizeScript(response.body).uuid)
+      const modelizedScript = modelizeScript(response.body)
+      addScript({ [modelizedScript.uuid]: modelizedScript })
+      addScriptToProjectSuccess(projectId, modelizedScript.uuid)
       setProjectToastrDisplay('addScriptToProjectSuccess')
       close()
     } catch(e) {

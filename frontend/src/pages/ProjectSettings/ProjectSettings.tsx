@@ -21,7 +21,7 @@ import AuditParameterRow, { AddAuditParameterRow } from './Components/AuditParam
 import PageRow, { PageRowHeader } from './Components/PageTable';
 import { AddPageRow } from './Components/PageTable';
 import ProjectDetailsInput from './Components/ProjectDetailsInput';
-import { AddScript, ScriptTableHeader } from './Components/ScriptTable'
+import { AddScript, ScriptRow, ScriptTableHeader } from './Components/ScriptTable'
 import Style from './ProjectSettings.style';
 
 export type OwnProps = {} & RouteComponentProps<{
@@ -354,6 +354,12 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
         <Style.ElementContainer>
           <ScriptTableHeader/>
         </Style.ElementContainer>
+        {project.scriptsIds.map(scriptId => (
+          <Style.ElementContainer key={scriptId}>
+            <ScriptRow
+              scriptId={scriptId}
+            />
+          </Style.ElementContainer>))}
         {isUserAdminOfProject(currentUser, project) && <Style.ElementContainer>
           <AddScript
             projectId={project.uuid}

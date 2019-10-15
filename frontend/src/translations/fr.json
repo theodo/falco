@@ -259,6 +259,7 @@
       "edit_page_success_message": "La page a bien été modifiée",
       "edit_project_details_success": "Le projet a bien été modifié",
       "add_audit_parameter_to_project_success": "Le paramètre d'audit a bien été créé",
+      "add_script_to_project_sucess": "Le script a bien été créé",
       "edit_audit_parameter_success": "Le paramètre d'audit a bien été modifié",
       "add_page_success_message": "La page a bien été créée",
       "delete_page_success_message": "La page a bien été supprimée",

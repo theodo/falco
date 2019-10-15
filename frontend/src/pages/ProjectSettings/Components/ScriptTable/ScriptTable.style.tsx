@@ -21,9 +21,26 @@ export const NameHeader = styled.div`
   width: 25%;
 `;
 
+export const Script = styled.div`
+  white-space: nowrap;
+  width: 40%;
+  font-family: ${fontFamily.mainSans};
+  font-size: ${fontSize.inputText};
+  line-height: ${lineHeight.inputText};
+  color: ${colorUsage.inputText};
+  margin-right: ${getSpacing(4)};
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+export const NameScript = styled.div`
+  ${genericStyle}
+  width: 25%;
+`;
+
 export const ScriptHeader = styled.div`
   ${genericStyle}
-  width: 75%;
+  width: 40%;
 `;
 
 export const AddScriptButtonContainer = styled.div`

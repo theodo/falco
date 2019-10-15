@@ -208,7 +208,7 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
         ...state.byId,
         [typedAction.payload.projectId]: {
           ...state.byId[typedAction.payload.projectId],
-          scriptIds: [...state.byId[typedAction.payload.projectId].scriptsIds, typedAction.payload.scriptId]
+          scriptsIds: [...state.byId[typedAction.payload.projectId].scriptsIds, typedAction.payload.scriptId]
         }
       },
     };
