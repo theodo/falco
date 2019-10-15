@@ -27,32 +27,6 @@ services:
   redis:
     image: redis
 
-  celeryworker:
-    build: .
-    volumes:
-      - ./backend:/code
-    links:
-      - db
-      - redis
-    env_file:
-      - .env
-    environment:
-      DATABASE_URL: "postgres://postgres@db:5432/postgres"
-    command: python /code/manage.py celery
-
-  celerybeat:
-    build: .
-    volumes:
-      - ./backend:/code
-    links:
-      - db
-      - redis
-    env_file:
-      - .env
-    environment:
-      DATABASE_URL: "postgres://postgres@db:5432/postgres"
-    command: celery -A root.celery beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
-
 networks:
   default:
     ipam:

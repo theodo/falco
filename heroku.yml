@@ -14,4 +14,4 @@ release:
   command:
     - ./release_backend.sh
 run:
-  web: ./start_backend.sh
+  web: /usr/bin/supervisord -c /etc/supervisord.conf
