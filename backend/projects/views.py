@@ -7,6 +7,7 @@ from projects.models import (
     ProjectMemberRole,
     ProjectAuditParameters,
     AvailableAuditParameters,
+    Script,
 )
 from projects.serializers import (
     PageSerializer,
@@ -14,6 +15,7 @@ from projects.serializers import (
     ProjectMemberRoleSerializer,
     ProjectAuditParametersSerializer,
     AvailableAuditParameterSerializer,
+    ScriptSerializer,
 )
 from projects.permissions import (
     check_if_member_of_project,
@@ -275,3 +277,19 @@ def available_audit_parameters(request):
         available_audit_parameters, many=True
     )
     return JsonResponse(serializer.data, safe=False)
+
+
+@api_view(["POST"])
+@permission_classes([permissions.IsAuthenticated])
+def project_scripts(request, project_uuid):
+    project = Project.objects.get(uuid=project_uuid)
+    check_if_admin_of_project(request.user.id, project.uuid)
+    data = JSONParser().parse(request)
+    serializer = ScriptSerializer(data=data)
+    if serializer.is_valid():
+        script = Script.objects.create(project=project, **serializer.validated_data)
+        script.save()
+        return JsonResponse(
+            {"uuid": script.uuid, **serializer.data}, status=status.HTTP_201_CREATED
+        )
+    return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

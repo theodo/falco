@@ -80,7 +80,7 @@ class ScriptSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Script
-        fields = ("uuid", "name", "latest_audit_status_histories")
+        fields = ("uuid", "name", "latest_audit_status_histories", "script")
 
 
 class AvailableAuditParameterSerializer(serializers.ModelSerializer):
