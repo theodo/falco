@@ -191,6 +191,13 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
                 intl.formatMessage({'id': 'Toastr.ProjectSettings.delete_audit_parameter_success'}),
               );
               break;
+            case "addScriptToProjectSuccess":
+              toastr.success(
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.add_script_to_project_sucess'}),
+              );
+              break;
+          case "addScriptToProjectError":
           case "deleteAuditParameterError":
           case "editAuditParameterError":
           case "addMemberError":
@@ -349,6 +356,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
         </Style.ElementContainer>
         {isUserAdminOfProject(currentUser, project) && <Style.ElementContainer>
           <AddScript
+            projectId={project.uuid}
           />
           </Style.ElementContainer>}
       </Style.ProjectSettingsBlock>

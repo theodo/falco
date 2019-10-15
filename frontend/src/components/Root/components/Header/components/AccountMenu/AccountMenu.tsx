@@ -1,10 +1,9 @@
+import Loader from 'components/Loader';
 import React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
 import { UserState } from 'redux/user/reducer';
 import { routeDefinitions } from 'routes';
-
-import Loader from 'components/Loader';
 import { Container, Notification, UserActionItem, UserActionsBlock, UserEmail, UserInfosBlock, UserInfosBlockContainer, UserName, WhatsNewLink } from './AccountMenu.style';
 
 interface OwnProps {

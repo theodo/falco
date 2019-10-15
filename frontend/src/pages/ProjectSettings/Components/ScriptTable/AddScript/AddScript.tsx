@@ -5,7 +5,12 @@ import { colorUsage } from 'stylesheet';
 import { ScriptModal } from '../ScriptModal';
 import { AddScriptButtonContainer, AddScriptButtonLabel } from '../ScriptTable.style';
 
-export const AddScript: React.FunctionComponent<InjectedIntlProps> = ({
+interface Props {
+  projectId: string;
+}
+
+export const AddScript: React.FunctionComponent<InjectedIntlProps & Props> = ({
+  projectId,
   intl
   }) => {
 
@@ -33,6 +38,7 @@ export const AddScript: React.FunctionComponent<InjectedIntlProps> = ({
         <ScriptModal
           display={displayScriptModal}
           close={closeScriptModal}
+          projectId={projectId}
         />
       </React.Fragment>
   )

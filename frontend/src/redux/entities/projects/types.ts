@@ -65,3 +65,5 @@ export type ProjectToastrDisplayType =
 | 'editAuditParameterSuccess'
 | 'deleteAuditParameterSuccess'
 | 'deleteAuditParameterError'
+| 'addScriptToProjectSuccess'
+| 'addScriptToProjectError'

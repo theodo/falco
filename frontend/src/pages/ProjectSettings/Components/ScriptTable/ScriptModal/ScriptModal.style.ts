@@ -71,3 +71,26 @@ export const ConfirmButton = styled.button`
   cursor: pointer;
   text-decoration: none;
 `;
+
+export const Loader = styled.div`
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  position: fixed;
+  top: 40%;
+  right: 50%;
+  border: 4px solid ${colorUsage.leadSubmitButtonLoaderSecondary};
+  border-left-color: ${colorUsage.loader};
+  animation: rotating 1.5s 0s linear infinite;
+  z-index: 4;
+
+
+  @keyframes rotating {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+}
+`;

@@ -1,9 +1,10 @@
 import { ApiScriptType, ScriptType } from "./types";
 
 
-const modelizeScript = (apiScript: ApiScriptType): ScriptType => ({
+export const modelizeScript = (apiScript: ApiScriptType): ScriptType => ({
     uuid: apiScript.uuid,
     name: apiScript.name,
+    script: apiScript.script,
 });
 
 export const modelizeApiScriptsToById = (scripts: ApiScriptType[]): Record<string, ScriptType> => {

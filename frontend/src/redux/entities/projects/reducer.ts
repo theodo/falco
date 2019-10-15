@@ -4,6 +4,7 @@ import {
   addAuditParameterToProjectSuccess,
   addMemberToProjectSuccess,
   addPageToProjectSuccess,
+  addScriptToProjectSuccess,
   deleteAuditParameterFromProjectSuccess,
   deleteMemberOfProjectSuccess,
   deletePageOfProjectSuccess,
@@ -12,7 +13,7 @@ import {
   fetchProjectError,
   fetchProjectsRequest,
   fetchProjectSuccess,
-  setProjectToastrDisplay,
+  setProjectToastrDisplay
 } from './actions';
 import { ProjectMember, ProjectToastrDisplayType, ProjectType } from './types';
 
@@ -28,7 +29,8 @@ export type ProjectsAction = ActionType<
   typeof setProjectToastrDisplay |
   typeof editProjectDetailsSuccess |
   typeof addAuditParameterToProjectSuccess |
-  typeof deleteAuditParameterFromProjectSuccess
+  typeof deleteAuditParameterFromProjectSuccess |
+  typeof addScriptToProjectSuccess
 >;
 
 export type ProjectsState = Readonly<{
@@ -197,6 +199,19 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
           }
         },
       };
+    case getType(addScriptToProjectSuccess):
+      if(!state.byId) { return state };
+
+      return {
+      ...state,
+      byId: {
+        ...state.byId,
+        [typedAction.payload.projectId]: {
+          ...state.byId[typedAction.payload.projectId],
+          scriptIds: [...state.byId[typedAction.payload.projectId].scriptsIds, typedAction.payload.scriptId]
+        }
+      },
+    };
     default:
       return state;
   }
