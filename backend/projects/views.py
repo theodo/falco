@@ -293,3 +293,28 @@ def project_scripts(request, project_uuid):
             {"uuid": script.uuid, **serializer.data}, status=status.HTTP_201_CREATED
         )
     return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["PUT", "DELETE"])
+@permission_classes([permissions.IsAuthenticated])
+def project_script_detail(request, project_uuid, script_uuid):
+    project = get_object_or_404(Project, pk=project_uuid)
+    script = get_object_or_404(Script, pk=script_uuid)
+    check_if_member_of_project(request.user.id, project.uuid)
+
+    if script.project != project:
+        return JsonResponse({}, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == "PUT":
+        check_if_admin_of_project(request.user.id, project.uuid)
+        data = JSONParser().parse(request)
+        serializer = ScriptSerializer(script, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == "DELETE":
+        check_if_admin_of_project(request.user.id, project.uuid)
+        script.delete()
+        return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
