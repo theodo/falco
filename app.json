@@ -58,7 +58,7 @@
       }
     },
     "scripts": {
-      "postdeploy": "./manage.py shell -c \"from django.contrib.auth.models import User; User.objects.create_superuser('admin', $EMAIL_FROM, 'admin')\""
+      "postdeploy": "./manage.py shell -c \"from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', $EMAIL_FROM, 'admin')\""
     },
     "success_url": "/admin/"
   }
