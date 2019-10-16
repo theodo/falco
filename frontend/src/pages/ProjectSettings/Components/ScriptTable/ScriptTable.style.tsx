@@ -23,7 +23,7 @@ export const NameHeader = styled.div`
 
 export const Script = styled.div`
   white-space: nowrap;
-  width: 40%;
+  width: 70%;
   font-family: ${fontFamily.mainSans};
   font-size: ${fontSize.inputText};
   line-height: ${lineHeight.inputText};
@@ -44,7 +44,7 @@ export const NameScript = styled.div`
 
 export const ScriptHeader = styled.div`
   ${genericStyle}
-  width: 40%;
+  width: 70%;
 `;
 
 export const AddScriptButtonContainer = styled.div`
