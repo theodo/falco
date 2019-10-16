@@ -1,5 +1,5 @@
 {
-    "name": "falco-nicolasgo",
+    "name": "Falco",
     "description": "A Heroku version of Falco",
     "repository": "https://github.com/theodo/falco",
     "logo": "https://user-images.githubusercontent.com/2587348/51670042-0f2b6a80-1fc6-11e9-8080-c3195853ba62.png",
@@ -7,7 +7,9 @@
     "stack": "container",
     "addons": ["heroku-postgresql:hobby-dev", "heroku-redis"],
     "env": {
-      "DJANGO_SETTINGS_MODULE": "root.settings.dev",
+      "DJANGO_SETTINGS_MODULE": "root.settings.prod",
+      "MEDIA_BUCKET": "falco-staging-media",
+      "PUBLIC_URL": "/static/front",
       "DB_CYPHER_KEY": {
               "description": "This gets generated",
               "generator": "secret"
@@ -30,39 +32,30 @@
       },
       "EMAIL_PORT": {
               "description": "",
-              "value": "587"
+              "value": "587",
+              "required": false
       },
       "EMAIL_FROM": {
               "description": "Who sends the mail",
-              "value": "dev@getfal.co"
+              "value": "dev@getfal.co",
+              "required": false
       },
       "EMAIL_TO": {
               "description": "Who should receive the mails",
-              "value": "dev@getfal.co"
-      },
-      "GOOGLE_ANALYTICS_ID": {
-              "description": "ID Google Analytics",
-              "value": ""
+              "value": "dev@getfal.co",
+              "required": false
       },
       "ALLOWED_HOST": {
               "description": "",
               "value": ""
       },
-      "MEDIA_BUCKET": {
-              "description": "",
-              "value": "falco-staging-media"
-      },
-      "PUBLIC_URL": {
-              "description": "",
-              "value": "/static/front"
-      },
       "REACT_APP_API_BASE_URL": {
               "description": "",
               "value": ""
-      },
-      "WEBPAGETEST_API_KEY": {
-              "description": "",
-              "value": ""
       }
-    }
+    },
+    "scripts": {
+      "postdeploy": "./manage.py shell -c \"from django.contrib.auth.models import User; User.objects.create_superuser('admin', $EMAIL_FROM, 'admin')\""
+    },
+    "success_url": "/admin/"
   }
