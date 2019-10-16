@@ -11,6 +11,10 @@ export const addScript = createStandardAction('projects/ADD_SCRIPT')<{
     byId: Record<string, ScriptType>;
   }>();
 
+  export const editScriptSuccess = createStandardAction('projects/EDIT_SCRIPT_SUCCESS')<{
+    byId: Record<string, ScriptType>;
+  }>();
+
 export default {
     fetchScriptAction,
     addScript,

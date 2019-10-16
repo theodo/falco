@@ -39,6 +39,7 @@ export const AddScript: React.FunctionComponent<InjectedIntlProps & Props> = ({
           display={displayScriptModal}
           close={closeScriptModal}
           projectId={projectId}
+          scriptId=""
         />
       </React.Fragment>
   )

@@ -7,37 +7,45 @@ import Close from 'icons/Close';
 import { ProjectToastrDisplayType } from 'redux/entities/projects/types';
 import { modelizeScript } from 'redux/entities/scripts/modelizer';
 import { ScriptType } from 'redux/entities/scripts/types';
-import { makePostRequest } from 'services/networking/request';
+import { makePostRequest, makePutRequest } from 'services/networking/request';
 import { colorUsage, zIndex } from 'stylesheet';
 import { CloseContainer, ConfirmButton, Loader, NameInput, PageTitle, ScriptInput } from './ScriptModal.style';
 
+export interface OwnProps {
+  scriptId: string;
+}
 
 type Props = {
   display: boolean;
   projectId: string;
+  script: ScriptType | undefined | null
   close: () => void;
   addScriptToProjectSuccess: (projectId: string, scriptId: string) => void;
   addScript: (byId: Record<string, ScriptType>) => void;
+  editScriptSuccess: (byId: Record<string, ScriptType>) => void;
   setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
-} & InjectedIntlProps;
+} & InjectedIntlProps & OwnProps;
 
 export const ScriptModal: React.FunctionComponent<Props> = ({
   display,
   close,
   projectId,
+  scriptId,
+  script,
   addScriptToProjectSuccess,
   addScript,
+  editScriptSuccess,
   setProjectToastrDisplay,
   intl,
 }) => {
-  const [script, setScript] = React.useState("");
-  const [scriptName, setScriptName] = React.useState("");
+  const [scriptContent, setScriptContent] = React.useState(script ? script.script : "");
+  const [scriptName, setScriptName] = React.useState(script ? script.name : "");
 
   const [state, createScript] = useAsyncFn(async () => {
     try {
       const response = await makePostRequest(`/api/projects/${projectId}/scripts`, true, {
         name: scriptName,
-        script,
+        script: scriptContent,
       });
       if (!response) {
         throw new Error("No response")
@@ -50,7 +58,25 @@ export const ScriptModal: React.FunctionComponent<Props> = ({
     } catch(e) {
       setProjectToastrDisplay('addScriptToProjectError')
     }
-  }, [projectId, script, scriptName]);
+  }, [projectId, scriptContent, scriptName]);
+
+  const [editState, editScript] = useAsyncFn(async () => {
+    try {
+      const response = await makePutRequest(`/api/projects/${projectId}/scripts/${scriptId}`, true, {
+        name: scriptName,
+        script: scriptContent,
+      });
+      if (!response) {
+        throw new Error("No response")
+      }
+      const modelizedScript = modelizeScript(response.body)
+      setProjectToastrDisplay('editScriptSuccess')
+      editScriptSuccess({ [modelizedScript.uuid]: modelizedScript })
+      close()
+    } catch(e) {
+      setProjectToastrDisplay('editScriptError')
+    }
+  }, [projectId, scriptContent, scriptName]);
 
   const modalStyles = {
     content: {
@@ -78,6 +104,10 @@ export const ScriptModal: React.FunctionComponent<Props> = ({
   };
   const handleModalClose = () => {
     document.body.style.overflow = 'auto';
+    if (!script) { // clear creation modal on close
+      setScriptContent("")
+      setScriptName("")
+    }
   };
 
   const handleNameChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
@@ -85,7 +115,7 @@ export const ScriptModal: React.FunctionComponent<Props> = ({
   }
 
   const handleScriptChange = (event: React.SyntheticEvent<HTMLTextAreaElement>) => {
-    setScript((event.target as HTMLInputElement).value)
+    setScriptContent((event.target as HTMLInputElement).value)
   }
 
   return (
@@ -103,13 +133,15 @@ export const ScriptModal: React.FunctionComponent<Props> = ({
       <PageTitle>{intl.formatMessage({ id: `ProjectSettings.script_modal_title`})}</PageTitle>
       <NameInput
         onChange={handleNameChange}
+        value={scriptName}
         placeholder={intl.formatMessage({ id: `ProjectSettings.script_name_placeholder`})}
       />
       <ScriptInput
         onChange={handleScriptChange}
+        value={scriptContent}
       />
-      <ConfirmButton onClick={createScript}>
-        {intl.formatMessage({ id: `ProjectSettings.script_confirm_creation`})}
+      <ConfirmButton onClick={script ? editScript : createScript}>
+        {intl.formatMessage({ id: script ?`ProjectSettings.script_confirm_edition` : `ProjectSettings.script_confirm_creation`})}
       </ConfirmButton>
       <CloseContainer
         onClick={close}
@@ -117,7 +149,7 @@ export const ScriptModal: React.FunctionComponent<Props> = ({
         <Close color={colorUsage.graphModalToggleButton} />
       </CloseContainer>
     </Modal>
-    {state.loading ? <Loader/> : null}
+    {state.loading || editState.loading ? <Loader/> : null}
     </React.Fragment>
   );
 };

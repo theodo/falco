@@ -1,12 +1,13 @@
 import { AnyAction } from "redux";
 import { ActionType, getType } from "typesafe-actions";
-import { addScript, fetchScriptAction } from "./actions";
+import { addScript, editScriptSuccess, fetchScriptAction } from "./actions";
 import { ScriptType } from "./types";
 
 
 export type ScriptsAction = ActionType<
 typeof fetchScriptAction |
-typeof addScript
+typeof addScript |
+typeof editScriptSuccess
 >;
 
 export type ScriptsState = Readonly<{
@@ -29,6 +30,14 @@ const reducer = (state: ScriptsState = initialState, action: AnyAction) => {
                 }
             };
         case getType(addScript):
+            return {
+                ...state,
+                byId: {
+                    ...state.byId,
+                    ...typedAction.payload.byId,
+            }
+        };
+        case getType(editScriptSuccess):
             return {
                 ...state,
                 byId: {

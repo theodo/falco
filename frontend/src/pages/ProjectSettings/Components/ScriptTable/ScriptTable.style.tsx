@@ -33,6 +33,10 @@ export const Script = styled.div`
   text-overflow: ellipsis;
 `;
 
+export const EditIconContainer = styled.div`
+  cursor: pointer;
+`;
+
 export const NameScript = styled.div`
   ${genericStyle}
   width: 25%;
