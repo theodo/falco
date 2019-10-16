@@ -52,13 +52,13 @@
               "value": ".herokuapp.com"
       },
       "REACT_APP_API_BASE_URL": {
-              "description": "The URL of the applcation, again. (Unusued ?)",
+              "description": "The URL of the application, again. (Unused ?)",
               "value": "",
               "required": false
       }
     },
     "scripts": {
-      "postdeploy": "./manage.py shell -c \"from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', $EMAIL_FROM, 'admin')\""
+      "postdeploy": "./manage.py shell -c \"from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', '$EMAIL_FROM', 'admin')\""
     },
-    "success_url": "/admin/"
+    "success_url": "/admin/?next=/admin/password_change/"
   }
