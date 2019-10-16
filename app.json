@@ -19,19 +19,22 @@
               "generator": "secret"
       },
       "EMAIL_HOST": {
-              "description": "",
-              "value": "smtp.gmail.com"
+              "description": "The host to use for sending email.",
+              "value": "localhost",
+              "required": false
       },
       "EMAIL_USER": {
-              "description": "",
-              "value": ""
+              "description": "Username to use for the SMTP server defined in EMAIL_HOST. If empty, Django won’t attempt authentication.",
+              "value": "",
+              "required": false
       },
       "EMAIL_PASSWORD": {
-              "description": "",
-              "value": ""
+              "description": "Password to use for the SMTP server defined in EMAIL_HOST. This setting is used in conjunction with EMAIL_HOST_USER when authenticating to the SMTP server. If either of these settings is empty, Django won’t attempt authentication.",
+              "value": "",
+              "required": false
       },
       "EMAIL_PORT": {
-              "description": "",
+              "description": "Port to use for the SMTP server defined in EMAIL_HOST.",
               "value": "587",
               "required": false
       },
@@ -41,17 +44,17 @@
               "required": false
       },
       "EMAIL_TO": {
-              "description": "Who should receive the mails",
-              "value": "dev@getfal.co",
-              "required": false
+              "description": "Who should receive the mails. Will be used to create the admin account, with 'admin' password.",
+              "value": ""
       },
       "ALLOWED_HOST": {
-              "description": "",
-              "value": ""
+              "description": "The URL the application will be available on. See https://docs.djangoproject.com/fr/2.2/ref/settings/#allowed-hosts",
+              "value": ".herokuapp.com"
       },
       "REACT_APP_API_BASE_URL": {
-              "description": "",
-              "value": ""
+              "description": "The URL of the applcation, again. (Unusued ?)",
+              "value": "",
+              "required": false
       }
     },
     "scripts": {
