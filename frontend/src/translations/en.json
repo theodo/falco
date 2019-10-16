@@ -263,6 +263,8 @@
       "add_audit_parameter_to_project_success": "The audit parameter has been created successfully",
       "add_script_to_project_sucess": "The script has been created successfully",
       "edit_script_sucess": "The script has been edited successfully",
+      "delete_script_sucess": "The script has been deleted successfully",
+      "delete_script_confirm_question": "Do you really want to delete this script?",
       "edit_audit_parameter_success": "The audit parameter has been edited successfully",
       "delete_page_success_message": "The page has been deleted successfully",
       "delete_page_confirm_question": "Do you really want to delete the page?",

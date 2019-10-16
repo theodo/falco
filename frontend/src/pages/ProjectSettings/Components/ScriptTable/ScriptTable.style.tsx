@@ -64,3 +64,24 @@ export const AddScriptButtonContainer = styled.div`
 export const AddScriptButtonLabel = styled.div`
   margin-left: ${getSpacing(4)};
 `
+export const ScriptDeleteContainer = styled.div`
+  width: 5%;
+  display: flex;
+  flex-direction: row-reverse;
+`;
+
+export const ScriptDeleteButton = styled.button`
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  padding: 2px;
+  background: inherit;
+
+  &:hover {
+    opacity: 0.5;
+    background: white;
+    transition-duration: 0.2s;
+  }
+`;

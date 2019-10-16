@@ -69,3 +69,5 @@ export type ProjectToastrDisplayType =
 | 'addScriptToProjectError'
 | 'editScriptError'
 | 'editScriptSuccess'
+| 'deleteScriptError'
+| 'deleteScriptSuccess'

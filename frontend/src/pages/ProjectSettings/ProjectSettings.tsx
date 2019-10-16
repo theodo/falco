@@ -203,8 +203,15 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
                 intl.formatMessage({'id': 'Toastr.ProjectSettings.edit_script_sucess'}),
               );
               break;
+            case "deleteScriptSuccess":
+              toastr.success(
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.delete_script_sucess'}),
+              );
+              break;
           case "addScriptToProjectError":
           case "editScriptError":
+          case "deleteScriptError":
           case "deleteAuditParameterError":
           case "editAuditParameterError":
           case "addMemberError":

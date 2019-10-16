@@ -132,6 +132,10 @@ export const addScriptToProjectSuccess = createStandardAction('projects/ADD_SCRI
   projectId: string;
   scriptId: string;
 }>();
+export const deleteScriptFromProjectSuccess = createStandardAction('projects/DELETE_SCRIPT_FROM_PROJECT_SUCCESS')<{
+  projectId: string;
+  scriptId: string;
+}>();
 
 export default {
   addMemberToProjectRequest,
@@ -162,4 +166,5 @@ export default {
   deleteAuditParameterFromProjectError,
   deleteAuditParameterFromProjectSuccess,
   addScriptToProjectSuccess,
+  deleteScriptFromProjectSuccess,
 };
