@@ -3,10 +3,11 @@ FROM node:8.12-alpine AS node
 
 WORKDIR /code
 
-ENV NODE_PATH /code/src
-COPY ./frontend /code/
-RUN yarn && yarn build
+COPY ./frontend/package.json ./frontend/yarn.lock /code/
+RUN yarn install --pure-lockfile
 
+COPY ./frontend/ /code/
+RUN yarn build
 
 # Second stage: build base backend
 FROM python:3.7-alpine AS backend

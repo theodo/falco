@@ -1,9 +1,3 @@
-.git
-.github
-
-**/node_modules/*
-.circleci
-.github
 design
 devops
 docs
@@ -11,4 +5,19 @@ fixtures
 hooks
 postgres-data
 
-*.md
+**/.circleci
+**/*.log
+**/*.md
+**/._*
+**/.dockerignore
+**/.DS_Store
+**/.git/
+**/.gitattributes
+**/.gitignore
+**/.gitmodules
+**/.github
+**/Dockerfile*
+**/Thumbs.db
+.env*
+build/
+**/node_modules/
