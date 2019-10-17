@@ -101,6 +101,3 @@ EMAIL_PORT = int(port) if port is not None else 0
     In PROD environment, we want to secure this sensitive data and enforce this parameter to be set to True.
 """
 STORE_REFRESH_TOKEN_COOKIE_ONLY_IN_HTTPS = True
-
-# Google Analytics
-GOOGLE_ANALYTICS_ID = os.environ.get("GOOGLE_ANALYTICS_ID")

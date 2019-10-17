@@ -4,16 +4,6 @@
 <html lang="en" style="height: 100%;">
 
 <head>
-  {% if google_analytics_id %}
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=" + {{ google_analytics_id }}></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config',  "{{ google_analytics_id }}");
-    </script>
-  {% endif %}
   <base href="/">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -28,19 +18,6 @@
       <link href="{% static style %}" rel="stylesheet">
     {% endfor %}
   {% endif %}
-  <script type="text/javascript">
-    window.$crisp = [];
-    window.CRISP_WEBSITE_ID = "549814f3-864a-4606-b5a5-3cbcc594af24";
-    (
-      function() {
-        d = document;
-        s = d.createElement("script");
-        s.src = "https://client.crisp.chat/l.js";
-        s.async = 1;
-        d.getElementsByTagName("head")[0].appendChild(s);
-      }
-      )();
-  </script>
 </head>
 
 <body style="margin: 0; height: 100%;">
