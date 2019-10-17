@@ -12,14 +12,14 @@ import {
 export const CloseContainer = styled.div`
   position: absolute;
   top: 40px;
-  left: 975px;
+  right: 10px;
   width: 30px;
   height: 30px;
   cursor: pointer;
   z-index: ${zIndex.graphModalCloseButton};
 `;
 
-export const PageTitle = styled.div`
+export const PageTitle = styled.span`
   line-height: ${lineHeight.h1Text};
   color: ${colorUsage.h1Text};
   font-family: ${fontFamily.mainSans};
@@ -35,7 +35,7 @@ export const ScriptInput = styled.textarea`
   font-family: ${fontFamily.mainMono};
   resize: none;
   height: 70%;
-  overflow-y: scroll;
+  overflow-y: auto;
   margin-top: ${getSpacing(4)};
 `;
 
@@ -82,7 +82,7 @@ export const Loader = styled.div`
   border: 4px solid ${colorUsage.leadSubmitButtonLoaderSecondary};
   border-left-color: ${colorUsage.loader};
   animation: rotating 1.5s 0s linear infinite;
-  z-index: 4;
+  z-index: ${zIndex.modalLoader};
 
 
   @keyframes rotating {

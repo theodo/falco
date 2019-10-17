@@ -16,12 +16,12 @@ const genericStyle = `
   text-overflow: ellipsis;
 `;
 
-export const NameHeader = styled.div`
+export const NameHeader = styled.span`
   ${genericStyle}
   width: 25%;
 `;
 
-export const Script = styled.div`
+export const Script = styled.span`
   white-space: nowrap;
   width: 70%;
   font-family: ${fontFamily.mainSans};

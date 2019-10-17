@@ -180,6 +180,7 @@ export const colorUsage = {
   projectSettingsIconColor: colorPalette.grey800,
   createScriptButtonBackground: colorPalette.accentGreen500,
   createScriptButtonText: colorPalette.white500,
+  scriptRowIcon: colorPalette.black200,
 
   // WebPageTest
   webPageTestLinkButtonBackground: colorPalette.primary500,
@@ -391,12 +392,18 @@ export const zIndex = {
   graphModalCloseButton: '1',
   metricModalCheckbox: '1',
   webPageTestRadioButton: '1',
+  modalLoader: '4',
 };
 
 export const getSpacing = (multiplier: number): string =>
   `${multiplier * SPACING_UNIT}${MEASUREMENT_UNIT}`;
 
 export const responsiveThreshold = '460px';
+
+export const modalSize = {
+  big: '1375px',
+  medium: '1000px',
+}
 
 // Material UI - theme, do not declare constant inside this object
 export const muiTheme = createMuiTheme({

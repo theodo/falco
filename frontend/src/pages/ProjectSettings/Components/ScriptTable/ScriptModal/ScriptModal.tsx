@@ -8,7 +8,7 @@ import { ProjectToastrDisplayType } from 'redux/entities/projects/types';
 import { modelizeScript } from 'redux/entities/scripts/modelizer';
 import { ScriptType } from 'redux/entities/scripts/types';
 import { makePostRequest, makePutRequest } from 'services/networking/request';
-import { colorUsage, zIndex } from 'stylesheet';
+import { colorUsage, modalSize, zIndex } from 'stylesheet';
 import { CloseContainer, ConfirmButton, Loader, NameInput, PageTitle, ScriptInput } from './ScriptModal.style';
 
 export interface OwnProps {
@@ -81,7 +81,7 @@ export const ScriptModal: React.FunctionComponent<Props> = ({
   const modalStyles = {
     content: {
       height: `${window.innerHeight - 100}px`,
-      width: '1000px',
+      width: `${modalSize.medium}`,
       top: '50%',
       left: '50%',
       right: 'auto',
@@ -99,11 +99,7 @@ export const ScriptModal: React.FunctionComponent<Props> = ({
     },
   };
 
-  const handleModalOpen = () => {
-    document.body.style.overflow = 'hidden';
-  };
   const handleModalClose = () => {
-    document.body.style.overflow = 'auto';
     if (!script) { // clear creation modal on close
       setScriptContent("")
       setScriptName("")
@@ -127,7 +123,6 @@ export const ScriptModal: React.FunctionComponent<Props> = ({
       shouldCloseOnOverlayClick
       style={modalStyles}
       appElement={document.querySelector('#root') as HTMLElement}
-      onAfterOpen={handleModalOpen}
       onAfterClose={handleModalClose}
     >
       <PageTitle>{intl.formatMessage({ id: `ProjectSettings.script_modal_title`})}</PageTitle>
@@ -136,16 +131,12 @@ export const ScriptModal: React.FunctionComponent<Props> = ({
         value={scriptName}
         placeholder={intl.formatMessage({ id: `ProjectSettings.script_name_placeholder`})}
       />
-      <ScriptInput
-        onChange={handleScriptChange}
-        value={scriptContent}
-      />
+      <ScriptInput onChange={handleScriptChange} value={scriptContent} />
       <ConfirmButton onClick={script ? editScript : createScript}>
-        {intl.formatMessage({ id: script ?`ProjectSettings.script_confirm_edition` : `ProjectSettings.script_confirm_creation`})}
+        {intl.formatMessage({ id: script ? `ProjectSettings.script_confirm_edition`
+        : `ProjectSettings.script_confirm_creation`})}
       </ConfirmButton>
-      <CloseContainer
-        onClick={close}
-      >
+      <CloseContainer onClick={close} >
         <Close color={colorUsage.graphModalToggleButton} />
       </CloseContainer>
     </Modal>

@@ -7,7 +7,7 @@ import MessagePill from 'components/MessagePill';
 import MetricGraph from 'components/MetricGraph';
 import Close from 'icons/Close';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
-import { colorUsage, zIndex } from 'stylesheet';
+import { colorUsage, modalSize, zIndex } from 'stylesheet';
 import { CloseContainer, PageSubTitle, PageTitle } from './GraphModal.style';
 
 export interface OwnProps {
@@ -58,7 +58,7 @@ const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> 
   const modalStyles = {
     content: {
       height: `${window.innerHeight - 100}px`,
-      width: '1375px',
+      width: `${modalSize.big}`,
       top: '50%',
       left: '50%',
       right: 'auto',
@@ -104,8 +104,8 @@ const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> 
       >
         <Close color={colorUsage.graphModalToggleButton} />
       </CloseContainer>
-      {isLoading 
-        ? <Loader /> 
+      {isLoading
+        ? <Loader />
         : <MetricGraph
             fullscreen={true}
             auditResults={auditResults}

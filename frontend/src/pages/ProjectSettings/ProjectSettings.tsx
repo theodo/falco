@@ -376,9 +376,7 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
             />
           </Style.ElementContainer>))}
         {isUserAdminOfProject(currentUser, project) && <Style.ElementContainer>
-          <AddScript
-            projectId={project.uuid}
-          />
+          <AddScript projectId={project.uuid} />
           </Style.ElementContainer>}
       </Style.ProjectSettingsBlock>
       <Style.PageSubTitle>

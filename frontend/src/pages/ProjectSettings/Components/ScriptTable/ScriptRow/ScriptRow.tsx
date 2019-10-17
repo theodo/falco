@@ -73,7 +73,7 @@ export const ScriptRow: React.FunctionComponent<Props> = ({
       </Script>
       <EditIconContainer onClick={openScriptModal}>
         <Edit
-          color="black"
+          color={colorUsage.scriptRowIcon}
           width="1rem"
           height="1rem"
         />
