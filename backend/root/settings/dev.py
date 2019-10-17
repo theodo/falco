@@ -48,6 +48,3 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
     to False.
 """
 STORE_REFRESH_TOKEN_COOKIE_ONLY_IN_HTTPS = False
-
-# Google Analytics
-GOOGLE_ANALYTICS_ID = os.environ.get("GOOGLE_ANALYTICS_ID")

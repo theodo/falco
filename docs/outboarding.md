@@ -21,9 +21,6 @@ Check all the database dumps that you may have on your computer. Check the Downl
 ## Get removed from the Trello Board
 Ask another member to remove you from the trello board.
 
-## Get removed from Google analytics
-Ask an admin of the Google analytics page to remove you from the falco project.
-
 ## Get removed from scrumble
 Ask another member of the scrumble board to remove you from the project.
 
