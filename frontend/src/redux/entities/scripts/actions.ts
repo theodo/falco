@@ -1,4 +1,4 @@
-import { createAsyncAction } from "typesafe-actions";
+import { createAsyncAction, createStandardAction } from "typesafe-actions";
 import { ScriptType } from "./types";
 
 export const fetchScriptAction = createAsyncAction(
@@ -7,6 +7,15 @@ export const fetchScriptAction = createAsyncAction(
     'scripts/FETCH_SCRIPT_FAILURE',
 )<{}, { byId: Record<string, ScriptType>; }, { errorMessage: string }>();
 
+export const addScript = createStandardAction('projects/ADD_SCRIPT')<{
+    byId: Record<string, ScriptType>;
+  }>();
+
+  export const editScriptSuccess = createStandardAction('projects/EDIT_SCRIPT_SUCCESS')<{
+    byId: Record<string, ScriptType>;
+  }>();
+
 export default {
     fetchScriptAction,
+    addScript,
 }

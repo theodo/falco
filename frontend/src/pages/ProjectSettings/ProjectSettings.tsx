@@ -21,6 +21,7 @@ import AuditParameterRow, { AddAuditParameterRow } from './Components/AuditParam
 import PageRow, { PageRowHeader } from './Components/PageTable';
 import { AddPageRow } from './Components/PageTable';
 import ProjectDetailsInput from './Components/ProjectDetailsInput';
+import { AddScript, ScriptRow, ScriptTableHeader } from './Components/ScriptTable'
 import Style from './ProjectSettings.style';
 
 export type OwnProps = {} & RouteComponentProps<{
@@ -190,6 +191,27 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
                 intl.formatMessage({'id': 'Toastr.ProjectSettings.delete_audit_parameter_success'}),
               );
               break;
+            case "addScriptToProjectSuccess":
+              toastr.success(
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.add_script_to_project_sucess'}),
+              );
+              break;
+            case "editScriptSuccess":
+              toastr.success(
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.edit_script_sucess'}),
+              );
+              break;
+            case "deleteScriptSuccess":
+              toastr.success(
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.delete_script_sucess'}),
+              );
+              break;
+          case "addScriptToProjectError":
+          case "editScriptError":
+          case "deleteScriptError":
           case "deleteAuditParameterError":
           case "editAuditParameterError":
           case "addMemberError":
@@ -337,6 +359,24 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
             <AddPageRow
               projectId={project.uuid}
             />
+          </Style.ElementContainer>}
+      </Style.ProjectSettingsBlock>
+      <Style.PageSubTitle>
+        <FormattedMessage id="ProjectSettings.scripts"/>
+      </Style.PageSubTitle>
+      <Style.ProjectSettingsBlock>
+        <Style.ElementContainer>
+          <ScriptTableHeader/>
+        </Style.ElementContainer>
+        {project.scriptsIds.map(scriptId => (
+          <Style.ElementContainer key={scriptId}>
+            <ScriptRow
+              scriptId={scriptId}
+              projectId={project.uuid}
+            />
+          </Style.ElementContainer>))}
+        {isUserAdminOfProject(currentUser, project) && <Style.ElementContainer>
+          <AddScript projectId={project.uuid} />
           </Style.ElementContainer>}
       </Style.ProjectSettingsBlock>
       <Style.PageSubTitle>

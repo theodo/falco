@@ -117,7 +117,7 @@ class AvailableAuditParameters(BaseModel):
 
 
 class Script(BaseModel):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, blank=False, null=False)
     script = EncryptedTextField()
     project = models.ForeignKey(
         Project, related_name="scripts", on_delete=models.CASCADE

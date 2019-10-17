@@ -17,4 +17,6 @@ urlpatterns = [
         views.project_audit_parameters_detail,
     ),
     path("available_audit_parameters", views.available_audit_parameters),
+    path("<uuid:project_uuid>/scripts", views.project_scripts),
+    path("<uuid:project_uuid>/scripts/<uuid:script_uuid>", views.project_script_detail),
 ]

@@ -128,6 +128,14 @@ export const deleteAuditParameterFromProjectError = createStandardAction('projec
   projectId: string;
   errorMessage: string;
 }>();
+export const addScriptToProjectSuccess = createStandardAction('projects/ADD_SCRIPT_TO_PROJECT_SUCCESS')<{
+  projectId: string;
+  scriptId: string;
+}>();
+export const deleteScriptFromProjectSuccess = createStandardAction('projects/DELETE_SCRIPT_FROM_PROJECT_SUCCESS')<{
+  projectId: string;
+  scriptId: string;
+}>();
 
 export default {
   addMemberToProjectRequest,
@@ -157,4 +165,6 @@ export default {
   deleteAuditParameterFromProjectRequest,
   deleteAuditParameterFromProjectError,
   deleteAuditParameterFromProjectSuccess,
+  addScriptToProjectSuccess,
+  deleteScriptFromProjectSuccess,
 };
