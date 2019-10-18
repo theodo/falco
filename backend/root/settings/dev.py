@@ -8,12 +8,18 @@ FERNET_KEYS = [os.environ.get("DB_CYPHER_KEY")]
 DEBUG = True
 INTERNAL_IPS = ["127.0.0.1", "172.16.210.1"]
 
-INSTALLED_APPS = INSTALLED_APPS + ["debug_toolbar", "django_extensions"]
+INSTALLED_APPS = INSTALLED_APPS + ["django_extensions", "corsheaders"]
 
-MIDDLEWARE = MIDDLEWARE + ["debug_toolbar.middleware.DebugToolbarMiddleware"]
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+]
 
-# Static files
-STATICFILES_STORAGE = "core.storage.ManifestStorage"
+CORS_ALLOW_CREDENTIALS = True
+
+MIDDLEWARE = MIDDLEWARE + ["corsheaders.middleware.CorsMiddleware"]
+
+# # Static files
+# STATICFILES_STORAGE = "core.storage.ManifestStorage"
 
 # Uploaded files storage
 MEDIA_ROOT = "/uploads/"

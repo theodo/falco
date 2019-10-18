@@ -9,7 +9,8 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
 
   backend:
-    build: .
+    build: ./backend
+    command: python /code/manage.py rundebugserver 0.0.0.0:80
     volumes:
       - ./backend:/code
     ports:
@@ -22,10 +23,22 @@ services:
       - .env
     environment:
       DATABASE_URL: "postgres://postgres@db:5432/postgres"
-      PORT: 80
 
   redis:
     image: redis
+
+  celery:
+    build: ./backend
+    volumes:
+      - ./backend:/code
+    links:
+      - db
+      - redis
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: "postgres://postgres@db:5432/postgres"
+    command: celery worker -A root.celery -B -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler -c 4
 
 networks:
   default:
