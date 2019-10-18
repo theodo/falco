@@ -14,4 +14,4 @@ release:
     - ./release_backend.sh
 run:
   web: ./start_backend.sh
-  celery: /usr/bin/supervisord -c /etc/supervisord.conf
+  celery: ./start_celery.sh
