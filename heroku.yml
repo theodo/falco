@@ -7,11 +7,11 @@ setup:
 build:
   docker:
     web: Dockerfile
-    celery: Dockerfile
+    worker: Dockerfile
 release:
   image: web
   command:
     - ./release_backend.sh
 run:
   web: ./start_backend.sh
-  celery: ./start_celery.sh
+  worker: ./start_celery.sh

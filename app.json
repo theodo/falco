@@ -1,63 +1,43 @@
 {
-    "name": "Falco",
-    "description": "A Heroku version of Falco",
-    "repository": "https://github.com/theodo/falco",
-    "logo": "https://user-images.githubusercontent.com/2587348/51670042-0f2b6a80-1fc6-11e9-8080-c3195853ba62.png",
-    "keywords": ["nginx", "docker", "proxy"],
-    "stack": "container",
-    "addons": ["heroku-postgresql:hobby-dev", "heroku-redis"],
-    "env": {
-      "MEDIA_BUCKET": "falco-staging-media",
-      "PUBLIC_URL": "/static/front",
-      "DB_CYPHER_KEY": {
-              "description": "This gets generated",
-              "generator": "secret"
-      },
-      "SECRET_KEY": {
-              "description": "This gets generated",
-              "generator": "secret"
-      },
-      "EMAIL_HOST": {
-              "description": "The host to use for sending email.",
-              "value": "localhost",
-              "required": false
-      },
-      "EMAIL_USER": {
-              "description": "Username to use for the SMTP server defined in EMAIL_HOST. If empty, Django won’t attempt authentication.",
-              "value": "",
-              "required": false
-      },
-      "EMAIL_PASSWORD": {
-              "description": "Password to use for the SMTP server defined in EMAIL_HOST. This setting is used in conjunction with EMAIL_HOST_USER when authenticating to the SMTP server. If either of these settings is empty, Django won’t attempt authentication.",
-              "value": "",
-              "required": false
-      },
-      "EMAIL_PORT": {
-              "description": "Port to use for the SMTP server defined in EMAIL_HOST.",
-              "value": "587",
-              "required": false
-      },
-      "EMAIL_FROM": {
-              "description": "Who sends the mail",
-              "value": "dev@getfal.co",
-              "required": false
-      },
-      "EMAIL_TO": {
-              "description": "Who should receive the mails. Will be used to create the admin account, with 'admin' password.",
-              "value": ""
-      },
-      "ALLOWED_HOST": {
-              "description": "The URL the application will be available on. See https://docs.djangoproject.com/fr/2.2/ref/settings/#allowed-hosts",
-              "value": ".herokuapp.com"
-      },
-      "REACT_APP_API_BASE_URL": {
-              "description": "The URL of the application, again. (Unused ?)",
-              "value": "",
-              "required": false
-      }
+  "name": "Falco",
+  "description": "A Heroku version of Falco",
+  "repository": "https://github.com/theodo/falco",
+  "logo": "https://user-images.githubusercontent.com/2587348/51670042-0f2b6a80-1fc6-11e9-8080-c3195853ba62.png",
+  "keywords": ["webpagetest", "performance"],
+  "stack": "container",
+  "addons": ["heroku-postgresql:hobby-dev", "heroku-redis"],
+  "env": {
+    "MEDIA_BUCKET": "falco-staging-media",
+    "DB_CYPHER_KEY": {
+      "description": "This gets generated",
+      "generator": "secret"
     },
-    "scripts": {
-      "postdeploy": "./manage.py shell -c \"from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', '$EMAIL_FROM', 'admin')\""
+    "SECRET_KEY": {
+      "description": "This gets generated",
+      "generator": "secret"
     },
-    "success_url": "/admin/?next=%2Fadmin%2Fpassword_change%2F"
-  }
+    "EMAIL_ADMIN": {
+      "description": "This email will be assigned to the `admin` account",
+      "value": "your@email.com",
+      "required": true
+    },
+    "ALLOWED_HOST": {
+      "description": "The URL the application will be available on. See https://docs.djangoproject.com/fr/2.2/ref/settings/#allowed-hosts",
+      "value": ".herokuapp.com"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "Free"
+    },
+    "worker": {
+      "quantity": 1,
+      "size": "Free"
+    }
+  },
+  "scripts": {
+    "postdeploy": "./manage.py shell -c \"from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', '$EMAIL_ADMIN', 'admin')\""
+  },
+  "success_url": "/admin/?next=%2Fadmin%2Fpassword_change%2F"
+}

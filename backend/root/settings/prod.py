@@ -10,22 +10,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 FERNET_KEYS = [os.environ.get("DB_CYPHER_KEY")]
 DEBUG = False
 
-ALLOWED_HOSTS = ["falco-nicolasgo.herokuapp.com"]
-
 if "ALLOWED_HOST" in os.environ:
     ALLOWED_HOSTS.append(os.environ.get("ALLOWED_HOST"))
-
-try:
-    LOCAL_EC2_IP = requests.get(
-        "http://169.254.169.254/latest/meta-data/local-ipv4"
-    ).text
-    PUBLIC_EC2_IP = requests.get(
-        "http://169.254.169.254/latest/meta-data/public-ipv4"
-    ).text
-    ALLOWED_HOSTS.append(LOCAL_EC2_IP)
-    ALLOWED_HOSTS.append(PUBLIC_EC2_IP)
-except requests.exceptions.RequestException:
-    pass
 
 INSTALLED_APPS = INSTALLED_APPS + ["django.contrib.staticfiles"]
 
