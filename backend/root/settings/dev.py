@@ -16,9 +16,6 @@ CORS_ALLOW_CREDENTIALS = True
 
 MIDDLEWARE = MIDDLEWARE + ["corsheaders.middleware.CorsMiddleware"]
 
-# # Static files
-# STATICFILES_STORAGE = "core.storage.ManifestStorage"
-
 # Uploaded files storage
 MEDIA_ROOT = "/uploads/"
 MEDIA_URL_PATH = "uploads/"

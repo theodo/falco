@@ -27,7 +27,7 @@ try:
 except requests.exceptions.RequestException:
     pass
 
-INSTALLED_APPS = INSTALLED_APPS + ["storages"]
+INSTALLED_APPS = INSTALLED_APPS + ["django.contrib.staticfiles"]
 
 # Secure connection
 SECURE_REDIRECT_EXEMPT = [r"/?health"]
