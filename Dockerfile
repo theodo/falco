@@ -6,11 +6,14 @@ WORKDIR /code
 COPY ./frontend/package.json ./frontend/yarn.lock /code/
 RUN yarn install --pure-lockfile
 
+COPY ./frontend/ /code/
+RUN yarn build
+
 # Second stage: build base backend
 FROM python:3.7-alpine AS backend
 
 # Allow heroku exec
-RUN apk add --no-cache curl postgresql-dev openssh bash supervisor
+RUN apk add --no-cache curl postgresql-dev openssh bash
 
 
 ADD ./.profile.d /app/.profile.d

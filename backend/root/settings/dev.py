@@ -10,9 +10,7 @@ INTERNAL_IPS = ["127.0.0.1", "172.16.210.1"]
 
 INSTALLED_APPS = INSTALLED_APPS + ["django_extensions", "corsheaders"]
 
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:3000",
-]
+CORS_ORIGIN_WHITELIST = ["http://localhost:3000"]
 
 CORS_ALLOW_CREDENTIALS = True
 
