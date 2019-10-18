@@ -6,9 +6,6 @@ WORKDIR /code
 COPY ./frontend/package.json ./frontend/yarn.lock /code/
 RUN yarn install --pure-lockfile
 
-COPY ./frontend/ /code/
-RUN yarn build
-
 # Second stage: build base backend
 FROM python:3.7-alpine AS backend
 
@@ -28,7 +25,6 @@ RUN chmod a+x /app/.profile.d/heroku-exec.sh && \
 
 ENV DJANGO_SETTINGS_MODULE root.settings.prod
 ENV PYTHONPATH /code
-ENV CELERY_BROKER_URL sqs://
 ENV PIP_NO_CACHE_DIR true
 
 COPY --from=node /code/build /code/front/static/front

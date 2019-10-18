@@ -6,8 +6,8 @@ setup:
       as: REDIS
 build:
   docker:
-    web: Dockerfile.heroku.backend
-    celery: Dockerfile.heroku.backend
+    web: Dockerfile
+    celery: Dockerfile
 release:
   image: web
   command:
