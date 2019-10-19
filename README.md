@@ -1,5 +1,5 @@
 # Falco
-[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors)
 
 ![logo falco](https://user-images.githubusercontent.com/2587348/51670042-0f2b6a80-1fc6-11e9-8080-c3195853ba62.png)
 
@@ -65,6 +65,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/LouisPinsard"><img src="https://avatars1.githubusercontent.com/u/30240360?v=4" width="100px;" alt="Louis Pinsard"/><br /><sub><b>Louis Pinsard</b></sub></a><br /><a href="https://github.com/theodo/falco/commits?author=LouisPinsard" title="Code">💻</a></td>
     <td align="center"><a href="https://www.theodo.fr/"><img src="https://avatars0.githubusercontent.com/u/44815600?v=4" width="100px;" alt="Vincent Larrat"/><br /><sub><b>Vincent Larrat</b></sub></a><br /><a href="https://github.com/theodo/falco/commits?author=vlarrat-theodo" title="Code">💻</a> <a href="#security-vlarrat-theodo" title="Security">🛡️</a></td>
     <td align="center"><a href="https://github.com/antkahn"><img src="https://avatars3.githubusercontent.com/u/4716121?v=4" width="100px;" alt="antkahn"/><br /><sub><b>antkahn</b></sub></a><br /><a href="https://github.com/theodo/falco/commits?author=antkahn" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/fargito"><img src="https://avatars3.githubusercontent.com/u/29537204?v=4" width="100px;" alt="François Farge"/><br /><sub><b>François Farge</b></sub></a><br /><a href="https://github.com/theodo/falco/commits?author=fargito" title="Code">💻</a></td>
   </tr>
 </table>
 
