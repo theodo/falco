@@ -1,0 +1,2007 @@
+[
+    {
+      "model": "sessions.session",
+      "pk": "04tvl458b15bvgitz1whx6udzjr7vn69",
+      "fields": {
+        "session_data": "YzJkYTM4NTg3MTliY2E3ZTkzZTFiNGUzM2IwM2NkZDc0MzQ3NmI0Njp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI3MmE2ZTk0ZjczOTM0OTQ0ZjYxOTdmZWVkYWY1OGEyZDg1MTU0MWIwIn0=",
+        "expire_date": "2019-11-02T15:30:22.820Z"
+      }
+    },
+    {
+      "model": "django_celery_beat.intervalschedule",
+      "pk": 1,
+      "fields": { "every": 1, "period": "seconds" }
+    },
+    {
+      "model": "django_celery_beat.crontabschedule",
+      "pk": 1,
+      "fields": {
+        "minute": "0",
+        "hour": "4",
+        "day_of_week": "*",
+        "day_of_month": "*",
+        "month_of_year": "*",
+        "timezone": "UTC"
+      }
+    },
+    {
+      "model": "django_celery_beat.crontabschedule",
+      "pk": 2,
+      "fields": {
+        "minute": "00",
+        "hour": "01",
+        "day_of_week": "*",
+        "day_of_month": "*",
+        "month_of_year": "*",
+        "timezone": "UTC"
+      }
+    },
+    {
+      "model": "django_celery_beat.crontabschedule",
+      "pk": 3,
+      "fields": {
+        "minute": "00",
+        "hour": "02",
+        "day_of_week": "*",
+        "day_of_month": "*",
+        "month_of_year": "*",
+        "timezone": "UTC"
+      }
+    },
+    {
+      "model": "django_celery_beat.crontabschedule",
+      "pk": 4,
+      "fields": {
+        "minute": "00",
+        "hour": "08",
+        "day_of_week": "*",
+        "day_of_month": "*",
+        "month_of_year": "*",
+        "timezone": "UTC"
+      }
+    },
+    {
+      "model": "django_celery_beat.periodictasks",
+      "pk": 1,
+      "fields": { "last_update": "2019-10-19T15:39:02.652Z" }
+    },
+    {
+      "model": "django_celery_beat.periodictask",
+      "pk": 1,
+      "fields": {
+        "name": "celery.backend_cleanup",
+        "task": "celery.backend_cleanup",
+        "interval": null,
+        "crontab": 1,
+        "solar": null,
+        "args": "[]",
+        "kwargs": "{}",
+        "queue": null,
+        "exchange": null,
+        "routing_key": null,
+        "priority": null,
+        "expires": null,
+        "one_off": false,
+        "start_time": null,
+        "enabled": true,
+        "last_run_at": null,
+        "total_run_count": 0,
+        "date_changed": "2019-10-19T15:36:05.131Z",
+        "description": ""
+      }
+    },
+    {
+      "model": "django_celery_beat.periodictask",
+      "pk": 2,
+      "fields": {
+        "name": "One off update all configurations",
+        "task": "audits.tasks.get_wpt_audit_configurations",
+        "interval": 1,
+        "crontab": null,
+        "solar": null,
+        "args": "[]",
+        "kwargs": "{}",
+        "queue": null,
+        "exchange": null,
+        "routing_key": null,
+        "priority": null,
+        "expires": null,
+        "one_off": true,
+        "start_time": null,
+        "enabled": false,
+        "last_run_at": null,
+        "total_run_count": 0,
+        "date_changed": "2019-10-19T15:31:19.733Z",
+        "description": ""
+      }
+    },
+    {
+      "model": "django_celery_beat.periodictask",
+      "pk": 3,
+      "fields": {
+        "name": "Update available WPT configurations",
+        "task": "audits.tasks.get_wpt_audit_configurations",
+        "interval": null,
+        "crontab": 2,
+        "solar": null,
+        "args": "[]",
+        "kwargs": "{}",
+        "queue": null,
+        "exchange": null,
+        "routing_key": null,
+        "priority": null,
+        "expires": null,
+        "one_off": false,
+        "start_time": null,
+        "enabled": true,
+        "last_run_at": null,
+        "total_run_count": 0,
+        "date_changed": "2019-10-19T15:36:24.599Z",
+        "description": ""
+      }
+    },
+    {
+      "model": "django_celery_beat.periodictask",
+      "pk": 4,
+      "fields": {
+        "name": "Clean audit statuses for successful audits",
+        "task": "audits.tasks.clean_old_audit_statuses",
+        "interval": null,
+        "crontab": 3,
+        "solar": null,
+        "args": "[]",
+        "kwargs": "{}",
+        "queue": null,
+        "exchange": null,
+        "routing_key": null,
+        "priority": null,
+        "expires": null,
+        "one_off": false,
+        "start_time": null,
+        "enabled": true,
+        "last_run_at": null,
+        "total_run_count": 0,
+        "date_changed": "2019-10-19T15:37:47.951Z",
+        "description": ""
+      }
+    },
+    {
+      "model": "django_celery_beat.periodictask",
+      "pk": 5,
+      "fields": {
+        "name": "Run all audits",
+        "task": "audits.tasks.request_all_audits",
+        "interval": null,
+        "crontab": 4,
+        "solar": null,
+        "args": "[]",
+        "kwargs": "{}",
+        "queue": null,
+        "exchange": null,
+        "routing_key": null,
+        "priority": null,
+        "expires": null,
+        "one_off": false,
+        "start_time": null,
+        "enabled": true,
+        "last_run_at": null,
+        "total_run_count": 0,
+        "date_changed": "2019-10-19T15:39:02.655Z",
+        "description": ""
+      }
+    },
+    {
+      "model": "core.user",
+      "pk": 1,
+      "fields": {
+        "password": "argon2$argon2i$v=19$m=512,t=2,p=2$aEQ5d0RmaUhUMGMx$aAQkFxusuzgkjxjuMHB+aw",
+        "last_login": "2019-10-19T15:30:22.816Z",
+        "is_superuser": true,
+        "username": "admin",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2019-10-19T15:25:28.933Z",
+        "first_name": "",
+        "last_name": "",
+        "email": "falco@theodo.fr",
+        "last_visited_at": "2019-10-19T13:32:35.130Z",
+        "groups": [],
+        "user_permissions": []
+      }
+    },
+    {
+      "model": "audits.audit",
+      "pk": "aa523ee7-bef7-4a3d-bbb1-ac04e24602a5",
+      "fields": {
+        "created_at": "2019-10-19T15:32:54.529Z",
+        "updated_at": "2019-10-19T15:32:54.529Z",
+        "page": "c972c6f5-44e9-4db1-8cee-a3e98f33c879",
+        "script": null,
+        "parameters": "6f71a6f4-0a54-4108-8549-1ba33f53f351"
+      }
+    },
+    {
+      "model": "audits.auditstatushistory",
+      "pk": "381f2078-665b-44df-8459-956128458081",
+      "fields": {
+        "created_at": "2019-10-19T15:33:42.116Z",
+        "updated_at": "2019-10-19T15:33:42.116Z",
+        "audit": "aa523ee7-bef7-4a3d-bbb1-ac04e24602a5",
+        "status": "RUNNING",
+        "details": "Completed 2 of 3 tests",
+        "info": "{\"positionInQueue\": null, \"runningTime\": null, \"completedTests\": \"2\", \"totalTests\": \"3\"}"
+      }
+    },
+    {
+      "model": "audits.auditstatushistory",
+      "pk": "473e4b1a-29c6-4e17-bcc7-26e2a03d2a2a",
+      "fields": {
+        "created_at": "2019-10-19T15:34:13.750Z",
+        "updated_at": "2019-10-19T15:34:13.750Z",
+        "audit": "aa523ee7-bef7-4a3d-bbb1-ac04e24602a5",
+        "status": "SUCCESS",
+        "details": "Audit Successful! AuditResults uuid: 616c9d91-b7c5-4547-9add-72c35a176687",
+        "info": null
+      }
+    },
+    {
+      "model": "audits.auditstatushistory",
+      "pk": "522ce62e-0c13-4e93-a587-92dcdac46c4a",
+      "fields": {
+        "created_at": "2019-10-19T15:33:26.049Z",
+        "updated_at": "2019-10-19T15:33:26.049Z",
+        "audit": "aa523ee7-bef7-4a3d-bbb1-ac04e24602a5",
+        "status": "RUNNING",
+        "details": "Test Started 27 seconds ago",
+        "info": "{\"positionInQueue\": null, \"runningTime\": 27, \"completedTests\": null, \"totalTests\": null}"
+      }
+    },
+    {
+      "model": "audits.auditstatushistory",
+      "pk": "cb70b5b5-20d5-40eb-87f8-172cbf2f649e",
+      "fields": {
+        "created_at": "2019-10-19T15:33:10.664Z",
+        "updated_at": "2019-10-19T15:33:10.664Z",
+        "audit": "aa523ee7-bef7-4a3d-bbb1-ac04e24602a5",
+        "status": "RUNNING",
+        "details": "Test Started 12 seconds ago",
+        "info": "{\"positionInQueue\": null, \"runningTime\": 12, \"completedTests\": null, \"totalTests\": null}"
+      }
+    },
+    {
+      "model": "audits.auditstatushistory",
+      "pk": "d76d0911-7a67-4a6e-ad06-0dfdda30374b",
+      "fields": {
+        "created_at": "2019-10-19T15:32:54.625Z",
+        "updated_at": "2019-10-19T15:32:54.625Z",
+        "audit": "aa523ee7-bef7-4a3d-bbb1-ac04e24602a5",
+        "status": "REQUESTED",
+        "details": "Audit created in database",
+        "info": null
+      }
+    },
+    {
+      "model": "audits.auditstatushistory",
+      "pk": "e0b9a41b-4716-466f-96b8-46c1adb7a63d",
+      "fields": {
+        "created_at": "2019-10-19T15:33:58.107Z",
+        "updated_at": "2019-10-19T15:33:58.107Z",
+        "audit": "aa523ee7-bef7-4a3d-bbb1-ac04e24602a5",
+        "status": "RUNNING",
+        "details": "Completed 2 of 3 tests",
+        "info": "{\"positionInQueue\": null, \"runningTime\": null, \"completedTests\": \"2\", \"totalTests\": \"3\"}"
+      }
+    },
+    {
+      "model": "audits.auditstatushistory",
+      "pk": "ea4f144b-1708-4ee4-a6f8-04d7048a385e",
+      "fields": {
+        "created_at": "2019-10-19T15:32:54.663Z",
+        "updated_at": "2019-10-19T15:32:54.663Z",
+        "audit": "aa523ee7-bef7-4a3d-bbb1-ac04e24602a5",
+        "status": "REQUESTED",
+        "details": "Audit requested",
+        "info": null
+      }
+    },
+    {
+      "model": "audits.auditstatushistory",
+      "pk": "fbe5d6c2-bc9f-49b0-9ed3-97f49e31609d",
+      "fields": {
+        "created_at": "2019-10-19T15:32:54.888Z",
+        "updated_at": "2019-10-19T15:32:54.888Z",
+        "audit": "aa523ee7-bef7-4a3d-bbb1-ac04e24602a5",
+        "status": "QUEUEING",
+        "details": "{'testId': '191019_DD_ca0fa6573702fd7a8bcc7863c63997d5', 'ownerKey': '8b99c23b475d9cde1ae5cf0e453944cf86cc2772', 'jsonUrl': 'https://www.webpagetest.org/jsonResult.php?test=191019_DD_ca0fa6573702fd7a8bcc7863c63997d5', 'xmlUrl': 'https://www.webpagetest.org/xmlResult/191019_DD_ca0fa6573702fd7a8bcc7863c63997d5/', 'userUrl': 'https://www.webpagetest.org/result/191019_DD_ca0fa6573702fd7a8bcc7863c63997d5/', 'summaryCSV': 'https://www.webpagetest.org/result/191019_DD_ca0fa6573702fd7a8bcc7863c63997d5/page_data.csv', 'detailCSV': 'https://www.webpagetest.org/result/191019_DD_ca0fa6573702fd7a8bcc7863c63997d5/requests.csv'}",
+        "info": null
+      }
+    },
+    {
+      "model": "audits.auditresults",
+      "pk": "616c9d91-b7c5-4547-9add-72c35a176687",
+      "fields": {
+        "created_at": "2019-10-19T15:34:13.744Z",
+        "updated_at": "2019-10-19T15:34:13.744Z",
+        "audit": "aa523ee7-bef7-4a3d-bbb1-ac04e24602a5",
+        "wpt_results_json_url": "https://www.webpagetest.org/jsonResult.php?test=191019_DD_ca0fa6573702fd7a8bcc7863c63997d5",
+        "wpt_results_user_url": "https://www.webpagetest.org/result/191019_DD_ca0fa6573702fd7a8bcc7863c63997d5",
+        "wpt_metric_first_view_tti": 1195,
+        "wpt_metric_repeat_view_tti": 892,
+        "wpt_metric_first_view_speed_index": 1423,
+        "wpt_metric_repeat_view_speed_index": 970,
+        "wpt_metric_first_view_first_paint": 1195,
+        "wpt_metric_repeat_view_first_paint": 892,
+        "wpt_metric_first_view_first_meaningful_paint": 2308,
+        "wpt_metric_repeat_view_first_meaningful_paint": 1136,
+        "wpt_metric_first_view_load_time": 3541,
+        "wpt_metric_repeat_view_load_time": 2595,
+        "wpt_metric_first_view_first_contentful_paint": 1195,
+        "wpt_metric_repeat_view_first_contentful_paint": 893,
+        "wpt_metric_first_view_time_to_first_byte": 301,
+        "wpt_metric_repeat_view_time_to_first_byte": 220,
+        "wpt_metric_first_view_visually_complete": 2100,
+        "wpt_metric_repeat_view_visually_complete": 1100,
+        "wpt_metric_lighthouse_performance": null,
+        "script_step_name": null,
+        "script_step_number": null,
+        "lh_metric_tti_displayed_value": null,
+        "lh_metric_tti_score": null,
+        "lh_metric_first_contentful_paint_displayed_value": null,
+        "lh_metric_first_contentful_paint_score": null,
+        "lh_metric_speed_index_displayed_value": null,
+        "lh_metric_speed_index_score": null,
+        "lh_metric_first_meaningful_paint_displayed_value": null,
+        "lh_metric_first_meaningful_paint_score": null,
+        "lh_metric_first_cpu_idle_displayed_value": null,
+        "lh_metric_first_cpu_idle_score": null,
+        "lh_metric_max_potential_first_input_delay_displayed_value": null,
+        "lh_metric_max_potential_first_input_delay_score": null
+      }
+    },
+    {
+      "model": "projects.project",
+      "pk": "c3d87c1e-b584-4939-9549-d9f6900873cd",
+      "fields": {
+        "created_at": "2019-10-19T15:32:22.613Z",
+        "updated_at": "2019-10-19T15:34:13.747Z",
+        "name": "Theodo",
+        "wpt_api_key": "<Enter your WPT API Key>",
+        "screenshot_url": "https://www.webpagetest.org/getfile.php?test=191019_DD_ca0fa6573702fd7a8bcc7863c63997d5&file=1_screen.jpg",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.projectmemberrole",
+      "pk": "2b342a2d-24fe-464c-9cbf-014a055a7e46",
+      "fields": {
+        "created_at": "2019-10-19T15:32:22.617Z",
+        "updated_at": "2019-10-19T15:32:22.617Z",
+        "project": "c3d87c1e-b584-4939-9549-d9f6900873cd",
+        "user": 1,
+        "is_admin": true
+      }
+    },
+    {
+      "model": "projects.page",
+      "pk": "c972c6f5-44e9-4db1-8cee-a3e98f33c879",
+      "fields": {
+        "created_at": "2019-10-19T15:32:22.620Z",
+        "updated_at": "2019-10-19T15:32:22.620Z",
+        "name": "Homepage",
+        "url": "https://www.theodo.fr/",
+        "project": "c3d87c1e-b584-4939-9549-d9f6900873cd"
+      }
+    },
+    {
+      "model": "projects.projectauditparameters",
+      "pk": "6f71a6f4-0a54-4108-8549-1ba33f53f351",
+      "fields": {
+        "created_at": "2019-10-19T15:32:22.623Z",
+        "updated_at": "2019-10-19T15:32:22.623Z",
+        "name": "Chrome | Dulles (Cable)",
+        "configuration": "f3b0f969-8422-467d-ace5-c5b0038133d4",
+        "network_shape": "CABLE",
+        "project": "c3d87c1e-b584-4939-9549-d9f6900873cd"
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "0052739f-6687-449d-b1c3-87b9855f703a",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.836Z",
+        "updated_at": "2019-10-19T15:31:15.836Z",
+        "browser": "Firefox",
+        "location": "ec2-ap-northeast-1",
+        "location_label": "Tokyo, Japan - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "0095ebaa-74d1-4f15-97f4-3666ad4e2f97",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.399Z",
+        "updated_at": "2019-10-19T15:31:15.399Z",
+        "browser": "IE 11",
+        "location": "Dulles_Thinkpad",
+        "location_label": "Dulles, VA - Thinkpad T430",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "00ece347-cf14-4597-91d4-1df7e33e3f0f",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.346Z",
+        "updated_at": "2019-10-19T15:31:15.346Z",
+        "browser": "Canary",
+        "location": "Dulles_Thinkpad",
+        "location_label": "Dulles, VA - Thinkpad T430",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "0619eb67-2871-4301-b5e7-5f48d0e9ce1c",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.425Z",
+        "updated_at": "2019-10-19T15:31:15.425Z",
+        "browser": "Chromium",
+        "location": "Dulles_Pi4",
+        "location_label": "Dulles, VA - Raspberry Pi 4",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "066193b3-3e22-49d6-885d-d2764b04c23e",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.406Z",
+        "updated_at": "2019-10-19T15:31:15.406Z",
+        "browser": "Chromium",
+        "location": "Dulles_Pi3",
+        "location_label": "Dulles, VA - Raspberry Pi 3 B",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "08992e11-7d28-4952-b459-27bf7e11d212",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.303Z",
+        "updated_at": "2019-10-19T15:31:15.303Z",
+        "browser": "Firefox",
+        "location": "Dulles",
+        "location_label": "Dulles, VA",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "0a8b9269-a532-4231-8485-2dc50856d56a",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.218Z",
+        "updated_at": "2019-10-19T15:31:15.269Z",
+        "browser": "Moto G - UC Mini",
+        "location": "Dulles_MotoG",
+        "location_label": "Dulles, VA",
+        "location_group": "Android Devices - Dulles, VA",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "0ca1b527-97b3-4326-9aeb-322ebb8243a5",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.767Z",
+        "updated_at": "2019-10-19T15:31:15.767Z",
+        "browser": "Firefox Nightly",
+        "location": "ec2-ap-southeast-1",
+        "location_label": "Singapore - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "0efa6f76-39f9-4c5f-bd0b-45e45e587a0d",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.620Z",
+        "updated_at": "2019-10-19T15:31:15.620Z",
+        "browser": "Firefox Nightly",
+        "location": "London_EC2",
+        "location_label": "London, UK - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "10587823-5b10-4f3b-b4cf-0f2dee00394d",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.773Z",
+        "updated_at": "2019-10-19T15:31:15.773Z",
+        "browser": "Firefox ESR",
+        "location": "ec2-ap-southeast-1",
+        "location_label": "Singapore - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "183f4af0-3b69-41bc-aedf-bd6fb517cf83",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.190Z",
+        "updated_at": "2019-10-19T15:31:15.249Z",
+        "browser": "Moto G - Chrome Canary",
+        "location": "Dulles_MotoG",
+        "location_label": "Dulles, VA",
+        "location_group": "Android Devices - Dulles, VA",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "1e110b17-922d-4a25-8172-4921d9b2a321",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.793Z",
+        "updated_at": "2019-10-19T15:31:15.793Z",
+        "browser": "Chrome Canary",
+        "location": "ec2-ap-northeast-2",
+        "location_label": "Seoul, Korea - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "21f1f907-d2c5-49e0-8d8a-99d3ba415c13",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.334Z",
+        "updated_at": "2019-10-19T15:31:15.334Z",
+        "browser": "IE 11",
+        "location": "Dulles_IE11",
+        "location_label": "Dulles, VA",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "2325ca3e-7bcf-4f24-ba98-eafd7e11cefb",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.512Z",
+        "updated_at": "2019-10-19T15:31:15.512Z",
+        "browser": "Firefox ESR",
+        "location": "ec2-us-west-1",
+        "location_label": "California, USA - EC2",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "24ca23a4-5ebb-4b82-9229-be01d90b7b72",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.119Z",
+        "updated_at": "2019-10-19T15:31:15.171Z",
+        "browser": "Moto G4 - Opera Mini (High)",
+        "location": "Dulles_MotoG4",
+        "location_label": "Dulles, VA",
+        "location_group": "Android Devices - Dulles, VA",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "309461eb-1ea1-4047-ae32-ca28c35dd685",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.735Z",
+        "updated_at": "2019-10-19T15:31:15.735Z",
+        "browser": "Firefox ESR",
+        "location": "ap-south-1",
+        "location_label": "Mumbai, India - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "39779608-bfda-40fd-9e18-34b9dc7b0726",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.576Z",
+        "updated_at": "2019-10-19T15:31:15.576Z",
+        "browser": "Firefox",
+        "location": "ec2-eu-west-1",
+        "location_label": "Ireland - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "3b584b3a-f948-4911-be1a-9dd84f88eba5",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.652Z",
+        "updated_at": "2019-10-19T15:31:15.652Z",
+        "browser": "Firefox Nightly",
+        "location": "ec2-eu-west-3",
+        "location_label": "Paris - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "3ddc1cdc-22f1-476c-b2ae-cd2caaf0619b",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.697Z",
+        "updated_at": "2019-10-19T15:31:15.697Z",
+        "browser": "Firefox ESR",
+        "location": "ec2-eu-central-1",
+        "location_label": "Frankfurt, Germany - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "3df89942-f28c-431f-84bd-14eb54de9df0",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.506Z",
+        "updated_at": "2019-10-19T15:31:15.506Z",
+        "browser": "Firefox Nightly",
+        "location": "ec2-us-west-1",
+        "location_label": "California, USA - EC2",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "4298f47c-d764-4a6e-aa13-005ee05af5fb",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.457Z",
+        "updated_at": "2019-10-19T15:31:15.457Z",
+        "browser": "Chrome Canary",
+        "location": "ec2-us-east-1",
+        "location_label": "Virginia USA - EC2 ",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "439ad7d1-deec-41d4-a331-66a0f388ffe5",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.715Z",
+        "updated_at": "2019-10-19T15:31:15.715Z",
+        "browser": "Chrome Canary",
+        "location": "ap-south-1",
+        "location_label": "Mumbai, India - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "44c6f577-9fd7-495c-b46f-7c52b5f70ef2",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.787Z",
+        "updated_at": "2019-10-19T15:31:15.787Z",
+        "browser": "Chrome Beta",
+        "location": "ec2-ap-northeast-2",
+        "location_label": "Seoul, Korea - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "4961da17-a988-4e88-a16b-2f7001820e11",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.582Z",
+        "updated_at": "2019-10-19T15:31:15.582Z",
+        "browser": "Firefox Nightly",
+        "location": "ec2-eu-west-1",
+        "location_label": "Ireland - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "4c3aa066-98f9-4169-9237-9f68ecb149cc",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.482Z",
+        "updated_at": "2019-10-19T15:31:15.482Z",
+        "browser": "Chrome",
+        "location": "ec2-us-west-1",
+        "location_label": "California, USA - EC2",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "5339b55d-9411-4b25-b802-fe511ce0e727",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.112Z",
+        "updated_at": "2019-10-19T15:31:15.166Z",
+        "browser": "Moto G4 - Opera Mini (Extreme)",
+        "location": "Dulles_MotoG4",
+        "location_label": "Dulles, VA",
+        "location_group": "Android Devices - Dulles, VA",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "538d278d-3ea1-4bef-8144-ef318b664cce",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.518Z",
+        "updated_at": "2019-10-19T15:31:15.518Z",
+        "browser": "Chrome",
+        "location": "ec2-sa-east-1",
+        "location_label": "Sao Paulo, Brazil - EC2",
+        "location_group": "South America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "53f9835a-c1ed-4b55-aecb-e45aee63d243",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.753Z",
+        "updated_at": "2019-10-19T15:31:15.753Z",
+        "browser": "Chrome Canary",
+        "location": "ec2-ap-southeast-1",
+        "location_label": "Singapore - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "54d50ad7-5554-4496-972e-03aad1755f4b",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.805Z",
+        "updated_at": "2019-10-19T15:31:15.806Z",
+        "browser": "Firefox Nightly",
+        "location": "ec2-ap-northeast-2",
+        "location_label": "Seoul, Korea - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "56058b39-feec-46a0-bbce-6de88e23d767",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.824Z",
+        "updated_at": "2019-10-19T15:31:15.824Z",
+        "browser": "Chrome Beta",
+        "location": "ec2-ap-northeast-1",
+        "location_label": "Tokyo, Japan - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "5829daa4-07f9-4a3b-b6a7-0f54eb182e8f",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.876Z",
+        "updated_at": "2019-10-19T15:31:15.876Z",
+        "browser": "Firefox",
+        "location": "ec2-ap-southeast-2",
+        "location_label": "Sydney, Australia - EC2",
+        "location_group": "Oceania",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "585f2883-0423-4ae4-a270-6f2f5ec37d24",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.594Z",
+        "updated_at": "2019-10-19T15:31:15.594Z",
+        "browser": "Chrome",
+        "location": "London_EC2",
+        "location_label": "London, UK - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "58858c4c-c544-4938-b717-1b7794fd4efa",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.297Z",
+        "updated_at": "2019-10-19T15:31:15.297Z",
+        "browser": "Canary",
+        "location": "Dulles",
+        "location_label": "Dulles, VA",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "58c4abd0-5f26-4984-82e1-bb86269553a6",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.531Z",
+        "updated_at": "2019-10-19T15:31:15.531Z",
+        "browser": "Chrome Canary",
+        "location": "ec2-sa-east-1",
+        "location_label": "Sao Paulo, Brazil - EC2",
+        "location_group": "South America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "611ed38d-2673-4afc-b76a-bd0517ae31e0",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.665Z",
+        "updated_at": "2019-10-19T15:31:15.666Z",
+        "browser": "Chrome",
+        "location": "ec2-eu-central-1",
+        "location_label": "Frankfurt, Germany - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "668429b6-d8a2-4944-9316-a0141c8b172c",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.074Z",
+        "updated_at": "2019-10-19T15:31:15.137Z",
+        "browser": "Moto G4 - Chrome Canary",
+        "location": "Dulles_MotoG4",
+        "location_label": "Dulles, VA",
+        "location_group": "Android Devices - Dulles, VA",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "6766d17e-6484-4de7-aca8-1ee0b3e7f3d1",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.389Z",
+        "updated_at": "2019-10-19T15:31:15.389Z",
+        "browser": "Microsoft Edge Canary (Chromium)",
+        "location": "Dulles_Thinkpad",
+        "location_label": "Dulles, VA - Thinkpad T430",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "686b6a1d-3d32-45be-9e03-7f3ee44cfe82",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.494Z",
+        "updated_at": "2019-10-19T15:31:15.494Z",
+        "browser": "Chrome Canary",
+        "location": "ec2-us-west-1",
+        "location_label": "California, USA - EC2",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "68f9a4a7-fdd7-402b-aca7-46fcb0622c73",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.690Z",
+        "updated_at": "2019-10-19T15:31:15.690Z",
+        "browser": "Firefox Nightly",
+        "location": "ec2-eu-central-1",
+        "location_label": "Frankfurt, Germany - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "6af651a1-66ca-4e3f-8e45-4529337b59e2",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.570Z",
+        "updated_at": "2019-10-19T15:31:15.570Z",
+        "browser": "Chrome Canary",
+        "location": "ec2-eu-west-1",
+        "location_label": "Ireland - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "6baed1f9-66f4-4fcf-8f90-c16a2d740345",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.206Z",
+        "updated_at": "2019-10-19T15:31:15.259Z",
+        "browser": "Moto G - Chrome Dev",
+        "location": "Dulles_MotoG",
+        "location_label": "Dulles, VA",
+        "location_group": "Android Devices - Dulles, VA",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "7136a29a-5e34-43ad-a008-9d2e1273ac2e",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.469Z",
+        "updated_at": "2019-10-19T15:31:15.469Z",
+        "browser": "Firefox Nightly",
+        "location": "ec2-us-east-1",
+        "location_label": "Virginia USA - EC2 ",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "75181b15-e212-49c3-a90b-032e62d4f35a",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.549Z",
+        "updated_at": "2019-10-19T15:31:15.549Z",
+        "browser": "Firefox ESR",
+        "location": "ec2-sa-east-1",
+        "location_label": "Sao Paulo, Brazil - EC2",
+        "location_group": "South America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "75fa93d5-caf5-4202-b2cb-dc00c8573084",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.747Z",
+        "updated_at": "2019-10-19T15:31:15.747Z",
+        "browser": "Chrome Beta",
+        "location": "ec2-ap-southeast-1",
+        "location_label": "Singapore - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "77224e59-cd55-4bcc-81ce-943e6766f251",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.646Z",
+        "updated_at": "2019-10-19T15:31:15.646Z",
+        "browser": "Firefox",
+        "location": "ec2-eu-west-3",
+        "location_label": "Paris - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "7863148f-ec98-4d66-b6b1-52a0685f044c",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.525Z",
+        "updated_at": "2019-10-19T15:31:15.525Z",
+        "browser": "Chrome Beta",
+        "location": "ec2-sa-east-1",
+        "location_label": "Sao Paulo, Brazil - EC2",
+        "location_group": "South America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "7868a5d1-3c06-42b1-91e8-d9215584d84b",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.315Z",
+        "updated_at": "2019-10-19T15:31:15.315Z",
+        "browser": "Microsoft Edge (EdgeHTML)",
+        "location": "Dulles_Edge",
+        "location_label": "Dulles, VA",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "7972faae-0322-417a-abb8-b751d272dff4",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.183Z",
+        "updated_at": "2019-10-19T15:31:15.244Z",
+        "browser": "Moto G - Chrome",
+        "location": "Dulles_MotoG",
+        "location_label": "Dulles, VA",
+        "location_group": "Android Devices - Dulles, VA",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "7976e865-b2d0-4965-9879-e857f973212b",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.721Z",
+        "updated_at": "2019-10-19T15:31:15.721Z",
+        "browser": "Firefox",
+        "location": "ap-south-1",
+        "location_label": "Mumbai, India - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "7bfbbf89-0ed5-4a71-876a-cced5bac1adc",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.488Z",
+        "updated_at": "2019-10-19T15:31:15.488Z",
+        "browser": "Chrome Beta",
+        "location": "ec2-us-west-1",
+        "location_label": "California, USA - EC2",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "81ce7c11-0820-4dd6-bbcd-79c4b25a04a1",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.080Z",
+        "updated_at": "2019-10-19T15:31:15.141Z",
+        "browser": "Moto G4 - Chrome Beta",
+        "location": "Dulles_MotoG4",
+        "location_label": "Dulles, VA",
+        "location_group": "Android Devices - Dulles, VA",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "83c215dc-7409-4c2c-89bf-b0bf7154ed72",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.563Z",
+        "updated_at": "2019-10-19T15:31:15.563Z",
+        "browser": "Chrome Beta",
+        "location": "ec2-eu-west-1",
+        "location_label": "Ireland - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "879dab48-fa5e-4161-83a8-fc7e4489baa0",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.556Z",
+        "updated_at": "2019-10-19T15:31:15.556Z",
+        "browser": "Chrome",
+        "location": "ec2-eu-west-1",
+        "location_label": "Ireland - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "8a9b02f8-b6e9-4198-959d-e9f0bc57baad",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.450Z",
+        "updated_at": "2019-10-19T15:31:15.450Z",
+        "browser": "Chrome Beta",
+        "location": "ec2-us-east-1",
+        "location_label": "Virginia USA - EC2 ",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "8ace6963-bb20-4893-8e3c-3c9d4cfe4f81",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.818Z",
+        "updated_at": "2019-10-19T15:31:15.818Z",
+        "browser": "Chrome",
+        "location": "ec2-ap-northeast-1",
+        "location_label": "Tokyo, Japan - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "92ef7e5f-1705-4045-bed3-35ea0f4892e9",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.588Z",
+        "updated_at": "2019-10-19T15:31:15.588Z",
+        "browser": "Firefox ESR",
+        "location": "ec2-eu-west-1",
+        "location_label": "Ireland - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "938078a4-cd75-4435-961c-2b5b04d799be",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.322Z",
+        "updated_at": "2019-10-19T15:31:15.322Z",
+        "browser": "Microsoft Edge Dev (Chromium)",
+        "location": "Dulles_Edge",
+        "location_label": "Dulles, VA",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "9417513d-a40c-4330-a605-fc2d2c607d4d",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.328Z",
+        "updated_at": "2019-10-19T15:31:15.328Z",
+        "browser": "Microsoft Edge Canary (Chromium)",
+        "location": "Dulles_Edge",
+        "location_label": "Dulles, VA",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "96d50e30-604b-4340-88e7-89eeca01cd45",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.703Z",
+        "updated_at": "2019-10-19T15:31:15.703Z",
+        "browser": "Chrome",
+        "location": "ap-south-1",
+        "location_label": "Mumbai, India - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "99318556-58aa-4f6a-8d1d-c66bcda0bafb",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.238Z",
+        "updated_at": "2019-10-19T15:31:15.284Z",
+        "browser": "Moto G - Firefox",
+        "location": "Dulles_MotoG",
+        "location_label": "Dulles, VA",
+        "location_group": "Android Devices - Dulles, VA",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "9c2506b2-97cc-4640-84ab-372f9102513b",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.106Z",
+        "updated_at": "2019-10-19T15:31:15.161Z",
+        "browser": "Moto G4 - UC Mini",
+        "location": "Dulles_MotoG4",
+        "location_label": "Dulles, VA",
+        "location_group": "Android Devices - Dulles, VA",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "9ed38424-e9ba-481a-a91d-8f5e4099a922",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.848Z",
+        "updated_at": "2019-10-19T15:31:15.848Z",
+        "browser": "Firefox ESR",
+        "location": "ec2-ap-northeast-1",
+        "location_label": "Tokyo, Japan - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "9ef1824a-16e4-4a01-aad9-f52612c50413",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.231Z",
+        "updated_at": "2019-10-19T15:31:15.279Z",
+        "browser": "Moto G - Opera Mini (High)",
+        "location": "Dulles_MotoG",
+        "location_label": "Dulles, VA",
+        "location_group": "Android Devices - Dulles, VA",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "a71ba57a-4f16-4eb4-900c-617ac8467e46",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.659Z",
+        "updated_at": "2019-10-19T15:31:15.659Z",
+        "browser": "Firefox ESR",
+        "location": "ec2-eu-west-3",
+        "location_label": "Paris - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "a8f8377d-0550-4975-a296-4eb7b14270bc",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.799Z",
+        "updated_at": "2019-10-19T15:31:15.799Z",
+        "browser": "Firefox",
+        "location": "ec2-ap-northeast-2",
+        "location_label": "Seoul, Korea - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "a9081a46-ee5b-4458-867c-3d27a64a43c1",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.412Z",
+        "updated_at": "2019-10-19T15:31:15.412Z",
+        "browser": "Firefox",
+        "location": "Dulles_Pi3",
+        "location_label": "Dulles, VA - Raspberry Pi 3 B",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "ab9561c2-01b0-484f-92bd-e078a026c4f6",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.125Z",
+        "updated_at": "2019-10-19T15:31:15.178Z",
+        "browser": "Moto G4 - Firefox",
+        "location": "Dulles_MotoG4",
+        "location_label": "Dulles, VA",
+        "location_group": "Android Devices - Dulles, VA",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "abc77fc5-6ede-4c28-b91d-a2d30c6a4046",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.602Z",
+        "updated_at": "2019-10-19T15:31:15.602Z",
+        "browser": "Chrome Beta",
+        "location": "London_EC2",
+        "location_label": "London, UK - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "aed71c95-fd2f-456e-b2ac-d031c51768e0",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.760Z",
+        "updated_at": "2019-10-19T15:31:15.760Z",
+        "browser": "Firefox",
+        "location": "ec2-ap-southeast-1",
+        "location_label": "Singapore - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "af8a38be-a0a9-45fe-9308-07f5aecf5caa",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.741Z",
+        "updated_at": "2019-10-19T15:31:15.741Z",
+        "browser": "Chrome",
+        "location": "ec2-ap-southeast-1",
+        "location_label": "Singapore - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "b0855cce-c7dc-49aa-9440-fdd8d443cd9a",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.066Z",
+        "updated_at": "2019-10-19T15:31:15.131Z",
+        "browser": "Moto G4 - Chrome",
+        "location": "Dulles_MotoG4",
+        "location_label": "Dulles, VA",
+        "location_group": "Android Devices - Dulles, VA",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "b15dff98-472c-4465-8876-fc21f155596a",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.887Z",
+        "updated_at": "2019-10-19T15:31:15.887Z",
+        "browser": "Firefox Nightly",
+        "location": "ec2-ap-southeast-2",
+        "location_label": "Sydney, Australia - EC2",
+        "location_group": "Oceania",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "b17074c2-8f2b-4d09-b996-5769c1255a9e",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.093Z",
+        "updated_at": "2019-10-19T15:31:15.151Z",
+        "browser": "Moto G4 - Samsung Internet",
+        "location": "Dulles_MotoG4",
+        "location_label": "Dulles, VA",
+        "location_group": "Android Devices - Dulles, VA",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "b32623af-7216-4b78-9c80-9a807f241ac4",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.678Z",
+        "updated_at": "2019-10-19T15:31:15.678Z",
+        "browser": "Chrome Canary",
+        "location": "ec2-eu-central-1",
+        "location_label": "Frankfurt, Germany - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "b534adc7-e4cc-4c42-9cc7-7ad94fe20c50",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.842Z",
+        "updated_at": "2019-10-19T15:31:15.842Z",
+        "browser": "Firefox Nightly",
+        "location": "ec2-ap-northeast-1",
+        "location_label": "Tokyo, Japan - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "b8127353-3580-4d85-986a-bbf6cb4fd586",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.225Z",
+        "updated_at": "2019-10-19T15:31:15.274Z",
+        "browser": "Moto G - Opera Mini (Extreme)",
+        "location": "Dulles_MotoG",
+        "location_label": "Dulles, VA",
+        "location_group": "Android Devices - Dulles, VA",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "bac0f2ef-699e-4aa3-a31f-d734bc6ec7a5",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.543Z",
+        "updated_at": "2019-10-19T15:31:15.543Z",
+        "browser": "Firefox Nightly",
+        "location": "ec2-sa-east-1",
+        "location_label": "Sao Paulo, Brazil - EC2",
+        "location_group": "South America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "bb878052-3362-470c-9a0c-b103e6bfc04f",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.867Z",
+        "updated_at": "2019-10-19T15:31:15.867Z",
+        "browser": "Chrome Canary",
+        "location": "ec2-ap-southeast-2",
+        "location_label": "Sydney, Australia - EC2",
+        "location_group": "Oceania",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "bc6aabe2-3cfd-43b4-a735-b6fddd51001e",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.684Z",
+        "updated_at": "2019-10-19T15:31:15.684Z",
+        "browser": "Firefox",
+        "location": "ec2-eu-central-1",
+        "location_label": "Frankfurt, Germany - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "bf17a4cc-c57a-4847-a8cd-84b2c87124cc",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.830Z",
+        "updated_at": "2019-10-19T15:31:15.830Z",
+        "browser": "Chrome Canary",
+        "location": "ec2-ap-northeast-1",
+        "location_label": "Tokyo, Japan - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "c2e1cc18-c3c0-48fc-8a33-4e2aeeb8aabc",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.537Z",
+        "updated_at": "2019-10-19T15:31:15.537Z",
+        "browser": "Firefox",
+        "location": "ec2-sa-east-1",
+        "location_label": "Sao Paulo, Brazil - EC2",
+        "location_group": "South America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "c3199b00-f81c-4b3e-8025-83d6fac5987a",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.212Z",
+        "updated_at": "2019-10-19T15:31:15.264Z",
+        "browser": "Moto G - UC Browser",
+        "location": "Dulles_MotoG",
+        "location_label": "Dulles, VA",
+        "location_group": "Android Devices - Dulles, VA",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "c3f748a9-22ee-4ef4-8f0d-f5d2eb4087b3",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.812Z",
+        "updated_at": "2019-10-19T15:31:15.812Z",
+        "browser": "Firefox ESR",
+        "location": "ec2-ap-northeast-2",
+        "location_label": "Seoul, Korea - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "c5412363-2ccd-424a-aab6-9ededcb466a4",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.443Z",
+        "updated_at": "2019-10-19T15:31:15.443Z",
+        "browser": "Chrome",
+        "location": "ec2-us-east-1",
+        "location_label": "Virginia USA - EC2 ",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "c669d91c-31d9-4b06-b177-f7edf1d991c3",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.709Z",
+        "updated_at": "2019-10-19T15:31:15.709Z",
+        "browser": "Chrome Beta",
+        "location": "ap-south-1",
+        "location_label": "Mumbai, India - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "c77c4f60-5509-4480-9a3b-2746844578bf",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.780Z",
+        "updated_at": "2019-10-19T15:31:15.780Z",
+        "browser": "Chrome",
+        "location": "ec2-ap-northeast-2",
+        "location_label": "Seoul, Korea - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "c797936b-14d3-4874-bbab-f7d02c54dae0",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.352Z",
+        "updated_at": "2019-10-19T15:31:15.352Z",
+        "browser": "Firefox",
+        "location": "Dulles_Thinkpad",
+        "location_label": "Dulles, VA - Thinkpad T430",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "c80f78bd-a544-40cc-afb9-3424719fad17",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.364Z",
+        "updated_at": "2019-10-19T15:31:15.365Z",
+        "browser": "Firefox Nightly",
+        "location": "Dulles_Thinkpad",
+        "location_label": "Dulles, VA - Thinkpad T430",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "c92b694e-b831-4e1b-9898-e5845e87974f",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.672Z",
+        "updated_at": "2019-10-19T15:31:15.672Z",
+        "browser": "Chrome Beta",
+        "location": "ec2-eu-central-1",
+        "location_label": "Frankfurt, Germany - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "ca86c438-44b5-46f3-9ea6-9d18f36cb6c7",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.086Z",
+        "updated_at": "2019-10-19T15:31:15.146Z",
+        "browser": "Moto G4 - Chrome Dev",
+        "location": "Dulles_MotoG4",
+        "location_label": "Dulles, VA",
+        "location_group": "Android Devices - Dulles, VA",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "cb49ce0d-6cff-4cc4-afea-182e47ed1314",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.358Z",
+        "updated_at": "2019-10-19T15:31:15.358Z",
+        "browser": "Firefox Beta",
+        "location": "Dulles_Thinkpad",
+        "location_label": "Dulles, VA - Thinkpad T430",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "cd74e18e-9341-406b-b4f6-7b3538bf07de",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.728Z",
+        "updated_at": "2019-10-19T15:31:15.728Z",
+        "browser": "Firefox Nightly",
+        "location": "ap-south-1",
+        "location_label": "Mumbai, India - EC2",
+        "location_group": "Asia",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "ce5f8ff4-cc25-4a52-8fff-112940d1e847",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.383Z",
+        "updated_at": "2019-10-19T15:31:15.383Z",
+        "browser": "Microsoft Edge Dev (Chromium)",
+        "location": "Dulles_Thinkpad",
+        "location_label": "Dulles, VA - Thinkpad T430",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "d2f92392-6098-407c-bb91-1ba34b90a500",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.340Z",
+        "updated_at": "2019-10-19T15:31:15.340Z",
+        "browser": "Chrome",
+        "location": "Dulles_Thinkpad",
+        "location_label": "Dulles, VA - Thinkpad T430",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "d32c7290-8a71-4924-b0d6-38c3ed900137",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.431Z",
+        "updated_at": "2019-10-19T15:31:15.431Z",
+        "browser": "Firefox",
+        "location": "Dulles_Pi4",
+        "location_label": "Dulles, VA - Raspberry Pi 4",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "d6caeace-134c-49b0-8d6f-647b4a217099",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.627Z",
+        "updated_at": "2019-10-19T15:31:15.627Z",
+        "browser": "Chrome",
+        "location": "ec2-eu-west-3",
+        "location_label": "Paris - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "e16917f4-71bc-4332-84ad-db84a5b76fdf",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.418Z",
+        "updated_at": "2019-10-19T15:31:15.418Z",
+        "browser": "Firefox ESR",
+        "location": "Dulles_Pi3",
+        "location_label": "Dulles, VA - Raspberry Pi 3 B",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "e273bd46-c3b4-4af3-9997-6a2313a8b7ac",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.475Z",
+        "updated_at": "2019-10-19T15:31:15.475Z",
+        "browser": "Firefox ESR",
+        "location": "ec2-us-east-1",
+        "location_label": "Virginia USA - EC2 ",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "e3f3f775-1c0e-4b8b-a45b-d9e69a1bb9e4",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.463Z",
+        "updated_at": "2019-10-19T15:31:15.463Z",
+        "browser": "Firefox",
+        "location": "ec2-us-east-1",
+        "location_label": "Virginia USA - EC2 ",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "e560b513-37df-4020-bfa6-d6417d212c7d",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.614Z",
+        "updated_at": "2019-10-19T15:31:15.614Z",
+        "browser": "Firefox",
+        "location": "London_EC2",
+        "location_label": "London, UK - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "e6b9f993-eb07-47f0-ba18-86ab67923aaa",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.894Z",
+        "updated_at": "2019-10-19T15:31:15.894Z",
+        "browser": "Firefox ESR",
+        "location": "ec2-ap-southeast-2",
+        "location_label": "Sydney, Australia - EC2",
+        "location_group": "Oceania",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "eb517705-db2b-4615-b1ea-9cb727e25640",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.860Z",
+        "updated_at": "2019-10-19T15:31:15.860Z",
+        "browser": "Chrome Beta",
+        "location": "ec2-ap-southeast-2",
+        "location_label": "Sydney, Australia - EC2",
+        "location_group": "Oceania",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "eb5ad94a-80f5-47e9-8c49-6ce06835f739",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.371Z",
+        "updated_at": "2019-10-19T15:31:15.371Z",
+        "browser": "Firefox ESR",
+        "location": "Dulles_Thinkpad",
+        "location_label": "Dulles, VA - Thinkpad T430",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "ee81e3a3-d4ba-49cd-9805-0a908145f4aa",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.099Z",
+        "updated_at": "2019-10-19T15:31:15.156Z",
+        "browser": "Moto G4 - UC Browser",
+        "location": "Dulles_MotoG4",
+        "location_label": "Dulles, VA",
+        "location_group": "Android Devices - Dulles, VA",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "f3b0f969-8422-467d-ace5-c5b0038133d4",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.290Z",
+        "updated_at": "2019-10-19T15:31:15.290Z",
+        "browser": "Chrome",
+        "location": "Dulles",
+        "location_label": "Dulles, VA",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "f466a8f6-be22-4e62-a3ac-d5f0002fa50f",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.437Z",
+        "updated_at": "2019-10-19T15:31:15.437Z",
+        "browser": "Firefox ESR",
+        "location": "Dulles_Pi4",
+        "location_label": "Dulles, VA - Raspberry Pi 4",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "f56c4397-a5bb-4997-9eaa-0a911370ca7b",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.854Z",
+        "updated_at": "2019-10-19T15:31:15.854Z",
+        "browser": "Chrome",
+        "location": "ec2-ap-southeast-2",
+        "location_label": "Sydney, Australia - EC2",
+        "location_group": "Oceania",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "f5b645cd-89ab-42fa-9b87-d3d37bc7016e",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.500Z",
+        "updated_at": "2019-10-19T15:31:15.500Z",
+        "browser": "Firefox",
+        "location": "ec2-us-west-1",
+        "location_label": "California, USA - EC2",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "f93980e8-344e-43d1-bc0a-01b5a8d39a6e",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.639Z",
+        "updated_at": "2019-10-19T15:31:15.639Z",
+        "browser": "Chrome Canary",
+        "location": "ec2-eu-west-3",
+        "location_label": "Paris - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "f9969c9a-e2d5-453d-a018-235ba8d9f83b",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.196Z",
+        "updated_at": "2019-10-19T15:31:15.254Z",
+        "browser": "Moto G - Chrome Beta",
+        "location": "Dulles_MotoG",
+        "location_label": "Dulles, VA",
+        "location_group": "Android Devices - Dulles, VA",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "fb554dc8-26fa-49a6-977d-0c6959e9f556",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.633Z",
+        "updated_at": "2019-10-19T15:31:15.633Z",
+        "browser": "Chrome Beta",
+        "location": "ec2-eu-west-3",
+        "location_label": "Paris - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "fc3c3ce4-15ce-4aca-b3f4-c13560c629b3",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.608Z",
+        "updated_at": "2019-10-19T15:31:15.608Z",
+        "browser": "Chrome Canary",
+        "location": "London_EC2",
+        "location_label": "London, UK - EC2",
+        "location_group": "Europe",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "fd460310-be53-4722-a894-07a47ccab3cb",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.377Z",
+        "updated_at": "2019-10-19T15:31:15.377Z",
+        "browser": "Microsoft Edge (EdgeHTML)",
+        "location": "Dulles_Thinkpad",
+        "location_label": "Dulles, VA - Thinkpad T430",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "projects.availableauditparameters",
+      "pk": "fd8ba456-49a6-41af-ba2a-fc7677f4c666",
+      "fields": {
+        "created_at": "2019-10-19T15:31:15.309Z",
+        "updated_at": "2019-10-19T15:31:15.309Z",
+        "browser": "Firefox Nightly",
+        "location": "Dulles",
+        "location_label": "Dulles, VA",
+        "location_group": "North America",
+        "is_active": true
+      }
+    },
+    {
+      "model": "admin.logentry",
+      "pk": 1,
+      "fields": {
+        "action_time": "2019-10-19T15:31:07.338Z",
+        "user": 1,
+        "content_type": 7,
+        "object_id": "1",
+        "object_repr": "every second",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+      }
+    },
+    {
+      "model": "admin.logentry",
+      "pk": 2,
+      "fields": {
+        "action_time": "2019-10-19T15:31:11.344Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "2",
+        "object_repr": "One off update all configurations: every second",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+      }
+    },
+    {
+      "model": "admin.logentry",
+      "pk": 3,
+      "fields": {
+        "action_time": "2019-10-19T15:32:22.625Z",
+        "user": 1,
+        "content_type": 15,
+        "object_id": "c3d87c1e-b584-4939-9549-d9f6900873cd",
+        "object_repr": "Theodo",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"project member role\", \"object\": \"projectmemberrole:2b342a\"}}, {\"added\": {\"name\": \"page\", \"object\": \"Homepage\"}}, {\"added\": {\"name\": \"project audit parameters\", \"object\": \"Chrome | Dulles (Cable)\"}}]"
+      }
+    },
+    {
+      "model": "admin.logentry",
+      "pk": 4,
+      "fields": {
+        "action_time": "2019-10-19T15:36:17.590Z",
+        "user": 1,
+        "content_type": 6,
+        "object_id": "2",
+        "object_repr": "00 01 * * * (m/h/d/dM/MY) UTC",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+      }
+    },
+    {
+      "model": "admin.logentry",
+      "pk": 5,
+      "fields": {
+        "action_time": "2019-10-19T15:36:24.603Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "3",
+        "object_repr": "Update available WPT configurations: 00 01 * * * (m/h/d/dM/MY) UTC",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+      }
+    },
+    {
+      "model": "admin.logentry",
+      "pk": 6,
+      "fields": {
+        "action_time": "2019-10-19T15:37:44.928Z",
+        "user": 1,
+        "content_type": 6,
+        "object_id": "3",
+        "object_repr": "00 02 * * * (m/h/d/dM/MY) UTC",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+      }
+    },
+    {
+      "model": "admin.logentry",
+      "pk": 7,
+      "fields": {
+        "action_time": "2019-10-19T15:37:47.952Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "4",
+        "object_repr": "Clean audit statuses for successful audits: 00 02 * * * (m/h/d/dM/MY) UTC",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+      }
+    },
+    {
+      "model": "admin.logentry",
+      "pk": 8,
+      "fields": {
+        "action_time": "2019-10-19T15:38:50.381Z",
+        "user": 1,
+        "content_type": 6,
+        "object_id": "4",
+        "object_repr": "00 08 * * * (m/h/d/dM/MY) UTC",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+      }
+    },
+    {
+      "model": "admin.logentry",
+      "pk": 9,
+      "fields": {
+        "action_time": "2019-10-19T15:39:02.656Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "5",
+        "object_repr": "Run all audits: 00 08 * * * (m/h/d/dM/MY) UTC",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+      }
+    }
+  ]
+  
