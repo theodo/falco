@@ -74,6 +74,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "fargito",
+      "name": "François Farge",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/29537204?v=4",
+      "profile": "https://github.com/fargito",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
