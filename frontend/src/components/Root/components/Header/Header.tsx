@@ -25,8 +25,8 @@ import {
 // Your component own properties
 interface Props {
   currentURL: string;
-  isUserAuthenticated: boolean,
-  isMenuDisplayed: boolean
+  isUserAuthenticated: boolean;
+  isMenuDisplayed: boolean;
 }
 
 export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
@@ -51,8 +51,8 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
         setAccountMenuRight(
           Math.floor(
             headerContainerRef.current.getBoundingClientRect().right -
-            accountMenuButtonRef.current.getBoundingClientRect().right -
-            15,
+              accountMenuButtonRef.current.getBoundingClientRect().right -
+              15,
           ) + 'px',
         );
         setMenuHasBeenPositionned(true);
@@ -67,8 +67,8 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
         setProjectsMenuRight(
           Math.floor(
             headerContainerRef.current.getBoundingClientRect().right -
-            projectsMenuButtonRef.current.getBoundingClientRect().right -
-            15,
+              projectsMenuButtonRef.current.getBoundingClientRect().right -
+              15,
           ) + 'px',
         );
         setMenuHasBeenPositionned(true);
@@ -146,7 +146,7 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
           </LogoContainer>
         </HeaderMenu>
         <HeaderContent shouldHaveShadow={shouldDisplayConnectedUserHeader && scrollPosition > 10}>
-          {shouldDisplayConnectedUserHeader && (
+          {shouldDisplayConnectedUserHeader ? (
             <Nav>
               <HeaderButtonsBlock>
                 <HeaderButton onClick={toggleProjectsMenuVisibility} ref={projectsMenuButtonRef}>
@@ -159,11 +159,15 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
                 </HeaderButton>
               </HeaderButtonsBlock>
             </Nav>
-          )}
-          {isLandingPage && (
-            <HeaderLink href={routeDefinitions.login.path}>
-              <FormattedMessage id="Header.connect_link" />
-            </HeaderLink>
+          ) : (
+            <>
+              <HeaderLink to={routeDefinitions.login.path}>
+                <FormattedMessage id="Header.login_link" />
+              </HeaderLink>
+              <HeaderLink to={routeDefinitions.signUp.path}>
+                <FormattedMessage id="Header.signup_link" />
+              </HeaderLink>
+            </>
           )}
         </HeaderContent>
       </HeaderBlock>

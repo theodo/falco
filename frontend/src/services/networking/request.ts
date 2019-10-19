@@ -44,7 +44,7 @@ const checkAccessToken = async (requestFunction: () => void) => {
       const response = await request.post(`${backendBaseUrl}/auth/jwt/refresh`).withCredentials();
       await update_token(response.body.access);
     } catch (e) {
-      store.dispatch(logoutUserRequest({ redirectTo: routeDefinitions.login.path }));
+      store.dispatch(logoutUserRequest({ redirectTo: routeDefinitions.landing.path }));
     }
   }
   return requestFunction();

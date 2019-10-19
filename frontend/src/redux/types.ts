@@ -1,7 +1,6 @@
 import { RouterState } from 'connected-react-router';
 import { ToastrState } from 'react-redux-toastr';
 import { PersistPartial } from 'redux-persist/lib/persistReducer';
-import { LeadAction, LeadState } from 'redux/lead';
 import { AuditResultsAction, AuditResultsState } from './auditResults';
 import { AuditParametersAction, AuditParametersState } from './entities/auditParameters';
 import { AuditsAction, AuditsState } from './entities/audits';
@@ -15,7 +14,6 @@ import { SignUpAction, SignUpState } from './sign-up';
 import { UserAction, UserState } from './user';
 
 export type RootState = Readonly<{
-  lead: LeadState;
   login: LoginState & PersistPartial;
   signUp: SignUpState;
   parameters: ParametersState & PersistPartial;
@@ -35,7 +33,6 @@ export type RootState = Readonly<{
 export type RootStateWithRouter = RootState & Readonly<{ router: RouterState }>;
 
 export type RootAction =
-  | LeadAction
   | LoginAction
   | SignUpAction
   | ParametersAction

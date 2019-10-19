@@ -151,7 +151,7 @@ export const MenusContainer = styled.div`
 `;
 MenusContainer.displayName = 'MenusContainer';
 
-export const HeaderLink = styled.a`
+export const HeaderLink = styled(Link)`
   text-decoration: none;
   color: ${colorUsage.menuLink};
   line-height: ${lineHeight.menuLink};
@@ -159,6 +159,7 @@ export const HeaderLink = styled.a`
   font-size: ${fontSize.menuLink};
   user-select: none;
   cursor: pointer;
+  margin-left: 20px;
 
   &:hover {
     color: ${colorUsage.menuLinkHover};

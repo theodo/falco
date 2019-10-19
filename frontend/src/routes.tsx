@@ -7,7 +7,6 @@ import { NotFoundComponent } from 'components/Root/components';
 import { getIsAuthenticated } from 'redux/login/selectors';
 
 const Audits = lazy(() => import('./pages/Audits'));
-const Landing = lazy(() => import('./pages/Landing'));
 const Login = lazy(() => import('./pages/User/Login'));
 const SignUp = lazy(() => import('./pages/User/SignUp'));
 const Project = lazy(() => import('./pages/Project'));
@@ -29,7 +28,7 @@ interface RouteProps {
 export const routeDefinitions: Record<string, RouteDefinition> = {
   landing: {
     path: '/',
-    component: Landing,
+    component: Login,
     exact: true,
     strict: false,
     isAuthenticated: false,
@@ -128,7 +127,7 @@ const PrivateRoute = ({ component, store, ...other }: any) => {
         ) : (
             <Redirect
               to={{
-                pathname: routeDefinitions.login.path,
+                pathname: routeDefinitions.landing.path,
                 state: { from: props.location.pathname },
               }}
             />

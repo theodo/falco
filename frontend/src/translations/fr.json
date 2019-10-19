@@ -2,59 +2,12 @@
   "Header": {
     "logo_title_landing": "Page d'accueil",
     "logo_title_app": "Rafraîchir la page",
-    "connect_link": "SE CONNECTER",
+    "login_link": "SE CONNECTER",
     "login_button": "MON COMPTE",
     "projects_button": "MES PROJETS",
     "last_audit_intro": "Dernier audit",
     "logout_link": "Se déconnecter",
-    "whats_new": "Quoi de neuf sur Falco ?"
-  },
-  "Landing": {
-    "introduction_block": {
-      "title": "Optimisez la performance de vos sites Web",
-      "introduction": "Quel que soit votre domaine, la performance de votre site web est cruciale pour vos utilisateurs et donc pour votre business. Falco vous aide à monitorer, à analyser et à optimiser vos sites.",
-      "leadForm": {
-        "email_label": "Saisissez votre adresse email ...",
-        "submit_button": "DEMANDER UNE DÉMO",
-        "submit_button_running": "DEMANDE EN COURS",
-        "submit_button_success": "MERCI !",
-        "submit_failed": "Une erreur s'est produite lors de la soumission de votre demande.\n\nMerci de réessayer.",
-        "error_email_required": "Vous devez fournir un email",
-        "error_email_valid": "Votre email n'est pas valide"
-      }
-    },
-    "customers_block": {
-      "title": "Ils nous font confiance"
-    },
-    "features_block": {
-      "title": "Fonctionnalités",
-      "monitoring": {
-        "title": "Suivi quotidien",
-        "description": "Falco monitore les performances plusieurs fois par jour, et propose une vue historisée pour piloter leur évolution."
-      },
-      "analysis": {
-        "title": "Analyses détaillées",
-        "description": "Falco propose d'accéder à tous les détails de chaque audit, pour toujours avoir toutes les informations nécessaires."
-      },
-      "optimisation": {
-        "title": "Optimisations pertinentes",
-        "description": "Falco vous propose les optimisations les plus efficaces, en s'appuyant sur les recommandations de Google."
-      }
-    },
-    "faq_block": {
-      "title": "FAQ",
-      "1st_question": "Quelles métriques Falco permet-il de piloter ?",
-      "1st_answer": "Falco permet de mesurer le Time to Interactive, le Speed Index, le score Lighthouse, le Time to First Byte et d’autres métriques.",
-      "2nd_question": "Mon site possède une partie authentifiée, puis-je l’auditer ?",
-      "2nd_answer": "Oui, Falco permet de scripter un audit de manière à passer une authentification, ou à simuler des interactions utilisateur.",
-      "3rd_question": "Est-ce que Falco permet d’auditer des Single Page Applications ?",
-      "3rd_answer": "Falco est indépendant de la technologie utilisée sur vos sites, et permet d’auditer les performances et d’obtenir des recommendations quelle que soit la stack.",
-      "4th_question": "Qui est à l’origine de Falco ?",
-      "4th_answer": "Falco est un produit développé par {theodoLink}, afin d’accompagner au mieux ses clients sur les problématiques de performance."
-    },
-    "footer": {
-      "created_by": "Créé avec ❤️ par {theodoLink}"
-    }
+    "signup_link": "S’INSCRIRE"
   },
   "Login": {
     "username_label": "Nom d'utilisateur",
