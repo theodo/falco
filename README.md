@@ -40,6 +40,46 @@ You will need to provide your credit card details to Heroku, but you will be und
 
 Full documentation for Falco lives on the [docs website](https://getfal.co).
 
+## Local development
+
+### First installation
+
+- Clone the repository:
+  ```bash
+  git clone git@github.com:theodo/falco.git
+  ```
+- Move to the `falco` directory:
+  ```bash
+  cd falco
+  ```
+- Install the backend and the frontend:
+  ```bash
+  make install
+  ```
+- Start the backend:
+  ```bash
+  make backend/start
+  ```
+- Populate the database with fixtures:
+  ```bash
+  make fixtures/load
+  ```
+- Edit the .env file: replace the initial SECRET_KEY with a random string
+
+### To (re)start the app
+
+- Start the backend:
+  ```bash
+  make backend/start
+  ```
+- Start the frontend:
+
+  ```bash
+  make frontend/start
+  ```
+
+The project should now be running at [localhost:3000](http://localhost:3000).
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
