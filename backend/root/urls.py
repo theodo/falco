@@ -13,7 +13,6 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 from root import views
@@ -27,20 +26,8 @@ urlpatterns = [
     path("auth/", include("djoser.urls")),
     path("auth/", include("djoser.urls.jwt")),
     path("health", views.health, name="health"),
-    path("api/leads/", include("leads.urls", namespace="leads")),
     path("api/projects/", include("projects.urls", namespace="projects")),
     path("api/audits/", include("audits.urls", namespace="audits")),
     path("api/core/", include("core.urls", namespace="core")),
-    path("api/content/", include("content.urls", namespace="content")),
     path("", include("front.urls")),  # Keep this line last
 ]
-
-if settings.DEBUG:
-    from django.conf.urls.static import static
-    import debug_toolbar
-
-    urlpatterns = (
-        [path("__debug__/", include(debug_toolbar.urls))]
-        + static(settings.MEDIA_URL_PATH, document_root=settings.MEDIA_ROOT)
-        + urlpatterns
-    )

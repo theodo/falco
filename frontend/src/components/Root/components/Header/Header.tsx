@@ -5,7 +5,6 @@ import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { routeDefinitions } from 'routes';
 import { colorUsage } from 'stylesheet';
 import AccountMenu from './components/AccountMenu';
-import { Notification } from './components/AccountMenu/AccountMenu.style';
 import ProjectsMenu from './components/ProjectsMenu';
 import {
   HeaderBlock,
@@ -26,14 +25,12 @@ import {
 // Your component own properties
 interface Props {
   currentURL: string;
-  shouldDisplayWhatsNewNotification: boolean;
-  isUserAuthenticated: boolean,
-  isMenuDisplayed: boolean
+  isUserAuthenticated: boolean;
+  isMenuDisplayed: boolean;
 }
 
 export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
   currentURL,
-  shouldDisplayWhatsNewNotification,
   isUserAuthenticated,
   isMenuDisplayed,
   intl,
@@ -54,8 +51,8 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
         setAccountMenuRight(
           Math.floor(
             headerContainerRef.current.getBoundingClientRect().right -
-            accountMenuButtonRef.current.getBoundingClientRect().right -
-            15,
+              accountMenuButtonRef.current.getBoundingClientRect().right -
+              15,
           ) + 'px',
         );
         setMenuHasBeenPositionned(true);
@@ -70,8 +67,8 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
         setProjectsMenuRight(
           Math.floor(
             headerContainerRef.current.getBoundingClientRect().right -
-            projectsMenuButtonRef.current.getBoundingClientRect().right -
-            15,
+              projectsMenuButtonRef.current.getBoundingClientRect().right -
+              15,
           ) + 'px',
         );
         setMenuHasBeenPositionned(true);
@@ -149,7 +146,7 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
           </LogoContainer>
         </HeaderMenu>
         <HeaderContent shouldHaveShadow={shouldDisplayConnectedUserHeader && scrollPosition > 10}>
-          {shouldDisplayConnectedUserHeader && (
+          {shouldDisplayConnectedUserHeader ? (
             <Nav>
               <HeaderButtonsBlock>
                 <HeaderButton onClick={toggleProjectsMenuVisibility} ref={projectsMenuButtonRef}>
@@ -158,16 +155,19 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
                 </HeaderButton>
                 <HeaderButton onClick={toggleAccountMenuVisibility} ref={accountMenuButtonRef}>
                   <FormattedMessage id="Header.login_button" />
-                  {shouldDisplayWhatsNewNotification && <Notification />}
                   <HeaderButtonArrow />
                 </HeaderButton>
               </HeaderButtonsBlock>
             </Nav>
-          )}
-          {isLandingPage && (
-            <HeaderLink href={routeDefinitions.login.path}>
-              <FormattedMessage id="Header.connect_link" />
-            </HeaderLink>
+          ) : (
+            <>
+              <HeaderLink to={routeDefinitions.login.path}>
+                <FormattedMessage id="Header.login_link" />
+              </HeaderLink>
+              <HeaderLink to={routeDefinitions.signUp.path}>
+                <FormattedMessage id="Header.signup_link" />
+              </HeaderLink>
+            </>
           )}
         </HeaderContent>
       </HeaderBlock>

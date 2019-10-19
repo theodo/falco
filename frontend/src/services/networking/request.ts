@@ -11,7 +11,7 @@ interface AccessToken {
   exp: number;
 }
 
-export function update_token(token: string | undefined) {
+export function updateToken(token: string | undefined) {
   if (token) {
     localStorage.setItem('token', token);
   } else {
@@ -42,9 +42,9 @@ const checkAccessToken = async (requestFunction: () => void) => {
   if (!isTokenValid(decodedToken)) {
     try {
       const response = await request.post(`${backendBaseUrl}/auth/jwt/refresh`).withCredentials();
-      await update_token(response.body.access);
+      await updateToken(response.body.access);
     } catch (e) {
-      store.dispatch(logoutUserRequest({ redirectTo: routeDefinitions.login.path }));
+      store.dispatch(logoutUserRequest({ redirectTo: routeDefinitions.landing.path }));
     }
   }
   return requestFunction();
@@ -119,7 +119,7 @@ export const login = async (endpoint: string, data: {}) => {
   const response = await makeLoginRequest(endpoint, data);
   const token: string | undefined = response.body.token || response.body.access;
   if (token) {
-    await update_token(token);
+    await updateToken(token);
     return true;
   }
   return false;
@@ -130,6 +130,6 @@ export const makeLogoutRequest = (endpoint: string) =>
 
 export const logout = async (endpoint: string) => {
   const response = await makeLogoutRequest(endpoint);
-  await update_token(undefined);
+  await updateToken(undefined);
   return !!response;
 };

@@ -1,0 +1,42 @@
+{
+  "name": "Falco",
+  "description": "A Heroku version of Falco",
+  "repository": "https://github.com/theodo/falco",
+  "logo": "https://user-images.githubusercontent.com/2587348/51670042-0f2b6a80-1fc6-11e9-8080-c3195853ba62.png",
+  "keywords": ["webpagetest", "performance"],
+  "stack": "container",
+  "addons": ["heroku-postgresql:hobby-dev", "heroku-redis"],
+  "env": {
+    "DB_CYPHER_KEY": {
+      "description": "This gets generated",
+      "generator": "secret"
+    },
+    "SECRET_KEY": {
+      "description": "This gets generated",
+      "generator": "secret"
+    },
+    "EMAIL_ADMIN": {
+      "description": "This email will be assigned to the `admin` account",
+      "value": "your@email.com",
+      "required": true
+    },
+    "ALLOWED_HOST": {
+      "description": "The URL the application will be available on. See https://docs.djangoproject.com/fr/2.2/ref/settings/#allowed-hosts",
+      "value": ".herokuapp.com"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    },
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "scripts": {
+    "postdeploy": "./manage.py shell -c \"from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', '$EMAIL_ADMIN', 'admin')\""
+  },
+  "success_url": "/admin/login/?next=/admin/core/user/1/password/"
+}

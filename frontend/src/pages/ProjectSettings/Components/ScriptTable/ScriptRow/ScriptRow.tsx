@@ -32,6 +32,9 @@ export const ScriptRow: React.FunctionComponent<Props> = ({
   }) => {
 
   const [displayScriptModal, setDisplayScriptModal] = React.useState(false);
+ 
+  // could’t find a way to not declare `state` using `useAsyncFn`
+  // eslint-disable-next-line
   const [state, deleteScript] = useAsyncFn(async () => {
     try {
       const response = await makeDeleteRequest(`/api/projects/${projectId}/scripts/${scriptId}`, true);

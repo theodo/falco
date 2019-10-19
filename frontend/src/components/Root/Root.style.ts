@@ -19,7 +19,6 @@ export const PageBackground = styled.div<PageBackgroundProps>`
   position: fixed;
   height: 100%;
   width: 100%;
-  background-color: ${props => props.isLandingPage && colorUsage.landingPageGlobalBackground};
 `;
 PageBackground.displayName = 'PageBackground';
 

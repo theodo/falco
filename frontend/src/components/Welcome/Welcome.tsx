@@ -13,13 +13,13 @@ const Welcome: React.FunctionComponent<Props> = () => {
         </Style.WelcomeBlockTitle>
         <Style.WelcomeBlockText>
           <Style.WelcomeBlockTextParagraph>
-            <FormattedMessage id="Welcome.noProject"/>
+            <FormattedMessage id="Welcome.no_project"/>
           </Style.WelcomeBlockTextParagraph>
           <Style.WelcomeBlockTextParagraph>
-            <FormattedMessage id="Welcome.createProject"/>
+            <FormattedMessage id="Welcome.create_project"/>
           </Style.WelcomeBlockTextParagraph>
           <Style.WelcomeBlockTextParagraph>
-            <FormattedMessage id="Welcome.joinProject"/>
+            <FormattedMessage id="Welcome.join_project"/>
           </Style.WelcomeBlockTextParagraph>
         </Style.WelcomeBlockText>
       </Style.WelcomeBlockContainer>

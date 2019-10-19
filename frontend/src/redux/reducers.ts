@@ -8,9 +8,7 @@ import { combineReducers, Reducer } from 'redux';
 
 import { reducer as toastr } from 'react-redux-toastr'
 import { reducer as auditResults } from './auditResults';
-import { reducer as content } from './content';
 import { reducer as entities } from './entities'
-import { reducer as lead } from './lead';
 import { reducer as login } from './login';
 import { reducer as parameters } from './parameters';
 import { reducer as signUp } from './sign-up';
@@ -26,12 +24,10 @@ export default function createReducer(asyncReducers: {
 }) {
   return combineReducers<RootState, RootAction>({
     ...asyncReducers,
-    lead,
     login,
     parameters,
     entities,
     auditResults,
-    content,
     user,
     signUp,
     toastr

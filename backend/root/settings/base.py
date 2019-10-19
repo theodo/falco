@@ -25,7 +25,6 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "django.contrib.staticfiles",
     "django_celery_beat",
     "memoize",
     "rest_framework",
@@ -35,8 +34,6 @@ INSTALLED_APPS = [
     "core",
     "audits.apps.AuditsConfig",
     "projects.apps.ProjectsConfig",
-    "leads.apps.LeadsConfig",
-    "content",
 ]
 
 MIDDLEWARE = [
@@ -47,6 +44,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "core.middlewares.LastVisitedAtUpdateMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "root.urls"
@@ -56,7 +54,7 @@ AUTH_USER_MODEL = "core.User"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "front", "static", "front")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -123,9 +121,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+if "REDIS_URL" in os.environ:
+    CELERY_BROKER_URL = os.environ.get("REDIS_URL")
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"

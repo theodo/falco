@@ -113,7 +113,7 @@ export const colorUsage = {
   menuLaunchAuditsButtonBackground: colorPalette.accentGreen500,
   menuLaunchAuditsButtonText: colorPalette.white500,
 
-  // Landing Page
+  // Root
   landingPageGlobalBackground: colorPalette.grey100,
   landingTheodoLink: colorPalette.primary500,
   landingImageShadowBox: colorPalette.black100,

@@ -3,13 +3,12 @@ import { addLocaleData, IntlProvider } from 'react-intl';
 import en from 'react-intl/locale-data/en';
 import fr from 'react-intl/locale-data/fr';
 import { RouteComponentProps } from 'react-router';
-import { routeDefinitions } from 'routes';
 
 import { flattenMessages } from 'services/i18n/intl';
 import enMessages from 'translations/en.json';
 import frMessages from 'translations/fr.json';
 import { Header, Menu } from './components';
-import { Body, Content, Page, PageBackground, PageContainer } from './Root.style';
+import { Body, Content, Page, PageContainer } from './Root.style';
 
 const locales: Record<string, any> = {
   fr: flattenMessages(frMessages),
@@ -26,7 +25,6 @@ interface Props extends RouteComponentProps<any> {
 }
 
 const Root: React.FunctionComponent<Props> = ({ children, location, isUserAuthenticated, hasProjects }) => {
-  const isLandingPage = location.pathname === routeDefinitions.landing.path;
   const shouldDisplayMenu = isUserAuthenticated && hasProjects;
 
   const userLanguage =
@@ -38,7 +36,6 @@ const Root: React.FunctionComponent<Props> = ({ children, location, isUserAuthen
   return (
     <IntlProvider locale={userLanguageWithoutRegionCode} messages={localizedMessages}>
       <PageContainer>
-        <PageBackground isLandingPage={isLandingPage} />
         <Page>
           <Header isUserAuthenticated={isUserAuthenticated} isMenuDisplayed={shouldDisplayMenu}/>
           <Body>

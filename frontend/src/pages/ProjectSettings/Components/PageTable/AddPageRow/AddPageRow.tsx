@@ -37,7 +37,7 @@ export const AddPageRow: React.FunctionComponent<Props> = ({
     () => {
       setNameInputFocus();
     },
-    [isAddingMode],
+    [isAddingMode, setNameInputFocus],
   );
 
   const handleBlur = () => {

@@ -1,5 +1,0 @@
-.terraform
-eb.pem
-deployment/.archive
-deployment/archive.zip
-provisioning/terraform.tfstate*
