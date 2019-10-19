@@ -1,10 +1,10 @@
 backend/install: .env
-	TMPDIR=/private$$TMPDIR docker-compose up -d
+	docker-compose up -d
 	docker-compose exec backend ./manage.py migrate
 	docker-compose exec backend ./manage.py createcachetable
 
 backend/start:
-	TMPDIR=/private$$TMPDIR docker-compose up
+	docker-compose up
 
 backend/migrate:
 	docker-compose exec backend ./manage.py migrate
