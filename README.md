@@ -17,6 +17,7 @@
     Falco helps you <b>monitor, analyze, and optimize</b> your websites.
 </p>
 
+[![CircleCI](https://circleci.com/gh/theodo/falco/tree/master.svg?style=svg)](https://circleci.com/gh/theodo/falco/tree/master)
 [![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors)
 
 ## Features
