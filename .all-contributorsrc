@@ -17,6 +17,17 @@
         "infra",
         "doc"
       ]
+    },
+    {
+      "login": "gllmcornet",
+      "name": "Guillaume Cornet",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/35029311?v=4",
+      "profile": "https://github.com/gllmcornet",
+      "contributions": [
+        "code",
+        "infra",
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 7,
