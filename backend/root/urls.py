@@ -26,7 +26,6 @@ urlpatterns = [
     path("auth/", include("djoser.urls")),
     path("auth/", include("djoser.urls.jwt")),
     path("health", views.health, name="health"),
-    path("api/leads/", include("leads.urls", namespace="leads")),
     path("api/projects/", include("projects.urls", namespace="projects")),
     path("api/audits/", include("audits.urls", namespace="audits")),
     path("api/core/", include("core.urls", namespace="core")),

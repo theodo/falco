@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     "core",
     "audits.apps.AuditsConfig",
     "projects.apps.ProjectsConfig",
-    "leads.apps.LeadsConfig",
 ]
 
 MIDDLEWARE = [

@@ -60,18 +60,6 @@ CELERY_TASK_DEFAULT_QUEUE = os.environ.get("CELERY_TASK_DEFAULT_QUEUE", "celery"
 # SECURE_BROWSER_XSS_FILTER = True
 # SECURE_CONTENT_TYPE_NOSNIFF = True
 
-# Email settings
-# https://docs.djangoproject.com/en/2.2/topics/email/
-
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-
-EMAIL_USE_TLS = True
-EMAIL_HOST = os.environ.get("EMAIL_HOST")
-EMAIL_HOST_USER = os.environ.get("EMAIL_USER")
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_PASSWORD")
-port = os.environ.get("EMAIL_PORT")
-EMAIL_PORT = int(port) if port is not None else 0
-
 # RefreshToken JWT
 """
     STORE_REFRESH_TOKEN_COOKIE_ONLY_IN_HTTPS parameter indicates if refreshToken cookie received from ResponseHeader

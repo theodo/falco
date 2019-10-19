@@ -36,8 +36,6 @@ DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TOOLBAR_CALLBACK": lambda request: request.META["SERVER_NAME"] != "testserver"
 }
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-
 # RefreshToken JWT
 """
     STORE_REFRESH_TOKEN_COOKIE_ONLY_IN_HTTPS parameter indicates if refreshToken cookie received from ResponseHeader
