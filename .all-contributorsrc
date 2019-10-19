@@ -37,6 +37,15 @@
       "contributions": [
         "infra"
       ]
+    },
+    {
+      "login": "CecileSerene",
+      "name": "Gontier Cécile",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/24312896?v=4",
+      "profile": "https://github.com/CecileSerene",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
