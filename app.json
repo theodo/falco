@@ -38,5 +38,5 @@
   "scripts": {
     "postdeploy": "./manage.py shell -c \"from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', '$EMAIL_ADMIN', 'admin')\""
   },
-  "success_url": "/admin/?next=%2Fadmin%2Fpassword_change%2F"
+  "success_url": "/admin/login/?next=/admin/core/user/1/password/"
 }
