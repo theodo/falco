@@ -28,6 +28,15 @@
         "infra",
         "design"
       ]
+    },
+    {
+      "login": "kraynel",
+      "name": "Kevin Raynel",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/4620699?v=4",
+      "profile": "https://github.com/kraynel",
+      "contributions": [
+        "infra"
+      ]
     }
   ],
   "contributorsPerLine": 7,

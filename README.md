@@ -1,5 +1,5 @@
 # Falco
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors)
 
 ![logo falco](https://user-images.githubusercontent.com/2587348/51670042-0f2b6a80-1fc6-11e9-8080-c3195853ba62.png)
 
@@ -60,6 +60,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://phacks.dev/"><img src="https://avatars1.githubusercontent.com/u/2587348?v=4" width="100px;" alt="Nicolas Goutay"/><br /><sub><b>Nicolas Goutay</b></sub></a><br /><a href="#design-phacks" title="Design">🎨</a> <a href="https://github.com/theodo/falco/commits?author=phacks" title="Code">💻</a> <a href="#content-phacks" title="Content">🖋</a> <a href="#infra-phacks" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/theodo/falco/commits?author=phacks" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/gllmcornet"><img src="https://avatars3.githubusercontent.com/u/35029311?v=4" width="100px;" alt="Guillaume Cornet"/><br /><sub><b>Guillaume Cornet</b></sub></a><br /><a href="https://github.com/theodo/falco/commits?author=gllmcornet" title="Code">💻</a> <a href="#infra-gllmcornet" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#design-gllmcornet" title="Design">🎨</a></td>
+    <td align="center"><a href="https://github.com/kraynel"><img src="https://avatars3.githubusercontent.com/u/4620699?v=4" width="100px;" alt="Kevin Raynel"/><br /><sub><b>Kevin Raynel</b></sub></a><br /><a href="#infra-kraynel" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
   </tr>
 </table>
 
