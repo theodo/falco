@@ -1,9 +1,0 @@
-- [ ] The Title of this PR looks like: [Ticket number] Ticket Title
-- [ ] The link to the [Trello ticket]()
-- [ ] I created this branch out of the master branch or a branch branched out of the master branch
-- [ ] Tests :
-  - [ ] Components modifications are tested
-  - [ ] Reducers modifications are tested
-  - [ ] Selectors modifications are tested
-  - [ ] Saga modifications are tested
-- [ ] Screenshot in the PR for Prod environment if relevant
