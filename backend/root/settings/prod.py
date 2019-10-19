@@ -10,6 +10,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 FERNET_KEYS = [os.environ.get("DB_CYPHER_KEY")]
 DEBUG = False
 
+ALLOWED_HOSTS = []
+
 if "ALLOWED_HOST" in os.environ:
     ALLOWED_HOSTS.append(os.environ.get("ALLOWED_HOST"))
 
