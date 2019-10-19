@@ -1,5 +1,5 @@
 # Falco
-[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors)
 
 ![logo falco](https://user-images.githubusercontent.com/2587348/51670042-0f2b6a80-1fc6-11e9-8080-c3195853ba62.png)
 
@@ -68,6 +68,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/fargito"><img src="https://avatars3.githubusercontent.com/u/29537204?v=4" width="100px;" alt="François Farge"/><br /><sub><b>François Farge</b></sub></a><br /><a href="https://github.com/theodo/falco/commits?author=fargito" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/EtienneGrall"><img src="https://avatars2.githubusercontent.com/u/44709108?v=4" width="100px;" alt="EtienneGrall"/><br /><sub><b>EtienneGrall</b></sub></a><br /><a href="https://github.com/theodo/falco/commits?author=EtienneGrall" title="Code">💻</a></td>
   </tr>
 </table>
 
