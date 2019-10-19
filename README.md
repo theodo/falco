@@ -8,7 +8,9 @@
 </h1>
 
 <div align="center">
-  <img alt="Falco screenshot" src="https://falco-backup-db.s3.eu-west-3.amazonaws.com/falco_screenshot.jpg" width="600"/>
+  <a href="https://getfal.co">
+    <img alt="Falco screenshot" src="https://falco-backup-db.s3.eu-west-3.amazonaws.com/falco_screenshot.jpg" width="600"/>
+  </a>
 </div>
 
 <br />
@@ -111,7 +113,9 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 The ongoing development of Falco is proudly sponsored by [Theodo](https://www.theodo.fr/).
 
 <div align="center">
-  <img alt="Theodo logo" src="https://cdn2.hubspot.net/hub/2383597/hubfs/Website/Logos/Logo_Theodo_cropped.svg" width="200"/>
+  <a href="https://www.theodo.fr/" />
+    <img alt="Theodo logo" src="https://cdn2.hubspot.net/hub/2383597/hubfs/Website/Logos/Logo_Theodo_cropped.svg" width="200"/>
+  </a>
 </div>
 
 > Our Paris, London & New York teams of full-stack developers and agile experts bring together the tech, the talent and the experience to develop your web, mobile and software applications in record time.
