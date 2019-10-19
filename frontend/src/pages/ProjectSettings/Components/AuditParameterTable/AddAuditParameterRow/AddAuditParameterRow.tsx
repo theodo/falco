@@ -42,7 +42,7 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
     () => {
       setNameInputFocus();
     },
-    [isAddingMode],
+    [isAddingMode, setNameInputFocus],
   );
 
   const handleBlur = () => {

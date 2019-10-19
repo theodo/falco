@@ -7,13 +7,13 @@ const NotFoundComponent: React.FunctionComponent<any> = () => (
     <NotFoundContainer>
         <NotFoundInsideContainer>
             <NotFoundTitle>
-                <FormattedMessage id="notFound.404Title" />
+                <FormattedMessage id="NotFound.title" />
             </NotFoundTitle>
             <NotFoundSubTitle>
-                <FormattedMessage id="notFound.404Subtitle" />
+                <FormattedMessage id="NotFound.subtitle" />
             </NotFoundSubTitle>
             <NotFoundButton href="/">
-                <FormattedMessage id="notFound.404Button" />
+                <FormattedMessage id="NotFound.button" />
             </NotFoundButton>
         </NotFoundInsideContainer>
     </NotFoundContainer>

@@ -3,7 +3,6 @@ import { addLocaleData, IntlProvider } from 'react-intl';
 import en from 'react-intl/locale-data/en';
 import fr from 'react-intl/locale-data/fr';
 import { RouteComponentProps } from 'react-router';
-import { routeDefinitions } from 'routes';
 
 import { flattenMessages } from 'services/i18n/intl';
 import enMessages from 'translations/en.json';

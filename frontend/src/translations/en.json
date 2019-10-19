@@ -200,9 +200,9 @@
   },
   "Welcome": {
     "title": "Welcome to Falco !",
-    "noProject": "You don't have access to any project for now.",
-    "createProject": "To create a new project, please contact Jaafar (jaafarr@theodo.fr) or Nicolas (nicolasgo@theodo.fr).",
-    "joinProject": "To join an existing project, please contact the project administrator."
+    "no_project": "You don't have access to any project for now.",
+    "create_project": "To create a new project, please contact Jaafar (jaafarr@theodo.fr) or Nicolas (nicolasgo@theodo.fr).",
+    "join_project": "To join an existing project, please contact the project administrator."
   },
   "Toastr": {
     "ProjectSettings":{
@@ -226,15 +226,15 @@
   },
   "components": {
     "MetricGraph": {
-      "tooltipDate": "On {day} at {time}",
+      "tooltip_date": "On {day} at {time}",
       "metric_info_title": "Details",
       "expand": "Show all data",
       "close": "Close"
     }
   },
-  "notFound": {
-    "404Title": "404 Not Found",
-    "404Subtitle": "Sorry, this page does not exist",
-    "404Button": "Back to Homepage"
+  "NotFound": {
+    "title": "404 Not Found",
+    "subtitle": "Sorry, this page does not exist",
+    "button": "Back to Homepage"
   }
 }

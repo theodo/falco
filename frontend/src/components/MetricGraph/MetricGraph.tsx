@@ -113,7 +113,7 @@ const MetricGraph: React.FunctionComponent<Props> = ({
         const dataType = METRICS[entry.dataKey as MetricType].type;
         const formattedDate = intl.formatMessage(
           {
-            id: 'components.MetricGraph.tooltipDate',
+            id: 'components.MetricGraph.tooltip_date',
           },
           {
             day: dayjs(label)
