@@ -1,54 +1,39 @@
-# Falco
+<p align="center">
+  <a href="https://getfal.co">
+    <img alt="Falco" src="https://falco-backup-db.s3.eu-west-3.amazonaws.com/logo.svg" width="60" />
+  </a>
+</p>
+<h1 align="center">
+  Falco · an Open Source WebPageTest runner
+</h1>
+
+<div align="center">
+  <img alt="Falco screenshot" src="https://falco-backup-db.s3.eu-west-3.amazonaws.com/falco_screenshot.jpg" width="600"/>
+</div>
+
+<br />
+
+<p align="center">
+    Falco helps you <b>monitor, analyze, and optimize</b> your websites.
+</p>
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors)
 
-![logo falco](https://user-images.githubusercontent.com/2587348/51670042-0f2b6a80-1fc6-11e9-8080-c3195853ba62.png)
+## Features
 
-Falco helps you get your Performance Kaizen ready to go, in minutes
+- 🔬 Automatically run audits multiple times a day in many conditions
+- 📈 See the evolution of key performance metrics to easily spot regressions
+- 👥 Invite the whole team so that everyone (devs, ops, product, marketing…) is involved in performance
+- 🗺 Audit the performance of individual URLs or entire user journeys ([even on Single Page Apps!](https://css-tricks.com/recipes-for-performance-testing-single-page-applications-in-webpagetest/))
+- 📸 Easily access and compare WebPageTest results between audits
 
 ## Quick start
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/theodo/falco/)
 
+## Docs
 
-## Getting started
-
-- Make sure you have those dependencies installed on your machine:
-  - [Docker](https://www.docker.com/community-edition)
-- Follow the [installation](./docs/installation.md) docs
-- Head to [localhost:8000](http://localhost:8000)
-
-## Documentation index
-
-- [Installation](./docs/installation.md)
-- [Frontend docs](./frontend/README.md)
-- [Provisioning](./docs/provisioning.md)
-- [Deployment](./docs/deployment.md)
-- [HTTPS](./docs/https.md)
-- [Dump production database in local](./docs/database_dump.md)
-- [Write scripts](./docs/scripts.md)
-- [DEV tips](./docs/development_tips.md)
-- [Outboarding](./docs/outboarding.md)
-
-## Team
-
-> 🚧 Update me!
-
-Product Manager:
-
-- **Jaafar Raji** (jaafarr@theodo.fr)
-
-Agile Coach:
-
-- **Lou Prieur** (loup@theodo.fr)
-
-Developers (see [contributors](../../graphs/contributors)):
-
-- **Cécile Gontier** (cecilego@theodo.fr)
-- **Nicolas Goutay** (nicolasgo@theodo.fr)
-- **Etienne Grall** (etienneg@theodo.fr)
-- **Vincent Larrat** (vincentla@theodo.fr)
-- **François Farge** (francoisf@theodo.fr)
-- **Guillaume Cornet** (guillaumec@theodo.fr)
+Full documentation for Falco lives on the [docs website](https://getfal.co).
 
 ## Contributors ✨
 
@@ -75,3 +60,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+## Sponsor
+
+The ongoing development of Falco is proudly sponsored by [Theodo](https://www.theodo.fr/).
+
+<div align="center">
+  <img alt="Theodo logo" src="https://cdn2.hubspot.net/hub/2383597/hubfs/Website/Logos/Logo_Theodo_cropped.svg" width="200"/>
+</div>
+
+> Our Paris, London & New York teams of full-stack developers and agile experts bring together the tech, the talent and the experience to develop your web, mobile and software applications in record time.
