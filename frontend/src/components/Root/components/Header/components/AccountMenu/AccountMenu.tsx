@@ -4,34 +4,28 @@ import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
 import { UserState } from 'redux/user/reducer';
 import { routeDefinitions } from 'routes';
-import { Container, Notification, UserActionItem, UserActionsBlock, UserEmail, UserInfosBlock, UserInfosBlockContainer, UserName, WhatsNewLink } from './AccountMenu.style';
+import { Container, UserActionItem, UserActionsBlock, UserEmail, UserInfosBlock, UserInfosBlockContainer, UserName } from './AccountMenu.style';
 
 interface OwnProps {
   fetchUserRequest: () => void;
-  fetchLastUpdateOfWhatsNewRequest: () => void;
-  registerNewClickOnWhatsNew: (newClickTime: string | null) => void;
   logoutUser: (redirectTo?: string | undefined) => void;
   isVisible: boolean;
   position?: string;
   right?: string | null;
   user: UserState;
   isUserAuthenticated: boolean;
-  shouldDisplayWhatsNewNotification: boolean;
 }
 
 type Props = OwnProps & InjectedIntlProps & RouteComponentProps;
 
 export const AccountMenu: React.FunctionComponent<Props> = ({
   fetchUserRequest,
-  fetchLastUpdateOfWhatsNewRequest,
-  registerNewClickOnWhatsNew,
   isVisible,
   logoutUser,
   position,
   right,
   user,
   isUserAuthenticated,
-  shouldDisplayWhatsNewNotification,
 }) => {
   React.useEffect(
     () => {
@@ -40,15 +34,6 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
       }
     },
     [isUserAuthenticated, fetchUserRequest],
-  );
-
-  React.useEffect(
-    () => {
-      if (isUserAuthenticated) {
-        fetchLastUpdateOfWhatsNewRequest();
-      }
-    },
-    [isUserAuthenticated, fetchLastUpdateOfWhatsNewRequest],
   );
 
   const capitalize = (word: any) => {
@@ -77,22 +62,6 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
           </UserInfosBlock>
         </UserInfosBlockContainer>
         <UserActionsBlock>
-          <WhatsNewLink
-            onClick={
-              () => {
-                registerNewClickOnWhatsNew((new Date()).toISOString())
-              }
-            }
-            href="https://www.notion.so/Falco-What-s-new-3c08ac348c7b40499638c0a62924aacc"
-            target="_blank"
-          >
-            <UserActionItem margin={'0'}>
-              <FormattedMessage id="Header.whats_new" />
-              {
-                shouldDisplayWhatsNewNotification && <Notification />
-              }
-            </UserActionItem>
-          </WhatsNewLink>
           <UserActionItem
             margin={'0'}
             onClick={() => logoutUser(routeDefinitions.landing.path)}
@@ -103,5 +72,5 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
       </Container>
     );
   }
-  return <div />;
+  return null;
 };

@@ -62,17 +62,3 @@ export const UserActionItem = styled.div`
       font-weight: ${fontWeight.accountMenuActionItemHoverText};
     }
   `;
-
-export const WhatsNewLink = styled.a`
-    all: unset;
-  `;
-
-export const Notification = styled.span`
-  height: 12px;
-  width: 12px;
-  margin-left: 5px;
-  margin-bottom: 10px;
-  background-color: ${colorUsage.accountMenuNotification};
-  border-radius: 50%;
-  display: inline-block;
-  `;

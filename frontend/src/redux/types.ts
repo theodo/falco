@@ -3,7 +3,6 @@ import { ToastrState } from 'react-redux-toastr';
 import { PersistPartial } from 'redux-persist/lib/persistReducer';
 import { LeadAction, LeadState } from 'redux/lead';
 import { AuditResultsAction, AuditResultsState } from './auditResults';
-import { ContentAction, ContentState } from './content';
 import { AuditParametersAction, AuditParametersState } from './entities/auditParameters';
 import { AuditsAction, AuditsState } from './entities/audits';
 import { AuditStatusHistoriesAction, AuditStatusHistoriesState } from './entities/auditStatusHistories/reducer';
@@ -30,7 +29,6 @@ export type RootState = Readonly<{
   };
   auditResults: AuditResultsState;
   user: UserState;
-  content: ContentState & PersistPartial;
   toastr: ToastrState;
 }>;
 // This type allows url fetching from anywhere without modifying the RootState
@@ -49,4 +47,3 @@ export type RootAction =
   | AuditStatusHistoriesAction
   | AuditResultsAction
   | UserAction
-  | ContentAction;

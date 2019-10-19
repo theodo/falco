@@ -5,7 +5,6 @@ import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { routeDefinitions } from 'routes';
 import { colorUsage } from 'stylesheet';
 import AccountMenu from './components/AccountMenu';
-import { Notification } from './components/AccountMenu/AccountMenu.style';
 import ProjectsMenu from './components/ProjectsMenu';
 import {
   HeaderBlock,
@@ -26,14 +25,12 @@ import {
 // Your component own properties
 interface Props {
   currentURL: string;
-  shouldDisplayWhatsNewNotification: boolean;
   isUserAuthenticated: boolean,
   isMenuDisplayed: boolean
 }
 
 export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
   currentURL,
-  shouldDisplayWhatsNewNotification,
   isUserAuthenticated,
   isMenuDisplayed,
   intl,
@@ -158,7 +155,6 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
                 </HeaderButton>
                 <HeaderButton onClick={toggleAccountMenuVisibility} ref={accountMenuButtonRef}>
                   <FormattedMessage id="Header.login_button" />
-                  {shouldDisplayWhatsNewNotification && <Notification />}
                   <HeaderButtonArrow />
                 </HeaderButton>
               </HeaderButtonsBlock>
