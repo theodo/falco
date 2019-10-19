@@ -6,7 +6,7 @@ Falco helps you get your Performance Kaizen ready to go, in minutes
 
 ## Quick start
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/theodo/falco/tree/heroku-deploy-wip-kevin)
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/theodo/falco/)
 
 
 ## Getting started
