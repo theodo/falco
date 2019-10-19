@@ -79,9 +79,6 @@ EMAIL_PORT = int(port) if port is not None else 0
 """
 STORE_REFRESH_TOKEN_COOKIE_ONLY_IN_HTTPS = True
 
-# Google Analytics
-GOOGLE_ANALYTICS_ID = os.environ.get("GOOGLE_ANALYTICS_ID")
-
 # Place static in the same location as webpack build files
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = ["/code/front/static/front", "/code/static"]

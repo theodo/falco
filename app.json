@@ -28,11 +28,11 @@
   "formation": {
     "web": {
       "quantity": 1,
-      "size": "Free"
+      "size": "free"
     },
     "worker": {
       "quantity": 1,
-      "size": "Free"
+      "size": "free"
     }
   },
   "scripts": {
