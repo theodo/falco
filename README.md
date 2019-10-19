@@ -30,7 +30,11 @@
 
 ## Quick start
 
+You can deploy Falco on Heroku by clicking on the following button:
+
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/theodo/falco/)
+
+You will need to provide your credit card details to Heroku, but you will be under the free tier by default. You can find more details on why they are needed and Heroku’s pricing policy [in the docs](https://getfal.co).
 
 ## Docs
 
