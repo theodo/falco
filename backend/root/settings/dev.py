@@ -16,11 +16,6 @@ CORS_ALLOW_CREDENTIALS = True
 
 MIDDLEWARE = MIDDLEWARE + ["corsheaders.middleware.CorsMiddleware"]
 
-# Uploaded files storage
-MEDIA_ROOT = "/uploads/"
-MEDIA_URL_PATH = "uploads/"
-MEDIA_URL = "http://localhost:8000/" + MEDIA_URL_PATH
-
 # Caching
 CACHES = {
     "default": {

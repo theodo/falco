@@ -7,7 +7,6 @@
   "stack": "container",
   "addons": ["heroku-postgresql:hobby-dev", "heroku-redis"],
   "env": {
-    "MEDIA_BUCKET": "falco-staging-media",
     "DB_CYPHER_KEY": {
       "description": "This gets generated",
       "generator": "secret"
