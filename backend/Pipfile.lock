@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "32d207a16a87cca87cbf4104f9b85dbf072224b6d0690debc75e81688bf0691a"
+            "sha256": "753e57ed8e83246ec64c049f97c19d2cd0dacfa0f5512b1a170219e678b799e8"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -170,11 +170,11 @@
                 "argon2"
             ],
             "hashes": [
-                "sha256:7c3543e4fb070d14e10926189a7fcf42ba919263b7473dceaefce34d54e8a119",
-                "sha256:a2814bffd1f007805b19194eb0b9a331933b82bd5da1c3ba3d7b7ba16e06dc4b"
+                "sha256:16a5d54411599780ac9dfe3b9b38f90f785c51259a584e0b24b6f14a7f69aae8",
+                "sha256:9a2f98211ab474c710fcdad29c82f30fc14ce9917c7a70c3682162a624de4035"
             ],
             "index": "pypi",
-            "version": "==2.2"
+            "version": "==2.2.4"
         },
         "django-celery-beat": {
             "hashes": [
@@ -557,11 +557,11 @@
                 "argon2"
             ],
             "hashes": [
-                "sha256:7c3543e4fb070d14e10926189a7fcf42ba919263b7473dceaefce34d54e8a119",
-                "sha256:a2814bffd1f007805b19194eb0b9a331933b82bd5da1c3ba3d7b7ba16e06dc4b"
+                "sha256:16a5d54411599780ac9dfe3b9b38f90f785c51259a584e0b24b6f14a7f69aae8",
+                "sha256:9a2f98211ab474c710fcdad29c82f30fc14ce9917c7a70c3682162a624de4035"
             ],
             "index": "pypi",
-            "version": "==2.2"
+            "version": "==2.2.4"
         },
         "django-cors-headers": {
             "hashes": [
