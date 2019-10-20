@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "lodash": "4.17.15",
+    "react-app-rewire-webpack-bundle-analyzer": "1.1.0"
+  }
+}
