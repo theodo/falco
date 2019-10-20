@@ -4,7 +4,16 @@ import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
 import { UserState } from 'redux/user/reducer';
 import { routeDefinitions } from 'routes';
-import { Container, UserActionItem, UserActionsBlock, UserEmail, UserInfosBlock, UserInfosBlockContainer, UserName } from './AccountMenu.style';
+import {
+  Container,
+  UserActionItem, 
+  UserActionItemExternalLink, 
+  UserActionsBlock, 
+  UserEmail, 
+  UserInfosBlock, 
+  UserInfosBlockContainer, 
+  UserName
+} from './AccountMenu.style';
 
 interface OwnProps {
   fetchUserRequest: () => void;
@@ -62,6 +71,13 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
           </UserInfosBlock>
         </UserInfosBlockContainer>
         <UserActionsBlock>
+          <UserActionItem
+            margin={'0'}
+          >
+            <UserActionItemExternalLink href="https://getfal.co" target="_blank" rel="noopener noreferrer">
+              <FormattedMessage id="Header.see_the_docs" />
+            </UserActionItemExternalLink>
+          </UserActionItem>
           <UserActionItem
             margin={'0'}
             onClick={() => logoutUser(routeDefinitions.landing.path)}

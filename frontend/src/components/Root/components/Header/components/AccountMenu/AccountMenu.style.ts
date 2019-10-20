@@ -62,3 +62,7 @@ export const UserActionItem = styled.div`
       font-weight: ${fontWeight.accountMenuActionItemHoverText};
     }
   `;
+
+  export const UserActionItemExternalLink = styled.a`
+    all: unset;
+  `
