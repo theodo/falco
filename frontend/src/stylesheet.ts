@@ -1,5 +1,3 @@
-import { createMuiTheme } from '@material-ui/core/styles';
-
 /**
  * App spacing measurement convention
  * Use the getSpacing function below to compute padding and margin
@@ -404,15 +402,3 @@ export const modalSize = {
   big: '1375px',
   medium: '1000px',
 }
-
-// Material UI - theme, do not declare constant inside this object
-export const muiTheme = createMuiTheme({
-  typography: {
-    useNextVariants: true,
-  },
-  palette: {
-    primary: {
-      main: colorPalette.primary500,
-    },
-  },
-});
