@@ -80,7 +80,12 @@ Full documentation for Falco lives on the [docs website](https://getfal.co).
   make frontend/start
   ```
 
-The project should now be running at [localhost:3000](http://localhost:3000).
+The project should now be running at [localhost:3000](http://localhost:3000). You can acces to the Django administration interface at [http://localhost:8000/admin/](http://localhost:8000/admin/).
+
+To access both these interfaces, you can login using the following credentials:
+
+- username: `admin`
+- password: `admin`
 
 ## Contributors ✨
 
