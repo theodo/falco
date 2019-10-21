@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { RouteComponentProps } from 'react-router';
 import { ValueType } from 'react-select/lib/types';
 import { ProjectMember, ProjectToastrDisplayType, ProjectType } from 'redux/entities/projects/types';
@@ -9,7 +10,7 @@ import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
 import ToggleButton from 'components/ToggleButton';
 import Close from 'icons/Close';
-import { toastr } from 'react-redux-toastr';
+import ReduxToastr, { toastr } from 'react-redux-toastr';
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import { UserState } from 'redux/user';
 import { modelizeUser } from 'redux/user/modelizer';
@@ -435,6 +436,14 @@ const ProjectSettings: React.FunctionComponent<Props> = ({
             </Style.ElementContainer>
           )}
       </Style.ProjectSettingsBlock>
+      <ReduxToastr
+        timeOut={4000}
+        newestOnTop={false}
+        preventDuplicates
+        transitionIn="fadeIn"
+        transitionOut="fadeOut"
+        closeOnToastrClick
+      />
     </Style.Container>
   );
 }

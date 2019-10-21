@@ -6,7 +6,8 @@
 import { LocationChangeAction, RouterState } from 'connected-react-router';
 import { combineReducers, Reducer } from 'redux';
 
-import { reducer as toastr } from 'react-redux-toastr'
+// @ts-ignore
+import toastr from 'react-redux-toastr/lib/reducer'
 import { reducer as auditResults } from './auditResults';
 import { reducer as entities } from './entities'
 import { reducer as login } from './login';
