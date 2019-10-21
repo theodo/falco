@@ -31,15 +31,11 @@ const Style = {
   `,
 
   MetricsContainer: styled.div`
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-self: flex- start;
+    column-count: 2; 
   `,
 
   MetricItem: styled.div`
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     align-items: center;
     margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
