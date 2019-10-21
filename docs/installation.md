@@ -54,4 +54,4 @@ What you need to do to (re)start the project:
   make frontend/start
   ```
 
-  The project should now be running at [localhost:8000](http://localhost:8000).
+  The project should now be running at [localhost:8000](http://localhost:8000). The fixtures load has created an account you can access by using "admin" as user name and password.
