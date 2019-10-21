@@ -50,7 +50,7 @@ import {
   setProjectToastrDisplay,
 } from './actions';
 import { modelizeProject, modelizeProjects } from './modelizer';
-import { ApiProjectResponseType, ApiProjectType } from './types';
+import { ApiProjectType } from './types';
 
 function* fetchProjectsFailedHandler(error: Error, actionPayload: Record<string, any>) {
   yield put(fetchProjectError({ projectId: actionPayload.currentProjectId, errorMessage: error.message }));
@@ -110,15 +110,15 @@ function* fetchProjects(action: ActionType<typeof fetchProjectsRequest>) {
   const firstProjectEndpoint = action.payload.currentProjectId
     ? `/api/projects/${action.payload.currentProjectId}/`
     : '/api/projects/first';
-  const { body: firstProject }: { body: ApiProjectResponseType } = yield call(
+  const { body: firstProject }: { body: ApiProjectType } = yield call(
     makeGetRequest,
     firstProjectEndpoint,
     true,
     null,
   );
   // if the returned project is empty, put an empty state for projects
-  if (firstProject.project.uuid) {
-    yield put(saveFetchedProjects({ projects: [firstProject.project] }));
+  if (firstProject.uuid) {
+    yield put(saveFetchedProjects({ projects: [firstProject] }));
   } else {
     yield put(fetchProjectError({ projectId: null, errorMessage: "No project returned" }));
     return;
@@ -140,13 +140,13 @@ function* fetchProjects(action: ActionType<typeof fetchProjectsRequest>) {
 
 function* fetchProject(action: ActionType<typeof fetchProjectRequest>) {
   const endpoint = `/api/projects/${action.payload.projectId}/`;
-  const { body: projectResponse }: { body: ApiProjectResponseType } = yield call(
+  const { body: project }: { body: ApiProjectType } = yield call(
     makeGetRequest,
     endpoint,
     true,
     null,
   );
-  yield put(saveFetchedProjects({ projects: [projectResponse.project] }));
+  yield put(saveFetchedProjects({ projects: [project] }));
 };
 
 function* addMemberToProject(action: ActionType<typeof addMemberToProjectRequest>) {

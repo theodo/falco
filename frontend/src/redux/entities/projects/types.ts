@@ -25,6 +25,7 @@ export interface ApiProjectType {
   latest_audit_at: string;
   project_members: ApiProjectMember[];
   wpt_api_key: string;
+  has_siblings: boolean;
 };
 
 export interface ProjectMember {
@@ -40,12 +41,6 @@ export interface ApiProjectMember {
   email: string;
   is_admin: boolean;
 }
-
-
-export interface ApiProjectResponseType {
-  project: ApiProjectType;
-  has_siblings: boolean;
-};
 
 export type ProjectToastrDisplayType =
 | ''
