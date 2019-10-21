@@ -1,0 +1,188 @@
+import * as React from 'react';
+import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
+import { RouteComponentProps } from 'react-router';
+import { ProjectToastrDisplayType, ProjectType } from 'redux/entities/projects/types';
+
+import Loader from 'components/Loader';
+import MessagePill from 'components/MessagePill';
+import ReduxToastr, { toastr } from 'react-redux-toastr';
+import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
+import { UserState } from 'redux/user';
+import { isUserAdminOfProject } from 'services/utils';
+import { AddPageRow } from './Components/PageTable';
+import PageRow, { PageRowHeader } from './Components/PageTable';
+import { AddScript, ScriptRow, ScriptTableHeader } from './Components/ScriptTable'
+import Style from './ScriptsAndPagesSettings.style';
+
+export type OwnProps = {} & RouteComponentProps<{
+  projectId: string;
+}>;
+
+type Props = {
+  currentUser: UserState,
+  fetchProjectsRequest: (projectId: string) => void;
+  project?: ProjectType | null;
+  toastrDisplay: ProjectToastrDisplayType;
+  setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
+} & OwnProps &
+  InjectedIntlProps;
+
+const ScriptsAndPagesSettings: React.FunctionComponent<Props> = ({
+  fetchProjectsRequest,
+  match,
+  intl,
+  project,
+  currentUser,
+  toastrDisplay,
+  setProjectToastrDisplay,
+}) => {
+
+  interface UserOption {
+    value: string;
+    label: string;
+    disabled: boolean;
+  };
+
+  interface ApiAvailableAuditParameters {
+    uuid: string,
+    browser: string,
+    location_label: string,
+    location_group: string,
+  }
+
+
+  useFetchProjectIfUndefined(fetchProjectsRequest, match.params.projectId, project);
+
+  React.useEffect(
+    () => {
+      if('' !== toastrDisplay) {
+        switch(toastrDisplay) {
+          case "addPageSuccess":
+            toastr.success(
+              intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
+              intl.formatMessage({'id': 'Toastr.ProjectSettings.add_page_success_message'}),
+            );
+            break;
+          case "editPageSuccess":
+              toastr.success(
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
+                intl.formatMessage({'id': 'Toastr.ProjectSettings.edit_page_success_message'}),
+              );
+              break;
+          case "deletePageSuccess":
+            toastr.success(
+              intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
+              intl.formatMessage({'id': 'Toastr.ProjectSettings.delete_page_success_message'}),
+            );
+            break;
+          case "addScriptToProjectSuccess":
+            toastr.success(
+              intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
+              intl.formatMessage({'id': 'Toastr.ProjectSettings.add_script_to_project_sucess'}),
+            );
+            break;
+          case "editScriptSuccess":
+            toastr.success(
+              intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
+              intl.formatMessage({'id': 'Toastr.ProjectSettings.edit_script_sucess'}),
+            );
+            break;
+          case "deleteScriptSuccess":
+            toastr.success(
+              intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
+              intl.formatMessage({'id': 'Toastr.ProjectSettings.delete_script_sucess'}),
+            );
+            break;
+          case "addScriptToProjectError":
+          case "editScriptError":
+          case "deleteScriptError":
+          case "editPageError":
+          case "addPageError":
+          case "deletePageError":
+            toastr.error(
+              intl.formatMessage({'id': 'Toastr.ProjectSettings.error_title'}),
+              intl.formatMessage({'id': 'Toastr.ProjectSettings.error_message'}),
+            );
+            break;
+        }
+
+        setProjectToastrDisplay('');
+      }
+    },
+    [toastrDisplay, setProjectToastrDisplay, intl],
+  );
+
+
+  if (project === undefined) {
+    return (
+      <Style.Container>
+        <Loader />
+      </Style.Container>
+    );
+  }
+
+  if (project === null || currentUser === null) {
+    return (
+      <Style.Container>
+        <MessagePill messageType="error">
+          <FormattedMessage id="Project.project_error" />
+        </MessagePill>
+      </Style.Container>
+    );
+  }
+
+  return (
+    <Style.Container>
+      <Style.PageSubTitle>
+        <FormattedMessage id="ProjectSettings.pages"/>
+      </Style.PageSubTitle>
+      <Style.ProjectSettingsBlock>
+        <Style.ElementContainer>
+          <PageRowHeader />
+        </Style.ElementContainer>
+        {project.pagesIds.map(pageId => (
+          <Style.ElementContainer key={pageId}>
+            <PageRow
+              disabled={!isUserAdminOfProject(currentUser, project)}
+              projectId={project.uuid}
+              pageId={pageId}
+            />
+          </Style.ElementContainer>))}
+          {isUserAdminOfProject(currentUser, project) && <Style.ElementContainer>
+            <AddPageRow
+              projectId={project.uuid}
+            />
+          </Style.ElementContainer>}
+      </Style.ProjectSettingsBlock>
+      <Style.PageSubTitle>
+        <FormattedMessage id="ProjectSettings.scripts"/>
+      </Style.PageSubTitle>
+      <Style.ProjectSettingsBlock>
+        <Style.ElementContainer>
+          <ScriptTableHeader/>
+        </Style.ElementContainer>
+        {project.scriptsIds.map(scriptId => (
+          <Style.ElementContainer key={scriptId}>
+            <ScriptRow
+              scriptId={scriptId}
+              projectId={project.uuid}
+            />
+          </Style.ElementContainer>))}
+        {isUserAdminOfProject(currentUser, project) && <Style.ElementContainer>
+          <AddScript projectId={project.uuid} />
+          </Style.ElementContainer>}
+      </Style.ProjectSettingsBlock>
+      <ReduxToastr
+        timeOut={4000}
+        newestOnTop={false}
+        preventDuplicates
+        transitionIn="fadeIn"
+        transitionOut="fadeOut"
+        closeOnToastrClick
+      />
+    </Style.Container>
+  );
+}
+
+export default ScriptsAndPagesSettings;

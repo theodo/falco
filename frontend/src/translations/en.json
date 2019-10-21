@@ -54,6 +54,7 @@
     "name": "Project name",
     "wpt_key": "WebPageTest API Key",
     "project_audit_parameters": "Project environments",
+    "scripts_and_pages": "Project scripts and pages",
     "scripts": "Project scripts",
     "script": "Script",
     "script_name": "Script name",

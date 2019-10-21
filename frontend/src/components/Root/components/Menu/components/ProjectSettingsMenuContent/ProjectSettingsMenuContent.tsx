@@ -31,7 +31,7 @@ export const ProjectSettingsMenuContent: React.FunctionComponent<Props> = ({
 }) => {
 
   const settingPages = [
-    routeDefinitions.projectSettingsGeneral, routeDefinitions.environmentSettings
+    routeDefinitions.projectSettingsGeneral, routeDefinitions.environmentSettings, routeDefinitions.scriptsAndPagesSettings
   ]
 
   const linkPathMatchesUrl = (page: any) => {
