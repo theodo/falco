@@ -12,6 +12,7 @@ const SignUp = lazy(() => import('./pages/User/SignUp'));
 const Project = lazy(() => import('./pages/Project'));
 const Projects = lazy(() => import('./pages/Projects'));
 const ProjectSettings = lazy(() => import('./pages/ProjectSettings'));
+const GeneralSettings = lazy(() => import('./pages/GeneralSettings'));
 
 interface RouteDefinition {
   path: string;
@@ -64,6 +65,13 @@ export const routeDefinitions: Record<string, RouteDefinition> = {
   projectSettings: {
     path: '/project/:projectId/settings',
     component: ProjectSettings,
+    exact: true,
+    strict: false,
+    isAuthenticated: true,
+  },
+  projectSettingsGeneral: {
+    path: '/project/:projectId/settings/general',
+    component: GeneralSettings,
     exact: true,
     strict: false,
     isAuthenticated: true,
