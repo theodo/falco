@@ -1,6 +1,8 @@
 from core.models import User
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 from projects.models import (
     Page,
     Project,
@@ -22,6 +24,7 @@ from projects.permissions import (
     check_if_admin_of_project,
     is_admin_of_project,
 )
+from rest_framework.response import Response
 from rest_framework import permissions, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.parsers import JSONParser
@@ -31,16 +34,33 @@ def get_user_projects(user_id):
     return Project.objects.filter(members__id=user_id, is_active=True)
 
 
+@swagger_auto_schema(
+    methods=["get"],
+    responses={
+        200: openapi.Response(
+            "Returns a list of all the user’s projects", ProjectSerializer(many=True)
+        )
+    },
+    tags=["Project"],
+)
+@swagger_auto_schema(
+    methods=["post"],
+    request_body=ProjectSerializer,
+    responses={201: openapi.Response("Returns the created project", ProjectSerializer)},
+    tags=["Project"],
+)
 @api_view(["GET", "POST"])
 @permission_classes([permissions.IsAuthenticated])
 def project_list(request):
     if request.method == "GET":
         projects = get_user_projects(request.user.id)
-        serializer = ProjectSerializer(projects, many=True)
+        serializer = ProjectSerializer(
+            projects, many=True, context={"user_id": request.user.id}
+        )
         return JsonResponse(serializer.data, safe=False)
     elif request.method == "POST":
         data = JSONParser().parse(request)
-        serializer = ProjectSerializer(data=data)
+        serializer = ProjectSerializer(data=data, context={"user_id": request.user.id})
         if serializer.is_valid():
             project = Project.objects.create(**serializer.validated_data)
             project.save()
@@ -51,19 +71,43 @@ def project_list(request):
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@swagger_auto_schema(
+    methods=["get"],
+    responses={200: openapi.Response("", ProjectSerializer)},
+    tags=["Project"],
+)
 @api_view(["GET"])
 @permission_classes([permissions.IsAuthenticated])
 def first_project(request):
-    """returns the first project of the user, a boolean that indicates whether
-    the user has other projects.
-    This will speed up the loading of the first project page"""
+    """Returns the first project of the user.
+    This is used to speed up the loading of the first project page"""
     projects = get_user_projects(request.user.id)
-    serializer = ProjectSerializer(projects.first())
-    return JsonResponse(
-        {"project": serializer.data, "has_siblings": projects.count() > 1}
+    serializer = ProjectSerializer(
+        projects.first(), context={"user_id": request.user.id}
     )
+    return JsonResponse(serializer.data)
 
 
+@swagger_auto_schema(
+    methods=["get"],
+    responses={
+        200: openapi.Response("Returns details of a project.", ProjectSerializer)
+    },
+    tags=["Project"],
+)
+@swagger_auto_schema(
+    methods=["put"],
+    request_body=ProjectSerializer,
+    responses={
+        200: openapi.Response(
+            "Update a project. Allows for partial updates.", ProjectSerializer
+        )
+    },
+    tags=["Project"],
+)
+@swagger_auto_schema(
+    methods=["delete"], responses={204: "No content"}, tags=["Project"]
+)
 @api_view(["GET", "PUT", "DELETE"])
 @permission_classes([permissions.IsAuthenticated])
 def project_detail(request, project_uuid):
@@ -71,12 +115,11 @@ def project_detail(request, project_uuid):
     check_if_member_of_project(request.user.id, project.uuid)
 
     if request.method == "GET":
-        projects = get_user_projects(request.user.id)
         if is_admin_of_project(request.user.id, project.uuid):
-            serializer = ProjectSerializer(project)
-            return JsonResponse(
-                {"project": serializer.data, "has_siblings": projects.count() > 1}
+            serializer = ProjectSerializer(
+                project, context={"user_id": request.user.id}
             )
+            return JsonResponse(serializer.data)
         serializer = ProjectSerializer(
             project,
             fields=(
@@ -89,15 +132,16 @@ def project_detail(request, project_uuid):
                 "screenshot_url",
                 "latest_audit_at",
             ),
+            context={"user_id": request.user.id},
         )
-        return JsonResponse(
-            {"project": serializer.data, "has_siblings": projects.count() > 1}
-        )
+        return JsonResponse(serializer.data)
 
     elif request.method == "PUT":
         check_if_admin_of_project(request.user.id, project.uuid)
         data = JSONParser().parse(request)
-        serializer = ProjectSerializer(project, data=data, partial=True)
+        serializer = ProjectSerializer(
+            project, data=data, partial=True, context={"user_id": request.user.id}
+        )
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
@@ -109,6 +153,21 @@ def project_detail(request, project_uuid):
         return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
 
 
+@swagger_auto_schema(
+    methods=["get"],
+    responses={
+        200: openapi.Response(
+            "Returns a list of all pages in the project", PageSerializer(many=True)
+        )
+    },
+    tags=["Project"],
+)
+@swagger_auto_schema(
+    methods=["post"],
+    request_body=PageSerializer,
+    responses={201: openapi.Response("Returns the created project", PageSerializer)},
+    tags=["Project"],
+)
 @api_view(["GET", "POST"])
 @permission_classes([permissions.IsAuthenticated])
 def project_page_list(request, project_uuid):
@@ -132,6 +191,24 @@ def project_page_list(request, project_uuid):
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@swagger_auto_schema(
+    methods=["get"],
+    responses={200: openapi.Response("Returns details of a page.", PageSerializer)},
+    tags=["Project"],
+)
+@swagger_auto_schema(
+    methods=["put"],
+    request_body=PageSerializer,
+    responses={
+        200: openapi.Response(
+            "Update a page. Allows for partial updates.", PageSerializer
+        )
+    },
+    tags=["Project"],
+)
+@swagger_auto_schema(
+    methods=["delete"], responses={204: "No content"}, tags=["Project"]
+)
 @api_view(["GET", "PUT", "DELETE"])
 @permission_classes([permissions.IsAuthenticated])
 def project_page_detail(request, project_uuid, page_uuid):
@@ -161,6 +238,17 @@ def project_page_detail(request, project_uuid, page_uuid):
         return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
 
 
+@swagger_auto_schema(
+    methods=["post"],
+    request_body=ProjectAuditParametersSerializer,
+    responses={
+        201: openapi.Response(
+            "Returns the created project audit parameter",
+            ProjectAuditParametersSerializer,
+        )
+    },
+    tags=["Project"],
+)
 @api_view(["POST"])
 @permission_classes([permissions.IsAuthenticated])
 def project_audit_parameter_list(request, project_uuid):
@@ -178,6 +266,30 @@ def project_audit_parameter_list(request, project_uuid):
     return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@swagger_auto_schema(
+    methods=["get"],
+    responses={
+        200: openapi.Response(
+            "Returns details of a project audit parameter.",
+            ProjectAuditParametersSerializer,
+        )
+    },
+    tags=["Project"],
+)
+@swagger_auto_schema(
+    methods=["put"],
+    request_body=ProjectAuditParametersSerializer,
+    responses={
+        200: openapi.Response(
+            "Update a project audit parameter. Allows for partial updates.",
+            ProjectAuditParametersSerializer,
+        )
+    },
+    tags=["Project"],
+)
+@swagger_auto_schema(
+    methods=["delete"], responses={204: "No content"}, tags=["Project"]
+)
 @api_view(["GET", "PUT", "DELETE"])
 @permission_classes([permissions.IsAuthenticated])
 def project_audit_parameters_detail(request, project_uuid, audit_parameters_uuid):
@@ -209,6 +321,20 @@ def project_audit_parameters_detail(request, project_uuid, audit_parameters_uuid
         return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
 
 
+@swagger_auto_schema(
+    methods=["put"],
+    request_body=ProjectMemberRoleSerializer,
+    responses={
+        200: openapi.Response(
+            "Update a project member. Allows for partial updates.",
+            ProjectMemberRoleSerializer,
+        )
+    },
+    tags=["Project"],
+)
+@swagger_auto_schema(
+    methods=["delete"], responses={204: "No content"}, tags=["Project"]
+)
 @api_view(["PUT", "DELETE"])
 @permission_classes([permissions.IsAuthenticated])
 def project_member_detail(request, project_uuid, user_id):
@@ -240,6 +366,18 @@ def project_member_detail(request, project_uuid, user_id):
         return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
 
 
+@swagger_auto_schema(
+    methods=["post"],
+    request_body=openapi.Schema(
+        type="object", properties={"user_id": openapi.Schema(type="string")}
+    ),
+    responses={
+        201: openapi.Response(
+            "Returns the updated project with the new member.", ProjectSerializer
+        )
+    },
+    tags=["Project"],
+)
 @api_view(["POST"])
 @permission_classes([permissions.IsAuthenticated])
 def project_members(request, project_uuid):
@@ -269,16 +407,30 @@ def project_members(request, project_uuid):
     )
 
 
+@swagger_auto_schema(
+    methods=["get"],
+    responses={
+        200: openapi.Response("response description", AvailableAuditParameterSerializer)
+    },
+    tags=["Audits"],
+)
 @api_view(["GET"])
 @permission_classes([permissions.IsAuthenticated])
 def available_audit_parameters(request):
+    """user_detail fbv docstring"""
     available_audit_parameters = AvailableAuditParameters.objects.filter(is_active=True)
     serializer = AvailableAuditParameterSerializer(
         available_audit_parameters, many=True
     )
-    return JsonResponse(serializer.data, safe=False)
+    return Response(serializer.data)
 
 
+@swagger_auto_schema(
+    methods=["post"],
+    request_body=ScriptSerializer,
+    responses={200: openapi.Response("response description", ScriptSerializer)},
+    tags=["Project"],
+)
 @api_view(["POST"])
 @permission_classes([permissions.IsAuthenticated])
 def project_scripts(request, project_uuid):
@@ -295,6 +447,19 @@ def project_scripts(request, project_uuid):
     return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@swagger_auto_schema(
+    methods=["put"],
+    request_body=ScriptSerializer,
+    responses={
+        200: openapi.Response(
+            "Update a script. Allows for partial updates.", ScriptSerializer
+        )
+    },
+    tags=["Project"],
+)
+@swagger_auto_schema(
+    methods=["delete"], responses={204: "No content"}, tags=["Project"]
+)
 @api_view(["PUT", "DELETE"])
 @permission_classes([permissions.IsAuthenticated])
 def project_script_detail(request, project_uuid, script_uuid):
