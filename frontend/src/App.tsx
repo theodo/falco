@@ -4,6 +4,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { History } from 'history';
 import { Provider } from 'react-redux';
 import ReduxToastr from 'react-redux-toastr';
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { Route } from 'react-router';
 import { Store } from 'redux';
 import { Persistor } from 'redux-persist';
