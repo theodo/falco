@@ -20,7 +20,7 @@
 </p>
 
 [![CircleCI](https://circleci.com/gh/theodo/falco/tree/master.svg?style=svg)](https://circleci.com/gh/theodo/falco/tree/master)
-[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors)
 
 ## Features
 
@@ -106,6 +106,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/fargito"><img src="https://avatars3.githubusercontent.com/u/29537204?v=4" width="100px;" alt="François Farge"/><br /><sub><b>François Farge</b></sub></a><br /><a href="https://github.com/theodo/falco/commits?author=fargito" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/EtienneGrall"><img src="https://avatars2.githubusercontent.com/u/44709108?v=4" width="100px;" alt="EtienneGrall"/><br /><sub><b>EtienneGrall</b></sub></a><br /><a href="https://github.com/theodo/falco/commits?author=EtienneGrall" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/alexfauquette"><img src="https://avatars2.githubusercontent.com/u/45398769?v=4" width="100px;" alt="Alexandre Fauquette"/><br /><sub><b>Alexandre Fauquette</b></sub></a><br /><a href="https://github.com/theodo/falco/commits?author=alexfauquette" title="Code">💻</a></td>
   </tr>
 </table>
 
