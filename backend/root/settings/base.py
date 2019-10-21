@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "memoize",
     "rest_framework",
     "djoser",
+    "drf_yasg",
     # Our apps
     "front",
     "core",
@@ -127,3 +128,9 @@ if "REDIS_URL" in os.environ:
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_URL = "/static/"
+
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {
+        "Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}
+    }
+}

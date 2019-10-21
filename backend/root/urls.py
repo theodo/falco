@@ -15,12 +15,46 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf.urls import url
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
 from root import views
+
 
 admin.site.site_title = "falco Site Admin"
 admin.site.site_header = "falco Administration"
 
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Falco API",
+        default_version="",
+        description="""This is the API documentation for this instance of [Falco](https://getfal.co).
+
+If you have any question or would want to raise an issue, head to the [GitHub repository](https://github.com/theodo/falco).
+
+
+To obtain a Falco API Key, you can login to Falco and inspect any XHR call inside the Dev Tools.""",
+        terms_of_service="https://github.com/theodo/falco/blob/master/CODE_OF_CONDUCT.md",
+        contact=openapi.Contact(email="falco@theodo.fr"),
+        license=openapi.License(name="MIT License"),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
+
 urlpatterns = [
+    url(
+        r"^swagger(?P<format>\.json|\.yaml)$",
+        schema_view.without_ui(cache_timeout=0),
+        name="schema-json",
+    ),
+    url(
+        r"^swagger/$",
+        schema_view.with_ui("swagger", cache_timeout=0),
+        name="schema-swagger-ui",
+    ),
     path("admin/", admin.site.urls),
     path("auth/", include("front.auth.auth_urls")),
     path("auth/", include("djoser.urls")),
