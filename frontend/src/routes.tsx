@@ -13,6 +13,7 @@ const Project = lazy(() => import('./pages/Project'));
 const Projects = lazy(() => import('./pages/Projects'));
 const ProjectSettings = lazy(() => import('./pages/ProjectSettings'));
 const GeneralSettings = lazy(() => import('./pages/GeneralSettings'));
+const EnvironmentSettings = lazy(() => import('./pages/EnvironmentSettings'));
 
 interface RouteDefinition {
   path: string;
@@ -20,6 +21,7 @@ interface RouteDefinition {
   exact: boolean;
   strict: boolean;
   isAuthenticated: boolean;
+  id?: string;
 }
 
 interface RouteProps {
@@ -75,6 +77,15 @@ export const routeDefinitions: Record<string, RouteDefinition> = {
     exact: true,
     strict: false,
     isAuthenticated: true,
+    id: 'ProjectSettings.general_settings'
+  },
+  environmentSettings: {
+    path: '/project/:projectId/settings/environment',
+    component: EnvironmentSettings,
+    exact: true,
+    strict: false,
+    isAuthenticated: true,
+    id: 'ProjectSettings.project_audit_parameters'
   },
   auditsDetails: {
     path: '/project/:projectId/audits/:pageOrScriptId/audit-parameters/:auditParametersId',
