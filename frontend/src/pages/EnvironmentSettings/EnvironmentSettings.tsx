@@ -1,12 +1,11 @@
+import Loader from 'components/Loader';
+import MessagePill from 'components/MessagePill';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import ReduxToastr, { toastr } from 'react-redux-toastr';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { RouteComponentProps } from 'react-router';
 import { ProjectToastrDisplayType, ProjectType } from 'redux/entities/projects/types';
-
-import Loader from 'components/Loader';
-import MessagePill from 'components/MessagePill';
-import ReduxToastr, { toastr } from 'react-redux-toastr';
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import { UserState } from 'redux/user';
 import { makeGetRequest } from 'services/networking/request';
