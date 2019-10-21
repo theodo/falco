@@ -3,6 +3,9 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
+from rest_framework import permissions, status
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.parsers import JSONParser
 from projects.models import (
     Page,
     Project,
@@ -24,10 +27,6 @@ from projects.permissions import (
     check_if_admin_of_project,
     is_admin_of_project,
 )
-from rest_framework.response import Response
-from rest_framework import permissions, status
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.parsers import JSONParser
 
 
 def get_user_projects(user_id):
@@ -422,7 +421,7 @@ def available_audit_parameters(request):
     serializer = AvailableAuditParameterSerializer(
         available_audit_parameters, many=True
     )
-    return Response(serializer.data)
+    return JsonResponse(serializer.data)
 
 
 @swagger_auto_schema(
