@@ -15,6 +15,7 @@ const ProjectSettings = lazy(() => import('./pages/ProjectSettings'));
 const GeneralSettings = lazy(() => import('./pages/GeneralSettings'));
 const EnvironmentSettings = lazy(() => import('./pages/EnvironmentSettings'));
 const ScriptsAndPagesSettings = lazy(() => import('./pages/ScriptsAndPagesSettings'));
+const MembersSettings = lazy(() => import('./pages/MembersSettings'));
 
 interface RouteDefinition {
   path: string;
@@ -95,6 +96,14 @@ export const routeDefinitions: Record<string, RouteDefinition> = {
     strict: false,
     isAuthenticated: true,
     id: 'ProjectSettings.scripts_and_pages'
+  },
+  membersSettings: {
+    path: '/project/:projectId/settings/members',
+    component: MembersSettings,
+    exact: true,
+    strict: false,
+    isAuthenticated: true,
+    id: 'ProjectSettings.project_members'
   },
   auditsDetails: {
     path: '/project/:projectId/audits/:pageOrScriptId/audit-parameters/:auditParametersId',
