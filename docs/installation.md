@@ -54,4 +54,9 @@ What you need to do to (re)start the project:
   make frontend/start
   ```
 
-  The project should now be running at [localhost:8000](http://localhost:8000). The fixtures load has created an account you can access by using "admin" as user name and password.
+The project should now be running at [localhost:3000](http://localhost:3000). You can acces to the Django administration interface at [http://localhost:8000/admin/](http://localhost:8000/admin/).
+
+To access to those both interfaces, the fixtures load has created an account with the following credentials:
+
+- username: `admin`
+- password: `admin`
