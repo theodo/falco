@@ -409,9 +409,12 @@ def project_members(request, project_uuid):
 @swagger_auto_schema(
     methods=["get"],
     responses={
-        200: openapi.Response("response description", AvailableAuditParameterSerializer)
+        200: openapi.Response(
+            "Returns all WebPageTest available audit parameters",
+            AvailableAuditParameterSerializer,
+        )
     },
-    tags=["Audits"],
+    tags=["Project"],
 )
 @api_view(["GET"])
 @permission_classes([permissions.IsAuthenticated])
@@ -427,7 +430,7 @@ def available_audit_parameters(request):
 @swagger_auto_schema(
     methods=["post"],
     request_body=ScriptSerializer,
-    responses={200: openapi.Response("response description", ScriptSerializer)},
+    responses={201: openapi.Response("Returns the created script", ScriptSerializer)},
     tags=["Project"],
 )
 @api_view(["POST"])
