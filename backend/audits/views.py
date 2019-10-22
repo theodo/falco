@@ -20,7 +20,7 @@ from projects.models import Page, Project, Script
 @swagger_auto_schema(
     methods=["post"],
     responses={201: openapi.Response("Returns the created audits", AuditSerializer)},
-    tags=["Audit"],
+    tags=["Audits"],
 )
 @api_view(["POST"])
 @permission_classes([permissions.IsAuthenticated])
@@ -66,7 +66,7 @@ def request_audit(request, project_uuid):
             "Returns the status of a given audit", AuditStatusHistorySerializer
         )
     },
-    tags=["Audit"],
+    tags=["Audits"],
 )
 @api_view(["GET"])
 @permission_classes([permissions.IsAuthenticated])
@@ -99,7 +99,7 @@ def audit_status(request, audit_uuid):
             "Returns the results of a given audit", AuditResultsSerializer
         )
     },
-    tags=["Audit"],
+    tags=["Audits"],
 )
 @api_view(["GET"])
 @permission_classes([permissions.IsAuthenticated])
@@ -129,7 +129,7 @@ def audit_results(request, audit_uuid):
             AuditResultsSerializer(many=True),
         )
     },
-    tags=["Audit"],
+    tags=["Audits"],
 )
 @api_view(["GET"])
 @permission_classes([permissions.IsAuthenticated])

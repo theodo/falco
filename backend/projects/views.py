@@ -40,13 +40,13 @@ def get_user_projects(user_id):
             "Returns a list of all the user’s projects", ProjectSerializer(many=True)
         )
     },
-    tags=["Project"],
+    tags=["Projects"],
 )
 @swagger_auto_schema(
     methods=["post"],
     request_body=ProjectSerializer,
     responses={201: openapi.Response("Returns the created project", ProjectSerializer)},
-    tags=["Project"],
+    tags=["Projects"],
 )
 @api_view(["GET", "POST"])
 @permission_classes([permissions.IsAuthenticated])
@@ -73,7 +73,7 @@ def project_list(request):
 @swagger_auto_schema(
     methods=["get"],
     responses={200: openapi.Response("", ProjectSerializer)},
-    tags=["Project"],
+    tags=["Projects"],
 )
 @api_view(["GET"])
 @permission_classes([permissions.IsAuthenticated])
@@ -92,20 +92,20 @@ def first_project(request):
     responses={
         200: openapi.Response("Returns details of a project.", ProjectSerializer)
     },
-    tags=["Project"],
+    tags=["Projects"],
 )
 @swagger_auto_schema(
     methods=["put"],
     request_body=ProjectSerializer,
     responses={
         200: openapi.Response(
-            "Update a project. Allows for partial updates.", ProjectSerializer
+            "Updates a project. Allows for partial updates.", ProjectSerializer
         )
     },
-    tags=["Project"],
+    tags=["Projects"],
 )
 @swagger_auto_schema(
-    methods=["delete"], responses={204: "No content"}, tags=["Project"]
+    methods=["delete"], responses={204: "No content"}, tags=["Projects"]
 )
 @api_view(["GET", "PUT", "DELETE"])
 @permission_classes([permissions.IsAuthenticated])
@@ -159,13 +159,13 @@ def project_detail(request, project_uuid):
             "Returns a list of all pages in the project", PageSerializer(many=True)
         )
     },
-    tags=["Project"],
+    tags=["Pages"],
 )
 @swagger_auto_schema(
     methods=["post"],
     request_body=PageSerializer,
-    responses={201: openapi.Response("Returns the created project", PageSerializer)},
-    tags=["Project"],
+    responses={201: openapi.Response("Returns the created page", PageSerializer)},
+    tags=["Pages"],
 )
 @api_view(["GET", "POST"])
 @permission_classes([permissions.IsAuthenticated])
@@ -193,21 +193,19 @@ def project_page_list(request, project_uuid):
 @swagger_auto_schema(
     methods=["get"],
     responses={200: openapi.Response("Returns details of a page.", PageSerializer)},
-    tags=["Project"],
+    tags=["Pages"],
 )
 @swagger_auto_schema(
     methods=["put"],
     request_body=PageSerializer,
     responses={
         200: openapi.Response(
-            "Update a page. Allows for partial updates.", PageSerializer
+            "Updates a page. Allows for partial updates.", PageSerializer
         )
     },
-    tags=["Project"],
+    tags=["Pages"],
 )
-@swagger_auto_schema(
-    methods=["delete"], responses={204: "No content"}, tags=["Project"]
-)
+@swagger_auto_schema(methods=["delete"], responses={204: "No content"}, tags=["Pages"])
 @api_view(["GET", "PUT", "DELETE"])
 @permission_classes([permissions.IsAuthenticated])
 def project_page_detail(request, project_uuid, page_uuid):
@@ -246,7 +244,7 @@ def project_page_detail(request, project_uuid, page_uuid):
             ProjectAuditParametersSerializer,
         )
     },
-    tags=["Project"],
+    tags=["Project Audit Parameters"],
 )
 @api_view(["POST"])
 @permission_classes([permissions.IsAuthenticated])
@@ -269,25 +267,25 @@ def project_audit_parameter_list(request, project_uuid):
     methods=["get"],
     responses={
         200: openapi.Response(
-            "Returns details of a project audit parameter.",
+            "Returns the details of a project audit parameter.",
             ProjectAuditParametersSerializer,
         )
     },
-    tags=["Project"],
+    tags=["Project Audit Parameters"],
 )
 @swagger_auto_schema(
     methods=["put"],
     request_body=ProjectAuditParametersSerializer,
     responses={
         200: openapi.Response(
-            "Update a project audit parameter. Allows for partial updates.",
+            "Updates a project audit parameter. Allows for partial updates.",
             ProjectAuditParametersSerializer,
         )
     },
-    tags=["Project"],
+    tags=["Project Audit Parameters"],
 )
 @swagger_auto_schema(
-    methods=["delete"], responses={204: "No content"}, tags=["Project"]
+    methods=["delete"], responses={204: "No content"}, tags=["Project Audit Parameters"]
 )
 @api_view(["GET", "PUT", "DELETE"])
 @permission_classes([permissions.IsAuthenticated])
@@ -325,14 +323,14 @@ def project_audit_parameters_detail(request, project_uuid, audit_parameters_uuid
     request_body=ProjectMemberRoleSerializer,
     responses={
         200: openapi.Response(
-            "Update a project member. Allows for partial updates.",
+            "Updates a project member. Allows for partial updates.",
             ProjectMemberRoleSerializer,
         )
     },
-    tags=["Project"],
+    tags=["Project Members"],
 )
 @swagger_auto_schema(
-    methods=["delete"], responses={204: "No content"}, tags=["Project"]
+    methods=["delete"], responses={204: "No content"}, tags=["Project Members"]
 )
 @api_view(["PUT", "DELETE"])
 @permission_classes([permissions.IsAuthenticated])
@@ -375,7 +373,7 @@ def project_member_detail(request, project_uuid, user_id):
             "Returns the updated project with the new member.", ProjectSerializer
         )
     },
-    tags=["Project"],
+    tags=["Project Members"],
 )
 @api_view(["POST"])
 @permission_classes([permissions.IsAuthenticated])
@@ -414,12 +412,11 @@ def project_members(request, project_uuid):
             AvailableAuditParameterSerializer,
         )
     },
-    tags=["Project"],
+    tags=["Project Audit Parameters"],
 )
 @api_view(["GET"])
 @permission_classes([permissions.IsAuthenticated])
 def available_audit_parameters(request):
-    """user_detail fbv docstring"""
     available_audit_parameters = AvailableAuditParameters.objects.filter(is_active=True)
     serializer = AvailableAuditParameterSerializer(
         available_audit_parameters, many=True
@@ -431,7 +428,7 @@ def available_audit_parameters(request):
     methods=["post"],
     request_body=ScriptSerializer,
     responses={201: openapi.Response("Returns the created script", ScriptSerializer)},
-    tags=["Project"],
+    tags=["Scripts"],
 )
 @api_view(["POST"])
 @permission_classes([permissions.IsAuthenticated])
@@ -454,13 +451,13 @@ def project_scripts(request, project_uuid):
     request_body=ScriptSerializer,
     responses={
         200: openapi.Response(
-            "Update a script. Allows for partial updates.", ScriptSerializer
+            "Updates a script. Allows for partial updates.", ScriptSerializer
         )
     },
-    tags=["Project"],
+    tags=["Scripts"],
 )
 @swagger_auto_schema(
-    methods=["delete"], responses={204: "No content"}, tags=["Project"]
+    methods=["delete"], responses={204: "No content"}, tags=["Scripts"]
 )
 @api_view(["PUT", "DELETE"])
 @permission_classes([permissions.IsAuthenticated])

@@ -15,7 +15,7 @@ from core.serializers import UserSerializer, UserIdAndNameSerializer
             "Returns the full information of the current user", UserSerializer
         )
     },
-    tags=["User"],
+    tags=["Users"],
 )
 @api_view(["GET"])
 @permission_classes([permissions.IsAuthenticated])
@@ -33,7 +33,7 @@ def user_infos(request):
             UserIdAndNameSerializer(many=True),
         )
     },
-    tags=["User"],
+    tags=["Users"],
 )
 @api_view(["GET"])
 @permission_classes([permissions.IsAuthenticated])
