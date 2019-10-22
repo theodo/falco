@@ -52,7 +52,7 @@ export const ProjectSettingsMenuContent: React.FunctionComponent<Props> = ({
       <GoBackToProjectLink onClick={redirectToProjectPage} >
         <FormattedMessage id="Menu.go_back_to_project" />
       </GoBackToProjectLink>
-      <Settings>Settings</Settings>
+      <Settings>{intl.formatMessage({ id: 'Menu.project_settings'})}</Settings>
         {settingPages.map((page) =>
           <ProjectSettingsItem
             key={page.path}
