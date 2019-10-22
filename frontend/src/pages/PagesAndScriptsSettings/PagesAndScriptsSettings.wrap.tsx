@@ -7,7 +7,7 @@ import { fetchProjectsRequest, setProjectToastrDisplay } from 'redux/entities/pr
 import { getProject, getProjectToastrDisplay } from 'redux/entities/projects/selectors';
 import { ProjectToastrDisplayType } from 'redux/entities/projects/types';
 import { getUser } from 'redux/user/selectors';
-import ScriptsAndPagesSettings, { OwnProps } from './ScriptsAndPagesSettings';
+import PagesAndScriptsSettings, { OwnProps } from './PagesAndScriptsSettings';
 
 const mapStateToProps = (state: RootState, props: OwnProps) => ({
   currentUser: getUser(state),
@@ -23,4 +23,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(injectIntl(ScriptsAndPagesSettings));
+)(injectIntl(PagesAndScriptsSettings));

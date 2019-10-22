@@ -12,7 +12,7 @@ import { isUserAdminOfProject } from 'services/utils';
 import { AddPageRow } from './Components/PageTable';
 import PageRow, { PageRowHeader } from './Components/PageTable';
 import { AddScript, ScriptRow, ScriptTableHeader } from './Components/ScriptTable'
-import Style from './ScriptsAndPagesSettings.style';
+import Style from './PagesAndScriptsSettings.style';
 
 export type OwnProps = {} & RouteComponentProps<{
   projectId: string;
@@ -27,7 +27,7 @@ type Props = {
 } & OwnProps &
   InjectedIntlProps;
 
-const ScriptsAndPagesSettings: React.FunctionComponent<Props> = ({
+const PagesAndScriptsSettings: React.FunctionComponent<Props> = ({
   fetchProjectsRequest,
   match,
   intl,
@@ -185,4 +185,4 @@ const ScriptsAndPagesSettings: React.FunctionComponent<Props> = ({
   );
 }
 
-export default ScriptsAndPagesSettings;
+export default PagesAndScriptsSettings;

@@ -33,7 +33,7 @@ export const ProjectSettingsMenuContent: React.FunctionComponent<Props> = ({
   const settingPages = [
     routeDefinitions.projectSettingsGeneral,
     routeDefinitions.environmentSettings,
-    routeDefinitions.scriptsAndPagesSettings,
+    routeDefinitions.pagesAndScriptsSettings,
     routeDefinitions.membersSettings,
   ]
 
