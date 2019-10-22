@@ -3,10 +3,11 @@ import React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
-import { getSpacing } from 'stylesheet';
+import { colorUsage, getSpacing } from 'stylesheet';
 
 import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
+import { Add } from 'icons';
 import {
   Container,
   CurrentProjectItem,
@@ -14,13 +15,15 @@ import {
   CurrentProjectItemTitle,
   CurrentProjectItemTitleBlock,
   CurrentProjectItemTitleContainer,
+  NewProject,
+  NewProjectItem,
   ProjectItem,
   ProjectItemContainer,
   ProjectItemLastAudit,
   ProjectItemSnapshot,
   ProjectItemSnapshotContainer,
   ProjectItemTitle,
-  ProjectItemTitleBlock,
+  ProjectItemTitleBlock
 } from './ProjectsMenu.style';
 
 interface OwnProps {
@@ -113,6 +116,10 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
           {projects
             .filter((project: ProjectType | null) => currentProject !== project)
             .map((project: ProjectType | null) => renderProjectItem(project))}
+          <NewProjectItem to="path" >
+            <Add color={colorUsage.scriptRowIcon} width="24px" strokeWidth="20"/>
+            <NewProject>Create a new project</NewProject>
+          </NewProjectItem>
         </ProjectItemContainer>
       </Container>
     );
