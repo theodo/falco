@@ -126,7 +126,7 @@ const GeneralSettings: React.FunctionComponent<Props> = ({
 
   return (
     <Style.Container>
-      <Style.PageTitle>{project.name}</Style.PageTitle>
+      <Style.PageTitle>{intl.formatMessage({ id: 'ProjectSettings.settings'}) + ' - ' + project.name}</Style.PageTitle>
       <Style.Title>
         <FormattedMessage id="ProjectSettings.general_settings"/>
       </Style.Title>

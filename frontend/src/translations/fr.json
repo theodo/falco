@@ -50,7 +50,7 @@
     "title": "Projets"
   },
   "ProjectSettings": {
-    "settings": "Paramètres",
+    "settings": "Paramètres du projet",
     "general_settings": "Général",
     "name": "Nom du projet",
     "wpt_key": "Clé API WebPageTest",
