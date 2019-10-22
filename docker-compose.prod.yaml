@@ -1,0 +1,40 @@
+version: "3.1"
+
+services:
+  db:
+    image: postgres:10
+
+  backend:
+    image: theodofr/falco:nightly
+    command: gunicorn --bind 0.0.0.0:8000 --chdir /code --workers 2 --access-logfile - --error-logfile - -c root/gunicorn.py root.wsgi:application
+    ports:
+      - "8000:8000"
+    links:
+      - db
+      - redis
+    environment:
+      DJANGO_SETTINGS_MODULE: root.settings.prod
+      CELERY_BROKER_URL: redis://redis:6379/0
+      DB_CYPHER_KEY: pleasechangeme
+      SECRET_KEY: pleasechangeme
+      EMAIL_FROM: dev@getfal.co
+      EMAIL_TO: trash@getfal.co
+      DATABASE_URL: "postgres://postgres@db:5432/postgres"
+
+  redis:
+    image: redis
+
+  celery:
+    image: theodofr/falco:nightly
+    command: celery worker -A root.celery -B -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler -c 4
+    links:
+      - db
+      - redis
+    environment:
+      DJANGO_SETTINGS_MODULE: root.settings.prod
+      CELERY_BROKER_URL: redis://redis:6379/0
+      DB_CYPHER_KEY: pleasechangeme
+      SECRET_KEY: pleasechangeme
+      EMAIL_FROM: dev@getfal.co
+      EMAIL_TO: trash@getfal.co
+      DATABASE_URL: "postgres://postgres@db:5432/postgres"
