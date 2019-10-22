@@ -37,7 +37,8 @@
     "launch_audits": "Launch audits manually",
     "running_audits_number": "{number} running {number,plural,one {audit} other {audits}}",
     "manage_project_settings": "Manage project settings →",
-    "go_back_to_project": "← Go back to project page"
+    "go_back_to_project": "← Go back to project page",
+    "project_settings": "Settings"
   },
   "Project": {
     "project_error": "It seems that you are not authorized to access this project.\n\nPlease try again or contact your administrator to get granted.",
@@ -49,11 +50,12 @@
     "title": "Projects"
   },
   "ProjectSettings": {
-    "settings": "Settings",
+    "settings": "Project settings",
     "general_settings": "General",
     "name": "Project name",
     "wpt_key": "WebPageTest API Key",
     "project_audit_parameters": "Project environments",
+    "pages_and_scripts": "Project pages and scripts",
     "scripts": "Project scripts",
     "script": "Script",
     "script_name": "Script name",
@@ -215,6 +217,7 @@
       "edit_project_details_success": "The project has been edited successfully",
       "add_page_success_message": "The page has been created successfully",
       "add_audit_parameter_to_project_success": "The audit parameter has been created successfully",
+      "delete_audit_parameter_success": "The audit parameter has been deleted successfully",
       "add_script_to_project_sucess": "The script has been created successfully",
       "edit_script_sucess": "The script has been edited successfully",
       "delete_script_sucess": "The script has been deleted successfully",

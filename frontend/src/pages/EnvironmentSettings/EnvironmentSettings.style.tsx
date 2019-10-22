@@ -1,6 +1,5 @@
-import Select from 'components/Select';
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
+import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight, settingsContainerSize } from 'stylesheet';
 
 const Style = {
   Container: styled.div`
@@ -8,10 +7,10 @@ const Style = {
     flex-direction: column;
     padding: 0 0 ${getSpacing(4)} 0;
     margin: 0;
-    width: 800px;
+    width: ${settingsContainerSize};
   `,
 
-  PageTitle: styled.div`
+  PageTitle: styled.h1`
     line-height: ${lineHeight.h1Text};
     color: ${colorUsage.h1Text};
     font-family: ${fontFamily.mainSans};
@@ -22,7 +21,7 @@ const Style = {
     text-overflow: ellipsis;
   `,
 
-Title: styled.div`
+Title: styled.h2`
   line-height: ${lineHeight.h2Text};
   color: ${colorUsage.h2Text};
   font-family: ${fontFamily.mainSans};
@@ -31,29 +30,13 @@ Title: styled.div`
   margin-top: ${getSpacing(6)};
 `,
 
-PageSubTitle: styled.div`
+PageSubTitle: styled.h3`
   line-height: ${lineHeight.h3Text};
   color: ${colorUsage.h3Text};
   font-family: ${fontFamily.mainSans};
   font-size: ${fontSize.h3Text};
   font-weight: ${fontWeight.h3Text};
   margin-top: ${getSpacing(4)};
-`,
-
-SelectUser: styled(Select)`
-  margin-top: ${getSpacing(4)};
-  font-family: ${fontFamily.mainSans};
-  font-size: ${fontSize.inputSelectText};
-  line-height: ${lineHeight.inputSelectText};
-`,
-
-InviteUserLink: styled.div`
-  margin-top: ${getSpacing(4)};
-  line-height: ${lineHeight.bodyText};
-  color: ${colorUsage.bodyText};
-  font-family: ${fontFamily.mainSans};
-  font-size: ${fontSize.bodyText};
-  font-weight: ${fontWeight.bodyText};
 `,
 
 ProjectSettingsBlock: styled.div`
@@ -91,56 +74,16 @@ ElementContainer: styled.div`
   }
 `,
 
-AuditParameterName: styled.div`
+AuditParameterName: styled.span`
   width: 40%;
 `,
 
-Configuration: styled.div`
+Configuration: styled.span`
   width: 40%;
 `,
 
-NetworkShape: styled.div`
+NetworkShape: styled.span`
   width: 20%;
-`,
-
-MemberUsername: styled.div`
-  width: 25%;
-`,
-
-MemberEmail: styled.div`
-  width: 30%;
-`,
-
-MemberAdminBadgeContainer: styled.div`
-  width: 40%;
-  display:flex;
-  justify-content: center;
-`,
-
-MemberAdminDeleteContainer: styled.div`
-  width: 5%;
-  display: flex;
-  flex-direction: row-reverse;
-`,
-
-MemberAdminDeleteButton: styled.button`
-  cursor: pointer;
-  border: none;
-  border-radius: 50%;
-  height: 24px;
-  width: 24px;
-  padding: 2px;
-  background: inherit;
-
-  &:hover {
-    opacity: 0.5;
-    background: white;
-    transition-duration: 0.2s;
-  }
-`,
-
-SettingsFieldContainer: styled.div`
-  margin-top: ${getSpacing(4)};
 `,
 };
 

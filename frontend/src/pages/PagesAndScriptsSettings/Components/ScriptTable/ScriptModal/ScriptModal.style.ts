@@ -19,7 +19,7 @@ export const CloseContainer = styled.div`
   z-index: ${zIndex.graphModalCloseButton};
 `;
 
-export const PageTitle = styled.span`
+export const PageTitle = styled.h1`
   line-height: ${lineHeight.h1Text};
   color: ${colorUsage.h1Text};
   font-family: ${fontFamily.mainSans};

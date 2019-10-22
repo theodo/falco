@@ -141,7 +141,7 @@ export const ProjectMenuContent: React.FunctionComponent<Props> = ({
       )}
       {isUserAdminOfProject(user, project) && <ProjectSettingsLink
         key={project.uuid}
-        to={routeDefinitions.projectSettings.path.replace(':projectId', project.uuid)}
+        to={routeDefinitions.projectSettingsGeneral.path.replace(':projectId', project.uuid)}
         margin={`0 0 ${getSpacing(4)} ${getSpacing(4)}`}
       >
         <FormattedMessage id="Menu.manage_project_settings" />

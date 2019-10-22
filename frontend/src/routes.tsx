@@ -11,7 +11,10 @@ const Login = lazy(() => import('./pages/User/Login'));
 const SignUp = lazy(() => import('./pages/User/SignUp'));
 const Project = lazy(() => import('./pages/Project'));
 const Projects = lazy(() => import('./pages/Projects'));
-const ProjectSettings = lazy(() => import('./pages/ProjectSettings'));
+const GeneralSettings = lazy(() => import('./pages/GeneralSettings'));
+const EnvironmentSettings = lazy(() => import('./pages/EnvironmentSettings'));
+const PagesAndScriptsSettings = lazy(() => import('./pages/PagesAndScriptsSettings'));
+const MembersSettings = lazy(() => import('./pages/MembersSettings'));
 
 interface RouteDefinition {
   path: string;
@@ -19,6 +22,7 @@ interface RouteDefinition {
   exact: boolean;
   strict: boolean;
   isAuthenticated: boolean;
+  id?: string;
 }
 
 interface RouteProps {
@@ -61,12 +65,37 @@ export const routeDefinitions: Record<string, RouteDefinition> = {
     strict: false,
     isAuthenticated: true,
   },
-  projectSettings: {
-    path: '/project/:projectId/settings',
-    component: ProjectSettings,
+  projectSettingsGeneral: {
+    path: '/project/:projectId/settings/general',
+    component: GeneralSettings,
     exact: true,
     strict: false,
     isAuthenticated: true,
+    id: 'ProjectSettings.general_settings'
+  },
+  environmentSettings: {
+    path: '/project/:projectId/settings/environment',
+    component: EnvironmentSettings,
+    exact: true,
+    strict: false,
+    isAuthenticated: true,
+    id: 'ProjectSettings.project_audit_parameters'
+  },
+  pagesAndScriptsSettings: {
+    path: '/project/:projectId/settings/pages-scripts',
+    component: PagesAndScriptsSettings,
+    exact: true,
+    strict: false,
+    isAuthenticated: true,
+    id: 'ProjectSettings.pages_and_scripts'
+  },
+  membersSettings: {
+    path: '/project/:projectId/settings/members',
+    component: MembersSettings,
+    exact: true,
+    strict: false,
+    isAuthenticated: true,
+    id: 'ProjectSettings.project_members'
   },
   auditsDetails: {
     path: '/project/:projectId/audits/:pageOrScriptId/audit-parameters/:auditParametersId',
