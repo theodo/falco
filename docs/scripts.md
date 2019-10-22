@@ -5,7 +5,7 @@ You can also refer to [WebPageTest documentation about scripting](https://sites.
 
 ## General
 * Scripts are divided by steps, that way you can track performance for each step. At the beginning of each step add `setEventName [StepName]`.
-* If you want to track only some parts of your script (for example you don't care about the performance of the login, you only want the performance of getting to a certain page once logged in), you can put `logData 0` before the part you dont want WebPageTest to track and `logData 1` just before the part you're interested in. WPT will execute all of the script but will only record the part after `logData 1`.
+* If you want to track only some parts of your script (for example you don't care about the performance of the login, you only want the performance of getting to a certain page once logged in), you can put `logData 0` before the part you don't want WebPageTest to track and `logData 1` just before the part you're interested in. WPT will execute all of the script but will only record the part after `logData 1`.
 * To navigate through pages by url rather than clicking on buttons, use `navigate [full_url]`. Use it at the beginning of the script to point to the login page for example.
 * The script is a list of javascript commands, each command should be preceded by `exec` (for example to declare variables) or `execAndWait` (after a click). `execAndWait` will wait for browser to complete any activity generated from the action, while `exec` only executes the javascript command.
 
