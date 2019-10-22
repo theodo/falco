@@ -5,15 +5,15 @@ import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
 import { colorUsage } from 'stylesheet';
 import {
-  AddNameInput, AddPageButtonContainer, AddPageButtonLabel, AddUrlInput, PageButton, AddPageButtonsContainer
+  AddNameInput, AddPageButtonContainer, AddPageButtonLabel, AddPageButtonsContainer, AddUrlInput, PageButton
 } from '../PageTable.style';
 
-export interface  OwnProps {
+export interface OwnProps {
   projectId: string,
 }
 
 type Props = {
-  addPageToProjectRequest: (projectId: string, pageName: string, pageUrl: string) => void,  
+  addPageToProjectRequest: (projectId: string, pageName: string, pageUrl: string) => void,
 } & OwnProps & InjectedIntlProps;
 
 const useFocus = (isAdding: boolean): React.MutableRefObject<any> => {
@@ -35,7 +35,7 @@ export const AddPageRow: React.FunctionComponent<Props> = ({
   projectId,
   addPageToProjectRequest,
   intl
-  }) => {
+}) => {
   const [pageName, setPageName] = React.useState('');
   const [pageUrl, setPageUrl] = React.useState('')
   const [isAddingMode, setAddingMode] = React.useState(false);
@@ -44,8 +44,8 @@ export const AddPageRow: React.FunctionComponent<Props> = ({
   const cancel = () => {
     setPageName('');
     setPageUrl('');
-      setAddingMode(false);
-    }
+    setAddingMode(false);
+  }
 
   const validate = () => {
     if (pageName && pageUrl) {
@@ -82,7 +82,7 @@ export const AddPageRow: React.FunctionComponent<Props> = ({
           strokeWidth="20"
         />
         <AddPageButtonLabel>
-          {intl.formatMessage({id: 'ProjectSettings.add_page'})}
+          {intl.formatMessage({ id: 'ProjectSettings.add_page' })}
         </AddPageButtonLabel>
       </AddPageButtonContainer >
       <AddNameInput
@@ -90,7 +90,7 @@ export const AddPageRow: React.FunctionComponent<Props> = ({
         value={pageName}
         onChange={handleNameChange}
         ref={nameInputRef}
-        placeholder={intl.formatMessage({id: 'ProjectSettings.page_name_placeholder'})}
+        placeholder={intl.formatMessage({ id: 'ProjectSettings.page_name_placeholder' })}
       />
       <AddUrlInput
         isAdding={isAddingMode}
@@ -112,7 +112,7 @@ export const AddPageRow: React.FunctionComponent<Props> = ({
             color={colorUsage.projectSettingsIconColor}
             width="13px"
             strokeWidth="20"
-      />
+          />
         </PageButton>
       </AddPageButtonsContainer >
     </React.Fragment>

@@ -6,7 +6,7 @@ import { PageType } from 'redux/entities/pages/types';
 import { colorUsage } from 'stylesheet';
 import { EditNameInput, EditUrlInput, PageButton, PageDeleteContainer } from '../PageTable.style';
 
-export interface  OwnProps {
+export interface OwnProps {
   pageId: string,
   projectId: string,
   disabled: boolean,
@@ -26,22 +26,22 @@ export const PageRow: React.FunctionComponent<Props> = ({
   disabled,
   deletePageOfProjectRequest,
   intl
-  }) => {
+}) => {
   const [pageName, setPageName] = React.useState('');
   const [pageUrl, setPageUrl] = React.useState('')
 
   React.useEffect(
     () => {
-      if(page) {
+      if (page) {
         setPageName(page.name);
         setPageUrl(page.url)
       }
     },
     [page],
-    );
+  );
 
   const handleBlur = () => {
-    if(page && (pageName !== page.name || pageUrl !== page.url)) {
+    if (page && (pageName !== page.name || pageUrl !== page.url)) {
       editPageRequest(
         projectId,
         {
@@ -49,7 +49,7 @@ export const PageRow: React.FunctionComponent<Props> = ({
           name: pageName,
           url: pageUrl
         })
-      }
+    }
   };
 
   const handleNameChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
@@ -61,14 +61,14 @@ export const PageRow: React.FunctionComponent<Props> = ({
   }
 
   const handlePageDeletion = (currentProjectId: string, targetPageId: string) => {
-    toastr.confirm(intl.formatMessage({ id: 'Toastr.ProjectSettings.delete_page_confirm_question'}), 
-    {
-      onOk: () => deletePageOfProjectRequest(currentProjectId, targetPageId)
-    })
+    toastr.confirm(intl.formatMessage({ id: 'Toastr.ProjectSettings.delete_page_confirm_question' }),
+      {
+        onOk: () => deletePageOfProjectRequest(currentProjectId, targetPageId)
+      })
   }
 
-  if(null === page || undefined === page) {
-    return(null);
+  if (null === page || undefined === page) {
+    return (null);
   };
 
   return (
