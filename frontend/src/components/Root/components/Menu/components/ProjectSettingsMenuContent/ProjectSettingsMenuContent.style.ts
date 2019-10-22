@@ -32,7 +32,7 @@ export const SettingsPageTitleBlock = styled.div`
   align-items: center;
 `;
 
-export const SettingsPageTitle = styled.div`
+export const SettingsPageTitle = styled.h2`
   max-width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;

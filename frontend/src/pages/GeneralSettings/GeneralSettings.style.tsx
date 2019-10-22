@@ -11,7 +11,7 @@ const Style = {
     width: 800px;
   `,
 
-  PageTitle: styled.div`
+  PageTitle: styled.h1`
     line-height: ${lineHeight.h1Text};
     color: ${colorUsage.h1Text};
     font-family: ${fontFamily.mainSans};
@@ -22,7 +22,7 @@ const Style = {
     text-overflow: ellipsis;
   `,
 
-Title: styled.div`
+Title: styled.h2`
   line-height: ${lineHeight.h2Text};
   color: ${colorUsage.h2Text};
   font-family: ${fontFamily.mainSans};
@@ -31,7 +31,7 @@ Title: styled.div`
   margin-top: ${getSpacing(6)};
 `,
 
-PageSubTitle: styled.div`
+PageSubTitle: styled.h3`
   line-height: ${lineHeight.h3Text};
   color: ${colorUsage.h3Text};
   font-family: ${fontFamily.mainSans};
