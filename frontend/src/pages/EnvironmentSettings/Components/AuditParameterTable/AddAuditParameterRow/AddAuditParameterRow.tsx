@@ -1,9 +1,13 @@
 import Select from 'components/Select/Select';
-import { Add } from 'icons';
+import Add from 'icons/Add';
+import Close from 'icons/Close';
+import Done from 'icons/Done';
 import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
 import { colorUsage, getSpacing } from 'stylesheet';
-import { AddAuditParameterButtonContainer, AddAuditParameterButtonLabel, AddNameInput } from '../AuditParameterTable.style';
+import {
+  AddAuditParameterButtonContainer, AddAuditParameterButtonLabel, AddAuditParameterButtonsContainer, AddNameInput, AuditParameterRowButton
+} from '../AuditParameterTable.style';
 import { availableNetworkShape } from '../common'
 
 export interface OwnProps {
@@ -31,7 +35,7 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
   addAuditParameterToProjectRequest,
   availableAuditParameters,
   intl
-  }) => {
+}) => {
   const [auditParameterName, setAuditParameterName] = React.useState('');
   const [auditParameterConfigurationId, setAuditParameterConfigurationId] = React.useState('')
   const [auditParameterNetworkShape, setAuditParameterNetworkShape] = React.useState('')
@@ -45,12 +49,15 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
     [isAddingMode, setNameInputFocus],
   );
 
-  const handleBlur = () => {
-    if(!auditParameterName && !auditParameterNetworkShape && !auditParameterConfigurationId) {
-      setAddingMode(false);
-    }
+  const cancel = () => {
+    setAuditParameterName('');
+    setAuditParameterNetworkShape('');
+    setAuditParameterConfigurationId('');
+    setAddingMode(false);
+  }
 
-    if(auditParameterName && auditParameterConfigurationId && auditParameterNetworkShape) {
+  const validate = () => {
+    if (auditParameterName && auditParameterConfigurationId && auditParameterNetworkShape) {
       addAuditParameterToProjectRequest(
         projectId,
         auditParameterName,
@@ -99,7 +106,6 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
         isAdding={isAddingMode}
         value={auditParameterName}
         onChange={handleNameChange}
-        onBlur={handleBlur}
         ref={nameInputRef}
         placeholder={intl.formatMessage({ id: 'ProjectSettings.audit_parameter_name_placeholder' })}
       />
@@ -112,7 +118,6 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
         display={isAddingMode ? 'visible' : 'none'}
         width="40%"
         margin={selectMargin}
-        onBlur={handleBlur}
         placeholder={intl.formatMessage({ id: 'ProjectSettings.audit_parameter_configuration_placeholder' })}
       />
       <Select
@@ -124,9 +129,24 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
         display={isAddingMode ? 'visible' : 'none'}
         width="20%"
         margin={selectMargin}
-        onBlur={handleBlur}
         placeholder={intl.formatMessage({ id: 'ProjectSettings.audit_parameter_network_shape_placeholder' })}
       />
+      <AddAuditParameterButtonsContainer isAdding={isAddingMode}>
+        <AuditParameterRowButton onClick={validate}>
+          <Done
+            color={colorUsage.projectSettingsIconColor}
+            width="16px"
+            strokeWidth="3"
+          />
+        </AuditParameterRowButton>
+        <AuditParameterRowButton onClick={cancel}>
+          <Close
+            color={colorUsage.projectSettingsIconColor}
+            width="13px"
+            strokeWidth="20"
+          />
+        </AuditParameterRowButton>
+      </AddAuditParameterButtonsContainer >
     </React.Fragment>
   )
 }
