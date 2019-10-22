@@ -6,9 +6,9 @@ import { colorUsage, getSpacing } from 'stylesheet';
 import { AddAuditParameterButtonContainer, AddAuditParameterButtonLabel, AddNameInput } from '../AuditParameterTable.style';
 import { availableNetworkShape } from '../common'
 
-export interface  OwnProps {
+export interface OwnProps {
   projectId: string,
-  availableAuditParameters: Array<{uuid: string, label: string}>
+  availableAuditParameters: Array<{ uuid: string, label: string }>
 }
 
 type Props = {
@@ -18,12 +18,12 @@ type Props = {
 const useFocus = (): [React.MutableRefObject<any>, () => void] => {
   const htmlElRef = React.useRef<HTMLInputElement>(null)
   const setFocus = () => {
-    if(htmlElRef.current) {
+    if (htmlElRef.current) {
       htmlElRef.current.focus()
     }
   }
 
-  return [ htmlElRef, setFocus ]
+  return [htmlElRef, setFocus]
 }
 
 export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
@@ -92,7 +92,7 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
           strokeWidth="20"
         />
         <AddAuditParameterButtonLabel>
-          {intl.formatMessage({id: 'ProjectSettings.add_audit_parameter'})}
+          {intl.formatMessage({ id: 'ProjectSettings.add_audit_parameter' })}
         </AddAuditParameterButtonLabel>
       </AddAuditParameterButtonContainer >
       <AddNameInput
@@ -101,7 +101,7 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
         onChange={handleNameChange}
         onBlur={handleBlur}
         ref={nameInputRef}
-        placeholder={intl.formatMessage({id: 'ProjectSettings.audit_parameter_name_placeholder'})}
+        placeholder={intl.formatMessage({ id: 'ProjectSettings.audit_parameter_name_placeholder' })}
       />
       <Select
         value={availableAuditParameters.find(auditParametersOption => {
@@ -113,7 +113,7 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
         width="40%"
         margin={selectMargin}
         onBlur={handleBlur}
-        placeholder={intl.formatMessage({id: 'ProjectSettings.audit_parameter_configuration_placeholder'})}
+        placeholder={intl.formatMessage({ id: 'ProjectSettings.audit_parameter_configuration_placeholder' })}
       />
       <Select
         value={availableNetworkShape.find(auditParametersOption => {
@@ -125,7 +125,7 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
         width="20%"
         margin={selectMargin}
         onBlur={handleBlur}
-        placeholder={intl.formatMessage({id: 'ProjectSettings.audit_parameter_network_shape_placeholder'})}
+        placeholder={intl.formatMessage({ id: 'ProjectSettings.audit_parameter_network_shape_placeholder' })}
       />
     </React.Fragment>
   )

@@ -46,19 +46,19 @@ const editableInputStyle = `
 
 export const AddNameInput = styled.input`
   ${addInputStyle}
-  display: ${(props: AddInputProps) => props.isAdding? "visible" : "none"};
+  display: ${(props: AddInputProps) => props.isAdding ? "visible" : "none"};
   width: 40%;
 `;
 
 export const AddBrowserInput = styled.input`
   ${addInputStyle}
-  display: ${(props: AddInputProps) => props.isAdding? "visible" : "none"};
+  display: ${(props: AddInputProps) => props.isAdding ? "visible" : "none"};
   width: 40%;
 `;
 
 export const AddNetworkShapeInput = styled.input`
   ${addInputStyle}
-  display: ${(props: AddInputProps) => props.isAdding? "visible" : "none"};
+  display: ${(props: AddInputProps) => props.isAdding ? "visible" : "none"};
   width: 20%;
 `;
 
@@ -78,7 +78,7 @@ export const EditBrowserInput = styled.input`
 `;
 
 export const AddAuditParameterButtonContainer = styled.div`
-  display: ${(props: AddInputProps) => props.isAdding? "none" : "flex"};
+  display: ${(props: AddInputProps) => props.isAdding ? "none" : "flex"};
   align-items: center;
   cursor: pointer;
   margin: auto;
