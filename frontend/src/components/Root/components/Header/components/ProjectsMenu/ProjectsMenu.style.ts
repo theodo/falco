@@ -120,3 +120,29 @@ export const CurrentProjectItemTitle = styled.div`
     text-overflow: ellipsis;
   `;
 
+export const NewProjectItem = styled(Link)`
+  display: flex;
+  padding: ${getSpacing(3)} ${getSpacing(8)};
+  text-decoration: none;
+  color: ${colorUsage.projectsMenuItemText};
+  background-color: ${colorUsage.projectsMenuItemBackground};
+  font-family: ${fontFamily.mainSans};
+  border-bottom: 1px solid ${colorUsage.projectsMenuItemBorder};
+  align-items: center;
+
+  &:hover {
+    color: ${colorUsage.projectsMenuItemHoverText};
+  }
+`;
+
+
+export const NewProject = styled.span`
+    font-size: ${fontSize.h4Text};
+    font-weight: ${fontWeight.h4Text};
+    line-height: ${lineHeight.h4Text};
+    color: ${colorUsage.projectsMenuItemText};
+    margin-left: ${getSpacing(2)};
+    &:hover {
+      color: ${colorUsage.projectsMenuItemHoverText};
+    }
+`;
