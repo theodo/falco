@@ -46,19 +46,19 @@ const editableInputStyle = `
 
 export const AddNameInput = styled.input`
   ${addInputStyle}
-  display: ${(props: AddInputProps) => props.isAdding? "visible" : "none"};
+  display: ${(props: AddInputProps) => props.isAdding ? "visible" : "none"};
   width: 40%;
 `;
 
 export const AddBrowserInput = styled.input`
   ${addInputStyle}
-  display: ${(props: AddInputProps) => props.isAdding? "visible" : "none"};
+  display: ${(props: AddInputProps) => props.isAdding ? "visible" : "none"};
   width: 40%;
 `;
 
 export const AddNetworkShapeInput = styled.input`
   ${addInputStyle}
-  display: ${(props: AddInputProps) => props.isAdding? "visible" : "none"};
+  display: ${(props: AddInputProps) => props.isAdding ? "visible" : "none"};
   width: 20%;
 `;
 
@@ -78,7 +78,7 @@ export const EditBrowserInput = styled.input`
 `;
 
 export const AddAuditParameterButtonContainer = styled.div`
-  display: ${(props: AddInputProps) => props.isAdding? "none" : "flex"};
+  display: ${(props: AddInputProps) => props.isAdding ? "none" : "flex"};
   align-items: center;
   cursor: pointer;
   margin: auto;
@@ -117,12 +117,13 @@ export const EditButton = styled.button`
 `;
 
 export const AuditParameterDeleteContainer = styled.div`
-  width: 5%;
+  width: 60px;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
+  justify-content: flex-end;
 `;
 
-export const AuditParameterDeleteButton = styled.button`
+export const AuditParameterRowButton = styled.button`
   cursor: pointer;
   border: none;
   border-radius: 50%;
@@ -136,4 +137,11 @@ export const AuditParameterDeleteButton = styled.button`
     background: white;
     transition-duration: 0.2s;
   }
+`;
+
+export const AddAuditParameterButtonsContainer = styled.div`
+  display: ${(props: AddInputProps) => props.isAdding ? "flex" : "none"};
+  width: 60px;
+  flex-direction: row;
+  justify-content: flex-end;
 `;

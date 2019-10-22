@@ -56,13 +56,13 @@ export const UrlHeader = styled.div`
 
 export const AddNameInput = styled.input`
   ${addInputStyle}
-  display: ${(props: AddInputProps) => props.isAdding? "visible" : "none"};
+  display: ${(props: AddInputProps) => props.isAdding ? "visible" : "none"};
   width: 25%;
 `;
 
 export const AddUrlInput = styled.input`
   ${addInputStyle}
-  display: ${(props: AddInputProps) => props.isAdding? "visible" : "none"};
+  display: ${(props: AddInputProps) => props.isAdding ? "visible" : "none"};
   width: 70%;
 `;
 
@@ -77,7 +77,7 @@ export const EditUrlInput = styled.input`
 `;
 
 export const AddPageButtonContainer = styled.div`
-  display: ${(props: AddInputProps) => props.isAdding? "none" : "flex"};
+  display: ${(props: AddInputProps) => props.isAdding ? "none" : "flex"};
   align-items: center;
   cursor: pointer;
   margin: auto;
@@ -116,12 +116,13 @@ export const EditButton = styled.button`
 `;
 
 export const PageDeleteContainer = styled.div`
-  width: 5%;
+  width: 60px;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
+  justify-content: flex-end;
 `;
 
-export const PageDeleteButton = styled.button`
+export const PageButton = styled.button`
   cursor: pointer;
   border: none;
   border-radius: 50%;
@@ -135,4 +136,12 @@ export const PageDeleteButton = styled.button`
     background: white;
     transition-duration: 0.2s;
   }
+`;
+
+
+export const AddPageButtonsContainer = styled.div`
+  display: ${(props: AddInputProps) => props.isAdding ? "flex" : "none"};
+  width: 60px;
+  flex-direction: row;
+  justify-content: flex-end;
 `;
