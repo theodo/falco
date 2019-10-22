@@ -7,7 +7,7 @@ interface Props {
   strokeWidth?: string;
 }
 
-export default class Done extends React.Component<Props> {
+export default class Checkmark extends React.Component<Props> {
   render() {
     return (
       <svg

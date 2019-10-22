@@ -1,7 +1,7 @@
 import Select from 'components/Select/Select';
-import Add from 'icons/Add';
-import Close from 'icons/Close';
-import Done from 'icons/Done';
+import { default as AddIcon } from 'icons/Add';
+import { default as CheckmarkIcon } from 'icons/Checkmark';
+import { default as CloseIcon } from 'icons/Close';
 import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
 import { colorUsage, getSpacing } from 'stylesheet';
@@ -93,7 +93,7 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
   return (
     <React.Fragment>
       <AddAuditParameterButtonContainer isAdding={isAddingMode} onClick={activateAddingMode}>
-        <Add
+        <AddIcon
           color={colorUsage.projectSettingsIconColor}
           width="24px"
           strokeWidth="20"
@@ -133,14 +133,14 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
       />
       <AddAuditParameterButtonsContainer isAdding={isAddingMode}>
         <AuditParameterRowButton onClick={validate}>
-          <Done
+          <CheckmarkIcon
             color={colorUsage.projectSettingsIconColor}
             width="16px"
             strokeWidth="3"
           />
         </AuditParameterRowButton>
         <AuditParameterRowButton onClick={cancel}>
-          <Close
+          <CloseIcon
             color={colorUsage.projectSettingsIconColor}
             width="13px"
             strokeWidth="20"
