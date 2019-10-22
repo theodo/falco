@@ -4,7 +4,7 @@ import { InjectedIntlProps } from 'react-intl';
 import { toastr } from 'react-redux-toastr';
 import { PageType } from 'redux/entities/pages/types';
 import { colorUsage } from 'stylesheet';
-import { EditNameInput, EditUrlInput, PageDeleteButton, PageDeleteContainer } from '../PageTable.style';
+import { EditNameInput, EditUrlInput, PageButton, PageDeleteContainer } from '../PageTable.style';
 
 export interface  OwnProps {
   pageId: string,
@@ -86,13 +86,13 @@ export const PageRow: React.FunctionComponent<Props> = ({
         onBlur={handleBlur}
       />
       <PageDeleteContainer>
-        <PageDeleteButton onClick={() => handlePageDeletion(projectId, pageId)}>
+        <PageButton onClick={() => handlePageDeletion(projectId, pageId)}>
           <Close
             color={colorUsage.projectSettingsIconColor}
             width="13px"
             strokeWidth="20"
           />
-        </PageDeleteButton>
+        </PageButton>
       </PageDeleteContainer >
     </React.Fragment>
   )
