@@ -120,7 +120,7 @@ export const AuditParameterDeleteContainer = styled.div`
   width: 60px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-end;
 `;
 
 export const AuditParameterRowButton = styled.button`
@@ -143,5 +143,5 @@ export const AddAuditParameterButtonsContainer = styled.div`
   display: ${(props: AddInputProps) => props.isAdding ? "flex" : "none"};
   width: 60px;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-end;
 `;
