@@ -90,6 +90,15 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
 
   const selectMargin = `0 ${getSpacing(2)} 0 0`
 
+  const foundAuditParameter = availableAuditParameters.find(auditParametersOption => {
+    return auditParametersOption.uuid === auditParameterConfigurationId;
+  });
+  const auditParameterValue = foundAuditParameter && {
+    ...availableAuditParameters.find(auditParametersOption => {
+      return auditParametersOption.uuid === auditParameterConfigurationId;
+    })
+    , value: auditParameterConfigurationId
+  };
   return (
     <React.Fragment>
       <AddAuditParameterButtonContainer isAdding={isAddingMode} onClick={activateAddingMode}>
@@ -110,9 +119,7 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
         placeholder={intl.formatMessage({ id: 'ProjectSettings.audit_parameter_name_placeholder' })}
       />
       <Select
-        value={availableAuditParameters.find(auditParametersOption => {
-          return auditParametersOption.uuid === auditParameterConfigurationId;
-        })}
+        value={auditParameterValue}
         onChange={handleConfigurationChange}
         options={availableAuditParameters}
         display={isAddingMode ? 'visible' : 'none'}
