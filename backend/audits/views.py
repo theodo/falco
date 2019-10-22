@@ -1,4 +1,10 @@
 import datetime
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework import permissions, status
+from rest_framework.decorators import api_view, permission_classes
 
 from audits.models import Audit, AuditResults, AuditStatusHistory, AvailableStatuses
 from audits.serializers import (
@@ -8,13 +14,14 @@ from audits.serializers import (
 )
 from audits.tasks import request_audit as task_request_audit
 from projects.permissions import check_if_member_of_project
-from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
 from projects.models import Page, Project, Script
-from rest_framework import permissions, status
-from rest_framework.decorators import api_view, permission_classes
 
 
+@swagger_auto_schema(
+    methods=["post"],
+    responses={201: openapi.Response("Returns the created audits", AuditSerializer)},
+    tags=["Audits"],
+)
 @api_view(["POST"])
 @permission_classes([permissions.IsAuthenticated])
 def request_audit(request, project_uuid):
@@ -52,6 +59,15 @@ def request_audit(request, project_uuid):
         )
 
 
+@swagger_auto_schema(
+    methods=["get"],
+    responses={
+        200: openapi.Response(
+            "Returns the status of a given audit", AuditStatusHistorySerializer
+        )
+    },
+    tags=["Audits"],
+)
 @api_view(["GET"])
 @permission_classes([permissions.IsAuthenticated])
 def audit_status(request, audit_uuid):
@@ -76,6 +92,15 @@ def audit_status(request, audit_uuid):
         return JsonResponse(serializer.data, safe=False)
 
 
+@swagger_auto_schema(
+    methods=["get"],
+    responses={
+        200: openapi.Response(
+            "Returns the results of a given audit", AuditResultsSerializer
+        )
+    },
+    tags=["Audits"],
+)
 @api_view(["GET"])
 @permission_classes([permissions.IsAuthenticated])
 def audit_results(request, audit_uuid):
@@ -96,6 +121,16 @@ def audit_results(request, audit_uuid):
         return JsonResponse(serializer.data, safe=False)
 
 
+@swagger_auto_schema(
+    methods=["get"],
+    responses={
+        200: openapi.Response(
+            "Returns the full information of all audit results for a given page",
+            AuditResultsSerializer(many=True),
+        )
+    },
+    tags=["Audits"],
+)
 @api_view(["GET"])
 @permission_classes([permissions.IsAuthenticated])
 def audits_results(request):

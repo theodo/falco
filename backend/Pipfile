@@ -21,6 +21,7 @@ djoser = "==1.5.1"
 django-fernet-fields = "==0.5"
 whitenoise = "*"
 django-heroku = "*"
+drf-yasg = "*"
 
 [dev-packages]
 "flake8" = "==3.7.7"

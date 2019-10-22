@@ -127,6 +127,16 @@ class ProjectMemberRoleSerializer(serializers.ModelSerializer):
 
 
 class ProjectSerializer(DynamicFieldsModelSerializer):
+    has_siblings = serializers.SerializerMethodField("_has_siblings")
+
+    def _has_siblings(self, obj) -> bool:
+        return (
+            Project.objects.filter(
+                members__id=self.context.get("user_id"), is_active=True
+            ).count()
+            > 1
+        )
+
     pages = PageSerializer(many=True)
     scripts = ScriptSerializer(many=True)
     audit_parameters_list = ProjectAuditParametersSerializer(many=True)
@@ -146,4 +156,5 @@ class ProjectSerializer(DynamicFieldsModelSerializer):
             "screenshot_url",
             "latest_audit_at",
             "wpt_api_key",
+            "has_siblings",
         )
