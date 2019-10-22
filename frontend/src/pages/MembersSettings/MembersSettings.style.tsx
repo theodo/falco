@@ -1,6 +1,6 @@
 import Select from 'components/Select/Select';
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
+import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight, settingsContainerSize } from 'stylesheet';
 
 const Style = {
   Container: styled.div`
@@ -8,7 +8,7 @@ const Style = {
     flex-direction: column;
     padding: 0 0 ${getSpacing(4)} 0;
     margin: 0;
-    width: 800px;
+    width: ${settingsContainerSize};
   `,
 
   PageTitle: styled.h1`

@@ -402,3 +402,5 @@ export const modalSize = {
   big: '1375px',
   medium: '1000px',
 }
+
+export const settingsContainerSize = '800px'
