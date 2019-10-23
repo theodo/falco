@@ -2,7 +2,7 @@
 
 ## How to add a package to Django
 
-If you need to add a Django package in FALCO backend, please use folowing procedure:
+If you need to add a Django package in FALCO backend, please use following procedure:
 
 - Go to `falco` directory
 
@@ -40,7 +40,7 @@ If you need to add a Django package in FALCO backend, please use folowing proced
 
 ## How to import custom data from a backup file
 
-If you need to add a Django package in FALCO backend, please use folowing procedure:
+If you need to add a Django package in FALCO backend, please use following procedure:
 
 - Go to `falco` directory
 
