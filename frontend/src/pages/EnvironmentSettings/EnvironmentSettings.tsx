@@ -41,12 +41,6 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({
   deleteAuditParameterFromProjectRequest,
 }) => {
 
-  interface UserOption {
-    value: string;
-    label: string;
-    disabled: boolean;
-  };
-
   interface ApiAvailableAuditParameters {
     uuid: string,
     browser: string,
