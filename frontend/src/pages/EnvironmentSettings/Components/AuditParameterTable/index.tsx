@@ -3,9 +3,9 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { ProjectType } from 'redux/entities/projects/types';
 import { UserState } from 'redux/user';
 import { isUserAdminOfProject } from 'services/utils';
-import Style from '../../EnvironmentSettings.style';
 import AddAuditParameterRow from './AddAuditParameterRow';
 import AuditParameterRow from './AuditParameterRow';
+import { AuditParameterName, Configuration, ElementContainer, NetworkShape, ProjectSettingsBlock } from './AuditParameterTable.style';
 
 interface ModelizedAvailableAuditParameters {
     uuid: string,
@@ -23,16 +23,16 @@ type Props = {
 
 
 const ProjectAuditParameterTable = ({ project, currentUser, availableAuditParameters, add, edit, del, intl }: Props) => (
-    <Style.ProjectSettingsBlock>
-        <Style.ElementContainer>
-            <Style.AuditParameterName>{intl.formatMessage({ id: "ProjectSettings.audit_parameter_name" })}</Style.AuditParameterName>
-            <Style.Configuration>{intl.formatMessage({ id: "ProjectSettings.configuration" })}</Style.Configuration>
-            <Style.NetworkShape>
+    <ProjectSettingsBlock>
+        <ElementContainer>
+            <AuditParameterName>{intl.formatMessage({ id: "ProjectSettings.audit_parameter_name" })}</AuditParameterName>
+            <Configuration>{intl.formatMessage({ id: "ProjectSettings.configuration" })}</Configuration>
+            <NetworkShape>
                 {intl.formatMessage({ id: "ProjectSettings.network_type" })}
-            </Style.NetworkShape>
-        </Style.ElementContainer>
+            </NetworkShape>
+        </ElementContainer>
         {project.auditParametersIds.map(auditParameterId => (
-            <Style.ElementContainer key={auditParameterId}>
+            <ElementContainer key={auditParameterId}>
                 <AuditParameterRow
                     disabled={!isUserAdminOfProject(currentUser, project)}
                     projectId={project.uuid}
@@ -41,15 +41,15 @@ const ProjectAuditParameterTable = ({ project, currentUser, availableAuditParame
                     edit={edit}
                     del={del}
                 />
-            </Style.ElementContainer>))}
-        {isUserAdminOfProject(currentUser, project) && <Style.ElementContainer>
+            </ElementContainer>))}
+        {isUserAdminOfProject(currentUser, project) && <ElementContainer>
             <AddAuditParameterRow
                 projectId={project.uuid}
                 availableAuditParameters={availableAuditParameters}
                 addAuditParameterToProjectRequest={add}
             />
-        </Style.ElementContainer>}
-    </Style.ProjectSettingsBlock>
+        </ElementContainer>}
+    </ProjectSettingsBlock>
 )
 
 export default injectIntl(ProjectAuditParameterTable)
