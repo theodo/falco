@@ -9,8 +9,7 @@ import { ProjectToastrDisplayType, ProjectType } from 'redux/entities/projects/t
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import { UserState } from 'redux/user';
 import { makeGetRequest } from 'services/networking/request';
-import { isUserAdminOfProject } from 'services/utils';
-import AuditParameterRow, { AddAuditParameterRow } from './Components/AuditParameterTable'
+import ProjectAuditParameterTable from './Components/AuditParameterTable';
 import Style from './EnvironmentSettings.style';
 
 export type OwnProps = {} & RouteComponentProps<{
@@ -52,7 +51,7 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({
 
   useFetchProjectIfUndefined(fetchProjectsRequest, match.params.projectId, project);
 
-  const [availableAuditParameters, setAvailableAuditParameters] = React.useState<Array<{label: string, uuid: string}>>([])
+  const [availableAuditParameters, setAvailableAuditParameters] = React.useState<Array<{ label: string, uuid: string }>>([])
 
   const modelizeAvailableAuditParameters = (apiAvailableAuditParameters: ApiAvailableAuditParameters) => ({
     label: `${apiAvailableAuditParameters.location_label}. ${apiAvailableAuditParameters.browser}`,
@@ -63,43 +62,43 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({
     () => {
       const request = makeGetRequest('/api/projects/available_audit_parameters', true);
       request
-      .then((response) => {
-        if(response) {
-          setAvailableAuditParameters(response.body.map((apiAvailableAuditParameters: ApiAvailableAuditParameters) => modelizeAvailableAuditParameters(apiAvailableAuditParameters)));
-        }
-      })
+        .then((response) => {
+          if (response) {
+            setAvailableAuditParameters(response.body.map((apiAvailableAuditParameters: ApiAvailableAuditParameters) => modelizeAvailableAuditParameters(apiAvailableAuditParameters)));
+          }
+        })
     },
     [],
   );
 
   React.useEffect(
     () => {
-      if('' !== toastrDisplay) {
-        switch(toastrDisplay) {
+      if ('' !== toastrDisplay) {
+        switch (toastrDisplay) {
           case "addAuditParameterSuccess":
             toastr.success(
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.add_audit_parameter_to_project_success'}),
+              intl.formatMessage({ 'id': 'Toastr.ProjectSettings.success_title' }),
+              intl.formatMessage({ 'id': 'Toastr.ProjectSettings.add_audit_parameter_to_project_success' }),
             );
             break;
           case "editAuditParameterSuccess":
             toastr.success(
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.edit_audit_parameter_success'}),
-              );
+              intl.formatMessage({ 'id': 'Toastr.ProjectSettings.success_title' }),
+              intl.formatMessage({ 'id': 'Toastr.ProjectSettings.edit_audit_parameter_success' }),
+            );
             break;
           case "deleteAuditParameterSuccess":
             toastr.success(
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.delete_audit_parameter_success'}),
-              );
+              intl.formatMessage({ 'id': 'Toastr.ProjectSettings.success_title' }),
+              intl.formatMessage({ 'id': 'Toastr.ProjectSettings.delete_audit_parameter_success' }),
+            );
             break;
           case "addAuditParameterError":
           case "deleteAuditParameterError":
           case "editAuditParameterError":
             toastr.error(
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.error_title'}),
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.error_message'}),
+              intl.formatMessage({ 'id': 'Toastr.ProjectSettings.error_title' }),
+              intl.formatMessage({ 'id': 'Toastr.ProjectSettings.error_message' }),
             );
             break;
         }
@@ -131,34 +130,18 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({
 
   return (
     <Style.Container>
-      <Style.PageTitle>{intl.formatMessage({ id: 'ProjectSettings.settings'}) + ' - ' + project.name}</Style.PageTitle>
+      <Style.PageTitle>{intl.formatMessage({ id: 'ProjectSettings.settings' }) + ' - ' + project.name}</Style.PageTitle>
       <Style.PageSubTitle>
-        <FormattedMessage id="ProjectSettings.project_audit_parameters"/>
+        <FormattedMessage id="ProjectSettings.project_audit_parameters" />
       </Style.PageSubTitle>
-      <Style.ProjectSettingsBlock>
-        <Style.ElementContainer>
-          <Style.AuditParameterName>{intl.formatMessage({ id: "ProjectSettings.audit_parameter_name"})}</Style.AuditParameterName>
-          <Style.Configuration>{intl.formatMessage({ id: "ProjectSettings.configuration"})}</Style.Configuration>
-          <Style.NetworkShape>
-            {intl.formatMessage({ id: "ProjectSettings.network_type"})}
-          </Style.NetworkShape>
-        </Style.ElementContainer>
-        {project.auditParametersIds.map(auditParameterId => (
-          <Style.ElementContainer key={auditParameterId}>
-            <AuditParameterRow
-              disabled={!isUserAdminOfProject(currentUser, project)}
-              projectId={project.uuid}
-              auditParameterId={auditParameterId}
-              availableAuditParameters={availableAuditParameters}
-            />
-          </Style.ElementContainer>))}
-        {isUserAdminOfProject(currentUser, project) && <Style.ElementContainer>
-            <AddAuditParameterRow
-              projectId={project.uuid}
-              availableAuditParameters={availableAuditParameters}
-            />
-          </Style.ElementContainer>}
-      </Style.ProjectSettingsBlock>
+
+      <ProjectAuditParameterTable
+        project={project}
+        currentUser={currentUser}
+        availableAuditParameters={availableAuditParameters}
+        intl={intl}
+      />
+
       <ReduxToastr
         timeOut={4000}
         newestOnTop={false}
