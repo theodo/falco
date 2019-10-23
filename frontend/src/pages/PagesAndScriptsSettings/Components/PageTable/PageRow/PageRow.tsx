@@ -14,17 +14,17 @@ export interface OwnProps {
 
 type Props = {
   page?: PageType | null,
-  editPageRequest: (projectId: string, page: PageType) => void,
-  deletePageOfProjectRequest: (projectId: string, pageId: string) => void;
+  edit: (projectId: string, page: PageType) => void,
+  del: (projectId: string, pageId: string) => void;
 } & OwnProps & InjectedIntlProps;
 
 export const PageRow: React.FunctionComponent<Props> = ({
   pageId,
   page,
   projectId,
-  editPageRequest,
+  edit,
   disabled,
-  deletePageOfProjectRequest,
+  del,
   intl
 }) => {
   const [pageName, setPageName] = React.useState('');
@@ -42,7 +42,7 @@ export const PageRow: React.FunctionComponent<Props> = ({
 
   const handleBlur = () => {
     if (page && (pageName !== page.name || pageUrl !== page.url)) {
-      editPageRequest(
+      edit(
         projectId,
         {
           uuid: page.uuid,
@@ -63,7 +63,7 @@ export const PageRow: React.FunctionComponent<Props> = ({
   const handlePageDeletion = (currentProjectId: string, targetPageId: string) => {
     toastr.confirm(intl.formatMessage({ id: 'Toastr.ProjectSettings.delete_page_confirm_question' }),
       {
-        onOk: () => deletePageOfProjectRequest(currentProjectId, targetPageId)
+        onOk: () => del(currentProjectId, targetPageId)
       })
   }
 

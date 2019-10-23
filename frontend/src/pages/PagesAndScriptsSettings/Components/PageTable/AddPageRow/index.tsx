@@ -1,1 +1,1 @@
-export { default } from './AddPageRow.wrap';
+export { default } from './AddPageRow';
