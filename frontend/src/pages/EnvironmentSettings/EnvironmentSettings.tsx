@@ -9,7 +9,7 @@ import { ProjectToastrDisplayType, ProjectType } from 'redux/entities/projects/t
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import { UserState } from 'redux/user';
 import { makeGetRequest } from 'services/networking/request';
-import ProjectAuditParameterTable from './Components/AuditParameterTable';
+import ProjectAuditParameterTable from '../../components/AuditParameterTable';
 import Style from './EnvironmentSettings.style';
 
 export type OwnProps = {} & RouteComponentProps<{
