@@ -10,7 +10,7 @@ import { ProjectToastrDisplayType, ProjectType } from 'redux/entities/projects/t
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import { UserState } from 'redux/user';
 import { isUserAdminOfProject } from 'services/utils';
-import PageTable from './Components/PageTable';
+import PageTable from '../../components/PageTable';
 import { AddScript, ScriptRow, ScriptTableHeader } from './Components/ScriptTable'
 import Style from './PagesAndScriptsSettings.style';
 
