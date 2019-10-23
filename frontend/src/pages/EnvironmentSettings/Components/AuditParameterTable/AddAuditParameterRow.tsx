@@ -3,12 +3,12 @@ import { default as AddIcon } from 'icons/Add';
 import { default as CheckmarkIcon } from 'icons/Checkmark';
 import { default as CloseIcon } from 'icons/Close';
 import * as React from 'react';
-import { InjectedIntlProps } from 'react-intl';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { colorUsage, getSpacing } from 'stylesheet';
 import {
   AddAuditParameterButtonContainer, AddAuditParameterButtonLabel, AddAuditParameterButtonsContainer, AddNameInput, AuditParameterRowButton
-} from '../AuditParameterTable.style';
-import { availableNetworkShape } from '../common'
+} from './AuditParameterTable.style';
+import { availableNetworkShape } from './common'
 
 export interface OwnProps {
   projectId: string,
@@ -30,7 +30,7 @@ const useFocus = (): [React.MutableRefObject<any>, () => void] => {
   return [htmlElRef, setFocus]
 }
 
-export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
+const AddAuditParameterRow: React.FunctionComponent<Props> = ({
   projectId,
   addAuditParameterToProjectRequest,
   availableAuditParameters,
@@ -157,3 +157,5 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
     </React.Fragment>
   )
 }
+
+export default injectIntl(AddAuditParameterRow)

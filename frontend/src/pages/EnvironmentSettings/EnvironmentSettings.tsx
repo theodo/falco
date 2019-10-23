@@ -22,6 +22,9 @@ type Props = {
   project?: ProjectType | null;
   toastrDisplay: ProjectToastrDisplayType;
   setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
+  addAuditParameterToProjectRequest: (projectId: string, auditParameterName: string, auditParameterNetworkShape: string, auditParameterConfigurationId: string) => void;
+  editAuditParameterRequest: (projectId: string, auditParameter: { name: string, uuid: string, configuration_id: string, network_shape: string }) => void;
+  deleteAuditParameterFromProjectRequest: (projectId: string, auditParameterId: string) => void;
 } & OwnProps &
   InjectedIntlProps;
 
@@ -33,6 +36,9 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({
   currentUser,
   toastrDisplay,
   setProjectToastrDisplay,
+  addAuditParameterToProjectRequest,
+  editAuditParameterRequest,
+  deleteAuditParameterFromProjectRequest,
 }) => {
 
   interface UserOption {
@@ -139,7 +145,9 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({
         project={project}
         currentUser={currentUser}
         availableAuditParameters={availableAuditParameters}
-        intl={intl}
+        add={addAuditParameterToProjectRequest}
+        edit={editAuditParameterRequest}
+        del={deleteAuditParameterFromProjectRequest}
       />
 
       <ReduxToastr

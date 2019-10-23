@@ -14,21 +14,23 @@ export interface OwnProps {
   projectId: string,
   disabled: boolean,
   availableAuditParameters: Array<{ uuid: string, label: string }>
+  edit: (projectId: string, auditParameter: { name: string, uuid: string, configuration_id: string, network_shape: string }) => void;
+  del: (projectId: string, auditParameterId: string) => void;
 }
 
 type Props = {
   auditParameter?: AuditParametersType | null,
-  editAuditParameterRequest: (projectId: string, auditParameter: { name: string, uuid: string, configuration_id: string, network_shape: string }) => void,
-  deleteAuditParameterFromProjectRequest: (projectId: string, auditParameterId: string) => void;
+  edit: (projectId: string, auditParameter: { name: string, uuid: string, configuration_id: string, network_shape: string }) => void,
+  del: (projectId: string, auditParameterId: string) => void;
 } & OwnProps & InjectedIntlProps;
 
 export const AuditParameterRow: React.FunctionComponent<Props> = ({
   auditParameterId,
   auditParameter,
   projectId,
-  editAuditParameterRequest,
+  edit,
   disabled,
-  deleteAuditParameterFromProjectRequest,
+  del,
   availableAuditParameters,
   intl
 }) => {
@@ -49,7 +51,7 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
 
   const handleBlur = () => {
     if (auditParameter && (auditParameterName !== auditParameter.name || auditParameterConfigurationId !== auditParameter.configurationId || auditParameter.networkShape !== auditParameterNetworkShape)) {
-      editAuditParameterRequest(
+      edit(
         projectId,
         {
           uuid: auditParameter.uuid,
@@ -75,7 +77,7 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
   const handleAuditParameterDeletion = (currentProjectId: string, targetAuditParameterId: string) => {
     toastr.confirm(intl.formatMessage({ id: 'Toastr.ProjectSettings.delete_auditParameter_confirm_question' }),
       {
-        onOk: () => deleteAuditParameterFromProjectRequest(currentProjectId, targetAuditParameterId)
+        onOk: () => del(currentProjectId, targetAuditParameterId)
       })
   }
 

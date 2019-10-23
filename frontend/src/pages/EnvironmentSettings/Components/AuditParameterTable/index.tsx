@@ -1,5 +1,5 @@
 import React from 'react';
-import { InjectedIntlProps } from 'react-intl';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { ProjectType } from 'redux/entities/projects/types';
 import { UserState } from 'redux/user';
 import { isUserAdminOfProject } from 'services/utils';
@@ -16,9 +16,9 @@ type Props = {
     currentUser: UserState,
     project: ProjectType;
     availableAuditParameters: ModelizedAvailableAuditParameters[];
-    add?: (projectId: string, auditParameterName: string, auditParameterNetworkShape: string, auditParameterConfigurationId: string) => void;
-    edit?: (projectId: string, auditParameter: { name: string, uuid: string, configuration_id: string, network_shape: string }) => void;
-    del?: (projectId: string, auditParameterId: string) => void;
+    add: (projectId: string, auditParameterName: string, auditParameterNetworkShape: string, auditParameterConfigurationId: string) => void;
+    edit: (projectId: string, auditParameter: { name: string, uuid: string, configuration_id: string, network_shape: string }) => void;
+    del: (projectId: string, auditParameterId: string) => void;
 } & InjectedIntlProps;
 
 
@@ -38,15 +38,18 @@ const ProjectAuditParameterTable = ({ project, currentUser, availableAuditParame
                     projectId={project.uuid}
                     auditParameterId={auditParameterId}
                     availableAuditParameters={availableAuditParameters}
+                    edit={edit}
+                    del={del}
                 />
             </Style.ElementContainer>))}
         {isUserAdminOfProject(currentUser, project) && <Style.ElementContainer>
             <AddAuditParameterRow
                 projectId={project.uuid}
                 availableAuditParameters={availableAuditParameters}
+                addAuditParameterToProjectRequest={add}
             />
         </Style.ElementContainer>}
     </Style.ProjectSettingsBlock>
 )
 
-export default ProjectAuditParameterTable
+export default injectIntl(ProjectAuditParameterTable)
