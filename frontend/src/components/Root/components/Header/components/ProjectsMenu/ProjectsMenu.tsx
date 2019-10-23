@@ -116,9 +116,11 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
           {projects
             .filter((project: ProjectType | null) => currentProject !== project)
             .map((project: ProjectType | null) => renderProjectItem(project))}
-          <NewProjectItem to="path" >
-            <Add color={colorUsage.scriptRowIcon} width="24px" strokeWidth="20"/>
-            <NewProject>Create a new project</NewProject>
+          <NewProjectItem to="new-project" >
+            <Add color={colorUsage.scriptRowIcon} width="24px" strokeWidth="20" />
+            <NewProject>
+              <FormattedMessage id="Projects.create_new_project" />
+            </NewProject>
           </NewProjectItem>
         </ProjectItemContainer>
       </Container>
