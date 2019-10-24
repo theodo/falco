@@ -2673,8 +2673,6 @@ classnames@^2.2.3, classnames@^2.2.5:
 clean-css@4.2.x:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.2.1.tgz#2d411ef76b8569b6d0c84068dabe85b0aa5e5c17"
-  dependencies:
-    source-map "~0.6.0"
 
 cli-cursor@^1.0.2:
   version "1.0.2"
@@ -2984,6 +2982,11 @@ core-js@^2.4.0, core-js@^2.4.1, core-js@^2.5.0, core-js@^2.5.1:
 core-js@^3.1.4:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.1.4.tgz#3a2837fc48e582e1ae25907afcd6cf03b0cc7a07"
+
+core-js@^3.3.3:
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.3.3.tgz#b7048d3c6c1a52b5fe55a729c1d4ccdffe0891bb"
+  integrity sha512-0xmD4vUJRY8nfLyV9zcpC17FtSie5STXzw+HyYw2t8IIvmDnbq7RJUULECCo+NstpJtwK9kx8S+898iyqgeUow==
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -10089,7 +10092,7 @@ source-map@^0.5.0, source-map@^0.5.3, source-map@^0.5.6, source-map@^0.5.7:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
 
-source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.0, source-map@~0.6.1:
+source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
 
@@ -10911,9 +10914,10 @@ typesafe-actions@^3.0.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/typesafe-actions/-/typesafe-actions-3.4.0.tgz#cdf925941eafc75a659ebc2d584b673b86a1a5ab"
 
-typescript@^3.2.2:
-  version "3.5.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.5.2.tgz#a09e1dc69bc9551cadf17dba10ee42cf55e5d56c"
+typescript@~3.4.0:
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.4.5.tgz#2d2618d10bb566572b8d7aad5180d84257d70a99"
+  integrity sha512-YycBxUb49UUhdNMU5aJ7z5Ej2XGmaIBL0x34vZ82fn3hGvD+bgrMrVDpatgz2f7YxUMJxMkbWxJZeAvDxVe7Vw==
 
 ua-parser-js@^0.7.18:
   version "0.7.20"

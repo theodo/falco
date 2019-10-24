@@ -1,4 +1,6 @@
-import 'babel-polyfill';
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+
 import dayjs from 'dayjs';
 import 'dayjs/locale/fr';
 import relativeTime from 'dayjs/plugin/relativeTime';
