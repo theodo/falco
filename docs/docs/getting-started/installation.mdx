@@ -56,15 +56,38 @@ Once Falco is deployed, you should be able to log in to the admin interface usin
 
 ## Deploying with Docker Compose
 
-If you want to start a minimal docker-compose pointing to the released Docker images, you can take a look at the example `docker-compose.prod.yml`.
+### Installing Docker Compose
 
-To install Falco with docker-compose:
+The following steps are applicable to Ubuntu and were taken from the [Mattermost documentation](https://docs.mattermost.com/install/prod-docker.html) (thanks to them!).
+If you are using another platform, please check the [Docker installation Docs](https://docs.docker.com/install/#supported-platforms).
+
+1. Install Docker using the [Ubuntu online guide](https://docs.docker.com/installation/ubuntulinux/) or these instructions:
+
+```bash
+sudo apt-get update
+sudo apt-get install wget
+wget -qO- https://get.docker.com/ | sh
+sudo usermod -aG docker <username>
+sudo service docker start
+newgrp docker
+```
+
+2. Install Docker Compose using [the online guide](https://docs.docker.com/compose/install/). You have to download the latest release from [Docker Compose Github’s page](https://github.com/docker/compose/releases/) and put the binary on your /usr/local/bin folder. Usually, you can use the following command, replacing `$dockerComposeVersion` by the Docker Compose version to install :
+
+```bash
+curl -L https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+### Installing Falco with Docker Compose
+
+To install Falco with `docker-compose`:
 
 1. Create a new directory.
-2. Copy `docker-compose.prod.yml` inside that directory and rename it `docker-compose.yml`. You can change the `latest` tag to a specific version if you need to.
-3. Copy `.env.prod.dist` inside that directory and rename it `.env.prod`. Edit the file and generate the secrets, change the mails, etc.
+2. Copy the `docker-compose.prod.yml` file ([link](https://github.com/theodo/falco/blob/master/docker-compose.prod.yml)) inside that directory and rename it `docker-compose.yml`. You can change the `latest` tag to a specific version if you need to.
+3. Copy the `.env.prod.dist` file ([link](https://github.com/theodo/falco/blob/master/.env.prod.dist)) inside that directory and rename it to `.env.prod`. Edit the file and generate the secrets, change the emails, etc.
 4. Start the stack with `docker-compose up -d`
 
-This will start the stack: Redis + PostgreSQL + Celery + the main application. The main application should be available on http://localhost.
+This will start the stack: Redis + PostgreSQL + Celery + the main application. The main application should be available on http://localhost:80.
 
 For a production use, we recommend using a PostreSQL with valid SSL certificates and expose the application with a frontal server managing the HTTPS certificates.
