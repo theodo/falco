@@ -16,3 +16,10 @@ export interface ApiAuditParametersType {
     network_shape: string;
     configuration: string;
 }
+
+export interface AuditParametersTableDisplayType {
+    uuid: string;
+    name: string;
+    networkShape: string;
+    configurationId: string;
+}

@@ -2,7 +2,7 @@ import Select from 'components/Select';
 import Close from 'icons/Close';
 import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
-import { AuditParametersType } from 'redux/entities/auditParameters/types';
+import { AuditParametersTableDisplayType, AuditParametersType } from 'redux/entities/auditParameters/types';
 import { colorUsage } from 'stylesheet';
 import { getSpacing } from 'stylesheet';
 import { AuditParameterDeleteContainer, AuditParameterRowButton, EditNameInput } from '../AuditParameterTable.style';
@@ -10,7 +10,7 @@ import { availableNetworkShape } from '../common'
 
 
 type Props = {
-  auditParameter: AuditParametersType,
+  auditParameter: AuditParametersType | AuditParametersTableDisplayType,
   disabled: boolean,
   availableAuditParameters: Array<{ uuid: string, label: string }>
   edit: (auditParameter: { name: string, uuid: string, configuration_id: string, network_shape: string }) => void,

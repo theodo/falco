@@ -4,7 +4,7 @@ import AddAuditParameterRow from './AddAuditParameterRow';
 import AuditParameterRow from './AuditParameterRow';
 import { AuditParameterName, Configuration, ElementContainer, NetworkShape, ProjectSettingsBlock } from './AuditParameterTable.style';
 
-import { AuditParametersType } from 'redux/entities/auditParameters/types';
+import { AuditParametersTableDisplayType, AuditParametersType } from 'redux/entities/auditParameters/types';
 interface ModelizedAvailableAuditParameters {
     uuid: string,
     label: string,
@@ -12,7 +12,7 @@ interface ModelizedAvailableAuditParameters {
 
 type Props = {
     disabled: boolean;
-    auditParameters: AuditParametersType[] | undefined;
+    auditParameters: Array<AuditParametersType | AuditParametersTableDisplayType> | undefined;
     availableAuditParameters: ModelizedAvailableAuditParameters[];
     add: (auditParameterName: string, auditParameterNetworkShape: string, auditParameterConfigurationId: string) => void;
     edit: (auditParameter: { name: string, uuid: string, configuration_id: string, network_shape: string }) => void;
