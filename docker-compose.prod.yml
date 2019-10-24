@@ -8,16 +8,15 @@ services:
     image: redis:5.0-alpine
 
   backend:
-    image: theodofr/falco:nightly
+    image: theodofr/falco:latest
     command: gunicorn --bind 0.0.0.0:8000 --chdir /code --workers 2 --access-logfile - --error-logfile - -c root/gunicorn.py root.wsgi:application
     ports:
       - "80:8000"
     env_file:
       - .env.prod
 
-
   celery:
-    image: theodofr/falco:nightly
+    image: theodofr/falco:latest
     command: celery worker -A root.celery -B -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler -c 4
     env_file:
       - .env.prod
