@@ -4,6 +4,7 @@ import { Dispatch } from 'redux';
 import { RootState } from 'redux/types';
 
 import { editAuditParameterRequest } from 'redux/entities/auditParameters';
+import { getProjectAuditParameters } from 'redux/entities/auditParameters/selectors';
 import { fetchProjectsRequest, setProjectToastrDisplay } from 'redux/entities/projects';
 import { getProject, getProjectToastrDisplay } from 'redux/entities/projects/selectors';
 import { ProjectToastrDisplayType } from 'redux/entities/projects/types';
@@ -15,7 +16,8 @@ import { addAuditParameterToProjectRequest, deleteAuditParameterFromProjectReque
 const mapStateToProps = (state: RootState, props: OwnProps) => ({
   currentUser: getUser(state),
   project: getProject(state, props.match.params.projectId),
-  toastrDisplay: getProjectToastrDisplay(state)
+  toastrDisplay: getProjectToastrDisplay(state),
+  auditParameters: getProjectAuditParameters(state, props.match.params.projectId)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

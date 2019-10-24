@@ -5,6 +5,7 @@ import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import ReduxToastr, { toastr } from 'react-redux-toastr';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { RouteComponentProps } from 'react-router';
+import { AuditParametersType } from 'redux/entities/auditParameters/types';
 import { ProjectToastrDisplayType, ProjectType } from 'redux/entities/projects/types';
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import { UserState } from 'redux/user';
@@ -12,6 +13,7 @@ import { makeGetRequest } from 'services/networking/request';
 import ProjectAuditParameterTable from '../../components/AuditParameterTable';
 import Style from './EnvironmentSettings.style';
 
+import { isUserAdminOfProject } from 'services/utils';
 export type OwnProps = {} & RouteComponentProps<{
   projectId: string;
 }>;
@@ -21,6 +23,7 @@ type Props = {
   fetchProjectsRequest: (projectId: string) => void;
   project?: ProjectType | null;
   toastrDisplay: ProjectToastrDisplayType;
+  auditParameters: AuditParametersType[] | undefined;
   setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
   addAuditParameterToProjectRequest: (projectId: string, auditParameterName: string, auditParameterNetworkShape: string, auditParameterConfigurationId: string) => void;
   editAuditParameterRequest: (projectId: string, auditParameter: { name: string, uuid: string, configuration_id: string, network_shape: string }) => void;
@@ -35,6 +38,7 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({
   project,
   currentUser,
   toastrDisplay,
+  auditParameters,
   setProjectToastrDisplay,
   addAuditParameterToProjectRequest,
   editAuditParameterRequest,
@@ -57,6 +61,15 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({
     label: `${apiAvailableAuditParameters.location_label}. ${apiAvailableAuditParameters.browser}`,
     uuid: apiAvailableAuditParameters.uuid,
   });
+
+  const handleAuditParameterDeletion = (auditParameterId: string) => {
+    if (!project) { return null }
+    toastr.confirm(intl.formatMessage({ id: 'Toastr.ProjectSettings.delete_auditParameter_confirm_question' }),
+      {
+        onOk: () => deleteAuditParameterFromProjectRequest(project.uuid, auditParameterId)
+
+      })
+  }
 
   React.useEffect(
     () => {
@@ -136,12 +149,12 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({
       </Style.PageSubTitle>
 
       <ProjectAuditParameterTable
-        project={project}
-        currentUser={currentUser}
+        auditParameters={auditParameters}
+        disabled={!isUserAdminOfProject(currentUser, project)}
         availableAuditParameters={availableAuditParameters}
-        add={addAuditParameterToProjectRequest}
-        edit={editAuditParameterRequest}
-        del={deleteAuditParameterFromProjectRequest}
+        add={(auditParameterName: string, auditParameterNetworkShape: string, auditParameterConfigurationId: string) => addAuditParameterToProjectRequest(project.uuid, auditParameterName, auditParameterNetworkShape, auditParameterConfigurationId)}
+        edit={(auditParameter: { name: string, uuid: string, configuration_id: string, network_shape: string }) => editAuditParameterRequest(project.uuid, auditParameter)}
+        del={(auditParameterId: string) => handleAuditParameterDeletion(auditParameterId)}
       />
 
       <ReduxToastr

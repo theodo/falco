@@ -1,28 +1,26 @@
 import React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { ProjectType } from 'redux/entities/projects/types';
-import { UserState } from 'redux/user';
-import { isUserAdminOfProject } from 'services/utils';
 import AddAuditParameterRow from './AddAuditParameterRow';
 import AuditParameterRow from './AuditParameterRow';
 import { AuditParameterName, Configuration, ElementContainer, NetworkShape, ProjectSettingsBlock } from './AuditParameterTable.style';
 
+import { AuditParametersType } from 'redux/entities/auditParameters/types';
 interface ModelizedAvailableAuditParameters {
     uuid: string,
     label: string,
 }
 
 type Props = {
-    currentUser: UserState,
-    project: ProjectType;
+    disabled: boolean;
+    auditParameters: AuditParametersType[] | undefined;
     availableAuditParameters: ModelizedAvailableAuditParameters[];
-    add: (projectId: string, auditParameterName: string, auditParameterNetworkShape: string, auditParameterConfigurationId: string) => void;
-    edit: (projectId: string, auditParameter: { name: string, uuid: string, configuration_id: string, network_shape: string }) => void;
-    del: (projectId: string, auditParameterId: string) => void;
+    add: (auditParameterName: string, auditParameterNetworkShape: string, auditParameterConfigurationId: string) => void;
+    edit: (auditParameter: { name: string, uuid: string, configuration_id: string, network_shape: string }) => void;
+    del: (auditParameterId: string) => void;
 } & InjectedIntlProps;
 
 
-const ProjectAuditParameterTable = ({ project, currentUser, availableAuditParameters, add, edit, del, intl }: Props) => (
+const ProjectAuditParameterTable = ({ disabled, auditParameters, availableAuditParameters, add, edit, del, intl }: Props) => (
     <ProjectSettingsBlock>
         <ElementContainer>
             <AuditParameterName>{intl.formatMessage({ id: "ProjectSettings.audit_parameter_name" })}</AuditParameterName>
@@ -31,22 +29,20 @@ const ProjectAuditParameterTable = ({ project, currentUser, availableAuditParame
                 {intl.formatMessage({ id: "ProjectSettings.network_type" })}
             </NetworkShape>
         </ElementContainer>
-        {project.auditParametersIds.map(auditParameterId => (
-            <ElementContainer key={auditParameterId}>
+        {auditParameters && auditParameters.map(auditParameter => (
+            <ElementContainer key={auditParameter.uuid}>
                 <AuditParameterRow
-                    disabled={!isUserAdminOfProject(currentUser, project)}
-                    projectId={project.uuid}
-                    auditParameterId={auditParameterId}
+                    disabled={disabled}
+                    auditParameter={auditParameter}
                     availableAuditParameters={availableAuditParameters}
                     edit={edit}
                     del={del}
                 />
             </ElementContainer>))}
-        {isUserAdminOfProject(currentUser, project) && <ElementContainer>
+        {!disabled && <ElementContainer>
             <AddAuditParameterRow
-                projectId={project.uuid}
                 availableAuditParameters={availableAuditParameters}
-                addAuditParameterToProjectRequest={add}
+                add={add}
             />
         </ElementContainer>}
     </ProjectSettingsBlock>

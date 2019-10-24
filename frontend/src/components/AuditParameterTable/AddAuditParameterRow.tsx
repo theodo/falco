@@ -10,14 +10,10 @@ import {
 } from './AuditParameterTable.style';
 import { availableNetworkShape } from './common'
 
-export interface OwnProps {
-  projectId: string,
-  availableAuditParameters: Array<{ uuid: string, label: string }>
-}
-
 type Props = {
-  addAuditParameterToProjectRequest: (projectId: string, auditParameterName: string, auditParameterNetworkShape: string, auditParameterConfigurationId: string) => void,
-} & OwnProps & InjectedIntlProps;
+  availableAuditParameters: Array<{ uuid: string, label: string }>
+  add: (auditParameterName: string, auditParameterNetworkShape: string, auditParameterConfigurationId: string) => void,
+} & InjectedIntlProps;
 
 const useFocus = (): [React.MutableRefObject<any>, () => void] => {
   const htmlElRef = React.useRef<HTMLInputElement>(null)
@@ -31,8 +27,7 @@ const useFocus = (): [React.MutableRefObject<any>, () => void] => {
 }
 
 const AddAuditParameterRow: React.FunctionComponent<Props> = ({
-  projectId,
-  addAuditParameterToProjectRequest,
+  add,
   availableAuditParameters,
   intl
 }) => {
@@ -58,8 +53,7 @@ const AddAuditParameterRow: React.FunctionComponent<Props> = ({
 
   const validate = () => {
     if (auditParameterName && auditParameterConfigurationId && auditParameterNetworkShape) {
-      addAuditParameterToProjectRequest(
-        projectId,
+      add(
         auditParameterName,
         auditParameterNetworkShape,
         auditParameterConfigurationId,
