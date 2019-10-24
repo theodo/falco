@@ -77,3 +77,6 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Configure app for Heroku deployment
 django_heroku.settings(locals())
+
+if "DISABLE_DATABASE_SSL_CHECK" in os.environ:
+    del DATABASES["default"]["OPTIONS"]["sslmode"]
