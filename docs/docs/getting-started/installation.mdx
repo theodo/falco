@@ -56,4 +56,15 @@ Once Falco is deployed, you should be able to log in to the admin interface usin
 
 ## Deploying with Docker Compose
 
-_This section is a work in progress._
+If you want to start a minimal docker-compose pointing to the released Docker images, you can take a look at the example `docker-compose.prod.yml`.
+
+To install Falco with docker-compose:
+
+1. Create a new directory.
+2. Copy `docker-compose.prod.yml` inside that directory and rename it `docker-compose.yml`. You can change the `latest` tag to a specific version if you need to.
+3. Copy `.env.prod.dist` inside that directory and rename it `.env.prod`. Edit the file and generate the secrets, change the mails, etc.
+4. Start the stack with `docker-compose up -d`
+
+This will start the stack: Redis + PostgreSQL + Celery + the main application. The main application should be available on http://localhost.
+
+For a production use, we recommend using a PostreSQL with valid SSL certificates and expose the application with a frontal server managing the HTTPS certificates.
