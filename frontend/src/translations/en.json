@@ -241,5 +241,11 @@
     "title": "404 Not Found",
     "subtitle": "Sorry, this page does not exist",
     "button": "Back to Homepage"
+  },
+  "CreateProject": {
+    "next": "Next",
+    "previous": "Previous",
+    "validate": "Validate",
+    "title": "Project creation"
   }
 }

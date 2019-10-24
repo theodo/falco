@@ -15,6 +15,7 @@ const GeneralSettings = lazy(() => import('./pages/GeneralSettings'));
 const EnvironmentSettings = lazy(() => import('./pages/EnvironmentSettings'));
 const PagesAndScriptsSettings = lazy(() => import('./pages/PagesAndScriptsSettings'));
 const MembersSettings = lazy(() => import('./pages/MembersSettings'));
+const CreateProject = lazy(() => import('./pages/CreateProject'));
 
 interface RouteDefinition {
   path: string;
@@ -108,6 +109,13 @@ export const routeDefinitions: Record<string, RouteDefinition> = {
     path:
       '/project/:projectId/audits/:pageOrScriptId/audit-parameters/:auditParametersId/step/:scriptStepId',
     component: Audits,
+    exact: true,
+    strict: false,
+    isAuthenticated: true,
+  },
+  createProject: {
+    path: '/new-project',
+    component: CreateProject,
     exact: true,
     strict: false,
     isAuthenticated: true,

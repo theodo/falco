@@ -241,5 +241,11 @@
     "title": "404 Page Introuvable",
     "subtitle": "Désolé, cette page n'existe pas",
     "button": "Retour à l'accueil"
+  },
+  "CreateProject": {
+    "next": "Suivant",
+    "previous": "Précédent",
+    "validate": "Valider",
+    "title": "Création d'un projet"
   }
 }
