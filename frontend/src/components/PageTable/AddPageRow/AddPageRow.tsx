@@ -8,13 +8,9 @@ import {
   AddNameInput, AddPageButtonContainer, AddPageButtonLabel, AddPageButtonsContainer, AddUrlInput, PageButton
 } from '../PageTable.style';
 
-export interface OwnProps {
-  projectId: string,
-}
-
 type Props = {
-  add: (projectId: string, pageName: string, pageUrl: string) => void,
-} & OwnProps & InjectedIntlProps;
+  add: (pageName: string, pageUrl: string) => void,
+} & InjectedIntlProps;
 
 const useFocus = (isAdding: boolean): React.MutableRefObject<any> => {
   const htmlElRef = React.useRef<HTMLInputElement>(null)
@@ -32,7 +28,6 @@ const useFocus = (isAdding: boolean): React.MutableRefObject<any> => {
 }
 
 export const AddPageRow: React.FunctionComponent<Props> = ({
-  projectId,
   add,
   intl
 }) => {
@@ -50,7 +45,6 @@ export const AddPageRow: React.FunctionComponent<Props> = ({
   const validate = () => {
     if (pageName && pageUrl) {
       add(
-        projectId,
         pageName,
         pageUrl
       );

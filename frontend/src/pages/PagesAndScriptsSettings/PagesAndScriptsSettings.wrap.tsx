@@ -4,6 +4,7 @@ import { Dispatch } from 'redux';
 import { RootState } from 'redux/types';
 
 import { editPageRequest } from 'redux/entities/pages';
+import { getProjectPages } from 'redux/entities/pages/selectors';
 import { PageType } from 'redux/entities/pages/types';
 import { fetchProjectsRequest, setProjectToastrDisplay } from 'redux/entities/projects';
 import { addPageToProjectRequest, deletePageOfProjectRequest } from 'redux/entities/projects';
@@ -15,7 +16,8 @@ import PagesAndScriptsSettings, { OwnProps } from './PagesAndScriptsSettings';
 const mapStateToProps = (state: RootState, props: OwnProps) => ({
   currentUser: getUser(state),
   project: getProject(state, props.match.params.projectId),
-  toastrDisplay: getProjectToastrDisplay(state)
+  toastrDisplay: getProjectToastrDisplay(state),
+  pages: getProjectPages(state, props.match.params.projectId || ""),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

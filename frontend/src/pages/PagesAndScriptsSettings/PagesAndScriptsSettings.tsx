@@ -27,6 +27,7 @@ type Props = {
   addPageToProjectRequest: (projectId: string, pageName: string, pageUrl: string) => void;
   editPageRequest: (projectId: string, page: PageType) => void;
   deletePageOfProjectRequest: (projectId: string, pageId: string) => void;
+  pages: Array<PageType | null> | undefined | null;
 } & OwnProps &
   InjectedIntlProps;
 
@@ -41,6 +42,7 @@ const PagesAndScriptsSettings: React.FunctionComponent<Props> = ({
   addPageToProjectRequest,
   editPageRequest,
   deletePageOfProjectRequest,
+  pages,
 }) => {
 
   interface UserOption {
@@ -145,11 +147,11 @@ const PagesAndScriptsSettings: React.FunctionComponent<Props> = ({
       </Style.PageSubTitle>
 
       <PageTable
-        currentUser={currentUser}
-        project={project}
-        add={addPageToProjectRequest}
-        edit={editPageRequest}
-        del={deletePageOfProjectRequest}
+        pages={pages}
+        disabled={!isUserAdminOfProject(currentUser, project)}
+        add={(pageName: string, pageUrl: string) => addPageToProjectRequest(project.uuid, pageName, pageUrl)}
+        edit={(page: PageType) => editPageRequest(project.uuid, page)}
+        del={(pageId: string) => deletePageOfProjectRequest(project.uuid, pageId)}
       />
 
       <Style.PageSubTitle>

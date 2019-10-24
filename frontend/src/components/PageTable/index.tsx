@@ -1,9 +1,6 @@
 import React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { PageType } from 'redux/entities/pages/types';
-import { ProjectType } from 'redux/entities/projects/types';
-import { UserState } from 'redux/user';
-import { isUserAdminOfProject } from 'services/utils';
 import AddPageRow from './AddPageRow';
 import PageRow from './PageRow';
 import { ElementContainer, ProjectSettingsBlock } from './PageTable.style';
@@ -11,32 +8,32 @@ import PageRowHeader from './PageTableHeader';
 
 
 type Props = {
-    currentUser: UserState,
-    project: ProjectType;
-    add: (projectId: string, pageName: string, pageUrl: string) => void;
-    edit: (projectId: string, page: PageType) => void;
-    del: (projectId: string, pageId: string) => void;
+    pages: Array<PageType | null> | null | undefined;
+    disabled: boolean;
+    add: (pageName: string, pageUrl: string) => void;
+    edit: (page: PageType) => void;
+    del: (pageId: string) => void;
 } & InjectedIntlProps;
 
 
-const PageTable = ({ currentUser, project, add, edit, del }: Props) => (
+const PageTable = ({ pages, disabled, add, edit, del }: Props) => (
     <ProjectSettingsBlock>
         <ElementContainer>
             <PageRowHeader />
         </ElementContainer>
-        {project.pagesIds.map((pageId: string) => (
-            <ElementContainer key={pageId}>
+        {pages && pages.map((page: PageType | null) => (
+            page && <ElementContainer key={page.uuid}>
                 <PageRow
-                    disabled={!isUserAdminOfProject(currentUser, project)}
-                    projectId={project.uuid}
-                    pageId={pageId}
+                    disabled={disabled}
+                    page={page}
                     edit={edit}
                     del={del}
                 />
-            </ElementContainer>))}
-        {isUserAdminOfProject(currentUser, project) && <ElementContainer>
+            </ElementContainer>
+        ))
+        }
+        {!disabled && <ElementContainer>
             <AddPageRow
-                projectId={project.uuid}
                 add={add}
             />
         </ElementContainer>}
