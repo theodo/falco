@@ -11,7 +11,7 @@ services:
     image: theodofr/falco:nightly
     command: gunicorn --bind 0.0.0.0:8000 --chdir /code --workers 2 --access-logfile - --error-logfile - -c root/gunicorn.py root.wsgi:application
     ports:
-      - "8000:8000"
+      - "80:8000"
     links:
       - db
       - redis

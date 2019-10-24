@@ -74,8 +74,10 @@ WSGI_APPLICATION = "root.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {"default": dj_database_url.config()}
-
+if "DISABLE_DATABASE_SSL_CHECK" in os.environ:
+    DATABASES = {"default": dj_database_url.config(ssl_require=False)}
+else:
+    DATABASES = {"default": dj_database_url.config()}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
