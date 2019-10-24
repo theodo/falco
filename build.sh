@@ -1,6 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
+export DOCKER_BUILDKIT=1
+
 # Build the compile stage:
 docker build --target node \
        --cache-from=falco/falco-front:compile-stage \
