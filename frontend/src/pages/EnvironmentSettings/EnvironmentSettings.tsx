@@ -9,7 +9,6 @@ import { AuditParametersType } from 'redux/entities/auditParameters/types';
 import { ProjectToastrDisplayType, ProjectType } from 'redux/entities/projects/types';
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import { UserState } from 'redux/user';
-import { makeGetRequest } from 'services/networking/request';
 import ProjectAuditParameterTable from '../../components/AuditParameterTable';
 import Style from './EnvironmentSettings.style';
 
@@ -45,22 +44,10 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({
   deleteAuditParameterFromProjectRequest,
 }) => {
 
-  interface ApiAvailableAuditParameters {
-    uuid: string,
-    browser: string,
-    location_label: string,
-    location_group: string,
-  }
 
 
   useFetchProjectIfUndefined(fetchProjectsRequest, match.params.projectId, project);
 
-  const [availableAuditParameters, setAvailableAuditParameters] = React.useState<Array<{ label: string, uuid: string }>>([])
-
-  const modelizeAvailableAuditParameters = (apiAvailableAuditParameters: ApiAvailableAuditParameters) => ({
-    label: `${apiAvailableAuditParameters.location_label}. ${apiAvailableAuditParameters.browser}`,
-    uuid: apiAvailableAuditParameters.uuid,
-  });
 
   const handleAuditParameterDeletion = (auditParameterId: string) => {
     if (!project) { return null }
@@ -70,19 +57,6 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({
 
       })
   }
-
-  React.useEffect(
-    () => {
-      const request = makeGetRequest('/api/projects/available_audit_parameters', true);
-      request
-        .then((response) => {
-          if (response) {
-            setAvailableAuditParameters(response.body.map((apiAvailableAuditParameters: ApiAvailableAuditParameters) => modelizeAvailableAuditParameters(apiAvailableAuditParameters)));
-          }
-        })
-    },
-    [],
-  );
 
   React.useEffect(
     () => {
@@ -151,7 +125,6 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({
       <ProjectAuditParameterTable
         auditParameters={auditParameters}
         disabled={!isUserAdminOfProject(currentUser, project)}
-        availableAuditParameters={availableAuditParameters}
         add={(auditParameterName: string, auditParameterNetworkShape: string, auditParameterConfigurationId: string) => addAuditParameterToProjectRequest(project.uuid, auditParameterName, auditParameterNetworkShape, auditParameterConfigurationId)}
         edit={(auditParameter: { name: string, uuid: string, configuration_id: string, network_shape: string }) => editAuditParameterRequest(project.uuid, auditParameter)}
         del={(auditParameterId: string) => handleAuditParameterDeletion(auditParameterId)}
