@@ -1,9 +1,30 @@
 .idea
 .vscode
 .env
+.DS_Store
 postgres-data/
 backend/celerybeat-schedule
 backend/celerybeat.pid
 backend/venv/
-devops/falco-new.pem
-devops/falco-new.pem.pub
+
+# Docs
+# dependencies
+/docs/node_modules
+
+# production
+/docs/build
+
+# generated files
+/docs/.docusaurus
+/docs/.cache-loader
+
+# misc
+/docs/.DS_Store
+/docs/.env.local
+/docs/.env.development.local
+/docs/.env.test.local
+/docs/.env.production.local
+
+/docs/npm-debug.log*
+/docs/yarn-debug.log*
+/docs/yarn-error.log*
