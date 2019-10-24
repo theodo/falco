@@ -140,16 +140,14 @@ class ProjectSerializer(DynamicFieldsModelSerializer):
     pages = PageSerializer(many=True)
     scripts = ScriptSerializer(many=True)
     audit_parameters_list = ProjectAuditParametersSerializer(many=True)
-    project_members = ProjectMemberRoleSerializer(
-        source="projectmemberrole_set", many=True
-    )
+    members = ProjectMemberRoleSerializer(many=True)
 
     class Meta:
         model = Project
         fields = (
             "uuid",
             "name",
-            "project_members",
+            "members",
             "pages",
             "scripts",
             "audit_parameters_list",

@@ -61,7 +61,55 @@ def project_list(request):
         data = JSONParser().parse(request)
         serializer = ProjectSerializer(data=data, context={"user_id": request.user.id})
         if serializer.is_valid():
+
+            pages = serializer.validated_data.pop("pages")
+            scripts = serializer.validated_data.pop("scripts")
+            audit_parameters_list = serializer.validated_data.pop(
+                "audit_parameters_list"
+            )
+            members = serializer.validated_data.pop("members")
+
             project = Project.objects.create(**serializer.validated_data)
+
+            project.pages.set(
+                [
+                    Page.objects.create(
+                        url=page.get("url"), name=page.get("name"), project=project
+                    )
+                    for page in pages
+                ]
+            )
+            project.scripts.set(
+                [
+                    Script.objects.create(
+                        name=script.get("name"),
+                        script=script.get("script"),
+                        project=project,
+                    )
+                    for script in scripts
+                ]
+            )
+            project.audit_parameters_list.set(
+                [
+                    ProjectAuditParameters.objects.create(
+                        name=audit_parameter.get("name"),
+                        configuration=audit_parameter.get("configuration"),
+                        network_shape=audit_parameter.get("network_shape"),
+                        project=project,
+                    )
+                    for audit_parameter in audit_parameters_list
+                ]
+            )
+            # Probleme here to pass user
+            project.members.set(
+                [
+                    ProjectMemberRole.objects.create(
+                        project=project, is_admin=member.get("is_admin")
+                    )
+                    for member in members
+                ]
+            )
+
             project.save()
             return JsonResponse(
                 {"uuid": project.uuid, **serializer.data},

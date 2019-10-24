@@ -3,6 +3,8 @@ import { FormattedMessage } from 'react-intl';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { AuditParametersTableDisplayType } from 'redux/entities/auditParameters/types';
 import { PageType } from 'redux/entities/pages/types';
+import { UserState } from 'redux/user/reducer';
+import { makePostRequest } from 'services/networking/request';
 import ProjectAuditParameterTable from '../../components/AuditParameterTable';
 import PageTable from '../../components/PageTable';
 import ProjectDetailsInput from '../../components/ProjectDetailsInput';
@@ -10,7 +12,7 @@ import Style from './CreateProject.style';
 
 const VALIDATION_STEP = 3;
 
-const CreateProject: React.FunctionComponent = () => {
+const CreateProject = ({ user }: { user: UserState }) => {
 
   const [step, setStep] = React.useState(0);
   const [projectName, setProjectName] = React.useState('');
@@ -28,8 +30,28 @@ const CreateProject: React.FunctionComponent = () => {
     if (step > 0) { setStep(step - 1); }
   }
 
-  const validate = () => {
-    return null
+  const validate = async () => {
+    const response = await makePostRequest(`/api/projects/`, true, {
+      name: projectName,
+      members: [
+        {
+          // need to add the user here. How ?
+          is_admin: true
+        },
+        {
+          email: user && user.emailAddress,
+          is_admin: false
+        }
+      ],
+      pages: projectPages.map((page) => ({ name: page.name, url: page.url })),
+      scripts: [],
+      audit_parameters_list: auditParameters.map((auditParameter) => ({
+        name: auditParameter.name,
+        network_shape: auditParameter.networkShape,
+        configuration: auditParameter.configurationId
+      })),
+      wpt_api_key: projectApiKey
+    });
   }
 
   // General Settings
