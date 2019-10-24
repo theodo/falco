@@ -1,0 +1,59 @@
+---
+id: installation
+title: Installation
+sidebar_label: Installation
+---
+
+## Deploying to Heroku (recommended)
+
+The most convenient way to deploy Falco is to deploy it on [Heroku](https://heroku.com)
+using our one-click deploy feature.
+
+### Prerequisite
+
+To install Falco on Heroku, you will need a Heroku account with valid payment information (some of Falco features can be run for free under Heroku’s Free Tier, however the credit card details are needed to qualify for free Heroku Addons). [Click here](https://signup.heroku.com) to create a Heroku account.
+
+### A note about Heroku’s princing and Falco features
+
+Heroku pricing is splitted in two: the “dyno” (understand the _actual hosting_) and the “addons”.
+
+Under the Free Tier, any Heroku app not used for 30 minutes will enter “Sleep mode”. This means that any processes running will be stopped. To “wake” an Heroku app, you can just hit its URL—after around 30 seconds, it should be back up.
+
+Only the `web` dyno (the user interface) can “fall asleep”—the `worker` dyno responsible for running the audits automatically stays up. If you do not want to wait for the app to wake up, you might want to pay for their dyno “Hobby” tier, which [at the time of writing costs $14/month](https://www.heroku.com/pricing) for both dynos.
+
+In addition, the Free Tier of the PostgreSQL addon used in Falco [currently allows a maximum of 10.000 rows](https://elements.heroku.com/addons/heroku-postgresql). Should you use Falco intensively, you might have to upgrade to the “Hobby Basic” Tier ($9/month, independently of the dyno tier discussed above).
+
+To sum up:
+
+| Falco features | Free Tier | Upgraded dyno ($14/month) | Upgraded Postgres ($9/month) | Both upgrades ($16/month) |
+|-----------------------------------|-----------|--------------------------|------------------------------|---------------------------|
+| Running audits automatically | ✅ | ✅ | ✅ | ✅ |
+| Visualizing and comparing results | ✅ | ✅ | ✅ | ✅ |
+| Always-up instance | ❌ | ✅ | ❌ | ✅ |
+| Running *lots* of audits | ❌ | ❌ | ✅ | ✅ |
+
+You are free to upgrade or downgrade at any time—beware though that should you have more than 10.000 rows in the database, you will have to delete old audits to qualify again for the free Postgres tier.
+
+### Installation
+
+Click on the following button to trigger the deployment of your Falco instance:
+
+import Link from "@docusaurus/Link";
+
+<Link
+    className="button button--primary button--lg"
+    href={"getting-started/installation"}
+    style={{marginBottom: '20px'}}
+>
+    Deploy to Heroku
+</Link>
+
+Then, choose a name for your instance (like `falco-mycompany`), pick the region closest to you, and follow Heroku’s instructions.
+
+The actual deployment should take approximately 10 minutes.
+
+Once Falco is deployed, you should be able to log in to the admin interface using the credentials `admin` and `admin`.
+
+## Deploying with Docker Compose
+
+_This section is a work in progress._
