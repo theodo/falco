@@ -42,50 +42,9 @@ You will need to provide your credit card details to Heroku, but you will be und
 
 Full documentation for Falco lives on the [docs website](https://getfal.co).
 
-## Local development
+## Contributing
 
-### First installation
-
-- Clone the repository:
-  ```bash
-  git clone git@github.com:theodo/falco.git
-  ```
-- Move to the `falco` directory:
-  ```bash
-  cd falco
-  ```
-- Install the backend and the frontend:
-  ```bash
-  make install
-  ```
-- Start the backend:
-  ```bash
-  make backend/start
-  ```
-- Populate the database with fixtures:
-  ```bash
-  make fixtures/load
-  ```
-- Edit the .env file: replace the initial SECRET_KEY with a random string
-
-### To (re)start the app
-
-- Start the backend:
-  ```bash
-  make backend/start
-  ```
-- Start the frontend:
-
-  ```bash
-  make frontend/start
-  ```
-
-The project should now be running at [localhost:3000](http://localhost:3000). You can access to the Django administration interface at [http://localhost:8000/admin/](http://localhost:8000/admin/).
-
-To access both these interfaces, you can login using the following credentials:
-
-- username: `admin`
-- password: `admin`
+Thanks for your interest in contributing! There are many ways to contribute to this project. Get started [here](./CONTRIBUTING.md).
 
 ## Contributors ✨
 
