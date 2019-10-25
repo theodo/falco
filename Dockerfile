@@ -4,7 +4,7 @@ FROM node:8.12-alpine AS node
 WORKDIR /code
 
 COPY ./frontend/package.json ./frontend/yarn.lock /code/
-RUN yarn install --pure-lockfile
+RUN yarn install --pure-lockfile --ignore-scripts
 
 COPY ./frontend/ /code/
 RUN yarn build
