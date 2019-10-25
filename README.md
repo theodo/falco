@@ -30,6 +30,8 @@
 - 🗺 Audit the performance of individual URLs or entire user journeys ([even on Single Page Apps!](https://css-tricks.com/recipes-for-performance-testing-single-page-applications-in-webpagetest/))
 - 📸 Easily access and compare WebPageTest results between audits
 
+You can try a demo version by logging in to https://falco.theo.do with the credentials `demo / demodemo`.
+
 ## Quick start
 
 You can deploy Falco on Heroku by clicking on the following button:
