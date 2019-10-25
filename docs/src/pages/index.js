@@ -97,6 +97,7 @@ function Home() {
           </div>
             <div className={classnames("text--center", styles.infoPill)}>
               <p>Looking for Theodo’s Falco instance? Head to its new URL: <a href="https://falco.theo.do">https://falco.theo.do</a>.</p>
+              <p>To see a demo, log in to <a href="https://falco.theo.do">https://falco.theo.do</a> with the credentials <code>demo / demodemo</code>.</p>
             </div>
         </div>
       </header>
