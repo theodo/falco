@@ -30,21 +30,23 @@ ENV DJANGO_SETTINGS_MODULE root.settings.prod
 ENV PYTHONPATH /code
 ENV PIP_NO_CACHE_DIR true
 
-COPY --from=node /code/build /code/front/static/front
+RUN pip3 install --no-cache-dir pipenv gunicorn
 
 WORKDIR /code
-
-RUN pip3 install --no-cache-dir pipenv gunicorn
 
 COPY ./backend/Pipfile* /code/
 RUN apk add --no-cache --virtual build-dependencies gcc musl-dev libffi-dev curl-dev openssl-dev libressl-dev && \
     pipenv install --system --deploy && \
     apk del build-dependencies
 
+RUN addgroup -S pythongroup && \
+  adduser -S pythonuser -G pythongroup --uid 2000 && \
+  chown -R pythonuser:pythongroup /code
+USER pythonuser
+
+COPY --from=node /code/build /code/front/static/front
+
 COPY ./backend /code/
 
 # Collect statics
-RUN mkdir -p /var/log/falco && \
- mkdir -p /code/static && \
- touch /var/log/falco/django.log && \
- SECRET_KEY=itdoesntreallymatter LOG_PATH=/dev/stdout python ./manage.py collectstatic --no-input
+RUN mkdir -p /code/static && SECRET_KEY=notused python ./manage.py collectstatic --no-input
