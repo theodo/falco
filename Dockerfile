@@ -39,7 +39,9 @@ RUN apk add --no-cache --virtual build-dependencies gcc musl-dev libffi-dev curl
     pipenv install --system --deploy && \
     apk del build-dependencies
 
-RUN addgroup -S pythongroup && adduser -S pythonuser -G pythongroup --uid 2000
+RUN addgroup -S pythongroup && \
+  adduser -S pythonuser -G pythongroup --uid 2000 && \
+  chown -R pythonuser:pythongroup /code
 USER pythonuser
 
 COPY --from=node /code/build /code/front/static/front
