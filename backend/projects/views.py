@@ -67,7 +67,7 @@ def project_list(request):
             audit_parameters_list = serializer.validated_data.pop(
                 "audit_parameters_list"
             )
-            members = serializer.validated_data.pop("members")
+            serializer.validated_data.pop("members")  # remove members input
 
             project = Project.objects.create(**serializer.validated_data)
 
@@ -100,13 +100,16 @@ def project_list(request):
                     for audit_parameter in audit_parameters_list
                 ]
             )
-            # Probleme here to pass user
+
+            # TODO correct responce error
+            # 'User' instance expected, got <ProjectMemberRole: projectmemberrole:3c6ca4>
             project.members.set(
                 [
                     ProjectMemberRole.objects.create(
-                        project=project, is_admin=member.get("is_admin")
+                        project=project,
+                        is_admin=True,
+                        user=get_object_or_404(User, id=request.user.id),
                     )
-                    for member in members
                 ]
             )
 

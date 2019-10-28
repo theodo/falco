@@ -33,16 +33,7 @@ const CreateProject = ({ user }: { user: UserState }) => {
   const validate = async () => {
     const response = await makePostRequest(`/api/projects/`, true, {
       name: projectName,
-      members: [
-        {
-          // need to add the user here. How ?
-          is_admin: true
-        },
-        {
-          email: user && user.emailAddress,
-          is_admin: false
-        }
-      ],
+      members: [],
       pages: projectPages.map((page) => ({ name: page.name, url: page.url })),
       scripts: [],
       audit_parameters_list: auditParameters.map((auditParameter) => ({
