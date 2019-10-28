@@ -24,14 +24,8 @@ SECURE_REDIRECT_EXEMPT = [r"/?health"]
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "handlers": {
-        "file": {
-            "level": "INFO",
-            "class": "logging.FileHandler",
-            "filename": os.environ.get("LOG_PATH"),
-        }
-    },
-    "loggers": {"django": {"handlers": ["file"]}},
+    "handlers": {"console": {"level": "INFO", "class": "logging.StreamHandler"}},
+    "loggers": {"django": {"handlers": ["console"]}},
 }
 
 # Caching
@@ -44,7 +38,6 @@ CACHES = {
 
 # Celery configuration
 
-CELERY_BROKER_TRANSPORT_OPTIONS = {"region": "eu-west-3"}
 CELERY_TASK_DEFAULT_QUEUE = os.environ.get("CELERY_TASK_DEFAULT_QUEUE", "celery")
 
 # SSL Configuration
