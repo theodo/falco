@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Update Dockerfile to run Celery as a dedicated, non-root user (@kraynel)
+
 ## [1.0.1] - 2019-10-25
 
 ### Fixed
