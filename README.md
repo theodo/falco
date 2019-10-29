@@ -20,7 +20,7 @@
 </p>
 
 [![CircleCI](https://circleci.com/gh/theodo/falco/tree/master.svg?style=svg)](https://circleci.com/gh/theodo/falco/tree/master)
-[![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors)
 
 ## Features
 
@@ -69,6 +69,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/EtienneGrall"><img src="https://avatars2.githubusercontent.com/u/44709108?v=4" width="100px;" alt="EtienneGrall"/><br /><sub><b>EtienneGrall</b></sub></a><br /><a href="https://github.com/theodo/falco/commits?author=EtienneGrall" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/alexfauquette"><img src="https://avatars2.githubusercontent.com/u/45398769?v=4" width="100px;" alt="Alexandre Fauquette"/><br /><sub><b>Alexandre Fauquette</b></sub></a><br /><a href="https://github.com/theodo/falco/commits?author=alexfauquette" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/0xflotus"><img src="https://avatars3.githubusercontent.com/u/26602940?v=4" width="100px;" alt="0xflotus"/><br /><sub><b>0xflotus</b></sub></a><br /><a href="https://github.com/theodo/falco/commits?author=0xflotus" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://codepen.io/donroyco/"><img src="https://avatars2.githubusercontent.com/u/1763537?v=4" width="100px;" alt="Roy"/><br /><sub><b>Roy</b></sub></a><br /><a href="https://github.com/theodo/falco/commits?author=donroyco" title="Documentation">📖</a></td>
   </tr>
 </table>
 

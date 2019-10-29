@@ -110,6 +110,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "donroyco",
+      "name": "Roy",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1763537?v=4",
+      "profile": "http://codepen.io/donroyco/",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
