@@ -7,8 +7,19 @@
 
 module.exports = {
   docs: {
-    Introduction: ['introduction/motivation', 'introduction/what-is-webpagetest'],
-    'Getting Started': ['getting-started/installation', 'getting-started/configuring-your-first-project', 'getting-started/managing-users'],
-    'REST API': ['api-reference/api-docs', 'api-reference/swagger-ui'],
+    Introduction: [
+      'introduction/motivation', 
+      'introduction/what-is-webpagetest'
+    ],
+    'Getting Started': [
+      'getting-started/installation',
+      'getting-started/configuring-your-first-project',
+      'getting-started/managing-users',
+      'getting-started/troubleshooting'
+    ],
+    'REST API': [
+      'api-reference/api-docs',
+      'api-reference/swagger-ui'
+    ],
   },
 };
