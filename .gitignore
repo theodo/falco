@@ -21,6 +21,7 @@ backend/venv/
 
 # misc
 /docs/.DS_Store
+/docs/static/.DS_Store
 /docs/.env.local
 /docs/.env.development.local
 /docs/.env.test.local
