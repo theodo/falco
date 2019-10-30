@@ -119,6 +119,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "AlbericTrancart",
+      "name": "Albéric Trancart",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/6317823?v=4",
+      "profile": "http://alberic.trancart.net/",
+      "contributions": [
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
