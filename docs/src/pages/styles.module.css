@@ -69,3 +69,8 @@ html[data-theme='dark'] .usersImages img {
   border-radius: 10px;
   display: inline-block;
 }
+
+.addFocus:focus {
+  outline: 1px dotted #212121;
+  outline: -webkit-focus-ring-color auto 5px;
+}

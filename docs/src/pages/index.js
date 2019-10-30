@@ -65,7 +65,7 @@ function Home() {
                 <Link
                   className={classnames(
                     "button button--outline button--secondary button--lg",
-                    styles.getStarted
+                    styles.addFocus
                   )}
                   to={withBaseUrl("docs/getting-started/installation")}
                 >
@@ -74,7 +74,7 @@ function Home() {
                 <Link
                   className={classnames(
                     "button button--primary button--lg",
-                    styles.getStarted
+                    styles.addFocus
                   )}
                   href="https://heroku.com/deploy?template=https://github.com/theodo/falco/"
                   target="_blank"
