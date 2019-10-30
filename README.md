@@ -40,6 +40,15 @@ You can deploy Falco on Heroku by clicking on the following button:
 
 You will need to provide your credit card details to Heroku, but you will be under the free tier by default. You can find more details on why they are needed and Heroku’s pricing policy [in the docs](https://getfal.co).
 
+<details>
+<summary>Heroku Teams user? Click here to deploy Falco.</summary>
+<br />
+Heroku Teams do not allow for free Dynos, thus the above button will not work. Instead, you can click the following, Heroku Teams-specific button that will create “hobby”-sized dynos:
+<br />
+<br />
+<a href="https://heroku.com/deploy?template=https://github.com/theodo/falco/tree/heroku-teams-button"><img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a>
+</details>
+
 ## Docs
 
 Full documentation for Falco lives on the [docs website](https://getfal.co).
