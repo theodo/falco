@@ -105,7 +105,7 @@ function Home() {
         <section className={styles.users}>
           <div className="container">
             <div className="text--center">
-              <h3>Trusted By</h3>
+              <h2>Trusted By</h2>
             </div>
             <div className={classnames("row", styles.usersImages)}>
               <div
@@ -165,7 +165,7 @@ function Home() {
                         />
                       </div>
                     )}
-                    <h3>{title}</h3>
+                    <h2>{title}</h2>
                     <p>{description}</p>
                   </div>
                 ))}
