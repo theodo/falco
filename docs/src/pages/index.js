@@ -15,7 +15,7 @@ import styles from "./styles.module.css";
 
 const features = [
   {
-    title: <>Fine-grained monitoring</>,
+    title: "Fine-grained monitoring",
     imageUrl: "img/monitoring.svg",
     description: (
       <>
@@ -25,7 +25,7 @@ const features = [
     )
   },
   {
-    title: <>Detailed analysis</>,
+    title: "Detailed analysis",
     imageUrl: "img/analysis.svg",
     description: (
       <>
@@ -36,7 +36,7 @@ const features = [
     )
   },
   {
-    title: <>Before/after comparisons</>,
+    title: "Before/after comparisons",
     imageUrl: "img/comparisons.svg",
     description: (
       <>
@@ -65,7 +65,7 @@ function Home() {
                 <Link
                   className={classnames(
                     "button button--outline button--secondary button--lg",
-                    styles.getStarted
+                    styles.addFocus
                   )}
                   to={withBaseUrl("docs/getting-started/installation")}
                 >
@@ -74,7 +74,7 @@ function Home() {
                 <Link
                   className={classnames(
                     "button button--primary button--lg",
-                    styles.getStarted
+                    styles.addFocus
                   )}
                   href="https://heroku.com/deploy?template=https://github.com/theodo/falco/"
                   target="_blank"
@@ -105,7 +105,7 @@ function Home() {
         <section className={styles.users}>
           <div className="container">
             <div className="text--center">
-              <h3>Trusted By</h3>
+              <h2>Trusted By</h2>
             </div>
             <div className={classnames("row", styles.usersImages)}>
               <div
@@ -114,7 +114,7 @@ function Home() {
               >
                 <img
                   src={withBaseUrl("img/bnp.png")}
-                  alt="BNPParibas asset management logo"
+                  alt="BNPParibas Asset Management logo"
                 />
               </div>
               <div
@@ -123,7 +123,7 @@ function Home() {
               >
                 <img
                   src={withBaseUrl("img/choose.png")}
-                  alt="BNPParibas asset management logo"
+                  alt="Choose my Company logo"
                 />
               </div>
               <div
@@ -132,7 +132,7 @@ function Home() {
               >
                 <img
                   src={withBaseUrl("img/tarkett.png")}
-                  alt="BNPParibas asset management logo"
+                  alt="Tarkett logo"
                 />
               </div>
               <div
@@ -141,7 +141,7 @@ function Home() {
               >
                 <img
                   src={withBaseUrl("img/voodoo.png")}
-                  alt="BNPParibas asset management logo"
+                  alt="Voodoo logo"
                 />
               </div>
             </div>
@@ -161,11 +161,11 @@ function Home() {
                         <img
                           className={styles.featureImage}
                           src={withBaseUrl(imageUrl)}
-                          alt={title}
+                          alt=""
                         />
                       </div>
                     )}
-                    <h3>{title}</h3>
+                    <h2>{title}</h2>
                     <p>{description}</p>
                   </div>
                 ))}
