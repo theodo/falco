@@ -15,7 +15,7 @@ import styles from "./styles.module.css";
 
 const features = [
   {
-    title: <>Fine-grained monitoring</>,
+    title: "Fine-grained monitoring",
     imageUrl: "img/monitoring.svg",
     description: (
       <>
@@ -25,7 +25,7 @@ const features = [
     )
   },
   {
-    title: <>Detailed analysis</>,
+    title: "Detailed analysis",
     imageUrl: "img/analysis.svg",
     description: (
       <>
@@ -36,7 +36,7 @@ const features = [
     )
   },
   {
-    title: <>Before/after comparisons</>,
+    title: "Before/after comparisons",
     imageUrl: "img/comparisons.svg",
     description: (
       <>
@@ -161,7 +161,7 @@ function Home() {
                         <img
                           className={styles.featureImage}
                           src={withBaseUrl(imageUrl)}
-                          alt={title}
+                          alt=""
                         />
                       </div>
                     )}
