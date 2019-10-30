@@ -114,7 +114,7 @@ function Home() {
               >
                 <img
                   src={withBaseUrl("img/bnp.png")}
-                  alt="BNPParibas asset management logo"
+                  alt="BNPParibas Asset Management logo"
                 />
               </div>
               <div
@@ -123,7 +123,7 @@ function Home() {
               >
                 <img
                   src={withBaseUrl("img/choose.png")}
-                  alt="BNPParibas asset management logo"
+                  alt="Choose my Company logo"
                 />
               </div>
               <div
@@ -132,7 +132,7 @@ function Home() {
               >
                 <img
                   src={withBaseUrl("img/tarkett.png")}
-                  alt="BNPParibas asset management logo"
+                  alt="Tarkett logo"
                 />
               </div>
               <div
@@ -141,7 +141,7 @@ function Home() {
               >
                 <img
                   src={withBaseUrl("img/voodoo.png")}
-                  alt="BNPParibas asset management logo"
+                  alt="Voodoo logo"
                 />
               </div>
             </div>
