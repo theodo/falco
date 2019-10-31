@@ -4,12 +4,12 @@ export const modelizeProject = (project: ApiProjectType): Record<string, Project
   [project.uuid]: {
     uuid: project.uuid,
     name: project.name,
-    pagesIds: project.pages.map(page => page.uuid),
-    scriptsIds: project.scripts.map(script => script.uuid),
-    auditParametersIds: project.audit_parameters_list.map(auditParameters => auditParameters.uuid),
+    pagesIds: project.pages ? project.pages.map(page => page.uuid) : [],
+    scriptsIds: project.scripts ? project.scripts.map(script => script.uuid) : [],
+    auditParametersIds: project.audit_parameters_list ? project.audit_parameters_list.map(auditParameters => auditParameters.uuid) : [],
     screenshotUrl: project.screenshot_url,
     latestAuditAt: project.latest_audit_at,
-    projectMembers: project.project_members.map(apiProjectMember => modelizeProjectMember(apiProjectMember)),
+    projectMembers: project.project_members ? project.project_members.map(apiProjectMember => modelizeProjectMember(apiProjectMember)) : [],
     wptApiKey: project.wpt_api_key
   },
 });

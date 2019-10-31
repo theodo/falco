@@ -2,19 +2,15 @@ import { default as AddIcon } from 'icons/Add';
 import { default as CheckmarkIcon } from 'icons/Checkmark';
 import { default as CloseIcon } from 'icons/Close';
 import * as React from 'react';
-import { InjectedIntlProps } from 'react-intl';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { colorUsage } from 'stylesheet';
 import {
   AddNameInput, AddPageButtonContainer, AddPageButtonLabel, AddPageButtonsContainer, AddUrlInput, PageButton
 } from '../PageTable.style';
 
-export interface OwnProps {
-  projectId: string,
-}
-
 type Props = {
-  addPageToProjectRequest: (projectId: string, pageName: string, pageUrl: string) => void,
-} & OwnProps & InjectedIntlProps;
+  add: (pageName: string, pageUrl: string) => void,
+} & InjectedIntlProps;
 
 const useFocus = (isAdding: boolean): React.MutableRefObject<any> => {
   const htmlElRef = React.useRef<HTMLInputElement>(null)
@@ -32,8 +28,7 @@ const useFocus = (isAdding: boolean): React.MutableRefObject<any> => {
 }
 
 export const AddPageRow: React.FunctionComponent<Props> = ({
-  projectId,
-  addPageToProjectRequest,
+  add,
   intl
 }) => {
   const [pageName, setPageName] = React.useState('');
@@ -49,8 +44,7 @@ export const AddPageRow: React.FunctionComponent<Props> = ({
 
   const validate = () => {
     if (pageName && pageUrl) {
-      addPageToProjectRequest(
-        projectId,
+      add(
         pageName,
         pageUrl
       );
@@ -118,3 +112,5 @@ export const AddPageRow: React.FunctionComponent<Props> = ({
     </React.Fragment>
   )
 }
+
+export default injectIntl(AddPageRow)

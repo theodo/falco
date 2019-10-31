@@ -6,25 +6,18 @@ import { PageType } from 'redux/entities/pages/types';
 import { colorUsage } from 'stylesheet';
 import { EditNameInput, EditUrlInput, PageButton, PageDeleteContainer } from '../PageTable.style';
 
-export interface OwnProps {
-  pageId: string,
-  projectId: string,
-  disabled: boolean,
-}
-
 type Props = {
-  page?: PageType | null,
-  editPageRequest: (projectId: string, page: PageType) => void,
-  deletePageOfProjectRequest: (projectId: string, pageId: string) => void;
-} & OwnProps & InjectedIntlProps;
+  page: PageType | null,
+  disabled: boolean,
+  edit: (page: PageType) => void,
+  del: (pageId: string) => void,
+} & InjectedIntlProps
 
 export const PageRow: React.FunctionComponent<Props> = ({
-  pageId,
   page,
-  projectId,
-  editPageRequest,
+  edit,
   disabled,
-  deletePageOfProjectRequest,
+  del,
   intl
 }) => {
   const [pageName, setPageName] = React.useState('');
@@ -42,8 +35,7 @@ export const PageRow: React.FunctionComponent<Props> = ({
 
   const handleBlur = () => {
     if (page && (pageName !== page.name || pageUrl !== page.url)) {
-      editPageRequest(
-        projectId,
+      edit(
         {
           uuid: page.uuid,
           name: pageName,
@@ -60,10 +52,10 @@ export const PageRow: React.FunctionComponent<Props> = ({
     setPageUrl(e.currentTarget.value)
   }
 
-  const handlePageDeletion = (currentProjectId: string, targetPageId: string) => {
+  const handlePageDeletion = (targetPageId: string) => {
     toastr.confirm(intl.formatMessage({ id: 'Toastr.ProjectSettings.delete_page_confirm_question' }),
       {
-        onOk: () => deletePageOfProjectRequest(currentProjectId, targetPageId)
+        onOk: () => del(targetPageId)
       })
   }
 
@@ -86,7 +78,7 @@ export const PageRow: React.FunctionComponent<Props> = ({
         onBlur={handleBlur}
       />
       <PageDeleteContainer>
-        <PageButton onClick={() => handlePageDeletion(projectId, pageId)}>
+        <PageButton onClick={() => handlePageDeletion(page.uuid)}>
           <Close
             color={colorUsage.projectSettingsIconColor}
             width="13px"

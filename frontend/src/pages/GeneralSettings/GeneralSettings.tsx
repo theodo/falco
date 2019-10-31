@@ -8,7 +8,7 @@ import { RouteComponentProps } from 'react-router';
 import { ProjectToastrDisplayType, ProjectType } from 'redux/entities/projects/types';
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import { UserState } from 'redux/user';
-import ProjectDetailsInput from './Components/ProjectDetailsInput';
+import ProjectDetailsInput from '../../components/ProjectDetailsInput';
 import Style from './GeneralSettings.style';
 
 export type OwnProps = {} & RouteComponentProps<{
@@ -21,7 +21,7 @@ type Props = {
   project?: ProjectType | null;
   toastrDisplay: ProjectToastrDisplayType;
   setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
-  editProjectDetailsRequest: (projectId: string, payload: {name: string, wpt_api_key: string}) => void;
+  editProjectDetailsRequest: (projectId: string, payload: { name: string, wpt_api_key: string }) => void;
 } & OwnProps &
   InjectedIntlProps;
 
@@ -65,18 +65,18 @@ const GeneralSettings: React.FunctionComponent<Props> = ({
 
   React.useEffect(
     () => {
-      if('' !== toastrDisplay) {
-        switch(toastrDisplay) {
-            case "editProjectDetailsSuccess":
-              toastr.success(
-                intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
-                intl.formatMessage({'id': 'Toastr.ProjectSettings.edit_project_details_success'}),
-              );
-              break;
+      if ('' !== toastrDisplay) {
+        switch (toastrDisplay) {
+          case "editProjectDetailsSuccess":
+            toastr.success(
+              intl.formatMessage({ 'id': 'Toastr.ProjectSettings.success_title' }),
+              intl.formatMessage({ 'id': 'Toastr.ProjectSettings.edit_project_details_success' }),
+            );
+            break;
           case "editProjectDetailsError":
             toastr.error(
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.error_title'}),
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.error_message'}),
+              intl.formatMessage({ 'id': 'Toastr.ProjectSettings.error_title' }),
+              intl.formatMessage({ 'id': 'Toastr.ProjectSettings.error_message' }),
             );
             break;
         }
@@ -126,9 +126,9 @@ const GeneralSettings: React.FunctionComponent<Props> = ({
 
   return (
     <Style.Container>
-      <Style.PageTitle>{intl.formatMessage({ id: 'ProjectSettings.settings'}) + ' - ' + project.name}</Style.PageTitle>
+      <Style.PageTitle>{intl.formatMessage({ id: 'ProjectSettings.settings' }) + ' - ' + project.name}</Style.PageTitle>
       <Style.Title>
-        <FormattedMessage id="ProjectSettings.general_settings"/>
+        <FormattedMessage id="ProjectSettings.general_settings" />
       </Style.Title>
       <Style.SettingsFieldContainer>
         <ProjectDetailsInput

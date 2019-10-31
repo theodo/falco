@@ -44,39 +44,40 @@ const editableInputStyle = `
   }
 `;
 
-export const NameHeader = styled.div`
-  ${genericStyle}
-  width: 25%;
-`;
-
-export const UrlHeader = styled.div`
-  ${genericStyle}
-  width: 70%;
-`;
-
 export const AddNameInput = styled.input`
   ${addInputStyle}
   display: ${(props: AddInputProps) => props.isAdding ? "visible" : "none"};
-  width: 25%;
+  width: 40%;
 `;
 
-export const AddUrlInput = styled.input`
+export const AddBrowserInput = styled.input`
   ${addInputStyle}
   display: ${(props: AddInputProps) => props.isAdding ? "visible" : "none"};
-  width: 70%;
+  width: 40%;
+`;
+
+export const AddNetworkShapeInput = styled.input`
+  ${addInputStyle}
+  display: ${(props: AddInputProps) => props.isAdding ? "visible" : "none"};
+  width: 20%;
 `;
 
 export const EditNameInput = styled.input`
   ${editableInputStyle}
-  width: 25%;
+  width: 40%;
 `;
 
-export const EditUrlInput = styled.input`
+export const EditNetworkShapeInput = styled.input`
   ${editableInputStyle}
-  width: 70%;
+  width: 20%;
 `;
 
-export const AddPageButtonContainer = styled.div`
+export const EditBrowserInput = styled.input`
+  ${editableInputStyle}
+  width: 40%;
+`;
+
+export const AddAuditParameterButtonContainer = styled.div`
   display: ${(props: AddInputProps) => props.isAdding ? "none" : "flex"};
   align-items: center;
   cursor: pointer;
@@ -89,7 +90,7 @@ export const AddPageButtonContainer = styled.div`
   };
 `;
 
-export const AddPageButtonLabel = styled.div`
+export const AddAuditParameterButtonLabel = styled.div`
   margin-left: ${getSpacing(4)};
 `
 
@@ -115,14 +116,14 @@ export const EditButton = styled.button`
   }
 `;
 
-export const PageDeleteContainer = styled.div`
+export const AuditParameterDeleteContainer = styled.div`
   width: 60px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
 `;
 
-export const PageButton = styled.button`
+export const AuditParameterRowButton = styled.button`
   cursor: pointer;
   border: none;
   border-radius: 50%;
@@ -138,10 +139,57 @@ export const PageButton = styled.button`
   }
 `;
 
-
-export const AddPageButtonsContainer = styled.div`
+export const AddAuditParameterButtonsContainer = styled.div`
   display: ${(props: AddInputProps) => props.isAdding ? "flex" : "none"};
   width: 60px;
   flex-direction: row;
   justify-content: flex-end;
+`;
+
+export const ElementContainer = styled.div`
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 20px;
+
+  :first-child {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom: solid 1px ${colorUsage.projectSettingsContainerBorder};
+    background-color: ${colorUsage.oddProjectMemberBackground};
+    font-weight: bold;
+  }
+
+  :last-child {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
+
+  :nth-child(odd){
+    background-color: ${colorUsage.oddProjectMemberBackground};
+  }
+`;
+
+
+export const AuditParameterName = styled.span`
+  width: 40%;
+`;
+
+export const Configuration = styled.span`
+  width: 40%;
+`;
+
+export const NetworkShape = styled.span`
+  width: 20%;
+`;
+
+export const ProjectSettingsBlock = styled.div`
+border: solid 1px ${colorUsage.projectSettingsContainerBorder};
+margin-top: ${getSpacing(4)};
+border-radius: 3px;
+font-family: ${fontFamily.mainSans};
+font-size: ${fontSize.inputText};
+line-height: ${lineHeight.inputText};
+color: ${colorUsage.inputText};
 `;

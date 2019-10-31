@@ -47,7 +47,8 @@
   },
   "Projects": {
     "no_project_error": "It seems that you have no access to any project.\n\nPlease try again or contact your administrator to get granted.",
-    "title": "Projects"
+    "title": "Projects",
+    "create_new_project": "Create a new project"
   },
   "ProjectSettings": {
     "settings": "Project settings",
@@ -208,7 +209,7 @@
     "join_project": "To join an existing project, please contact the project administrator."
   },
   "Toastr": {
-    "ProjectSettings":{
+    "ProjectSettings": {
       "success_title": "Success",
       "error_title": "Failure",
       "error_message": "An error occured, please try again",
@@ -240,5 +241,11 @@
     "title": "404 Not Found",
     "subtitle": "Sorry, this page does not exist",
     "button": "Back to Homepage"
+  },
+  "CreateProject": {
+    "next": "Next",
+    "previous": "Previous",
+    "validate": "Validate",
+    "title": "Project creation"
   }
 }

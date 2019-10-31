@@ -2,33 +2,26 @@ import Select from 'components/Select';
 import Close from 'icons/Close';
 import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
-import { toastr } from 'react-redux-toastr';
-import { AuditParametersType } from 'redux/entities/auditParameters/types';
+import { AuditParametersTableDisplayType, AuditParametersType } from 'redux/entities/auditParameters/types';
 import { colorUsage } from 'stylesheet';
 import { getSpacing } from 'stylesheet';
 import { AuditParameterDeleteContainer, AuditParameterRowButton, EditNameInput } from '../AuditParameterTable.style';
 import { availableNetworkShape } from '../common'
 
-export interface OwnProps {
-  auditParameterId: string,
-  projectId: string,
-  disabled: boolean,
-  availableAuditParameters: Array<{ uuid: string, label: string }>
-}
 
 type Props = {
-  auditParameter?: AuditParametersType | null,
-  editAuditParameterRequest: (projectId: string, auditParameter: { name: string, uuid: string, configuration_id: string, network_shape: string }) => void,
-  deleteAuditParameterFromProjectRequest: (projectId: string, auditParameterId: string) => void;
-} & OwnProps & InjectedIntlProps;
+  auditParameter: AuditParametersType | AuditParametersTableDisplayType,
+  disabled: boolean,
+  availableAuditParameters: Array<{ uuid: string, label: string }>
+  edit: (auditParameter: { name: string, uuid: string, configuration_id: string, network_shape: string }) => void,
+  del: (auditParameterId: string) => void;
+} & InjectedIntlProps;
 
 export const AuditParameterRow: React.FunctionComponent<Props> = ({
-  auditParameterId,
   auditParameter,
-  projectId,
-  editAuditParameterRequest,
+  edit,
   disabled,
-  deleteAuditParameterFromProjectRequest,
+  del,
   availableAuditParameters,
   intl
 }) => {
@@ -49,8 +42,7 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
 
   const handleBlur = () => {
     if (auditParameter && (auditParameterName !== auditParameter.name || auditParameterConfigurationId !== auditParameter.configurationId || auditParameter.networkShape !== auditParameterNetworkShape)) {
-      editAuditParameterRequest(
-        projectId,
+      edit(
         {
           uuid: auditParameter.uuid,
           name: auditParameterName,
@@ -72,12 +64,6 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
     setAuditParameterNetworkShape(e.value)
   }
 
-  const handleAuditParameterDeletion = (currentProjectId: string, targetAuditParameterId: string) => {
-    toastr.confirm(intl.formatMessage({ id: 'Toastr.ProjectSettings.delete_auditParameter_confirm_question' }),
-      {
-        onOk: () => deleteAuditParameterFromProjectRequest(currentProjectId, targetAuditParameterId)
-      })
-  }
 
   if (null === auditParameter || undefined === auditParameter) {
     return (null);
@@ -124,7 +110,7 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
         placeholder={intl.formatMessage({ id: 'ProjectSettings.audit_parameter_network_shape_placeholder' })}
       />
       <AuditParameterDeleteContainer>
-        <AuditParameterRowButton onClick={() => handleAuditParameterDeletion(projectId, auditParameterId)}>
+        <AuditParameterRowButton onClick={() => del(auditParameter.uuid)}>
           <Close
             color={colorUsage.projectSettingsIconColor}
             width="13px"

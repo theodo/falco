@@ -3,21 +3,17 @@ import { default as AddIcon } from 'icons/Add';
 import { default as CheckmarkIcon } from 'icons/Checkmark';
 import { default as CloseIcon } from 'icons/Close';
 import * as React from 'react';
-import { InjectedIntlProps } from 'react-intl';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { colorUsage, getSpacing } from 'stylesheet';
 import {
   AddAuditParameterButtonContainer, AddAuditParameterButtonLabel, AddAuditParameterButtonsContainer, AddNameInput, AuditParameterRowButton
-} from '../AuditParameterTable.style';
-import { availableNetworkShape } from '../common'
-
-export interface OwnProps {
-  projectId: string,
-  availableAuditParameters: Array<{ uuid: string, label: string }>
-}
+} from './AuditParameterTable.style';
+import { availableNetworkShape } from './common'
 
 type Props = {
-  addAuditParameterToProjectRequest: (projectId: string, auditParameterName: string, auditParameterNetworkShape: string, auditParameterConfigurationId: string) => void,
-} & OwnProps & InjectedIntlProps;
+  availableAuditParameters: Array<{ uuid: string, label: string }>
+  add: (auditParameterName: string, auditParameterNetworkShape: string, auditParameterConfigurationId: string) => void,
+} & InjectedIntlProps;
 
 const useFocus = (): [React.MutableRefObject<any>, () => void] => {
   const htmlElRef = React.useRef<HTMLInputElement>(null)
@@ -30,9 +26,8 @@ const useFocus = (): [React.MutableRefObject<any>, () => void] => {
   return [htmlElRef, setFocus]
 }
 
-export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
-  projectId,
-  addAuditParameterToProjectRequest,
+const AddAuditParameterRow: React.FunctionComponent<Props> = ({
+  add,
   availableAuditParameters,
   intl
 }) => {
@@ -58,8 +53,7 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
 
   const validate = () => {
     if (auditParameterName && auditParameterConfigurationId && auditParameterNetworkShape) {
-      addAuditParameterToProjectRequest(
-        projectId,
+      add(
         auditParameterName,
         auditParameterNetworkShape,
         auditParameterConfigurationId,
@@ -157,3 +151,5 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
     </React.Fragment>
   )
 }
+
+export default injectIntl(AddAuditParameterRow)

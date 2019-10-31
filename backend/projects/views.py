@@ -61,7 +61,58 @@ def project_list(request):
         data = JSONParser().parse(request)
         serializer = ProjectSerializer(data=data, context={"user_id": request.user.id})
         if serializer.is_valid():
+
+            pages = serializer.validated_data.pop("pages")
+            scripts = serializer.validated_data.pop("scripts")
+            audit_parameters_list = serializer.validated_data.pop(
+                "audit_parameters_list"
+            )
+            serializer.validated_data.pop("members")  # remove members input
+
             project = Project.objects.create(**serializer.validated_data)
+
+            project.pages.set(
+                [
+                    Page.objects.create(
+                        url=page.get("url"), name=page.get("name"), project=project
+                    )
+                    for page in pages
+                ]
+            )
+            project.scripts.set(
+                [
+                    Script.objects.create(
+                        name=script.get("name"),
+                        script=script.get("script"),
+                        project=project,
+                    )
+                    for script in scripts
+                ]
+            )
+            project.audit_parameters_list.set(
+                [
+                    ProjectAuditParameters.objects.create(
+                        name=audit_parameter.get("name"),
+                        configuration=audit_parameter.get("configuration"),
+                        network_shape=audit_parameter.get("network_shape"),
+                        project=project,
+                    )
+                    for audit_parameter in audit_parameters_list
+                ]
+            )
+
+            # TODO correct responce error
+            # 'User' instance expected, got <ProjectMemberRole: projectmemberrole:3c6ca4>
+            project.members.set(
+                [
+                    ProjectMemberRole.objects.create(
+                        project=project,
+                        is_admin=True,
+                        user=get_object_or_404(User, id=request.user.id),
+                    )
+                ]
+            )
+
             project.save()
             return JsonResponse(
                 {"uuid": project.uuid, **serializer.data},
@@ -421,7 +472,7 @@ def available_audit_parameters(request):
     serializer = AvailableAuditParameterSerializer(
         available_audit_parameters, many=True
     )
-    return JsonResponse(serializer.data)
+    return JsonResponse(serializer.data, safe=False)
 
 
 @swagger_auto_schema(

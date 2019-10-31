@@ -47,7 +47,8 @@
   },
   "Projects": {
     "no_project_error": "Vous ne semblez avoir accès à aucun projet.\n\nMerci de réessayer ou de vous rapprocher de votre administrateur pour obtenir l'accès à votre projet.",
-    "title": "Projets"
+    "title": "Projets",
+    "create_new_project": "Créer un nouveau projet"
   },
   "ProjectSettings": {
     "settings": "Paramètres du projet",
@@ -208,7 +209,7 @@
     "join_project": "Pour rejoindre un projet existant, veuillez contacter l'administrateur du projet."
   },
   "Toastr": {
-    "ProjectSettings":{
+    "ProjectSettings": {
       "success_title": "Succès",
       "error_title": "Échec",
       "error_message": "Une erreur est survenue, veuillez réessayer",
@@ -240,5 +241,11 @@
     "title": "404 Page Introuvable",
     "subtitle": "Désolé, cette page n'existe pas",
     "button": "Retour à l'accueil"
+  },
+  "CreateProject": {
+    "next": "Suivant",
+    "previous": "Précédent",
+    "validate": "Valider",
+    "title": "Création d'un projet"
   }
 }
