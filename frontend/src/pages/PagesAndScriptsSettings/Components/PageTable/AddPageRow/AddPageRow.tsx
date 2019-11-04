@@ -79,7 +79,7 @@ export const AddPageRow: React.FunctionComponent<Props> = ({
         <AddIcon
           color={colorUsage.projectSettingsIconColor}
           width="24px"
-          strokeWidth="20"
+          strokeWidth="15"
         />
         <AddPageButtonLabel>
           {intl.formatMessage({ id: 'ProjectSettings.add_page' })}
@@ -104,14 +104,14 @@ export const AddPageRow: React.FunctionComponent<Props> = ({
           <CheckmarkIcon
             color={colorUsage.projectSettingsIconColor}
             width="16px"
-            strokeWidth="3"
+            strokeWidth="5"
           />
         </PageButton>
         <PageButton onClick={cancel}>
           <CloseIcon
             color={colorUsage.projectSettingsIconColor}
             width="13px"
-            strokeWidth="20"
+            strokeWidth="15"
           />
         </PageButton>
       </AddPageButtonsContainer >

@@ -137,7 +137,7 @@ export const ScriptModal: React.FunctionComponent<Props> = ({
         : `ProjectSettings.script_confirm_creation`})}
       </ConfirmButton>
       <CloseContainer onClick={close} >
-        <Close color={colorUsage.graphModalToggleButton} />
+        <Close width="20px" height="20px" strokeWidth="5" color={colorUsage.graphModalToggleButton} />
       </CloseContainer>
     </Modal>
     {state.loading || editState.loading ? <Loader/> : null}

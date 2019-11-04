@@ -421,7 +421,7 @@ def available_audit_parameters(request):
     serializer = AvailableAuditParameterSerializer(
         available_audit_parameters, many=True
     )
-    return JsonResponse(serializer.data)
+    return JsonResponse(serializer.data, safe=False)
 
 
 @swagger_auto_schema(

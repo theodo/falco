@@ -9,6 +9,7 @@ interface AuditStatusHistoryIconProps {
 
 interface MenuArrowContainerProps {
   margin?: string;
+  height?: string;
 };
 
 export const PageScriptItem = styled(Link)`
@@ -76,7 +77,6 @@ export const AuditStatusHistoryIconContainer = styled.div`
 `;
 
 export const MenuArrowContainer = styled.span`
-  width: 12px;
-  min-width: 12px;
   margin: ${(props: MenuArrowContainerProps) => (props.margin ? props.margin : '0')};
+  height: ${(props: MenuArrowContainerProps) => (props.height ? props.height : 'auto')};
 `;
