@@ -171,13 +171,15 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
           />
         )}
       </PageScriptTitleBlock>
-      <MenuArrowContainer margin={`0 0 0 ${getSpacing(4)}`}>
+      <MenuArrowContainer margin={`0 0 0 ${getSpacing(4)}`} height="20px">
         <MenuArrow
           color={
             linkPathMatchesUrl
               ? colorUsage.menuArrowSelected
               : colorUsage.menuArrow
           }
+          width="20px"
+          height="20px"
         />
       </MenuArrowContainer>
     </PageScriptItem>

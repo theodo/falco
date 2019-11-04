@@ -9,6 +9,12 @@ import {
   lineHeight,
 } from 'stylesheet';
 
+
+interface MenuArrowContainerProps {
+  margin?: string;
+  height?: string;
+};
+
 export const GoBackToProjectLink = styled.a`
   color: ${colorUsage.metricsSettingsText};
   font-size: ${fontSize.link};
@@ -39,9 +45,8 @@ export const SettingsPageTitle = styled.h2`
 `;
 
 export const MenuArrowContainer = styled.span`
-  width: 12px;
-  min-width: 12px;
-  margin: 0;
+  margin: ${(props: MenuArrowContainerProps) => (props.margin ? props.margin : '0')};
+  height: ${(props: MenuArrowContainerProps) => (props.height ? props.height : 'auto')};
 `;
 
 export const ProjectSettingsItem = styled(Link)`

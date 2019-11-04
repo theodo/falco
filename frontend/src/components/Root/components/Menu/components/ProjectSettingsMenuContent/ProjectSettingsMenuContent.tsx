@@ -5,7 +5,7 @@ import { routeDefinitions } from 'routes';
 
 import { MenuArrow } from 'icons';
 import { ProjectType } from 'redux/entities/projects/types';
-import { colorUsage } from 'stylesheet';
+import { colorUsage, getSpacing } from 'stylesheet';
 import {
   Container,
   GoBackToProjectLink,
@@ -64,13 +64,15 @@ export const ProjectSettingsMenuContent: React.FunctionComponent<Props> = ({
             <SettingsPageTitleBlock>
                 <SettingsPageTitle>{intl.formatMessage({id: page.id ? page.id : ''})}</SettingsPageTitle>
             </SettingsPageTitleBlock>
-            <MenuArrowContainer>
+            <MenuArrowContainer margin={`0 0 0 ${getSpacing(4)}`} height="20px">
               <MenuArrow
                 color={
                   linkPathMatchesUrl(page)
                     ? colorUsage.menuArrowSelected
                     : colorUsage.menuArrow
                 }
+                height="20px"
+                width="20px"
               />
             </MenuArrowContainer>
           </ProjectSettingsItem>
