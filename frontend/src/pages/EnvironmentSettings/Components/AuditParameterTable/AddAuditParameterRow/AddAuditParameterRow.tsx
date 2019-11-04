@@ -105,7 +105,7 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
         <AddIcon
           color={colorUsage.projectSettingsIconColor}
           width="24px"
-          strokeWidth="20"
+          strokeWidth="15"
         />
         <AddAuditParameterButtonLabel>
           {intl.formatMessage({ id: 'ProjectSettings.add_audit_parameter' })}
@@ -143,14 +143,14 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
           <CheckmarkIcon
             color={colorUsage.projectSettingsIconColor}
             width="16px"
-            strokeWidth="3"
+            strokeWidth="5"
           />
         </AuditParameterRowButton>
         <AuditParameterRowButton onClick={cancel}>
           <CloseIcon
             color={colorUsage.projectSettingsIconColor}
             width="13px"
-            strokeWidth="20"
+            strokeWidth="15"
           />
         </AuditParameterRowButton>
       </AddAuditParameterButtonsContainer >

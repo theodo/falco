@@ -29,7 +29,7 @@ export const AddScript: React.FunctionComponent<InjectedIntlProps & Props> = ({
         <Add
           color={colorUsage.projectSettingsIconColor}
           width="24px"
-          strokeWidth="20"
+          strokeWidth="15"
         />
         <AddScriptButtonLabel>
           {intl.formatMessage({id: 'ProjectSettings.add_script'})}

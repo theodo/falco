@@ -90,7 +90,7 @@ export const PageRow: React.FunctionComponent<Props> = ({
           <Close
             color={colorUsage.projectSettingsIconColor}
             width="13px"
-            strokeWidth="20"
+            strokeWidth="15"
           />
         </PageButton>
       </PageDeleteContainer >

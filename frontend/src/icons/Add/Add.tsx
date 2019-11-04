@@ -13,15 +13,30 @@ export default class Add extends React.Component<Props> {
       <svg
         width={this.props.width}
         height={this.props.height}
-        viewBox="0 0 24 24"
+        viewBox="0 0 76 76"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <path 
-          d="M 12 2 C 6.486 2 2 6.486 2 12 C 2 17.514 6.486 22 12 22 C 17.514 22 22 17.514 22 12 C 22 6.486 17.514 2 12 2 z M 12 4 C 16.411 4 20 7.589 20 12 C 20 16.411 16.411 20 12 20 C 7.589 20 4 16.411 4 12 C 4 7.589 7.589 4 12 4 z M 11 8 L 11 11 L 8 11 L 8 13 L 11 13 L 11 16 L 13 16 L 13 13 L 16 13 L 16 11 L 13 11 L 13 8 L 11 8 z"
+        <g
+          id="Add"
           stroke={this.props.color}
+          stroke-width="1"
           fill={this.props.color}
-        />
+          fill-rule="evenodd"
+        >
+          <g
+            id="Group"
+            fill={this.props.color}
+            fill-rule="nonzero"
+            stroke={this.props.color}
+            stroke-width="0.5"
+          >
+            <path
+              d="M38,0 C17.0468,0 0,17.0468 0,38 C0,58.9532 17.0468,76 38,76 C58.9532,76 76,58.9532 76,38 C76,17.0468 58.9532,0 38,0 Z M38,5 C56.195375,5 71,19.804625 71,38 C71,56.195375 56.195375,71 38,71 C19.804625,71 5,56.195375 5,38 C5,19.804625 19.804625,5 38,5 Z M33.25,19 L33.25,33.25 L19,33.25 L19,42.75 L33.25,42.75 L33.25,57 L42.75,57 L42.75,42.75 L57,42.75 L57,33.25 L42.75,33.25 L42.75,19 L33.25,19 Z"
+              id="Shape"
+            />
+          </g>
+        </g>
       </svg>
     );
   }

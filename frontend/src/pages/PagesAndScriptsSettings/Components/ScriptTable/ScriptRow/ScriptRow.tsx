@@ -86,7 +86,7 @@ export const ScriptRow: React.FunctionComponent<Props> = ({
           <Close
             color={colorUsage.projectSettingsIconColor}
             width="13px"
-            strokeWidth="20"
+            strokeWidth="15"
           />
         </ScriptDeleteButton>
       </ScriptDeleteContainer >
