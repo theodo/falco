@@ -107,10 +107,10 @@ const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> 
       {isLoading
         ? <Loader />
         : <MetricGraph
-            fullscreen={true}
-            auditResults={auditResults}
-            metrics={[metric]}
-            showOnlyLastWeek={false}
+          fullscreen={true}
+          auditResults={auditResults}
+          metrics={[metric]}
+          showOnlyLastWeek={false}
         />
       }
     </Modal>
