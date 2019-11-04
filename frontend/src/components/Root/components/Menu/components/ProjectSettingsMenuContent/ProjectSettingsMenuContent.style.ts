@@ -39,8 +39,6 @@ export const SettingsPageTitle = styled.h2`
 `;
 
 export const MenuArrowContainer = styled.span`
-  width: 12px;
-  min-width: 12px;
   margin: 0;
 `;
 

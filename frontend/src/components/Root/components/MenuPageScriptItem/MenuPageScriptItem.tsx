@@ -178,6 +178,7 @@ export const MenuPageScriptItem: React.FunctionComponent<Props & InjectedIntlPro
               ? colorUsage.menuArrowSelected
               : colorUsage.menuArrow
           }
+          height="27px"
         />
       </MenuArrowContainer>
     </PageScriptItem>

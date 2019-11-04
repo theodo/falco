@@ -76,7 +76,5 @@ export const AuditStatusHistoryIconContainer = styled.div`
 `;
 
 export const MenuArrowContainer = styled.span`
-  width: 12px;
-  min-width: 12px;
   margin: ${(props: MenuArrowContainerProps) => (props.margin ? props.margin : '0')};
 `;

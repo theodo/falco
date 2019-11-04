@@ -52,29 +52,30 @@ export const ProjectSettingsMenuContent: React.FunctionComponent<Props> = ({
       <GoBackToProjectLink onClick={redirectToProjectPage} >
         <FormattedMessage id="Menu.go_back_to_project" />
       </GoBackToProjectLink>
-      <Settings>{intl.formatMessage({ id: 'Menu.project_settings'})}</Settings>
-        {settingPages.map((page) =>
-          <ProjectSettingsItem
-            key={page.path}
-            to={page.path.replace(':projectId', project.uuid)}
-            className={
-              linkPathMatchesUrl(page) ? 'active' : ''
-            }
-          >
-            <SettingsPageTitleBlock>
-                <SettingsPageTitle>{intl.formatMessage({id: page.id ? page.id : ''})}</SettingsPageTitle>
-            </SettingsPageTitleBlock>
-            <MenuArrowContainer>
-              <MenuArrow
-                color={
-                  linkPathMatchesUrl(page)
-                    ? colorUsage.menuArrowSelected
-                    : colorUsage.menuArrow
-                }
-              />
-            </MenuArrowContainer>
-          </ProjectSettingsItem>
-        )}
+      <Settings>{intl.formatMessage({ id: 'Menu.project_settings' })}</Settings>
+      {settingPages.map((page) =>
+        <ProjectSettingsItem
+          key={page.path}
+          to={page.path.replace(':projectId', project.uuid)}
+          className={
+            linkPathMatchesUrl(page) ? 'active' : ''
+          }
+        >
+          <SettingsPageTitleBlock>
+            <SettingsPageTitle>{intl.formatMessage({ id: page.id ? page.id : '' })}</SettingsPageTitle>
+          </SettingsPageTitleBlock>
+          <MenuArrowContainer>
+            <MenuArrow
+              color={
+                linkPathMatchesUrl(page)
+                  ? colorUsage.menuArrowSelected
+                  : colorUsage.menuArrow
+              }
+              height="27px"
+            />
+          </MenuArrowContainer>
+        </ProjectSettingsItem>
+      )}
     </Container>
   );
 };
