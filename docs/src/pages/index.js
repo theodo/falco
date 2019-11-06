@@ -10,7 +10,7 @@ import classnames from "classnames";
 import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import withBaseUrl from "@docusaurus/withBaseUrl";
+import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.css";
 
 const features = [
@@ -67,7 +67,7 @@ function Home() {
                     "button button--outline button--secondary button--lg",
                     styles.addFocus
                   )}
-                  to={withBaseUrl("docs/getting-started/installation")}
+                  to={useBaseUrl("docs/getting-started/installation")}
                 >
                   Read the docs
                 </Link>
@@ -88,7 +88,7 @@ function Home() {
               style={{ display: "flex", justifyContent: "center" }}
             >
               <img
-                src={withBaseUrl("img/screenshot.jpg")}
+                src={useBaseUrl("img/screenshot.jpg")}
                 alt="A screenshot of the Falco project view"
                 className="shadow--md"
                 style={{ maxWidth: "500px", alignSelf: "center" }}
@@ -113,7 +113,7 @@ function Home() {
                 style={{ display: "flex", justifyContent: "center", marginBottom: "30px"}}
               >
                 <img
-                  src={withBaseUrl("img/bnp.png")}
+                  src={useBaseUrl("img/bnp.png")}
                   alt="BNPParibas Asset Management logo"
                 />
               </div>
@@ -122,7 +122,7 @@ function Home() {
                 style={{ display: "flex", justifyContent: "center", marginBottom: "30px" }}
               >
                 <img
-                  src={withBaseUrl("img/choose.png")}
+                  src={useBaseUrl("img/choose.png")}
                   alt="Choose my Company logo"
                 />
               </div>
@@ -131,7 +131,7 @@ function Home() {
                 style={{ display: "flex", justifyContent: "center", marginBottom: "30px" }}
               >
                 <img
-                  src={withBaseUrl("img/tarkett.png")}
+                  src={useBaseUrl("img/tarkett.png")}
                   alt="Tarkett logo"
                 />
               </div>
@@ -140,7 +140,7 @@ function Home() {
                 style={{ display: "flex", justifyContent: "center", marginBottom: "30px" }}
               >
                 <img
-                  src={withBaseUrl("img/voodoo.png")}
+                  src={useBaseUrl("img/voodoo.png")}
                   alt="Voodoo logo"
                 />
               </div>
@@ -160,7 +160,7 @@ function Home() {
                       <div className="text--center">
                         <img
                           className={styles.featureImage}
-                          src={withBaseUrl(imageUrl)}
+                          src={useBaseUrl(imageUrl)}
                           alt=""
                         />
                       </div>
