@@ -1,0 +1,64 @@
+{
+  "data": {
+      "id": "191024_HA_976b046886025ec8693cbe4f1145929e",
+      "statusCode": 200,
+      "lighthouse": {
+        "audits": {
+          "first-contentful-paint": {
+            "score": 0.98999999999999999,
+            "displayValue": "1.5 s"
+          },
+          "speed-index": {
+            "score": 1,
+            "displayValue": "1.5 s"
+          },
+          "first-meaningful-paint": {
+            "score": 0.98999999999999999,
+            "displayValue": "1.5 s"
+          },
+        "first-cpu-idle": {
+          "score": 0.98999999999999999,
+          "displayValue": "2.3 s"
+        },
+        "max-potential-fid": {
+          "score": 1,
+          "displayValue": "50 ms"
+        },
+        "interactive": {
+          "score": 0.98999999999999999,
+          "displayValue": "2.3 s"
+        }
+      }
+    },
+    "median": {
+      "firstView": {
+        "LastInteractive": 164,
+        "speedIndex": 700,
+        "firstPaint": 685.82499999679999,
+        "firstMeaningfulPaint": 686,
+        "firstContentfulPaint": 686,
+        "loadTime": 814,
+        "TTFB": 266,
+        "visualComplete": 700,
+        "lighthouse.Performance": 0.98999999999999999,
+        "images": {
+          "screenShot": "https://www.webpagetest.org/getfile.php?test=191024_HA_976b046886025ec8693cbe4f1145929e&file=3_Cached_screen.jpg"
+        }
+      },
+      "repeatView": {
+        "LastInteractive": 571,
+        "speedIndex": 1440,
+        "firstPaint": 585.82499999679999,
+        "firstMeaningfulPaint": 586,
+        "firstContentfulPaint": 586,
+        "loadTime": 714,
+        "TTFB": 216,
+        "visualComplete": 650,
+        "lighthouse.Performance": 0.98999999999999999,
+        "images": {
+          "screenShot": "https://www.webpagetest.org/getfile.php?test=191024_HA_976b046886025ec8693cbe4f1145929e&file=3_Cached_screen.jpg"
+        }
+      }
+    }
+  }
+}
