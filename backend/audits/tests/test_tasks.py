@@ -50,7 +50,7 @@ class TasksTestCase(TestCase):
         )
         new_page_audit = Audit.objects.create(page=page_to_audit, parameters=parameters)
 
-        request_audit.s(audit_uuid=new_page_audit.uuid).apply()
+        request_audit(audit_uuid=new_page_audit.uuid)
 
         auditHistory = AuditStatusHistory.objects.all()
 
