@@ -32,6 +32,7 @@ django-extensions = "==2.1.6"
 django-cors-headers = "==3.1.1"
 isort = "==4.3.17"
 black = "==18.9b0"
+httpretty= "*"
 
 [requires]
 python_version = "3.7"
