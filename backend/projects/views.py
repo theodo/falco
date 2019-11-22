@@ -409,7 +409,9 @@ def project_members(request, project_uuid):
 
 @swagger_auto_schema(
     methods=["post"],
-    request_body="",
+    request_body=openapi.Schema(
+        type="object", properties={"wpt_instance_url": openapi.Schema(type="string")}
+    ),
     responses={
         201: openapi.Response(
             "Returns discovered available audit parameters for the WPT instance URL passed in parameter",
