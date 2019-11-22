@@ -37,11 +37,13 @@ def request_audit(audit_uuid):
         payload["url"] = audit.page.url
         payload["lighthouse"] = 1
         payload["k"] = audit.page.project.wpt_api_key
+        wpt_instance_url = audit.page.project.wpt_instance_url
     elif audit.script is not None:
         payload["script"] = audit.script.script
         payload["k"] = audit.script.project.wpt_api_key
+        wpt_instance_url = audit.script.project.wpt_instance_url
 
-    r = requests.post("https://www.webpagetest.org/runtest.php", params=payload)
+    r = requests.post(f"{wpt_instance_url}/runtest.php", params=payload)
     response = r.json()
     if response["statusCode"] == 200:
         audit_status_queueing = AuditStatusHistory(
@@ -85,9 +87,14 @@ def poll_audit_results(audit_uuid, json_url):
         audit_status_requested.save()
         poll_audit_results.apply_async((audit_uuid, json_url), countdown=15)
     elif status_code == 200:
+        if audit.page is not None:
+            wpt_instance_url = audit.page.project.wpt_instance_url
+        elif audit.script is not None:
+            wpt_instance_url = audit.script.project.wpt_instance_url
+
         parsed_url = urlparse(json_url)
         test_id = parse_qs(parsed_url.query)["test"][0]
-        wpt_results_user_url = f"https://www.webpagetest.org/result/{test_id}"
+        wpt_results_user_url = f"{wpt_instance_url}/result/{test_id}"
         try:
             if audit.page is not None:
                 project = audit.page.project
