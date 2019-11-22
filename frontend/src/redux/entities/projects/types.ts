@@ -13,6 +13,7 @@ export interface ProjectType {
   auditParametersIds: string[];
   projectMembers: ProjectMember[];
   wptApiKey: string;
+  wptInstanceURL: string;
 };
 
 export interface ApiProjectType {
@@ -25,6 +26,7 @@ export interface ApiProjectType {
   latest_audit_at: string;
   project_members: ApiProjectMember[];
   wpt_api_key: string;
+  wpt_instance_url: string;
   has_siblings: boolean;
 };
 
