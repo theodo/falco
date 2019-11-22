@@ -16,12 +16,15 @@ export type OwnProps = {} & RouteComponentProps<{
 }>;
 
 type Props = {
-  currentUser: UserState,
+  currentUser: UserState;
   fetchProjectsRequest: (projectId: string) => void;
   project?: ProjectType | null;
   toastrDisplay: ProjectToastrDisplayType;
   setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
-  editProjectDetailsRequest: (projectId: string, payload: {name: string, wpt_api_key: string}) => void;
+  editProjectDetailsRequest: (
+    projectId: string,
+    payload: { name: string; wpt_api_key: string; wpt_instance_url: string },
+  ) => void;
 } & OwnProps &
   InjectedIntlProps;
 
@@ -35,48 +38,48 @@ const GeneralSettings: React.FunctionComponent<Props> = ({
   setProjectToastrDisplay,
   editProjectDetailsRequest,
 }) => {
-
   interface UserOption {
     value: string;
     label: string;
     disabled: boolean;
-  };
-
-  interface ApiAvailableAuditParameters {
-    uuid: string,
-    browser: string,
-    location_label: string,
-    location_group: string,
   }
 
+  interface ApiAvailableAuditParameters {
+    uuid: string;
+    browser: string;
+    location_label: string;
+    location_group: string;
+  }
 
   useFetchProjectIfUndefined(fetchProjectsRequest, match.params.projectId, project);
 
   const [projectName, setProjectName] = React.useState('');
   const [projectApiKey, setProjectApiKey] = React.useState('');
+  const [projectInstanceURL, setProjectInstanceURL] = React.useState('');
 
   React.useEffect(
     () => {
       setProjectName(project ? project.name : '');
       setProjectApiKey(project ? project.wptApiKey : '');
+      setProjectInstanceURL(project ? project.wptInstanceURL : '');
     },
-    [project]
-  )
+    [project],
+  );
 
   React.useEffect(
     () => {
-      if('' !== toastrDisplay) {
-        switch(toastrDisplay) {
-            case "editProjectDetailsSuccess":
-              toastr.success(
-                intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
-                intl.formatMessage({'id': 'Toastr.ProjectSettings.edit_project_details_success'}),
-              );
-              break;
-          case "editProjectDetailsError":
+      if ('' !== toastrDisplay) {
+        switch (toastrDisplay) {
+          case 'editProjectDetailsSuccess':
+            toastr.success(
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.edit_project_details_success' }),
+            );
+            break;
+          case 'editProjectDetailsError':
             toastr.error(
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.error_title'}),
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.error_message'}),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.error_title' }),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.error_message' }),
             );
             break;
         }
@@ -105,30 +108,33 @@ const GeneralSettings: React.FunctionComponent<Props> = ({
     );
   }
 
-
   const handleNameChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
-    setProjectName(e.currentTarget.value)
-  }
+    setProjectName(e.currentTarget.value);
+  };
 
   const handleApiKeyChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
-    setProjectApiKey(e.currentTarget.value)
-  }
+    setProjectApiKey(e.currentTarget.value);
+  };
+
+  const handleInstanceURLChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
+    setProjectInstanceURL(e.currentTarget.value);
+  };
 
   const sendEditRequestOnBlur = () => {
-    editProjectDetailsRequest(
-      project.uuid,
-      {
-        name: projectName,
-        wpt_api_key: projectApiKey,
-      },
-    )
+    editProjectDetailsRequest(project.uuid, {
+      name: projectName,
+      wpt_api_key: projectApiKey,
+      wpt_instance_url: projectInstanceURL,
+    });
   };
 
   return (
     <Style.Container>
-      <Style.PageTitle>{intl.formatMessage({ id: 'ProjectSettings.settings'}) + ' - ' + project.name}</Style.PageTitle>
+      <Style.PageTitle>
+        {intl.formatMessage({ id: 'ProjectSettings.settings' }) + ' - ' + project.name}
+      </Style.PageTitle>
       <Style.Title>
-        <FormattedMessage id="ProjectSettings.general_settings"/>
+        <FormattedMessage id="ProjectSettings.general_settings" />
       </Style.Title>
       <Style.SettingsFieldContainer>
         <ProjectDetailsInput
@@ -146,6 +152,17 @@ const GeneralSettings: React.FunctionComponent<Props> = ({
           value={projectApiKey}
         />
       </Style.SettingsFieldContainer>
+      <Style.SettingsFieldContainer>
+        <ProjectDetailsInput
+          label="ProjectSettings.wpt_instance_url"
+          onChange={handleInstanceURLChange}
+          onBlur={sendEditRequestOnBlur}
+          value={projectInstanceURL}
+        />
+      </Style.SettingsFieldContainer>
+      <Style.ExplanationText>
+        {intl.formatMessage({id: "ProjectSettings.wpt_instance_url_explanation"})}
+      </Style.ExplanationText>
       <ReduxToastr
         timeOut={4000}
         newestOnTop={false}
@@ -156,6 +173,6 @@ const GeneralSettings: React.FunctionComponent<Props> = ({
       />
     </Style.Container>
   );
-}
+};
 
 export default GeneralSettings;

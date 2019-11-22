@@ -142,6 +142,15 @@ MemberAdminDeleteButton: styled.button`
 SettingsFieldContainer: styled.div`
   margin-top: ${getSpacing(4)};
 `,
+
+ExplanationText: styled.span`
+  margin-top: ${getSpacing(4)};
+  line-height: ${lineHeight.bodyText};
+  color: ${colorUsage.bodyText};
+  font-family: ${fontFamily.mainSans};
+  font-size: ${fontSize.bodyText};
+  font-weight: ${fontWeight.bodyText};
+`,
 };
 
 export default Style;

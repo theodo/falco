@@ -54,6 +54,8 @@
     "general_settings": "General",
     "name": "Project name",
     "wpt_key": "WebPageTest API Key",
+    "wpt_instance_url": "WebPageTest instance URL",
+    "wpt_instance_url_explanation": "If you don’t use a private WebPageTest instance, leave the default value “https://webpagetest.org”. If you want to use a private instance, enter its URL without the trailing slash.",
     "project_audit_parameters": "Project environments",
     "pages_and_scripts": "Project pages and scripts",
     "scripts": "Project scripts",
