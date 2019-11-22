@@ -281,7 +281,9 @@ def get_wpt_audit_configurations():
 
     for location, location_data in data.items():
         browsers = location_data["Browsers"].split(",")
-        group = location_data["group"]
+        group = location_data.get(
+            "group", ""
+        )  # Private instances locations may not be grouped
         label = location_data["labelShort"]
         for brower in browsers:
             configuration, created = AvailableAuditParameters.objects.update_or_create(
