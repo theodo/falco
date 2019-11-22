@@ -285,9 +285,9 @@ def get_wpt_audit_configurations():
             "group", ""
         )  # Private instances locations may not be grouped
         label = location_data["labelShort"]
-        for brower in browsers:
+        for browser in browsers:
             configuration, created = AvailableAuditParameters.objects.update_or_create(
-                browser=brower,
+                browser=browser,
                 location=location,
                 defaults={
                     "location_label": label,
