@@ -6,6 +6,7 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import permissions, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.parsers import JSONParser
+from requests.exceptions import ConnectionError
 from projects.models import (
     Page,
     Project,
@@ -27,6 +28,8 @@ from projects.permissions import (
     check_if_admin_of_project,
     is_admin_of_project,
 )
+
+from audits.tasks import get_wpt_audit_configurations
 
 
 def get_user_projects(user_id):
@@ -401,6 +404,47 @@ def project_members(request, project_uuid):
         )
     return HttpResponse(
         "You must provide a user_id", status=status.HTTP_400_BAD_REQUEST
+    )
+
+
+@swagger_auto_schema(
+    methods=["post"],
+    request_body="",
+    responses={
+        201: openapi.Response(
+            "Returns discovered available audit parameters for the WPT instance URL passed in parameter",
+            AvailableAuditParameterSerializer,
+        )
+    },
+    tags=["Project Audit Parameters"],
+)
+@api_view(["POST"])
+def discover_available_audit_parameters(request):
+    data = JSONParser().parse(request)
+    if "wpt_instance_url" in data:
+        try:
+            get_wpt_audit_configurations(data["wpt_instance_url"])
+        except ConnectionError:
+            return JsonResponse(
+                {
+                    "error": "UNREACHABLE",
+                    "details": "The WPT instance is not reachable, please check the URL",
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        available_audit_parameters = AvailableAuditParameters.objects.filter(
+            is_active=True
+        )
+        serializer = AvailableAuditParameterSerializer(
+            available_audit_parameters, many=True
+        )
+        return JsonResponse(serializer.data, safe=False)
+    return JsonResponse(
+        {
+            "error": "MISSING_PARAMETER",
+            "details": "You must provide a wpt_instance_url in the request body",
+        },
+        status=status.HTTP_400_BAD_REQUEST,
     )
 
 

@@ -259,13 +259,22 @@ def clean_old_audit_statuses():
 
 
 @shared_task
-def get_wpt_audit_configurations():
+def get_wpt_audit_configurations(wpt_instance_url="https://webpagetest.org"):
     """gets all the available locations from WPT"""
-    response = requests.get("https://www.webpagetest.org/getLocations.php?f=json&k=A")
+
+    # For some reason, the key mask to get API-available locations is different between
+    # public and private WPT instances
+    wpt_key_mask = ""
+    if wpt_instance_url == "https://webpagetest.org":
+        wpt_key_mask = "A"
+
+    response = requests.get(
+        f"{wpt_instance_url}/getLocations.php?f=json&k={wpt_key_mask}"
+    )
 
     if response.status_code != 200:
         logging.error("Invalid response from WebPageTest API: non-200 response code")
-        return
+        raise Exception("Invalid response from WebPageTest API: non-200 response code")
 
     try:
         data = response.json()["data"]
@@ -273,9 +282,13 @@ def get_wpt_audit_configurations():
         logging.error(
             "Invalid response from WebPageTest API: 'data' key is not present"
         )
-        return
+        raise Exception(
+            "Invalid response from WebPageTest API: 'data' key is not present"
+        )
 
-    for available_audit_parameter in AvailableAuditParameters.objects.all():
+    for available_audit_parameter in AvailableAuditParameters.objects.filter(
+        wpt_instance_url=wpt_instance_url
+    ):
         available_audit_parameter.is_active = False
         available_audit_parameter.save()
 
@@ -294,4 +307,5 @@ def get_wpt_audit_configurations():
                     "location_group": group,
                     "is_active": True,
                 },
+                wpt_instance_url=wpt_instance_url,
             )
