@@ -1,0 +1,13 @@
+{
+    "statusCode": 200,
+    "statusText": "Ok",
+    "data": {
+        "testId": "191024_HA_976b046886025ec8693cbe4f1145929e",
+        "ownerKey": "9259cab7a56de88af4f67e16e631ed954d8c9fee",
+        "jsonUrl": "https://www.webpagetest.org/jsonResult.php?test=191024_HA_976b046886025ec8693cbe4f1145929e",
+        "xmlUrl": "https://www.webpagetest.org/xmlResult/191024_HA_976b046886025ec8693cbe4f1145929e/",
+        "userUrl": "https://www.webpagetest.org/result/191024_HA_976b046886025ec8693cbe4f1145929e/",
+        "summaryCSV": "https://www.webpagetest.org/result/191024_HA_976b046886025ec8693cbe4f1145929e/page_data.csv",
+        "detailCSV": "https://www.webpagetest.org/result/191024_HA_976b046886025ec8693cbe4f1145929e/requests.csv"
+    }
+}
