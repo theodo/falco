@@ -1,4 +1,5 @@
 import httpretty
+from unittest.mock import MagicMock
 import json
 from django.test import TestCase, override_settings
 from audits.tasks import request_audit
@@ -10,25 +11,27 @@ from projects.models import (
 )
 from audits.models import Audit, AuditStatusHistory
 from unittest.mock import patch
-from .mocks import poll_audit_results
 
 
 class TasksTestCase(TestCase):
     @httpretty.activate
     @override_settings(CELERY_EAGER=True)
-    @patch("audits.tasks.poll_audit_results", poll_audit_results)
-    def test_request_audit(self):
-        responseData = json.load(
-            open("audits/tests/json_mocks/wpt_runtest_post_result.json")
+    @patch("audits.tasks.poll_audit_results")
+    def test_request_audit(self, poll_audit_results_mock):
+        poll_audit_results_mock.apply_async = MagicMock()
+        POST_runtest_data = open("audits/tests/json_mocks/wpt_POST_runtest.json").read()
+        GET_jsonResults_data = json.load(
+            open("audits/tests/json_mocks/wpt_GET_jsonResult.json")
         )
-        bodyData = open("audits/tests/json_mocks/wpt_runtest_post_body.json").read()
         httpretty.register_uri(
-            httpretty.POST, "https://www.webpagetest.org/runtest.php", body=bodyData
+            httpretty.POST,
+            "https://www.webpagetest.org/runtest.php",
+            body=POST_runtest_data,
         )
         httpretty.register_uri(
             httpretty.GET,
             "https://www.webpagetest.org/jsonResult.php?test=191024_HA_976b046886025ec8693cbe4f1145929e",
-            body=responseData,
+            body=GET_jsonResults_data,
         )
         project = Project.objects.create()
         page_to_audit = Page.objects.create(
@@ -61,7 +64,7 @@ class TasksTestCase(TestCase):
             auditHistory[0].status == "REQUESTED"
             or auditHistory[1].status == "REQUESTED"
         )
-        poll_audit_results.apply_async.assert_called_with(
+        poll_audit_results_mock.apply_async.assert_called_with(
             (
                 new_page_audit.uuid,
                 "https://www.webpagetest.org/jsonResult.php?test=191024_HA_976b046886025ec8693cbe4f1145929e",
