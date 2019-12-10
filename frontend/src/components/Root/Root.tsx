@@ -30,8 +30,14 @@ const Root: React.FunctionComponent<Props> = ({ children, location, isUserAuthen
   const userLanguage =
     (navigator.languages && navigator.languages[0]) || navigator.language || 'fr';
   // Split locales with a region code
-  const userLanguageWithoutRegionCode = userLanguage.toLowerCase().split(/[_-]+/)[0];
-  const localizedMessages = locales[userLanguage] || locales[userLanguageWithoutRegionCode];
+  let userLanguageWithoutRegionCode = userLanguage.toLowerCase().split(/[_-]+/)[0];
+  let localizedMessages = locales[userLanguage] || locales[userLanguageWithoutRegionCode];
+
+  // Default to english if user’s locale is not available
+  if (!localizedMessages) {
+    userLanguageWithoutRegionCode = "en";
+    localizedMessages = locales.en;
+  }
 
   return (
     <IntlProvider locale={userLanguageWithoutRegionCode} messages={localizedMessages}>
