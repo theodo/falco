@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.3] - 2019-12-10
+
+- Upgraded Docusaurus for performance and bugfixes (@phacks)
+- Fixed a translation problem for users neither French nor English-speaking (@phacks)
+
 ## [1.0.2] - 2019-10-28
 
 ### Added
@@ -32,7 +37,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 🎉Initial release! 🎉
 
-[Unreleased]: https://github.com/theodo/falco/compare/1.0.2...HEAD
+[Unreleased]: https://github.com/theodo/falco/compare/1.0.3...HEAD
+[1.0.3]: https://github.com/theodo/falco/compare/1.0.3...1.0.3
 [1.0.2]: https://github.com/theodo/falco/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/theodo/falco/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/theodo/falco/releases/tag/1.0.0
