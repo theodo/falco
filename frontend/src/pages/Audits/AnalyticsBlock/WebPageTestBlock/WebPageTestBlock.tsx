@@ -31,7 +31,8 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps & InjectedIntlProps> = 
     if (!dateComparatorDisplayed) {
       return selectedAudit.WPTResultsUserUrl;
     }
-    const baseUrl = 'https://www.webpagetest.org/video/compare.php?tests=';
+    const privateInstanceRootUrl = selectedAudit.WPTResultsUserUrl.split('/result/')[0]
+    const baseUrl = `${privateInstanceRootUrl}/video/compare.php?tests=`
     const selectedAuditId = getWPTAuditId(selectedAudit);
     const auditToCompareId = getWPTAuditId(auditToCompare);
 
