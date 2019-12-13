@@ -86,7 +86,13 @@ class ScriptSerializer(serializers.ModelSerializer):
 class AvailableAuditParameterSerializer(serializers.ModelSerializer):
     class Meta:
         model = AvailableAuditParameters
-        fields = ("uuid", "browser", "location_label", "location_group")
+        fields = (
+            "uuid",
+            "browser",
+            "location_label",
+            "location_group",
+            "wpt_instance_url",
+        )
 
 
 class ProjectAuditParametersSerializer(serializers.ModelSerializer):
@@ -156,5 +162,6 @@ class ProjectSerializer(DynamicFieldsModelSerializer):
             "screenshot_url",
             "latest_audit_at",
             "wpt_api_key",
+            "wpt_instance_url",
             "has_siblings",
         )

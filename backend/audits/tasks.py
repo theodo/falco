@@ -37,11 +37,13 @@ def request_audit(audit_uuid):
         payload["url"] = audit.page.url
         payload["lighthouse"] = 1
         payload["k"] = audit.page.project.wpt_api_key
+        wpt_instance_url = audit.page.project.wpt_instance_url
     elif audit.script is not None:
         payload["script"] = audit.script.script
         payload["k"] = audit.script.project.wpt_api_key
+        wpt_instance_url = audit.script.project.wpt_instance_url
 
-    r = requests.post("https://www.webpagetest.org/runtest.php", params=payload)
+    r = requests.post(f"{wpt_instance_url}/runtest.php", params=payload)
     response = r.json()
     if response["statusCode"] == 200:
         audit_status_queueing = AuditStatusHistory(
@@ -85,9 +87,14 @@ def poll_audit_results(audit_uuid, json_url):
         audit_status_requested.save()
         poll_audit_results.apply_async((audit_uuid, json_url), countdown=15)
     elif status_code == 200:
+        if audit.page is not None:
+            wpt_instance_url = audit.page.project.wpt_instance_url
+        elif audit.script is not None:
+            wpt_instance_url = audit.script.project.wpt_instance_url
+
         parsed_url = urlparse(json_url)
         test_id = parse_qs(parsed_url.query)["test"][0]
-        wpt_results_user_url = f"https://www.webpagetest.org/result/{test_id}"
+        wpt_results_user_url = f"{wpt_instance_url}/result/{test_id}"
         try:
             if audit.page is not None:
                 project = audit.page.project
@@ -259,13 +266,22 @@ def clean_old_audit_statuses():
 
 
 @shared_task
-def get_wpt_audit_configurations():
+def get_wpt_audit_configurations(wpt_instance_url="https://webpagetest.org"):
     """gets all the available locations from WPT"""
-    response = requests.get("https://www.webpagetest.org/getLocations.php?f=json&k=A")
+
+    # For some reason, the key mask to get API-available locations is different between
+    # public and private WPT instances
+    wpt_key_mask = ""
+    if wpt_instance_url == "https://webpagetest.org":
+        wpt_key_mask = "A"
+
+    response = requests.get(
+        f"{wpt_instance_url}/getLocations.php?f=json&k={wpt_key_mask}"
+    )
 
     if response.status_code != 200:
         logging.error("Invalid response from WebPageTest API: non-200 response code")
-        return
+        raise Exception("Invalid response from WebPageTest API: non-200 response code")
 
     try:
         data = response.json()["data"]
@@ -273,23 +289,30 @@ def get_wpt_audit_configurations():
         logging.error(
             "Invalid response from WebPageTest API: 'data' key is not present"
         )
-        return
+        raise Exception(
+            "Invalid response from WebPageTest API: 'data' key is not present"
+        )
 
-    for available_audit_parameter in AvailableAuditParameters.objects.all():
+    for available_audit_parameter in AvailableAuditParameters.objects.filter(
+        wpt_instance_url=wpt_instance_url
+    ):
         available_audit_parameter.is_active = False
         available_audit_parameter.save()
 
     for location, location_data in data.items():
         browsers = location_data["Browsers"].split(",")
-        group = location_data["group"]
+        group = location_data.get(
+            "group", ""
+        )  # Private instances locations may not be grouped
         label = location_data["labelShort"]
-        for brower in browsers:
+        for browser in browsers:
             configuration, created = AvailableAuditParameters.objects.update_or_create(
-                browser=brower,
+                browser=browser,
                 location=location,
                 defaults={
                     "location_label": label,
                     "location_group": group,
                     "is_active": True,
                 },
+                wpt_instance_url=wpt_instance_url,
             )

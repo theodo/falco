@@ -1,8 +1,7 @@
 import httpretty
 from unittest.mock import MagicMock
-import json
-from django.test import TestCase, override_settings
-from audits.tasks import request_audit
+from django.test import TestCase
+from audits.tasks import request_audit, get_wpt_audit_configurations
 from projects.models import (
     Page,
     Project,
@@ -15,22 +14,21 @@ from unittest.mock import patch
 
 class TasksTestCase(TestCase):
     @httpretty.activate
-    @override_settings(CELERY_EAGER=True)
     @patch("audits.tasks.poll_audit_results")
     def test_request_audit(self, poll_audit_results_mock):
         poll_audit_results_mock.apply_async = MagicMock()
         POST_runtest_data = open("audits/tests/json_mocks/wpt_POST_runtest.json").read()
-        GET_jsonResults_data = json.load(
-            open("audits/tests/json_mocks/wpt_GET_jsonResult.json")
-        )
+        GET_jsonResults_data = open(
+            "audits/tests/json_mocks/wpt_GET_jsonResult.json"
+        ).read()
         httpretty.register_uri(
             httpretty.POST,
-            "https://www.webpagetest.org/runtest.php",
+            "https://webpagetest.org/runtest.php",
             body=POST_runtest_data,
         )
         httpretty.register_uri(
             httpretty.GET,
-            "https://www.webpagetest.org/jsonResult.php?test=191024_HA_976b046886025ec8693cbe4f1145929e",
+            "https://webpagetest.org/jsonResult.php?test=191024_HA_976b046886025ec8693cbe4f1145929e",
             body=GET_jsonResults_data,
         )
         project = Project.objects.create()
@@ -71,3 +69,36 @@ class TasksTestCase(TestCase):
             ),
             countdown=15,
         )
+
+    @httpretty.activate
+    def test_get_wpt_audit_configurations__create_configurations_for_default_instance(
+        self
+    ):
+        GET_getLocations_data = open(
+            "audits/tests/json_mocks/wpt_GET_getLocations.json"
+        ).read()
+        httpretty.register_uri(
+            httpretty.GET,
+            "https://webpagetest.org/getLocations.php?f=json&k=A",
+            body=GET_getLocations_data,
+        )
+        get_wpt_audit_configurations()
+        available_audit_parameters = AvailableAuditParameters.objects.all()
+        self.assertEqual(len(available_audit_parameters), 3)
+
+    @httpretty.activate
+    def test_get_wpt_audit_configurations__create_configurations_for_private_instance(
+        self
+    ):
+        GET_getLocations_data = open(
+            "audits/tests/json_mocks/wpt_GET_getLocations.json"
+        ).read()
+        private_instance_name = "http://myprivateinstance.com"
+        httpretty.register_uri(
+            httpretty.GET,
+            f"{private_instance_name}/getLocations.php?f=json&k=",
+            body=GET_getLocations_data,
+        )
+        get_wpt_audit_configurations(private_instance_name)
+        available_audit_parameters = AvailableAuditParameters.objects.all()
+        self.assertEqual(len(available_audit_parameters), 3)

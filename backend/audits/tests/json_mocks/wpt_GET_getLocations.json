@@ -1,0 +1,58 @@
+{
+  "statusCode": 200,
+  "statusText": "Ok",
+  "data": {
+    "Dulles_MotoG4": {
+      "Label": "Moto G (gen 4)",
+      "location": "Dulles_MotoG4",
+      "Browsers": "Moto G4 - Chrome,Moto G4 - Firefox",
+      "status": "OK",
+      "relayServer": null,
+      "relayLocation": null,
+      "labelShort": "Dulles, VA",
+      "group": "Android Devices - Dulles, VA",
+      "PendingTests": {
+        "p1": 0,
+        "p2": 1,
+        "p3": 0,
+        "p4": 0,
+        "p5": 84,
+        "p6": 0,
+        "p7": 0,
+        "p8": 0,
+        "p9": 0,
+        "Total": 101,
+        "HighPriority": 0,
+        "LowPriority": 85,
+        "Testing": 16,
+        "Idle": 0
+      }
+    },
+    "Dulles_MotoG": {
+      "Label": "Moto G (gen 1)",
+      "location": "Dulles_MotoG",
+      "Browsers": "Moto G - Chrome",
+      "status": "OK",
+      "relayServer": null,
+      "relayLocation": null,
+      "labelShort": "Dulles, VA",
+      "group": "Android Devices - Dulles, VA",
+      "PendingTests": {
+        "p1": 0,
+        "p2": 0,
+        "p3": 0,
+        "p4": 0,
+        "p5": 0,
+        "p6": 0,
+        "p7": 0,
+        "p8": 0,
+        "p9": 0,
+        "Total": 0,
+        "HighPriority": 0,
+        "LowPriority": 0,
+        "Testing": 0,
+        "Idle": 13
+      }
+    }
+  }
+}

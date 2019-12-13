@@ -47,16 +47,18 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({
     browser: string,
     location_label: string,
     location_group: string,
+    wpt_instance_url: string,
   }
 
 
   useFetchProjectIfUndefined(fetchProjectsRequest, match.params.projectId, project);
 
-  const [availableAuditParameters, setAvailableAuditParameters] = React.useState<Array<{label: string, uuid: string}>>([])
+  const [availableAuditParameters, setAvailableAuditParameters] = React.useState<Array<{label: string, uuid: string, wptInstanceURL: string}>>([])
 
   const modelizeAvailableAuditParameters = (apiAvailableAuditParameters: ApiAvailableAuditParameters) => ({
     label: `${apiAvailableAuditParameters.location_label}. ${apiAvailableAuditParameters.browser}`,
     uuid: apiAvailableAuditParameters.uuid,
+    wptInstanceURL: apiAvailableAuditParameters.wpt_instance_url
   });
 
   React.useEffect(
@@ -65,7 +67,12 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({
       request
       .then((response) => {
         if(response) {
-          setAvailableAuditParameters(response.body.map((apiAvailableAuditParameters: ApiAvailableAuditParameters) => modelizeAvailableAuditParameters(apiAvailableAuditParameters)));
+          setAvailableAuditParameters(
+            response.body
+            .map((apiAvailableAuditParameters: ApiAvailableAuditParameters) => 
+              modelizeAvailableAuditParameters(apiAvailableAuditParameters)
+            )
+          );
         }
       })
     },
@@ -129,6 +136,10 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({
     );
   }
 
+  const filteredAvailableProjectsParameters = availableAuditParameters.filter(
+    availableAuditParameter => availableAuditParameter.wptInstanceURL === project.wptInstanceURL
+  )
+
   return (
     <Style.Container>
       <Style.PageTitle>{intl.formatMessage({ id: 'ProjectSettings.settings'}) + ' - ' + project.name}</Style.PageTitle>
@@ -149,13 +160,13 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({
               disabled={!isUserAdminOfProject(currentUser, project)}
               projectId={project.uuid}
               auditParameterId={auditParameterId}
-              availableAuditParameters={availableAuditParameters}
+              availableAuditParameters={filteredAvailableProjectsParameters}
             />
           </Style.ElementContainer>))}
         {isUserAdminOfProject(currentUser, project) && <Style.ElementContainer>
             <AddAuditParameterRow
               projectId={project.uuid}
-              availableAuditParameters={availableAuditParameters}
+              availableAuditParameters={filteredAvailableProjectsParameters}
             />
           </Style.ElementContainer>}
       </Style.ProjectSettingsBlock>

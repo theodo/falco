@@ -29,6 +29,7 @@
 - 👥 Invite the whole team so that everyone (devs, ops, product, marketing…) is involved in performance
 - 🗺 Audit the performance of individual URLs or entire user journeys ([even on Single Page Apps!](https://css-tricks.com/recipes-for-performance-testing-single-page-applications-in-webpagetest/))
 - 📸 Easily access and compare WebPageTest results between audits
+- 🙈 Can be used with your own Private Instance of WebPageTest
 
 You can try a demo version by logging in to https://falco.theo.do with the credentials `demo / demodemo`.
 
@@ -39,6 +40,8 @@ You can deploy Falco on Heroku by clicking on the following button:
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/theodo/falco/tree/1.0.3)
 
 You will need to provide your credit card details to Heroku, but you will be under the free tier by default. You can find more details on why they are needed and Heroku’s pricing policy [in the docs](https://getfal.co).
+
+After deployment, you can connect to Falco (and the admin interface at `/admin/`) with the credentials `admin` and `admin`: make sure to change your password after connecting!
 
 <details>
 <summary>Heroku Teams user? Click here to deploy Falco.</summary>

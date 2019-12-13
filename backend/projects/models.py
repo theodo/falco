@@ -14,6 +14,9 @@ class Project(BaseModel):
         User, blank=True, related_name="member_of", through="ProjectMemberRole"
     )
     is_active = models.BooleanField(default=True)
+    wpt_instance_url = models.CharField(
+        max_length=100, blank=False, null=False, default="https://webpagetest.org"
+    )
 
     @property
     def latest_audit_at(self):
@@ -108,6 +111,9 @@ class AvailableAuditParameters(BaseModel):
     location_label = models.CharField(max_length=100, blank=False, null=False)
     location_group = models.CharField(max_length=100, blank=False, null=False)
     is_active = models.BooleanField(default=True)
+    wpt_instance_url = models.CharField(
+        max_length=100, blank=False, null=False, default="https://webpagetest.org"
+    )
 
     class Meta:
         ordering = ("location", "browser")

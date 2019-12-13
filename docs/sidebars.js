@@ -21,5 +21,9 @@ module.exports = {
       'api-reference/api-docs',
       'api-reference/swagger-ui'
     ],
+    'WebPageTest Private Instances': [
+      'wpt-private-instances/about-wpt-private-instances',
+      'wpt-private-instances/setting-up-falco-for-private-instances'
+    ]
   },
 };

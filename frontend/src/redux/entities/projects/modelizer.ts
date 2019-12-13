@@ -10,7 +10,8 @@ export const modelizeProject = (project: ApiProjectType): Record<string, Project
     screenshotUrl: project.screenshot_url,
     latestAuditAt: project.latest_audit_at,
     projectMembers: project.project_members.map(apiProjectMember => modelizeProjectMember(apiProjectMember)),
-    wptApiKey: project.wpt_api_key
+    wptApiKey: project.wpt_api_key,
+    wptInstanceURL: project.wpt_instance_url
   },
 });
 
