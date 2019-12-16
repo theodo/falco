@@ -3,6 +3,8 @@
 .DS_Store
 .env
 .env.prod
+node_modules/
+
 postgres-data/
 backend/celerybeat-schedule
 backend/celerybeat.pid
