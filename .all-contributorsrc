@@ -128,11 +128,21 @@
       "contributions": [
         "ideas"
       ]
+    },
+    {
+      "login": "toqueteos",
+      "name": "Carlos Cobo",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/699969?v=4",
+      "profile": "https://toqueteos.es",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
   "projectName": "falco",
   "projectOwner": "theodo",
   "repoType": "github",
-  "repoHost": "https://github.com"
+  "repoHost": "https://github.com",
+  "skipCi": true
 }
