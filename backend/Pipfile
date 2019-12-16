@@ -6,18 +6,18 @@ name = "pypi"
 [packages]
 "argon2_cffi" = "==19.1.0"
 dj-database-url = "==0.5.0"
-django = {extras = ["argon2"],version = "==2.2.8"}
+django = {extras = ["argon2"],version = "==3.0"}
 django-memoize = "==2.2.0"
 django-storages = "==1.7.1"
 "psycopg2-binary" = "==2.8.2"
 ptvsd = "==4.2.8"
 pytz = "==2019.1"
 requests = "==2.21.0"
-djangorestframework = "==3.9.2"
+djangorestframework = "==3.11.0"
 celery = {extras = ["sqs", "redis"],version = "==4.3.0"}
 django-celery-beat = "==1.4.0"
 djangorestframework-simplejwt = "==4.3.0"
-djoser = "==1.5.1"
+djoser = "==2.0.3"
 django-fernet-fields = "==0.5"
 whitenoise = "*"
 django-heroku = "*"
