@@ -26,7 +26,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django_celery_beat",
-    "memoize",
     "rest_framework",
     "djoser",
     "drf_yasg",
