@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.2] — 2019-12-17
+
+- Upgrade backend dependencies (@phacks)
+- Remove node_modules from the root of the repository (@toqueteos)
+
 ## [1.1.1] — 2019-12-13
 
 - Fix WPT Compare view not working for Private Instances (@phacks)
@@ -44,8 +49,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 🎉Initial release! 🎉
 
-[Unreleased]: https://github.com/theodo/falco/compare/1.1.1...HEAD
-[Unreleased]: https://github.com/theodo/falco/compare/1.1.1...1.1.0
+[Unreleased]: https://github.com/theodo/falco/compare/1.1.2...HEAD
+[1.1.2]: https://github.com/theodo/falco/compare/1.1.2...1.1.1
+[1.1.1]: https://github.com/theodo/falco/compare/1.1.1...1.1.0
 [1.1.0]: https://github.com/theodo/falco/compare/1.0.3...1.1.0
 [1.0.3]: https://github.com/theodo/falco/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/theodo/falco/compare/1.0.1...1.0.2
