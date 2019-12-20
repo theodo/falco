@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.3] — 2019-12-20
+
+-  [Security] Bump Django to 3.0.1 (#101) (@phacks)
+-  Fix `from_date` not working for scripts (#103) (@phacks)
+-  Activate gzip compression on API calls (#104) (@phacks)
+
 ## [1.1.2] — 2019-12-17
 
 - Upgrade backend dependencies (@phacks)
@@ -49,7 +55,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 🎉Initial release! 🎉
 
-[Unreleased]: https://github.com/theodo/falco/compare/1.1.2...HEAD
+[Unreleased]: https://github.com/theodo/falco/compare/1.1.3...HEAD
+[1.1.3]: https://github.com/theodo/falco/compare/1.1.3...1.1.2
 [1.1.2]: https://github.com/theodo/falco/compare/1.1.2...1.1.1
 [1.1.1]: https://github.com/theodo/falco/compare/1.1.1...1.1.0
 [1.1.0]: https://github.com/theodo/falco/compare/1.0.3...1.1.0
