@@ -47,11 +47,15 @@ def format_wpt_json_results_for_page(data):
             ]["max-potential-fid"]["score"],
         }
     wpt_metrics = {
-        "wpt_metric_first_view_tti": data["median"]["firstView"].get("FirstInteractive")
+        "wpt_metric_first_view_tti": data["median"]["firstView"].get(
+            "TimeToInteractive"
+        )
+        or data["median"]["firstView"].get("FirstInteractive")
         or data["median"]["firstView"].get("LastInteractive"),
         "wpt_metric_repeat_view_tti": data["median"]["repeatView"].get(
-            "FirstInteractive"
+            "TimeToInteractive"
         )
+        or data["median"]["repeatView"].get("FirstInteractive")
         or data["median"]["repeatView"].get("LastInteractive"),
         "wpt_metric_first_view_speed_index": data["median"]["firstView"]["SpeedIndex"],
         "wpt_metric_repeat_view_speed_index": data["median"]["repeatView"][
