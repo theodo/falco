@@ -164,7 +164,10 @@ def audits_results(request):
             check_if_member_of_project(request.user.id, script.project.uuid)
             audits = Audit.objects.filter(script=script_uuid)
             if audit_parameters_uuid:
-                audits = audits.filter(parameters=audit_parameters_uuid)
+                audits = audits.filter(parameters=audit_parameters_uuid).filter(
+                    created_at__gte=from_date,
+                    created_at__lte=(to_date + datetime.timedelta(days=1)),
+                )
             audits_results = AuditResults.objects.filter(audit__in=audits)
             serializer = AuditResultsSerializer(audits_results, many=True)
 
