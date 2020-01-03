@@ -1,5 +1,5 @@
 # First stage: collect static files in base image
-FROM node:8.12 AS node
+FROM node:12.14 AS node
 
 
 WORKDIR /code
