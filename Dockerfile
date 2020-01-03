@@ -1,5 +1,5 @@
 # First stage: build front app
-FROM node:8.12-alpine AS node
+FROM node:12.14-alpine AS node
 
 WORKDIR /code
 
