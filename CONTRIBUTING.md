@@ -22,6 +22,13 @@ This section will guide you through installing Falco on your development machine
 
 ### First installation
 
+**Prerequisites**:
+
+- `node >=12.14` — It should work fine on older versions, however it was not tested recently. You can use [`nvm`](https://github.com/nvm-sh/nvm) to install and manage node versions on your machine.
+- `docker` ([installation docs](https://docs.docker.com/install/)).
+
+**Install steps**:
+
 - Clone the repository:
   ```bash
   git clone git@github.com:theodo/falco.git
