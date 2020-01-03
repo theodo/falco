@@ -7,9 +7,10 @@
 
 module.exports = {
   docs: {
-    Introduction: [
+    'Introduction': [
       'introduction/motivation', 
-      'introduction/what-is-webpagetest'
+      'introduction/what-is-webpagetest',
+      'introduction/using-webpagetest',
     ],
     'Getting Started': [
       'getting-started/installation',
