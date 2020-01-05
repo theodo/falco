@@ -96,7 +96,7 @@ Without a valid SSL certificate, the application will not work.
 The first time the application starts, you will need to manually run the migrations and add some data:
 
 ```sh
-docker-composer exec backend sh
+docker-compose exec backend sh
 
 # You are now inside the Docker container
 ./manage.py migrate --noinput
