@@ -15,8 +15,8 @@ import styles from "./styles.module.css";
 
 const features = [
   {
-    title: "Fine-grained monitoring",
-    imageUrl: "img/monitoring.svg",
+    title: "Automatically run audits multiple times a day",
+    imageUrl: "img/analysis.svg",
     description: (
       <>
         Falco runs performance audits several times a day, and offers a
@@ -25,26 +25,56 @@ const features = [
     )
   },
   {
-    title: "Detailed analysis",
-    imageUrl: "img/analysis.svg",
+    title: "Monitor key performance metrics",
+    imageUrl: "img/monitoring.svg",
     description: (
       <>
-        Falco enables you to access the full WebPageTest results of each audit,
-        allowing you to analyze the performance of your app whenever you need
-        to.
+        Falco monitors key performance metrics, and lets you choose which one you want
+        to monitor—Time to Interactive, First Meaningful Paint, Speed Index…
       </>
     )
   },
   {
-    title: "Before/after comparisons",
-    imageUrl: "img/comparisons.svg",
+    title: "Invite and involve your whole team",
+    imageUrl: "img/team.svg",
+    description: (
+      <>
+        Invite your team to Falco to make collaboration around performance issues
+        better, with fine-grained user rights management.
+      </>
+    )
+  },
+  {
+    title: "Audit individual URLs or entire user journeys",
+    imageUrl: "img/user_journey.svg",
+    description: (
+      <>
+        You can both test the performance of individual, public URLs or complete
+        user journeys—it even works for Single Page Apps!
+      </>
+    )
+  },
+  {
+    title: "View and compare WebPageTest results",
+    imageUrl: "img/compare.svg",
     description: (
       <>
         Compare side-by-side the WebPageTest results of your app before and
         after a specific release to see its impact on performance.
       </>
     )
+  },
+  {
+    title: "Use your own WebPageTest Private Instance",
+    imageUrl: "img/private.svg",
+    description: (
+      <>
+        You can choose to use your own WebPageTest Private Instance for more frequent audits,
+        or rely on the public one.
+      </>
+    )
   }
+
 ];
 
 function Home() {
@@ -109,7 +139,7 @@ function Home() {
             </div>
             <div className={classnames("row", styles.usersImages)}>
               <div
-                className="col col--2 col--offset-2"
+                className="col col--2"
                 style={{ display: "flex", justifyContent: "center", marginBottom: "30px"}}
               >
                 <img
@@ -142,6 +172,24 @@ function Home() {
                 <img
                   src={useBaseUrl("img/voodoo.png")}
                   alt="Voodoo logo"
+                />
+              </div>
+              <div
+                className="col col--2"
+                style={{ display: "flex", justifyContent: "center", marginBottom: "30px" }}
+              >
+                <img
+                  src={useBaseUrl("img/evaneos.png")}
+                  alt="Evaneos logo"
+                />
+              </div>
+              <div
+                className="col col--2"
+                style={{ display: "flex", justifyContent: "center", marginBottom: "30px" }}
+              >
+                <img
+                  src={useBaseUrl("img/oscaro.png")}
+                  alt="Oscaro logo"
                 />
               </div>
             </div>

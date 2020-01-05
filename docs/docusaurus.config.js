@@ -51,6 +51,10 @@ module.exports = {
               label: 'REST API',
               to: '/docs/api-reference/api-docs',
             },
+            {
+              label: 'WebPageTest Private Instances',
+              to: '/docs/wpt-private-instances/about-wpt-private-instances',
+            },
           ],
         },
         {
@@ -76,7 +80,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/theodo/falco/edit/master/docs/docs/',
+          editUrl: 'https://github.com/theodo/falco/edit/master/docs/',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
         },
