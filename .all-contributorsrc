@@ -137,6 +137,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "whysthatso",
+      "name": "Andreas Wagner",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1685114?v=4",
+      "profile": "http://www.andreaswagner.name",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
