@@ -51,6 +51,10 @@ module.exports = {
               label: 'REST API',
               to: '/docs/api-reference/api-docs',
             },
+            {
+              label: 'WebPageTest Private Instances',
+              to: '/docs/wpt-private-instances/about-wpt-private-instances',
+            },
           ],
         },
         {
