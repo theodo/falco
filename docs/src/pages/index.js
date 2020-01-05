@@ -139,7 +139,7 @@ function Home() {
             </div>
             <div className={classnames("row", styles.usersImages)}>
               <div
-                className="col col--2 col--offset-2"
+                className="col col--2"
                 style={{ display: "flex", justifyContent: "center", marginBottom: "30px"}}
               >
                 <img
@@ -172,6 +172,24 @@ function Home() {
                 <img
                   src={useBaseUrl("img/voodoo.png")}
                   alt="Voodoo logo"
+                />
+              </div>
+              <div
+                className="col col--2"
+                style={{ display: "flex", justifyContent: "center", marginBottom: "30px" }}
+              >
+                <img
+                  src={useBaseUrl("img/evaneos.png")}
+                  alt="Evaneos logo"
+                />
+              </div>
+              <div
+                className="col col--2"
+                style={{ display: "flex", justifyContent: "center", marginBottom: "30px" }}
+              >
+                <img
+                  src={useBaseUrl("img/oscaro.png")}
+                  alt="Oscaro logo"
                 />
               </div>
             </div>
