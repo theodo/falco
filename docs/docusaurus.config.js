@@ -76,7 +76,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/theodo/falco/edit/master/docs/docs/',
+          editUrl: 'https://github.com/theodo/falco/edit/master/docs/',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
         },
