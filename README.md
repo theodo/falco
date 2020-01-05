@@ -86,6 +86,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="http://alberic.trancart.net/"><img src="https://avatars1.githubusercontent.com/u/6317823?v=4" width="100px;" alt=""/><br /><sub><b>Albéric Trancart</b></sub></a><br /><a href="#ideas-AlbericTrancart" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://toqueteos.es"><img src="https://avatars3.githubusercontent.com/u/699969?v=4" width="100px;" alt=""/><br /><sub><b>Carlos Cobo</b></sub></a><br /><a href="https://github.com/theodo/falco/commits?author=toqueteos" title="Code">💻</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="http://www.andreaswagner.name"><img src="https://avatars1.githubusercontent.com/u/1685114?v=4" width="100px;" alt=""/><br /><sub><b>Andreas Wagner</b></sub></a><br /><a href="https://github.com/theodo/falco/commits?author=whysthatso" title="Documentation">📖</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-enable -->
