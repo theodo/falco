@@ -73,6 +73,11 @@ module.exports = {
       },
       copyright: `Copyright © ${new Date().getFullYear()} Theodo. Built with Docusaurus.`,
     },
+    algolia: {
+      apiKey: '155e292a0c73c552b48c218cdfc2b4fb',
+      indexName: 'getfal',
+      algoliaOptions: {}, // Optional, if provided by Algolia
+    },
   },
   presets: [
     [
