@@ -27,7 +27,7 @@ WPT service provides numerouse options for running your tests ( location, bandwi
 
 To create your first project, head to `<your Falco instance URL>/admin/` and connect to the admin interface. Then click on the `+ Add` button in the `Projects` section, and you should see the following form:
 
-![The form used to create a project](/img/create-project.png)
+![The form used to create a project](/docs/static/img/create-project.png)
 
 The form fields are as follow:
 
