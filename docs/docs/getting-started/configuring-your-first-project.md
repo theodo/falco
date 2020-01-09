@@ -19,7 +19,9 @@ WPT service provides numerouse options for running your tests ( location, bandwi
 1. mark checkbox for `Get all wpt audit configurations: 0 1 * * * (m/h/d/dM/MY) UTC` 
 1. from combobox (dropdown list) choose to Run the task
 
-![Run import task](/img/wpt-update.png)
+
+![Run import task](/docs/static/img/wpt-update.png)
+
 
 ## Creating your first project
 
