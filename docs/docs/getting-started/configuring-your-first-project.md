@@ -17,7 +17,7 @@ This email contains your WebPageTest API Key that we will use in the next sectio
 WPT service provides numerouse options for running your tests ( location, bandwidth ), so you **must** import this data into your setup. To do this, via admin interface:
 1. Head to `<your Falco instance URL>/admin/django_celery_beat/periodictask/` 
 1. Check the `Get all wpt audit configurations: 0 1 * * * (m/h/d/dM/MY) UTC` checkbox
-1. from combobox (dropdown list) choose to Run the task
+1. Choose the Run the task option from the dropdown list
 
 
 ![Run import task](/docs/static/img/wpt-update.png)
