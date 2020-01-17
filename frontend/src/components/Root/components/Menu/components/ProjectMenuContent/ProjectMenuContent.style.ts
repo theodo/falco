@@ -59,7 +59,7 @@ export const Audits = styled.div`
 `;
 
 export const AuditsAndScriptsContainer = styled.div`
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 export const LaunchAuditsButton = styled.button`
