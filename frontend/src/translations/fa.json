@@ -31,23 +31,23 @@
     "sign_up_error": "متاسفانه ثبت نام انجام نشد.\nلطفا مجددا تلاش کنید."
   },
   "Menu": {
-    "audit_parameters_selection": "Audits environment",
+    "audit_parameters_selection": "محیط حسابرسی",
     "page_badge": "صفحه",
     "script_badge": "اسکریپت",
-    "launch_audits": "Launch audits manually",
-    "running_audits_number": "{number} running {number,plural,one {audit} other {audits}}",
+    "launch_audits": "حسابرسی ها را به صورت دستی راه اندازی کنید",
+    "running_audits_number": "{number}درحال اجرا  {number,plural,one {audit} other {audits}}",
     "manage_project_settings": "← مدیریت تنظیمات پروژه",
     "go_back_to_project": "بازگشت به صفحه پروژه →",
     "project_settings": "تنظیمات"
   },
   "Project": {
-    "project_error": "It seems that you are not authorized to access this project.\n\nPlease try again or contact your administrator to get granted.",
-    "no_page_or_script_error": "It seems that this project is empty (no page or script configured).\n\nPlease try again or contact your administrator to solve this issue.",
-    "no_audit_parameters_error": "It seems that this project has no audit parameters configured.\n\nPlease try again or contact your administrator to solve this issue."
+    "project_error": "به نظر می رسد شما اجازه دسترسی به این پروژه را ندارید.\n\nلطفا دوباره تلاش کنید یا با مدیر تماس بگیرید تا دسترسی به شما اعطا شود.",
+    "no_page_or_script_error": "به نظر می رسد که این پروژه خالی است (هیچ صفحه یا اسکریپتی پیکربندی نشده است).\n\nلطفا مجددا تلاش کنید یا با مدیر تماس بگیرید تا مشکل رفع شود.",
+    "no_audit_parameters_error": "به نظر می رسد که این پروژه هیچ پارامتر حسابرسی پیکربندی شده ای ندارد.\n\nلطفا مجددا تلاش کنید یا با مدیر تماس بگیرید تا مشکل رفع شود."
   },
   "Projects": {
-    "no_project_error": "It seems that you have no access to any project.\n\nPlease try again or contact your administrator to get granted.",
-    "title": "Projects"
+    "no_project_error": "به نظر می رسد که شما به هیچ پروژه ای دسترسی ندارید.\n\nلطفا دوباره تلاش کنید یا با مدیر تماس بگیرید تا دسترسی به شما اعطا شود.",
+    "title": "پروژه ها"
   },
   "ProjectSettings": {
     "settings": "تنظیمات پروژه",
@@ -129,74 +129,74 @@
   },
   "Metrics": {
     "WPTMetricFirstViewTTI": {
-      "name": "TTI - زمان برای تعامل (نمای اولیه)",
+      "name": "TTI - زمان برای تعامل (اولین نمایش)",
       "description": "زمانی محاسبه می شود که محاسبات پردازنده و درخواست های شبکه بین آنها فاصله کمی داشته باشد (برای اولین بازدید کاربر)"
     },
     "WPTMetricRepeatViewTTI": {
-      "name": "TTI - زمان برای تعامل (Repeat View)",
+      "name": "TTI - زمان برای تعامل (تکرار نمایش)",
       "description": "زمانی محاسبه می شود که محاسبات پردازنده و درخواست های شبکه بین آنها فاصله کمی داشته باشد (زمان بازگشت به وب سایت)"
     },
     "WPTMetricFirstViewSpeedIndex": {
-      "name": "Speed Index (First View)",
-      "description": "وقتی پیکسلهای صفحه به موقعیت نهایی خود می رسند باعث ایجاد تغییر می شوند (برای اولین بازدید از وب سایت)"
+      "name": "شاخص سرعت (اولین نمایش)",
+      "description": "زمانی که پیکسلهای صفحه به موقعیت نهایی خود می رسند باعث ایجاد تغییر می شوند (برای اولین بازدید از وب سایت)"
     },
     "WPTMetricRepeatViewSpeedIndex": {
-      "name": "Speed Index (Repeat View)",
-      "description": "وقتی پیکسلهای صفحه به موقعیت نهایی خود می رسند باعث ایجاد تغییر می شوند (زمان بازگشت به وب سایت)"
+      "name": "شاخص سرعت (تکرار نمایش)",
+      "description": "زمانی که پیکسلهای صفحه به موقعیت نهایی خود می رسند باعث ایجاد تغییر می شوند (زمان بازگشت به وب سایت)"
     },
     "WPTMetricFirstViewFirstPaint": {
-      "name": "First Paint (First View)",
-      "description": "Triggered when the first pixel is drawn on the screen (for the first visit on website)"
+      "name": "اولین رنگ (اولین نمایش)",
+      "description": "زمانی که اولین پیکسل روی صفحه رسم می شود (برای اولین بازدید از وب سایت)"
     },
     "WPTMetricRepeatViewFirstPaint": {
-      "name": "First Paint (Repeat View)",
-      "description": "Triggered when the first pixel is drawn on the screen (when coming back to website)"
+      "name": "اولین نمایش (تکرار نمایش)",
+      "description": "زمانی که اولین پیکسل روی صفحه رسم می شود (زمان بازگشت به وب سایت)"
     },
     "WPTMetricFirstViewFirstMeaningfulPaint": {
-      "name": "First Meaningful Paint (First View)",
-      "description": "Triggered when the “hero” element of the page (a big element at the top center) is visible (for the first visit on website)"
+      "name": "اولین رنگ معنی دار (اولین نمایش)",
+      "description": "زمانی که عنصر “قهرمان“ صفحه (عنصر بزرگی در مرکز بالا) قابل مشاهده باشد (برای اولین بازدید از وب سایت)"
     },
     "WPTMetricRepeatViewFirstMeaningfulPaint": {
-      "name": "First Meaningful Paint (Repeat View)",
-      "description": "Triggered when the “hero” element of the page (a big element at the top center) is visible (when coming back to website)"
+      "name": "اولین رنگ معنی دار (تکرار نمایش)",
+      "description": "زمانی که عنصر “قهرمان“ صفحه (عنصر بزرگی در مرکز بالا) قابل مشاهده باشد (زمان بازگشت به وب سایت)"
     },
     "WPTMetricFirstViewLoadTime": {
-      "name": "Load Time (First View)",
-      "description": "Triggered when network is quiet and page is fully loaded (for the first visit on website)"
+      "name": "Load Time (اولین نمایش)",
+      "description": "زمانی که شبکه خاموش است و صفحه به طور کامل بارگیری می شود (برای اولین بازدید از وب سایت)"
     },
     "WPTMetricRepeatViewLoadTime": {
-      "name": "Load Time (Repeat View)",
-      "description": "Triggered when network is quiet and page is fully loaded (when coming back to website)"
+      "name": "Load Time (تکرار نمایش)",
+      "description": "زمانی که شبکه خاموش است و صفحه به طور کامل بارگیری می شود (زمان بازگشت به وب سایت)"
     },
     "WPTMetricFirstViewFirstContentfulPaint": {
-      "name": "First Contentful Paint (First View)",
-      "description": "Triggered when the first DOM element (text, image, ...) is drawn on the screen (for the first visit on website)"
+      "name": "اولین رنگ محتوا (اولین نمایش)",
+      "description": "زمانی که اولین عنصر DOM (متن ، تصویر ، ...) روی صفحه ترسیم شود ، ترسیم می شود (برای اولین بازدید از وب سایت)"
     },
     "WPTMetricRepeatViewFirstContentfulPaint": {
-      "name": "First Contentful Paint (Repeat View)",
-      "description": "Triggered when the first DOM element (text, image, ...) is drawn on the screen (when coming back to website)"
+      "name": "اولین رنگ محتوا (تکرار نمایش)",
+      "description": "زمانی که اولین عنصر DOM (متن ، تصویر ، ...) روی صفحه ترسیم شود ، ترسیم می شود (زمان بازگشت به وب سایت)"
     },
     "WPTMetricFirstViewTimeToFirstByte": {
       "name": "زمان برای اولین بایت (اولین نمایش)",
-      "description": "Triggered when the browser receives the first byte from the server, usually HTML (for the first visit on website)"
+      "description": "وقتی مرورگر اولین بایت را از سرور دریافت می کند ، معمولا HTML (برای اولین بازدید از وب سایت)"
     },
     "WPTMetricRepeatViewTimeToFirstByte": {
       "name": "زمان برای اولین بایت (تکرار نمایش)",
-      "description": "Triggered when the browser receives the first byte from the server, usually HTML (when coming back to website)"
+      "description": "وقتی مرورگر اولین بایت را از سرور دریافت می کند ، معمولا HTML (زمان بازگشت به وب سایت)"
     },
     "WPTMetricFirstViewVisuallyComplete": {
-      "name": "Visually Complete (First View)",
-      "description": "Triggered when 100% of the pixels on the page reached their final position (for the first visit on website)"
+      "name": "چشمی کامل است (اولین نمایش)",
+      "description": "زمانی که ۱۰۰٪‌ پیکسلهای صفحه به موقعیت نهایی خود رسیده اند (برای اولین بازدید از وب سایت)"
     },
     "WPTMetricRepeatViewVisuallyComplete": {
-      "name": "Visually Complete (Repeat View)",
-      "description": "Triggered when 100% of the pixels on the page reached their final position (for the first visit on website)"
+      "name": "چشمی کامل است (تکرار نمایش)",
+      "description": "زمانی که ۱۰۰٪‌ پیکسلهای صفحه به موقعیت نهایی خود رسیده اند (زمان بازگشت به وب سایت)"
     },
     "WPTMetricLighthousePerformance": {
       "name": "امتیار عملکرد Lighthouse",
-      "description": "Aggregates many of other performance metrics, simulates middle-end device & poor network conditions.\nMeasured via Dev Tools or https://web.dev/fast"
+      "description": "بسیاری از معیارهای عملکرد دیگر را جمع می کند ، دستگاه رده متوسط و شرایط شبکه را شبیه سازی می کند.\nاندازه گیری از طریق Dev tools یا https://web.dev/fast"
     },
-    "lighthouseFirstContentfulPaint": "First Contentful Paint",
+    "lighthouseFirstContentfulPaint": "اولین رنگ محتوا",
     "lighthouseSpeedIndex": "Speed Index",
     "lighthouseTTI": "زمان برای تعامل",
     "lighthouseFirstMeaningfulPaint": "اولین رنگ معنی دار",
