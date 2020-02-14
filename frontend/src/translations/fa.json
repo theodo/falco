@@ -1,0 +1,246 @@
+{
+  "Header": {
+    "logo_title_landing": "Home page",
+    "logo_title_app": "Refresh the page",
+    "login_link": "LOG IN",
+    "login_button": "MY ACCOUNT",
+    "projects_button": "MY PROJECTS",
+    "last_audit_intro": "Last audit",
+    "logout_link": "Log out",
+    "see_the_docs": "See the docs",
+    "signup_link": "SIGN UP"
+  },
+  "Login": {
+    "username_label": "Username",
+    "password_label": "Password",
+    "connect_button": "LOG IN",
+    "connect_button_running": "LOGGING IN",
+    "error_username_required": "You must provide a username",
+    "error_password_required": "You must type password",
+    "login_error": "Those credentials seem incorrect.\nPlease try again."
+  },
+  "SignUp": {
+    "username_label": "Username",
+    "email_label": "Email address",
+    "password_label": "Password",
+    "connect_button": "SIGN UP",
+    "connect_button_running": "SIGNING UP",
+    "error_username_required": "You must provide a username",
+    "error_email_required": "You must provide an email address",
+    "error_password_required": "You must provide a password",
+    "sign_up_error": "Unable to sign you up.\nPlease try again."
+  },
+  "Menu": {
+    "audit_parameters_selection": "Audits environment",
+    "page_badge": "PAGE",
+    "script_badge": "SCRIPT",
+    "launch_audits": "Launch audits manually",
+    "running_audits_number": "{number} running {number,plural,one {audit} other {audits}}",
+    "manage_project_settings": "Manage project settings →",
+    "go_back_to_project": "← Go back to project page",
+    "project_settings": "Settings"
+  },
+  "Project": {
+    "project_error": "It seems that you are not authorized to access this project.\n\nPlease try again or contact your administrator to get granted.",
+    "no_page_or_script_error": "It seems that this project is empty (no page or script configured).\n\nPlease try again or contact your administrator to solve this issue.",
+    "no_audit_parameters_error": "It seems that this project has no audit parameters configured.\n\nPlease try again or contact your administrator to solve this issue."
+  },
+  "Projects": {
+    "no_project_error": "It seems that you have no access to any project.\n\nPlease try again or contact your administrator to get granted.",
+    "title": "Projects"
+  },
+  "ProjectSettings": {
+    "settings": "Project settings",
+    "general_settings": "General",
+    "name": "Project name",
+    "wpt_key": "WebPageTest API Key",
+    "wpt_instance_url": "WebPageTest instance URL",
+    "wpt_instance_url_explanation": "If you don’t use a private WebPageTest instance, leave the default value “https://webpagetest.org”. If you want to use a private instance, enter its URL without the trailing slash. If you change the instance at some point in time, don’t forget to update the audit environments in the “Project environments” tab.",
+    "project_audit_parameters": "Project environments",
+    "pages_and_scripts": "Project pages and scripts",
+    "scripts": "Project scripts",
+    "script": "Script",
+    "script_name": "Script name",
+    "script_modal_title": "Script creation",
+    "script_name_placeholder": "Enter script name",
+    "script_confirm_creation": "Create script",
+    "script_confirm_edition": "Edit script",
+    "add_script": "Add script to projet",
+    "audit_parameter_name": "Environment name",
+    "configuration": "Configuration",
+    "project_members": "Project members",
+    "network_type": "Network type",
+    "audit_parameter_name_placeholder": "Name",
+    "audit_parameter_network_shape_placeholder": "Network shape",
+    "audit_parameter_configuration_placeholder": "Configuration",
+    "add_audit_parameter": "Add audit parameter to project",
+    "pages": "Pages",
+    "page_name": "Page name",
+    "page_name_placeholder": "Name",
+    "page_url": "Page url",
+    "page_url_placeholder": "Url",
+    "member_in_project": " (Already in project)",
+    "member_username": "Username",
+    "member_email": "Email",
+    "member_status": "Status",
+    "admin": "Admin",
+    "add_member": "Add user...",
+    "add_page": "Add page to project",
+    "member_not_on_falco": "User not on Falco ? You can send them the following link so that they can create their account : "
+  },
+  "Audits": {
+    "title": "Dashboard for the last week",
+    "page_or_script_unavailable": "The page or the script you requested seems unavailable for this project.\n\nPlease try again or contact your administrator to solve this issue.",
+    "audit_parameters_unavailable": "The audit parameters you requested seem unavailable for this project.\n\nPlease try again or contact your administrator to solve this issue.",
+    "no_audit": "No audit data is available for this page/script and for this audits environment.\n\nPlease try again later.",
+    "pick_right_metrics": "How to pick the right metrics? →",
+    "MetricsModal": {
+      "add_delete_metrics": "Add / Delete metrics",
+      "cancel_button": "Cancel",
+      "validate_button": "Validate"
+    },
+    "webpagetest_analysis": "Analysis",
+    "webpagetest_results": "Access results",
+    "webpagetest_detailed_results": "Detailed results (on WebPageTest)",
+    "webpagetest_latest_audit": "Latest audit",
+    "webpagetest_choose_results": "Choose the type of result",
+    "webpagetest_dateSelector_audit": "Select a date",
+    "webpagetest_date_format": "{day} at {time}",
+    "script_step_selection": "Script step to display",
+    "webpagetest_select_date": "Choose the date of the audit",
+    "webpagetest_select_dates": "Choose the dates of the audits",
+    "webpagetest_date_label": "Audit date",
+    "webpagetest_dateComparator_audit": "Compare several audits",
+    "lighthouse_report": "Lighthouse Report",
+    "lighthouse_note": "Note: data provided by Lighthouse may differ from the Dashboard data. This is due to a different audit environment. Diagnostics and opportunities are still relevant, even though the indicated metric improvements may differ from the real results.",
+    "lighthouse_performance": "Performance",
+    "lighthouse_results": "Access report",
+    "lighthouse_header": "Metrics",
+    "AuditStatusHistory": {
+      "last_audit_successful": "The last audit was successful",
+      "audit_running": "An audit is currently running",
+      "audit_failure": "The last audit failed",
+      "audit_requested": "Audit requested",
+      "audit_in_queue": "Waiting in queue",
+      "audit_in_queue_behind": "Waiting in queue behind {positionInQueue} {positionInQueue,plural,one {test} other {tests}}",
+      "audit_started": "Audit started {runningTime} seconds ago",
+      "audit_tests_running": "Audit running, {completedTests} {completedTests,plural,one {test} other {tests}} completed on {totalTests}"
+    }
+  },
+  "Metrics": {
+    "WPTMetricFirstViewTTI": {
+      "name": "TTI - Time To Interactive (First View)",
+      "description": "Triggered when CPU computations and network requests are few and far between (for the first visit on website)"
+    },
+    "WPTMetricRepeatViewTTI": {
+      "name": "TTI - Time To Interactive (Repeat View)",
+      "description": "Triggered when CPU computations and network requests are few and far between (when coming back to website)"
+    },
+    "WPTMetricFirstViewSpeedIndex": {
+      "name": "Speed Index (First View)",
+      "description": "Triggered when pixels of the page reach their final position (for the first visit on website)"
+    },
+    "WPTMetricRepeatViewSpeedIndex": {
+      "name": "Speed Index (Repeat View)",
+      "description": "Triggered when pixels of the page reach their final position (when coming back to website)"
+    },
+    "WPTMetricFirstViewFirstPaint": {
+      "name": "First Paint (First View)",
+      "description": "Triggered when the first pixel is drawn on the screen (for the first visit on website)"
+    },
+    "WPTMetricRepeatViewFirstPaint": {
+      "name": "First Paint (Repeat View)",
+      "description": "Triggered when the first pixel is drawn on the screen (when coming back to website)"
+    },
+    "WPTMetricFirstViewFirstMeaningfulPaint": {
+      "name": "First Meaningful Paint (First View)",
+      "description": "Triggered when the “hero” element of the page (a big element at the top center) is visible (for the first visit on website)"
+    },
+    "WPTMetricRepeatViewFirstMeaningfulPaint": {
+      "name": "First Meaningful Paint (Repeat View)",
+      "description": "Triggered when the “hero” element of the page (a big element at the top center) is visible (when coming back to website)"
+    },
+    "WPTMetricFirstViewLoadTime": {
+      "name": "Load Time (First View)",
+      "description": "Triggered when network is quiet and page is fully loaded (for the first visit on website)"
+    },
+    "WPTMetricRepeatViewLoadTime": {
+      "name": "Load Time (Repeat View)",
+      "description": "Triggered when network is quiet and page is fully loaded (when coming back to website)"
+    },
+    "WPTMetricFirstViewFirstContentfulPaint": {
+      "name": "First Contentful Paint (First View)",
+      "description": "Triggered when the first DOM element (text, image, ...) is drawn on the screen (for the first visit on website)"
+    },
+    "WPTMetricRepeatViewFirstContentfulPaint": {
+      "name": "First Contentful Paint (Repeat View)",
+      "description": "Triggered when the first DOM element (text, image, ...) is drawn on the screen (when coming back to website)"
+    },
+    "WPTMetricFirstViewTimeToFirstByte": {
+      "name": "Time to First Byte (First View)",
+      "description": "Triggered when the browser receives the first byte from the server, usually HTML (for the first visit on website)"
+    },
+    "WPTMetricRepeatViewTimeToFirstByte": {
+      "name": "Time to First Byte (Repeat View)",
+      "description": "Triggered when the browser receives the first byte from the server, usually HTML (when coming back to website)"
+    },
+    "WPTMetricFirstViewVisuallyComplete": {
+      "name": "Visually Complete (First View)",
+      "description": "Triggered when 100% of the pixels on the page reached their final position (for the first visit on website)"
+    },
+    "WPTMetricRepeatViewVisuallyComplete": {
+      "name": "Visually Complete (Repeat View)",
+      "description": "Triggered when 100% of the pixels on the page reached their final position (for the first visit on website)"
+    },
+    "WPTMetricLighthousePerformance": {
+      "name": "Lighthouse Performance Score",
+      "description": "Aggregates many of other performance metrics, simulates middle-end device & poor network conditions.\nMeasured via Dev Tools or https://web.dev/fast"
+    },
+    "lighthouseFirstContentfulPaint": "First Contentful Paint",
+    "lighthouseSpeedIndex": "Speed Index",
+    "lighthouseTTI": "Time To Interactive",
+    "lighthouseFirstMeaningfulPaint": "First Meaningful Paint",
+    "lighthouseFirstCPUIdle": "First CPU Idle",
+    "lighthouseMaxPotentialFirstInputDelay": "Max Potential First Input Delay"
+  },
+  "Welcome": {
+    "title": "Welcome to Falco !",
+    "no_project": "You don't have access to any project for now.",
+    "create_project": "To create a new project, please contact Jaafar (jaafarr@theodo.fr) or Nicolas (nicolasgo@theodo.fr).",
+    "join_project": "To join an existing project, please contact the project administrator."
+  },
+  "Toastr": {
+    "ProjectSettings":{
+      "success_title": "Success",
+      "error_title": "Failure",
+      "error_message": "An error occured, please try again",
+      "add_member_success_message": "The user has been added successfully to the project",
+      "edit_page_success_message": "The page has been edited successfully",
+      "edit_project_details_success": "The project has been edited successfully",
+      "add_page_success_message": "The page has been created successfully",
+      "add_audit_parameter_to_project_success": "The audit parameter has been created successfully",
+      "delete_audit_parameter_success": "The audit parameter has been deleted successfully",
+      "add_script_to_project_sucess": "The script has been created successfully",
+      "edit_script_sucess": "The script has been edited successfully",
+      "delete_script_sucess": "The script has been deleted successfully",
+      "delete_script_confirm_question": "Do you really want to delete this script?",
+      "edit_audit_parameter_success": "The audit parameter has been edited successfully",
+      "delete_page_success_message": "The page has been deleted successfully",
+      "delete_page_confirm_question": "Do you really want to delete the page?",
+      "delete_auditParameter_confirm_question": "Are you sure you want to delete that line? Associated audit data will be deleted permanently."
+    }
+  },
+  "components": {
+    "MetricGraph": {
+      "tooltip_date": "On {day} at {time}",
+      "metric_info_title": "Details",
+      "expand": "Show all data",
+      "close": "Close"
+    }
+  },
+  "NotFound": {
+    "title": "404 Not Found",
+    "subtitle": "Sorry, this page does not exist",
+    "button": "Back to Homepage"
+  }
+}
