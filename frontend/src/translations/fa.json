@@ -1,0 +1,246 @@
+{
+  "Header": {
+    "logo_title_landing": "صفحه اصلی",
+    "logo_title_app": "بروز کردن صفحه",
+    "login_link": "ورود",
+    "login_button": "حساب من",
+    "projects_button": "پروژه های من",
+    "last_audit_intro": "آخرین حسابرسی",
+    "logout_link": "خروج",
+    "see_the_docs": "مطالعه اسناد",
+    "signup_link": "ثبت نام"
+  },
+  "Login": {
+    "username_label": "نام کاربری",
+    "password_label": "کلمه عبور",
+    "connect_button": "ورود",
+    "connect_button_running": "ورود به سیستم",
+    "error_username_required": "شما باید یک نام کاربری وارد کنید",
+    "error_password_required": "شما باید کلمه عبور را وارد کنید",
+    "login_error": "اطلاعات وارد شده اشتباه است.\nلطفا دوباره تلاش کنید."
+  },
+  "SignUp": {
+    "username_label": "نام کاربری",
+    "email_label": "آدرس ایمیل",
+    "password_label": "کلمه عبور",
+    "connect_button": "ثبت نام",
+    "connect_button_running": "ثبت نام",
+    "error_username_required": "شما باید یک نام کاربری وارد کنید",
+    "error_email_required": "شما باید یک ایمیل وارد کنید",
+    "error_password_required": "شما باید کلمه عبور را وارد کنید",
+    "sign_up_error": "متاسفانه ثبت نام انجام نشد.\nلطفا مجددا تلاش کنید."
+  },
+  "Menu": {
+    "audit_parameters_selection": "محیط حسابرسی",
+    "page_badge": "صفحه",
+    "script_badge": "اسکریپت",
+    "launch_audits": "حسابرسی ها را به صورت دستی راه اندازی کنید",
+    "running_audits_number": "{number}درحال اجرا  {number,plural,one {audit} other {audits}}",
+    "manage_project_settings": "← مدیریت تنظیمات پروژه",
+    "go_back_to_project": "بازگشت به صفحه پروژه →",
+    "project_settings": "تنظیمات"
+  },
+  "Project": {
+    "project_error": "به نظر می رسد شما اجازه دسترسی به این پروژه را ندارید.\n\nلطفا دوباره تلاش کنید یا با مدیر تماس بگیرید تا دسترسی به شما اعطا شود.",
+    "no_page_or_script_error": "به نظر می رسد که این پروژه خالی است (هیچ صفحه یا اسکریپتی پیکربندی نشده است).\n\nلطفا مجددا تلاش کنید یا با مدیر تماس بگیرید تا مشکل رفع شود.",
+    "no_audit_parameters_error": "به نظر می رسد که این پروژه هیچ پارامتر حسابرسی پیکربندی شده ای ندارد.\n\nلطفا مجددا تلاش کنید یا با مدیر تماس بگیرید تا مشکل رفع شود."
+  },
+  "Projects": {
+    "no_project_error": "به نظر می رسد که شما به هیچ پروژه ای دسترسی ندارید.\n\nلطفا دوباره تلاش کنید یا با مدیر تماس بگیرید تا دسترسی به شما اعطا شود.",
+    "title": "پروژه ها"
+  },
+  "ProjectSettings": {
+    "settings": "تنظیمات پروژه",
+    "general_settings": "عمومی",
+    "name": "نام پروژه",
+    "wpt_key": "کلید API WebPageTest",
+    "wpt_instance_url": "آدرس نمونه WebPageTest",
+    "wpt_instance_url_explanation": "اگر شما از یک نمونه خصوصی WebPageTst استفاده نمی کنید، پیش فرض را ”https://webpagetest.org” بگذارید. اگر شما میخواهید از یک نمونه شخصی استفاده کنید آدرس آن را بدون اسلش انتهایی وارد کنید. اگر در هر زمانی آدرس نمونه شما تغییر کرد، فراموش نکنید که  محیط های حسابرسی را در زبانه محیط پروژه تغییر بدهید.",
+    "project_audit_parameters": "محیط پروژه",
+    "pages_and_scripts": "صفحات پروژه و اسکریپت ها",
+    "scripts": "اسکریپت های پروژه",
+    "script": "اسکریپت",
+    "script_name": "نام اسکریپت",
+    "script_modal_title": "ایجاد اسکریپت",
+    "script_name_placeholder": "نام اسکریپت را وارد کنید",
+    "script_confirm_creation": "ایجاد اسکریپت",
+    "script_confirm_edition": "ویرایش اسکریپت",
+    "add_script": "اضافه کردن اسکریپت به پروژه",
+    "audit_parameter_name": "نام تجهیزات",
+    "configuration": "تنظیمات",
+    "project_members": "اعضای پروژه",
+    "network_type": "نوع شبکه",
+    "audit_parameter_name_placeholder": "نام",
+    "audit_parameter_network_shape_placeholder": "شکل شبکه",
+    "audit_parameter_configuration_placeholder": "تنظیمات",
+    "add_audit_parameter": "پارامتر حسابرسی را به پروژه اضافه کن",
+    "pages": "صفحات",
+    "page_name": "نام صفحه",
+    "page_name_placeholder": "نام",
+    "page_url": "آدرس صفحه",
+    "page_url_placeholder": "Url",
+    "member_in_project": " (موجود در پروژه)",
+    "member_username": "نام کاربری",
+    "member_email": "ایمیل",
+    "member_status": "وضعیت",
+    "admin": "مدیر",
+    "add_member": "اضافه کردن کاربر...",
+    "add_page": "اضافه کردن صفحه به پروژه",
+    "member_not_on_falco": "کاربر در فالکو نیست ? می توانید لینک زیر را برای آنها ارسال کنید تا بتوانند حساب کاربری خود را ایجاد کنند : "
+  },
+  "Audits": {
+    "title": "داشبورد برای هفته گذشته",
+    "page_or_script_unavailable": "صفحه یا اسکریپتی که درخواست کردید برای این پروژه در دسترس نیست.\n\nلطفا دوباره تلاش کنید یا با مدیر تماس بگیرید تا مشکل رفع شود.",
+    "audit_parameters_unavailable": "به نظر می رسد پارامترهای حسابرسی شما درخواستی برای این پروژه در دسترس نیست.\n\nلطفا دوباره تلاش کنید یا با مدیر تماس بگیرید تا مشکل رفع شود.",
+    "no_audit": "داده های حسابرسی برای این صفحه / اسکریپت و برای این محیط حسابرسی موجود نیست.\n\nلطفا دوباره تلاش کنید.",
+    "pick_right_metrics": "چگونه معیارهای مناسب را انتخاب کنم؟ →",
+    "MetricsModal": {
+      "add_delete_metrics": "اضافه / حذف معیار",
+      "cancel_button": "لغو",
+      "validate_button": "تایید اعتبار"
+    },
+    "webpagetest_analysis": "تحلیل و بررسی",
+    "webpagetest_results": "دسترسی به نتایج",
+    "webpagetest_detailed_results": "نتایج دقیق (در WebPageTest)",
+    "webpagetest_latest_audit": "آخرین حسابرسی",
+    "webpagetest_choose_results": "انتخاب نوع نتایج",
+    "webpagetest_dateSelector_audit": "انتخاب تاریخ",
+    "webpagetest_date_format": "{day} در ساعت {time}",
+    "script_step_selection": "مرحله اسکریپت برای نمایش",
+    "webpagetest_select_date": "انتخاب تاریخ حسابرسی",
+    "webpagetest_select_dates": "انتخاب تاریخ حسابرسی ها",
+    "webpagetest_date_label": "تاریخ حسابرسی",
+    "webpagetest_dateComparator_audit": "مقایسه چندین حسابرسی",
+    "lighthouse_report": "گزارش Lighthouse",
+    "lighthouse_note": "توجه: داده های تهیه شده توسط Lighthouse ممکن است با داده های داشبورد متفاوت باشد. این به دلیل شرایط حسابرسی متفاوت است. تشخیص و فرصتها هنوز هم مرتبط هستند ، حتی اگر پیشرفت های متریک نشان داده شده ممکن است با نتایج واقعی متفاوت باشد.",
+    "lighthouse_performance": "کارایی",
+    "lighthouse_results": "گزارش دسترسی",
+    "lighthouse_header": "معیارها",
+    "AuditStatusHistory": {
+      "last_audit_successful": "آخرین حسابرسی موفقیت آمیز بود",
+      "audit_running": "یک حسابرسی درحال انجام است",
+      "audit_failure": "آخرین حسابرسی انجام نشد",
+      "audit_requested": "حسابرسی درخواست شد",
+      "audit_in_queue": "منتظر در صف",
+      "audit_in_queue_behind": "منتظر در صف، پشت {positionInQueue} {positionInQueue,plural,one {test} other {tests}}",
+      "audit_started": "حسابرسی شروع  {runningTime} ثانیه قبل شروع شد",
+      "audit_tests_running": "حسابرسی درحال انجام است, {completedTests} {completedTests,plural,one {test} other {tests}} تمام شده اند در {totalTests}"
+    }
+  },
+  "Metrics": {
+    "WPTMetricFirstViewTTI": {
+      "name": "TTI - زمان برای تعامل (اولین نمایش)",
+      "description": "زمانی محاسبه می شود که محاسبات پردازنده و درخواست های شبکه بین آنها فاصله کمی داشته باشد (برای اولین بازدید کاربر)"
+    },
+    "WPTMetricRepeatViewTTI": {
+      "name": "TTI - زمان برای تعامل (تکرار نمایش)",
+      "description": "زمانی محاسبه می شود که محاسبات پردازنده و درخواست های شبکه بین آنها فاصله کمی داشته باشد (زمان بازگشت به وب سایت)"
+    },
+    "WPTMetricFirstViewSpeedIndex": {
+      "name": "شاخص سرعت (اولین نمایش)",
+      "description": "زمانی که پیکسلهای صفحه به موقعیت نهایی خود می رسند باعث ایجاد تغییر می شوند (برای اولین بازدید از وب سایت)"
+    },
+    "WPTMetricRepeatViewSpeedIndex": {
+      "name": "شاخص سرعت (تکرار نمایش)",
+      "description": "زمانی که پیکسلهای صفحه به موقعیت نهایی خود می رسند باعث ایجاد تغییر می شوند (زمان بازگشت به وب سایت)"
+    },
+    "WPTMetricFirstViewFirstPaint": {
+      "name": "اولین رنگ (اولین نمایش)",
+      "description": "زمانی که اولین پیکسل روی صفحه رسم می شود (برای اولین بازدید از وب سایت)"
+    },
+    "WPTMetricRepeatViewFirstPaint": {
+      "name": "اولین نمایش (تکرار نمایش)",
+      "description": "زمانی که اولین پیکسل روی صفحه رسم می شود (زمان بازگشت به وب سایت)"
+    },
+    "WPTMetricFirstViewFirstMeaningfulPaint": {
+      "name": "اولین رنگ معنی دار (اولین نمایش)",
+      "description": "زمانی که عنصر “قهرمان“ صفحه (عنصر بزرگی در مرکز بالا) قابل مشاهده باشد (برای اولین بازدید از وب سایت)"
+    },
+    "WPTMetricRepeatViewFirstMeaningfulPaint": {
+      "name": "اولین رنگ معنی دار (تکرار نمایش)",
+      "description": "زمانی که عنصر “قهرمان“ صفحه (عنصر بزرگی در مرکز بالا) قابل مشاهده باشد (زمان بازگشت به وب سایت)"
+    },
+    "WPTMetricFirstViewLoadTime": {
+      "name": "Load Time (اولین نمایش)",
+      "description": "زمانی که شبکه خاموش است و صفحه به طور کامل بارگیری می شود (برای اولین بازدید از وب سایت)"
+    },
+    "WPTMetricRepeatViewLoadTime": {
+      "name": "Load Time (تکرار نمایش)",
+      "description": "زمانی که شبکه خاموش است و صفحه به طور کامل بارگیری می شود (زمان بازگشت به وب سایت)"
+    },
+    "WPTMetricFirstViewFirstContentfulPaint": {
+      "name": "اولین رنگ محتوا (اولین نمایش)",
+      "description": "زمانی که اولین عنصر DOM (متن ، تصویر ، ...) روی صفحه ترسیم شود ، ترسیم می شود (برای اولین بازدید از وب سایت)"
+    },
+    "WPTMetricRepeatViewFirstContentfulPaint": {
+      "name": "اولین رنگ محتوا (تکرار نمایش)",
+      "description": "زمانی که اولین عنصر DOM (متن ، تصویر ، ...) روی صفحه ترسیم شود ، ترسیم می شود (زمان بازگشت به وب سایت)"
+    },
+    "WPTMetricFirstViewTimeToFirstByte": {
+      "name": "زمان برای اولین بایت (اولین نمایش)",
+      "description": "وقتی مرورگر اولین بایت را از سرور دریافت می کند ، معمولا HTML (برای اولین بازدید از وب سایت)"
+    },
+    "WPTMetricRepeatViewTimeToFirstByte": {
+      "name": "زمان برای اولین بایت (تکرار نمایش)",
+      "description": "وقتی مرورگر اولین بایت را از سرور دریافت می کند ، معمولا HTML (زمان بازگشت به وب سایت)"
+    },
+    "WPTMetricFirstViewVisuallyComplete": {
+      "name": "چشمی کامل است (اولین نمایش)",
+      "description": "زمانی که ۱۰۰٪‌ پیکسلهای صفحه به موقعیت نهایی خود رسیده اند (برای اولین بازدید از وب سایت)"
+    },
+    "WPTMetricRepeatViewVisuallyComplete": {
+      "name": "چشمی کامل است (تکرار نمایش)",
+      "description": "زمانی که ۱۰۰٪‌ پیکسلهای صفحه به موقعیت نهایی خود رسیده اند (زمان بازگشت به وب سایت)"
+    },
+    "WPTMetricLighthousePerformance": {
+      "name": "امتیار عملکرد Lighthouse",
+      "description": "بسیاری از معیارهای عملکرد دیگر را جمع می کند ، دستگاه رده متوسط و شرایط شبکه را شبیه سازی می کند.\nاندازه گیری از طریق Dev tools یا https://web.dev/fast"
+    },
+    "lighthouseFirstContentfulPaint": "اولین رنگ محتوا",
+    "lighthouseSpeedIndex": "Speed Index",
+    "lighthouseTTI": "زمان برای تعامل",
+    "lighthouseFirstMeaningfulPaint": "اولین رنگ معنی دار",
+    "lighthouseFirstCPUIdle": "اولین پردازنده بیکار",
+    "lighthouseMaxPotentialFirstInputDelay": "بیشترین پتانسیل برای اولین تاخیر"
+  },
+  "Welcome": {
+    "title": "به فالکو خوش آمدید !",
+    "no_project": "درحال حاضر شما به هیچ پروژه ای دسترسی ندارید.",
+    "create_project": "برای ایجاد پروژه لطفا با جعفر  (jaafarr@theodo.fr) یا نیکولاس (nicolasgo@theodo.fr) تماس بگیرید.",
+    "join_project": "برای پیوستن به یک پروژه موجود، لطفا با مدیر پروژه تماس بگیرید."
+  },
+  "Toastr": {
+    "ProjectSettings":{
+      "success_title": "موفق",
+      "error_title": "نا موفق",
+      "error_message": "خطایی رخ داد، لطفا مجددا تلاش کنید",
+      "add_member_success_message": "کاربر با موفقیت به پروژه اضافه شد",
+      "edit_page_success_message": "صفحه با موفقیت ویرایش شد",
+      "edit_project_details_success": "پروژه با موفقیت ویرایش شد",
+      "add_page_success_message": "صفه با موفقیت ایجاد شد",
+      "add_audit_parameter_to_project_success": "پارامتر حسابرسی با موفقیت ایجاد شد",
+      "delete_audit_parameter_success": "پارامتر حسابرسی حذف گردید",
+      "add_script_to_project_sucess": "اسکریپت با موفقیت ایجاد شد",
+      "edit_script_sucess": "اسکریپت با موفقیت ویرایش شد",
+      "delete_script_sucess": "اسکریپت حذف گردید",
+      "delete_script_confirm_question": "مطمئن هستید میخواهید این اسکریپت را حذف کنید؟",
+      "edit_audit_parameter_success": "پارامتر حسابرسی با موفقیت ویرایش شد",
+      "delete_page_success_message": "صفحه حذف شد",
+      "delete_page_confirm_question": "مطمئن هستید میخواهید این صفحه را حذف کنید؟",
+      "delete_auditParameter_confirm_question": "مطمئن هستید میخواهید این خط را حذف کنید؟داده های حسابرسی مرتبط بطور کامل حذف می شوند."
+    }
+  },
+  "components": {
+    "MetricGraph": {
+      "tooltip_date": "در روز {day} ساعت {time}",
+      "metric_info_title": "جزییات",
+      "expand": "نمایش تمام اطلاعات",
+      "close": "بستن"
+    }
+  },
+  "NotFound": {
+    "title": "404 پیدا نشد",
+    "subtitle": "متاسفانه، این صفحه موجود نیست",
+    "button": "بازگشت به صفحه اصلی"
+  }
+}
