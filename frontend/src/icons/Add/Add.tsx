@@ -20,16 +20,16 @@ export default class Add extends React.Component<Props> {
         <g
           id="Add"
           stroke={this.props.color}
-          stroke-width="1"
+          strokeWidth="1"
           fill={this.props.color}
-          fill-rule="evenodd"
+          fillRule="evenodd"
         >
           <g
             id="Group"
             fill={this.props.color}
-            fill-rule="nonzero"
+            fillRule="nonzero"
             stroke={this.props.color}
-            stroke-width="0.5"
+            strokeWidth="0.5"
           >
             <path
               d="M38,0 C17.0468,0 0,17.0468 0,38 C0,58.9532 17.0468,76 38,76 C58.9532,76 76,58.9532 76,38 C76,17.0468 58.9532,0 38,0 Z M38,5 C56.195375,5 71,19.804625 71,38 C71,56.195375 56.195375,71 38,71 C19.804625,71 5,56.195375 5,38 C5,19.804625 19.804625,5 38,5 Z M33.25,19 L33.25,33.25 L19,33.25 L19,42.75 L33.25,42.75 L33.25,57 L42.75,57 L42.75,42.75 L57,42.75 L57,33.25 L42.75,33.25 L42.75,19 L33.25,19 Z"

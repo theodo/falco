@@ -20,16 +20,16 @@ export default class Checkmark extends React.Component<Props> {
         <g
           id="Checkmark"
           stroke={this.props.color}
-          stroke-width="1"
+          strokeWidth="1"
           fill={this.props.color}
-          fill-rule="evenodd"
+          fillRule="evenodd"
         >
           <g
             id="Group"
             fill={this.props.color}
-            fill-rule="nonzero"
+            fillRule="nonzero"
             stroke={this.props.color}
-            stroke-width={this.props.strokeWidth}
+            strokeWidth={this.props.strokeWidth}
           >
             <polygon
               id="Path"

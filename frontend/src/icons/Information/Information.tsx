@@ -16,8 +16,8 @@ export default class Information extends React.Component<Props> {
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g id="Information" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <g id="Group" fill="#3657FF" fill-rule="nonzero">
+        <g id="Information" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+          <g id="Group" fill="#3657FF" fillRule="nonzero">
             <path
               d="M38,0 C17.0468,0 0,17.0470303 0,38.0002303 C0,58.9534303 17.0468,76 38,76 C58.9532,76 76,58.9534303 76,38.0002303 C76,17.0470303 58.9532,0 38,0 Z M38,69.0909091 C20.8562424,69.0909091 6.90909091,55.1437576 6.90909091,38.0002303 C6.90909091,20.856703 20.8562424,6.90909091 38,6.90909091 C55.1437576,6.90909091 69.0909091,20.856703 69.0909091,38.0002303 C69.0909091,55.1437576 55.1435273,69.0909091 38,69.0909091 Z"
               id="Shape"
