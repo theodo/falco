@@ -190,7 +190,7 @@
     },
     "WPTMetricRepeatViewVisuallyComplete": {
       "name": "Visually Complete (Repeat View)",
-      "description": "Triggered when 100% of the pixels on the page reached their final position (for the first visit on website)"
+      "description": "Triggered when 100% of the pixels on the page reached their final position (when coming back to website)"
     },
     "WPTMetricLighthousePerformance": {
       "name": "Lighthouse Performance Score",
