@@ -19,10 +19,10 @@ export default class MenuArrow extends React.Component<Props> {
         <g
           id="Arrow-/-Dark"
           stroke={this.props.color}
-          stroke-width="5"
+          strokeWidth="5"
           fill={this.props.color}
-          fill-rule="evenodd"
-          stroke-linecap="square"
+          fillRule="evenodd"
+          strokeLinecap="square"
         >
           <g id="Arrow" transform="translate(18.000000, 0.000000)">
             <path d="M0.692307692,0 L39.5,38" id="Line-4" />

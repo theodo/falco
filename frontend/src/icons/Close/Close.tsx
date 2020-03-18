@@ -17,12 +17,18 @@ export default class Close extends React.Component<Props> {
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g id="Close" stroke={this.props.color} stroke-width="5" fill={this.props.color} fill-rule="evenodd">
+        <g
+          id="Close"
+          stroke={this.props.color}
+          strokeWidth="5"
+          fill={this.props.color}
+          fillRule="evenodd"
+        >
           <g
             id="Group"
             transform="translate(-0.000000, 0.000000)"
             stroke={this.props.color}
-            stroke-width={this.props.strokeWidth}
+            strokeWidth={this.props.strokeWidth}
           >
             <path d="M0,76 L76,0" id="Path-2" />
             <path
