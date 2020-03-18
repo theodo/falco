@@ -88,6 +88,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="http://www.andreaswagner.name"><img src="https://avatars1.githubusercontent.com/u/1685114?v=4" width="100px;" alt=""/><br /><sub><b>Andreas Wagner</b></sub></a><br /><a href="https://github.com/theodo/falco/commits?author=whysthatso" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://MParvin.net"><img src="https://avatars0.githubusercontent.com/u/7812338?v=4" width="100px;" alt=""/><br /><sub><b>Mohammad Parvin</b></sub></a><br /><a href="#translation-MParvin" title="Translation">🌍</a></td>
   </tr>
 </table>
 
