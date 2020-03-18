@@ -6,6 +6,8 @@ jobs:
     docker:
       - image: python:3.7
       - image: postgres:10
+        environment:
+          POSTGRES_HOST_AUTH_METHOD: trust
 
     environment:
       DATABASE_URL: postgres://postgres@localhost:5432/postgres
