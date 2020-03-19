@@ -75,6 +75,12 @@ To access both these interfaces, you can login using the following credentials:
 - username: `admin`
 - password: `admin`
 
+### To reset the database to its original state (with fixtures)
+
+- Ensure that nothing is connected to your database (Django shell, Postgres GUI…)
+- Run `docker-compose exec backend ./manage.py reset_db`
+- Run `make fixtures/load`
+
 ### Add a new pip package to Falco’s backend
 
 To add a Django package in Falco’s backend:
