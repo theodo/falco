@@ -1,3 +1,4 @@
+import pytz
 from datetime import datetime, timedelta
 from django.core.management.base import BaseCommand
 
@@ -38,10 +39,12 @@ class Command(BaseCommand):
         page = PageFactory(project=project)
         page2 = PageFactory(project=project, name="Docs")
 
-        # Creates a week worth of audits, with history and results
+        # Creates a month worth of audits, with history and results
         for day in range(0, 30):
             audit = AuditFactory(parameters=parameters_project, page=page)
-            timestamp = datetime.now() - timedelta(days=day)
+            timestamp = datetime.now(pytz.timezone("Europe/Paris")) - timedelta(
+                days=day
+            )
             Audit.objects.filter(pk=audit.pk).update(created_at=timestamp)
             AuditStatusHistoryFactory(audit=audit)
             results = AuditResultsFactory(audit=audit)

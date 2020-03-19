@@ -1,6 +1,5 @@
-import factory
 import factory.fuzzy
-from datetime import datetime
+from django.utils import timezone
 
 from . import models
 from projects.factories import PageFactory, ProjectAuditParametersFactory
@@ -13,7 +12,7 @@ class AuditFactory(factory.DjangoModelFactory):
 
     page = factory.SubFactory(PageFactory)
     parameters = factory.SubFactory(ProjectAuditParametersFactory)
-    created_at = factory.LazyFunction(datetime.now)
+    created_at = factory.LazyFunction(timezone.now)
 
 
 class AuditStatusHistoryFactory(factory.DjangoModelFactory):
