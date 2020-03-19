@@ -22,7 +22,7 @@ db/connect:
 	docker exec -it falco_db_1 psql -Upostgres postgres
 
 fixtures/load:
-	docker-compose exec backend ./manage.py loaddata fixtures/fixtures.json
+	docker-compose exec backend ./manage.py load_fixtures
 
 frontend/install: frontend/.env
 	yarn --cwd frontend install
