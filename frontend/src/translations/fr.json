@@ -1,5 +1,6 @@
 {
   "Header": {
+    "go_to_admin": "Accèder à l'interface d'admin",
     "logo_title_landing": "Page d'accueil",
     "logo_title_app": "Rafraîchir la page",
     "login_link": "SE CONNECTER",
@@ -210,7 +211,7 @@
     "join_project": "Pour rejoindre un projet existant, veuillez contacter l'administrateur du projet."
   },
   "Toastr": {
-    "ProjectSettings":{
+    "ProjectSettings": {
       "success_title": "Succès",
       "error_title": "Échec",
       "error_message": "Une erreur est survenue, veuillez réessayer",

@@ -11,7 +11,7 @@ class UserFactory(factory.DjangoModelFactory):
     last_name = "Doe"
     username = "janed"
     email = "jane.doe@gmail.com"
-    password = factory.PostGenerationMethodCall("set_password", "janedoe")
+    password = factory.PostGenerationMethodCall("set_password", "janed")
 
 
 class AdminFactory(UserFactory):

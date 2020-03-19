@@ -1,5 +1,6 @@
 {
   "Header": {
+    "go_to_admin": "به رابط مدیریت دسترسی پیدا کنید",
     "logo_title_landing": "صفحه اصلی",
     "logo_title_app": "بروز کردن صفحه",
     "login_link": "ورود",
@@ -210,7 +211,7 @@
     "join_project": "برای پیوستن به یک پروژه موجود، لطفا با مدیر پروژه تماس بگیرید."
   },
   "Toastr": {
-    "ProjectSettings":{
+    "ProjectSettings": {
       "success_title": "موفق",
       "error_title": "نا موفق",
       "error_message": "خطایی رخ داد، لطفا مجددا تلاش کنید",
