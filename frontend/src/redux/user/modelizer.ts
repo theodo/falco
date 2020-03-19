@@ -6,4 +6,5 @@ export const modelizeUser = (user: ApiUser): User => ({
   lastName: user.last_name,
   emailAddress: user.email,
   username: user.username,
+  isStaff: user.is_staff,
 });

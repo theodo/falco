@@ -6,13 +6,13 @@ import { UserState } from 'redux/user/reducer';
 import { routeDefinitions } from 'routes';
 import {
   Container,
-  UserActionItem, 
-  UserActionItemExternalLink, 
-  UserActionsBlock, 
-  UserEmail, 
-  UserInfosBlock, 
-  UserInfosBlockContainer, 
-  UserName
+  UserActionItem,
+  UserActionItemExternalLink,
+  UserActionsBlock,
+  UserEmail,
+  UserInfosBlock,
+  UserInfosBlockContainer,
+  UserName,
 } from './AccountMenu.style';
 
 interface OwnProps {
@@ -71,17 +71,23 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
           </UserInfosBlock>
         </UserInfosBlockContainer>
         <UserActionsBlock>
-          <UserActionItem
-            margin={'0'}
-          >
-            <UserActionItemExternalLink href="https://getfal.co" target="_blank" rel="noopener noreferrer">
+          <UserActionItem margin={'0'}>
+            <UserActionItemExternalLink
+              href="https://getfal.co"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FormattedMessage id="Header.see_the_docs" />
             </UserActionItemExternalLink>
           </UserActionItem>
-          <UserActionItem
-            margin={'0'}
-            onClick={() => logoutUser(routeDefinitions.landing.path)}
-          >
+          {user.isStaff && (
+            <UserActionItem margin={'0'}>
+              <UserActionItemExternalLink href="/admin/" target="_blank" rel="noopener noreferrer">
+                <FormattedMessage id="Header.go_to_admin" />
+              </UserActionItemExternalLink>
+            </UserActionItem>
+          )}
+          <UserActionItem margin={'0'} onClick={() => logoutUser(routeDefinitions.landing.path)}>
             <FormattedMessage id="Header.logout_link" />
           </UserActionItem>
         </UserActionsBlock>
