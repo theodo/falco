@@ -20,6 +20,9 @@ django-fernet-fields = "==0.6"
 whitenoise = "==5.0.1"
 django-heroku = "==0.3.1"
 drf-yasg = "==1.17.0"
+factory-boy = "==2.12.0"
+django-extensions = "==2.2.8"
+ipython = "==7.9.0"
 
 [dev-packages]
 "flake8" = "==3.7.7"
