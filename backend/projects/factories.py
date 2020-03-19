@@ -62,5 +62,5 @@ class ProjectAuditParametersFactory(factory.DjangoModelFactory):
 
     name = "Dulles | Chrome | Cable"
     configuration = factory.SubFactory(AvailableAuditParametersFactory)
-    network_shape = models.NetworkShapeOptions.CABLE.value
+    network_shape = models.NetworkShapeOptions.CABLE.name
     project = factory.SubFactory(ProjectFactory)

@@ -11,8 +11,8 @@ class AuditFactory(factory.DjangoModelFactory):
         model = models.Audit
         django_get_or_create = ("page", "parameters", "created_at")
 
-    page = PageFactory()
-    parameters = ProjectAuditParametersFactory()
+    page = factory.SubFactory(PageFactory)
+    parameters = factory.SubFactory(ProjectAuditParametersFactory)
     created_at = factory.LazyFunction(datetime.now)
 
 
@@ -21,7 +21,7 @@ class AuditStatusHistoryFactory(factory.DjangoModelFactory):
         model = models.AuditStatusHistory
         django_get_or_create = ("audit", "status")
 
-    audit = AuditFactory()
+    audit = factory.SubFactory(AuditFactory)
     status = models.AvailableStatuses.SUCCESS.value
 
 
@@ -29,7 +29,7 @@ class AuditResultsFactory(factory.DjangoModelFactory):
     class Meta:
         model = models.AuditResults
 
-    audit = AuditFactory()
+    audit = factory.SubFactory(AuditFactory)
     wpt_results_json_url = "https://www.webpagetest.org/jsonResult.php?test=200319_SG_5a702cf8c430e2e61bda902f5fd80554&pretty=1"
     wpt_results_user_url = (
         "https://www.webpagetest.org/result/200319_SG_5a702cf8c430e2e61bda902f5fd80554/"
