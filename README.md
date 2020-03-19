@@ -37,7 +37,7 @@ You can try a demo version by logging in to https://falco.theo.do with the crede
 
 You can deploy Falco on Heroku by clicking on the following button:
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/theodo/falco/tree/1.1.3)
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/theodo/falco/tree/1.1.4)
 
 You will need to provide your credit card details to Heroku, but you will be under the free tier by default. You can find more details on why they are needed and Heroku’s pricing policy [in the docs](https://getfal.co).
 
@@ -95,6 +95,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
