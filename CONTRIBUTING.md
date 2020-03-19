@@ -16,6 +16,11 @@ To edit a piece of documentation, you can click on the “Edit this page” link
 
 ![Edit this doc button](/docs/static/img/edit-docs.png)
 
+## Internationalization
+
+Falco uses [`react-intl`](https://github.com/formatjs/react-intl) under the hood to manage internationalization. It detects the language of the user’s browser and serves that locale if available, otherwise defaults to English.
+If you spot a mistake in one of the translations available, or would like to translate Falco to your language, please edit (or create) the appropriate JSON file in `frontend/translations` and submit a pull request.
+
 ## Local development on Falco
 
 This section will guide you through installing Falco on your development machine, so that you can work on your feature or bug fix locally before submitting a PR.
@@ -69,3 +74,37 @@ To access both these interfaces, you can login using the following credentials:
 
 - username: `admin`
 - password: `admin`
+
+### Add a new pip package to Falco’s backend
+
+To add a Django package in Falco’s backend:
+
+- Start the backend:
+
+  ```sh
+  make backend/start
+  ```
+
+- Once the backend is up and running, install your package inside the docker container (this may take a few minutes):
+
+  ```sh
+  docker exec -it falco_backend_1 pipenv install <package_name>==<package_version>
+  ```
+
+  _This will install your package, then update Pipfile and Pipfile.lock files accordingly._
+
+- Once package is installed, stop backend using `Ctrl + C`
+
+- To make your package installation persistent, you have to rebuild all Django containers (this may also take a few minutes):
+
+  ```sh
+  docker-compose build --no-cache backend
+
+  docker-compose build --no-cache celery
+  ```
+
+- Relaunch backend and ensure you have no error:
+  ```sh
+  make backend/start
+  ```
+- Enjoy! 🎉
