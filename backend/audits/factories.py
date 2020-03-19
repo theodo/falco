@@ -1,4 +1,5 @@
 import factory
+import factory.fuzzy
 from datetime import datetime
 
 from . import models
@@ -33,34 +34,44 @@ class AuditResultsFactory(factory.DjangoModelFactory):
     wpt_results_user_url = (
         "https://www.webpagetest.org/result/200319_SG_5a702cf8c430e2e61bda902f5fd80554/"
     )
-    wpt_metric_first_view_tti = 2000
-    wpt_metric_repeat_view_tti = 2000
-    wpt_metric_first_view_speed_index = 2000
-    wpt_metric_repeat_view_speed_index = 2000
-    wpt_metric_first_view_first_paint = 2000
-    wpt_metric_repeat_view_first_paint = 2000
-    wpt_metric_first_view_first_meaningful_paint = 2000
-    wpt_metric_repeat_view_first_meaningful_paint = 2000
-    wpt_metric_first_view_load_time = 2000
-    wpt_metric_repeat_view_load_time = 2000
-    wpt_metric_first_view_first_contentful_paint = 2000
-    wpt_metric_repeat_view_first_contentful_paint = 2000
-    wpt_metric_first_view_time_to_first_byte = 2000
-    wpt_metric_repeat_view_time_to_first_byte = 2000
-    wpt_metric_first_view_visually_complete = 2000
-    wpt_metric_repeat_view_visually_complete = 2000
-    wpt_metric_lighthouse_performance = 0.8
-    script_step_name = 2000
-    script_step_number = 2000
+    wpt_metric_first_view_tti = factory.fuzzy.FuzzyInteger(1800, 2200)
+    wpt_metric_repeat_view_tti = factory.fuzzy.FuzzyInteger(1800, 2200)
+    wpt_metric_first_view_speed_index = factory.fuzzy.FuzzyInteger(1800, 2200)
+    wpt_metric_repeat_view_speed_index = factory.fuzzy.FuzzyInteger(1800, 2200)
+    wpt_metric_first_view_first_paint = factory.fuzzy.FuzzyInteger(1800, 2200)
+    wpt_metric_repeat_view_first_paint = factory.fuzzy.FuzzyInteger(1800, 2200)
+    wpt_metric_first_view_first_meaningful_paint = factory.fuzzy.FuzzyInteger(
+        1800, 2200
+    )
+    wpt_metric_repeat_view_first_meaningful_paint = factory.fuzzy.FuzzyInteger(
+        1800, 2200
+    )
+    wpt_metric_first_view_load_time = factory.fuzzy.FuzzyInteger(1800, 2200)
+    wpt_metric_repeat_view_load_time = factory.fuzzy.FuzzyInteger(1800, 2200)
+    wpt_metric_first_view_first_contentful_paint = factory.fuzzy.FuzzyInteger(
+        1800, 2200
+    )
+    wpt_metric_repeat_view_first_contentful_paint = factory.fuzzy.FuzzyInteger(
+        1800, 2200
+    )
+    wpt_metric_first_view_time_to_first_byte = factory.fuzzy.FuzzyInteger(1800, 2200)
+    wpt_metric_repeat_view_time_to_first_byte = factory.fuzzy.FuzzyInteger(1800, 2200)
+    wpt_metric_first_view_visually_complete = factory.fuzzy.FuzzyInteger(1800, 2200)
+    wpt_metric_repeat_view_visually_complete = factory.fuzzy.FuzzyInteger(1800, 2200)
+    wpt_metric_lighthouse_performance = factory.fuzzy.FuzzyDecimal(0.7, 0.9)
+    script_step_name = factory.fuzzy.FuzzyInteger(1800, 2200)
+    script_step_number = factory.fuzzy.FuzzyInteger(1800, 2200)
     lh_metric_tti_displayed_value = "2 s"
-    lh_metric_tti_score = 0.8
+    lh_metric_tti_score = factory.fuzzy.FuzzyDecimal(0.7, 0.9)
     lh_metric_first_contentful_paint_displayed_value = "2 s"
-    lh_metric_first_contentful_paint_score = 0.8
+    lh_metric_first_contentful_paint_score = factory.fuzzy.FuzzyDecimal(0.7, 0.9)
     lh_metric_speed_index_displayed_value = "2 s"
-    lh_metric_speed_index_score = 0.8
+    lh_metric_speed_index_score = factory.fuzzy.FuzzyDecimal(0.7, 0.9)
     lh_metric_first_meaningful_paint_displayed_value = "2 s"
-    lh_metric_first_meaningful_paint_score = 0.8
+    lh_metric_first_meaningful_paint_score = factory.fuzzy.FuzzyDecimal(0.7, 0.9)
     lh_metric_first_cpu_idle_displayed_value = "2 s"
-    lh_metric_first_cpu_idle_score = 0.8
+    lh_metric_first_cpu_idle_score = factory.fuzzy.FuzzyDecimal(0.7, 0.9)
     lh_metric_max_potential_first_input_delay_displayed_value = "2 s"
-    lh_metric_max_potential_first_input_delay_score = 0.8
+    lh_metric_max_potential_first_input_delay_score = factory.fuzzy.FuzzyDecimal(
+        0.7, 0.9
+    )

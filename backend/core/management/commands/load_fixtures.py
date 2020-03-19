@@ -30,7 +30,7 @@ class Command(BaseCommand):
         page = PageFactory(project=project)
 
         # Creates a week worth of audits, with history and results
-        for day in range(0, 6):
+        for day in range(0, 30):
             audit = AuditFactory(parameters=parameters, page=page)
             timestamp = datetime.now() - timedelta(days=day)
             Audit.objects.filter(pk=audit.pk).update(created_at=timestamp)
