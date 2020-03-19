@@ -1,10 +1,12 @@
 import factory
 from . import models
+from core.factories import UserFactory
 
 
-class ProjectFactory(factory.Factory):
+class ProjectFactory(factory.DjangoModelFactory):
     class Meta:
         model = models.Project
+        django_get_or_create = ("name",)
 
     name = "Falco docs"
     wpt_api_key = "1234567890"
@@ -13,29 +15,35 @@ class ProjectFactory(factory.Factory):
     wpt_instance_url = "https://webpagetest.org"
 
 
-class ProjectMemberRoleFactory(factory.Factory):
+class ProjectMemberRoleFactory(factory.DjangoModelFactory):
     class Meta:
         model = models.ProjectMemberRole
+        django_get_or_create = ("user", "project")
+
+    user = factory.SubFactory(UserFactory)
+    project = factory.SubFactory(ProjectFactory)
+    is_admin = True
 
 
-class PageFactory(factory.Factory):
+class PageFactory(factory.DjangoModelFactory):
     class Meta:
         model = models.Page
+        django_get_or_create = ("name", "project")
 
     name = "Homepage"
     url = "https://getfal.co"
-    project = ProjectFactory()
+    project = factory.SubFactory(ProjectFactory)
 
 
-class ScriptFactory(factory.Factory):
+class ScriptFactory(factory.DjangoModelFactory):
     class Meta:
         model = models.Script
 
     name = "User funnel"
-    project = ProjectFactory()
+    project = factory.SubFactory(ProjectFactory)
 
 
-class AvailableAuditParametersFactory(factory.Factory):
+class AvailableAuditParametersFactory(factory.DjangoModelFactory):
     class Meta:
         model = models.AvailableAuditParameters
 
@@ -47,11 +55,12 @@ class AvailableAuditParametersFactory(factory.Factory):
     wpt_instance_url = "https://webpagetest.org"
 
 
-class ProjectAuditParametersFactory(factory.Factory):
+class ProjectAuditParametersFactory(factory.DjangoModelFactory):
     class Meta:
         model = models.ProjectAuditParameters
+        django_get_or_create = ("configuration", "network_shape", "project")
 
     name = "Dulles | Chrome | Cable"
-    configuration = AvailableAuditParametersFactory()
-    network_shape = models.NetworkShapeOptions.CABLE
-    project = ProjectFactory()
+    configuration = factory.SubFactory(AvailableAuditParametersFactory)
+    network_shape = models.NetworkShapeOptions.CABLE.value
+    project = factory.SubFactory(ProjectFactory)

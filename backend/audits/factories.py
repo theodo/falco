@@ -1,25 +1,30 @@
 import factory
+from datetime import datetime
+
 from . import models
 from projects.factories import PageFactory, ProjectAuditParametersFactory
 
 
-class AuditFactory(factory.Factory):
+class AuditFactory(factory.DjangoModelFactory):
     class Meta:
         model = models.Audit
+        django_get_or_create = ("page", "parameters", "created_at")
 
     page = PageFactory()
     parameters = ProjectAuditParametersFactory()
+    created_at = factory.LazyFunction(datetime.now)
 
 
-class AuditStatusHistoryFactory(factory.Factory):
+class AuditStatusHistoryFactory(factory.DjangoModelFactory):
     class Meta:
         model = models.AuditStatusHistory
+        django_get_or_create = ("audit", "status")
 
     audit = AuditFactory()
-    status = models.AvailableStatuses.SUCCESS
+    status = models.AvailableStatuses.SUCCESS.value
 
 
-class AuditResultsFactory(factory.Factory):
+class AuditResultsFactory(factory.DjangoModelFactory):
     class Meta:
         model = models.AuditResults
 
