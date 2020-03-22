@@ -164,6 +164,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "MaximeThoonsen",
+      "name": "Thoonsen Maxime",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/4814551?v=4",
+      "profile": "https://twitter.com/maxthoon",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
