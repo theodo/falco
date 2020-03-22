@@ -34,7 +34,7 @@ else
 fi
 
 # Run black and get the output and return code
-black=$(black --exclude venv --diff --check backend/.)
+black=$(docker-compose exec -T backend black --diff --check .)
 ret_code=$?
 
 if [ $ret_code != 0 ]; then
@@ -46,7 +46,7 @@ else
 fi
 
 # Run flake8 and get the output and return code
-flake=$(flake8 backend/. --exclude backend/venv/)
+flake=$(docker-compose exec -T backend flake8 . --exclude ./venv/)
 ret_code=$?
 
 if [ $ret_code != 0 ]; then
