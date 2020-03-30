@@ -36,7 +36,7 @@ The form fields are as follow:
 - `Scripts`: A _script_ is the code for a WebPageTest script, which can be used to test user journeys, or pages that are behind an authentication, or pages that do not have a proper URL. To know more about WebPageTest scripting, you can read “[Recipes for Performance Testing Single Page Applications in WebPageTest](https://css-tricks.com/recipes-for-performance-testing-single-page-applications-in-webpagetest/)” by [@phacks](https://twitter.com/phacks) (phacks is a maintainer of Falco).
 - `Project Audit Parameters`: A _project audit parameter_ is a set of conditions under with the audits will be ran. You can configure the geographic situation, the browser, the device, and the network shape—and give this set of conditions a more concise, memorable name. The available configurations are updated daily from the ones available on the [WebPageTest website](https://webpagetest.org/).
 
-Once you have created your project, you can lanch a manual audit from either:
+Once you have created your project, you can launch a manual audit from either:
 
 - The Django Admin interface, under `Projects`
 - The Falco interface, with the button `Launch audits manually`
