@@ -4,6 +4,11 @@ title: Configuring your first project
 sidebar_label: Configuring your first project
 ---
 
+## Generate a superuser
+To be able to create a new project on the admin interface, you need to have superuser rights.
+
+To generate a superuser, run `make backend/createsuperuser` in your terminal and follow the instructions.
+
 ## Getting a WebPageTest API Key
 
 As Falco relies on the [WebPageTest REST API](https://sites.google.com/a/webpagetest.org/docs/advanced-features/webpagetest-restful-apis) to run the audits, it is necessary to create a WebPageTest API Key.
