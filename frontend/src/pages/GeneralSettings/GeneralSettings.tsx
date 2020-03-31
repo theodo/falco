@@ -9,7 +9,13 @@ import { ProjectToastrDisplayType, ProjectType } from 'redux/entities/projects/t
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import { UserState } from 'redux/user';
 import ProjectDetailsInput from './Components/ProjectDetailsInput';
-import Style from './GeneralSettings.style';
+import {
+  Container,
+  ExplanationText,
+  PageTitle,
+  SettingsFieldContainer,
+  Title,
+} from './GeneralSettings.style';
 
 export type OwnProps = {} & RouteComponentProps<{
   projectId: string;
@@ -92,19 +98,19 @@ const GeneralSettings: React.FunctionComponent<Props> = ({
 
   if (project === undefined) {
     return (
-      <Style.Container>
+      <Container>
         <Loader />
-      </Style.Container>
+      </Container>
     );
   }
 
   if (project === null || currentUser === null) {
     return (
-      <Style.Container>
+      <Container>
         <MessagePill messageType="error">
           <FormattedMessage id="Project.project_error" />
         </MessagePill>
-      </Style.Container>
+      </Container>
     );
   }
 
@@ -129,40 +135,40 @@ const GeneralSettings: React.FunctionComponent<Props> = ({
   };
 
   return (
-    <Style.Container>
-      <Style.PageTitle>
+    <Container>
+      <PageTitle>
         {intl.formatMessage({ id: 'ProjectSettings.settings' }) + ' - ' + project.name}
-      </Style.PageTitle>
-      <Style.Title>
+      </PageTitle>
+      <Title>
         <FormattedMessage id="ProjectSettings.general_settings" />
-      </Style.Title>
-      <Style.SettingsFieldContainer>
+      </Title>
+      <SettingsFieldContainer>
         <ProjectDetailsInput
           label="ProjectSettings.name"
           onChange={handleNameChange}
           onBlur={sendEditRequestOnBlur}
           value={projectName}
         />
-      </Style.SettingsFieldContainer>
-      <Style.SettingsFieldContainer>
+      </SettingsFieldContainer>
+      <SettingsFieldContainer>
         <ProjectDetailsInput
           label="ProjectSettings.wpt_key"
           onChange={handleApiKeyChange}
           onBlur={sendEditRequestOnBlur}
           value={projectApiKey}
         />
-      </Style.SettingsFieldContainer>
-      <Style.SettingsFieldContainer>
+      </SettingsFieldContainer>
+      <SettingsFieldContainer>
         <ProjectDetailsInput
           label="ProjectSettings.wpt_instance_url"
           onChange={handleInstanceURLChange}
           onBlur={sendEditRequestOnBlur}
           value={projectInstanceURL}
         />
-      </Style.SettingsFieldContainer>
-      <Style.ExplanationText>
-        {intl.formatMessage({id: "ProjectSettings.wpt_instance_url_explanation"})}
-      </Style.ExplanationText>
+      </SettingsFieldContainer>
+      <ExplanationText>
+        {intl.formatMessage({ id: 'ProjectSettings.wpt_instance_url_explanation' })}
+      </ExplanationText>
       <ReduxToastr
         timeOut={4000}
         newestOnTop={false}
@@ -171,7 +177,7 @@ const GeneralSettings: React.FunctionComponent<Props> = ({
         transitionOut="fadeOut"
         closeOnToastrClick
       />
-    </Style.Container>
+    </Container>
   );
 };
 

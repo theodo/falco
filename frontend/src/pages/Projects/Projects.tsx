@@ -7,7 +7,7 @@ import { routeDefinitions } from 'routes';
 import Loader from 'components/Loader';
 import Welcome from 'components/Welcome';
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
-import Style from './Projects.style';
+import { Container } from './Projects.style';
 
 type Props = {
   fetchProjectsRequest: () => void;
@@ -19,17 +19,17 @@ const Projects: React.FunctionComponent<Props> = ({ fetchProjectsRequest, projec
 
   if (null === projects) {
     return (
-      <Style.Container>
+      <Container>
         <Loader />
-      </Style.Container>
+      </Container>
     );
   }
 
   if (0 === projects.length) {
     return (
-      <Style.Container>
+      <Container>
         <Welcome />
-      </Style.Container>
+      </Container>
     );
   }
   const firstProject = projects[0];

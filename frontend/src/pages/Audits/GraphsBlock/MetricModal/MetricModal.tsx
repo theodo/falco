@@ -5,7 +5,17 @@ import Modal from 'react-modal';
 import { METRICS } from 'redux/auditResults/constants';
 import { MetricType } from 'redux/auditResults/types';
 import { colorUsage, getSpacing, zIndex } from 'stylesheet';
-import Style from './MetricModal.style';
+import {
+  MetricItem,
+  MetricsContainer,
+  ModalButtonsContainer,
+  ModalCancelButton,
+  ModalCheckbox,
+  ModalCheckboxLabel,
+  ModalInnerContainer,
+  ModalTitle,
+  ModalValidateButton,
+} from './MetricModal.style';
 import MetricName from './MetricName';
 
 interface OwnProps {
@@ -90,37 +100,37 @@ const MetricModal: React.FunctionComponent<Props> = ({
       onAfterClose={handleModalClose}
       appElement={document.querySelector('#root') as HTMLElement}
     >
-      <Style.ModalInnerContainer ref={metricModalRef}>
-        <Style.ModalTitle>
+      <ModalInnerContainer ref={metricModalRef}>
+        <ModalTitle>
           <FormattedMessage id="Audits.MetricsModal.add_delete_metrics" />
-        </Style.ModalTitle>
-        <Style.MetricsContainer>
+        </ModalTitle>
+        <MetricsContainer>
           {(Object.keys(METRICS) as MetricType[]).map((metric, index) => {
             return (
-              <Style.MetricItem key={index} margin={`0 0 ${getSpacing(2)} 0`}>
-                <Style.ModalCheckbox
+              <MetricItem key={index} margin={`0 0 ${getSpacing(2)} 0`}>
+                <ModalCheckbox
                   type="checkbox"
                   onClick={event => updateMetrics(event, metric)}
                   checked={isMetricSelected(metric)}
                   readOnly={true}
                 />
-                <Style.ModalCheckboxLabel margin={`0 ${getSpacing(3)} 0 0`} />
+                <ModalCheckboxLabel margin={`0 ${getSpacing(3)} 0 0`} />
                 <MetricName metric={metric} modalRef={metricModalRef} onClick={updateMetrics}>
                   <FormattedMessage id={`Metrics.${metric}.name`} />
                 </MetricName>
-              </Style.MetricItem>
+              </MetricItem>
             );
           })}
-        </Style.MetricsContainer>
-        <Style.ModalButtonsContainer>
-          <Style.ModalCancelButton onClick={close} margin={`0 ${getSpacing(4)} 0 0`}>
+        </MetricsContainer>
+        <ModalButtonsContainer>
+          <ModalCancelButton onClick={close} margin={`0 ${getSpacing(4)} 0 0`}>
             <FormattedMessage id="Audits.MetricsModal.cancel_button" />
-          </Style.ModalCancelButton>
-          <Style.ModalValidateButton onClick={submitDisplayedMetrics}>
+          </ModalCancelButton>
+          <ModalValidateButton onClick={submitDisplayedMetrics}>
             <FormattedMessage id="Audits.MetricsModal.validate_button" />
-          </Style.ModalValidateButton>
-        </Style.ModalButtonsContainer>
-      </Style.ModalInnerContainer>
+          </ModalValidateButton>
+        </ModalButtonsContainer>
+      </ModalInnerContainer>
     </Modal>
   );
 };

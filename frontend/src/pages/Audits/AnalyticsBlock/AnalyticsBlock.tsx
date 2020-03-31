@@ -6,7 +6,7 @@ import MessagePill from 'components/MessagePill';
 import { AuditResultType } from 'redux/auditResults/types';
 import { getWPTAuditId } from 'services/utils';
 import { getSpacing } from 'stylesheet';
-import Style from './AnalyticsBlock.style';
+import { Container } from './AnalyticsBlock.style';
 import LighthouseBlock from './LighthouseBlock';
 import WebPageTestBlock from './WebPageTestBlock';
 
@@ -24,19 +24,19 @@ export const AnalyticsBlock: React.FunctionComponent<Props & InjectedIntlProps> 
 
   if (!auditResultIds || !auditResults) {
     return (
-      <Style.Container margin={blockMargin}>
+      <Container margin={blockMargin}>
         <Loader />
-      </Style.Container>
+      </Container>
     );
   }
 
   if (0 === auditResultIds.length || 0 === auditResults.length) {
     return (
-      <Style.Container margin={blockMargin}>
+      <Container margin={blockMargin}>
         <MessagePill messageType="error">
           <FormattedMessage id="Audits.no_audit" />
         </MessagePill>
-      </Style.Container>
+      </Container>
     );
   }
 
@@ -47,11 +47,11 @@ export const AnalyticsBlock: React.FunctionComponent<Props & InjectedIntlProps> 
   };
 
   return (
-    <Style.Container margin={blockMargin}>
+    <Container margin={blockMargin}>
       <WebPageTestBlock blockMargin={`0 0 ${getSpacing(4)} 0`} auditResults={auditResults} />
       {auditResults[0].WPTMetricLighthousePerformance ? (
         <LighthouseBlock lighthouseUrl={getLighthouseUrl()} lastAuditResult={auditResults[0]} />
       ) : null}
-    </Style.Container>
+    </Container>
   );
 };

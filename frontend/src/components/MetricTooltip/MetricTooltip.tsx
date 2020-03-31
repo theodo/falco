@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-import Style from './MetricTooltip.style';
+import { Container } from './MetricTooltip.style';
 
 export interface Props {
   children?: ReactNode;
@@ -37,9 +37,9 @@ const MetricTooltip: React.FunctionComponent<Props> = ({ children, parentRef, in
     return <div />;
   }
   return (
-    <Style.Container left={leftPosition} top={topPosition}>
+    <Container left={leftPosition} top={topPosition}>
       {children}
-    </Style.Container>
+    </Container>
   );
 };
 

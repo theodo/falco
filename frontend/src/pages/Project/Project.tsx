@@ -7,7 +7,7 @@ import { routeDefinitions } from 'routes';
 import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
-import Style from './Project.style';
+import { Container } from './Project.style';
 
 export type OwnProps = {} & RouteComponentProps<{
   projectId: string;
@@ -52,19 +52,19 @@ const Project: React.FunctionComponent<Props> = ({
 
   if (project === undefined) {
     return (
-      <Style.Container>
+      <Container>
         <Loader />
-      </Style.Container>
+      </Container>
     );
   }
 
   if (project === null) {
     return (
-      <Style.Container>
+      <Container>
         <MessagePill messageType="error">
           <FormattedMessage id="Project.project_error" />
         </MessagePill>
-      </Style.Container>
+      </Container>
     );
   }
 
@@ -85,11 +85,11 @@ const Project: React.FunctionComponent<Props> = ({
     );
   } else {
     return (
-      <Style.Container>
+      <Container>
         <MessagePill messageType="error">
           <FormattedMessage id="Project.no_page_or_script_error" />
         </MessagePill>
-      </Style.Container>
+      </Container>
     );
   }
 
@@ -100,11 +100,11 @@ const Project: React.FunctionComponent<Props> = ({
     );
   } else {
     return (
-      <Style.Container>
+      <Container>
         <MessagePill messageType="error">
           <FormattedMessage id="Project.no_audit_parameters_error" />
         </MessagePill>
-      </Style.Container>
+      </Container>
     );
   }
   return <Redirect to={firstPageOrScriptLocation} />;

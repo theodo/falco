@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import MetricTooltip from 'components/MetricTooltip';
 import { MetricType } from 'redux/auditResults/types';
-import Style from './MetricName.style';
+import { MetricContainer, MetricName as MetricNameName } from './MetricName.style';
 
 interface Props {
   metric: MetricType;
@@ -25,21 +25,21 @@ const MetricName: React.FunctionComponent<Props> = ({ metric, modalRef, onClick 
   const metricNameRef = React.useRef<HTMLDivElement>(null);
 
   return (
-    <Style.MetricContainer>
-      <Style.MetricName
+    <MetricContainer>
+      <MetricNameName
         onMouseEnter={displayTooltip}
         onMouseLeave={hideTooltip}
         ref={metricNameRef}
         onClick={event => onClick(event, metric)}
       >
         <FormattedMessage id={`Metrics.${metric}.name`} />
-      </Style.MetricName>
+      </MetricNameName>
       {showMetricTooltip && (
         <MetricTooltip parentRef={modalRef} initiatorRef={metricNameRef}>
           <FormattedMessage id={`Metrics.${metric}.description`} />
         </MetricTooltip>
       )}
-    </Style.MetricContainer>
+    </MetricContainer>
   );
 };
 
