@@ -1,4 +1,3 @@
-import { history } from 'index';
 import React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { routeDefinitions } from 'routes';
