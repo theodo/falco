@@ -5,6 +5,7 @@ from projects.models import (
     ProjectMemberRole,
     Script,
     AvailableAuditParameters,
+    MetricsPreferences,
 )
 
 from rest_framework import serializers
@@ -134,6 +135,7 @@ class ProjectMemberRoleSerializer(serializers.ModelSerializer):
 
 class ProjectSerializer(DynamicFieldsModelSerializer):
     has_siblings = serializers.SerializerMethodField("_has_siblings")
+    user_metrics = serializers.SerializerMethodField("_user_metrics")
 
     def _has_siblings(self, obj) -> bool:
         return (
@@ -142,6 +144,20 @@ class ProjectSerializer(DynamicFieldsModelSerializer):
             ).count()
             > 1
         )
+
+    def _user_metrics(self, obj):
+        metrics = list(
+            MetricsPreferences.objects.filter(project=obj).filter(
+                user_id=self.context.get("user_id")
+            )
+        )
+        if len(metrics) == 0:
+            metrics = [
+                "WPTMetricFirstViewTTI",
+                "WPTMetricFirstViewSpeedIndex",
+                "WPTMetricFirstViewLoadTime",
+            ]
+        return metrics
 
     pages = PageSerializer(many=True)
     scripts = ScriptSerializer(many=True)
@@ -164,4 +180,5 @@ class ProjectSerializer(DynamicFieldsModelSerializer):
             "wpt_api_key",
             "wpt_instance_url",
             "has_siblings",
+            "user_metrics",
         )

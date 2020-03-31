@@ -4,6 +4,7 @@ from core.models import BaseModel, User
 from django.db import models
 from django import forms
 from fernet_fields import EncryptedTextField
+from django.contrib.postgres.fields import ArrayField
 
 
 class Project(BaseModel):
@@ -55,6 +56,12 @@ class ProjectMemberRole(BaseModel):
     class Meta:
         ordering = ("-is_admin", "-created_at")
         unique_together = ("project", "user")
+
+
+class MetricsPreferences(BaseModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    metrics = ArrayField(models.CharField(max_length=100))
 
 
 class Page(BaseModel):
