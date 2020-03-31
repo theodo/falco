@@ -1,3 +1,4 @@
+import Button from "components/Button";
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
@@ -5,6 +6,7 @@ import {
   fontSize,
   fontWeight,
   getSpacing,
+  inheritVar,
   lineHeight,
   responsiveThreshold,
   zIndex,
@@ -111,7 +113,7 @@ export const HeaderButtonsBlock = styled.ul`
 `;
 HeaderButtonsBlock.displayName = 'HeaderButtonsBlock';
 
-export const HeaderButton = styled.li`
+export const HeaderMenuItem = styled.li`
   list-style: none;
   display: flex;
   align-items: center;
@@ -133,6 +135,12 @@ export const HeaderButton = styled.li`
     margin-left: 0;
   }
 `;
+HeaderMenuItem.displayName = 'HeaderMenuItem';
+
+export const HeaderButton = styled(Button)`
+  color: ${inheritVar};
+  font: ${inheritVar};
+`;
 HeaderButton.displayName = 'HeaderButton';
 
 export const HeaderButtonArrow = styled.span`
@@ -145,11 +153,6 @@ export const HeaderButtonArrow = styled.span`
   border-top-style: solid;
 `;
 HeaderButtonArrow.displayName = 'HeaderButtonArrow';
-
-export const MenusContainer = styled.div`
-  display: flex;
-`;
-MenusContainer.displayName = 'MenusContainer';
 
 export const HeaderLink = styled(Link)`
   text-decoration: none;

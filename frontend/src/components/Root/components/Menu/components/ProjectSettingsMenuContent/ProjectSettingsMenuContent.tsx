@@ -1,4 +1,3 @@
-import { history } from 'index';
 import React from 'react';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { routeDefinitions } from 'routes';
@@ -43,13 +42,11 @@ export const ProjectSettingsMenuContent: React.FunctionComponent<Props> = ({
   }
 
 
-  const redirectToProjectPage = () => {
-    history.replace(routeDefinitions.projectDetails.path.replace(':projectId', project.uuid))
-  }
+  const projectPageUrl = routeDefinitions.projectDetails.path.replace(':projectId', project.uuid)
 
   return (
     <Container>
-      <GoBackToProjectLink onClick={redirectToProjectPage} >
+      <GoBackToProjectLink to={projectPageUrl}>
         <FormattedMessage id="Menu.go_back_to_project" />
       </GoBackToProjectLink>
       <Settings>{intl.formatMessage({ id: 'Menu.project_settings'})}</Settings>

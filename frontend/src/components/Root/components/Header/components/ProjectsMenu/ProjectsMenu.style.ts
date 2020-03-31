@@ -11,7 +11,7 @@ interface ProjectsMenuContainerProps {
   right?: string | null;
 }
 
-export const Container = styled.div`
+export const Container = styled.ul`
     width: 460px;
     max-height: 600px;
     background-color: ${colorUsage.projectsMenuBackground};
@@ -19,14 +19,15 @@ export const Container = styled.div`
     position: ${(props: ProjectsMenuContainerProps) =>
     props.position ? props.position : 'static'};
     right: ${(props: ProjectsMenuContainerProps) => (props.right ? props.right : 'auto')};
+    top: 100px;
   `;
 
 export const ProjectItem = styled(Link)`
     display: flex;
-    padding: ${getSpacing(3)} ${getSpacing(8)};
+    padding: ${getSpacing(3)} ${getSpacing(7)};
+    margin: ${getSpacing(1)};
     text-decoration: none;
     color: ${colorUsage.projectsMenuItemText};
-    background-color: ${colorUsage.projectsMenuItemBackground};
     font-family: ${fontFamily.mainSans};
     border-bottom: 1px solid ${colorUsage.projectsMenuItemBorder};
 
@@ -39,9 +40,10 @@ export const ProjectItem = styled(Link)`
     }
   `;
 
-export const ProjectItemContainer = styled.div`
+export const ProjectItemContainer = styled.li`
     max-height: 458px;
     overflow-y: auto;
+    background-color: ${colorUsage.projectsMenuItemBackground};
   `;
 
 export const ProjectItemSnapshotContainer = styled.div`
@@ -77,7 +79,7 @@ export const ProjectItemLastAudit = styled.div`
     line-height: ${lineHeight.bodyText};
   `;
 
-export const CurrentProjectItem = styled.div`
+export const CurrentProjectItem = styled.li`
     display: flex;
     padding: ${getSpacing(4)} ${getSpacing(8)};
     color: ${colorUsage.projectsMenuItemText};

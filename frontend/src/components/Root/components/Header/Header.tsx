@@ -15,10 +15,10 @@ import {
   HeaderContent,
   HeaderLink,
   HeaderMenu,
+  HeaderMenuItem,
   LogoBlock,
   LogoContainer,
   LogoTitle,
-  MenusContainer,
   Nav,
 } from './Header.style';
 
@@ -147,16 +147,30 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
         </HeaderMenu>
         <HeaderContent shouldHaveShadow={shouldDisplayConnectedUserHeader && scrollPosition > 10}>
           {shouldDisplayConnectedUserHeader ? (
-            <Nav>
+            <Nav role="navigation">
               <HeaderButtonsBlock>
-                <HeaderButton onClick={toggleProjectsMenuVisibility} ref={projectsMenuButtonRef}>
-                  <FormattedMessage id="Header.projects_button" />
+                <HeaderMenuItem onClick={toggleProjectsMenuVisibility} ref={projectsMenuButtonRef} role="menu">
+                  <HeaderButton>
+                    <FormattedMessage id="Header.projects_button" />
+                  </HeaderButton>
                   <HeaderButtonArrow />
-                </HeaderButton>
-                <HeaderButton onClick={toggleAccountMenuVisibility} ref={accountMenuButtonRef}>
-                  <FormattedMessage id="Header.login_button" />
+                  <ProjectsMenu
+                    isVisible={isProjectsMenuVisible && MenuHasBeenPositionned}
+                    position={'absolute'}
+                    right={projectsMenuRight}
+                  />
+                </HeaderMenuItem>
+                <HeaderMenuItem onClick={toggleAccountMenuVisibility} ref={accountMenuButtonRef} role="menu">
+                  <HeaderButton>
+                    <FormattedMessage id="Header.login_button" />
+                  </HeaderButton>
                   <HeaderButtonArrow />
-                </HeaderButton>
+                  <AccountMenu
+                    isVisible={isAccountMenuVisible && MenuHasBeenPositionned}
+                    position={'absolute'}
+                    right={accountMenuRight}
+                  />
+                </HeaderMenuItem>
               </HeaderButtonsBlock>
             </Nav>
           ) : (
@@ -171,20 +185,6 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
           )}
         </HeaderContent>
       </HeaderBlock>
-      {shouldDisplayConnectedUserHeader && (
-        <MenusContainer>
-          <ProjectsMenu
-            isVisible={isProjectsMenuVisible && MenuHasBeenPositionned}
-            position={'absolute'}
-            right={projectsMenuRight}
-          />
-          <AccountMenu
-            isVisible={isAccountMenuVisible && MenuHasBeenPositionned}
-            position={'absolute'}
-            right={accountMenuRight}
-          />
-        </MenusContainer>
-      )}
     </HeaderContainer>
   );
 };

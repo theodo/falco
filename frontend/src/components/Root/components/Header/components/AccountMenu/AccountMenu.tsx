@@ -7,6 +7,7 @@ import { routeDefinitions } from 'routes';
 import {
   Container,
   UserActionItem,
+  UserActionItemButton,
   UserActionItemExternalLink,
   UserActionsBlock,
   UserEmail,
@@ -88,7 +89,9 @@ export const AccountMenu: React.FunctionComponent<Props> = ({
             </UserActionItem>
           )}
           <UserActionItem margin={'0'} onClick={() => logoutUser(routeDefinitions.landing.path)}>
-            <FormattedMessage id="Header.logout_link" />
+            <UserActionItemButton>
+              <FormattedMessage id="Header.logout_link" />
+            </UserActionItemButton>
           </UserActionItem>
         </UserActionsBlock>
       </Container>

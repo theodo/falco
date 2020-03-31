@@ -1,5 +1,14 @@
+import Button from "components/Button";
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
+import {
+  colorUsage,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  getSpacing,
+  inheritVar,
+  lineHeight
+} from 'stylesheet';
 
 interface ItemWithMarginProps {
   margin?: string;
@@ -10,7 +19,7 @@ interface AccountMenuContainerProps {
   right?: string | null;
 }
 
-export const Container = styled.div`
+export const Container = styled.ul`
     width: 460px;
     background-color: ${colorUsage.accountMenuBackground};
     box-shadow: 0 0 8px 4px ${colorUsage.accountMenuShadow};
@@ -18,6 +27,7 @@ export const Container = styled.div`
     right: ${(props: AccountMenuContainerProps) => (props.right ? props.right : 'auto')};
     color: ${colorUsage.accountMenuText};
     font-family: ${fontFamily.mainSans};
+    top: 100px;
   `;
 
 export const UserInfosBlockContainer = styled.div`
@@ -48,7 +58,7 @@ export const UserActionsBlock = styled.div`
     padding: ${getSpacing(2)} 0;
   `;
 
-export const UserActionItem = styled.div`
+export const UserActionItem = styled.li`
     margin: ${(props: ItemWithMarginProps) =>
     props.margin ? props.margin : `0 0 ${getSpacing(3)} 0`};
     padding: ${getSpacing(2)} ${getSpacing(10)};
@@ -65,4 +75,13 @@ export const UserActionItem = styled.div`
 
   export const UserActionItemExternalLink = styled.a`
     all: unset;
+
+    &:focus {
+      outline: -webkit-focus-ring-color auto 5px;
+    }
   `
+
+export const UserActionItemButton = styled(Button)`
+  color: ${inheritVar};
+  font: ${inheritVar};
+  `;

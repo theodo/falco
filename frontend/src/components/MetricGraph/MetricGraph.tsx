@@ -35,8 +35,8 @@ const MetricGraph: React.FunctionComponent<Props> = ({
   const [isExpandTooltipVisible, setIsExpandTooltipVisible] = React.useState(false);
 
   const legendRef = React.useRef<HTMLDivElement>(null);
-  const metricInfoIconContainerRef = React.useRef<HTMLDivElement>(null);
-  const expandButtonRef = React.useRef<HTMLDivElement>(null);
+  const metricInfoIconContainerRef = React.useRef<HTMLButtonElement>(null);
+  const expandButtonRef = React.useRef<HTMLButtonElement>(null);
 
   const renderLegend = (props: LegendProps) => {
     const { payload } = props;
