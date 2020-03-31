@@ -42,8 +42,8 @@
     "typesafe-actions": "^3.0.0"
   },
   "scripts": {
-    "start": "BROWSER=none react-app-rewired start",
-    "build": "PUBLIC_URL=/static NODE_PATH=src/ NODE_ENV=production react-app-rewired build",
+    "start": "react-app-rewired start",
+    "build": "PUBLIC_URL=/static NODE_ENV=production react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
     "analyze": "env-cmd .env.${REACT_APP_ENV} react-app-rewired build --analyze-bundle",
