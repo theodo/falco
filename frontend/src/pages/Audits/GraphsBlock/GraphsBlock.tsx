@@ -9,7 +9,13 @@ import { METRICS } from 'redux/auditResults/constants';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
 import { getSpacing } from 'stylesheet';
 import GraphModal from './GraphModal';
-import Style from './GraphsBlock.style';
+import {
+  ChooseMetricsButton,
+  Container,
+  GraphContainer,
+  GraphInfoLink,
+  GraphSettingsContainer,
+} from './GraphsBlock.style';
 import MetricModal from './MetricModal';
 
 export interface OwnProps {
@@ -28,7 +34,7 @@ interface Props extends OwnProps {
     pageOrScriptId: string,
     type: 'page' | 'script',
     fromDate?: dayjs.Dayjs,
-    toDate?: dayjs.Dayjs
+    toDate?: dayjs.Dayjs,
   ) => void;
 }
 
@@ -40,7 +46,7 @@ export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = (
   auditParametersId,
   pageOrScriptId,
   auditType,
-  fetchAuditResultsRequest
+  fetchAuditResultsRequest,
 }) => {
   const [showMetricModal, toggleMetricModal] = React.useState(false);
   const [showGraphModal, toggleGraphModal] = React.useState(false);
@@ -51,15 +57,15 @@ export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = (
     () => {
       setHasRequestedFullData(false);
     },
-    [pageOrScriptId]
-  )
-  
+    [pageOrScriptId],
+  );
+
   const fetchFullDataRequest = () => {
-    if(!hasRequestedFullData) {
+    if (!hasRequestedFullData) {
       fetchAuditResultsRequest(auditParametersId, pageOrScriptId, auditType);
       setHasRequestedFullData(true);
     }
-  }
+  };
 
   const openMetricModal = () => {
     toggleMetricModal(true);
@@ -79,29 +85,29 @@ export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = (
 
   if (!auditResultIds || !auditResults) {
     return (
-      <Style.Container margin={blockMargin}>
+      <Container margin={blockMargin}>
         <Loader />
-      </Style.Container>
+      </Container>
     );
   }
 
   if (0 === auditResultIds.length || 0 === auditResults.length) {
     return (
-      <Style.Container margin={blockMargin}>
+      <Container margin={blockMargin}>
         <MessagePill messageType="error">
           <FormattedMessage id="Audits.no_audit" />
         </MessagePill>
-      </Style.Container>
+      </Container>
     );
   }
 
   return (
-    <Style.Container margin={blockMargin}>
+    <Container margin={blockMargin}>
       {(Object.keys(METRICS) as MetricType[])
         .filter(metric => metrics.indexOf(metric) > -1)
         .map((metric, index) => {
           return (
-            <Style.GraphContainer margin={`0 0 ${getSpacing(4)} 0`} key={index}>
+            <GraphContainer margin={`0 0 ${getSpacing(4)} 0`} key={index}>
               <MetricGraph
                 fullscreen={false}
                 auditResults={auditResults}
@@ -109,21 +115,21 @@ export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = (
                 onExpandClick={openGraphModal}
                 showOnlyLastWeek={true}
               />
-            </Style.GraphContainer>
+            </GraphContainer>
           );
         })}
-      <Style.GraphSettingsContainer>
-        <Style.ChooseMetricsButton margin={`0 0 ${getSpacing(4)} 0`} onClick={openMetricModal}>
+      <GraphSettingsContainer>
+        <ChooseMetricsButton margin={`0 0 ${getSpacing(4)} 0`} onClick={openMetricModal}>
           <FormattedMessage id="Audits.MetricsModal.add_delete_metrics" /> →
-        </Style.ChooseMetricsButton>
-        <Style.GraphInfoLink
+        </ChooseMetricsButton>
+        <GraphInfoLink
           href="https://twitter.com/Phacks/status/1110161414025555968"
           target="_blank"
           margin={`0 0 0 ${getSpacing(8)}`}
         >
           <FormattedMessage id="Audits.pick_right_metrics" />
-        </Style.GraphInfoLink>
-      </Style.GraphSettingsContainer>
+        </GraphInfoLink>
+      </GraphSettingsContainer>
       <MetricModal metrics={metrics} show={showMetricModal} close={closeMetricModal} />
       <GraphModal
         metric={fullScreenedMetric}
@@ -131,6 +137,6 @@ export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = (
         show={showGraphModal}
         close={closeGraphModal}
       />
-    </Style.Container>
+    </Container>
   );
 };

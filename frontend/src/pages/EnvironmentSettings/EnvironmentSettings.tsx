@@ -10,15 +10,24 @@ import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProj
 import { UserState } from 'redux/user';
 import { makeGetRequest } from 'services/networking/request';
 import { isUserAdminOfProject } from 'services/utils';
-import AuditParameterRow, { AddAuditParameterRow } from './Components/AuditParameterTable'
-import Style from './EnvironmentSettings.style';
+import AuditParameterRow, { AddAuditParameterRow } from './Components/AuditParameterTable';
+import {
+  AuditParameterName,
+  Configuration,
+  Container,
+  ElementContainer,
+  NetworkShape,
+  PageSubTitle,
+  PageTitle,
+  ProjectSettingsBlock,
+} from './EnvironmentSettings.style';
 
 export type OwnProps = {} & RouteComponentProps<{
   projectId: string;
 }>;
 
 type Props = {
-  currentUser: UserState,
+  currentUser: UserState;
   fetchProjectsRequest: (projectId: string) => void;
   project?: ProjectType | null;
   toastrDisplay: ProjectToastrDisplayType;
@@ -35,78 +44,77 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({
   toastrDisplay,
   setProjectToastrDisplay,
 }) => {
-
   interface UserOption {
     value: string;
     label: string;
     disabled: boolean;
-  };
-
-  interface ApiAvailableAuditParameters {
-    uuid: string,
-    browser: string,
-    location_label: string,
-    location_group: string,
-    wpt_instance_url: string,
   }
 
+  interface ApiAvailableAuditParameters {
+    uuid: string;
+    browser: string;
+    location_label: string;
+    location_group: string;
+    wpt_instance_url: string;
+  }
 
   useFetchProjectIfUndefined(fetchProjectsRequest, match.params.projectId, project);
 
-  const [availableAuditParameters, setAvailableAuditParameters] = React.useState<Array<{label: string, uuid: string, wptInstanceURL: string}>>([])
+  const [availableAuditParameters, setAvailableAuditParameters] = React.useState<
+    Array<{ label: string; uuid: string; wptInstanceURL: string }>
+  >([]);
 
-  const modelizeAvailableAuditParameters = (apiAvailableAuditParameters: ApiAvailableAuditParameters) => ({
+  const modelizeAvailableAuditParameters = (
+    apiAvailableAuditParameters: ApiAvailableAuditParameters,
+  ) => ({
     label: `${apiAvailableAuditParameters.location_label}. ${apiAvailableAuditParameters.browser}`,
     uuid: apiAvailableAuditParameters.uuid,
-    wptInstanceURL: apiAvailableAuditParameters.wpt_instance_url
+    wptInstanceURL: apiAvailableAuditParameters.wpt_instance_url,
   });
 
-  React.useEffect(
-    () => {
-      const request = makeGetRequest('/api/projects/available_audit_parameters', true);
-      request
-      .then((response) => {
-        if(response) {
-          setAvailableAuditParameters(
-            response.body
-            .map((apiAvailableAuditParameters: ApiAvailableAuditParameters) => 
-              modelizeAvailableAuditParameters(apiAvailableAuditParameters)
-            )
-          );
-        }
-      })
-    },
-    [],
-  );
+  React.useEffect(() => {
+    const request = makeGetRequest('/api/projects/available_audit_parameters', true);
+    request.then(response => {
+      if (response) {
+        setAvailableAuditParameters(
+          response.body.map((apiAvailableAuditParameters: ApiAvailableAuditParameters) =>
+            modelizeAvailableAuditParameters(apiAvailableAuditParameters),
+          ),
+        );
+      }
+    });
+  }, []);
 
   React.useEffect(
     () => {
-      if('' !== toastrDisplay) {
-        switch(toastrDisplay) {
-          case "addAuditParameterSuccess":
+      if ('' !== toastrDisplay) {
+        switch (toastrDisplay) {
+          case 'addAuditParameterSuccess':
             toastr.success(
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.add_audit_parameter_to_project_success'}),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+              intl.formatMessage({
+                id: 'Toastr.ProjectSettings.add_audit_parameter_to_project_success',
+              }),
             );
             break;
-          case "editAuditParameterSuccess":
+          case 'editAuditParameterSuccess':
             toastr.success(
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.edit_audit_parameter_success'}),
-              );
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.edit_audit_parameter_success' }),
+            );
             break;
-          case "deleteAuditParameterSuccess":
+          case 'deleteAuditParameterSuccess':
             toastr.success(
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.delete_audit_parameter_success'}),
-              );
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.delete_audit_parameter_success' }),
+            );
             break;
-          case "addAuditParameterError":
-          case "deleteAuditParameterError":
-          case "editAuditParameterError":
+          case 'addAuditParameterError':
+          case 'deleteAuditParameterError':
+          case 'editAuditParameterError':
             toastr.error(
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.error_title'}),
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.error_message'}),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.error_title' }),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.error_message' }),
             );
             break;
         }
@@ -117,59 +125,65 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({
     [toastrDisplay, setProjectToastrDisplay, intl],
   );
 
-
   if (project === undefined) {
     return (
-      <Style.Container>
+      <Container>
         <Loader />
-      </Style.Container>
+      </Container>
     );
   }
 
   if (project === null || currentUser === null) {
     return (
-      <Style.Container>
+      <Container>
         <MessagePill messageType="error">
           <FormattedMessage id="Project.project_error" />
         </MessagePill>
-      </Style.Container>
+      </Container>
     );
   }
 
   const filteredAvailableProjectsParameters = availableAuditParameters.filter(
-    availableAuditParameter => availableAuditParameter.wptInstanceURL === project.wptInstanceURL
-  )
+    availableAuditParameter => availableAuditParameter.wptInstanceURL === project.wptInstanceURL,
+  );
 
   return (
-    <Style.Container>
-      <Style.PageTitle>{intl.formatMessage({ id: 'ProjectSettings.settings'}) + ' - ' + project.name}</Style.PageTitle>
-      <Style.PageSubTitle>
-        <FormattedMessage id="ProjectSettings.project_audit_parameters"/>
-      </Style.PageSubTitle>
-      <Style.ProjectSettingsBlock>
-        <Style.ElementContainer>
-          <Style.AuditParameterName>{intl.formatMessage({ id: "ProjectSettings.audit_parameter_name"})}</Style.AuditParameterName>
-          <Style.Configuration>{intl.formatMessage({ id: "ProjectSettings.configuration"})}</Style.Configuration>
-          <Style.NetworkShape>
-            {intl.formatMessage({ id: "ProjectSettings.network_type"})}
-          </Style.NetworkShape>
-        </Style.ElementContainer>
+    <Container>
+      <PageTitle>
+        {intl.formatMessage({ id: 'ProjectSettings.settings' }) + ' - ' + project.name}
+      </PageTitle>
+      <PageSubTitle>
+        <FormattedMessage id="ProjectSettings.project_audit_parameters" />
+      </PageSubTitle>
+      <ProjectSettingsBlock>
+        <ElementContainer>
+          <AuditParameterName>
+            {intl.formatMessage({ id: 'ProjectSettings.audit_parameter_name' })}
+          </AuditParameterName>
+          <Configuration>
+            {intl.formatMessage({ id: 'ProjectSettings.configuration' })}
+          </Configuration>
+          <NetworkShape>{intl.formatMessage({ id: 'ProjectSettings.network_type' })}</NetworkShape>
+        </ElementContainer>
         {project.auditParametersIds.map(auditParameterId => (
-          <Style.ElementContainer key={auditParameterId}>
+          <ElementContainer key={auditParameterId}>
             <AuditParameterRow
               disabled={!isUserAdminOfProject(currentUser, project)}
               projectId={project.uuid}
               auditParameterId={auditParameterId}
               availableAuditParameters={filteredAvailableProjectsParameters}
             />
-          </Style.ElementContainer>))}
-        {isUserAdminOfProject(currentUser, project) && <Style.ElementContainer>
+          </ElementContainer>
+        ))}
+        {isUserAdminOfProject(currentUser, project) && (
+          <ElementContainer>
             <AddAuditParameterRow
               projectId={project.uuid}
               availableAuditParameters={filteredAvailableProjectsParameters}
             />
-          </Style.ElementContainer>}
-      </Style.ProjectSettingsBlock>
+          </ElementContainer>
+        )}
+      </ProjectSettingsBlock>
       <ReduxToastr
         timeOut={4000}
         newestOnTop={false}
@@ -178,8 +192,8 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({
         transitionOut="fadeOut"
         closeOnToastrClick
       />
-    </Style.Container>
+    </Container>
   );
-}
+};
 
 export default EnvironmentSettings;

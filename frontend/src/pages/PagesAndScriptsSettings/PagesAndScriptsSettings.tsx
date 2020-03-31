@@ -12,7 +12,7 @@ import { isUserAdminOfProject } from 'services/utils';
 import { AddPageRow } from './Components/PageTable';
 import PageRow, { PageRowHeader } from './Components/PageTable';
 import { AddScript, ScriptRow, ScriptTableHeader } from './Components/ScriptTable'
-import Style from './PagesAndScriptsSettings.style';
+import { Container, ElementContainer, PageSubTitle, PageTitle, ProjectSettingsBlock } from './PagesAndScriptsSettings.style';
 
 export type OwnProps = {} & RouteComponentProps<{
   projectId: string;
@@ -115,64 +115,64 @@ const PagesAndScriptsSettings: React.FunctionComponent<Props> = ({
 
   if (project === undefined) {
     return (
-      <Style.Container>
+      <Container>
         <Loader />
-      </Style.Container>
+      </Container>
     );
   }
 
   if (project === null || currentUser === null) {
     return (
-      <Style.Container>
+      <Container>
         <MessagePill messageType="error">
           <FormattedMessage id="Project.project_error" />
         </MessagePill>
-      </Style.Container>
+      </Container>
     );
   }
 
   return (
-    <Style.Container>
-      <Style.PageTitle>{intl.formatMessage({ id: 'ProjectSettings.settings'}) + ' - ' + project.name}</Style.PageTitle>
-      <Style.PageSubTitle>
+    <Container>
+      <PageTitle>{intl.formatMessage({ id: 'ProjectSettings.settings'}) + ' - ' + project.name}</PageTitle>
+      <PageSubTitle>
         <FormattedMessage id="ProjectSettings.pages"/>
-      </Style.PageSubTitle>
-      <Style.ProjectSettingsBlock>
-        <Style.ElementContainer>
+      </PageSubTitle>
+      <ProjectSettingsBlock>
+        <ElementContainer>
           <PageRowHeader />
-        </Style.ElementContainer>
+        </ElementContainer>
         {project.pagesIds.map(pageId => (
-          <Style.ElementContainer key={pageId}>
+          <ElementContainer key={pageId}>
             <PageRow
               disabled={!isUserAdminOfProject(currentUser, project)}
               projectId={project.uuid}
               pageId={pageId}
             />
-          </Style.ElementContainer>))}
-          {isUserAdminOfProject(currentUser, project) && <Style.ElementContainer>
+          </ElementContainer>))}
+          {isUserAdminOfProject(currentUser, project) && <ElementContainer>
             <AddPageRow
               projectId={project.uuid}
             />
-          </Style.ElementContainer>}
-      </Style.ProjectSettingsBlock>
-      <Style.PageSubTitle>
+          </ElementContainer>}
+      </ProjectSettingsBlock>
+      <PageSubTitle>
         <FormattedMessage id="ProjectSettings.scripts"/>
-      </Style.PageSubTitle>
-      <Style.ProjectSettingsBlock>
-        <Style.ElementContainer>
+      </PageSubTitle>
+      <ProjectSettingsBlock>
+        <ElementContainer>
           <ScriptTableHeader/>
-        </Style.ElementContainer>
+        </ElementContainer>
         {project.scriptsIds.map(scriptId => (
-          <Style.ElementContainer key={scriptId}>
+          <ElementContainer key={scriptId}>
             <ScriptRow
               scriptId={scriptId}
               projectId={project.uuid}
             />
-          </Style.ElementContainer>))}
-        {isUserAdminOfProject(currentUser, project) && <Style.ElementContainer>
+          </ElementContainer>))}
+        {isUserAdminOfProject(currentUser, project) && <ElementContainer>
           <AddScript projectId={project.uuid} />
-          </Style.ElementContainer>}
-      </Style.ProjectSettingsBlock>
+          </ElementContainer>}
+      </ProjectSettingsBlock>
       <ReduxToastr
         timeOut={4000}
         newestOnTop={false}
@@ -181,7 +181,7 @@ const PagesAndScriptsSettings: React.FunctionComponent<Props> = ({
         transitionOut="fadeOut"
         closeOnToastrClick
       />
-    </Style.Container>
+    </Container>
   );
 }
 
