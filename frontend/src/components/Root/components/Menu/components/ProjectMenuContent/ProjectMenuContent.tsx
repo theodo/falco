@@ -6,12 +6,12 @@ import { ValueType } from 'react-select/lib/types';
 import { routeDefinitions } from 'routes';
 
 import MessagePill from 'components/MessagePill';
+import MenuPageScriptItem from 'components/Root/components/MenuPageScriptItem';
 import { AuditParametersType } from 'redux/entities/auditParameters/types';
 import { ProjectType } from 'redux/entities/projects/types';
 import { UserState } from 'redux/user';
 import { isUserAdminOfProject } from 'services/utils';
 import { getSpacing } from 'stylesheet';
-import MenuPageScriptItem from '../../../MenuPageScriptItem';
 import {
   AuditParametersBlock,
   AuditParametersTitle,
@@ -20,25 +20,25 @@ import {
   Container,
   LaunchAuditsButton,
   ProjectName,
-  ProjectSettingsLink
+  ProjectSettingsLink,
 } from './ProjectMenuContent.style';
 
 interface AuditParametersOption {
   value: string;
   label: string;
-};
+}
 
 export interface OwnProps {
   user: UserState;
   auditParametersId: string | null;
   currentPageId: string | null;
   project: ProjectType;
-  auditParametersList: AuditParametersType[],
+  auditParametersList: AuditParametersType[];
   currentScriptId: string | null;
   scriptStepId: string | null;
   runningAudits: string[];
   launchAudits: (projectId: string) => void;
-};
+}
 
 type Props = OwnProps & InjectedIntlProps;
 
@@ -97,34 +97,26 @@ export const ProjectMenuContent: React.FunctionComponent<Props> = ({
     <Container>
       <ProjectName>{project.name}</ProjectName>
 
-      {(runningAudits.length === 0 && auditCanBeLaunched)
-        ? (
-          <LaunchAuditsButton
-            onClick={
-              () => {
-                setAuditCanBeLaunched(false);
-                launchAudits(project.uuid);
-                // wait 1 second before it is possible to launch another audit
-                // this is intended to stop several audits being launched at once
-                setTimeout(() => setAuditCanBeLaunched(true), 1000);
-              }
-            }
-          >
-            <FormattedMessage id="Menu.launch_audits" />
-          </LaunchAuditsButton>
-        )
-        :
-        (runningAudits.length !== 0)
-          ? (
-            <MessagePill
-              messageType="info"
-              margin={getSpacing(3)}
-            >
-              <FormattedMessage id="Menu.running_audits_number" values={{ number: runningAudits.length }} />
-            </MessagePill>
-          )
-          : null
-      }
+      {runningAudits.length === 0 && auditCanBeLaunched ? (
+        <LaunchAuditsButton
+          onClick={() => {
+            setAuditCanBeLaunched(false);
+            launchAudits(project.uuid);
+            // wait 1 second before it is possible to launch another audit
+            // this is intended to stop several audits being launched at once
+            setTimeout(() => setAuditCanBeLaunched(true), 1000);
+          }}
+        >
+          <FormattedMessage id="Menu.launch_audits" />
+        </LaunchAuditsButton>
+      ) : runningAudits.length !== 0 ? (
+        <MessagePill messageType="info" margin={getSpacing(3)}>
+          <FormattedMessage
+            id="Menu.running_audits_number"
+            values={{ number: runningAudits.length }}
+          />
+        </MessagePill>
+      ) : null}
       {0 !== auditParametersSelectOptions.length && (
         <AuditParametersBlock>
           <AuditParametersTitle>
@@ -139,27 +131,23 @@ export const ProjectMenuContent: React.FunctionComponent<Props> = ({
           />
         </AuditParametersBlock>
       )}
-      {isUserAdminOfProject(user, project) && <ProjectSettingsLink
-        key={project.uuid}
-        to={routeDefinitions.projectSettingsGeneral.path.replace(':projectId', project.uuid)}
-        margin={`0 0 ${getSpacing(4)} ${getSpacing(4)}`}
-      >
-        <FormattedMessage id="Menu.manage_project_settings" />
-      </ProjectSettingsLink>}
+      {isUserAdminOfProject(user, project) && (
+        <ProjectSettingsLink
+          key={project.uuid}
+          to={routeDefinitions.projectSettingsGeneral.path.replace(':projectId', project.uuid)}
+          margin={`0 0 ${getSpacing(4)} ${getSpacing(4)}`}
+        >
+          <FormattedMessage id="Menu.manage_project_settings" />
+        </ProjectSettingsLink>
+      )}
       <Audits>Audits</Audits>
       <AuditsAndScriptsContainer>
-        {project.pagesIds.map((pageId: string) =>
-          <MenuPageScriptItem
-            key={pageId}
-            pageId={pageId}
-          />
-        )}
-        {project.scriptsIds.map((scriptId: string) =>
-          <MenuPageScriptItem
-            key={scriptId}
-            scriptId={scriptId}
-          />
-        )}
+        {project.pagesIds.map((pageId: string) => (
+          <MenuPageScriptItem key={pageId} pageId={pageId} />
+        ))}
+        {project.scriptsIds.map((scriptId: string) => (
+          <MenuPageScriptItem key={scriptId} scriptId={scriptId} />
+        ))}
       </AuditsAndScriptsContainer>
     </Container>
   );
