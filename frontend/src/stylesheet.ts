@@ -404,3 +404,5 @@ export const modalSize = {
 }
 
 export const settingsContainerSize = '800px'
+
+export const inheritVar = 'inherit';

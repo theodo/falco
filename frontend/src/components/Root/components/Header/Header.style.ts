@@ -1,3 +1,4 @@
+import Button from "components/Button";
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
@@ -5,6 +6,7 @@ import {
   fontSize,
   fontWeight,
   getSpacing,
+  inheritVar,
   lineHeight,
   responsiveThreshold,
   zIndex,
@@ -111,7 +113,7 @@ export const HeaderButtonsBlock = styled.ul`
 `;
 HeaderButtonsBlock.displayName = 'HeaderButtonsBlock';
 
-export const HeaderButton = styled.li`
+export const HeaderMenuItem = styled.li`
   list-style: none;
   display: flex;
   align-items: center;
@@ -132,6 +134,12 @@ export const HeaderButton = styled.li`
   &:first-of-type {
     margin-left: 0;
   }
+`;
+HeaderMenuItem.displayName = 'HeaderMenuItem';
+
+export const HeaderButton = styled(Button)`
+  color: ${inheritVar};
+  font: ${inheritVar};
 `;
 HeaderButton.displayName = 'HeaderButton';
 

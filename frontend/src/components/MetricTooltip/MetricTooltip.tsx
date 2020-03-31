@@ -5,7 +5,7 @@ import Style from './MetricTooltip.style';
 export interface Props {
   children?: ReactNode;
   parentRef: React.RefObject<HTMLDivElement>;
-  initiatorRef: React.RefObject<HTMLDivElement>;
+  initiatorRef: React.RefObject<HTMLButtonElement> | React.RefObject<HTMLDivElement>;
 }
 
 const MetricTooltip: React.FunctionComponent<Props> = ({ children, parentRef, initiatorRef }) => {

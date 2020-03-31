@@ -31,7 +31,7 @@ const Style = {
   `,
 
   MetricsContainer: styled.div`
-    column-count: 2; 
+    column-count: 2;
   `,
 
   MetricItem: styled.div`
@@ -62,7 +62,6 @@ const Style = {
     padding: ${getSpacing(2)} ${getSpacing(4)};
     border-radius: 4px;
     border: 2px solid ${colorUsage.cancelButtonBorder};
-    outline: none;
     cursor: pointer;
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.button};
@@ -76,7 +75,6 @@ const Style = {
     padding: ${getSpacing(2)} ${getSpacing(4)};
     border-radius: 4px;
     border: none;
-    outline: none;
     cursor: pointer;
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.button};
@@ -109,6 +107,13 @@ Style.ModalCheckbox = styled.input`
       height: 10px;
       background-color: ${colorUsage.checkboxColor};
     }
+  }
+
+  /**
+  * Simulates outline css property for accessibility stakes
+  */
+  &:focus + ${Style.ModalCheckboxLabel} {
+    box-shadow: 0 0 0 2px rgb(77, 144, 254, .6);
   }
 `;
 /* stylelint-enable */

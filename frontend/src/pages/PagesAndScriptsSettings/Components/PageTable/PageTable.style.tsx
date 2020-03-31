@@ -1,5 +1,13 @@
+import Button from 'components/Button';
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, getSpacing, lineHeight } from 'stylesheet';
+import {
+  colorUsage,
+  fontFamily,
+  fontSize,
+  getSpacing,
+  inheritVar,
+  lineHeight
+} from 'stylesheet';
 
 interface AddInputProps {
   isAdding: boolean;
@@ -56,13 +64,13 @@ export const UrlHeader = styled.div`
 
 export const AddNameInput = styled.input`
   ${addInputStyle}
-  display: ${(props: AddInputProps) => props.isAdding ? "visible" : "none"};
+  display: ${(props: AddInputProps) => (props.isAdding ? 'visible' : 'none')};
   width: 25%;
 `;
 
 export const AddUrlInput = styled.input`
   ${addInputStyle}
-  display: ${(props: AddInputProps) => props.isAdding ? "visible" : "none"};
+  display: ${(props: AddInputProps) => (props.isAdding ? 'visible' : 'none')};
   width: 70%;
 `;
 
@@ -76,22 +84,24 @@ export const EditUrlInput = styled.input`
   width: 70%;
 `;
 
-export const AddPageButtonContainer = styled.div`
-  display: ${(props: AddInputProps) => props.isAdding ? "none" : "flex"};
+export const AddPageButtonContainer = styled(Button)`
+  display: ${(props: AddInputProps) => (props.isAdding ? 'none' : 'flex')};
   align-items: center;
-  cursor: pointer;
   margin: auto;
+  font-size: ${inheritVar};
+  font-family: ${inheritVar};
+  color: ${inheritVar};
 
   &:hover {
     opacity: 0.5;
     background: white;
     transition-duration: 0.2s;
-  };
+  }
 `;
 
 export const AddPageButtonLabel = styled.div`
   margin-left: ${getSpacing(4)};
-`
+`;
 
 export const EditButtonContainer = styled.div`
   width: 5%;
@@ -138,9 +148,8 @@ export const PageButton = styled.button`
   }
 `;
 
-
 export const AddPageButtonsContainer = styled.div`
-  display: ${(props: AddInputProps) => props.isAdding ? "flex" : "none"};
+  display: ${(props: AddInputProps) => (props.isAdding ? 'flex' : 'none')};
   width: 60px;
   flex-direction: row;
   justify-content: flex-end;

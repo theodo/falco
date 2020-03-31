@@ -134,6 +134,13 @@ Style.RadioButton = styled.input`
       background: ${colorUsage.webPageTestRadioButtonColor};
     }
   }
+
+/**
+  * Simulates outline css property for accessibility stakes
+  */
+  &:focus + ${Style.RadioButtonLabel} {
+    box-shadow: 0 0 0 2px rgb(77, 144, 254, .6);
+  }
 `;
 /* stylelint-enable */
 

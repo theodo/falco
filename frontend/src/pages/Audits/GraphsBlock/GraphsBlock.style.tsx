@@ -46,9 +46,6 @@ const Style = {
     &:active {
       outline: none;
     }
-    &:focus {
-      outline: none;
-    }
   `,
 
   GraphInfoLink: styled.a`

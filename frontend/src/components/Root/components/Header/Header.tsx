@@ -15,6 +15,7 @@ import {
   HeaderContent,
   HeaderLink,
   HeaderMenu,
+  HeaderMenuItem,
   LogoBlock,
   LogoContainer,
   LogoTitle,
@@ -147,16 +148,20 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
         </HeaderMenu>
         <HeaderContent shouldHaveShadow={shouldDisplayConnectedUserHeader && scrollPosition > 10}>
           {shouldDisplayConnectedUserHeader ? (
-            <Nav>
+            <Nav role="navigation">
               <HeaderButtonsBlock>
-                <HeaderButton onClick={toggleProjectsMenuVisibility} ref={projectsMenuButtonRef}>
-                  <FormattedMessage id="Header.projects_button" />
+                <HeaderMenuItem onClick={toggleProjectsMenuVisibility} ref={projectsMenuButtonRef} role="menu">
+                  <HeaderButton>
+                    <FormattedMessage id="Header.projects_button" />
+                  </HeaderButton>
                   <HeaderButtonArrow />
-                </HeaderButton>
-                <HeaderButton onClick={toggleAccountMenuVisibility} ref={accountMenuButtonRef}>
-                  <FormattedMessage id="Header.login_button" />
+                </HeaderMenuItem>
+                <HeaderMenuItem onClick={toggleAccountMenuVisibility} ref={accountMenuButtonRef} role="menu">
+                  <HeaderButton>
+                    <FormattedMessage id="Header.login_button" />
+                  </HeaderButton>
                   <HeaderButtonArrow />
-                </HeaderButton>
+                </HeaderMenuItem>
               </HeaderButtonsBlock>
             </Nav>
           ) : (

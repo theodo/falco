@@ -1,5 +1,14 @@
+import Button from "components/Button";
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
+import {
+  colorUsage,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  getSpacing,
+  inheritVar,
+  lineHeight
+} from 'stylesheet';
 
 interface ItemWithMarginProps {
   margin?: string;
@@ -65,4 +74,13 @@ export const UserActionItem = styled.div`
 
   export const UserActionItemExternalLink = styled.a`
     all: unset;
+
+    &:focus {
+      outline: -webkit-focus-ring-color auto 5px;
+    }
   `
+
+export const UserActionItemButton = styled(Button)`
+  color: ${inheritVar};
+  font: ${inheritVar};
+  `;

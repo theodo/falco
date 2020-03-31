@@ -1,3 +1,4 @@
+import Button from 'components/Button';
 import styled from 'styled-components';
 import {
   colorUsage,
@@ -9,14 +10,15 @@ import {
   zIndex,
 } from 'stylesheet';
 
-export const CloseContainer = styled.div`
+export const CloseContainer = styled(Button)`
   position: absolute;
   top: 40px;
-  right: 10px;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
+  right: 20px;
+  width: 20px;
+  height: 20px;
   z-index: ${zIndex.graphModalCloseButton};
+  margin: 0;
+  text-align: inherit;
 `;
 
 export const PageTitle = styled.h1`
