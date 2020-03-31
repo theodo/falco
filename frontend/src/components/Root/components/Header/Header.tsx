@@ -19,7 +19,6 @@ import {
   LogoBlock,
   LogoContainer,
   LogoTitle,
-  MenusContainer,
   Nav,
 } from './Header.style';
 

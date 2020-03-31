@@ -154,11 +154,6 @@ export const HeaderButtonArrow = styled.span`
 `;
 HeaderButtonArrow.displayName = 'HeaderButtonArrow';
 
-export const MenusContainer = styled.div`
-  display: flex;
-`;
-MenusContainer.displayName = 'MenusContainer';
-
 export const HeaderLink = styled(Link)`
   text-decoration: none;
   color: ${colorUsage.menuLink};
