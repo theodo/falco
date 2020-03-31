@@ -155,12 +155,22 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
                     <FormattedMessage id="Header.projects_button" />
                   </HeaderButton>
                   <HeaderButtonArrow />
+                  <ProjectsMenu
+                    isVisible={isProjectsMenuVisible && MenuHasBeenPositionned}
+                    position={'absolute'}
+                    right={projectsMenuRight}
+                  />
                 </HeaderMenuItem>
                 <HeaderMenuItem onClick={toggleAccountMenuVisibility} ref={accountMenuButtonRef} role="menu">
                   <HeaderButton>
                     <FormattedMessage id="Header.login_button" />
                   </HeaderButton>
                   <HeaderButtonArrow />
+                  <AccountMenu
+                    isVisible={isAccountMenuVisible && MenuHasBeenPositionned}
+                    position={'absolute'}
+                    right={accountMenuRight}
+                  />
                 </HeaderMenuItem>
               </HeaderButtonsBlock>
             </Nav>
@@ -176,20 +186,6 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
           )}
         </HeaderContent>
       </HeaderBlock>
-      {shouldDisplayConnectedUserHeader && (
-        <MenusContainer>
-          <ProjectsMenu
-            isVisible={isProjectsMenuVisible && MenuHasBeenPositionned}
-            position={'absolute'}
-            right={projectsMenuRight}
-          />
-          <AccountMenu
-            isVisible={isAccountMenuVisible && MenuHasBeenPositionned}
-            position={'absolute'}
-            right={accountMenuRight}
-          />
-        </MenusContainer>
-      )}
     </HeaderContainer>
   );
 };

@@ -19,7 +19,7 @@ interface AccountMenuContainerProps {
   right?: string | null;
 }
 
-export const Container = styled.div`
+export const Container = styled.ul`
     width: 460px;
     background-color: ${colorUsage.accountMenuBackground};
     box-shadow: 0 0 8px 4px ${colorUsage.accountMenuShadow};
@@ -27,6 +27,7 @@ export const Container = styled.div`
     right: ${(props: AccountMenuContainerProps) => (props.right ? props.right : 'auto')};
     color: ${colorUsage.accountMenuText};
     font-family: ${fontFamily.mainSans};
+    top: 100px;
   `;
 
 export const UserInfosBlockContainer = styled.div`
@@ -57,7 +58,7 @@ export const UserActionsBlock = styled.div`
     padding: ${getSpacing(2)} 0;
   `;
 
-export const UserActionItem = styled.div`
+export const UserActionItem = styled.li`
     margin: ${(props: ItemWithMarginProps) =>
     props.margin ? props.margin : `0 0 ${getSpacing(3)} 0`};
     padding: ${getSpacing(2)} ${getSpacing(10)};
