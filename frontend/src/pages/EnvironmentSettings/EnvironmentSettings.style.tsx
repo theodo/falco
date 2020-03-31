@@ -2,13 +2,19 @@ import styled from 'styled-components';
 import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight, settingsContainerSize } from 'stylesheet';
 
 const Style = {
+  /* stylelint-disable selector-max-specificity */
   Container: styled.div`
     display: flex;
     flex-direction: column;
     padding: 0 0 ${getSpacing(4)} 0;
     margin: 0;
     width: ${settingsContainerSize};
+
+    .rrt-confirm-holder .rrt-confirm .rrt-buttons-holder .rrt-button:focus {
+      outline: -webkit-focus-ring-color auto 5px;
+    }
   `,
+  /* stylelint-enable selector-max-specificity */
 
   PageTitle: styled.h1`
     line-height: ${lineHeight.h1Text};
