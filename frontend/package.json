@@ -3,12 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/react": "^8.0.1",
-    "@types/react-modal": "^3.8.2",
-    "@types/react-redux-toastr": "^7.4.1",
-    "@types/react-select": "^2.0.13",
-    "@types/recharts": "^1.1.16",
-    "@types/redux-mock-store": "^1.0.1",
     "babel-polyfill": "6.26.0",
     "connected-react-router": "5.0.1",
     "core-js": "^3.3.3",
@@ -93,6 +87,12 @@
     }
   ],
   "devDependencies": {
+    "@testing-library/react": "^8.0.1",
+    "@types/react-modal": "^3.8.2",
+    "@types/react-redux-toastr": "^7.4.1",
+    "@types/react-select": "^2.0.13",
+    "@types/recharts": "^1.1.16",
+    "@types/redux-mock-store": "^1.0.1",
     "@types/cheerio": "^0.22.10",
     "@types/enzyme": "^3.1.15",
     "@types/history": "^4.7.2",
