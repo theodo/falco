@@ -1,4 +1,4 @@
-import Button from "components/Button";
+import Button from 'components/Button';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
@@ -125,6 +125,7 @@ export const HeaderMenuItem = styled.li`
   margin-left: ${getSpacing(4)};
   user-select: none;
   cursor: pointer;
+  position: relative;
 
   &:hover {
     color: ${colorUsage.headerButtonHoverText};
@@ -136,6 +137,13 @@ export const HeaderMenuItem = styled.li`
   }
 `;
 HeaderMenuItem.displayName = 'HeaderMenuItem';
+
+export const HeaderMenuItemContent = styled.div`
+  position: absolute;
+  top: 50px;
+  right: -15px;
+`;
+HeaderMenuItemContent.displayName = 'HeaderMenuItemContent';
 
 export const HeaderButton = styled(Button)`
   color: ${inheritVar};
