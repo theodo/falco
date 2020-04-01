@@ -16,6 +16,7 @@ import {
   HeaderLink,
   HeaderMenu,
   HeaderMenuItem,
+  HeaderMenuItemContent,
   LogoBlock,
   LogoContainer,
   LogoTitle,
@@ -36,46 +37,7 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
   intl,
 }) => {
   const [isAccountMenuVisible, setIsAccountMenuVisible] = React.useState(false);
-  const [accountMenuRight, setAccountMenuRight] = React.useState('auto');
   const [isProjectsMenuVisible, setIsProjectsMenuVisible] = React.useState(false);
-  const [projectsMenuRight, setProjectsMenuRight] = React.useState('auto');
-  const [MenuHasBeenPositionned, setMenuHasBeenPositionned] = React.useState(false);
-
-  const headerContainerRef = React.useRef<HTMLDivElement>(null);
-  const accountMenuButtonRef = React.useRef<HTMLLIElement>(null);
-  const projectsMenuButtonRef = React.useRef<HTMLLIElement>(null);
-
-  React.useEffect(
-    () => {
-      if (headerContainerRef.current && accountMenuButtonRef.current) {
-        setAccountMenuRight(
-          Math.floor(
-            headerContainerRef.current.getBoundingClientRect().right -
-              accountMenuButtonRef.current.getBoundingClientRect().right -
-              15,
-          ) + 'px',
-        );
-        setMenuHasBeenPositionned(true);
-      }
-    },
-    [isAccountMenuVisible],
-  );
-
-  React.useEffect(
-    () => {
-      if (headerContainerRef.current && projectsMenuButtonRef.current) {
-        setProjectsMenuRight(
-          Math.floor(
-            headerContainerRef.current.getBoundingClientRect().right -
-              projectsMenuButtonRef.current.getBoundingClientRect().right -
-              15,
-          ) + 'px',
-        );
-        setMenuHasBeenPositionned(true);
-      }
-    },
-    [isProjectsMenuVisible],
-  );
 
   const toggleAccountMenuVisibility = (event: MouseEvent) => {
     event.preventDefault();
@@ -118,13 +80,13 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
   const isLandingPage = currentURL === routeDefinitions.landing.path;
   const shouldDisplayConnectedUserHeader = isUserAuthenticated;
 
-  const [scrollPosition, setScrollPostition] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState(0);
   window.addEventListener('scroll', () => {
-    setScrollPostition(window.scrollY);
+    setScrollPosition(window.scrollY);
   });
 
   return (
-    <HeaderContainer ref={headerContainerRef}>
+    <HeaderContainer>
       <HeaderBlock shouldHaveShadow={isLandingPage && scrollPosition > 10}>
         <HeaderMenu isMenuDisplayed={isMenuDisplayed}>
           <LogoContainer
@@ -149,27 +111,23 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
           {shouldDisplayConnectedUserHeader ? (
             <Nav role="navigation">
               <HeaderButtonsBlock>
-                <HeaderMenuItem onClick={toggleProjectsMenuVisibility} ref={projectsMenuButtonRef} role="menu">
+                <HeaderMenuItem onClick={toggleProjectsMenuVisibility} role="menu">
                   <HeaderButton>
                     <FormattedMessage id="Header.projects_button" />
                   </HeaderButton>
                   <HeaderButtonArrow />
-                  <ProjectsMenu
-                    isVisible={isProjectsMenuVisible && MenuHasBeenPositionned}
-                    position={'absolute'}
-                    right={projectsMenuRight}
-                  />
+                  <HeaderMenuItemContent>
+                    {isProjectsMenuVisible && <ProjectsMenu />}
+                  </HeaderMenuItemContent>
                 </HeaderMenuItem>
-                <HeaderMenuItem onClick={toggleAccountMenuVisibility} ref={accountMenuButtonRef} role="menu">
+                <HeaderMenuItem onClick={toggleAccountMenuVisibility} role="menu">
                   <HeaderButton>
                     <FormattedMessage id="Header.login_button" />
                   </HeaderButton>
                   <HeaderButtonArrow />
-                  <AccountMenu
-                    isVisible={isAccountMenuVisible && MenuHasBeenPositionned}
-                    position={'absolute'}
-                    right={accountMenuRight}
-                  />
+                  <HeaderMenuItemContent>
+                    {isAccountMenuVisible && <AccountMenu />}
+                  </HeaderMenuItemContent>
                 </HeaderMenuItem>
               </HeaderButtonsBlock>
             </Nav>

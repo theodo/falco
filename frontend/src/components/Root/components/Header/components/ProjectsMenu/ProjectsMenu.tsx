@@ -25,10 +25,7 @@ import {
 
 interface OwnProps {
   currentProject?: ProjectType | null;
-  isVisible: boolean;
-  position?: string;
   projects: Array<ProjectType | null> | null;
-  right?: string | null;
 }
 
 type Props = OwnProps & InjectedIntlProps;
@@ -36,10 +33,7 @@ type Props = OwnProps & InjectedIntlProps;
 export const ProjectsMenu: React.FunctionComponent<Props> = ({
   currentProject,
   intl,
-  isVisible,
-  position,
   projects,
-  right,
 }) => {
   const renderCurrentProjectItem = () =>
     currentProject && (
@@ -71,10 +65,7 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
         to={routeDefinitions.projectDetails.path.replace(':projectId', project.uuid)}
       >
         <ProjectItemSnapshotContainer>
-          <ProjectItemSnapshot
-            src={project.screenshotUrl}
-            margin={`0 ${getSpacing(4)} 0 0`}
-          />
+          <ProjectItemSnapshot src={project.screenshotUrl} margin={`0 ${getSpacing(4)} 0 0`} />
         </ProjectItemSnapshotContainer>
         <ProjectItemTitleBlock>
           <ProjectItemTitle>{project.name}</ProjectItemTitle>
@@ -88,34 +79,31 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
       </ProjectItem>
     );
 
-  if (isVisible) {
-    if (null === projects) {
-      return (
-        <Container position={position} right={right}>
-          <Loader minHeight={'200px'} />
-        </Container>
-      );
-    }
-
-    if (0 === projects.length) {
-      return (
-        <Container position={position} right={right}>
-          <MessagePill messageType="error">
-            <FormattedMessage id="Projects.no_project_error" />
-          </MessagePill>
-        </Container>
-      );
-    }
+  if (null === projects) {
     return (
-      <Container position={position} right={right}>
-        {renderCurrentProjectItem()}
-        <ProjectItemContainer>
-          {projects
-            .filter((project: ProjectType | null) => currentProject !== project)
-            .map((project: ProjectType | null) => renderProjectItem(project))}
-        </ProjectItemContainer>
+      <Container>
+        <Loader minHeight={'200px'} />
       </Container>
     );
   }
-  return <div />;
+
+  if (0 === projects.length) {
+    return (
+      <Container>
+        <MessagePill messageType="error">
+          <FormattedMessage id="Projects.no_project_error" />
+        </MessagePill>
+      </Container>
+    );
+  }
+  return (
+    <Container>
+      {renderCurrentProjectItem()}
+      <ProjectItemContainer>
+        {projects
+          .filter((project: ProjectType | null) => currentProject !== project)
+          .map((project: ProjectType | null) => renderProjectItem(project))}
+      </ProjectItemContainer>
+    </Container>
+  );
 };
