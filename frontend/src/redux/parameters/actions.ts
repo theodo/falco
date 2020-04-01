@@ -27,10 +27,15 @@ export const updateDisplayedMetrics = createStandardAction('parameters/UPDATE_DI
   displayedMetrics: MetricType[];
 }>();
 
+export const updateAllDisplayedMetrics = createStandardAction('parameters/UPDATE_DISPLAYED_METRICS')<{
+  displayedMetrics: Record<string, MetricType[]>;
+}>();
+
 export default {
   setCurrentAuditParametersId,
   setCurrentPageId,
   setCurrentScriptId,
   setCurrentScriptStepId,
   updateDisplayedMetrics,
+  updateAllDisplayedMetrics,
 };

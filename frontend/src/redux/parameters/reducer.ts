@@ -9,6 +9,7 @@ import {
   setCurrentPageId,
   setCurrentScriptId,
   setCurrentScriptStepId,
+  updateAllDisplayedMetrics,
   updateDisplayedMetrics,
 } from './actions';
 
@@ -18,6 +19,7 @@ export type ParametersAction = ActionType<
   | typeof setCurrentScriptId
   | typeof setCurrentScriptStepId
   | typeof updateDisplayedMetrics
+  | typeof updateAllDisplayedMetrics
 >;
 
 export type ParametersState = Readonly<{
@@ -79,6 +81,14 @@ const reducer = (state: ParametersState = initialState, action: AnyAction) => {
           [action.payload.projectId]: action.payload.displayedMetrics,
         },
       };
+    case getType(updateAllDisplayedMetrics):
+      return {
+        ...state,
+        displayedMetrics: {
+          ...state.displayedMetrics,
+            ...action.payload.displayedMetrics,
+          }
+      }
     default:
       return state;
   }

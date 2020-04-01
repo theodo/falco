@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import { Dispatch } from 'redux';
 import { MetricType } from 'redux/auditResults/types';
-import { updateDisplayedMetrics } from 'redux/parameters';
+import { updateDisplayedMetricsRequest } from 'redux/entities/projects';
 import { getCurrentProjectId } from 'redux/selectors';
 import { RootStateWithRouter } from 'redux/types';
 import MetricModal from './MetricModal';
@@ -12,8 +12,8 @@ const mapStateToProps = (state: RootStateWithRouter) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  updateDisplayedMetrics: (projectId: string, displayedMetrics: MetricType[]) =>
-    dispatch(updateDisplayedMetrics({ projectId, displayedMetrics })),
+  updateDisplayedMetricsRequest: (projectId: string, displayedMetrics: MetricType[]) =>
+    dispatch(updateDisplayedMetricsRequest({projectId, displayedMetrics}))
 });
 
 export default connect(

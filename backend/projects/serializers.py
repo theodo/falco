@@ -146,18 +146,18 @@ class ProjectSerializer(DynamicFieldsModelSerializer):
         )
 
     def _user_metrics(self, obj):
-        metrics = list(
-            MetricsPreferences.objects.filter(project=obj).filter(
-                user_id=self.context.get("user_id")
-            )
+        metrics = MetricsPreferences.objects.filter(
+            project=obj, user_id=self.context.get("user_id")
         )
-        if len(metrics) == 0:
-            metrics = [
-                "WPTMetricFirstViewTTI",
-                "WPTMetricFirstViewSpeedIndex",
-                "WPTMetricFirstViewLoadTime",
-            ]
-        return metrics
+        if metrics:
+            metrics = metrics.values_list("metrics", flat=True).get()
+            if metrics is not None and len(metrics) > 0:
+                return metrics
+        return [
+            "WPTMetricFirstViewTTI",
+            "WPTMetricFirstViewSpeedIndex",
+            "WPTMetricFirstViewLoadTime",
+        ]
 
     pages = PageSerializer(many=True)
     scripts = ScriptSerializer(many=True)

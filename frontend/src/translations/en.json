@@ -228,7 +228,8 @@
       "edit_audit_parameter_success": "The audit parameter has been edited successfully",
       "delete_page_success_message": "The page has been deleted successfully",
       "delete_page_confirm_question": "Do you really want to delete the page?",
-      "delete_auditParameter_confirm_question": "Are you sure you want to delete that line? Associated audit data will be deleted permanently."
+      "delete_auditParameter_confirm_question": "Are you sure you want to delete that line? Associated audit data will be deleted permanently.",
+      "update_metrics_success_message": "The metrics have been updated successfully"
     }
   },
   "components": {

@@ -4,7 +4,7 @@ import { ValueType } from 'react-select/lib/types';
 
 import { AuditParametersType } from 'redux/entities/auditParameters/types';
 import { PageType } from 'redux/entities/pages/types';
-import { ProjectType } from 'redux/entities/projects/types';
+import {ProjectToastrDisplayType, ProjectType} from 'redux/entities/projects/types';
 import { ScriptType } from 'redux/entities/scripts/types';
 
 import Badge from 'components/Badge';
@@ -13,6 +13,8 @@ import MessagePill from 'components/MessagePill';
 import Select from 'components/Select';
 import dayjs from 'dayjs';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import ReduxToastr, { toastr } from 'react-redux-toastr';
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { auditStatus, AuditStatusHistoryType } from 'redux/entities/auditStatusHistories/types';
 import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
 import { routeDefinitions } from 'routes';
@@ -62,6 +64,8 @@ type Props = {
   setCurrentPageId: (pageId: string | null | undefined) => void;
   setCurrentScriptId: (scriptId: string | null | undefined) => void;
   setCurrentScriptStepId: (scriptStepId: string | null | undefined) => void;
+  toastrDisplay: ProjectToastrDisplayType;
+  setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
 } & OwnProps &
   InjectedIntlProps;
 
@@ -84,6 +88,8 @@ export const Audits: React.FunctionComponent<Props> = ({
   setCurrentPageId,
   setCurrentScriptId,
   setCurrentScriptStepId,
+  toastrDisplay,
+  setProjectToastrDisplay,
 }) => {
   const { projectId, pageOrScriptId, auditParametersId, scriptStepId } = match.params;
 
@@ -136,6 +142,30 @@ export const Audits: React.FunctionComponent<Props> = ({
     },
     // eslint-disable-next-line
     [script && script.uuid, scriptStepId, setCurrentScriptStepId],
+  );
+
+  React.useEffect(
+    () => {
+      if ('' !== toastrDisplay) {
+        switch (toastrDisplay) {
+          case 'updateDisplayedMetricsSuccess':
+            toastr.success(
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.update_metrics_success_message' }),
+            );
+            break;
+          case 'updateDisplayedMetricsError':
+            toastr.error(
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.error_title' }),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.error_message' }),
+            );
+            break;
+        }
+
+        setProjectToastrDisplay('');
+      }
+    },
+    [toastrDisplay, setProjectToastrDisplay, intl],
   );
 
   // we set a loader if the project hasn't been loaded from the server or if the page or the script haven't been
@@ -244,7 +274,7 @@ export const Audits: React.FunctionComponent<Props> = ({
       case auditStatus.requested:
         return <FormattedMessage id="Audits.AuditStatusHistory.audit_requested" />;
       case auditStatus.queuing:
-        return auditStatusHistory.info && auditStatusHistory.info.positionInQueue 
+        return auditStatusHistory.info && auditStatusHistory.info.positionInQueue
           ? <FormattedMessage id="Audits.AuditStatusHistory.audit_in_queue_behind" values={{ positionInQueue: auditStatusHistory.info.positionInQueue }}/>
           : <FormattedMessage id="Audits.AuditStatusHistory.audit_in_queue" />
       case auditStatus.running:
@@ -252,8 +282,8 @@ export const Audits: React.FunctionComponent<Props> = ({
           return <FormattedMessage id="Audits.AuditStatusHistory.audit_started" values={{ runningTime: auditStatusHistory.info.runningTime }}/>
         } else if(auditStatusHistory.info && auditStatusHistory.info.totalTests && auditStatusHistory.info.completedTests) {
           return (
-          <FormattedMessage 
-            id="Audits.AuditStatusHistory.audit_tests_running" 
+          <FormattedMessage
+            id="Audits.AuditStatusHistory.audit_tests_running"
             values={{
               completedTests: auditStatusHistory.info.completedTests,
               totalTests: auditStatusHistory.info.totalTests,
@@ -350,6 +380,14 @@ export const Audits: React.FunctionComponent<Props> = ({
       <AnalyticsBlock
         blockMargin={`0 0 ${getSpacing(8)} 0`}
         auditResultIds={sortedAuditResultsIds}
+      />
+      <ReduxToastr
+        timeOut={4000}
+        newestOnTop={false}
+        preventDuplicates
+        transitionIn="fadeIn"
+        transitionOut="fadeOut"
+        closeOnToastrClick
       />
     </Container>
   );

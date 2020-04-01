@@ -1,5 +1,6 @@
 import { createStandardAction } from 'typesafe-actions';
 
+import {MetricType} from "redux/auditResults/types";
 import { AuditParametersType } from '../auditParameters/types';
 import { PageType } from '../pages/types';
 import { ApiProjectType, ProjectToastrDisplayType, ProjectType } from './types';
@@ -137,6 +138,11 @@ export const deleteScriptFromProjectSuccess = createStandardAction('projects/DEL
   scriptId: string;
 }>();
 
+export const updateDisplayedMetricsRequest = createStandardAction('projects/UPDATE_DISPLAYED_METRICS_REQUEST')<{
+  projectId: string;
+  displayedMetrics: MetricType[];
+}>();
+
 export default {
   addMemberToProjectRequest,
   addMemberToProjectError,
@@ -167,4 +173,5 @@ export default {
   deleteAuditParameterFromProjectSuccess,
   addScriptToProjectSuccess,
   deleteScriptFromProjectSuccess,
+  updateDisplayedMetricsRequest
 };

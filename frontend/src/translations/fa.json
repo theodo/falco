@@ -228,7 +228,8 @@
       "edit_audit_parameter_success": "پارامتر حسابرسی با موفقیت ویرایش شد",
       "delete_page_success_message": "صفحه حذف شد",
       "delete_page_confirm_question": "مطمئن هستید میخواهید این صفحه را حذف کنید؟",
-      "delete_auditParameter_confirm_question": "مطمئن هستید میخواهید این خط را حذف کنید؟داده های حسابرسی مرتبط بطور کامل حذف می شوند."
+      "delete_auditParameter_confirm_question": "مطمئن هستید میخواهید این خط را حذف کنید؟داده های حسابرسی مرتبط بطور کامل حذف می شوند.",
+      "update_metrics_success_message": "معیارها با موفقیت به روز شدند"
     }
   },
   "components": {

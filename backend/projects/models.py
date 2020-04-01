@@ -61,7 +61,10 @@ class ProjectMemberRole(BaseModel):
 class MetricsPreferences(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    metrics = ArrayField(models.CharField(max_length=100))
+    metrics = ArrayField(models.CharField(max_length=100), null=True)
+
+    class Meta:
+        unique_together = ("project", "user")
 
 
 class Page(BaseModel):

@@ -14,6 +14,7 @@ from projects.models import (
     ProjectAuditParameters,
     AvailableAuditParameters,
     Script,
+    MetricsPreferences,
 )
 from projects.serializers import (
     PageSerializer,
@@ -529,3 +530,27 @@ def project_script_detail(request, project_uuid, script_uuid):
         check_if_admin_of_project(request.user.id, project.uuid)
         script.delete()
         return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
+
+
+@swagger_auto_schema(
+    methods=["post"],
+    responses={200: openapi.Response("Updates a metric preference.")},
+    tags=["Metrics"],
+)
+@api_view(["POST"])
+@permission_classes([permissions.IsAuthenticated])
+def metrics(request):
+    data = JSONParser().parse(request)
+    project_id = data["project"]
+    new_metrics = data["metrics"]
+    metrics = MetricsPreferences.objects.filter(
+        project_id=project_id, user_id=request.user.id
+    )
+    if not metrics:
+        new_metric_preferences = MetricsPreferences(
+            project_id=project_id, user_id=request.user.id, metrics=new_metrics
+        )
+        new_metric_preferences.save()
+    else:
+        metrics.update(metrics=new_metrics)
+    return JsonResponse({})

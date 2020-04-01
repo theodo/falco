@@ -22,4 +22,5 @@ urlpatterns = [
     ),
     path("<uuid:project_uuid>/scripts", views.project_scripts),
     path("<uuid:project_uuid>/scripts/<uuid:script_uuid>", views.project_script_detail),
+    path("metrics", views.metrics),
 ]

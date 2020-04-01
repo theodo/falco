@@ -8,6 +8,8 @@ import {
 } from 'services/networking/request';
 import { ActionType, getType } from 'typesafe-actions';
 
+import { MetricType } from 'redux/auditResults/types';
+import { updateAllDisplayedMetrics, updateDisplayedMetrics as parametersUpdateDisplayedMetrics } from 'redux/parameters';
 import { fetchAuditParametersAction } from '../auditParameters/actions';
 import {
   modelizeApiAuditParametersListToById,
@@ -56,6 +58,7 @@ import {
   fetchProjectSuccess,
   saveFetchedProjects,
   setProjectToastrDisplay,
+  updateDisplayedMetricsRequest,
 } from './actions';
 import { modelizeProject, modelizeProjects } from './modelizer';
 import { ApiProjectType } from './types';
@@ -140,6 +143,12 @@ function* fetchProjects(action: ActionType<typeof fetchProjectsRequest>) {
   );
   // if the returned project is empty, put an empty state for projects
   if (firstProject.uuid) {
+    yield put(
+      parametersUpdateDisplayedMetrics({
+        projectId: firstProject.uuid,
+        displayedMetrics: firstProject.user_metrics,
+      }),
+    );
     yield put(saveFetchedProjects({ projects: [firstProject] }));
   } else {
     yield put(fetchProjectError({ projectId: null, errorMessage: 'No project returned' }));
@@ -157,6 +166,14 @@ function* fetchProjects(action: ActionType<typeof fetchProjectsRequest>) {
     true,
     null,
   );
+  const displayedMetrics = projects.reduce(
+    (result, project) => {
+      result[project.uuid] = project.user_metrics;
+      return result;
+    },
+    {} as Record<string, MetricType[]>,
+  );
+  yield put(updateAllDisplayedMetrics({ displayedMetrics }));
   yield put(saveFetchedProjects({ projects }));
 }
 
@@ -167,6 +184,12 @@ function* fetchProject(action: ActionType<typeof fetchProjectRequest>) {
     endpoint,
     true,
     null,
+  );
+  yield put(
+    parametersUpdateDisplayedMetrics({
+      projectId: action.payload.projectId,
+      displayedMetrics: project.user_metrics,
+    }),
   );
   yield put(saveFetchedProjects({ projects: [project] }));
 }
@@ -428,6 +451,19 @@ function* deleteAuditParameterFromProjectFailedHandler(
   yield put(setProjectToastrDisplay({ toastrDisplay: 'deleteAuditParameterError' }));
 }
 
+function* updateDisplayedMetrics(action: ActionType<typeof updateDisplayedMetricsRequest>) {
+  const {projectId, displayedMetrics} = action.payload;
+  const response = yield call(makePostRequest, '/api/projects/metrics', true, {
+    project: projectId,
+    metrics: displayedMetrics,
+  });
+  if (!response || response.error) {
+    yield put(setProjectToastrDisplay({ toastrDisplay: 'updateDisplayedMetricsError' }));
+  }
+  yield put(parametersUpdateDisplayedMetrics({projectId, displayedMetrics}));
+  yield put(setProjectToastrDisplay({ toastrDisplay: 'updateDisplayedMetricsSuccess' }));
+}
+
 export default function* projectsSaga() {
   yield takeEvery(
     getType(fetchProjectRequest),
@@ -474,4 +510,5 @@ export default function* projectsSaga() {
       deleteAuditParameterFromProjectFailedHandler,
     ),
   );
+  yield takeEvery(getType(updateDisplayedMetricsRequest), updateDisplayedMetrics);
 }
