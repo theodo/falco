@@ -1,9 +1,7 @@
 import { PersistState } from 'redux-persist/es/types';
+import { RootState } from "redux/types";
 
-export const state = {
-  lead: {
-    leadSubmission: null,
-  },
+export const state: RootState = {
   login: {
     isAuthenticated: false,
     loginError: 'some login error message',
@@ -25,10 +23,23 @@ export const state = {
   entities: {
     projects: {
       byId: null,
+      toastrDisplay: ''
     },
     pages: {
       byId: null,
-    }
+    },
+    scripts: {
+      byId: null,
+    },
+    audits: {
+      runningAuditByPageOrScriptId: {}
+    },
+    auditParameters: {
+      byId: null,
+    },
+    auditStatusHistories: {
+      byPageOrScriptIdAndAuditParametersId: null,
+    },
   },
   auditResults: {
     isLoading: false,
@@ -36,9 +47,8 @@ export const state = {
     sortedByPageId: {},
     sortedByScriptId: {},
   },
-  content: {
-    lastUpdateOfWhatsNew: null,
-    lastClickOnWhatsNew: null,
-  },
   user: null,
+  toastr: {
+    toastrs: []
+  },
 };
