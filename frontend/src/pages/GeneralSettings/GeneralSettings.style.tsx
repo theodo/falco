@@ -1,6 +1,13 @@
-import Select from 'components/Select';
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight, settingsContainerSize } from 'stylesheet';
+import {
+  colorUsage,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  getSpacing,
+  lineHeight,
+  settingsContainerSize,
+} from 'stylesheet';
 
 export const Container = styled.div`
   display: flex;

@@ -3,12 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/react": "^8.0.1",
-    "@types/react-modal": "^3.8.2",
-    "@types/react-redux-toastr": "^7.4.1",
-    "@types/react-select": "^2.0.13",
-    "@types/recharts": "^1.1.16",
-    "@types/redux-mock-store": "^1.0.1",
     "babel-polyfill": "6.26.0",
     "connected-react-router": "5.0.1",
     "core-js": "^3.3.3",
@@ -42,8 +36,8 @@
     "typesafe-actions": "^3.0.0"
   },
   "scripts": {
-    "start": "BROWSER=none react-app-rewired start",
-    "build": "PUBLIC_URL=/static NODE_PATH=src/ NODE_ENV=production react-app-rewired build",
+    "start": "react-app-rewired start",
+    "build": "PUBLIC_URL=/static NODE_ENV=production react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
     "analyze": "env-cmd .env.${REACT_APP_ENV} react-app-rewired build --analyze-bundle",
@@ -93,6 +87,12 @@
     }
   ],
   "devDependencies": {
+    "@testing-library/react": "^8.0.1",
+    "@types/react-modal": "^3.8.2",
+    "@types/react-redux-toastr": "^7.4.1",
+    "@types/react-select": "^2.0.13",
+    "@types/recharts": "^1.1.16",
+    "@types/redux-mock-store": "^1.0.1",
     "@types/cheerio": "^0.22.10",
     "@types/enzyme": "^3.1.15",
     "@types/history": "^4.7.2",
