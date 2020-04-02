@@ -2,6 +2,7 @@ import React, { MouseEvent, useState } from 'react';
 
 import Logo from 'components/Logo';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { UserState } from 'redux/user';
 import { routeDefinitions } from 'routes';
 import { colorUsage } from 'stylesheet';
 import AccountMenu from './components/AccountMenu';
@@ -28,16 +29,29 @@ interface Props {
   currentURL: string;
   isUserAuthenticated: boolean;
   isMenuDisplayed: boolean;
+  fetchUserRequest: () => void;
+  user: UserState;
 }
 
 export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
   currentURL,
+  fetchUserRequest,
   isUserAuthenticated,
   isMenuDisplayed,
   intl,
+  user,
 }) => {
   const [isAccountMenuVisible, setIsAccountMenuVisible] = React.useState(false);
   const [isProjectsMenuVisible, setIsProjectsMenuVisible] = React.useState(false);
+
+  React.useEffect(
+    () => {
+      if (isUserAuthenticated) {
+        fetchUserRequest();
+      }
+    },
+    [isUserAuthenticated, fetchUserRequest],
+  );
 
   const toggleAccountMenuVisibility = (event: MouseEvent) => {
     event.preventDefault();
@@ -126,7 +140,7 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
                   </HeaderButton>
                   <HeaderButtonArrow />
                   <HeaderMenuItemContent>
-                    {isAccountMenuVisible && <AccountMenu />}
+                    {isAccountMenuVisible && <AccountMenu user={user}/>}
                   </HeaderMenuItemContent>
                 </HeaderMenuItem>
               </HeaderButtonsBlock>
