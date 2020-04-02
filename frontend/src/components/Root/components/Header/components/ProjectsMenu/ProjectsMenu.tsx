@@ -42,6 +42,7 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
           <CurrentProjectItemSnapshot
             src={currentProject.screenshotUrl}
             margin={`0 ${getSpacing(6)} 0 0`}
+            alt=''
           />
         </ProjectItemSnapshotContainer>
         <CurrentProjectItemTitleBlock>
@@ -65,7 +66,7 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
         to={routeDefinitions.projectDetails.path.replace(':projectId', project.uuid)}
       >
         <ProjectItemSnapshotContainer>
-          <ProjectItemSnapshot src={project.screenshotUrl} margin={`0 ${getSpacing(4)} 0 0`} />
+          <ProjectItemSnapshot src={project.screenshotUrl} margin={`0 ${getSpacing(4)} 0 0`} alt=''/>
         </ProjectItemSnapshotContainer>
         <ProjectItemTitleBlock>
           <ProjectItemTitle>{project.name}</ProjectItemTitle>
