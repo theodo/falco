@@ -31,7 +31,7 @@ const colorPalette = {
   black200: 'rgba(0, 0, 0, 0.5)',
   orange500: "#ffa400",
   orange200: "#ffe3b2",
-  red500: '#d8000c',
+  red500: '#B80009',
   red200: '#ffd2d2',
   auditFailRed: '#FF4E42',
   auditRunningOrange: "#ffa400",
