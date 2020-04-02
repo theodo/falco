@@ -116,19 +116,19 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
                     <FormattedMessage id="Header.projects_button" />
                   </HeaderButton>
                   <HeaderButtonArrow />
-                  <HeaderMenuItemContent>
-                    {isProjectsMenuVisible && <ProjectsMenu />}
-                  </HeaderMenuItemContent>
                 </HeaderMenuItem>
+                <HeaderMenuItemContent right="270">
+                  {isProjectsMenuVisible && <ProjectsMenu />}
+                </HeaderMenuItemContent>
                 <HeaderMenuItem onClick={toggleAccountMenuVisibility} role="menu">
                   <HeaderButton>
                     <FormattedMessage id="Header.login_button" />
                   </HeaderButton>
                   <HeaderButtonArrow />
-                  <HeaderMenuItemContent>
-                    {isAccountMenuVisible && <AccountMenu />}
-                  </HeaderMenuItemContent>
                 </HeaderMenuItem>
+                <HeaderMenuItemContent right="100">
+                  {isAccountMenuVisible && <AccountMenu />}
+                </HeaderMenuItemContent>
               </HeaderButtonsBlock>
             </Nav>
           ) : (
