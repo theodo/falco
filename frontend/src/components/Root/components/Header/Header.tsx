@@ -28,16 +28,27 @@ interface Props {
   currentURL: string;
   isUserAuthenticated: boolean;
   isMenuDisplayed: boolean;
+  fetchUserRequest: () => void;
 }
 
 export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
   currentURL,
+  fetchUserRequest,
   isUserAuthenticated,
   isMenuDisplayed,
   intl,
 }) => {
   const [isAccountMenuVisible, setIsAccountMenuVisible] = React.useState(false);
   const [isProjectsMenuVisible, setIsProjectsMenuVisible] = React.useState(false);
+
+  React.useEffect(
+    () => {
+      if (isUserAuthenticated) {
+        fetchUserRequest();
+      }
+    },
+    [isUserAuthenticated, fetchUserRequest],
+  );
 
   const toggleAccountMenuVisibility = (event: MouseEvent) => {
     event.preventDefault();

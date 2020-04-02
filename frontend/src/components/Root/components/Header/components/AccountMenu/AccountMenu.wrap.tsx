@@ -4,7 +4,6 @@ import { withRouter } from 'react-router';
 import { Dispatch } from 'redux';
 import { getIsAuthenticated, logoutUserRequest } from 'redux/login';
 import { RootState } from 'redux/types';
-import { fetchUserRequest } from 'redux/user';
 import { getUser } from 'redux/user/selectors';
 import { AccountMenu } from './AccountMenu';
 
@@ -14,7 +13,6 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  fetchUserRequest: () => dispatch(fetchUserRequest({})),
   logoutUser: (redirectTo?: string | undefined) => dispatch(logoutUserRequest({ redirectTo })),
 });
 

@@ -17,28 +17,16 @@ import {
 } from './AccountMenu.style';
 
 interface OwnProps {
-  fetchUserRequest: () => void;
   logoutUser: (redirectTo?: string | undefined) => void;
   user: UserState;
-  isUserAuthenticated: boolean;
 }
 
 type Props = OwnProps & InjectedIntlProps & RouteComponentProps;
 
 export const AccountMenu: React.FunctionComponent<Props> = ({
-  fetchUserRequest,
   logoutUser,
   user,
-  isUserAuthenticated,
 }) => {
-  React.useEffect(
-    () => {
-      if (isUserAuthenticated) {
-        fetchUserRequest();
-      }
-    },
-    [isUserAuthenticated, fetchUserRequest],
-  );
 
   const capitalize = (word: any) => {
     if (typeof word !== 'string') {
