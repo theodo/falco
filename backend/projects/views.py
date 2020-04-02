@@ -543,14 +543,10 @@ def metrics(request):
     data = JSONParser().parse(request)
     project_id = data["project"]
     new_metrics = data["metrics"]
-    metrics = MetricsPreferences.objects.filter(
-        project_id=project_id, user_id=request.user.id
+    metrics, created = MetricsPreferences.objects.update_or_create(
+        project_id=project_id,
+        user_id=request.user.id,
+        defaults={"metrics": new_metrics},
     )
-    if not metrics:
-        new_metric_preferences = MetricsPreferences(
-            project_id=project_id, user_id=request.user.id, metrics=new_metrics
-        )
-        new_metric_preferences.save()
-    else:
-        metrics.update(metrics=new_metrics)
+
     return JsonResponse({})
