@@ -4,11 +4,9 @@ import { Dispatch } from 'redux';
 import { getCurrentURL } from 'redux/selectors';
 import { RootStateWithRouter } from 'redux/types';
 import { fetchUserRequest } from 'redux/user';
-import { getUser } from 'redux/user/selectors';
 import { Header } from './Header';
 
 const mapStateToProps = (state: RootStateWithRouter) => ({
-  user: getUser(state),
   currentURL: getCurrentURL(state),
 });
 

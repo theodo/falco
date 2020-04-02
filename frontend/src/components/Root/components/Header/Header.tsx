@@ -2,7 +2,6 @@ import React, { MouseEvent, useState } from 'react';
 
 import Logo from 'components/Logo';
 import { FormattedMessage, InjectedIntlProps } from 'react-intl';
-import { UserState } from 'redux/user';
 import { routeDefinitions } from 'routes';
 import { colorUsage } from 'stylesheet';
 import AccountMenu from './components/AccountMenu';
@@ -30,7 +29,6 @@ interface Props {
   isUserAuthenticated: boolean;
   isMenuDisplayed: boolean;
   fetchUserRequest: () => void;
-  user: UserState;
 }
 
 export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
@@ -39,7 +37,6 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
   isUserAuthenticated,
   isMenuDisplayed,
   intl,
-  user,
 }) => {
   const [isAccountMenuVisible, setIsAccountMenuVisible] = React.useState(false);
   const [isProjectsMenuVisible, setIsProjectsMenuVisible] = React.useState(false);
@@ -140,7 +137,7 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
                   </HeaderButton>
                   <HeaderButtonArrow />
                   <HeaderMenuItemContent>
-                    {isAccountMenuVisible && <AccountMenu user={user}/>}
+                    {isAccountMenuVisible && <AccountMenu />}
                   </HeaderMenuItemContent>
                 </HeaderMenuItem>
               </HeaderButtonsBlock>

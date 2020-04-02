@@ -4,9 +4,11 @@ import { withRouter } from 'react-router';
 import { Dispatch } from 'redux';
 import { getIsAuthenticated, logoutUserRequest } from 'redux/login';
 import { RootState } from 'redux/types';
+import { getUser } from 'redux/user/selectors';
 import { AccountMenu } from './AccountMenu';
 
 const mapStateToProps = (state: RootState) => ({
+  user: getUser(state),
   isUserAuthenticated: getIsAuthenticated(state),
 });
 
