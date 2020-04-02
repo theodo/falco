@@ -117,7 +117,7 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
                   </HeaderButton>
                   <HeaderButtonArrow />
                 </HeaderMenuItem>
-                <HeaderMenuItemContent>
+                <HeaderMenuItemContent right="270">
                   {isProjectsMenuVisible && <ProjectsMenu />}
                 </HeaderMenuItemContent>
                 <HeaderMenuItem onClick={toggleAccountMenuVisibility} role="menu">
@@ -126,7 +126,7 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
                   </HeaderButton>
                   <HeaderButtonArrow />
                 </HeaderMenuItem>
-                <HeaderMenuItemContent>
+                <HeaderMenuItemContent right="100">
                   {isAccountMenuVisible && <AccountMenu />}
                 </HeaderMenuItemContent>
               </HeaderButtonsBlock>

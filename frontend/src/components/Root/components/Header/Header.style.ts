@@ -20,6 +20,10 @@ interface HeaderProps {
   shouldHaveShadow: boolean;
 }
 
+interface MenuItemProps {
+  right: string;
+}
+
 export const HeaderMenu = styled.div<MenuProps>`
   display: flex;
   padding-left: ${getSpacing(10)};
@@ -138,10 +142,10 @@ export const HeaderMenuItem = styled.li`
 `;
 HeaderMenuItem.displayName = 'HeaderMenuItem';
 
-export const HeaderMenuItemContent = styled.div`
+export const HeaderMenuItemContent = styled.div<MenuItemProps>`
   position: absolute;
-  top: 50px;
-  right: -15px;
+  top: 100px;
+  right: ${props => props.right}px;
 `;
 HeaderMenuItemContent.displayName = 'HeaderMenuItemContent';
 
