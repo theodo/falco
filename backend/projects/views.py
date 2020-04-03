@@ -568,15 +568,10 @@ def metrics(request, project_uuid):
 
     new_metrics = data["metrics"]
 
-    metrics, created = MetricsPreferences.objects.update_or_create(
-        project_id=project_uuid,
-        user_id=request.user.id,
-        defaults={"metrics": new_metrics},
-    )
+    metrics = MetricsPreferences.objects.filter(
+        project_id=project_uuid, user_id=request.user.id
+    ).update(metrics=new_metrics)
 
     serializer = MetricsPreferencesSerializer(metrics)
 
-    if created:
-        return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
-    else:
-        return JsonResponse(serializer.data, safe=False)
+    return JsonResponse(serializer.data, safe=False)
