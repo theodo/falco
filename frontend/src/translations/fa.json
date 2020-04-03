@@ -9,7 +9,8 @@
     "last_audit_intro": "آخرین حسابرسی",
     "logout_link": "خروج",
     "see_the_docs": "مطالعه اسناد",
-    "signup_link": "ثبت نام"
+    "signup_link": "ثبت نام",
+    "skip_to_content": "جستجوی محتوا"
   },
   "Login": {
     "username_label": "نام کاربری",
