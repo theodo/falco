@@ -53,6 +53,13 @@ class ProjectMemberRole(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     is_admin = models.BooleanField(default=False)
 
+    def save(self, *args, **kwargs):
+        project_member_role = super().save(*args, **kwargs)
+        return project_member_role
+
+    def delete(self, *args, **kwargs):
+        super().delete(*args, **kwargs)
+
     class Meta:
         ordering = ("-is_admin", "-created_at")
         unique_together = ("project", "user")

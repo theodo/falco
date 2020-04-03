@@ -160,6 +160,8 @@ class ProjectSerializer(DynamicFieldsModelSerializer):
         )
 
     def _user_metrics(self, obj):
+        if self.context.get("user_id") is None:
+            return
         metrics = MetricsPreferences.objects.filter(
             project=obj, user_id=self.context.get("user_id")
         )

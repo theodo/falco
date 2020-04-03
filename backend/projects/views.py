@@ -366,6 +366,11 @@ def project_member_detail(request, project_uuid, user_id):
 
     elif request.method == "DELETE":
         project_member.delete()
+        metrics_preferences = MetricsPreferences.objects.filter(
+            project=project_uuid, user_id=user_id
+        )
+        if metrics_preferences:
+            metrics_preferences.delete()
         return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
 
 
@@ -399,6 +404,15 @@ def project_members(request, project_uuid):
                 )
             project = Project.objects.filter(uuid=project_uuid).first()
             project.members.add(user.first(), through_defaults={"is_admin": False})
+            MetricsPreferences.objects.create(
+                project_id=project.uuid,
+                user_id=data["user_id"],
+                metrics=[
+                    "WPTMetricFirstViewTTI",
+                    "WPTMetricFirstViewSpeedIndex",
+                    "WPTMetricFirstViewLoadTime",
+                ],
+            )
             serializer = ProjectSerializer(project)
             return JsonResponse(serializer.data)
         return HttpResponse(
