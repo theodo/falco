@@ -4,7 +4,7 @@ import { ValueType } from 'react-select/lib/types';
 
 import { AuditParametersType } from 'redux/entities/auditParameters/types';
 import { PageType } from 'redux/entities/pages/types';
-import {ProjectToastrDisplayType, ProjectType} from 'redux/entities/projects/types';
+import { ProjectToastrDisplayType, ProjectType } from 'redux/entities/projects/types';
 import { ScriptType } from 'redux/entities/scripts/types';
 
 import Badge from 'components/Badge';
@@ -58,7 +58,7 @@ type Props = {
     pageOrScriptId: string,
     type: 'page' | 'script',
     fromDate?: dayjs.Dayjs,
-    toDate?: dayjs.Dayjs
+    toDate?: dayjs.Dayjs,
   ) => void;
   setCurrentAuditParametersId: (auditParametersId: string | null | undefined) => void;
   setCurrentPageId: (pageId: string | null | undefined) => void;
@@ -103,13 +103,13 @@ export const Audits: React.FunctionComponent<Props> = ({
         setCurrentScriptId(undefined);
         if (!sortedPageAuditResultsIds) {
           fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'page', fromDate);
-        };
+        }
       } else if (script) {
         setCurrentPageId(undefined);
         setCurrentScriptId(pageOrScriptId ? pageOrScriptId : undefined);
         if (!sortedScriptAuditResultsIds) {
           fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'script', fromDate);
-        };
+        }
       }
     },
     // eslint is disabled because the hook exhaustive-deps wants to add page and script as dependencies, but they rerender too much
@@ -270,48 +270,62 @@ export const Audits: React.FunctionComponent<Props> = ({
   };
 
   const getLastAuditMessage = (auditStatusHistory: AuditStatusHistoryType) => {
-    switch(auditStatusHistory.status) {
+    switch (auditStatusHistory.status) {
       case auditStatus.requested:
         return <FormattedMessage id="Audits.AuditStatusHistory.audit_requested" />;
       case auditStatus.queuing:
-        return auditStatusHistory.info && auditStatusHistory.info.positionInQueue
-          ? <FormattedMessage id="Audits.AuditStatusHistory.audit_in_queue_behind" values={{ positionInQueue: auditStatusHistory.info.positionInQueue }}/>
-          : <FormattedMessage id="Audits.AuditStatusHistory.audit_in_queue" />
-      case auditStatus.running:
-        if(auditStatusHistory.info && auditStatusHistory.info.runningTime) {
-          return <FormattedMessage id="Audits.AuditStatusHistory.audit_started" values={{ runningTime: auditStatusHistory.info.runningTime }}/>
-        } else if(auditStatusHistory.info && auditStatusHistory.info.totalTests && auditStatusHistory.info.completedTests) {
-          return (
+        return auditStatusHistory.info && auditStatusHistory.info.positionInQueue ? (
           <FormattedMessage
-            id="Audits.AuditStatusHistory.audit_tests_running"
-            values={{
-              completedTests: auditStatusHistory.info.completedTests,
-              totalTests: auditStatusHistory.info.totalTests,
-            }}
+            id="Audits.AuditStatusHistory.audit_in_queue_behind"
+            values={{ positionInQueue: auditStatusHistory.info.positionInQueue }}
           />
-          )
-      }
+        ) : (
+          <FormattedMessage id="Audits.AuditStatusHistory.audit_in_queue" />
+        );
+      case auditStatus.running:
+        if (auditStatusHistory.info && auditStatusHistory.info.runningTime) {
+          return (
+            <FormattedMessage
+              id="Audits.AuditStatusHistory.audit_started"
+              values={{ runningTime: auditStatusHistory.info.runningTime }}
+            />
+          );
+        } else if (
+          auditStatusHistory.info &&
+          auditStatusHistory.info.totalTests &&
+          auditStatusHistory.info.completedTests
+        ) {
+          return (
+            <FormattedMessage
+              id="Audits.AuditStatusHistory.audit_tests_running"
+              values={{
+                completedTests: auditStatusHistory.info.completedTests,
+                totalTests: auditStatusHistory.info.totalTests,
+              }}
+            />
+          );
+        }
     }
-    return <FormattedMessage id="Audits.AuditStatusHistory.audit_in_queue" />
-  }
+    return <FormattedMessage id="Audits.AuditStatusHistory.audit_in_queue" />;
+  };
 
   const pageOrScriptName = page ? page.name : script ? script.name : '';
 
   const latestAuditStatusHistory = page
     ? pageAuditStatusHistory
     : script
-      ? scriptAuditStatusHistory
-      : null;
+    ? scriptAuditStatusHistory
+    : null;
 
   const badgeParams = getBadgeParams();
 
   const sortedAuditResultsIds = page
     ? sortedPageAuditResultsIds
     : script && sortedScriptAuditResultsIds
-      ? scriptStepId && sortedScriptAuditResultsIds[scriptStepId]
-        ? sortedScriptAuditResultsIds[scriptStepId]
-        : []
-      : null;
+    ? scriptStepId && sortedScriptAuditResultsIds[scriptStepId]
+      ? sortedScriptAuditResultsIds[scriptStepId]
+      : []
+    : null;
 
   const scriptStepSelectOptions = Object.keys(scriptSteps).map(scriptStepKey => ({
     value: scriptStepKey,
@@ -347,14 +361,17 @@ export const Audits: React.FunctionComponent<Props> = ({
           />
         )}
       </PageTitleBlock>
-      {
-        latestAuditStatusHistory && auditStatus.success !== latestAuditStatusHistory.status &&
-          (auditStatus.error === latestAuditStatusHistory.status
-            ? <MessagePill messageType="error">
-                <FormattedMessage id="Audits.AuditStatusHistory.audit_failure" />
-              </MessagePill>
-            : <MessagePill messageType="info">{getLastAuditMessage(latestAuditStatusHistory)}</MessagePill>)
-      }
+      {latestAuditStatusHistory &&
+        auditStatus.success !== latestAuditStatusHistory.status &&
+        (auditStatus.error === latestAuditStatusHistory.status ? (
+          <MessagePill messageType="error">
+            <FormattedMessage id="Audits.AuditStatusHistory.audit_failure" />
+          </MessagePill>
+        ) : (
+          <MessagePill messageType="info">
+            {getLastAuditMessage(latestAuditStatusHistory)}
+          </MessagePill>
+        ))}
       <Title>
         <FormattedMessage id="Audits.title" />
       </Title>
@@ -373,7 +390,11 @@ export const Audits: React.FunctionComponent<Props> = ({
           />
         </ScriptStepBlock>
       )}
-      <GraphsBlock blockMargin={`0 0 ${getSpacing(8)} 0`} auditResultIds={sortedAuditResultsIds} metrics={project.userMetrics}/>
+      <GraphsBlock
+        blockMargin={`0 0 ${getSpacing(8)} 0`}
+        auditResultIds={sortedAuditResultsIds}
+        metrics={project.userMetrics}
+      />
       <Title>
         <FormattedMessage id="Audits.webpagetest_analysis" />
       </Title>

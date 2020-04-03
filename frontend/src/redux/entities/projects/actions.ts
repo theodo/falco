@@ -1,6 +1,6 @@
 import { createStandardAction } from 'typesafe-actions';
 
-import {MetricType} from "redux/auditResults/types";
+import { MetricType } from 'redux/auditResults/types';
 import { AuditParametersType } from '../auditParameters/types';
 import { PageType } from '../pages/types';
 import { ApiProjectType, ProjectToastrDisplayType, ProjectType } from './types';
