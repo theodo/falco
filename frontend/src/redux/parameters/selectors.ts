@@ -6,16 +6,8 @@ import { getPage } from 'redux/entities/pages/selectors';
 import { PageType } from 'redux/entities/pages/types';
 import { getScript } from 'redux/entities/scripts/selectors';
 import { ScriptType } from 'redux/entities/scripts/types';
-import { getCurrentProject, getCurrentProjectId } from 'redux/selectors';
+import { getCurrentProject } from 'redux/selectors';
 import { RootState, RootStateWithRouter } from 'redux/types';
-
-export const getMetricsToDisplay = (state: RootState): MetricType[] => {
-  const projectId = getCurrentProjectId(state as RootStateWithRouter);
-  if (!state.parameters.displayedMetrics[projectId]) {
-    return ['WPTMetricFirstViewTTI', 'WPTMetricFirstViewSpeedIndex', 'WPTMetricFirstViewLoadTime'];
-  }
-  return state.parameters.displayedMetrics[projectId];
-};
 
 export const getCurrentAuditParametersId = (state: RootState): string | null => {
   return state.parameters.currentAuditParametersId;

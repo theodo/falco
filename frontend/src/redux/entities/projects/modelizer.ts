@@ -11,7 +11,8 @@ export const modelizeProject = (project: ApiProjectType): Record<string, Project
     latestAuditAt: project.latest_audit_at,
     projectMembers: project.project_members.map(apiProjectMember => modelizeProjectMember(apiProjectMember)),
     wptApiKey: project.wpt_api_key,
-    wptInstanceURL: project.wpt_instance_url
+    wptInstanceURL: project.wpt_instance_url,
+    userMetrics: project.user_metrics,
   },
 });
 

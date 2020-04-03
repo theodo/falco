@@ -5,6 +5,7 @@ from projects.models import (
     ProjectMemberRole,
     Script,
     AvailableAuditParameters,
+    MetricsPreferences,
 )
 
 from rest_framework import serializers
@@ -132,8 +133,23 @@ class ProjectMemberRoleSerializer(serializers.ModelSerializer):
         fields = ("id", "email", "username", "is_admin")
 
 
+class MetricsPreferencesSerializer(serializers.ModelSerializer):
+    project = serializers.ReadOnlyField(source="project.uuid")
+    user = serializers.ReadOnlyField(source="user.id")
+
+    def validate(self, data):
+        if "metrics" not in data:
+            raise serializers.ValidationError("You must provide metrics")
+        return data
+
+    class Meta:
+        model = MetricsPreferences
+        fields = ("uuid", "project", "user", "metrics")
+
+
 class ProjectSerializer(DynamicFieldsModelSerializer):
     has_siblings = serializers.SerializerMethodField("_has_siblings")
+    user_metrics = serializers.SerializerMethodField("_user_metrics")
 
     def _has_siblings(self, obj) -> bool:
         return (
@@ -142,6 +158,14 @@ class ProjectSerializer(DynamicFieldsModelSerializer):
             ).count()
             > 1
         )
+
+    def _user_metrics(self, obj):
+        if self.context.get("user_id") is None:
+            return
+        metrics = MetricsPreferences.objects.filter(
+            project=obj, user_id=self.context.get("user_id")
+        )
+        return metrics.values_list("metrics", flat=True).get()
 
     pages = PageSerializer(many=True)
     scripts = ScriptSerializer(many=True)
@@ -164,4 +188,5 @@ class ProjectSerializer(DynamicFieldsModelSerializer):
             "wpt_api_key",
             "wpt_instance_url",
             "has_siblings",
+            "user_metrics",
         )

@@ -1,7 +1,7 @@
+import { MetricType } from "redux/auditResults/types";
 import { ApiAuditParametersType } from "../auditParameters/types";
 import { ApiPageType } from "../pages/types";
 import { ApiScriptType } from "../scripts/types";
-
 
 export interface ProjectType {
   uuid: string;
@@ -14,6 +14,7 @@ export interface ProjectType {
   projectMembers: ProjectMember[];
   wptApiKey: string;
   wptInstanceURL: string;
+  userMetrics: MetricType[];
 };
 
 export interface ApiProjectType {
@@ -28,6 +29,7 @@ export interface ApiProjectType {
   wpt_api_key: string;
   wpt_instance_url: string;
   has_siblings: boolean;
+  user_metrics: MetricType[];
 };
 
 export interface ProjectMember {
@@ -68,3 +70,5 @@ export type ProjectToastrDisplayType =
 | 'editScriptSuccess'
 | 'deleteScriptError'
 | 'deleteScriptSuccess'
+| 'updateDisplayedMetricsError'
+| 'updateDisplayedMetricsSuccess'

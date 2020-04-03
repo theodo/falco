@@ -56,6 +56,8 @@ import {
   fetchProjectSuccess,
   saveFetchedProjects,
   setProjectToastrDisplay,
+  updateDisplayedMetricsForProject,
+  updateDisplayedMetricsRequest,
 } from './actions';
 import { modelizeProject, modelizeProjects } from './modelizer';
 import { ApiProjectType } from './types';
@@ -428,6 +430,18 @@ function* deleteAuditParameterFromProjectFailedHandler(
   yield put(setProjectToastrDisplay({ toastrDisplay: 'deleteAuditParameterError' }));
 }
 
+function* updateDisplayedMetrics(action: ActionType<typeof updateDisplayedMetricsRequest>) {
+  const {projectId, displayedMetrics} = action.payload;
+  const response = yield call(makePostRequest, `/api/projects/${projectId}/metrics`, true, {
+    metrics: displayedMetrics,
+  });
+  if (!response || response.error) {
+    yield put(setProjectToastrDisplay({ toastrDisplay: 'updateDisplayedMetricsError' }));
+  }
+  yield put(updateDisplayedMetricsForProject({ projectId, displayedMetrics }));
+  yield put(setProjectToastrDisplay({ toastrDisplay: 'updateDisplayedMetricsSuccess' }));
+}
+
 export default function* projectsSaga() {
   yield takeEvery(
     getType(fetchProjectRequest),
@@ -474,4 +488,5 @@ export default function* projectsSaga() {
       deleteAuditParameterFromProjectFailedHandler,
     ),
   );
+  yield takeEvery(getType(updateDisplayedMetricsRequest), updateDisplayedMetrics);
 }

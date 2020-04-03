@@ -229,7 +229,8 @@
       "add_page_success_message": "La page a bien été créée",
       "delete_page_success_message": "La page a bien été supprimée",
       "delete_page_confirm_question": "Voulez-vous vraiment supprimer la page ?",
-      "delete_auditParameter_confirm_question": "Êtes-vous sûr de vouloir supprimer cette ligne? Les données d'audit associées ne pourront être récupérées."
+      "delete_auditParameter_confirm_question": "Êtes-vous sûr de vouloir supprimer cette ligne? Les données d'audit associées ne pourront être récupérées.",
+      "update_metrics_success_message": "Les métriques ont bien été mises à jour"
     }
   },
   "components": {

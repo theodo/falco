@@ -22,15 +22,9 @@ export const setCurrentScriptStepId = createStandardAction(
   scriptStepId: string | null | undefined;
 }>();
 
-export const updateDisplayedMetrics = createStandardAction('parameters/UPDATE_DISPLAYED_METRICS')<{
-  projectId: string;
-  displayedMetrics: MetricType[];
-}>();
-
 export default {
   setCurrentAuditParametersId,
   setCurrentPageId,
   setCurrentScriptId,
   setCurrentScriptStepId,
-  updateDisplayedMetrics,
 };

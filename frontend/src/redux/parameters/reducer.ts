@@ -3,13 +3,11 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { ActionType, getType } from 'typesafe-actions';
 
-import { MetricType } from 'redux/auditResults/types';
 import {
   setCurrentAuditParametersId,
   setCurrentPageId,
   setCurrentScriptId,
   setCurrentScriptStepId,
-  updateDisplayedMetrics,
 } from './actions';
 
 export type ParametersAction = ActionType<
@@ -17,7 +15,6 @@ export type ParametersAction = ActionType<
   | typeof setCurrentPageId
   | typeof setCurrentScriptId
   | typeof setCurrentScriptStepId
-  | typeof updateDisplayedMetrics
 >;
 
 export type ParametersState = Readonly<{
@@ -25,12 +22,10 @@ export type ParametersState = Readonly<{
   currentPageId: string | null;
   currentScriptId: string | null;
   currentScriptStepId: string | null;
-  displayedMetrics: Record<string, MetricType[]>;
 }>;
 
 const persistConfig = {
   key: 'parameters',
-  whitelist: ['displayedMetrics'],
   blacklist: [
     'currentAuditParametersId',
     'currentPageId',
@@ -45,7 +40,6 @@ const initialState: ParametersState = {
   currentPageId: null,
   currentScriptId: null,
   currentScriptStepId: null,
-  displayedMetrics: {},
 };
 
 const reducer = (state: ParametersState = initialState, action: AnyAction) => {
@@ -70,14 +64,6 @@ const reducer = (state: ParametersState = initialState, action: AnyAction) => {
       return {
         ...state,
         currentScriptStepId: action.payload.scriptStepId ? action.payload.scriptStepId : null,
-      };
-    case getType(updateDisplayedMetrics):
-      return {
-        ...state,
-        displayedMetrics: {
-          ...state.displayedMetrics,
-          [action.payload.projectId]: action.payload.displayedMetrics,
-        },
       };
     default:
       return state;

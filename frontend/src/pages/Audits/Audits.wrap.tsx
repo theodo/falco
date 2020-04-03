@@ -10,8 +10,9 @@ import {
 } from 'redux/auditResults/selectors';
 import { getAuditParameters } from 'redux/entities/auditParameters/selectors';
 import { getPage, getPageLatestAuditStatusHistory } from 'redux/entities/pages/selectors';
-import { fetchProjectsRequest } from 'redux/entities/projects';
-import { getProject } from 'redux/entities/projects/selectors';
+import { fetchProjectsRequest, setProjectToastrDisplay } from 'redux/entities/projects';
+import { getProject, getProjectToastrDisplay } from 'redux/entities/projects/selectors';
+import { ProjectToastrDisplayType } from 'redux/entities/projects/types';
 import { getScript, getScriptLatestAuditStatusHistory } from 'redux/entities/scripts/selectors';
 import {
   setCurrentAuditParametersId,
@@ -44,6 +45,7 @@ const mapStateToProps = (state: RootState, props: OwnProps) => ({
     props.match.params.auditParametersId,
     props.match.params.pageOrScriptId,
   ),
+  toastrDisplay: getProjectToastrDisplay(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -62,6 +64,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(setCurrentScriptId({ scriptId })),
   setCurrentScriptStepId: (scriptStepId: string | null | undefined) =>
     dispatch(setCurrentScriptStepId({ scriptStepId })),
+  setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) =>
+    dispatch(setProjectToastrDisplay({ toastrDisplay })),
 });
 
 export default connect(

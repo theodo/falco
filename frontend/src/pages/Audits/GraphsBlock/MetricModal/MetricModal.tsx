@@ -1,4 +1,4 @@
-import React, { MouseEvent, useState } from 'react';
+import React, {MouseEvent, useEffect, useState} from 'react';
 import { FormattedMessage } from 'react-intl';
 import Modal from 'react-modal';
 
@@ -26,15 +26,15 @@ interface Props extends OwnProps {
   metrics: MetricType[];
   show: boolean;
   close: () => void;
-  updateDisplayedMetrics: (projectId: string, selectedMetrics: MetricType[]) => void;
+  updateDisplayedMetricsRequest: (projectId: string, selectedMetrics: MetricType[]) => void;
 }
 
 const MetricModal: React.FunctionComponent<Props> = ({
   metrics,
   show,
   close,
-  updateDisplayedMetrics,
   projectId,
+  updateDisplayedMetricsRequest,
 }) => {
   const modalStyles = {
     content: {
@@ -64,6 +64,10 @@ const MetricModal: React.FunctionComponent<Props> = ({
 
   const [selectedMetrics, updateSelectedMetrics] = useState(metrics);
 
+  useEffect(() => {
+    updateSelectedMetrics(metrics);
+  }, [metrics])
+
   const updateMetrics = (event: MouseEvent, selectedValue: MetricType) => {
     if (selectedMetrics.indexOf(selectedValue) === -1) {
       updateSelectedMetrics(currentSelectedMetrics => [...currentSelectedMetrics, selectedValue]);
@@ -83,7 +87,7 @@ const MetricModal: React.FunctionComponent<Props> = ({
 
   const submitDisplayedMetrics = (event: MouseEvent) => {
     event.preventDefault();
-    updateDisplayedMetrics(projectId, selectedMetrics);
+    updateDisplayedMetricsRequest(projectId, selectedMetrics);
     close();
   };
 

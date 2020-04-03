@@ -1,10 +1,11 @@
 import { ProjectToastrDisplayType, ProjectType } from 'redux/entities/projects/types';
 import { RootState } from 'redux/types';
+import {MetricType} from "../../auditResults/types";
 
 export const hasProjects = (state: RootState): boolean => {
   const projects = state.entities.projects.byId;
-  if(!projects) { 
-    return false 
+  if(!projects) {
+    return false
   };
   return Object.keys(projects).length > 0;
 };

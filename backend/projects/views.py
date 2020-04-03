@@ -14,6 +14,7 @@ from projects.models import (
     ProjectAuditParameters,
     AvailableAuditParameters,
     Script,
+    MetricsPreferences,
 )
 from projects.serializers import (
     PageSerializer,
@@ -22,6 +23,7 @@ from projects.serializers import (
     ProjectAuditParametersSerializer,
     AvailableAuditParameterSerializer,
     ScriptSerializer,
+    MetricsPreferencesSerializer,
 )
 from projects.permissions import (
     check_if_member_of_project,
@@ -133,6 +135,7 @@ def project_detail(request, project_uuid):
                 "audit_parameters_list",
                 "screenshot_url",
                 "latest_audit_at",
+                "user_metrics",
             ),
             context={"user_id": request.user.id},
         )
@@ -363,6 +366,11 @@ def project_member_detail(request, project_uuid, user_id):
 
     elif request.method == "DELETE":
         project_member.delete()
+        metrics_preferences = MetricsPreferences.objects.filter(
+            project=project_uuid, user_id=user_id
+        )
+        if metrics_preferences:
+            metrics_preferences.delete()
         return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
 
 
@@ -396,6 +404,15 @@ def project_members(request, project_uuid):
                 )
             project = Project.objects.filter(uuid=project_uuid).first()
             project.members.add(user.first(), through_defaults={"is_admin": False})
+            MetricsPreferences.objects.create(
+                project_id=project.uuid,
+                user_id=data["user_id"],
+                metrics=[
+                    "WPTMetricFirstViewTTI",
+                    "WPTMetricFirstViewSpeedIndex",
+                    "WPTMetricFirstViewLoadTime",
+                ],
+            )
             serializer = ProjectSerializer(project)
             return JsonResponse(serializer.data)
         return HttpResponse(
@@ -528,3 +545,33 @@ def project_script_detail(request, project_uuid, script_uuid):
         check_if_admin_of_project(request.user.id, project.uuid)
         script.delete()
         return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
+
+
+@swagger_auto_schema(
+    methods=["post"],
+    responses={
+        200: openapi.Response(
+            "Updates a user’s metric preferences for a given project."
+        )
+    },
+    tags=["Metrics"],
+)
+@api_view(["POST"])
+@permission_classes([permissions.IsAuthenticated])
+def metrics(request, project_uuid):
+    check_if_member_of_project(request.user.id, project_uuid)
+    data = JSONParser().parse(request)
+    serializer = MetricsPreferencesSerializer(data=data)
+
+    if not serializer.is_valid():
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    new_metrics = data["metrics"]
+
+    metrics = MetricsPreferences.objects.filter(
+        project_id=project_uuid, user_id=request.user.id
+    ).update(metrics=new_metrics)
+
+    serializer = MetricsPreferencesSerializer(metrics)
+
+    return JsonResponse(serializer.data, safe=False)

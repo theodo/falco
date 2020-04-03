@@ -4,6 +4,8 @@ from core.models import BaseModel, User
 from django.db import models
 from django import forms
 from fernet_fields import EncryptedTextField
+from django.contrib.postgres.fields import ArrayField
+from django.db.models.signals import post_save, pre_delete
 
 
 class Project(BaseModel):
@@ -52,8 +54,77 @@ class ProjectMemberRole(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     is_admin = models.BooleanField(default=False)
 
+    def save(self, *args, **kwargs):
+        project_member_role = super().save(*args, **kwargs)
+        return project_member_role
+
+    def delete(self, *args, **kwargs):
+        super().delete(*args, **kwargs)
+
     class Meta:
         ordering = ("-is_admin", "-created_at")
+        unique_together = ("project", "user")
+
+
+def save_project_member(sender, instance, **kwargs):
+    MetricsPreferences.objects.create(
+        project=instance.project,
+        user=instance.user,
+        metrics=[
+            "WPTMetricFirstViewTTI",
+            "WPTMetricFirstViewSpeedIndex",
+            "WPTMetricFirstViewLoadTime",
+        ],
+    )
+
+
+def delete_project_member(sender, instance, **kwargs):
+    MetricsPreferences.objects.filter(
+        project=instance.project, user_id=instance.user.id
+    ).delete()
+
+
+post_save.connect(save_project_member, sender=ProjectMemberRole)
+pre_delete.connect(delete_project_member, sender=ProjectMemberRole)
+
+
+class MetricOptions(Enum):
+    FIRST_VIEW_TTI = "WPTMetricFirstViewTTI"
+    REPEAT_VIEW_TTI = "WPTMetricRepeatViewTTI"
+    FIRST_VIEW_SPEED_INDEX = "WPTMetricFirstViewSpeedIndex"
+    REPEAT_VIEW_SPEED_INDEX = "WPTMetricRepeatViewSpeedIndex"
+    FIRST_VIEW_PAINT = "WPTMetricFirstViewFirstPaint"
+    REPEAT_VIEW_FIRST_PAINT = "WPTMetricRepeatViewFirstPaint"
+    FIRST_VIEW_FIRST_MEANINGFUL_PAINT = "WPTMetricFirstViewFirstMeaningfulPaint"
+    REPEAT_VIEW_FIRST_MEANINGFUL_PAINT = "WPTMetricRepeatViewFirstMeaningfulPaint"
+    FIRST_VIEW_LOAD_TIME = "WPTMetricFirstViewLoadTime"
+    REPEAT_VIEW_LOAD_TIME = "WPTMetricRepeatViewLoadTime"
+    FIRST_VIEW_FIRST_CONTENTFUL_PAINT = "WPTMetricFirstViewFirstContentfulPaint"
+    REPEAT_VIEW_FIRST_CONTENTFUL_PAINT = "WPTMetricRepeatViewFirstContentfulPaint"
+    FIRST_VIEW_TIME_TO_FIRST_BYTE = "WPTMetricFirstViewTimeToFirstByte"
+    REPEAT_VIEW_TIME_TO_FIRST_BYTE = "WPTMetricRepeatViewTimeToFirstByte"
+    FIRST_VIEW_VISUALLY_COMPLETE = "WPTMetricFirstViewVisuallyComplete"
+    REPEAT_VIEW_VISUALLY_COMPLETE = "WPTMetricRepeatViewVisuallyComplete"
+    LIGHTHOUSE_PERFORMANCE = "WPTMetricLighthousePerformance"
+
+
+class MetricsPreferences(BaseModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    metrics = ArrayField(
+        models.CharField(
+            max_length=100,
+            choices=[(metric.value, metric.value) for metric in MetricOptions],
+        ),
+        null=True,
+        default=[
+            "WPTMetricFirstViewTTI",
+            "WPTMetricFirstViewSpeedIndex",
+            "WPTMetricFirstViewLoadTime",
+        ],
+    )
+
+    class Meta:
         unique_together = ("project", "user")
 
 
