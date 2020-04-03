@@ -21,11 +21,11 @@ import MetricModal from './MetricModal';
 export interface OwnProps {
   auditResultIds: string[] | null;
   blockMargin: string;
+  metrics: MetricType[];
 }
 
 interface Props extends OwnProps {
   auditResults: AuditResultsAsGraphData;
-  metrics: MetricType[];
   auditParametersId: string;
   pageOrScriptId: string;
   auditType: 'page' | 'script';

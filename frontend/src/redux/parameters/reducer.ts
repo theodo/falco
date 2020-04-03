@@ -3,14 +3,11 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { ActionType, getType } from 'typesafe-actions';
 
-import { MetricType } from 'redux/auditResults/types';
 import {
   setCurrentAuditParametersId,
   setCurrentPageId,
   setCurrentScriptId,
   setCurrentScriptStepId,
-  updateAllDisplayedMetrics,
-  updateDisplayedMetrics,
 } from './actions';
 
 export type ParametersAction = ActionType<
@@ -18,8 +15,6 @@ export type ParametersAction = ActionType<
   | typeof setCurrentPageId
   | typeof setCurrentScriptId
   | typeof setCurrentScriptStepId
-  | typeof updateDisplayedMetrics
-  | typeof updateAllDisplayedMetrics
 >;
 
 export type ParametersState = Readonly<{
@@ -27,12 +22,10 @@ export type ParametersState = Readonly<{
   currentPageId: string | null;
   currentScriptId: string | null;
   currentScriptStepId: string | null;
-  currentDisplayedMetrics: Record<string, MetricType[]>;
 }>;
 
 const persistConfig = {
   key: 'parameters',
-  whitelist: ['currentDisplayedMetrics'],
   blacklist: [
     'currentAuditParametersId',
     'currentPageId',
@@ -47,7 +40,6 @@ const initialState: ParametersState = {
   currentPageId: null,
   currentScriptId: null,
   currentScriptStepId: null,
-  currentDisplayedMetrics: {},
 };
 
 const reducer = (state: ParametersState = initialState, action: AnyAction) => {
@@ -73,22 +65,6 @@ const reducer = (state: ParametersState = initialState, action: AnyAction) => {
         ...state,
         currentScriptStepId: action.payload.scriptStepId ? action.payload.scriptStepId : null,
       };
-    case getType(updateDisplayedMetrics):
-      return {
-        ...state,
-        currentDisplayedMetrics: {
-          ...state.currentDisplayedMetrics,
-          [action.payload.projectId]: action.payload.displayedMetrics,
-        },
-      };
-    case getType(updateAllDisplayedMetrics):
-      return {
-        ...state,
-        currentDisplayedMetrics: {
-          ...state.currentDisplayedMetrics,
-            ...action.payload.displayedMetrics,
-          }
-      }
     default:
       return state;
   }

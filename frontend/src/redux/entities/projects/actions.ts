@@ -143,6 +143,11 @@ export const updateDisplayedMetricsRequest = createStandardAction('projects/UPDA
   displayedMetrics: MetricType[];
 }>();
 
+export const updateDisplayedMetricsForProject = createStandardAction('projects/UPDATE_DISPLAYED_METRICS_FOR_PROJECT')<{
+  projectId: string;
+  displayedMetrics: MetricType[];
+}>();
+
 export default {
   addMemberToProjectRequest,
   addMemberToProjectError,
@@ -173,5 +178,6 @@ export default {
   deleteAuditParameterFromProjectSuccess,
   addScriptToProjectSuccess,
   deleteScriptFromProjectSuccess,
-  updateDisplayedMetricsRequest
+  updateDisplayedMetricsRequest,
+  updateDisplayedMetricsForProject,
 };

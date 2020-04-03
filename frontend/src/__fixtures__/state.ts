@@ -17,7 +17,6 @@ export const state: RootState = {
     currentPageId: null,
     currentScriptId: null,
     currentScriptStepId: null,
-    currentDisplayedMetrics: {},
     _persist: {} as PersistState
   },
   entities: {

@@ -15,6 +15,7 @@ import {
   fetchProjectsRequest,
   fetchProjectSuccess,
   setProjectToastrDisplay,
+  updateDisplayedMetricsForProject,
 } from './actions';
 import { ProjectMember, ProjectToastrDisplayType, ProjectType } from './types';
 
@@ -32,7 +33,8 @@ export type ProjectsAction = ActionType<
   typeof addAuditParameterToProjectSuccess |
   typeof deleteAuditParameterFromProjectSuccess |
   typeof addScriptToProjectSuccess |
-  typeof deleteScriptFromProjectSuccess
+  typeof deleteScriptFromProjectSuccess |
+  typeof updateDisplayedMetricsForProject
 >;
 
 export type ProjectsState = Readonly<{
@@ -233,6 +235,20 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
             }
           },
         };
+    case getType(updateDisplayedMetricsForProject):
+      if (!state.byId) {
+        return state;
+      }
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [typedAction.payload.projectId]: {
+            ...state.byId[typedAction.payload.projectId],
+            userMetrics: typedAction.payload.displayedMetrics,
+          },
+        },
+      }
     default:
       return state;
   }

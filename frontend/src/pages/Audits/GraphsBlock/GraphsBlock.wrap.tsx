@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { fetchAuditResultsRequest } from 'redux/auditResults';
 import { selectAuditResultsAsGraphData } from 'redux/auditResults/selectors';
-import { getCurrentAuditParametersId, getCurrentPageId, getCurrentScriptId, getMetricsToDisplay } from 'redux/parameters/selectors';
+import { getCurrentAuditParametersId, getCurrentPageId, getCurrentScriptId } from 'redux/parameters/selectors';
 import { RootState } from 'redux/types';
 import { GraphsBlock, OwnProps } from './GraphsBlock';
 
@@ -17,9 +17,8 @@ const mapStateToProps = (state: RootState, props: OwnProps) => ({
   auditType: getAuditType(state),
   pageOrScriptId: getCurrentPageId(state) || getCurrentScriptId(state) || '',
   auditResults: props.auditResultIds
-    ? selectAuditResultsAsGraphData(state, props.auditResultIds, getMetricsToDisplay(state))
+    ? selectAuditResultsAsGraphData(state, props.auditResultIds, props.metrics)
     : null,
-  metrics: getMetricsToDisplay(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

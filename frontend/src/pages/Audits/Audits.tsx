@@ -373,7 +373,7 @@ export const Audits: React.FunctionComponent<Props> = ({
           />
         </ScriptStepBlock>
       )}
-      <GraphsBlock blockMargin={`0 0 ${getSpacing(8)} 0`} auditResultIds={sortedAuditResultsIds} />
+      <GraphsBlock blockMargin={`0 0 ${getSpacing(8)} 0`} auditResultIds={sortedAuditResultsIds} metrics={project.userMetrics}/>
       <Title>
         <FormattedMessage id="Audits.webpagetest_analysis" />
       </Title>
