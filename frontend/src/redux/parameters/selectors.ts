@@ -11,7 +11,7 @@ import { RootState, RootStateWithRouter } from 'redux/types';
 
 export const getMetricsToDisplay = (state: RootState): MetricType[] => {
   const projectId = getCurrentProjectId(state as RootStateWithRouter);
-  return state.parameters.displayedMetrics[projectId];
+  return state.parameters.currentDisplayedMetrics[projectId];
 };
 
 export const getCurrentAuditParametersId = (state: RootState): string | null => {

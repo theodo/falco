@@ -133,6 +133,20 @@ class ProjectMemberRoleSerializer(serializers.ModelSerializer):
         fields = ("id", "email", "username", "is_admin")
 
 
+class MetricsPreferencesSerializer(serializers.ModelSerializer):
+    project = serializers.ReadOnlyField(source="project.uuid")
+    user = serializers.ReadOnlyField(source="user.id")
+
+    def validate(self, data):
+        if "metrics" not in data:
+            raise serializers.ValidationError("You must provide metrics")
+        return data
+
+    class Meta:
+        model = MetricsPreferences
+        fields = ("uuid", "project", "user", "metrics")
+
+
 class ProjectSerializer(DynamicFieldsModelSerializer):
     has_siblings = serializers.SerializerMethodField("_has_siblings")
     user_metrics = serializers.SerializerMethodField("_user_metrics")
@@ -149,15 +163,7 @@ class ProjectSerializer(DynamicFieldsModelSerializer):
         metrics = MetricsPreferences.objects.filter(
             project=obj, user_id=self.context.get("user_id")
         )
-        if metrics:
-            metrics = metrics.values_list("metrics", flat=True).get()
-            if metrics is not None and len(metrics) > 0:
-                return metrics
-        return [
-            "WPTMetricFirstViewTTI",
-            "WPTMetricFirstViewSpeedIndex",
-            "WPTMetricFirstViewLoadTime",
-        ]
+        return metrics.values_list("metrics", flat=True).get()
 
     pages = PageSerializer(many=True)
     scripts = ScriptSerializer(many=True)

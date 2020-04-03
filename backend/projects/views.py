@@ -23,6 +23,7 @@ from projects.serializers import (
     ProjectAuditParametersSerializer,
     AvailableAuditParameterSerializer,
     ScriptSerializer,
+    MetricsPreferencesSerializer,
 )
 from projects.permissions import (
     check_if_member_of_project,
@@ -534,19 +535,34 @@ def project_script_detail(request, project_uuid, script_uuid):
 
 @swagger_auto_schema(
     methods=["post"],
-    responses={200: openapi.Response("Updates a metric preference.")},
+    responses={
+        200: openapi.Response(
+            "Updates a user’s metric preferences for a given project."
+        )
+    },
     tags=["Metrics"],
 )
 @api_view(["POST"])
 @permission_classes([permissions.IsAuthenticated])
-def metrics(request):
+def metrics(request, project_uuid):
+    check_if_member_of_project(request.user.id, project_uuid)
     data = JSONParser().parse(request)
-    project_id = data["project"]
+    serializer = MetricsPreferencesSerializer(data=data)
+
+    if not serializer.is_valid():
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     new_metrics = data["metrics"]
+
     metrics, created = MetricsPreferences.objects.update_or_create(
-        project_id=project_id,
+        project_id=project_uuid,
         user_id=request.user.id,
         defaults={"metrics": new_metrics},
     )
 
-    return JsonResponse({})
+    serializer = MetricsPreferencesSerializer(metrics)
+
+    if created:
+        return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+    else:
+        return JsonResponse(serializer.data, safe=False)

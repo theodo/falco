@@ -453,8 +453,7 @@ function* deleteAuditParameterFromProjectFailedHandler(
 
 function* updateDisplayedMetrics(action: ActionType<typeof updateDisplayedMetricsRequest>) {
   const {projectId, displayedMetrics} = action.payload;
-  const response = yield call(makePostRequest, '/api/projects/metrics', true, {
-    project: projectId,
+  const response = yield call(makePostRequest, `/api/projects/${projectId}/metrics`, true, {
     metrics: displayedMetrics,
   });
   if (!response || response.error) {

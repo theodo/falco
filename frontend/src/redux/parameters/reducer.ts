@@ -27,12 +27,12 @@ export type ParametersState = Readonly<{
   currentPageId: string | null;
   currentScriptId: string | null;
   currentScriptStepId: string | null;
-  displayedMetrics: Record<string, MetricType[]>;
+  currentDisplayedMetrics: Record<string, MetricType[]>;
 }>;
 
 const persistConfig = {
   key: 'parameters',
-  whitelist: ['displayedMetrics'],
+  whitelist: ['currentDisplayedMetrics'],
   blacklist: [
     'currentAuditParametersId',
     'currentPageId',
@@ -47,7 +47,7 @@ const initialState: ParametersState = {
   currentPageId: null,
   currentScriptId: null,
   currentScriptStepId: null,
-  displayedMetrics: {},
+  currentDisplayedMetrics: {},
 };
 
 const reducer = (state: ParametersState = initialState, action: AnyAction) => {
@@ -76,16 +76,16 @@ const reducer = (state: ParametersState = initialState, action: AnyAction) => {
     case getType(updateDisplayedMetrics):
       return {
         ...state,
-        displayedMetrics: {
-          ...state.displayedMetrics,
+        currentDisplayedMetrics: {
+          ...state.currentDisplayedMetrics,
           [action.payload.projectId]: action.payload.displayedMetrics,
         },
       };
     case getType(updateAllDisplayedMetrics):
       return {
         ...state,
-        displayedMetrics: {
-          ...state.displayedMetrics,
+        currentDisplayedMetrics: {
+          ...state.currentDisplayedMetrics,
             ...action.payload.displayedMetrics,
           }
       }
