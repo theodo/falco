@@ -9,7 +9,8 @@
     "last_audit_intro": "Last audit",
     "logout_link": "Log out",
     "see_the_docs": "See the docs",
-    "signup_link": "SIGN UP"
+    "signup_link": "SIGN UP",
+    "skip_to_content": "Skip to content"
   },
   "Login": {
     "username_label": "Username",

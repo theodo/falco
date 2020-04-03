@@ -122,6 +122,8 @@ export const colorUsage = {
   leadSubmitButtonLoaderSecondary: colorPalette.transparent,
   leadSubmitButtonSuccessBackground: colorPalette.accentGreen500,
   leadSubmitButtonSuccessCheck: colorPalette.white500,
+  skipContentButtonColor: colorPalette.white500,
+  skipContentButtonBackgroundColor: colorPalette.primary500,
 
   // Login Page
   connectButtonWaitingBackground: colorPalette.grey800,

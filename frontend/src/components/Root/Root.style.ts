@@ -59,3 +59,22 @@ export const Content = styled.div<ContentProps>`
   }
 `;
 Content.displayName = 'Content';
+
+export const SkipToContent = styled.a`
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: ${colorUsage.skipContentButtonColor};
+  background-color: ${colorUsage.skipContentButtonBackgroundColor};
+
+  &:focus {
+    z-index: 10;
+  }
+`;
+SkipToContent.displayName = 'SkipToContent';
