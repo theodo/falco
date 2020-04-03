@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import { Helmet } from 'react-helmet';
 import { addLocaleData, IntlProvider } from 'react-intl';
 import en from 'react-intl/locale-data/en';
 import fr from 'react-intl/locale-data/fr';
@@ -40,17 +41,22 @@ const Root: React.FunctionComponent<Props> = ({ children, location, isUserAuthen
   }
 
   return (
-    <IntlProvider locale={userLanguageWithoutRegionCode} messages={localizedMessages}>
-      <PageContainer>
-        <Page>
-          <Header isUserAuthenticated={isUserAuthenticated} isMenuDisplayed={shouldDisplayMenu}/>
-          <Body>
-            {shouldDisplayMenu && <Menu />}
-            <Content shouldDisplayMenu={shouldDisplayMenu}>{children}</Content>
-          </Body>
-        </Page>
-      </PageContainer>
-    </IntlProvider>
+    <>
+      <Helmet>
+        <html lang={userLanguageWithoutRegionCode} />
+      </Helmet>
+      <IntlProvider locale={userLanguageWithoutRegionCode} messages={localizedMessages}>
+        <PageContainer>
+          <Page>
+            <Header isUserAuthenticated={isUserAuthenticated} isMenuDisplayed={shouldDisplayMenu}/>
+            <Body>
+              {shouldDisplayMenu && <Menu />}
+              <Content shouldDisplayMenu={shouldDisplayMenu}>{children}</Content>
+            </Body>
+          </Page>
+        </PageContainer>
+      </IntlProvider>
+    </>
   );
 };
 
