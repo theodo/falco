@@ -4,22 +4,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'redux/types';
 
 import { fetchProjectsRequest } from './actions';
-import { getProject } from './selectors';
-import { ProjectType } from './types';
+import { getAllProjects, getProject } from './selectors';
 
-export const useFetchProjectIfUndefined = (
-  requestFetchProject: (projectId: string) => void,
-  projectId: string,
-  project?: ProjectType | null,
-) => {
+export const useAllProjects = () => {
+  const projects = useSelector(getAllProjects);
+
+  const dispatch = useDispatch();
   useEffect(
     () => {
-      if (project === undefined) {
-        requestFetchProject(projectId);
+      if (!projects) {
+        dispatch(fetchProjectsRequest({}));
       }
     },
-    [requestFetchProject, project, projectId],
+    [dispatch, projects],
   );
+
+  return projects;
 };
 
 export const useProjectById = (projectId: string) => {

@@ -5,8 +5,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import ReduxToastr, { toastr } from 'react-redux-toastr';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { RouteComponentProps } from 'react-router';
-import { ProjectToastrDisplayType, ProjectType } from 'redux/entities/projects/types';
-import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
+import { useProjectById } from 'redux/entities/projects/hooks';
+import { ProjectToastrDisplayType } from 'redux/entities/projects/types';
 import { UserState } from 'redux/user';
 import { makeGetRequest } from 'services/networking/request';
 import { isUserAdminOfProject } from 'services/utils';
@@ -28,16 +28,12 @@ export type OwnProps = {} & RouteComponentProps<{
 
 type Props = {
   currentUser: UserState;
-  fetchProjectsRequest: (projectId: string) => void;
-  project?: ProjectType | null;
   toastrDisplay: ProjectToastrDisplayType;
   setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
 } & OwnProps;
 
 const EnvironmentSettings: React.FunctionComponent<Props> = ({
-  fetchProjectsRequest,
   match,
-  project,
   currentUser,
   toastrDisplay,
   setProjectToastrDisplay,
@@ -58,7 +54,7 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({
     wpt_instance_url: string;
   }
 
-  useFetchProjectIfUndefined(fetchProjectsRequest, match.params.projectId, project);
+  const project = useProjectById(match.params.projectId);
 
   const [availableAuditParameters, setAvailableAuditParameters] = React.useState<
     Array<{ label: string; uuid: string; wptInstanceURL: string }>

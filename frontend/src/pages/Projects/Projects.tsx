@@ -1,20 +1,14 @@
 import * as React from 'react';
 import { Redirect } from 'react-router';
-import { ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
 
 import Loader from 'components/Loader';
 import Welcome from 'components/Welcome';
-import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
+import { useAllProjects } from 'redux/entities/projects/hooks';
 import { Container } from './Projects.style';
 
-type Props = {
-  fetchProjectsRequest: () => void;
-  projects: Array<ProjectType | null> | null;
-};
-
-const Projects: React.FunctionComponent<Props> = ({ fetchProjectsRequest, projects }) => {
-  useFetchProjectIfUndefined(fetchProjectsRequest, '', undefined);
+const Projects: React.FunctionComponent = () => {
+  const projects = useAllProjects();
 
   if (null === projects) {
     return (

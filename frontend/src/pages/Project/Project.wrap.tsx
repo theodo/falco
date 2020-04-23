@@ -7,19 +7,9 @@ import {
   setCurrentScriptStepId,
 } from 'redux/parameters';
 
-import { fetchProjectsRequest } from 'redux/entities/projects';
-import { RootState } from 'redux/types';
-
-import { getProject } from 'redux/entities/projects/selectors';
-import Project, { OwnProps } from './Project';
-
-const mapStateToProps = (state: RootState, props: OwnProps) => ({
-  project: getProject(state, props.match.params.projectId),
-});
+import Project from './Project';
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  fetchProjectsRequest: (projectId: string) =>
-    dispatch(fetchProjectsRequest({ currentProjectId: projectId })),
   setCurrentAuditParametersId: (auditParametersId: string | null | undefined) =>
     dispatch(setCurrentAuditParametersId({ auditParametersId })),
   setCurrentPageId: (pageId: string | null | undefined) => dispatch(setCurrentPageId({ pageId })),
@@ -30,6 +20,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps,
 )(Project);

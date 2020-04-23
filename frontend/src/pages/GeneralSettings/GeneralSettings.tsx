@@ -5,8 +5,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import ReduxToastr, { toastr } from 'react-redux-toastr';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { RouteComponentProps } from 'react-router';
-import { ProjectToastrDisplayType, ProjectType } from 'redux/entities/projects/types';
-import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
+import { useProjectById } from 'redux/entities/projects/hooks';
+import { ProjectToastrDisplayType } from 'redux/entities/projects/types';
 import { UserState } from 'redux/user';
 import ProjectDetailsInput from './Components/ProjectDetailsInput';
 import {
@@ -23,8 +23,6 @@ export type OwnProps = {} & RouteComponentProps<{
 
 type Props = {
   currentUser: UserState;
-  fetchProjectsRequest: (projectId: string) => void;
-  project?: ProjectType | null;
   toastrDisplay: ProjectToastrDisplayType;
   setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
   editProjectDetailsRequest: (
@@ -34,9 +32,7 @@ type Props = {
 } & OwnProps;
 
 const GeneralSettings: React.FunctionComponent<Props> = ({
-  fetchProjectsRequest,
   match,
-  project,
   currentUser,
   toastrDisplay,
   setProjectToastrDisplay,
@@ -57,7 +53,7 @@ const GeneralSettings: React.FunctionComponent<Props> = ({
     location_group: string;
   }
 
-  useFetchProjectIfUndefined(fetchProjectsRequest, match.params.projectId, project);
+  const project = useProjectById(match.params.projectId);
 
   const [projectName, setProjectName] = React.useState('');
   const [projectApiKey, setProjectApiKey] = React.useState('');

@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Redirect, RouteComponentProps } from 'react-router';
-import { ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
 
 import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
-import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
+import { useProjectById } from 'redux/entities/projects/hooks';
 import { Container } from './Project.style';
 
 export type OwnProps = {} & RouteComponentProps<{
@@ -14,24 +13,20 @@ export type OwnProps = {} & RouteComponentProps<{
 }>;
 
 type Props = {
-  fetchProjectsRequest: (projectId: string) => void;
   setCurrentAuditParametersId: (auditParametersId: string | null | undefined) => void;
   setCurrentPageId: (pageId: string | null | undefined) => void;
   setCurrentScriptId: (scriptId: string | null | undefined) => void;
   setCurrentScriptStepId: (scriptStepId: string | null | undefined) => void;
-  project?: ProjectType | null;
 } & OwnProps;
 
 const Project: React.FunctionComponent<Props> = ({
-  fetchProjectsRequest,
-  project,
   match,
   setCurrentAuditParametersId,
   setCurrentPageId,
   setCurrentScriptId,
   setCurrentScriptStepId,
 }) => {
-  useFetchProjectIfUndefined(fetchProjectsRequest, match.params.projectId, project);
+  const project = useProjectById(match.params.projectId);
 
   React.useEffect(
     () => {

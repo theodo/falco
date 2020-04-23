@@ -9,12 +9,8 @@ import ReduxToastr, { toastr } from 'react-redux-toastr';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { RouteComponentProps } from 'react-router';
 import { ValueType } from 'react-select/lib/types';
-import {
-  ProjectMember,
-  ProjectToastrDisplayType,
-  ProjectType,
-} from 'redux/entities/projects/types';
-import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
+import { useProjectById } from 'redux/entities/projects/hooks';
+import { ProjectMember, ProjectToastrDisplayType } from 'redux/entities/projects/types';
 import { UserState } from 'redux/user';
 import { modelizeUser } from 'redux/user/modelizer';
 import { ApiUser, User } from 'redux/user/types';
@@ -45,8 +41,6 @@ type Props = {
   addMemberToProject: (projectId: string, userId: string) => void;
   removeMemberOfProjectRequest: (projectId: string, userId: string) => void;
   editMemberOfProjectRequest: (projectId: string, userId: string, isAdmin: boolean) => void;
-  fetchProjectsRequest: (projectId: string) => void;
-  project?: ProjectType | null;
   toastrDisplay: ProjectToastrDisplayType;
   setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
 } & OwnProps;
@@ -55,9 +49,7 @@ const MembersSettings: React.FunctionComponent<Props> = ({
   addMemberToProject,
   removeMemberOfProjectRequest,
   editMemberOfProjectRequest,
-  fetchProjectsRequest,
   match,
-  project,
   currentUser,
   toastrDisplay,
   setProjectToastrDisplay,
@@ -72,6 +64,8 @@ const MembersSettings: React.FunctionComponent<Props> = ({
 
   const [selectOption, setSelectOption]: [ValueType<UserOption | {}>, any] = React.useState(null);
   const [allUsers, setAllUsers] = React.useState([]);
+
+  const project = useProjectById(match.params.projectId);
 
   const fetchAllUsers = () => {
     const request = makeGetRequest('/api/core/users', true);
@@ -92,8 +86,6 @@ const MembersSettings: React.FunctionComponent<Props> = ({
     },
     [project],
   );
-
-  useFetchProjectIfUndefined(fetchProjectsRequest, match.params.projectId, project);
 
   React.useEffect(
     () => {
