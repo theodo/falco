@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 import { useAsyncFn } from 'react-use';
 
 import Close from 'icons/Close';
-import { ProjectToastrDisplayType } from 'redux/entities/projects/types';
+import { useToastr } from 'redux/entities/projects/hooks';
 import { modelizeScript } from 'redux/entities/scripts/modelizer';
 import { ScriptType } from 'redux/entities/scripts/types';
 import { makePostRequest, makePutRequest } from 'services/networking/request';
@@ -30,7 +30,6 @@ type Props = {
   addScriptToProjectSuccess: (projectId: string, scriptId: string) => void;
   addScript: (byId: Record<string, ScriptType>) => void;
   editScriptSuccess: (byId: Record<string, ScriptType>) => void;
-  setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
 } & OwnProps;
 
 export const ScriptModal: React.FunctionComponent<Props> = ({
@@ -42,12 +41,13 @@ export const ScriptModal: React.FunctionComponent<Props> = ({
   addScriptToProjectSuccess,
   addScript,
   editScriptSuccess,
-  setProjectToastrDisplay,
 }) => {
   const intl = useIntl();
 
   const [scriptContent, setScriptContent] = React.useState(script ? script.script : '');
   const [scriptName, setScriptName] = React.useState(script ? script.name : '');
+
+  const { setToastrDisplay } = useToastr();
 
   const [state, createScript] = useAsyncFn(
     async () => {
@@ -62,10 +62,10 @@ export const ScriptModal: React.FunctionComponent<Props> = ({
         const modelizedScript = modelizeScript(response.body);
         addScript({ [modelizedScript.uuid]: modelizedScript });
         addScriptToProjectSuccess(projectId, modelizedScript.uuid);
-        setProjectToastrDisplay('addScriptToProjectSuccess');
+        setToastrDisplay('addScriptToProjectSuccess');
         close();
       } catch (e) {
-        setProjectToastrDisplay('addScriptToProjectError');
+        setToastrDisplay('addScriptToProjectError');
       }
     },
     [projectId, scriptContent, scriptName],
@@ -86,11 +86,11 @@ export const ScriptModal: React.FunctionComponent<Props> = ({
           throw new Error('No response');
         }
         const modelizedScript = modelizeScript(response.body);
-        setProjectToastrDisplay('editScriptSuccess');
+        setToastrDisplay('editScriptSuccess');
         editScriptSuccess({ [modelizedScript.uuid]: modelizedScript });
         close();
       } catch (e) {
-        setProjectToastrDisplay('editScriptError');
+        setToastrDisplay('editScriptError');
       }
     },
     [projectId, scriptContent, scriptName],

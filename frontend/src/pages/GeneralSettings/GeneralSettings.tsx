@@ -5,8 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import ReduxToastr, { toastr } from 'react-redux-toastr';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { RouteComponentProps } from 'react-router';
-import { useProjectById } from 'redux/entities/projects/hooks';
-import { ProjectToastrDisplayType } from 'redux/entities/projects/types';
+import { useProjectById, useToastr } from 'redux/entities/projects/hooks';
 import { useCurrentUser } from 'redux/user/selectors';
 import ProjectDetailsInput from './Components/ProjectDetailsInput';
 import {
@@ -17,27 +16,19 @@ import {
   Title,
 } from './GeneralSettings.style';
 
-export type OwnProps = {} & RouteComponentProps<{
-  projectId: string;
-}>;
-
 type Props = {
-  toastrDisplay: ProjectToastrDisplayType;
-  setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
   editProjectDetailsRequest: (
     projectId: string,
     payload: { name: string; wpt_api_key: string; wpt_instance_url: string },
   ) => void;
-} & OwnProps;
+} & RouteComponentProps<{
+  projectId: string;
+}>;
 
-const GeneralSettings: React.FunctionComponent<Props> = ({
-  match,
-  toastrDisplay,
-  setProjectToastrDisplay,
-  editProjectDetailsRequest,
-}) => {
+const GeneralSettings: React.FunctionComponent<Props> = ({ match, editProjectDetailsRequest }) => {
   const intl = useIntl();
   const currentUser = useCurrentUser();
+  const { currentToastrDisplay, resetToastrDisplay } = useToastr();
 
   interface UserOption {
     value: string;
@@ -69,8 +60,8 @@ const GeneralSettings: React.FunctionComponent<Props> = ({
 
   React.useEffect(
     () => {
-      if ('' !== toastrDisplay) {
-        switch (toastrDisplay) {
+      if ('' !== currentToastrDisplay) {
+        switch (currentToastrDisplay) {
           case 'editProjectDetailsSuccess':
             toastr.success(
               intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
@@ -85,10 +76,10 @@ const GeneralSettings: React.FunctionComponent<Props> = ({
             break;
         }
 
-        setProjectToastrDisplay('');
+        resetToastrDisplay();
       }
     },
-    [toastrDisplay, setProjectToastrDisplay, intl],
+    [currentToastrDisplay, resetToastrDisplay, intl],
   );
 
   if (project === undefined) {

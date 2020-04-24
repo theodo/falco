@@ -1,22 +1,3 @@
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { RootState } from 'redux/types';
+import PagesAndScriptsSettings from './PagesAndScriptsSettings';
 
-import { setProjectToastrDisplay } from 'redux/entities/projects';
-import { getProjectToastrDisplay } from 'redux/entities/projects/selectors';
-import { ProjectToastrDisplayType } from 'redux/entities/projects/types';
-import PagesAndScriptsSettings, { OwnProps } from './PagesAndScriptsSettings';
-
-const mapStateToProps = (state: RootState, props: OwnProps) => ({
-  toastrDisplay: getProjectToastrDisplay(state),
-});
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) =>
-    dispatch(setProjectToastrDisplay({ toastrDisplay })),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(PagesAndScriptsSettings);
+export default PagesAndScriptsSettings;

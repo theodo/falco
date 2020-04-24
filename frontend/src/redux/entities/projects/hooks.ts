@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from 'redux/types';
 
-import { fetchProjectsRequest } from './actions';
-import { getAllProjects, getProject } from './selectors';
+import { fetchProjectsRequest, setProjectToastrDisplay } from './actions';
+import { getAllProjects, getProject, getProjectToastrDisplay } from './selectors';
+import { ProjectToastrDisplayType } from './types';
 
 export const useAllProjects = () => {
   const projects = useSelector(getAllProjects);
@@ -36,4 +37,24 @@ export const useProjectById = (projectId: string) => {
   );
 
   return project;
+};
+
+export const useToastr = () => {
+  const currentToastrDisplay = useSelector(getProjectToastrDisplay);
+
+  const dispatch = useDispatch();
+  const setToastrDisplay = useCallback(
+    (display: ProjectToastrDisplayType) => {
+      dispatch(setProjectToastrDisplay({ toastrDisplay: display }));
+    },
+    [dispatch],
+  );
+  const resetToastrDisplay = useCallback(
+    () => {
+      dispatch(setProjectToastrDisplay({ toastrDisplay: '' }));
+    },
+    [dispatch],
+  );
+
+  return { currentToastrDisplay, setToastrDisplay, resetToastrDisplay };
 };

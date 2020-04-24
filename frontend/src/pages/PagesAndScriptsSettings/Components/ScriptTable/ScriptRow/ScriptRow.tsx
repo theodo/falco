@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { toastr } from 'react-redux-toastr';
 import { useAsyncFn } from 'react-use';
-import { ProjectToastrDisplayType } from 'redux/entities/projects/types';
+import { useToastr } from 'redux/entities/projects/hooks';
 import { ScriptType } from 'redux/entities/scripts/types';
 import { makeDeleteRequest } from 'services/networking/request';
 import { colorUsage } from 'stylesheet';
@@ -24,24 +24,21 @@ export interface OwnProps {
 
 type Props = {
   script: ScriptType | null | undefined;
-  setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
   deleteScriptFromProjectSuccess: (payload: { projectId: string; scriptId: string }) => void;
 } & OwnProps;
 
 export const ScriptRow: React.FunctionComponent<Props> = ({
   scriptId,
   projectId,
-  setProjectToastrDisplay,
   deleteScriptFromProjectSuccess,
   script,
 }) => {
   const intl = useIntl();
+  const { setToastrDisplay } = useToastr();
 
   const [displayScriptModal, setDisplayScriptModal] = React.useState(false);
 
-  // could’t find a way to not declare `state` using `useAsyncFn`
-  // eslint-disable-next-line
-  const [state, deleteScript] = useAsyncFn(
+  const [, deleteScript] = useAsyncFn(
     async () => {
       try {
         const response = await makeDeleteRequest(
@@ -52,12 +49,12 @@ export const ScriptRow: React.FunctionComponent<Props> = ({
           throw new Error('No response');
         }
         deleteScriptFromProjectSuccess({ projectId, scriptId });
-        setProjectToastrDisplay('deleteScriptSuccess');
+        setToastrDisplay('deleteScriptSuccess');
       } catch (e) {
-        setProjectToastrDisplay('deleteScriptError');
+        setToastrDisplay('deleteScriptError');
       }
     },
-    [projectId, scriptId],
+    [projectId, scriptId, setToastrDisplay],
   );
 
   const openScriptModal = () => {

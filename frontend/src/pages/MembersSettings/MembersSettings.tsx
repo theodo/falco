@@ -9,8 +9,8 @@ import ReduxToastr, { toastr } from 'react-redux-toastr';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { RouteComponentProps } from 'react-router';
 import { ValueType } from 'react-select/lib/types';
-import { useProjectById } from 'redux/entities/projects/hooks';
-import { ProjectMember, ProjectToastrDisplayType } from 'redux/entities/projects/types';
+import { useProjectById, useToastr } from 'redux/entities/projects/hooks';
+import { ProjectMember } from 'redux/entities/projects/types';
 import { modelizeUser } from 'redux/user/modelizer';
 import { useCurrentUser } from 'redux/user/selectors';
 import { ApiUser, User } from 'redux/user/types';
@@ -32,25 +32,19 @@ import {
   SelectUser,
 } from './MembersSettings.style';
 
-export type OwnProps = {} & RouteComponentProps<{
-  projectId: string;
-}>;
-
 type Props = {
   addMemberToProject: (projectId: string, userId: string) => void;
   removeMemberOfProjectRequest: (projectId: string, userId: string) => void;
   editMemberOfProjectRequest: (projectId: string, userId: string, isAdmin: boolean) => void;
-  toastrDisplay: ProjectToastrDisplayType;
-  setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
-} & OwnProps;
+} & RouteComponentProps<{
+  projectId: string;
+}>;
 
 const MembersSettings: React.FunctionComponent<Props> = ({
   addMemberToProject,
   removeMemberOfProjectRequest,
   editMemberOfProjectRequest,
   match,
-  toastrDisplay,
-  setProjectToastrDisplay,
 }) => {
   const intl = useIntl();
 
@@ -61,6 +55,8 @@ const MembersSettings: React.FunctionComponent<Props> = ({
   }
 
   const currentUser = useCurrentUser();
+
+  const { currentToastrDisplay, resetToastrDisplay } = useToastr();
 
   const [selectOption, setSelectOption]: [ValueType<UserOption | {}>, any] = React.useState(null);
   const [allUsers, setAllUsers] = React.useState([]);
@@ -89,8 +85,8 @@ const MembersSettings: React.FunctionComponent<Props> = ({
 
   React.useEffect(
     () => {
-      if ('' !== toastrDisplay) {
-        switch (toastrDisplay) {
+      if ('' !== currentToastrDisplay) {
+        switch (currentToastrDisplay) {
           case 'addMemberSuccess':
             toastr.success(
               intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
@@ -105,10 +101,10 @@ const MembersSettings: React.FunctionComponent<Props> = ({
             break;
         }
 
-        setProjectToastrDisplay('');
+        resetToastrDisplay();
       }
     },
-    [toastrDisplay, setProjectToastrDisplay, intl],
+    [currentToastrDisplay, resetToastrDisplay, intl],
   );
 
   const onChange = (selectedOption: ValueType<UserOption | {}>) => {

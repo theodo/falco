@@ -5,8 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import ReduxToastr, { toastr } from 'react-redux-toastr';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { RouteComponentProps } from 'react-router';
-import { useProjectById } from 'redux/entities/projects/hooks';
-import { ProjectToastrDisplayType } from 'redux/entities/projects/types';
+import { useProjectById, useToastr } from 'redux/entities/projects/hooks';
 import { useCurrentUser } from 'redux/user/selectors';
 import { isUserAdminOfProject } from 'services/utils';
 import { AddPageRow } from './Components/PageTable';
@@ -20,22 +19,14 @@ import {
   ProjectSettingsBlock,
 } from './PagesAndScriptsSettings.style';
 
-export type OwnProps = {} & RouteComponentProps<{
+type Props = RouteComponentProps<{
   projectId: string;
 }>;
 
-type Props = {
-  toastrDisplay: ProjectToastrDisplayType;
-  setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
-} & OwnProps;
-
-const PagesAndScriptsSettings: React.FunctionComponent<Props> = ({
-  match,
-  toastrDisplay,
-  setProjectToastrDisplay,
-}) => {
+const PagesAndScriptsSettings: React.FunctionComponent<Props> = ({ match }) => {
   const intl = useIntl();
   const currentUser = useCurrentUser();
+  const { currentToastrDisplay, resetToastrDisplay } = useToastr();
 
   interface UserOption {
     value: string;
@@ -54,8 +45,8 @@ const PagesAndScriptsSettings: React.FunctionComponent<Props> = ({
 
   React.useEffect(
     () => {
-      if ('' !== toastrDisplay) {
-        switch (toastrDisplay) {
+      if ('' !== currentToastrDisplay) {
+        switch (currentToastrDisplay) {
           case 'addPageSuccess':
             toastr.success(
               intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
@@ -105,10 +96,10 @@ const PagesAndScriptsSettings: React.FunctionComponent<Props> = ({
             break;
         }
 
-        setProjectToastrDisplay('');
+        resetToastrDisplay();
       }
     },
-    [toastrDisplay, setProjectToastrDisplay, intl],
+    [currentToastrDisplay, resetToastrDisplay, intl],
   );
 
   if (project === undefined) {
