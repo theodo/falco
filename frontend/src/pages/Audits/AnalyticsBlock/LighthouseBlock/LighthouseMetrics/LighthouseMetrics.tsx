@@ -49,10 +49,10 @@ const LighthouseMetrics: React.FunctionComponent<OwnProps> = ({ auditResult }) =
         <FormattedMessage id="Audits.lighthouse_header" />
       </MetricsHeader>
       <ColumnsContainer>
-        {metrics.map((column: LighthouseMetricType[]) => (
-          <Column>
+        {metrics.map((column: LighthouseMetricType[], colNum) => (
+          <Column key={colNum}>
             {column.map((metric: LighthouseMetricType) => (
-              <Metric>
+              <Metric key={metric}>
                 <MetricInnerwrap state={metricState(auditResult[metric].score)}>
                   <MetricTitle>
                     <FormattedMessage id={`Metrics.${metric}`} />
