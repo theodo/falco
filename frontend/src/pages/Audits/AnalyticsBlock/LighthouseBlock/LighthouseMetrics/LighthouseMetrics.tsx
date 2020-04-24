@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { AuditResultType, LighthouseMetricType } from 'redux/auditResults/types';
-import { LIGHTHOUSE_AVERAGE_SCORE_THRESHOLD, LIGHTHOUSE_PASS_SCORE_THRESHOLD } from '../LighthouseScore/LighthouseScore';
+import {
+  LIGHTHOUSE_AVERAGE_SCORE_THRESHOLD,
+  LIGHTHOUSE_PASS_SCORE_THRESHOLD,
+} from '../LighthouseScore/LighthouseScore';
 import {
   Column,
   ColumnsContainer,
@@ -33,7 +36,11 @@ const LighthouseMetrics: React.FunctionComponent<OwnProps> = ({ auditResult }) =
   const PASS = 'PASS';
 
   const metricState = (score: number): 'FAIL' | 'AVERAGE' | 'PASS' => {
-    return score < LIGHTHOUSE_AVERAGE_SCORE_THRESHOLD ? FAIL : score < LIGHTHOUSE_PASS_SCORE_THRESHOLD ? AVERAGE : PASS;
+    return score < LIGHTHOUSE_AVERAGE_SCORE_THRESHOLD
+      ? FAIL
+      : score < LIGHTHOUSE_PASS_SCORE_THRESHOLD
+      ? AVERAGE
+      : PASS;
   };
 
   return (
