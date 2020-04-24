@@ -11,8 +11,8 @@ import { RouteComponentProps } from 'react-router';
 import { ValueType } from 'react-select/lib/types';
 import { useProjectById } from 'redux/entities/projects/hooks';
 import { ProjectMember, ProjectToastrDisplayType } from 'redux/entities/projects/types';
-import { UserState } from 'redux/user';
 import { modelizeUser } from 'redux/user/modelizer';
+import { useCurrentUser } from 'redux/user/selectors';
 import { ApiUser, User } from 'redux/user/types';
 import { makeGetRequest } from 'services/networking/request';
 import { isUserAdminOfProject } from 'services/utils';
@@ -37,7 +37,6 @@ export type OwnProps = {} & RouteComponentProps<{
 }>;
 
 type Props = {
-  currentUser: UserState;
   addMemberToProject: (projectId: string, userId: string) => void;
   removeMemberOfProjectRequest: (projectId: string, userId: string) => void;
   editMemberOfProjectRequest: (projectId: string, userId: string, isAdmin: boolean) => void;
@@ -50,7 +49,6 @@ const MembersSettings: React.FunctionComponent<Props> = ({
   removeMemberOfProjectRequest,
   editMemberOfProjectRequest,
   match,
-  currentUser,
   toastrDisplay,
   setProjectToastrDisplay,
 }) => {
@@ -61,6 +59,8 @@ const MembersSettings: React.FunctionComponent<Props> = ({
     label: string;
     disabled: boolean;
   }
+
+  const currentUser = useCurrentUser();
 
   const [selectOption, setSelectOption]: [ValueType<UserOption | {}>, any] = React.useState(null);
   const [allUsers, setAllUsers] = React.useState([]);

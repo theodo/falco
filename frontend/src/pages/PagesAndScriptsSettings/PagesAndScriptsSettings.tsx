@@ -7,7 +7,7 @@ import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { RouteComponentProps } from 'react-router';
 import { useProjectById } from 'redux/entities/projects/hooks';
 import { ProjectToastrDisplayType } from 'redux/entities/projects/types';
-import { UserState } from 'redux/user';
+import { useCurrentUser } from 'redux/user/selectors';
 import { isUserAdminOfProject } from 'services/utils';
 import { AddPageRow } from './Components/PageTable';
 import PageRow, { PageRowHeader } from './Components/PageTable';
@@ -25,18 +25,17 @@ export type OwnProps = {} & RouteComponentProps<{
 }>;
 
 type Props = {
-  currentUser: UserState;
   toastrDisplay: ProjectToastrDisplayType;
   setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
 } & OwnProps;
 
 const PagesAndScriptsSettings: React.FunctionComponent<Props> = ({
   match,
-  currentUser,
   toastrDisplay,
   setProjectToastrDisplay,
 }) => {
   const intl = useIntl();
+  const currentUser = useCurrentUser();
 
   interface UserOption {
     value: string;
