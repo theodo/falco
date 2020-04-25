@@ -9,7 +9,8 @@
     "member-access": false,
     "object-literal-sort-keys": false,
     "jsx-no-lambda": false,
-    "no-console": [true, "log"]
+    "no-console": [true, "log"],
+    "interface-over-type-literal": false
   },
   "rulesDirectory": []
 }
