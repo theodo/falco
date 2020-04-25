@@ -4,7 +4,7 @@ import * as React from 'react';
 import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
 import MetricGraph from 'components/MetricGraph';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { METRICS } from 'redux/auditResults/constants';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
 import { getSpacing } from 'stylesheet';
@@ -38,7 +38,7 @@ interface Props extends OwnProps {
   ) => void;
 }
 
-export const GraphsBlock: React.FunctionComponent<Props & InjectedIntlProps> = ({
+export const GraphsBlock: React.FunctionComponent<Props> = ({
   auditResults,
   auditResultIds,
   metrics,

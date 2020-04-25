@@ -5,12 +5,30 @@ import dayjs from 'dayjs';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import { Information } from 'icons';
 import Expand from 'icons/Expand';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
-import { Area, AreaChart, Legend, LegendProps, ResponsiveContainer, Tooltip, TooltipProps, XAxis, YAxis } from 'recharts';
+import { FormattedMessage, useIntl } from 'react-intl';
+import {
+  Area,
+  AreaChart,
+  Legend,
+  LegendProps,
+  ResponsiveContainer,
+  Tooltip,
+  TooltipProps,
+  XAxis,
+  YAxis,
+} from 'recharts';
 import { METRICS } from 'redux/auditResults/constants';
 import { AuditResultsAsGraphData, MetricType } from 'redux/auditResults/types';
 import { colorUsage, fontFamily, fontSize, getSpacing } from 'stylesheet';
-import { ExpandButton, LegendTitle, MetricInfoIconContainer, MetricLegend, StyledTooltip, TooltipDate, TooltipValue } from './MetricGraph.style';
+import {
+  ExpandButton,
+  LegendTitle,
+  MetricInfoIconContainer,
+  MetricLegend,
+  StyledTooltip,
+  TooltipDate,
+  TooltipValue,
+} from './MetricGraph.style';
 
 export interface OwnProps {
   fullscreen: boolean;
@@ -21,16 +39,17 @@ export interface OwnProps {
   showOnlyLastWeek: boolean;
 }
 
-type Props = OwnProps & InjectedIntlProps;
+type Props = OwnProps;
 
 const MetricGraph: React.FunctionComponent<Props> = ({
   fullscreen,
   auditResults,
-  intl,
   metrics,
   onExpandClick,
   showOnlyLastWeek,
 }) => {
+  const intl = useIntl();
+
   const [isMetricInfoTooltipVisible, setIsMetricInfoTooltipVisible] = React.useState(false);
   const [isExpandTooltipVisible, setIsExpandTooltipVisible] = React.useState(false);
 
@@ -42,7 +61,7 @@ const MetricGraph: React.FunctionComponent<Props> = ({
     const { payload } = props;
     if (!payload) {
       return null;
-    };
+    }
     return payload.map((entry, index) => (
       <MetricLegend
         margin={
@@ -107,28 +126,28 @@ const MetricGraph: React.FunctionComponent<Props> = ({
     const { payload, label } = tooltipProps;
     if (!payload) {
       return null;
-    };
+    }
     return payload
       ? payload.map((entry, index) => {
-        const dataType = METRICS[entry.dataKey as MetricType].type;
-        const formattedDate = intl.formatMessage(
-          {
-            id: 'components.MetricGraph.tooltip_date',
-          },
-          {
-            day: dayjs(label)
-              .format('L')
-              .replace(new RegExp('[^.]?' + dayjs().format('YYYY') + '.?'), ''), // remove year
-            time: dayjs(label).format('LT'),
-          },
-        );
-        return (
-          <StyledTooltip key={index}>
-            <TooltipValue>{getFormattedValue(dataType, entry.value as number)}</TooltipValue>
-            <TooltipDate>{formattedDate}</TooltipDate>
-          </StyledTooltip>
-        );
-      })
+          const dataType = METRICS[entry.dataKey as MetricType].type;
+          const formattedDate = intl.formatMessage(
+            {
+              id: 'components.MetricGraph.tooltip_date',
+            },
+            {
+              day: dayjs(label)
+                .format('L')
+                .replace(new RegExp('[^.]?' + dayjs().format('YYYY') + '.?'), ''), // remove year
+              time: dayjs(label).format('LT'),
+            },
+          );
+          return (
+            <StyledTooltip key={index}>
+              <TooltipValue>{getFormattedValue(dataType, entry.value as number)}</TooltipValue>
+              <TooltipDate>{formattedDate}</TooltipDate>
+            </StyledTooltip>
+          );
+        })
       : null;
   };
 
@@ -169,14 +188,14 @@ const MetricGraph: React.FunctionComponent<Props> = ({
   const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000;
   const sevenDaysAgo = today - oneWeekInMilliseconds;
   const oldestAuditResultWithinLastWeek = auditResults
-    ? auditResults.find(auditResult => (auditResult.date >= sevenDaysAgo))
+    ? auditResults.find(auditResult => auditResult.date >= sevenDaysAgo)
     : null;
   const dateOfOldestAuditResultWithinLastWeek = oldestAuditResultWithinLastWeek
     ? oldestAuditResultWithinLastWeek.date
     : sevenDaysAgo;
 
   const auditResultsToDisplay = auditResults
-    ? auditResults.filter(auditResult => fullscreen ? true : (auditResult.date >= sevenDaysAgo))
+    ? auditResults.filter(auditResult => (fullscreen ? true : auditResult.date >= sevenDaysAgo))
     : null;
 
   return (

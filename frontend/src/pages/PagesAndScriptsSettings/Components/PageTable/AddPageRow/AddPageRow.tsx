@@ -2,42 +2,48 @@ import { default as AddIcon } from 'icons/Add';
 import { default as CheckmarkIcon } from 'icons/Checkmark';
 import { default as CloseIcon } from 'icons/Close';
 import * as React from 'react';
-import { InjectedIntlProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { colorUsage } from 'stylesheet';
 import {
-  AddNameInput, AddPageButtonContainer, AddPageButtonLabel, AddPageButtonsContainer, AddUrlInput, PageButton
+  AddNameInput,
+  AddPageButtonContainer,
+  AddPageButtonLabel,
+  AddPageButtonsContainer,
+  AddUrlInput,
+  PageButton,
 } from '../PageTable.style';
 
 export interface OwnProps {
-  projectId: string,
+  projectId: string;
 }
 
 type Props = {
-  addPageToProjectRequest: (projectId: string, pageName: string, pageUrl: string) => void,
-} & OwnProps & InjectedIntlProps;
+  addPageToProjectRequest: (projectId: string, pageName: string, pageUrl: string) => void;
+} & OwnProps;
 
 const useFocus = (isAdding: boolean): React.MutableRefObject<any> => {
-  const htmlElRef = React.useRef<HTMLInputElement>(null)
+  const htmlElRef = React.useRef<HTMLInputElement>(null);
   const previousState = React.useRef(true);
 
   React.useEffect(() => {
     const prevIsAdding = previousState.current;
     if (isAdding && prevIsAdding !== isAdding && htmlElRef.current) {
-      htmlElRef.current.focus()
+      htmlElRef.current.focus();
     }
     previousState.current = isAdding;
   });
 
-  return htmlElRef
-}
+  return htmlElRef;
+};
 
 export const AddPageRow: React.FunctionComponent<Props> = ({
   projectId,
   addPageToProjectRequest,
-  intl
 }) => {
+  const intl = useIntl();
+
   const [pageName, setPageName] = React.useState('');
-  const [pageUrl, setPageUrl] = React.useState('')
+  const [pageUrl, setPageUrl] = React.useState('');
   const [isAddingMode, setAddingMode] = React.useState(false);
   const nameInputRef = useFocus(isAddingMode);
 
@@ -45,46 +51,38 @@ export const AddPageRow: React.FunctionComponent<Props> = ({
     setPageName('');
     setPageUrl('');
     setAddingMode(false);
-  }
+  };
 
   const validate = () => {
     if (pageName && pageUrl) {
-      addPageToProjectRequest(
-        projectId,
-        pageName,
-        pageUrl
-      );
+      addPageToProjectRequest(projectId, pageName, pageUrl);
 
       setPageName('');
       setPageUrl('');
       setAddingMode(false);
     }
-  }
+  };
 
   const handleNameChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
-    setPageName(e.currentTarget.value)
-  }
+    setPageName(e.currentTarget.value);
+  };
 
   const handleUrlChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
-    setPageUrl(e.currentTarget.value)
-  }
+    setPageUrl(e.currentTarget.value);
+  };
 
   const activateAddingMode = () => {
     setAddingMode(true);
-  }
+  };
 
   return (
     <React.Fragment>
       <AddPageButtonContainer isAdding={isAddingMode} onClick={activateAddingMode}>
-        <AddIcon
-          color={colorUsage.projectSettingsIconColor}
-          width="24px"
-          strokeWidth="15"
-        />
+        <AddIcon color={colorUsage.projectSettingsIconColor} width="24px" strokeWidth="15" />
         <AddPageButtonLabel>
           {intl.formatMessage({ id: 'ProjectSettings.add_page' })}
         </AddPageButtonLabel>
-      </AddPageButtonContainer >
+      </AddPageButtonContainer>
       <AddNameInput
         isAdding={isAddingMode}
         value={pageName}
@@ -101,20 +99,12 @@ export const AddPageRow: React.FunctionComponent<Props> = ({
 
       <AddPageButtonsContainer isAdding={isAddingMode}>
         <PageButton onClick={validate}>
-          <CheckmarkIcon
-            color={colorUsage.projectSettingsIconColor}
-            width="16px"
-            strokeWidth="5"
-          />
+          <CheckmarkIcon color={colorUsage.projectSettingsIconColor} width="16px" strokeWidth="5" />
         </PageButton>
         <PageButton onClick={cancel}>
-          <CloseIcon
-            color={colorUsage.projectSettingsIconColor}
-            width="13px"
-            strokeWidth="15"
-          />
+          <CloseIcon color={colorUsage.projectSettingsIconColor} width="13px" strokeWidth="15" />
         </PageButton>
-      </AddPageButtonsContainer >
+      </AddPageButtonsContainer>
     </React.Fragment>
-  )
-}
+  );
+};

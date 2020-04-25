@@ -1,7 +1,7 @@
 import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import ReduxToastr, { toastr } from 'react-redux-toastr';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { RouteComponentProps } from 'react-router';
@@ -11,97 +11,101 @@ import { UserState } from 'redux/user';
 import { isUserAdminOfProject } from 'services/utils';
 import { AddPageRow } from './Components/PageTable';
 import PageRow, { PageRowHeader } from './Components/PageTable';
-import { AddScript, ScriptRow, ScriptTableHeader } from './Components/ScriptTable'
-import { Container, ElementContainer, PageSubTitle, PageTitle, ProjectSettingsBlock } from './PagesAndScriptsSettings.style';
+import { AddScript, ScriptRow, ScriptTableHeader } from './Components/ScriptTable';
+import {
+  Container,
+  ElementContainer,
+  PageSubTitle,
+  PageTitle,
+  ProjectSettingsBlock,
+} from './PagesAndScriptsSettings.style';
 
 export type OwnProps = {} & RouteComponentProps<{
   projectId: string;
 }>;
 
 type Props = {
-  currentUser: UserState,
+  currentUser: UserState;
   fetchProjectsRequest: (projectId: string) => void;
   project?: ProjectType | null;
   toastrDisplay: ProjectToastrDisplayType;
   setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
-} & OwnProps &
-  InjectedIntlProps;
+} & OwnProps;
 
 const PagesAndScriptsSettings: React.FunctionComponent<Props> = ({
   fetchProjectsRequest,
   match,
-  intl,
   project,
   currentUser,
   toastrDisplay,
   setProjectToastrDisplay,
 }) => {
+  const intl = useIntl();
 
   interface UserOption {
     value: string;
     label: string;
     disabled: boolean;
-  };
-
-  interface ApiAvailableAuditParameters {
-    uuid: string,
-    browser: string,
-    location_label: string,
-    location_group: string,
   }
 
+  interface ApiAvailableAuditParameters {
+    uuid: string;
+    browser: string;
+    location_label: string;
+    location_group: string;
+  }
 
   useFetchProjectIfUndefined(fetchProjectsRequest, match.params.projectId, project);
 
   React.useEffect(
     () => {
-      if('' !== toastrDisplay) {
-        switch(toastrDisplay) {
-          case "addPageSuccess":
+      if ('' !== toastrDisplay) {
+        switch (toastrDisplay) {
+          case 'addPageSuccess':
             toastr.success(
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.add_page_success_message'}),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.add_page_success_message' }),
             );
             break;
-          case "editPageSuccess":
-              toastr.success(
-                intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
-                intl.formatMessage({'id': 'Toastr.ProjectSettings.edit_page_success_message'}),
-              );
-              break;
-          case "deletePageSuccess":
+          case 'editPageSuccess':
             toastr.success(
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.delete_page_success_message'}),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.edit_page_success_message' }),
             );
             break;
-          case "addScriptToProjectSuccess":
+          case 'deletePageSuccess':
             toastr.success(
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.add_script_to_project_sucess'}),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.delete_page_success_message' }),
             );
             break;
-          case "editScriptSuccess":
+          case 'addScriptToProjectSuccess':
             toastr.success(
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.edit_script_sucess'}),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.add_script_to_project_sucess' }),
             );
             break;
-          case "deleteScriptSuccess":
+          case 'editScriptSuccess':
             toastr.success(
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.success_title'}),
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.delete_script_sucess'}),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.edit_script_sucess' }),
             );
             break;
-          case "addScriptToProjectError":
-          case "editScriptError":
-          case "deleteScriptError":
-          case "editPageError":
-          case "addPageError":
-          case "deletePageError":
+          case 'deleteScriptSuccess':
+            toastr.success(
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.delete_script_sucess' }),
+            );
+            break;
+          case 'addScriptToProjectError':
+          case 'editScriptError':
+          case 'deleteScriptError':
+          case 'editPageError':
+          case 'addPageError':
+          case 'deletePageError':
             toastr.error(
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.error_title'}),
-              intl.formatMessage({'id': 'Toastr.ProjectSettings.error_message'}),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.error_title' }),
+              intl.formatMessage({ id: 'Toastr.ProjectSettings.error_message' }),
             );
             break;
         }
@@ -111,7 +115,6 @@ const PagesAndScriptsSettings: React.FunctionComponent<Props> = ({
     },
     [toastrDisplay, setProjectToastrDisplay, intl],
   );
-
 
   if (project === undefined) {
     return (
@@ -133,9 +136,11 @@ const PagesAndScriptsSettings: React.FunctionComponent<Props> = ({
 
   return (
     <Container>
-      <PageTitle>{intl.formatMessage({ id: 'ProjectSettings.settings'}) + ' - ' + project.name}</PageTitle>
+      <PageTitle>
+        {intl.formatMessage({ id: 'ProjectSettings.settings' }) + ' - ' + project.name}
+      </PageTitle>
       <PageSubTitle>
-        <FormattedMessage id="ProjectSettings.pages"/>
+        <FormattedMessage id="ProjectSettings.pages" />
       </PageSubTitle>
       <ProjectSettingsBlock>
         <ElementContainer>
@@ -148,30 +153,31 @@ const PagesAndScriptsSettings: React.FunctionComponent<Props> = ({
               projectId={project.uuid}
               pageId={pageId}
             />
-          </ElementContainer>))}
-          {isUserAdminOfProject(currentUser, project) && <ElementContainer>
-            <AddPageRow
-              projectId={project.uuid}
-            />
-          </ElementContainer>}
+          </ElementContainer>
+        ))}
+        {isUserAdminOfProject(currentUser, project) && (
+          <ElementContainer>
+            <AddPageRow projectId={project.uuid} />
+          </ElementContainer>
+        )}
       </ProjectSettingsBlock>
       <PageSubTitle>
-        <FormattedMessage id="ProjectSettings.scripts"/>
+        <FormattedMessage id="ProjectSettings.scripts" />
       </PageSubTitle>
       <ProjectSettingsBlock>
         <ElementContainer>
-          <ScriptTableHeader/>
+          <ScriptTableHeader />
         </ElementContainer>
         {project.scriptsIds.map(scriptId => (
           <ElementContainer key={scriptId}>
-            <ScriptRow
-              scriptId={scriptId}
-              projectId={project.uuid}
-            />
-          </ElementContainer>))}
-        {isUserAdminOfProject(currentUser, project) && <ElementContainer>
-          <AddScript projectId={project.uuid} />
-          </ElementContainer>}
+            <ScriptRow scriptId={scriptId} projectId={project.uuid} />
+          </ElementContainer>
+        ))}
+        {isUserAdminOfProject(currentUser, project) && (
+          <ElementContainer>
+            <AddScript projectId={project.uuid} />
+          </ElementContainer>
+        )}
       </ProjectSettingsBlock>
       <ReduxToastr
         timeOut={4000}
@@ -183,6 +189,6 @@ const PagesAndScriptsSettings: React.FunctionComponent<Props> = ({
       />
     </Container>
   );
-}
+};
 
 export default PagesAndScriptsSettings;

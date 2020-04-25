@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import {
   WelcomeBlockContainer,
   WelcomeBlockText,
@@ -7,7 +7,7 @@ import {
   WelcomeBlockTitle,
 } from './Welcome.style';
 
-type Props = {} & InjectedIntlProps;
+type Props = {};
 
 const Welcome: React.FunctionComponent<Props> = () => {
   return (

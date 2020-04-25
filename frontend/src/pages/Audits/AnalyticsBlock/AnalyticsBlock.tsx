@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
@@ -19,7 +19,7 @@ interface Props extends OwnProps {
   auditResults: AuditResultType[] | null;
 }
 
-export const AnalyticsBlock: React.FunctionComponent<Props & InjectedIntlProps> = props => {
+export const AnalyticsBlock: React.FunctionComponent<Props> = props => {
   const { auditResults, auditResultIds, blockMargin } = props;
 
   if (!auditResultIds || !auditResults) {

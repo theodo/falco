@@ -1,7 +1,7 @@
 import React, { MouseEvent, useState } from 'react';
 
 import Logo from 'components/Logo';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { routeDefinitions } from 'routes';
 import { colorUsage } from 'stylesheet';
 import AccountMenu from './components/AccountMenu';
@@ -31,13 +31,14 @@ interface Props {
   fetchUserRequest: () => void;
 }
 
-export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
+export const Header: React.FunctionComponent<Props> = ({
   currentURL,
   fetchUserRequest,
   isUserAuthenticated,
   isMenuDisplayed,
-  intl,
 }) => {
+  const intl = useIntl();
+
   const [isAccountMenuVisible, setIsAccountMenuVisible] = React.useState(false);
   const [isProjectsMenuVisible, setIsProjectsMenuVisible] = React.useState(false);
 

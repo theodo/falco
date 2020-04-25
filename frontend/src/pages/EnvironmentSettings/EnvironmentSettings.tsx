@@ -1,7 +1,7 @@
 import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import ReduxToastr, { toastr } from 'react-redux-toastr';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { RouteComponentProps } from 'react-router';
@@ -32,18 +32,18 @@ type Props = {
   project?: ProjectType | null;
   toastrDisplay: ProjectToastrDisplayType;
   setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
-} & OwnProps &
-  InjectedIntlProps;
+} & OwnProps;
 
 const EnvironmentSettings: React.FunctionComponent<Props> = ({
   fetchProjectsRequest,
   match,
-  intl,
   project,
   currentUser,
   toastrDisplay,
   setProjectToastrDisplay,
 }) => {
+  const intl = useIntl();
+
   interface UserOption {
     value: string;
     label: string;

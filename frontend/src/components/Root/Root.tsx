@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
 import { Helmet } from 'react-helmet';
-import { addLocaleData, FormattedMessage, IntlProvider } from 'react-intl';
-import en from 'react-intl/locale-data/en';
-import fr from 'react-intl/locale-data/fr';
+import { /* addLocaleData, */ FormattedMessage, IntlProvider } from 'react-intl';
+// import en from 'react-intl/locale-data/en';
+// import fr from 'react-intl/locale-data/fr';
 import { RouteComponentProps } from 'react-router';
 
 import { flattenMessages } from 'services/i18n/intl';
@@ -16,7 +16,7 @@ const locales: Record<string, any> = {
   en: flattenMessages(enMessages),
 };
 
-addLocaleData([...fr, ...en]);
+// addLocaleData([...fr, ...en]);
 
 // Your component own properties
 interface Props extends RouteComponentProps<any> {
@@ -25,7 +25,12 @@ interface Props extends RouteComponentProps<any> {
   children: ReactNode;
 }
 
-const Root: React.FunctionComponent<Props> = ({ children, location, isUserAuthenticated, hasProjects }) => {
+const Root: React.FunctionComponent<Props> = ({
+  children,
+  location,
+  isUserAuthenticated,
+  hasProjects,
+}) => {
   const shouldDisplayMenu = isUserAuthenticated && hasProjects;
 
   const userLanguage =
@@ -36,7 +41,7 @@ const Root: React.FunctionComponent<Props> = ({ children, location, isUserAuthen
 
   // Default to english if user’s locale is not available
   if (!localizedMessages) {
-    userLanguageWithoutRegionCode = "en";
+    userLanguageWithoutRegionCode = 'en';
     localizedMessages = locales.en;
   }
 
@@ -51,7 +56,7 @@ const Root: React.FunctionComponent<Props> = ({ children, location, isUserAuthen
             <SkipToContent href="#start-of-content">
               <FormattedMessage id="Header.skip_to_content" />
             </SkipToContent>
-            <Header isUserAuthenticated={isUserAuthenticated} isMenuDisplayed={shouldDisplayMenu}/>
+            <Header isUserAuthenticated={isUserAuthenticated} isMenuDisplayed={shouldDisplayMenu} />
             <Body id="start-of-content">
               {shouldDisplayMenu && <Menu />}
               <Content shouldDisplayMenu={shouldDisplayMenu}>{children}</Content>
