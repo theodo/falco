@@ -137,7 +137,7 @@ const PagesAndScriptsSettings: React.FunctionComponent<Props> = ({
   return (
     <Container>
       <PageTitle>
-        {intl.formatMessage({ id: 'ProjectSettings.settings' }) + ' - ' + project.name}
+        <FormattedMessage id="ProjectSettings.settings" /> - {project.name}
       </PageTitle>
       <PageSubTitle>
         <FormattedMessage id="ProjectSettings.pages" />

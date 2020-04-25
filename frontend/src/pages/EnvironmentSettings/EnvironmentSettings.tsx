@@ -150,7 +150,7 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({
   return (
     <Container>
       <PageTitle>
-        {intl.formatMessage({ id: 'ProjectSettings.settings' }) + ' - ' + project.name}
+        <FormattedMessage id="ProjectSettings.settings" /> - {project.name}
       </PageTitle>
       <PageSubTitle>
         <FormattedMessage id="ProjectSettings.project_audit_parameters" />
@@ -158,12 +158,14 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({
       <ProjectSettingsBlock>
         <ElementContainer>
           <AuditParameterName>
-            {intl.formatMessage({ id: 'ProjectSettings.audit_parameter_name' })}
+            <FormattedMessage id="ProjectSettings.audit_parameter_name" />
           </AuditParameterName>
           <Configuration>
-            {intl.formatMessage({ id: 'ProjectSettings.configuration' })}
+            <FormattedMessage id="ProjectSettings.configuration" />
           </Configuration>
-          <NetworkShape>{intl.formatMessage({ id: 'ProjectSettings.network_type' })}</NetworkShape>
+          <NetworkShape>
+            <FormattedMessage id="ProjectSettings.network_type" />
+          </NetworkShape>
         </ElementContainer>
         {project.auditParametersIds.map(auditParameterId => (
           <ElementContainer key={auditParameterId}>

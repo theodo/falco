@@ -1,6 +1,6 @@
 import { Add } from 'icons';
 import * as React from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { colorUsage } from 'stylesheet';
 import { ScriptModal } from '../ScriptModal';
 import { AddScriptButtonContainer, AddScriptButtonLabel } from '../ScriptTable.style';
@@ -10,8 +10,6 @@ interface Props {
 }
 
 export const AddScript: React.FunctionComponent<Props> = ({ projectId }) => {
-  const intl = useIntl();
-
   const [displayScriptModal, setDisplayScriptModal] = React.useState(false);
 
   const openScriptModal = () => {
@@ -26,7 +24,7 @@ export const AddScript: React.FunctionComponent<Props> = ({ projectId }) => {
       <AddScriptButtonContainer onClick={openScriptModal}>
         <Add color={colorUsage.projectSettingsIconColor} width="24px" strokeWidth="15" />
         <AddScriptButtonLabel>
-          {intl.formatMessage({ id: 'ProjectSettings.add_script' })}
+          <FormattedMessage id="ProjectSettings.add_script" />
         </AddScriptButtonLabel>
       </AddScriptButtonContainer>
       <ScriptModal

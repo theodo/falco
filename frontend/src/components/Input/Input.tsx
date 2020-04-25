@@ -1,6 +1,6 @@
 import { InjectedFormikProps } from 'formik';
 import React from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import Style from './Input.style';
 
 type Props = InjectedFormikProps<any, any>;
@@ -38,7 +38,7 @@ export const Input: React.FunctionComponent<Props> = ({
         {...field}
       />
       <Style.Label className={componentsClassName}>
-        {error ? intl.formatMessage({ id: error }) : intl.formatMessage({ id: label })}
+        {error ? <FormattedMessage id={error} /> : <FormattedMessage id={label} />}
       </Style.Label>
     </Style.Field>
   );

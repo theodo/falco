@@ -73,7 +73,7 @@ const MetricGraph: React.FunctionComponent<Props> = ({
         ref={legendRef}
       >
         <LegendTitle fullscreen={fullscreen}>
-          {intl.formatMessage({ id: `Metrics.${entry.value}.name` })}
+          <FormattedMessage id={`Metrics.${entry.value}.name`} />
         </LegendTitle>
         {!fullscreen && (
           <MetricInfoIconContainer
@@ -130,21 +130,20 @@ const MetricGraph: React.FunctionComponent<Props> = ({
     return payload
       ? payload.map((entry, index) => {
           const dataType = METRICS[entry.dataKey as MetricType].type;
-          const formattedDate = intl.formatMessage(
-            {
-              id: 'components.MetricGraph.tooltip_date',
-            },
-            {
-              day: dayjs(label)
-                .format('L')
-                .replace(new RegExp('[^.]?' + dayjs().format('YYYY') + '.?'), ''), // remove year
-              time: dayjs(label).format('LT'),
-            },
-          );
           return (
             <StyledTooltip key={index}>
               <TooltipValue>{getFormattedValue(dataType, entry.value as number)}</TooltipValue>
-              <TooltipDate>{formattedDate}</TooltipDate>
+              <TooltipDate>
+                <FormattedMessage
+                  id="components.MetricGraph.tooltip_date"
+                  values={{
+                    day: dayjs(label)
+                      .format('L')
+                      .replace(new RegExp('[^.]?' + dayjs().format('YYYY') + '.?'), ''), // remove year
+                    time: dayjs(label).format('LT'),
+                  }}
+                />
+              </TooltipDate>
             </StyledTooltip>
           );
         })

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import Modal from 'react-modal';
 import { useAsyncFn } from 'react-use';
 
@@ -144,7 +144,9 @@ export const ScriptModal: React.FunctionComponent<Props> = ({
         appElement={document.querySelector('#root') as HTMLElement}
         onAfterClose={handleModalClose}
       >
-        <PageTitle>{intl.formatMessage({ id: `ProjectSettings.script_modal_title` })}</PageTitle>
+        <PageTitle>
+          <FormattedMessage id="ProjectSettings.script_modal_title" />
+        </PageTitle>
         <NameInput
           onChange={handleNameChange}
           value={scriptName}
@@ -152,11 +154,13 @@ export const ScriptModal: React.FunctionComponent<Props> = ({
         />
         <ScriptInput onChange={handleScriptChange} value={scriptContent} />
         <ConfirmButton onClick={script ? editScript : createScript}>
-          {intl.formatMessage({
-            id: script
-              ? `ProjectSettings.script_confirm_edition`
-              : `ProjectSettings.script_confirm_creation`,
-          })}
+          <FormattedMessage
+            id={
+              script
+                ? `ProjectSettings.script_confirm_edition`
+                : `ProjectSettings.script_confirm_creation`
+            }
+          />
         </ConfirmButton>
         <CloseContainer onClick={close}>
           <Close

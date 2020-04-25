@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { routeDefinitions } from 'routes';
 
 import { MenuArrow } from 'icons';
@@ -27,8 +27,6 @@ export const ProjectSettingsMenuContent: React.FunctionComponent<Props> = ({
   project,
   currentURL,
 }) => {
-  const intl = useIntl();
-
   const settingPages = [
     routeDefinitions.projectSettingsGeneral,
     routeDefinitions.environmentSettings,
@@ -48,7 +46,9 @@ export const ProjectSettingsMenuContent: React.FunctionComponent<Props> = ({
       <GoBackToProjectLink to={projectPageUrl}>
         <FormattedMessage id="Menu.go_back_to_project" />
       </GoBackToProjectLink>
-      <Settings>{intl.formatMessage({ id: 'Menu.project_settings' })}</Settings>
+      <Settings>
+        <FormattedMessage id="Menu.project_settings" />
+      </Settings>
       {settingPages.map(page => (
         <ProjectSettingsItem
           key={page.path}
@@ -57,7 +57,7 @@ export const ProjectSettingsMenuContent: React.FunctionComponent<Props> = ({
         >
           <SettingsPageTitleBlock>
             <SettingsPageTitle>
-              {intl.formatMessage({ id: page.id ? page.id : '' })}
+              <FormattedMessage id={page.id || ''} />
             </SettingsPageTitle>
           </SettingsPageTitleBlock>
           <MenuArrowContainer margin={`0 0 0 ${getSpacing(4)}`} height="20px">

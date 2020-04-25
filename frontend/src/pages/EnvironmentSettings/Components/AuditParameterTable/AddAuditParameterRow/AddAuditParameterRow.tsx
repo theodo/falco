@@ -3,7 +3,7 @@ import { default as AddIcon } from 'icons/Add';
 import { default as CheckmarkIcon } from 'icons/Checkmark';
 import { default as CloseIcon } from 'icons/Close';
 import * as React from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { colorUsage, getSpacing } from 'stylesheet';
 import {
   AddAuditParameterButtonContainer,
@@ -114,7 +114,7 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
       <AddAuditParameterButtonContainer isAdding={isAddingMode} onClick={activateAddingMode}>
         <AddIcon color={colorUsage.projectSettingsIconColor} width="24px" strokeWidth="15" />
         <AddAuditParameterButtonLabel>
-          {intl.formatMessage({ id: 'ProjectSettings.add_audit_parameter' })}
+          <FormattedMessage id="ProjectSettings.add_audit_parameter" />
         </AddAuditParameterButtonLabel>
       </AddAuditParameterButtonContainer>
       <AddNameInput

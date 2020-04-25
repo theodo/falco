@@ -2,7 +2,7 @@ import { default as AddIcon } from 'icons/Add';
 import { default as CheckmarkIcon } from 'icons/Checkmark';
 import { default as CloseIcon } from 'icons/Close';
 import * as React from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { colorUsage } from 'stylesheet';
 import {
   AddNameInput,
@@ -80,7 +80,7 @@ export const AddPageRow: React.FunctionComponent<Props> = ({
       <AddPageButtonContainer isAdding={isAddingMode} onClick={activateAddingMode}>
         <AddIcon color={colorUsage.projectSettingsIconColor} width="24px" strokeWidth="15" />
         <AddPageButtonLabel>
-          {intl.formatMessage({ id: 'ProjectSettings.add_page' })}
+          <FormattedMessage id="ProjectSettings.add_page" />
         </AddPageButtonLabel>
       </AddPageButtonContainer>
       <AddNameInput

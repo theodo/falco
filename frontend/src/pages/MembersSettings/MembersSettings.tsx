@@ -173,7 +173,7 @@ const MembersSettings: React.FunctionComponent<Props> = ({
   return (
     <Container>
       <PageTitle>
-        {intl.formatMessage({ id: 'ProjectSettings.settings' }) + ' - ' + project.name}
+        <FormattedMessage id="ProjectSettings.settings" /> - {project.name}
       </PageTitle>
       <PageSubTitle>
         <FormattedMessage id="ProjectSettings.project_members" />
@@ -188,7 +188,7 @@ const MembersSettings: React.FunctionComponent<Props> = ({
         />
       )}
       <InviteUserLink>
-        {intl.formatMessage({ id: 'ProjectSettings.member_not_on_falco' })}
+        <FormattedMessage id="ProjectSettings.member_not_on_falco" />
         <a href="/sign-up">
           {// small hack to get the page for the proper environment
           `${window.location.href.match(/https?:\/\/[^/]+/)}/sign-up`}
@@ -197,11 +197,13 @@ const MembersSettings: React.FunctionComponent<Props> = ({
       <ProjectSettingsBlock>
         <ElementContainer>
           <MemberUsername>
-            {intl.formatMessage({ id: 'ProjectSettings.member_username' })}
+            <FormattedMessage id="ProjectSettings.member_username" />
           </MemberUsername>
-          <MemberEmail>{intl.formatMessage({ id: 'ProjectSettings.member_email' })}</MemberEmail>
+          <MemberEmail>
+            <FormattedMessage id="ProjectSettings.member_email" />
+          </MemberEmail>
           <MemberAdminBadgeContainer>
-            {intl.formatMessage({ id: 'ProjectSettings.member_status' })}
+            <FormattedMessage id="ProjectSettings.member_status" />
           </MemberAdminBadgeContainer>
         </ElementContainer>
         {projectMembersWithCurrentUserFirst.map((projectMember: ProjectMember) => (

@@ -137,7 +137,7 @@ const GeneralSettings: React.FunctionComponent<Props> = ({
   return (
     <Container>
       <PageTitle>
-        {intl.formatMessage({ id: 'ProjectSettings.settings' }) + ' - ' + project.name}
+        <FormattedMessage id="ProjectSettings.settings" /> - {project.name}
       </PageTitle>
       <Title>
         <FormattedMessage id="ProjectSettings.general_settings" />
@@ -167,7 +167,7 @@ const GeneralSettings: React.FunctionComponent<Props> = ({
         />
       </SettingsFieldContainer>
       <ExplanationText>
-        {intl.formatMessage({ id: 'ProjectSettings.wpt_instance_url_explanation' })}
+        <FormattedMessage id="ProjectSettings.wpt_instance_url_explanation" />
       </ExplanationText>
       <ReduxToastr
         timeOut={4000}
