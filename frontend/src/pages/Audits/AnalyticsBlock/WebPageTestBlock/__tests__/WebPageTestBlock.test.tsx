@@ -9,8 +9,7 @@ import {
 import dayjs from 'dayjs';
 import 'jest-dom/extend-expect';
 import React from 'react';
-import { addLocaleData, IntlProvider } from 'react-intl';
-import intlfr from 'react-intl/locale-data/fr';
+import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 
@@ -19,7 +18,6 @@ import fr from 'translations/fr.json';
 import WebPageTestBlock from '..';
 
 afterEach(cleanup);
-addLocaleData(intlfr);
 
 // TODO: To remove once we figure out how to pass translations
 const consoleError = console.error.bind(console);
@@ -65,9 +63,8 @@ const pageAuditResult = {
   scriptStepNumber: null,
 };
 
-const pageAuditResultToCompare = pageAuditResult
-pageAuditResultToCompare.auditId ='6666'
-
+const pageAuditResultToCompare = pageAuditResult;
+pageAuditResultToCompare.auditId = '6666';
 
 describe('WebPageTestBlock', () => {
   describe('Date selection block', () => {
