@@ -1,4 +1,3 @@
-import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { getAllProjects } from 'redux/entities/projects/selectors';
 import { getCurrentProject } from 'redux/selectors';
@@ -15,4 +14,4 @@ const mapDispatchToProps = null;
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(injectIntl(ProjectsMenu));
+)(ProjectsMenu);

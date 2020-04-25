@@ -1,4 +1,3 @@
-import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { getCurrentAuditParametersId } from 'redux/parameters/selectors';
 import { getCurrentProjectId, getCurrentURL } from 'redux/selectors';
@@ -11,10 +10,10 @@ import { OwnProps } from './MenuPageScriptItem';
 
 const mapStateToProps = (state: RootStateWithRouter, props: OwnProps) => ({
   projectId: getCurrentProjectId(state),
-  page: getPage(state, props.pageId || ""),
-  script: getScript(state, props.scriptId || ""),
-  pageLatestAuditStatusHistory: getPageLatestAuditStatusHistory(state, props.pageId || ""),
-  scriptLatestAuditStatusHistory: getScriptLatestAuditStatusHistory(state, props.scriptId || ""),
+  page: getPage(state, props.pageId || ''),
+  script: getScript(state, props.scriptId || ''),
+  pageLatestAuditStatusHistory: getPageLatestAuditStatusHistory(state, props.pageId || ''),
+  scriptLatestAuditStatusHistory: getScriptLatestAuditStatusHistory(state, props.scriptId || ''),
   auditParametersId: getCurrentAuditParametersId(state),
   currentURL: getCurrentURL(state),
 });
@@ -24,4 +23,4 @@ const mapDispatchToProps = null;
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(injectIntl(MenuPageScriptItem));
+)(MenuPageScriptItem);

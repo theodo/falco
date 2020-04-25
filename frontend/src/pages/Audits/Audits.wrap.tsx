@@ -1,5 +1,4 @@
 import dayjs from 'dayjs';
-import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { fetchAuditResultsRequest } from 'redux/auditResults';
@@ -38,7 +37,10 @@ const mapStateToProps = (state: RootState, props: OwnProps) => ({
     props.match.params.pageOrScriptId,
   ),
   pageAuditStatusHistory: getPageLatestAuditStatusHistory(state, props.match.params.pageOrScriptId),
-  scriptAuditStatusHistory: getScriptLatestAuditStatusHistory(state, props.match.params.pageOrScriptId),
+  scriptAuditStatusHistory: getScriptLatestAuditStatusHistory(
+    state,
+    props.match.params.pageOrScriptId,
+  ),
   scriptSteps: selectAuditScriptSteps(
     state,
     props.match.params.auditParametersId,
@@ -52,9 +54,13 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     pageOrScriptId: string,
     type: 'page' | 'script',
     fromDate?: dayjs.Dayjs,
-    toDate?: dayjs.Dayjs
-  ) => dispatch(fetchAuditResultsRequest({ auditParametersId, pageOrScriptId, type, fromDate, toDate })),
-  fetchProjectsRequest: (projectId: string) => dispatch(fetchProjectsRequest({ currentProjectId: projectId })),
+    toDate?: dayjs.Dayjs,
+  ) =>
+    dispatch(
+      fetchAuditResultsRequest({ auditParametersId, pageOrScriptId, type, fromDate, toDate }),
+    ),
+  fetchProjectsRequest: (projectId: string) =>
+    dispatch(fetchProjectsRequest({ currentProjectId: projectId })),
   setCurrentAuditParametersId: (auditParametersId: string | null | undefined) =>
     dispatch(setCurrentAuditParametersId({ auditParametersId })),
   setCurrentPageId: (pageId: string | null | undefined) => dispatch(setCurrentPageId({ pageId })),
@@ -67,4 +73,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(injectIntl(Audits));
+)(Audits);
