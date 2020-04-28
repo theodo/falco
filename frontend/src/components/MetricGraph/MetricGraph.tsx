@@ -201,10 +201,12 @@ const MetricGraph: React.FunctionComponent<Props> = ({
     <ResponsiveContainer width={'100%'} height={fullscreen ? window.innerHeight - 220 : '100%'}>
       <AreaChart data={auditResultsToDisplay || undefined}>
         <defs>
-          <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor={colorUsage.graphLine} stopOpacity={0.8} />
-            <stop offset="95%" stopColor={colorUsage.graphLine} stopOpacity={0} />
-          </linearGradient>
+          {metrics.map((metric, index) =>
+            <linearGradient key={index} id={`areaGradient_${metric}`} x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor={METRICS[metric].colorLight} stopOpacity={0.8} />
+              <stop offset="95%" stopColor={METRICS[metric].colorLight} stopOpacity={0} />
+            </linearGradient>
+          )}
         </defs>
         <Legend verticalAlign="top" align="left" iconSize={0} content={renderLegend} />
         <YAxis
@@ -238,9 +240,9 @@ const MetricGraph: React.FunctionComponent<Props> = ({
             key={metric}
             type="monotone"
             dataKey={metric}
-            stroke={colorUsage.graphLine}
+            stroke={METRICS[metric].colorDark}
             fillOpacity={1}
-            fill="url(#areaGradient)"
+            fill={`url(#areaGradient_${metric})`}
             activeDot={{
               fill: colorUsage.graphTooltipActiveDot,
               stroke: colorUsage.graphTooltipActiveDotBorder,
