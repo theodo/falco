@@ -8,16 +8,14 @@ import MessagePill from 'components/MessagePill';
 import { useProjectById } from 'redux/entities/projects/hooks';
 import { Container } from './Project.style';
 
-export type OwnProps = {} & RouteComponentProps<{
-  projectId: string;
-}>;
-
 type Props = {
   setCurrentAuditParametersId: (auditParametersId: string | null | undefined) => void;
   setCurrentPageId: (pageId: string | null | undefined) => void;
   setCurrentScriptId: (scriptId: string | null | undefined) => void;
   setCurrentScriptStepId: (scriptStepId: string | null | undefined) => void;
-} & OwnProps;
+} & RouteComponentProps<{
+  projectId: string;
+}>;
 
 const Project: React.FunctionComponent<Props> = ({
   match,

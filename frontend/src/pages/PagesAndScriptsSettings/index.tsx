@@ -1,1 +1,1 @@
-export { default } from './PagesAndScriptsSettings.wrap';
+export { default } from './PagesAndScriptsSettings';
