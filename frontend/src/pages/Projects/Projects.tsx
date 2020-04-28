@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { InjectedIntlProps } from 'react-intl';
 import { Redirect } from 'react-router';
 import { ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
@@ -12,10 +11,10 @@ import { Container } from './Projects.style';
 type Props = {
   fetchProjectsRequest: () => void;
   projects: Array<ProjectType | null> | null;
-} & InjectedIntlProps;
+};
 
 const Projects: React.FunctionComponent<Props> = ({ fetchProjectsRequest, projects }) => {
-  useFetchProjectIfUndefined(fetchProjectsRequest, "", undefined);
+  useFetchProjectIfUndefined(fetchProjectsRequest, '', undefined);
 
   if (null === projects) {
     return (

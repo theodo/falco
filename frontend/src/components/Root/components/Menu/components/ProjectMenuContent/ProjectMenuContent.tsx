@@ -1,7 +1,7 @@
 import Select from 'components/Select';
 import { history } from 'index';
 import React from 'react';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { ValueType } from 'react-select/lib/types';
 import { routeDefinitions } from 'routes';
 
@@ -40,7 +40,7 @@ export interface OwnProps {
   launchAudits: (projectId: string) => void;
 }
 
-type Props = OwnProps & InjectedIntlProps;
+type Props = OwnProps;
 
 export const ProjectMenuContent: React.FunctionComponent<Props> = ({
   user,

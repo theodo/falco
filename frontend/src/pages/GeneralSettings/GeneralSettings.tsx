@@ -1,7 +1,7 @@
 import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import ReduxToastr, { toastr } from 'react-redux-toastr';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { RouteComponentProps } from 'react-router';
@@ -31,19 +31,19 @@ type Props = {
     projectId: string,
     payload: { name: string; wpt_api_key: string; wpt_instance_url: string },
   ) => void;
-} & OwnProps &
-  InjectedIntlProps;
+} & OwnProps;
 
 const GeneralSettings: React.FunctionComponent<Props> = ({
   fetchProjectsRequest,
   match,
-  intl,
   project,
   currentUser,
   toastrDisplay,
   setProjectToastrDisplay,
   editProjectDetailsRequest,
 }) => {
+  const intl = useIntl();
+
   interface UserOption {
     value: string;
     label: string;
@@ -137,7 +137,7 @@ const GeneralSettings: React.FunctionComponent<Props> = ({
   return (
     <Container>
       <PageTitle>
-        {intl.formatMessage({ id: 'ProjectSettings.settings' }) + ' - ' + project.name}
+        <FormattedMessage id="ProjectSettings.settings" /> - {project.name}
       </PageTitle>
       <Title>
         <FormattedMessage id="ProjectSettings.general_settings" />
@@ -167,7 +167,7 @@ const GeneralSettings: React.FunctionComponent<Props> = ({
         />
       </SettingsFieldContainer>
       <ExplanationText>
-        {intl.formatMessage({ id: 'ProjectSettings.wpt_instance_url_explanation' })}
+        <FormattedMessage id="ProjectSettings.wpt_instance_url_explanation" />
       </ExplanationText>
       <ReduxToastr
         timeOut={4000}

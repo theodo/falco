@@ -2,7 +2,7 @@ import Select from 'components/Select';
 import dayjs from 'dayjs';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { ValueType } from 'react-select/lib/types';
 import { AuditResultType } from 'redux/auditResults/types';
 
@@ -28,8 +28,9 @@ export interface OwnProps {
   blockMargin: string;
 }
 
-const WebPageTestBlock: React.FunctionComponent<OwnProps & InjectedIntlProps> = props => {
-  const { auditResults, blockMargin, intl } = props;
+const WebPageTestBlock: React.FunctionComponent<OwnProps> = props => {
+  const { auditResults, blockMargin } = props;
+  const intl = useIntl();
 
   const [selectedAudit, setSelectedAudit] = React.useState(auditResults[0]);
   React.useEffect(() => setSelectedAudit(auditResults[0]), [auditResults]);

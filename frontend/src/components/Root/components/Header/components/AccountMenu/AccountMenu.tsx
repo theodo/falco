@@ -1,6 +1,6 @@
 import Loader from 'components/Loader';
 import React from 'react';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
 import { UserState } from 'redux/user/reducer';
 import { routeDefinitions } from 'routes';
@@ -21,13 +21,9 @@ interface OwnProps {
   user: UserState;
 }
 
-type Props = OwnProps & InjectedIntlProps & RouteComponentProps;
+type Props = OwnProps & RouteComponentProps;
 
-export const AccountMenu: React.FunctionComponent<Props> = ({
-  logoutUser,
-  user,
-}) => {
-
+export const AccountMenu: React.FunctionComponent<Props> = ({ logoutUser, user }) => {
   const capitalize = (word: any) => {
     if (typeof word !== 'string') {
       return '';

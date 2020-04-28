@@ -1,4 +1,3 @@
-import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { RootState } from 'redux/types';
 import { AnalyticsBlock, OwnProps } from './AnalyticsBlock';
@@ -14,4 +13,4 @@ const mapDispatchToProps = null;
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(injectIntl(AnalyticsBlock));
+)(AnalyticsBlock);

@@ -4,7 +4,7 @@ import MessagePill from 'components/MessagePill';
 import ToggleButton from 'components/ToggleButton';
 import Close from 'icons/Close';
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import ReduxToastr, { toastr } from 'react-redux-toastr';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { RouteComponentProps } from 'react-router';
@@ -49,8 +49,7 @@ type Props = {
   project?: ProjectType | null;
   toastrDisplay: ProjectToastrDisplayType;
   setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
-} & OwnProps &
-  InjectedIntlProps;
+} & OwnProps;
 
 const MembersSettings: React.FunctionComponent<Props> = ({
   addMemberToProject,
@@ -58,12 +57,13 @@ const MembersSettings: React.FunctionComponent<Props> = ({
   editMemberOfProjectRequest,
   fetchProjectsRequest,
   match,
-  intl,
   project,
   currentUser,
   toastrDisplay,
   setProjectToastrDisplay,
 }) => {
+  const intl = useIntl();
+
   interface UserOption {
     value: string;
     label: string;
@@ -173,7 +173,7 @@ const MembersSettings: React.FunctionComponent<Props> = ({
   return (
     <Container>
       <PageTitle>
-        {intl.formatMessage({ id: 'ProjectSettings.settings' }) + ' - ' + project.name}
+        <FormattedMessage id="ProjectSettings.settings" /> - {project.name}
       </PageTitle>
       <PageSubTitle>
         <FormattedMessage id="ProjectSettings.project_members" />
@@ -188,7 +188,7 @@ const MembersSettings: React.FunctionComponent<Props> = ({
         />
       )}
       <InviteUserLink>
-        {intl.formatMessage({ id: 'ProjectSettings.member_not_on_falco' })}
+        <FormattedMessage id="ProjectSettings.member_not_on_falco" />
         <a href="/sign-up">
           {// small hack to get the page for the proper environment
           `${window.location.href.match(/https?:\/\/[^/]+/)}/sign-up`}
@@ -197,13 +197,13 @@ const MembersSettings: React.FunctionComponent<Props> = ({
       <ProjectSettingsBlock>
         <ElementContainer>
           <MemberUsername>
-            {intl.formatMessage({ id: 'ProjectSettings.member_username' })}
+            <FormattedMessage id="ProjectSettings.member_username" />
           </MemberUsername>
           <MemberEmail>
-            {intl.formatMessage({ id: 'ProjectSettings.member_email' })}
+            <FormattedMessage id="ProjectSettings.member_email" />
           </MemberEmail>
           <MemberAdminBadgeContainer>
-            {intl.formatMessage({ id: 'ProjectSettings.member_status' })}
+            <FormattedMessage id="ProjectSettings.member_status" />
           </MemberAdminBadgeContainer>
         </ElementContainer>
         {projectMembersWithCurrentUserFirst.map((projectMember: ProjectMember) => (

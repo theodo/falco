@@ -1,4 +1,3 @@
-import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { RootState } from 'redux/types';
@@ -33,4 +32,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(injectIntl(GeneralSettings));
+)(GeneralSettings);

@@ -1,4 +1,3 @@
-import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import {
   getCurrentAuditParametersId,
@@ -32,4 +31,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(injectIntl(ProjectMenuContent));
+)(ProjectMenuContent);

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Redirect, RouteComponentProps } from 'react-router';
 import { ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
@@ -20,8 +20,7 @@ type Props = {
   setCurrentScriptId: (scriptId: string | null | undefined) => void;
   setCurrentScriptStepId: (scriptStepId: string | null | undefined) => void;
   project?: ProjectType | null;
-} & OwnProps &
-  InjectedIntlProps;
+} & OwnProps;
 
 const Project: React.FunctionComponent<Props> = ({
   fetchProjectsRequest,
@@ -32,7 +31,6 @@ const Project: React.FunctionComponent<Props> = ({
   setCurrentScriptId,
   setCurrentScriptStepId,
 }) => {
-
   useFetchProjectIfUndefined(fetchProjectsRequest, match.params.projectId, project);
 
   React.useEffect(
@@ -42,12 +40,7 @@ const Project: React.FunctionComponent<Props> = ({
       setCurrentScriptId(undefined);
       setCurrentScriptStepId(undefined);
     },
-    [
-      setCurrentAuditParametersId,
-      setCurrentPageId,
-      setCurrentScriptId,
-      setCurrentScriptStepId,
-    ],
+    [setCurrentAuditParametersId, setCurrentPageId, setCurrentScriptId, setCurrentScriptStepId],
   );
 
   if (project === undefined) {

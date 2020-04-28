@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import Modal from 'react-modal';
 
 import Loader from 'components/Loader';
@@ -25,18 +25,19 @@ interface Props {
   close: () => void;
 }
 
-const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> = ({
+const GraphModal: React.FunctionComponent<OwnProps & Props> = ({
   auditResults,
   metric,
   show,
   close,
-  intl,
   projectName,
   pageName,
   scriptName,
   currentAuditParametersName,
-  isLoading
+  isLoading,
 }) => {
+  const intl = useIntl();
+
   if (!projectName) {
     return (
       <MessagePill messageType="error">
@@ -104,15 +105,16 @@ const GraphModal: React.FunctionComponent<OwnProps & Props & InjectedIntlProps> 
       >
         <Close color={colorUsage.graphModalToggleButton} />
       </CloseContainer>
-      {isLoading
-        ? <Loader />
-        : <MetricGraph
-            fullscreen={true}
-            auditResults={auditResults}
-            metrics={[metric]}
-            showOnlyLastWeek={false}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <MetricGraph
+          fullscreen={true}
+          auditResults={auditResults}
+          metrics={[metric]}
+          showOnlyLastWeek={false}
         />
-      }
+      )}
     </Modal>
   );
 };

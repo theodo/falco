@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import React from 'react';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
 import { getSpacing } from 'stylesheet';
@@ -28,13 +28,11 @@ interface OwnProps {
   projects: Array<ProjectType | null> | null;
 }
 
-type Props = OwnProps & InjectedIntlProps;
+type Props = OwnProps;
 
-export const ProjectsMenu: React.FunctionComponent<Props> = ({
-  currentProject,
-  intl,
-  projects,
-}) => {
+export const ProjectsMenu: React.FunctionComponent<Props> = ({ currentProject, projects }) => {
+  const intl = useIntl();
+
   const renderCurrentProjectItem = () =>
     currentProject && (
       <CurrentProjectItem>
@@ -42,7 +40,7 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
           <CurrentProjectItemSnapshot
             src={currentProject.screenshotUrl}
             margin={`0 ${getSpacing(6)} 0 0`}
-            alt=''
+            alt=""
           />
         </ProjectItemSnapshotContainer>
         <CurrentProjectItemTitleBlock>
@@ -50,7 +48,7 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
             <CurrentProjectItemTitle>{currentProject.name}</CurrentProjectItemTitle>
           </CurrentProjectItemTitleContainer>
           <ProjectItemLastAudit>
-            {intl.formatMessage({ id: `Header.last_audit_intro` })}{' '}
+            <FormattedMessage id="Header.last_audit_intro" />{' '}
             {dayjs(currentProject.latestAuditAt)
               .locale(intl.locale)
               .fromNow()}
@@ -66,12 +64,16 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
         to={routeDefinitions.projectDetails.path.replace(':projectId', project.uuid)}
       >
         <ProjectItemSnapshotContainer>
-          <ProjectItemSnapshot src={project.screenshotUrl} margin={`0 ${getSpacing(4)} 0 0`} alt=''/>
+          <ProjectItemSnapshot
+            src={project.screenshotUrl}
+            margin={`0 ${getSpacing(4)} 0 0`}
+            alt=""
+          />
         </ProjectItemSnapshotContainer>
         <ProjectItemTitleBlock>
           <ProjectItemTitle>{project.name}</ProjectItemTitle>
           <ProjectItemLastAudit>
-            {intl.formatMessage({ id: `Header.last_audit_intro` })}{' '}
+            <FormattedMessage id="Header.last_audit_intro" />{' '}
             {dayjs(project.latestAuditAt)
               .locale(intl.locale)
               .fromNow()}

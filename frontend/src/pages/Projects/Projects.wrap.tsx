@@ -1,4 +1,3 @@
-import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { fetchProjectsRequest } from 'redux/entities/projects';
@@ -17,4 +16,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(injectIntl(Projects));
+)(Projects);

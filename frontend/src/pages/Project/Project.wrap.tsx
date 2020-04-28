@@ -1,4 +1,3 @@
-import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import {
@@ -19,7 +18,8 @@ const mapStateToProps = (state: RootState, props: OwnProps) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  fetchProjectsRequest: (projectId: string) => dispatch(fetchProjectsRequest({ currentProjectId: projectId })),
+  fetchProjectsRequest: (projectId: string) =>
+    dispatch(fetchProjectsRequest({ currentProjectId: projectId })),
   setCurrentAuditParametersId: (auditParametersId: string | null | undefined) =>
     dispatch(setCurrentAuditParametersId({ auditParametersId })),
   setCurrentPageId: (pageId: string | null | undefined) => dispatch(setCurrentPageId({ pageId })),
@@ -32,4 +32,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(injectIntl(Project));
+)(Project);

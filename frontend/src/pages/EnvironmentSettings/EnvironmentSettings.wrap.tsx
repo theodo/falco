@@ -1,4 +1,3 @@
-import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { RootState } from 'redux/types';
@@ -12,15 +11,17 @@ import EnvironmentSettings, { OwnProps } from './EnvironmentSettings';
 const mapStateToProps = (state: RootState, props: OwnProps) => ({
   currentUser: getUser(state),
   project: getProject(state, props.match.params.projectId),
-  toastrDisplay: getProjectToastrDisplay(state)
+  toastrDisplay: getProjectToastrDisplay(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  fetchProjectsRequest: (projectId: string) => dispatch(fetchProjectsRequest({ currentProjectId: projectId })),
-  setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => dispatch(setProjectToastrDisplay({ toastrDisplay })),
+  fetchProjectsRequest: (projectId: string) =>
+    dispatch(fetchProjectsRequest({ currentProjectId: projectId })),
+  setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) =>
+    dispatch(setProjectToastrDisplay({ toastrDisplay })),
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(injectIntl(EnvironmentSettings));
+)(EnvironmentSettings);
