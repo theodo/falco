@@ -8,14 +8,12 @@ import {
   getCurrentScriptStepId,
 } from 'redux/parameters/selectors';
 import { RootStateWithRouter } from 'redux/types';
-import { getUser } from 'redux/user/selectors';
 
 import { Dispatch } from 'redux';
 import { launchAuditAction } from 'redux/entities/audits';
 import { ProjectMenuContent } from './ProjectMenuContent';
 
 const mapStateToProps = (state: RootStateWithRouter) => ({
-  user: getUser(state),
   auditParametersId: getCurrentAuditParametersId(state),
   currentPageId: getCurrentPageId(state),
   auditParametersList: getCurrentProjectAuditParameters(state),

@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { addScriptToProjectSuccess, setProjectToastrDisplay } from 'redux/entities/projects';
-import { ProjectToastrDisplayType } from 'redux/entities/projects/types';
+import { addScriptToProjectSuccess } from 'redux/entities/projects';
 import { addScript, editScriptSuccess } from 'redux/entities/scripts';
 import { getScript } from 'redux/entities/scripts/selectors';
 import { ScriptType } from 'redux/entities/scripts/types';
@@ -17,8 +16,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(addScriptToProjectSuccess({ projectId, scriptId })),
   addScript: (byId: Record<string, ScriptType>) => dispatch(addScript({ byId })),
   editScriptSuccess: (byId: Record<string, ScriptType>) => dispatch(editScriptSuccess({ byId })),
-  setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) =>
-    dispatch(setProjectToastrDisplay({ toastrDisplay })),
 });
 
 export default connect(

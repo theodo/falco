@@ -9,7 +9,7 @@ import MessagePill from 'components/MessagePill';
 import MenuPageScriptItem from 'components/Root/components/MenuPageScriptItem';
 import { AuditParametersType } from 'redux/entities/auditParameters/types';
 import { ProjectType } from 'redux/entities/projects/types';
-import { UserState } from 'redux/user';
+import { useCurrentUser } from 'redux/user/selectors';
 import { isUserAdminOfProject } from 'services/utils';
 import { getSpacing } from 'stylesheet';
 import {
@@ -29,7 +29,6 @@ interface AuditParametersOption {
 }
 
 export interface OwnProps {
-  user: UserState;
   auditParametersId: string | null;
   currentPageId: string | null;
   project: ProjectType;
@@ -43,7 +42,6 @@ export interface OwnProps {
 type Props = OwnProps;
 
 export const ProjectMenuContent: React.FunctionComponent<Props> = ({
-  user,
   auditParametersId,
   currentPageId,
   project,
@@ -53,6 +51,8 @@ export const ProjectMenuContent: React.FunctionComponent<Props> = ({
   runningAudits,
   launchAudits,
 }) => {
+  const user = useCurrentUser();
+
   const [auditCanBeLaunched, setAuditCanBeLaunched] = React.useState(true);
 
   const auditParametersSelectOptions = auditParametersList.map(auditParameters => ({

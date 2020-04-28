@@ -1,1 +1,1 @@
-export { default } from './Projects.wrap';
+export { default } from './Projects';

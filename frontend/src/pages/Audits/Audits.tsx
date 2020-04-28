@@ -4,7 +4,6 @@ import { ValueType } from 'react-select/lib/types';
 
 import { AuditParametersType } from 'redux/entities/auditParameters/types';
 import { PageType } from 'redux/entities/pages/types';
-import { ProjectType } from 'redux/entities/projects/types';
 import { ScriptType } from 'redux/entities/scripts/types';
 
 import Badge from 'components/Badge';
@@ -14,7 +13,7 @@ import Select from 'components/Select';
 import dayjs from 'dayjs';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { auditStatus, AuditStatusHistoryType } from 'redux/entities/auditStatusHistories/types';
-import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
+import { useProjectById } from 'redux/entities/projects/hooks';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
 import AnalyticsBlock from './AnalyticsBlock';
@@ -41,14 +40,12 @@ export type OwnProps = {} & RouteComponentProps<{
 }>;
 
 type Props = {
-  project?: ProjectType | null;
   page?: PageType | null;
   script?: ScriptType | null;
   currentAuditParameters?: AuditParametersType | null;
   scriptSteps: Record<string, string>;
   sortedPageAuditResultsIds: string[] | null;
   sortedScriptAuditResultsIds: Record<string, string[]> | null;
-  fetchProjectsRequest: (projectId: string) => void;
   pageAuditStatusHistory?: AuditStatusHistoryType | null;
   scriptAuditStatusHistory?: AuditStatusHistoryType | null;
   fetchAuditResultsRequest: (
@@ -66,10 +63,8 @@ type Props = {
 
 export const Audits: React.FunctionComponent<Props> = ({
   currentAuditParameters,
-  fetchProjectsRequest,
   history,
   match,
-  project,
   page,
   script,
   scriptSteps,
@@ -87,7 +82,7 @@ export const Audits: React.FunctionComponent<Props> = ({
 
   const { projectId, pageOrScriptId, auditParametersId, scriptStepId } = match.params;
 
-  useFetchProjectIfUndefined(fetchProjectsRequest, projectId, project);
+  const project = useProjectById(projectId);
 
   React.useEffect(
     () => {

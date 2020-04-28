@@ -2,7 +2,7 @@ import Loader from 'components/Loader';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
-import { UserState } from 'redux/user/reducer';
+import { useCurrentUser } from 'redux/user/selectors';
 import { routeDefinitions } from 'routes';
 import {
   Container,
@@ -18,12 +18,13 @@ import {
 
 interface OwnProps {
   logoutUser: (redirectTo?: string | undefined) => void;
-  user: UserState;
 }
 
 type Props = OwnProps & RouteComponentProps;
 
-export const AccountMenu: React.FunctionComponent<Props> = ({ logoutUser, user }) => {
+export const AccountMenu: React.FunctionComponent<Props> = ({ logoutUser }) => {
+  const user = useCurrentUser();
+
   const capitalize = (word: any) => {
     if (typeof word !== 'string') {
       return '';
