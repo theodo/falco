@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 "argon2_cffi" = "==19.1.0"
 dj-database-url = "==0.5.0"
-django = {extras = ["argon2"],version = "==3.0.3"}
+django = {extras = ["argon2"],version = "==3.0.7"}
 "psycopg2-binary" = "==2.8.2"
 ptvsd = "==4.2.8"
 pytz = "==2019.1"
