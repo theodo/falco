@@ -54,7 +54,7 @@ class ProjectAdmin(admin.ModelAdmin):
         ProjectAuditParametersInline,
     ]
     exclude = ["screenshot_url"]
-    list_filter = ("is_active",)
+    list_filter = ("is_active", "wpt_instance_url")
     list_display = ("name", "project_actions", "is_active", "created_at")
 
     def get_urls(self):
