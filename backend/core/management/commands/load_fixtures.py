@@ -1,6 +1,6 @@
-import pytz
-from datetime import datetime, timedelta
+from datetime import timedelta
 from django.core.management.base import BaseCommand
+from django.utils import timezone
 
 from audits.factories import (
     AuditFactory,
@@ -42,9 +42,7 @@ class Command(BaseCommand):
         # Creates a month worth of audits, with history and results
         for day in range(0, 30):
             audit = AuditFactory(parameters=parameters_project, page=page)
-            timestamp = datetime.now(pytz.timezone("Europe/Paris")) - timedelta(
-                days=day
-            )
+            timestamp = timezone.now() - timedelta(days=day)
             Audit.objects.filter(pk=audit.pk).update(created_at=timestamp)
             AuditStatusHistoryFactory(audit=audit)
             results = AuditResultsFactory(audit=audit)

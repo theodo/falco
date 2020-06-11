@@ -1,4 +1,4 @@
-import datetime
+from django.utils import timezone
 from core.models import User
 
 
@@ -20,7 +20,7 @@ class LastVisitedAtUpdateMiddleware:
         if request.path == "/api/projects/first" and request.user.is_authenticated:
             # Update last visit time after request finished processing.
             User.objects.filter(pk=request.user.pk).update(
-                last_visited_at=datetime.datetime.now()
+                last_visited_at=timezone.now()
             )
 
         # Code to be executed for each request/response after
