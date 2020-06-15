@@ -19,24 +19,24 @@ import {
 import { ProjectMember, ProjectToastrDisplayType, ProjectType } from './types';
 
 export type ProjectsAction = ActionType<
-  typeof fetchProjectsRequest |
-  typeof addMemberToProjectSuccess |
-  typeof addPageToProjectSuccess |
-  typeof deleteMemberOfProjectSuccess |
-  typeof deletePageOfProjectSuccess |
-  typeof editMemberOfProjectSuccess |
-  typeof fetchProjectSuccess |
-  typeof fetchProjectError |
-  typeof setProjectToastrDisplay |
-  typeof editProjectDetailsSuccess |
-  typeof addAuditParameterToProjectSuccess |
-  typeof deleteAuditParameterFromProjectSuccess |
-  typeof addScriptToProjectSuccess |
-  typeof deleteScriptFromProjectSuccess
+  | typeof fetchProjectsRequest
+  | typeof addMemberToProjectSuccess
+  | typeof addPageToProjectSuccess
+  | typeof deleteMemberOfProjectSuccess
+  | typeof deletePageOfProjectSuccess
+  | typeof editMemberOfProjectSuccess
+  | typeof fetchProjectSuccess
+  | typeof fetchProjectError
+  | typeof setProjectToastrDisplay
+  | typeof editProjectDetailsSuccess
+  | typeof addAuditParameterToProjectSuccess
+  | typeof deleteAuditParameterFromProjectSuccess
+  | typeof addScriptToProjectSuccess
+  | typeof deleteScriptFromProjectSuccess
 >;
 
 export type ProjectsState = Readonly<{
-  toastrDisplay: ProjectToastrDisplayType
+  toastrDisplay: ProjectToastrDisplayType;
   byId: Readonly<Record<string, ProjectType>> | null;
 }>;
 
@@ -46,35 +46,42 @@ const getAllPagesIdsExceptTargetPageId = (project: ProjectType, targetPageId: st
   return project.pagesIds.filter((pageId: string) => {
     return pageId !== targetPageId;
   });
-}
+};
 
-const getAllAuditParametersIdsExceptTargetAuditParameterId = (project: ProjectType, targetAuditParameterId: string) => {
+const getAllAuditParametersIdsExceptTargetAuditParameterId = (
+  project: ProjectType,
+  targetAuditParameterId: string,
+) => {
   return project.auditParametersIds.filter((auditParameterId: string) => {
     return auditParameterId !== targetAuditParameterId;
   });
-}
+};
 
 const getAllScriptsIdsExceptTargetScriptId = (project: ProjectType, targetScriptId: string) => {
   return project.scriptsIds.filter((scriptId: string) => {
     return scriptId !== targetScriptId;
   });
-}
+};
 
 const getAllMembersExceptTargetMember = (project: ProjectType, targetMemberId: string) => {
   return project.projectMembers.filter((member: ProjectMember) => {
     return member.id !== targetMemberId;
   });
-}
+};
 
-const getAllMembersWithUpdatedAdminStatusForTargetMember = (project: ProjectType, targetMemberId: string, isAdmin: boolean) => {
+const getAllMembersWithUpdatedAdminStatusForTargetMember = (
+  project: ProjectType,
+  targetMemberId: string,
+  isAdmin: boolean,
+) => {
   return project.projectMembers.map((member: ProjectMember) => {
-    if(member.id !== targetMemberId) {
+    if (member.id !== targetMemberId) {
       return member;
-    };
+    }
 
-    return {...member, isAdmin}
+    return { ...member, isAdmin };
   });
-}
+};
 
 const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
   const typedAction = action as ProjectsAction;
@@ -106,7 +113,9 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
         },
       };
     case getType(addPageToProjectSuccess):
-      if(!state.byId) { return state };
+      if (!state.byId) {
+        return state;
+      }
 
       return {
         ...state,
@@ -114,12 +123,17 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
           ...state.byId,
           [typedAction.payload.projectId]: {
             ...state.byId[typedAction.payload.projectId],
-            pagesIds: [...state.byId[typedAction.payload.projectId].pagesIds, typedAction.payload.page.uuid]
-          }
+            pagesIds: [
+              ...state.byId[typedAction.payload.projectId].pagesIds,
+              typedAction.payload.page.uuid,
+            ],
+          },
         },
       };
     case getType(deletePageOfProjectSuccess):
-      if(!state.byId) { return state };
+      if (!state.byId) {
+        return state;
+      }
 
       return {
         ...state,
@@ -127,12 +141,17 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
           ...state.byId,
           [typedAction.payload.projectId]: {
             ...state.byId[typedAction.payload.projectId],
-            pagesIds: getAllPagesIdsExceptTargetPageId(state.byId[typedAction.payload.projectId], typedAction.payload.pageId),
-          }
+            pagesIds: getAllPagesIdsExceptTargetPageId(
+              state.byId[typedAction.payload.projectId],
+              typedAction.payload.pageId,
+            ),
+          },
         },
       };
     case getType(deleteMemberOfProjectSuccess):
-      if(!state.byId) { return state };
+      if (!state.byId) {
+        return state;
+      }
 
       return {
         ...state,
@@ -140,37 +159,40 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
           ...state.byId,
           [typedAction.payload.projectId]: {
             ...state.byId[typedAction.payload.projectId],
-            projectMembers: getAllMembersExceptTargetMember(state.byId[typedAction.payload.projectId], typedAction.payload.userId),
-          }
+            projectMembers: getAllMembersExceptTargetMember(
+              state.byId[typedAction.payload.projectId],
+              typedAction.payload.userId,
+            ),
+          },
         },
       };
-      case getType(editMemberOfProjectSuccess):
-        if(!state.byId) { return state };
+    case getType(editMemberOfProjectSuccess):
+      if (!state.byId) {
+        return state;
+      }
 
-        const updatedMembers = getAllMembersWithUpdatedAdminStatusForTargetMember(
-          state.byId[typedAction.payload.projectId],
-          typedAction.payload.userId,
-          typedAction.payload.isAdmin
-        );
+      const updatedMembers = getAllMembersWithUpdatedAdminStatusForTargetMember(
+        state.byId[typedAction.payload.projectId],
+        typedAction.payload.userId,
+        typedAction.payload.isAdmin,
+      );
 
-        return {
-          ...state,
-          byId: {
-            ...state.byId,
-            [typedAction.payload.projectId]: {
-              ...state.byId[typedAction.payload.projectId],
-              projectMembers: updatedMembers
-            }
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [typedAction.payload.projectId]: {
+            ...state.byId[typedAction.payload.projectId],
+            projectMembers: updatedMembers,
           },
-        };
+        },
+      };
     case getType(fetchProjectError):
       return {
         ...state,
         byId: {
           ...state.byId,
-          ...(
-            typedAction.payload.projectId && { [typedAction.payload.projectId]: null }
-          ),
+          ...(typedAction.payload.projectId && { [typedAction.payload.projectId]: null }),
         },
       };
     case getType(editProjectDetailsSuccess):
@@ -181,21 +203,28 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
           ...typedAction.payload.byId,
         },
       };
-     case getType(addAuditParameterToProjectSuccess):
-        if(!state.byId) { return state };
+    case getType(addAuditParameterToProjectSuccess):
+      if (!state.byId) {
+        return state;
+      }
 
-        return {
+      return {
         ...state,
         byId: {
           ...state.byId,
           [typedAction.payload.projectId]: {
             ...state.byId[typedAction.payload.projectId],
-            auditParametersIds: [...state.byId[typedAction.payload.projectId].auditParametersIds, typedAction.payload.auditParameter.uuid]
-          }
+            auditParametersIds: [
+              ...state.byId[typedAction.payload.projectId].auditParametersIds,
+              typedAction.payload.auditParameter.uuid,
+            ],
+          },
         },
       };
     case getType(deleteAuditParameterFromProjectSuccess):
-      if(!state.byId) { return state };
+      if (!state.byId) {
+        return state;
+      }
 
       return {
         ...state,
@@ -203,36 +232,49 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
           ...state.byId,
           [typedAction.payload.projectId]: {
             ...state.byId[typedAction.payload.projectId],
-            auditParametersIds: getAllAuditParametersIdsExceptTargetAuditParameterId(state.byId[typedAction.payload.projectId], typedAction.payload.auditParameterId),
-          }
+            auditParametersIds: getAllAuditParametersIdsExceptTargetAuditParameterId(
+              state.byId[typedAction.payload.projectId],
+              typedAction.payload.auditParameterId,
+            ),
+          },
         },
       };
     case getType(addScriptToProjectSuccess):
-      if(!state.byId) { return state };
+      if (!state.byId) {
+        return state;
+      }
 
       return {
-      ...state,
-      byId: {
-        ...state.byId,
-        [typedAction.payload.projectId]: {
-          ...state.byId[typedAction.payload.projectId],
-          scriptsIds: [...state.byId[typedAction.payload.projectId].scriptsIds, typedAction.payload.scriptId]
-        }
-      },
-    };
-    case getType(deleteScriptFromProjectSuccess):
-        if(!state.byId) { return state };
-
-        return {
-          ...state,
-          byId: {
-            ...state.byId,
-            [typedAction.payload.projectId]: {
-              ...state.byId[typedAction.payload.projectId],
-              scriptsIds: getAllScriptsIdsExceptTargetScriptId(state.byId[typedAction.payload.projectId], typedAction.payload.scriptId),
-            }
+        ...state,
+        byId: {
+          ...state.byId,
+          [typedAction.payload.projectId]: {
+            ...state.byId[typedAction.payload.projectId],
+            scriptsIds: [
+              ...state.byId[typedAction.payload.projectId].scriptsIds,
+              typedAction.payload.scriptId,
+            ],
           },
-        };
+        },
+      };
+    case getType(deleteScriptFromProjectSuccess):
+      if (!state.byId) {
+        return state;
+      }
+
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [typedAction.payload.projectId]: {
+            ...state.byId[typedAction.payload.projectId],
+            scriptsIds: getAllScriptsIdsExceptTargetScriptId(
+              state.byId[typedAction.payload.projectId],
+              typedAction.payload.scriptId,
+            ),
+          },
+        },
+      };
     default:
       return state;
   }

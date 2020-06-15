@@ -6,10 +6,11 @@
 import { LocationChangeAction, RouterState } from 'connected-react-router';
 import { combineReducers, Reducer } from 'redux';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
-import toastr from 'react-redux-toastr/lib/reducer'
+import toastr from 'react-redux-toastr/lib/reducer';
 import { reducer as auditResults } from './auditResults';
-import { reducer as entities } from './entities'
+import { reducer as entities } from './entities';
 import { reducer as login } from './login';
 import { reducer as parameters } from './parameters';
 import { reducer as signUp } from './sign-up';
@@ -31,6 +32,6 @@ export default function createReducer(asyncReducers: {
     auditResults,
     user,
     signUp,
-    toastr
+    toastr,
   });
 }

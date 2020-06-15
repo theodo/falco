@@ -7,12 +7,11 @@ import {
 import reducer from '../reducer';
 
 const username = 'MyUser';
-const email = 'fakemail@totallylegitprovider.com'
+const email = 'fakemail@totallylegitprovider.com';
 const password = 'AwsomeP@sSw0rd';
 const originLocation = undefined;
 const initialState = { signUpError: null, isSubmitting: false };
-const stateDuringSignUp = { signUpError: null, isSubmitting: true  };
-const stateAfterSignUp = { oginError: null, isSubmitting: false };
+const stateDuringSignUp = { signUpError: null, isSubmitting: true };
 const stateAfterSignUpError = { signUpError: 'OUPS', isSubmitting: false };
 
 describe('Login reducer', () => {
@@ -43,7 +42,11 @@ describe('Login reducer', () => {
     it('Should return an initial state with an error in the signUpError field and isSubmitting field set to false', () => {
       const errorMessage = 'User not logged in';
       const action = signUpUserError({ errorMessage });
-      const expectedState = { ...stateDuringSignUp, signUpError: errorMessage, isSubmitting: false };
+      const expectedState = {
+        ...stateDuringSignUp,
+        signUpError: errorMessage,
+        isSubmitting: false,
+      };
 
       expect(reducer(stateDuringSignUp, action)).toEqual(expectedState);
     });

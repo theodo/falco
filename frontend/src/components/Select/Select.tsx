@@ -27,7 +27,7 @@ const Select: React.FunctionComponent<Props> = props => {
       ...provided,
       backgroundColor: colorUsage.inputSelectBorder,
     }),
-    option: (provided: any, state: any) => {
+    option(provided: any, state: any) {
       if (state.isSelected) {
         return provided;
       }
