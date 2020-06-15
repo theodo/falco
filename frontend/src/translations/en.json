@@ -208,7 +208,7 @@
   "Welcome": {
     "title": "Welcome to Falco !",
     "no_project": "You don't have access to any project for now.",
-    "create_project": "To create a new project, please contact Jaafar (jaafarr@theodo.fr) or Nicolas (nicolasgo@theodo.fr).",
+    "create_project": "To create a new project, please head to the documentation at: {link}",
     "join_project": "To join an existing project, please contact the project administrator."
   },
   "Toastr": {

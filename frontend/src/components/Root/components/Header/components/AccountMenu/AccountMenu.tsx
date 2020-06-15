@@ -15,6 +15,7 @@ import {
   UserInfosBlockContainer,
   UserName,
 } from './AccountMenu.style';
+import { DOCUMENTATION_ROOT } from 'services/constants';
 
 interface OwnProps {
   logoutUser: (redirectTo?: string | undefined) => void;
@@ -52,7 +53,7 @@ export const AccountMenu: React.FunctionComponent<Props> = ({ logoutUser }) => {
       <UserActionsBlock>
         <UserActionItem margin={'0'}>
           <UserActionItemExternalLink
-            href="https://getfal.co"
+            href={DOCUMENTATION_ROOT}
             target="_blank"
             rel="noopener noreferrer"
           >

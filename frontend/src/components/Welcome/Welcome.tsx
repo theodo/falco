@@ -6,10 +6,11 @@ import {
   WelcomeBlockTextParagraph,
   WelcomeBlockTitle,
 } from './Welcome.style';
+import { DOCUMENTATION_ROOT } from 'services/constants';
 
-type Props = {};
+const documentationPath = `${DOCUMENTATION_ROOT}/docs/getting-started/configuring-your-first-project`;
 
-const Welcome: React.FunctionComponent<Props> = () => {
+const Welcome: React.FunctionComponent = () => {
   return (
     <WelcomeBlockContainer>
       <WelcomeBlockTitle>
@@ -20,7 +21,16 @@ const Welcome: React.FunctionComponent<Props> = () => {
           <FormattedMessage id="Welcome.no_project" />
         </WelcomeBlockTextParagraph>
         <WelcomeBlockTextParagraph>
-          <FormattedMessage id="Welcome.create_project" />
+          <FormattedMessage
+            id="Welcome.create_project"
+            values={{
+              link: (
+                <a href={documentationPath} target="_blank" rel="noreferrer noopener">
+                  {documentationPath}
+                </a>
+              ),
+            }}
+          />
         </WelcomeBlockTextParagraph>
         <WelcomeBlockTextParagraph>
           <FormattedMessage id="Welcome.join_project" />
