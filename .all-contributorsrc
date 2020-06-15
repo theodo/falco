@@ -19,6 +19,19 @@
       ]
     },
     {
+      "login": "fargito",
+      "name": "François Farge",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/29537204?v=4",
+      "profile": "https://github.com/fargito",
+      "contributions": [
+        "design",
+        "code",
+        "content",
+        "infra",
+        "doc"
+      ]
+    },
+    {
       "login": "gllmcornet",
       "name": "Guillaume Cornet",
       "avatar_url": "https://avatars3.githubusercontent.com/u/35029311?v=4",
@@ -71,15 +84,6 @@
       "name": "antkahn",
       "avatar_url": "https://avatars3.githubusercontent.com/u/4716121?v=4",
       "profile": "https://github.com/antkahn",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "fargito",
-      "name": "François Farge",
-      "avatar_url": "https://avatars3.githubusercontent.com/u/29537204?v=4",
-      "profile": "https://github.com/fargito",
       "contributions": [
         "code"
       ]
