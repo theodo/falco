@@ -8,9 +8,4 @@ const mapStateToProps = (state: RootState, props: OwnProps) => ({
     : null,
 });
 
-const mapDispatchToProps = null;
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AnalyticsBlock);
+export default connect(mapStateToProps)(AnalyticsBlock);

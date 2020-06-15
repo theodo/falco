@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { SagaIterator } from 'redux-saga';
 import { call } from 'redux-saga/effects';
-import { ActionType } from 'typesafe-actions';
 
 export const handleAPIExceptions = (
-  saga: (action: ActionType<any>) => SagaIterator,
+  saga: any,
   handler: (error: Error, actionPayload: Record<string, any>) => void,
 ) =>
   function* wrappedSaga(...args: any[]) {

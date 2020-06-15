@@ -29,12 +29,12 @@ const colorPalette = {
   auditSuccessGreen: '#0CCE6B',
   black100: 'rgba(0, 0, 0, 0.2)',
   black200: 'rgba(0, 0, 0, 0.5)',
-  orange500: "#ffa400",
-  orange200: "#ffe3b2",
+  orange500: '#ffa400',
+  orange200: '#ffe3b2',
   red500: '#B80009',
   red200: '#ffd2d2',
   auditFailRed: '#FF4E42',
-  auditRunningOrange: "#ffa400",
+  auditRunningOrange: '#ffa400',
   transparent: 'rgba(0,0,0,0)',
 };
 
@@ -221,7 +221,7 @@ export const colorUsage = {
   ToggleButtonActiveBackground: colorPalette.accentGreen500,
   ToggleButtonDisabledBackground: colorPalette.grey500,
   ToggleButtonActiveLabelColor: colorPalette.accentGreen500,
-  ToggleButtonDisabledLabelColor: colorPalette.grey500
+  ToggleButtonDisabledLabelColor: colorPalette.grey500,
 };
 
 export const fontFamily = {
@@ -384,15 +384,15 @@ export const fontStyle = {
   inputErrorMessage: 'italic',
 };
 
-export const zIndex = {
-  modal: '3',
-  header: '2',
-  menu: '1',
-  tooltip: '1',
-  graphModalCloseButton: '1',
-  metricModalCheckbox: '1',
-  webPageTestRadioButton: '1',
-  modalLoader: '4',
+export const zIndex: { [key: string]: number } = {
+  modal: 3,
+  header: 2,
+  menu: 1,
+  tooltip: 1,
+  graphModalCloseButton: 1,
+  metricModalCheckbox: 1,
+  webPageTestRadioButton: 1,
+  modalLoader: 4,
 };
 
 export const getSpacing = (multiplier: number): string =>
@@ -403,8 +403,8 @@ export const responsiveThreshold = '460px';
 export const modalSize = {
   big: '1375px',
   medium: '1000px',
-}
+};
 
-export const settingsContainerSize = '800px'
+export const settingsContainerSize = '800px';
 
 export const inheritVar = 'inherit';

@@ -32,7 +32,7 @@
     "redux-saga": "0.16.2",
     "styled-components": "5.1.1",
     "superagent": "4.0.0",
-    "typesafe-actions": "^3.0.0"
+    "typesafe-actions": "^5.1.0"
   },
   "scripts": {
     "start": "react-app-rewired start",

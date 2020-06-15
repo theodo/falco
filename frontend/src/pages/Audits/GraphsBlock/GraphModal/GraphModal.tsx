@@ -70,7 +70,7 @@ const GraphModal: React.FunctionComponent<OwnProps & Props> = ({
       boxShadow: `0 0 8px 4px ${colorUsage.metricsModalShadow}`,
     },
     overlay: {
-      zIndex: `${zIndex.modal}`,
+      zIndex: zIndex.modal,
     },
   };
 

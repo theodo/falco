@@ -18,9 +18,4 @@ const mapStateToProps = (state: RootStateWithRouter, props: OwnProps) => ({
   currentURL: getCurrentURL(state),
 });
 
-const mapDispatchToProps = null;
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(MenuPageScriptItem);
+export default connect(mapStateToProps)(MenuPageScriptItem);

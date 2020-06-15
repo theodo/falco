@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import Modal from 'react-modal';
+import Modal, { Styles as ModalStyles } from 'react-modal';
 import { useAsyncFn } from 'react-use';
 
 import Close from 'icons/Close';
@@ -96,7 +96,7 @@ export const ScriptModal: React.FunctionComponent<Props> = ({
     [projectId, scriptContent, scriptName],
   );
 
-  const modalStyles = {
+  const modalStyles: ModalStyles = {
     content: {
       height: `${window.innerHeight - 100}px`,
       width: `${modalSize.medium}`,
@@ -113,7 +113,7 @@ export const ScriptModal: React.FunctionComponent<Props> = ({
       alignItems: 'center',
     },
     overlay: {
-      zIndex: `${zIndex.modal}`,
+      zIndex: zIndex.modal,
     },
   };
 

@@ -9,9 +9,4 @@ const mapStateToProps = (state: RootStateWithRouter) => ({
   projects: getAllProjects(state),
 });
 
-const mapDispatchToProps = null;
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ProjectsMenu);
+export default connect(mapStateToProps)(ProjectsMenu);

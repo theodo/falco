@@ -1,19 +1,19 @@
-import { createStandardAction } from 'typesafe-actions';
+import { createAction } from 'typesafe-actions';
 
-export const signUpUserRequest = createStandardAction('SignUp/USER_SIGN_UP_REQUEST')<{
+export const signUpUserRequest = createAction('SignUp/USER_SIGN_UP_REQUEST')<{
   username: string;
   email: string;
   password: string;
   originLocation: string | undefined;
 }>();
 
-export const signUpUserSuccess = createStandardAction('SignUp/USER_SIGN_UP_SUCCESS')();
+export const signUpUserSuccess = createAction('SignUp/USER_SIGN_UP_SUCCESS')();
 
-export const signUpUserError = createStandardAction('SignUp/USER_SIGN_UP_ERROR')<{
+export const signUpUserError = createAction('SignUp/USER_SIGN_UP_ERROR')<{
   errorMessage: string;
 }>();
 
-export const signUpUserClearError = createStandardAction('SignUp/USER_CLEAR_SIGN_UP_ERROR')();
+export const signUpUserClearError = createAction('SignUp/USER_CLEAR_SIGN_UP_ERROR')();
 
 export default {
   signUpUserRequest,
