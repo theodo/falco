@@ -93,6 +93,10 @@ This will start the stack: Redis + PostgreSQL + Celery + the main application. T
 For a production use, we recommend using a PostreSQL with valid SSL certificates and expose the application with a frontal server managing the HTTPS certificates.
 Without a valid SSL certificate, the application will not work.
 
+If you want to use an external postgresql instance, the environment variable set in `.env.prod` should look something like this:
+
+`DATABASE_URL=postgres://db_user:db_pass@postgres_domain_or_ip:port/db_name`
+
 The first time the application starts, you will need to manually run the migrations and add some data:
 
 ```sh
