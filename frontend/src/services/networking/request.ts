@@ -1,5 +1,5 @@
 import { store } from 'index';
-import jwt_decode from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 import { logoutUserRequest } from 'redux/login';
 import { routeDefinitions } from 'routes';
 import request from 'superagent';
@@ -38,7 +38,7 @@ function isTokenValid(token: AccessToken): boolean {
  */
 const checkAccessToken = async (requestFunction: () => void) => {
   const token = localStorage.getItem('token');
-  const decodedToken = token ? jwt_decode<AccessToken>(token) : { exp: 0 };
+  const decodedToken = token ? jwtDecode<AccessToken>(token) : { exp: 0 };
   if (!isTokenValid(decodedToken)) {
     try {
       const response = await request.post(`${backendBaseUrl}/auth/jwt/refresh`).withCredentials();
@@ -97,9 +97,7 @@ export const makePutRequest = async (endpoint: string, needsAuthentication: bool
 };
 
 export const makeDeleteRequest = async (endpoint: string, needsAuthentication: boolean) => {
-  const deleteRequest = request
-    .delete(`${baseUrl}${endpoint}`)
-    .set('Accept', 'application/json');
+  const deleteRequest = request.delete(`${baseUrl}${endpoint}`).set('Accept', 'application/json');
   if (needsAuthentication) {
     return await checkAccessToken(() => {
       return deleteRequest.set('Authorization', `Bearer ${localStorage.getItem('token')}`);

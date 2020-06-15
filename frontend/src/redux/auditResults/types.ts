@@ -25,27 +25,27 @@ export interface AuditResultType {
   scriptStepName: string | null;
   scriptStepNumber: string | null;
   lighthouseTTI: {
-    displayed_value: string;
+    displayedValue: string;
     score: number;
   };
   lighthouseSpeedIndex: {
-    displayed_value: string;
+    displayedValue: string;
     score: number;
   };
   lighthouseFirstContentfulPaint: {
-    displayed_value: string;
+    displayedValue: string;
     score: number;
   };
   lighthouseFirstMeaningfulPaint: {
-    displayed_value: string;
+    displayedValue: string;
     score: number;
   };
   lighthouseFirstCPUIdle: {
-    displayed_value: string;
+    displayedValue: string;
     score: number;
   };
   lighthouseMaxPotentialFirstInputDelay: {
-    displayed_value: string;
+    displayedValue: string;
     score: number;
   };
 }

@@ -58,7 +58,7 @@ const LighthouseMetrics: React.FunctionComponent<OwnProps> = ({ auditResult }) =
                     <FormattedMessage id={`Metrics.${metric}`} />
                   </MetricTitle>
                   <MetricValue state={metricState(auditResult[metric].score)}>
-                    {auditResult[metric].displayed_value}
+                    {auditResult[metric].displayedValue}
                   </MetricValue>
                 </MetricInnerwrap>
               </Metric>
