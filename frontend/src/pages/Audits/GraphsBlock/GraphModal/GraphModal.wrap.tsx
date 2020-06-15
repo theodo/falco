@@ -19,9 +19,5 @@ const mapStateToProps = (state: RootStateWithRouter) => ({
   scriptName: getCurrentScriptName(state),
   isLoading: isAuditResultLoading(state),
 });
-const mapDispatchToProps = null;
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(GraphModal);
+export default connect(mapStateToProps)(GraphModal);

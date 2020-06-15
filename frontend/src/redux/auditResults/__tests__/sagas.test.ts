@@ -27,8 +27,9 @@ const pageAuditResultId = '5555';
 const pageAuditId = '6666';
 const pageAuditResultDate = dayjs('2019-05-11T00:00:00.000000+00:00');
 const pageAuditResultValue = 11;
-const pageAuditResultLighthouseDisplayedValue = "3,2 s";
+const pageAuditResultLighthouseDisplayedValue = '3,2 s';
 const pageAuditResultLighthouseScore = 0.6;
+/* eslint-disable @typescript-eslint/camelcase */
 const pageAuditResultAPI = [
   {
     uuid: pageAuditResultId,
@@ -230,6 +231,7 @@ const scriptAuditResultModelized = {
     },
   },
 };
+/* eslint-enable */
 
 describe('[Saga] Fetch Audit Results', () => {
   describe('fetchAuditResults', () => {

@@ -23,14 +23,12 @@ import {
   ProjectItemTitleBlock,
 } from './ProjectsMenu.style';
 
-interface OwnProps {
+interface StateProps {
   currentProject?: ProjectType | null;
   projects: Array<ProjectType | null> | null;
 }
 
-type Props = OwnProps;
-
-export const ProjectsMenu: React.FunctionComponent<Props> = ({ currentProject, projects }) => {
+const ProjectsMenu: React.FunctionComponent<StateProps> = ({ currentProject, projects }) => {
   const intl = useIntl();
 
   const renderCurrentProjectItem = () =>
@@ -110,3 +108,5 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({ currentProject, p
     </Container>
   );
 };
+
+export default ProjectsMenu;

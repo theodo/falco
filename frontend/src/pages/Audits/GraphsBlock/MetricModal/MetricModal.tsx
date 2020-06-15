@@ -50,7 +50,7 @@ const MetricModal: React.FunctionComponent<Props> = ({
       overflow: 'visible',
     },
     overlay: {
-      zIndex: `${zIndex.modal}`,
+      zIndex: zIndex.modal,
     },
   };
 

@@ -9,7 +9,4 @@ const mapStateToProps = (state: RootStateWithRouter) => ({
   currentURL: getCurrentURL(state),
 });
 
-export default connect(
-  mapStateToProps,
-  null,
-)(Menu);
+export default connect(mapStateToProps)(Menu);

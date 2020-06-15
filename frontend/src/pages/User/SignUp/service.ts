@@ -42,6 +42,9 @@ export const mapPropsToValues = () => ({
 
 export const handleSubmit = (values: FormValues, { props }: { props: SignUpServiceProps }) => {
   if (!props.isSubmittingFromStore) {
+    // TODO improve this
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     props.signUp(values, props.location.state ? props.location.state.from : undefined);
   }
 };
