@@ -1829,7 +1829,7 @@
     "@types/react" "*"
     redux "^3.6.0 || ^4.0.0"
 
-"@types/react-redux@^7.0.0":
+"@types/react-redux@^7.1.2":
   version "7.1.9"
   resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.9.tgz#280c13565c9f13ceb727ec21e767abe0e9b4aec3"
   integrity sha512-mpC0jqxhP4mhmOl3P4ipRsgTgbNofMRXJb08Ms6gekViLj61v1hOZEKWDCyWsdONr6EjEA6ZHXC446wdywDe0w==
@@ -11116,7 +11116,7 @@ react-redux-toastr@^7.5.1:
     classnames "^2.2.3"
     eventemitter3 "^3.1.0"
 
-react-redux@^7.0.0:
+react-redux@^7.1.2:
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-7.2.0.tgz#f970f62192b3981642fec46fd0db18a074fe879d"
   integrity sha512-EvCAZYGfOLqwV7gh849xy9/pt55rJXPwmYvI4lilPM5rUT/1NxuuN59ipdBksRVSvz0KInbPnp4IfoXJXCqiDA==
