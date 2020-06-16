@@ -1,1 +1,1 @@
-export { default } from './WebPageTestBlock.wrap';
+export { default } from './WebPageTestBlock';
