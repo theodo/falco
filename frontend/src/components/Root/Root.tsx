@@ -9,13 +9,13 @@ import frMessages from 'translations/fr.json';
 import { Header, Menu } from './components';
 import { Body, Content, Page, PageContainer, SkipToContent } from './Root.style';
 
-const locales: Record<string, any> = {
+const locales: Record<string, { [key: string]: string }> = {
   fr: flattenMessages(frMessages),
   en: flattenMessages(enMessages),
 };
 
 // Your component own properties
-interface Props extends RouteComponentProps<any> {
+interface Props extends RouteComponentProps {
   hasProjects: boolean;
   isUserAuthenticated: boolean;
   children: ReactNode;
