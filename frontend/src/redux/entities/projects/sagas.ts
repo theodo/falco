@@ -60,31 +60,31 @@ import {
 import { modelizeProject, modelizeProjects } from './modelizer';
 import { ApiProjectType } from './types';
 
-function* fetchProjectsFailedHandler(error: Error, actionPayload: Record<string, any>) {
+function* fetchProjectsFailedHandler(error: Error, actionPayload: Record<string, string>) {
   yield put(
     fetchProjectError({ projectId: actionPayload.currentProjectId, errorMessage: error.message }),
   );
 }
 
-function* fetchProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
+function* fetchProjectFailedHandler(error: Error, actionPayload: Record<string, string>) {
   yield put(fetchProjectError({ projectId: actionPayload.projectId, errorMessage: error.message }));
 }
 
-function* addMemberToProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
+function* addMemberToProjectFailedHandler(error: Error, actionPayload: Record<string, string>) {
   yield put(
     addMemberToProjectError({ projectId: actionPayload.projectId, errorMessage: error.message }),
   );
   yield put(setProjectToastrDisplay({ toastrDisplay: 'addMemberError' }));
 }
 
-function* addPageToProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
+function* addPageToProjectFailedHandler(error: Error, actionPayload: Record<string, string>) {
   yield put(
     addPageToProjectError({ projectId: actionPayload.projectId, errorMessage: error.message }),
   );
   yield put(setProjectToastrDisplay({ toastrDisplay: 'addPageError' }));
 }
 
-function* deleteMemberOfProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
+function* deleteMemberOfProjectFailedHandler(error: Error, actionPayload: Record<string, string>) {
   yield put(
     deleteMemberOfProjectError({
       projectId: actionPayload.projectId,
@@ -94,7 +94,7 @@ function* deleteMemberOfProjectFailedHandler(error: Error, actionPayload: Record
   );
 }
 
-function* deletePageOfProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
+function* deletePageOfProjectFailedHandler(error: Error, actionPayload: Record<string, string>) {
   yield put(
     deletePageOfProjectError({
       projectId: actionPayload.projectId,
@@ -105,7 +105,7 @@ function* deletePageOfProjectFailedHandler(error: Error, actionPayload: Record<s
   yield put(setProjectToastrDisplay({ toastrDisplay: 'deletePageError' }));
 }
 
-function* editMemberOfProjectFailedHandler(error: Error, actionPayload: Record<string, any>) {
+function* editMemberOfProjectFailedHandler(error: Error, actionPayload: Record<string, string>) {
   yield put(
     editMemberOfProjectError({
       projectId: actionPayload.projectId,
@@ -348,7 +348,7 @@ function* editProjectDetails(action: ActionType<typeof editProjectDetailsRequest
   yield put(setProjectToastrDisplay({ toastrDisplay: 'editProjectDetailsSuccess' }));
 }
 
-function* editProjectDetailsFailedHandler(error: Error, actionPayload: Record<string, any>) {
+function* editProjectDetailsFailedHandler(error: Error, actionPayload: Record<string, string>) {
   yield put(
     editProjectDetailsError({
       projectId: actionPayload.projectId,
@@ -388,7 +388,7 @@ function* addAuditParameterToProject(action: ActionType<typeof addAuditParameter
 
 function* addAuditParameterToProjectFailedHandler(
   error: Error,
-  actionPayload: Record<string, any>,
+  actionPayload: Record<string, string>,
 ) {
   yield put(
     addAuditParameterToProjectError({
@@ -417,7 +417,7 @@ function* deleteAuditParameterFromProject(
 
 function* deleteAuditParameterFromProjectFailedHandler(
   error: Error,
-  actionPayload: Record<string, any>,
+  actionPayload: Record<string, string>,
 ) {
   yield put(
     deleteAuditParameterFromProjectError({

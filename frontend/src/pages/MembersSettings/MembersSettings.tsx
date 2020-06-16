@@ -58,7 +58,7 @@ const MembersSettings: React.FunctionComponent<Props> = ({
 
   const { currentToastrDisplay, resetToastrDisplay } = useToastr();
 
-  const [selectOption, setSelectOption]: [ValueType<UserOption | {}>, any] = React.useState(null);
+  const [selectOption, setSelectOption] = React.useState<ValueType<UserOption | {}>>(null);
   const [allUsers, setAllUsers] = React.useState([]);
 
   const project = useProjectById(match.params.projectId);

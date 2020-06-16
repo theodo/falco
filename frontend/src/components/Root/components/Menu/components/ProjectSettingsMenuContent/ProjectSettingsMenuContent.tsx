@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { routeDefinitions } from 'routes';
+import { routeDefinitions, RouteDefinition } from 'routes';
 
 import { MenuArrow } from 'icons';
 import { ProjectType } from 'redux/entities/projects/types';
@@ -34,7 +34,7 @@ export const ProjectSettingsMenuContent: React.FunctionComponent<Props> = ({
     routeDefinitions.membersSettings,
   ];
 
-  const linkPathMatchesUrl = (page: any) => {
+  const linkPathMatchesUrl = (page: RouteDefinition) => {
     const pageURL = page.path.replace(':projectId', project.uuid);
     return pageURL.startsWith(currentURL);
   };

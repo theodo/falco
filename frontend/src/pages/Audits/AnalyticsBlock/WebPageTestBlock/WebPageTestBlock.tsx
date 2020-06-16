@@ -120,18 +120,19 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps> = props => {
     }
   };
 
-  const radioOptions: any = ['latest', 'dateSelector', 'dateComparator'].reduce(
-    (cummulatedOptions, radioOptionType) => {
-      return {
-        ...cummulatedOptions,
-        [radioOptionType]: {
-          value: radioOptionType,
-          label: `Audits.webpagetest_${radioOptionType}_audit`,
-        },
-      };
-    },
-    {},
-  );
+  const radioOptions: { [key: string]: { value: string; label: string } } = [
+    'latest',
+    'dateSelector',
+    'dateComparator',
+  ].reduce((cummulatedOptions, radioOptionType) => {
+    return {
+      ...cummulatedOptions,
+      [radioOptionType]: {
+        value: radioOptionType,
+        label: `Audits.webpagetest_${radioOptionType}_audit`,
+      },
+    };
+  }, {});
 
   const optionBlock = (radioOptionType: 'latest' | 'dateSelector' | 'dateComparator') => {
     return (
