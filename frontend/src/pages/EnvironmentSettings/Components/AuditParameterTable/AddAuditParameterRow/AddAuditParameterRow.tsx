@@ -87,7 +87,7 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
   };
 
   const handleConfigurationChange = (e: any) => {
-    setAuditParameterConfigurationId(e.uuid);
+    setAuditParameterConfigurationId(e.value);
   };
 
   const handleNetworkShapeChange = (e: any) => {
@@ -100,15 +100,17 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
 
   const selectMargin = `0 ${getSpacing(2)} 0 0`;
 
-  const foundAuditParameter = availableAuditParameters.find(auditParametersOption => {
-    return auditParametersOption.uuid === auditParameterConfigurationId;
-  });
-  const auditParameterValue = foundAuditParameter && {
-    ...availableAuditParameters.find(auditParametersOption => {
-      return auditParametersOption.uuid === auditParameterConfigurationId;
+  const formattedAvailableAuditParameters = availableAuditParameters.map(
+    availableAuditParameter => ({
+      label: availableAuditParameter.label,
+      value: availableAuditParameter.uuid,
     }),
-    value: auditParameterConfigurationId,
-  };
+  );
+
+  const foundAuditParameter = formattedAvailableAuditParameters.find(auditParametersOption => {
+    return auditParametersOption.value === auditParameterConfigurationId;
+  });
+
   return (
     <React.Fragment>
       <AddAuditParameterButtonContainer isAdding={isAddingMode} onClick={activateAddingMode}>
@@ -125,9 +127,9 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
         placeholder={intl.formatMessage({ id: 'ProjectSettings.audit_parameter_name_placeholder' })}
       />
       <Select
-        value={auditParameterValue}
+        value={foundAuditParameter}
         onChange={handleConfigurationChange}
-        options={availableAuditParameters}
+        options={formattedAvailableAuditParameters}
         display={isAddingMode ? 'visible' : 'none'}
         width="40%"
         margin={selectMargin}

@@ -1,9 +1,13 @@
-import { InjectedFormikProps } from 'formik';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Style from './ProjectDetailsInput.style';
 
-type Props = InjectedFormikProps<any, any>;
+interface Props {
+  label: string;
+  value: string;
+  onBlur: () => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
 export const ProjectDetailsInput: React.FunctionComponent<Props> = ({
   label,

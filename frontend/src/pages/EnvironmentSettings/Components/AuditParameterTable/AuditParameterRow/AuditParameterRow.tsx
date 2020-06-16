@@ -76,7 +76,7 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
   };
 
   const handleConfigurationChange = (e: any) => {
-    setAuditParameterConfigurationId(e.uuid);
+    setAuditParameterConfigurationId(e.value);
   };
 
   const handleNetworkShapeChange = (e: any) => {
@@ -102,15 +102,17 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
 
   const selectMargin = `0 ${getSpacing(2)} 0 0`;
 
-  const foundAuditParameter = availableAuditParameters.find(auditParametersOption => {
-    return auditParametersOption.uuid === auditParameterConfigurationId;
-  });
-  const auditParameterValue = foundAuditParameter && {
-    ...availableAuditParameters.find(auditParametersOption => {
-      return auditParametersOption.uuid === auditParameterConfigurationId;
+  const formattedAvailableAuditParameters = availableAuditParameters.map(
+    availableAuditParameter => ({
+      label: availableAuditParameter.label,
+      value: availableAuditParameter.uuid,
     }),
-    value: auditParameterConfigurationId,
-  };
+  );
+
+  const foundAuditParameter = formattedAvailableAuditParameters.find(auditParametersOption => {
+    return auditParametersOption.value === auditParameterConfigurationId;
+  });
+
   return (
     <React.Fragment>
       <EditNameInput
@@ -120,9 +122,9 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
         onBlur={handleBlur}
       />
       <Select
-        value={auditParameterValue}
+        value={foundAuditParameter}
         onChange={handleConfigurationChange}
-        options={availableAuditParameters}
+        options={formattedAvailableAuditParameters}
         margin={selectMargin}
         width="40%"
         onBlur={handleBlur}
