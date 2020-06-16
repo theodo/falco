@@ -26,7 +26,7 @@ type Props = OwnProps & RouteComponentProps;
 export const AccountMenu: React.FunctionComponent<Props> = ({ logoutUser }) => {
   const user = useCurrentUser();
 
-  const capitalize = (word: any) => {
+  const capitalize = (word: string) => {
     if (typeof word !== 'string') {
       return '';
     }

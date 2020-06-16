@@ -1,1 +1,1 @@
-export { default } from './Input.wrap';
+export { default } from './Input';

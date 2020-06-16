@@ -1,18 +1,17 @@
-import { InjectedFormikProps } from 'formik';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import Style from './Input.style';
 
-type Props = InjectedFormikProps<any, any>;
+interface Props {
+  field: string;
+  label: string;
+  type: string;
+  name: string;
+  error: string;
+  disabled: boolean;
+}
 
-export const Input: React.FunctionComponent<Props> = ({
-  disabled,
-  error,
-  field,
-  label,
-  name,
-  type,
-}) => {
+const Input: React.FunctionComponent<Props> = ({ disabled, error, field, label, name, type }) => {
   const intl = useIntl();
 
   const [isActive, setIsActive] = React.useState(false);
@@ -43,3 +42,5 @@ export const Input: React.FunctionComponent<Props> = ({
     </Style.Field>
   );
 };
+
+export default Input;

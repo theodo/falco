@@ -9,7 +9,7 @@ import {
   NotFoundTitle,
 } from './NotFoundComponent.style';
 
-const NotFoundComponent: React.FunctionComponent<any> = () => (
+const NotFoundComponent: React.FunctionComponent = () => (
   <NotFoundContainer>
     <NotFoundInsideContainer>
       <NotFoundTitle>

@@ -16,7 +16,7 @@ const EnvironmentSettings = lazy(() => import('./pages/EnvironmentSettings'));
 const PagesAndScriptsSettings = lazy(() => import('./pages/PagesAndScriptsSettings'));
 const MembersSettings = lazy(() => import('./pages/MembersSettings'));
 
-interface RouteDefinition {
+export interface RouteDefinition {
   path: string;
   component: React.FunctionComponent<any>;
   exact: boolean;

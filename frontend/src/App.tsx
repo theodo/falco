@@ -10,6 +10,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import Root from './components/Root';
 import Routes from './routes';
+import { RootState } from 'redux/types';
 
 interface Props {
   history: History;
@@ -17,7 +18,7 @@ interface Props {
   store: Store;
 }
 
-const RootComponentWithRoutes: React.FunctionComponent<any> = props => (
+const RootComponentWithRoutes: React.FunctionComponent<{ store: RootState }> = props => (
   <Root>
     <Routes store={props.store} />
   </Root>
