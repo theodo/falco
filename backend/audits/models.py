@@ -36,9 +36,10 @@ class Audit(BaseModel):
         elif self.script is not None:
             project_name = self.script.project.name
             audit_name = self.script.name
-        return "%s — %s | % s" % (
+        return "%s — %s (%s) | % s" % (
             project_name,
             audit_name,
+            str(self.parameters),
             timezone.localtime(self.created_at),
         )
 
