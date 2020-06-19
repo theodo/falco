@@ -12,6 +12,9 @@ from audits.wpt_utils.normalizer import (
     format_wpt_json_results_for_script,
 )
 
+# after a certain number of times receiving the exact same answer when polling audits results, we want to stop the polling and say that the audit has failed
+MAX_POLL_SAME_RESPONSE_FROM_API = 50
+
 
 @shared_task
 def request_audit(audit_uuid):
@@ -79,7 +82,7 @@ def request_audit(audit_uuid):
 
 
 @shared_task
-def poll_audit_results(audit_uuid, json_url):
+def poll_audit_results(audit_uuid, json_url, previous_api_response="", repeat_index=0):
     audit = Audit.objects.get(uuid=audit_uuid)
     try:
         r = requests.get(json_url)
@@ -94,13 +97,30 @@ def poll_audit_results(audit_uuid, json_url):
             ),
         )
         raise e
+
+    if repeat_index > MAX_POLL_SAME_RESPONSE_FROM_API:
+        AuditStatusHistory.objects.create(
+            audit=audit,
+            status=AvailableStatuses.ERROR,
+            details=f"Polled api returned the exact same reponse for {repeat_index}>{MAX_POLL_SAME_RESPONSE_FROM_API} times: {previous_api_response}",
+        )
+
     if status_code in [100, 101]:
         api_response = str(response["data"]["statusText"])
         status, info = extract_status_and_info(api_response)
         AuditStatusHistory.objects.create(
             audit=audit, status=status, details=api_response, info=info
         )
-        poll_audit_results.apply_async((audit_uuid, json_url), countdown=15)
+
+        # when receiving too many times the exact same answer, we want to stop the polling
+        if api_response == previous_api_response:
+            repeat_index += 1
+        else:
+            repeat_index = 0
+
+        poll_audit_results.apply_async(
+            (audit_uuid, json_url, api_response, repeat_index), countdown=15
+        )
     elif status_code == 200:
         if audit.page is not None:
             wpt_instance_url = audit.page.project.wpt_instance_url
