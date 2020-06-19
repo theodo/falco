@@ -266,6 +266,19 @@ def clean_old_audit_statuses():
 
 
 @shared_task
+def clean_unfinished_audits():
+    """some audits may never finish and end up stuck in a loop. we need to remove those"""
+    finished_statuses = (AvailableStatuses.ERROR.value, AvailableStatuses.SUCCESS.value)
+    for audit in Audit.objects.prefetch_related("audit_status_history"):
+        if (
+            audit.audit_status_history.order_by("created_at").last().status
+            not in finished_statuses
+        ):
+            print(f"Deleting {audit.uuid}: {audit}")
+            audit.delete()
+
+
+@shared_task
 def get_wpt_audit_configurations(wpt_instance_url="https://webpagetest.org"):
     """gets all the available locations from WPT"""
 
