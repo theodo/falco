@@ -39,7 +39,7 @@ def request_audit(request, project_uuid):
                 AuditStatusHistory.objects.create(
                     audit=audit,
                     status=AvailableStatuses.REQUESTED.value,
-                    details="Audit created in database",
+                    details="Audit manually requested",
                 )
                 created_audits.append(audit)
 
@@ -49,7 +49,7 @@ def request_audit(request, project_uuid):
                 AuditStatusHistory.objects.create(
                     audit=audit,
                     status=AvailableStatuses.REQUESTED.value,
-                    details="Audit created in database",
+                    details="Audit manually requested",
                 )
                 created_audits.append(audit)
 
