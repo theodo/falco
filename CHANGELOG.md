@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.5] — 2020-07-04
+
+- [Accessibility] : improve accessibility
+- [Dependencies] : upgrade backend and frontend dependencies
+- Fail audits that to do not finish and add command to delete unfinished audits
+
 ## [1.1.4] — 2020-03-19
 
 - [Security] Bump Acorn to 5.7.4 && 6.4.1 (#125, #127)
@@ -64,7 +70,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 🎉Initial release! 🎉
 
-[unreleased]: https://github.com/theodo/falco/compare/1.1.4...HEAD
+[unreleased]: https://github.com/theodo/falco/compare/1.1.5...HEAD
+[1.1.5]: https://github.com/theodo/falco/compare/1.1.5...1.1.4
 [1.1.4]: https://github.com/theodo/falco/compare/1.1.4...1.1.3
 [1.1.3]: https://github.com/theodo/falco/compare/1.1.3...1.1.2
 [1.1.2]: https://github.com/theodo/falco/compare/1.1.2...1.1.1

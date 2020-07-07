@@ -22,7 +22,7 @@ const features = [
         Falco runs performance audits several times a day, and offers a
         historical overview to monitor its evolution.
       </>
-    )
+    ),
   },
   {
     title: "Monitor key performance metrics",
@@ -33,7 +33,7 @@ const features = [
         you want to monitor—Time to Interactive, First Meaningful Paint, Speed
         Index…
       </>
-    )
+    ),
   },
   {
     title: "Invite and involve your whole team",
@@ -43,7 +43,7 @@ const features = [
         Invite your team to Falco to make collaboration around performance
         issues better, with fine-grained user rights management.
       </>
-    )
+    ),
   },
   {
     title: "Audit individual URLs or entire user journeys",
@@ -53,7 +53,7 @@ const features = [
         You can both test the performance of individual, public URLs or complete
         user journeys—it even works for Single Page Apps!
       </>
-    )
+    ),
   },
   {
     title: "View and compare WebPageTest results",
@@ -63,7 +63,7 @@ const features = [
         Compare side-by-side the WebPageTest results of your app before and
         after a specific release to see its impact on performance.
       </>
-    )
+    ),
   },
   {
     title: "Use your own WebPageTest Private Instance",
@@ -73,8 +73,8 @@ const features = [
         You can choose to use your own WebPageTest Private Instance for more
         frequent audits, or rely on the public one.
       </>
-    )
-  }
+    ),
+  },
 ];
 
 function Home() {
@@ -106,7 +106,7 @@ function Home() {
                     "button button--primary button--lg",
                     styles.addFocus
                   )}
-                  href="https://heroku.com/deploy?template=https://github.com/theodo/falco/tree/1.1.4"
+                  href="https://heroku.com/deploy?template=https://github.com/theodo/falco/tree/1.1.5"
                   target="_blank"
                 >
                   Deploy to Heroku
@@ -150,7 +150,7 @@ function Home() {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginBottom: "30px"
+                  marginBottom: "30px",
                 }}
               >
                 <img
@@ -163,7 +163,7 @@ function Home() {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginBottom: "30px"
+                  marginBottom: "30px",
                 }}
               >
                 <img
@@ -176,7 +176,7 @@ function Home() {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginBottom: "30px"
+                  marginBottom: "30px",
                 }}
               >
                 <img src={useBaseUrl("img/tarkett.png")} alt="Tarkett logo" />
@@ -186,7 +186,7 @@ function Home() {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginBottom: "30px"
+                  marginBottom: "30px",
                 }}
               >
                 <img src={useBaseUrl("img/voodoo.png")} alt="Voodoo logo" />
@@ -196,7 +196,7 @@ function Home() {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginBottom: "30px"
+                  marginBottom: "30px",
                 }}
               >
                 <img src={useBaseUrl("img/evaneos.png")} alt="Evaneos logo" />
@@ -206,7 +206,7 @@ function Home() {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginBottom: "30px"
+                  marginBottom: "30px",
                 }}
               >
                 <img src={useBaseUrl("img/oscaro.png")} alt="Oscaro logo" />
