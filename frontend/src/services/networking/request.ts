@@ -11,7 +11,7 @@ interface AccessToken {
   exp: number;
 }
 
-export function updateToken(token: string | undefined) {
+export async function updateToken(token: string | undefined) {
   if (token) {
     localStorage.setItem('token', token);
   } else {
@@ -113,7 +113,7 @@ export const makeLoginRequest = (endpoint: string, data: {}) =>
     .send(data)
     .withCredentials();
 
-export const login = async (endpoint: string, data: {}) => {
+export const login = async (endpoint: string, data: {}): Promise<boolean> => {
   const response = await makeLoginRequest(endpoint, data);
   const token: string | undefined = response.body.token || response.body.access;
   if (token) {

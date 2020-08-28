@@ -1,8 +1,8 @@
+import React from 'react';
 import Select from 'components/Select/Select';
-import { default as AddIcon } from 'icons/Add';
-import { default as CheckmarkIcon } from 'icons/Checkmark';
-import { default as CloseIcon } from 'icons/Close';
-import * as React from 'react';
+import AddIcon from 'icons/Add';
+import CheckmarkIcon from 'icons/Checkmark';
+import CloseIcon from 'icons/Close';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { colorUsage, getSpacing } from 'stylesheet';
 import {
@@ -16,7 +16,7 @@ import { availableNetworkShape } from '../common';
 
 export interface OwnProps {
   projectId: string;
-  availableAuditParameters: Array<{ uuid: string; label: string }>;
+  availableAuditParameters: { uuid: string; label: string }[];
 }
 
 type Props = {
