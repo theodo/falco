@@ -2,7 +2,6 @@ from enum import Enum
 
 from core.models import BaseModel, User
 from django.db import models
-from django import forms
 from fernet_fields import EncryptedTextField
 
 
@@ -131,13 +130,3 @@ class Script(BaseModel):
 
     def __str__(self):
         return self.name
-
-
-class ScriptForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(ScriptForm, self).__init__(*args, **kwargs)
-        self.fields["script"].strip = False
-
-    class Meta:
-        model = Script
-        fields = "__all__"

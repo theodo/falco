@@ -4,7 +4,7 @@
 from django import forms
 from datetime import datetime, timedelta
 
-from audits.models import Audit, AuditResults
+from audits.models import Audit, AuditResults, Script
 from audits.tasks import request_audit
 from projects.permissions import check_if_member_of_project
 
@@ -142,3 +142,13 @@ class ManualAuditForm(forms.Form):
             raise
 
         return True
+
+
+class ScriptForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ScriptForm, self).__init__(*args, **kwargs)
+        self.fields["script"].strip = False
+
+    class Meta:
+        model = Script
+        fields = "__all__"
