@@ -7,14 +7,13 @@ from django.urls import path, reverse
 from django.http import HttpResponseRedirect
 from django.template.response import TemplateResponse
 
-from projects.forms import ManualAuditForm
+from projects.forms import ManualAuditForm, ScriptForm
 from projects.models import (
     ProjectMemberRole,
     Page,
     Project,
     ProjectAuditParameters,
     Script,
-    ScriptForm,
     AvailableAuditParameters,
 )
 
