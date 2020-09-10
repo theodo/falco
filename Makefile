@@ -18,6 +18,9 @@ backend/makemigrations:
 backend/shell:
 	docker-compose exec backend ./manage.py shell
 
+backend/test:
+	docker-compose exec backend ./manage.py test
+
 db/connect:
 	docker exec -it falco_db_1 psql -Upostgres postgres
 
