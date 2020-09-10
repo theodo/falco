@@ -81,8 +81,19 @@ class Page(BaseModel):
     url = models.CharField(max_length=500)
     project = models.ForeignKey(Project, related_name="pages", on_delete=models.CASCADE)
     login_script = models.ForeignKey(
-        LoginScript, related_name="pages", on_delete=models.CASCADE, null=True, blank=True
+        LoginScript,
+        related_name="pages",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
     )
+
+    @property
+    def logged_page_script(self):
+        if self.login_script is None:
+            return None
+
+        return f"setEventName    Login\n{self.login_script}\nsetEventName    Go to Page\nnavigate {self.url}"
 
     def __str__(self):
         return self.name

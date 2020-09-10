@@ -365,8 +365,12 @@ def get_wpt_audit_api_configuration(audit):
 
         return audit.script.project.wpt_instance_url, payload
 
-    payload["url"] = audit.page.url
-    payload["lighthouse"] = 1
+    if audit.page.login_script is not None:
+        payload["script"] = audit.page.logged_page_script
+    else:
+        payload["url"] = audit.page.url
+        payload["lighthouse"] = 1
+
     payload["k"] = audit.page.project.wpt_api_key
 
     return audit.page.project.wpt_instance_url, payload
