@@ -57,10 +57,32 @@ class ProjectMemberRole(BaseModel):
         unique_together = ("project", "user")
 
 
+class LoginScript(BaseModel):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, blank=False, null=False)
+    script = EncryptedTextField()
+
+    def __str__(self):
+        return self.name
+
+
+class LoginScriptForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(LoginScriptForm, self).__init__(*args, **kwargs)
+        self.fields["script"].strip = False
+
+    class Meta:
+        model = LoginScript
+        fields = "__all__"
+
+
 class Page(BaseModel):
     name = models.CharField(max_length=100)
     url = models.CharField(max_length=500)
     project = models.ForeignKey(Project, related_name="pages", on_delete=models.CASCADE)
+    login_script = models.ForeignKey(
+        LoginScript, related_name="pages", on_delete=models.CASCADE, null=True, blank=True
+    )
 
     def __str__(self):
         return self.name

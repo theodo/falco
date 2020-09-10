@@ -10,6 +10,8 @@ from django.template.response import TemplateResponse
 from projects.forms import ManualAuditForm
 from projects.models import (
     ProjectMemberRole,
+    LoginScript,
+    LoginScriptForm,
     Page,
     Project,
     ProjectAuditParameters,
@@ -27,6 +29,12 @@ class PageInline(admin.TabularInline):
 class ScriptInline(admin.TabularInline):
     model = Script
     form = ScriptForm
+    extra = 0
+
+
+class LoginScriptInline(admin.TabularInline):
+    model = LoginScript
+    form = LoginScriptForm
     extra = 0
 
 
@@ -51,6 +59,7 @@ class ProjectAdmin(admin.ModelAdmin):
         ProjectMemberRoleInline,
         PageInline,
         ScriptInline,
+        LoginScriptInline,
         ProjectAuditParametersInline,
     ]
     exclude = ["screenshot_url"]
