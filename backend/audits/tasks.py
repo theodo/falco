@@ -19,7 +19,6 @@ MAX_POLL_SAME_RESPONSE_FROM_API = 50
 @shared_task
 def request_audit(audit_uuid):
     audit = Audit.objects.get(uuid=audit_uuid)
-    parameters = audit.parameters
     AuditStatusHistory.objects.create(
         audit=audit,
         status=AvailableStatuses.REQUESTED.value,
@@ -30,23 +29,7 @@ def request_audit(audit_uuid):
     See https://sites.google.com/a/webpagetest.org/docs/advanced-features/webpagetest-restful-apis
     for all available parameters in the WebPageTest API
     """
-    payload = {
-        "f": "json",
-        "runs": 3,
-        "video": 1,
-        "location": f"{parameters.configuration.location}:{parameters.configuration.browser}.{NetworkShapeOptions[parameters.network_shape].value}",
-    }
-
-    if audit.page is not None:
-        payload["url"] = audit.page.url
-        payload["lighthouse"] = 1
-        payload["k"] = audit.page.project.wpt_api_key
-        wpt_instance_url = audit.page.project.wpt_instance_url
-    elif audit.script is not None:
-        payload["script"] = audit.script.script
-        payload["k"] = audit.script.project.wpt_api_key
-        wpt_instance_url = audit.script.project.wpt_instance_url
-
+    wpt_instance_url, payload = get_wpt_audit_api_configuration(audit)
     try:
         r = requests.post(f"{wpt_instance_url}/runtest.php", params=payload)
     except Exception as e:
@@ -362,3 +345,28 @@ def get_wpt_audit_configurations(wpt_instance_url="https://webpagetest.org"):
                 },
                 wpt_instance_url=wpt_instance_url,
             )
+
+
+def get_wpt_audit_api_configuration(audit):
+    parameters = audit.parameters
+    payload = {
+        "f": "json",
+        "runs": 3,
+        "video": 1,
+        "location": f"{parameters.configuration.location}:{parameters.configuration.browser}.{NetworkShapeOptions[parameters.network_shape].value}",
+    }
+
+    if audit.script is None and audit.page is None:
+        raise Exception("Invalid audit request")
+
+    if audit.script is not None:
+        payload["script"] = audit.script.script
+        payload["k"] = audit.script.project.wpt_api_key
+
+        return audit.script.project.wpt_instance_url, payload
+
+    payload["url"] = audit.page.url
+    payload["lighthouse"] = 1
+    payload["k"] = audit.page.project.wpt_api_key
+
+    return audit.page.project.wpt_instance_url, payload
