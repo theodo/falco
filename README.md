@@ -1,3 +1,4 @@
+Created with love
 <p align="center">
   <a href="https://getfal.co">
     <img alt="Falco" src="https://falco-backup-db.s3.eu-west-3.amazonaws.com/logo.svg" width="60" />
