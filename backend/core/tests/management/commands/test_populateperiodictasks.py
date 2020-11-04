@@ -9,4 +9,4 @@ class PopulatePeriodicTasksTest(TestCase):
         call_command("populate-periodic-tasks")
         nb_tasks_after_command = len(PeriodicTask.objects.all())
 
-        self.assertEqual(nb_tasks_after_command - nb_tasks_before_command, 6)
+        self.assertEqual(nb_tasks_after_command - nb_tasks_before_command, 7)

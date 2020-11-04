@@ -1,26 +1,33 @@
 import Select from 'components/Select';
 import Close from 'icons/Close';
 import * as React from 'react';
-import { InjectedIntlProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { toastr } from 'react-redux-toastr';
 import { AuditParametersType } from 'redux/entities/auditParameters/types';
 import { colorUsage } from 'stylesheet';
 import { getSpacing } from 'stylesheet';
-import { AuditParameterDeleteContainer, AuditParameterRowButton, EditNameInput } from '../AuditParameterTable.style';
-import { availableNetworkShape } from '../common'
+import {
+  AuditParameterDeleteContainer,
+  AuditParameterRowButton,
+  EditNameInput,
+} from '../AuditParameterTable.style';
+import { availableNetworkShape } from '../common';
 
 export interface OwnProps {
-  auditParameterId: string,
-  projectId: string,
-  disabled: boolean,
-  availableAuditParameters: Array<{ uuid: string, label: string }>
+  auditParameterId: string;
+  projectId: string;
+  disabled: boolean;
+  availableAuditParameters: Array<{ uuid: string; label: string }>;
 }
 
 type Props = {
-  auditParameter?: AuditParametersType | null,
-  editAuditParameterRequest: (projectId: string, auditParameter: { name: string, uuid: string, configuration_id: string, network_shape: string }) => void,
+  auditParameter?: AuditParametersType | null;
+  editAuditParameterRequest: (
+    projectId: string,
+    auditParameter: { name: string; uuid: string; configuration_id: string; network_shape: string },
+  ) => void;
   deleteAuditParameterFromProjectRequest: (projectId: string, auditParameterId: string) => void;
-} & OwnProps & InjectedIntlProps;
+} & OwnProps;
 
 export const AuditParameterRow: React.FunctionComponent<Props> = ({
   auditParameterId,
@@ -30,11 +37,12 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
   disabled,
   deleteAuditParameterFromProjectRequest,
   availableAuditParameters,
-  intl
 }) => {
+  const intl = useIntl();
+
   const [auditParameterName, setAuditParameterName] = React.useState('');
   const [auditParameterNetworkShape, setAuditParameterNetworkShape] = React.useState('');
-  const [auditParameterConfigurationId, setAuditParameterConfigurationId] = React.useState('')
+  const [auditParameterConfigurationId, setAuditParameterConfigurationId] = React.useState('');
 
   React.useEffect(
     () => {
@@ -48,53 +56,63 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
   );
 
   const handleBlur = () => {
-    if (auditParameter && (auditParameterName !== auditParameter.name || auditParameterConfigurationId !== auditParameter.configurationId || auditParameter.networkShape !== auditParameterNetworkShape)) {
-      editAuditParameterRequest(
-        projectId,
-        {
-          uuid: auditParameter.uuid,
-          name: auditParameterName,
-          configuration_id: auditParameterConfigurationId,
-          network_shape: auditParameterNetworkShape,
-        })
+    if (
+      auditParameter &&
+      (auditParameterName !== auditParameter.name ||
+        auditParameterConfigurationId !== auditParameter.configurationId ||
+        auditParameter.networkShape !== auditParameterNetworkShape)
+    ) {
+      editAuditParameterRequest(projectId, {
+        uuid: auditParameter.uuid,
+        name: auditParameterName,
+        configuration_id: auditParameterConfigurationId,
+        network_shape: auditParameterNetworkShape,
+      });
     }
   };
 
   const handleNameChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
-    setAuditParameterName(e.currentTarget.value)
-  }
+    setAuditParameterName(e.currentTarget.value);
+  };
 
   const handleConfigurationChange = (e: any) => {
-    setAuditParameterConfigurationId(e.uuid)
-  }
+    setAuditParameterConfigurationId(e.value);
+  };
 
   const handleNetworkShapeChange = (e: any) => {
-    setAuditParameterNetworkShape(e.value)
-  }
+    setAuditParameterNetworkShape(e.value);
+  };
 
-  const handleAuditParameterDeletion = (currentProjectId: string, targetAuditParameterId: string) => {
-    toastr.confirm(intl.formatMessage({ id: 'Toastr.ProjectSettings.delete_auditParameter_confirm_question' }),
+  const handleAuditParameterDeletion = (
+    currentProjectId: string,
+    targetAuditParameterId: string,
+  ) => {
+    toastr.confirm(
+      intl.formatMessage({ id: 'Toastr.ProjectSettings.delete_auditParameter_confirm_question' }),
       {
-        onOk: () => deleteAuditParameterFromProjectRequest(currentProjectId, targetAuditParameterId)
-      })
-  }
+        onOk: () =>
+          deleteAuditParameterFromProjectRequest(currentProjectId, targetAuditParameterId),
+      },
+    );
+  };
 
   if (null === auditParameter || undefined === auditParameter) {
-    return (null);
-  };
+    return null;
+  }
 
-  const selectMargin = `0 ${getSpacing(2)} 0 0`
+  const selectMargin = `0 ${getSpacing(2)} 0 0`;
 
+  const formattedAvailableAuditParameters = availableAuditParameters.map(
+    availableAuditParameter => ({
+      label: availableAuditParameter.label,
+      value: availableAuditParameter.uuid,
+    }),
+  );
 
-  const foundAuditParameter = availableAuditParameters.find(auditParametersOption => {
-    return auditParametersOption.uuid === auditParameterConfigurationId;
+  const foundAuditParameter = formattedAvailableAuditParameters.find(auditParametersOption => {
+    return auditParametersOption.value === auditParameterConfigurationId;
   });
-  const auditParameterValue = foundAuditParameter && {
-    ...availableAuditParameters.find(auditParametersOption => {
-      return auditParametersOption.uuid === auditParameterConfigurationId;
-    })
-    , value: auditParameterConfigurationId
-  };
+
   return (
     <React.Fragment>
       <EditNameInput
@@ -104,13 +122,15 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
         onBlur={handleBlur}
       />
       <Select
-        value={auditParameterValue}
+        value={foundAuditParameter}
         onChange={handleConfigurationChange}
-        options={availableAuditParameters}
+        options={formattedAvailableAuditParameters}
         margin={selectMargin}
         width="40%"
         onBlur={handleBlur}
-        placeholder={intl.formatMessage({ id: 'ProjectSettings.audit_parameter_configuration_placeholder' })}
+        placeholder={intl.formatMessage({
+          id: 'ProjectSettings.audit_parameter_configuration_placeholder',
+        })}
       />
       <Select
         value={availableNetworkShape.find(auditParametersOption => {
@@ -121,17 +141,17 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
         margin={selectMargin}
         width="20%"
         onBlur={handleBlur}
-        placeholder={intl.formatMessage({ id: 'ProjectSettings.audit_parameter_network_shape_placeholder' })}
+        placeholder={intl.formatMessage({
+          id: 'ProjectSettings.audit_parameter_network_shape_placeholder',
+        })}
       />
       <AuditParameterDeleteContainer>
-        <AuditParameterRowButton onClick={() => handleAuditParameterDeletion(projectId, auditParameterId)}>
-          <Close
-            color={colorUsage.projectSettingsIconColor}
-            width="13px"
-            strokeWidth="15"
-          />
+        <AuditParameterRowButton
+          onClick={() => handleAuditParameterDeletion(projectId, auditParameterId)}
+        >
+          <Close color={colorUsage.projectSettingsIconColor} width="13px" strokeWidth="15" />
         </AuditParameterRowButton>
-      </AuditParameterDeleteContainer >
+      </AuditParameterDeleteContainer>
     </React.Fragment>
-  )
-}
+  );
+};

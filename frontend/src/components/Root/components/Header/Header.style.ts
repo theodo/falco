@@ -1,3 +1,4 @@
+import Button from 'components/Button';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
@@ -5,6 +6,7 @@ import {
   fontSize,
   fontWeight,
   getSpacing,
+  inheritVar,
   lineHeight,
   responsiveThreshold,
   zIndex,
@@ -16,6 +18,10 @@ interface MenuProps {
 
 interface HeaderProps {
   shouldHaveShadow: boolean;
+}
+
+interface MenuItemProps {
+  right: string;
 }
 
 export const HeaderMenu = styled.div<MenuProps>`
@@ -111,7 +117,7 @@ export const HeaderButtonsBlock = styled.ul`
 `;
 HeaderButtonsBlock.displayName = 'HeaderButtonsBlock';
 
-export const HeaderButton = styled.li`
+export const HeaderMenuItem = styled.li`
   list-style: none;
   display: flex;
   align-items: center;
@@ -123,6 +129,7 @@ export const HeaderButton = styled.li`
   margin-left: ${getSpacing(4)};
   user-select: none;
   cursor: pointer;
+  position: relative;
 
   &:hover {
     color: ${colorUsage.headerButtonHoverText};
@@ -132,6 +139,19 @@ export const HeaderButton = styled.li`
   &:first-of-type {
     margin-left: 0;
   }
+`;
+HeaderMenuItem.displayName = 'HeaderMenuItem';
+
+export const HeaderMenuItemContent = styled.div<MenuItemProps>`
+  position: absolute;
+  top: 100px;
+  right: ${props => props.right}px;
+`;
+HeaderMenuItemContent.displayName = 'HeaderMenuItemContent';
+
+export const HeaderButton = styled(Button)`
+  color: ${inheritVar};
+  font: ${inheritVar};
 `;
 HeaderButton.displayName = 'HeaderButton';
 
@@ -145,11 +165,6 @@ export const HeaderButtonArrow = styled.span`
   border-top-style: solid;
 `;
 HeaderButtonArrow.displayName = 'HeaderButtonArrow';
-
-export const MenusContainer = styled.div`
-  display: flex;
-`;
-MenusContainer.displayName = 'MenusContainer';
 
 export const HeaderLink = styled(Link)`
   text-decoration: none;

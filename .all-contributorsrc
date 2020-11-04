@@ -19,6 +19,19 @@
       ]
     },
     {
+      "login": "fargito",
+      "name": "François Farge",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/29537204?v=4",
+      "profile": "https://github.com/fargito",
+      "contributions": [
+        "design",
+        "code",
+        "content",
+        "infra",
+        "doc"
+      ]
+    },
+    {
       "login": "gllmcornet",
       "name": "Guillaume Cornet",
       "avatar_url": "https://avatars3.githubusercontent.com/u/35029311?v=4",
@@ -76,21 +89,13 @@
       ]
     },
     {
-      "login": "fargito",
-      "name": "François Farge",
-      "avatar_url": "https://avatars3.githubusercontent.com/u/29537204?v=4",
-      "profile": "https://github.com/fargito",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
       "login": "EtienneGrall",
       "name": "EtienneGrall",
       "avatar_url": "https://avatars2.githubusercontent.com/u/44709108?v=4",
       "profile": "https://github.com/EtienneGrall",
       "contributions": [
-        "code"
+        "code",
+        "a11y"
       ]
     },
     {
@@ -145,6 +150,53 @@
       "profile": "http://www.andreaswagner.name",
       "contributions": [
         "doc"
+      ]
+    },
+    {
+      "login": "MParvin",
+      "name": "Mohammad Parvin",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/7812338?v=4",
+      "profile": "http://MParvin.net",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "CoolCold",
+      "name": "Roman Ovchinnikov",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/316482?v=4",
+      "profile": "http://coolcold.livejournal.com",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "MaximeThoonsen",
+      "name": "Thoonsen Maxime",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/4814551?v=4",
+      "profile": "https://twitter.com/maxthoon",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "MathildeDuboille",
+      "name": "MathildeDuboille",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/35567446?v=4",
+      "profile": "https://github.com/MathildeDuboille",
+      "contributions": [
+        "doc",
+        "a11y",
+        "code"
+      ]
+    },
+    {
+      "login": "Granipouss",
+      "name": "Brendan Daoud",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/19293395?v=4",
+      "profile": "https://github.com/Granipouss",
+      "contributions": [
+        "code"
       ]
     }
   ],

@@ -18,10 +18,10 @@ const colorPalette = {
   grey400: 'rgba(151, 151, 151, 0.80)',
   grey500: '#979797',
   grey800: '#4A4A4A',
-  accentBlue200: 'rgba(0,184,217,0.1)',
-  accentBlue500: '#00B8D9',
+  accentPurple200: '#F4BEF9',
+  accentPurple500: '#8A0E95',
   accentGreen200: 'rgba(54,179,126,0.1)',
-  accentGreen500: '#36B37E',
+  accentGreen500: '#227251',
   accentYellow500: '#F7B500',
   white200: 'rgba(255,255,255,0.1)',
   white500: '#ffffff',
@@ -29,12 +29,12 @@ const colorPalette = {
   auditSuccessGreen: '#0CCE6B',
   black100: 'rgba(0, 0, 0, 0.2)',
   black200: 'rgba(0, 0, 0, 0.5)',
-  orange500: "#ffa400",
-  orange200: "#ffe3b2",
-  red500: '#d8000c',
+  orange500: '#ffa400',
+  orange200: '#ffe3b2',
+  red500: '#B80009',
   red200: '#ffd2d2',
   auditFailRed: '#FF4E42',
-  auditRunningOrange: "#ffa400",
+  auditRunningOrange: '#ffa400',
   transparent: 'rgba(0,0,0,0)',
 };
 
@@ -122,6 +122,8 @@ export const colorUsage = {
   leadSubmitButtonLoaderSecondary: colorPalette.transparent,
   leadSubmitButtonSuccessBackground: colorPalette.accentGreen500,
   leadSubmitButtonSuccessCheck: colorPalette.white500,
+  skipContentButtonColor: colorPalette.white500,
+  skipContentButtonBackgroundColor: colorPalette.primary500,
 
   // Login Page
   connectButtonWaitingBackground: colorPalette.grey800,
@@ -197,8 +199,8 @@ export const colorUsage = {
   lighthouseLineColor: '#ebebeb',
 
   // Badge
-  pageBadgeText: colorPalette.accentBlue500,
-  pageBadgeBackground: colorPalette.accentBlue200,
+  pageBadgeText: colorPalette.accentPurple500,
+  pageBadgeBackground: colorPalette.accentPurple200,
   pageBadgeSelectedText: colorPalette.white500,
   pageBadgeSelectedBackground: colorPalette.white200,
   scriptBadgeText: colorPalette.accentGreen500,
@@ -219,7 +221,7 @@ export const colorUsage = {
   ToggleButtonActiveBackground: colorPalette.accentGreen500,
   ToggleButtonDisabledBackground: colorPalette.grey500,
   ToggleButtonActiveLabelColor: colorPalette.accentGreen500,
-  ToggleButtonDisabledLabelColor: colorPalette.grey500
+  ToggleButtonDisabledLabelColor: colorPalette.grey500,
 };
 
 export const fontFamily = {
@@ -382,15 +384,15 @@ export const fontStyle = {
   inputErrorMessage: 'italic',
 };
 
-export const zIndex = {
-  modal: '3',
-  header: '2',
-  menu: '1',
-  tooltip: '1',
-  graphModalCloseButton: '1',
-  metricModalCheckbox: '1',
-  webPageTestRadioButton: '1',
-  modalLoader: '4',
+export const zIndex: { [key: string]: number } = {
+  modal: 3,
+  header: 2,
+  menu: 1,
+  tooltip: 1,
+  graphModalCloseButton: 1,
+  metricModalCheckbox: 1,
+  webPageTestRadioButton: 1,
+  modalLoader: 4,
 };
 
 export const getSpacing = (multiplier: number): string =>
@@ -401,6 +403,8 @@ export const responsiveThreshold = '460px';
 export const modalSize = {
   big: '1375px',
   medium: '1000px',
-}
+};
 
-export const settingsContainerSize = '800px'
+export const settingsContainerSize = '800px';
+
+export const inheritVar = 'inherit';

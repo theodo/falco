@@ -1,92 +1,78 @@
 import Loader from 'components/Loader';
 import React from 'react';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
-import { UserState } from 'redux/user/reducer';
+import { useCurrentUser } from 'redux/user/selectors';
 import { routeDefinitions } from 'routes';
 import {
   Container,
-  UserActionItem, 
-  UserActionItemExternalLink, 
-  UserActionsBlock, 
-  UserEmail, 
-  UserInfosBlock, 
-  UserInfosBlockContainer, 
-  UserName
+  UserActionItem,
+  UserActionItemButton,
+  UserActionItemExternalLink,
+  UserActionsBlock,
+  UserEmail,
+  UserInfosBlock,
+  UserInfosBlockContainer,
+  UserName,
 } from './AccountMenu.style';
+import { DOCUMENTATION_ROOT } from 'services/constants';
 
 interface OwnProps {
-  fetchUserRequest: () => void;
   logoutUser: (redirectTo?: string | undefined) => void;
-  isVisible: boolean;
-  position?: string;
-  right?: string | null;
-  user: UserState;
-  isUserAuthenticated: boolean;
 }
 
-type Props = OwnProps & InjectedIntlProps & RouteComponentProps;
+type Props = OwnProps & RouteComponentProps;
 
-export const AccountMenu: React.FunctionComponent<Props> = ({
-  fetchUserRequest,
-  isVisible,
-  logoutUser,
-  position,
-  right,
-  user,
-  isUserAuthenticated,
-}) => {
-  React.useEffect(
-    () => {
-      if (isUserAuthenticated) {
-        fetchUserRequest();
-      }
-    },
-    [isUserAuthenticated, fetchUserRequest],
-  );
+export const AccountMenu: React.FunctionComponent<Props> = ({ logoutUser }) => {
+  const user = useCurrentUser();
 
-  const capitalize = (word: any) => {
+  const capitalize = (word: string) => {
     if (typeof word !== 'string') {
       return '';
     }
     return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
   };
 
-  if (isVisible) {
-    if (null === user) {
-      return (
-        <Container position={position} right={right}>
-          <Loader minHeight={'200px'} />
-        </Container>
-      );
-    }
+  if (null === user) {
     return (
-      <Container position={position} right={right}>
-        <UserInfosBlockContainer>
-          <UserInfosBlock>
-            <UserName>
-              {capitalize(user.firstName)} {capitalize(user.lastName)}
-            </UserName>
-            <UserEmail>{user.emailAddress.toLowerCase()}</UserEmail>
-          </UserInfosBlock>
-        </UserInfosBlockContainer>
-        <UserActionsBlock>
-          <UserActionItem
-            margin={'0'}
-          >
-            <UserActionItemExternalLink href="https://getfal.co" target="_blank" rel="noopener noreferrer">
-              <FormattedMessage id="Header.see_the_docs" />
-            </UserActionItemExternalLink>
-          </UserActionItem>
-          <UserActionItem
-            margin={'0'}
-            onClick={() => logoutUser(routeDefinitions.landing.path)}
-          >
-            <FormattedMessage id="Header.logout_link" />
-          </UserActionItem>
-        </UserActionsBlock>
+      <Container>
+        <Loader minHeight={'200px'} />
       </Container>
     );
   }
-  return null;
+  return (
+    <Container>
+      <UserInfosBlockContainer>
+        <UserInfosBlock>
+          <UserName>
+            {capitalize(user.firstName)} {capitalize(user.lastName)}
+          </UserName>
+          <UserEmail>{user.emailAddress.toLowerCase()}</UserEmail>
+        </UserInfosBlock>
+      </UserInfosBlockContainer>
+      <UserActionsBlock>
+        <UserActionItem margin={'0'}>
+          <UserActionItemExternalLink
+            href={DOCUMENTATION_ROOT}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FormattedMessage id="Header.see_the_docs" />
+          </UserActionItemExternalLink>
+        </UserActionItem>
+        {user.isStaff && (
+          <UserActionItem margin={'0'}>
+            <UserActionItemExternalLink href="/admin/" target="_blank" rel="noopener noreferrer">
+              <FormattedMessage id="Header.go_to_admin" />
+            </UserActionItemExternalLink>
+          </UserActionItem>
+        )}
+        <UserActionItem margin={'0'} onClick={() => logoutUser(routeDefinitions.landing.path)}>
+          <UserActionItemButton>
+            <FormattedMessage id="Header.logout_link" />
+          </UserActionItemButton>
+        </UserActionItem>
+      </UserActionsBlock>
+    </Container>
+  );
 };

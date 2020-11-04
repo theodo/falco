@@ -36,11 +36,24 @@ class Audit(BaseModel):
         elif self.script is not None:
             project_name = self.script.project.name
             audit_name = self.script.name
-        return "%s — %s | % s" % (
+        return "%s — %s (%s) | % s" % (
             project_name,
             audit_name,
+            str(self.parameters),
             timezone.localtime(self.created_at),
         )
+
+    def get_project(self):
+        if self.page is not None:
+            return self.page.project
+        elif self.script is not None:
+            return self.script.project
+        else:
+            raise Exception("Malformed audit: no page and no script")
+
+    def get_wpt_instance_url(self):
+        project = self.get_project()
+        return project.wpt_instance_url
 
 
 class AuditStatusHistory(BaseModel):

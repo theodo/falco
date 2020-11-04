@@ -1,9 +1,13 @@
-import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 
 import GraphModal from './GraphModal';
 
-import { getCurrentAuditParametersName, getCurrentPageName, getCurrentProjectName, getCurrentScriptName } from 'redux/parameters/selectors';
+import {
+  getCurrentAuditParametersName,
+  getCurrentPageName,
+  getCurrentProjectName,
+  getCurrentScriptName,
+} from 'redux/parameters/selectors';
 
 import { isAuditResultLoading } from 'redux/auditResults/selectors';
 import { RootStateWithRouter } from 'redux/types';
@@ -15,9 +19,5 @@ const mapStateToProps = (state: RootStateWithRouter) => ({
   scriptName: getCurrentScriptName(state),
   isLoading: isAuditResultLoading(state),
 });
-const mapDispatchToProps = null;
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(injectIntl(GraphModal));
+export default connect(mapStateToProps)(GraphModal);

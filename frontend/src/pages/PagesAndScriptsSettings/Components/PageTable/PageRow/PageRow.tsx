@@ -1,22 +1,22 @@
 import Close from 'icons/Close';
 import * as React from 'react';
-import { InjectedIntlProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { toastr } from 'react-redux-toastr';
 import { PageType } from 'redux/entities/pages/types';
 import { colorUsage } from 'stylesheet';
 import { EditNameInput, EditUrlInput, PageButton, PageDeleteContainer } from '../PageTable.style';
 
 export interface OwnProps {
-  pageId: string,
-  projectId: string,
-  disabled: boolean,
+  pageId: string;
+  projectId: string;
+  disabled: boolean;
 }
 
 type Props = {
-  page?: PageType | null,
-  editPageRequest: (projectId: string, page: PageType) => void,
+  page?: PageType | null;
+  editPageRequest: (projectId: string, page: PageType) => void;
   deletePageOfProjectRequest: (projectId: string, pageId: string) => void;
-} & OwnProps & InjectedIntlProps;
+} & OwnProps;
 
 export const PageRow: React.FunctionComponent<Props> = ({
   pageId,
@@ -25,16 +25,17 @@ export const PageRow: React.FunctionComponent<Props> = ({
   editPageRequest,
   disabled,
   deletePageOfProjectRequest,
-  intl
 }) => {
+  const intl = useIntl();
+
   const [pageName, setPageName] = React.useState('');
-  const [pageUrl, setPageUrl] = React.useState('')
+  const [pageUrl, setPageUrl] = React.useState('');
 
   React.useEffect(
     () => {
       if (page) {
         setPageName(page.name);
-        setPageUrl(page.url)
+        setPageUrl(page.url);
       }
     },
     [page],
@@ -42,34 +43,34 @@ export const PageRow: React.FunctionComponent<Props> = ({
 
   const handleBlur = () => {
     if (page && (pageName !== page.name || pageUrl !== page.url)) {
-      editPageRequest(
-        projectId,
-        {
-          uuid: page.uuid,
-          name: pageName,
-          url: pageUrl
-        })
+      editPageRequest(projectId, {
+        uuid: page.uuid,
+        name: pageName,
+        url: pageUrl,
+      });
     }
   };
 
   const handleNameChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
-    setPageName(e.currentTarget.value)
-  }
+    setPageName(e.currentTarget.value);
+  };
 
   const handleUrlChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
-    setPageUrl(e.currentTarget.value)
-  }
+    setPageUrl(e.currentTarget.value);
+  };
 
   const handlePageDeletion = (currentProjectId: string, targetPageId: string) => {
-    toastr.confirm(intl.formatMessage({ id: 'Toastr.ProjectSettings.delete_page_confirm_question' }),
+    toastr.confirm(
+      intl.formatMessage({ id: 'Toastr.ProjectSettings.delete_page_confirm_question' }),
       {
-        onOk: () => deletePageOfProjectRequest(currentProjectId, targetPageId)
-      })
-  }
+        onOk: () => deletePageOfProjectRequest(currentProjectId, targetPageId),
+      },
+    );
+  };
 
   if (null === page || undefined === page) {
-    return (null);
-  };
+    return null;
+  }
 
   return (
     <React.Fragment>
@@ -87,13 +88,9 @@ export const PageRow: React.FunctionComponent<Props> = ({
       />
       <PageDeleteContainer>
         <PageButton onClick={() => handlePageDeletion(projectId, pageId)}>
-          <Close
-            color={colorUsage.projectSettingsIconColor}
-            width="13px"
-            strokeWidth="15"
-          />
+          <Close color={colorUsage.projectSettingsIconColor} width="13px" strokeWidth="15" />
         </PageButton>
-      </PageDeleteContainer >
+      </PageDeleteContainer>
     </React.Fragment>
-  )
-}
+  );
+};

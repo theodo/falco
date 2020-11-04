@@ -19,11 +19,17 @@ function* fetchAuditResultsFailedHandler(error: Error) {
 
 export function* fetchAuditResults(action: ActionType<typeof fetchAuditResultsRequest>) {
   const endpoint = `/api/audits/results`;
-  const { auditParametersId, pageOrScriptId, type, toDate, fromDate} = action.payload;
-  const payload: { audit_parameters: string; page?: string; script?: string, from_date?: string, to_date?: string } = {
+  const { auditParametersId, pageOrScriptId, type, toDate, fromDate } = action.payload;
+  const payload: {
+    audit_parameters: string;
+    page?: string;
+    script?: string;
+    from_date?: string;
+    to_date?: string;
+  } = {
     audit_parameters: auditParametersId,
     from_date: fromDate ? fromDate.format('YYYY-MM-DD') : undefined,
-    to_date: toDate ? toDate.format('YYYY-MM-DD') : undefined
+    to_date: toDate ? toDate.format('YYYY-MM-DD') : undefined,
   };
   switch (type) {
     case 'page':

@@ -1,3 +1,4 @@
+import Button from 'components/Button';
 import styled from 'styled-components';
 import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
@@ -33,11 +34,10 @@ export const LegendTitle = styled.div`
 `;
 /* stylelint-enable */
 
-export const MetricInfoIconContainer = styled.div`
+export const MetricInfoIconContainer = styled(Button)`
   width: 16px;
   height: 16px;
   margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
-  cursor: pointer;
 `;
 
 export const StyledTooltip = styled.div`
@@ -52,11 +52,10 @@ export const StyledTooltip = styled.div`
   justify-content: center;
 `;
 
-export const ExpandButton = styled.div`
-  cursor: pointer;
+export const ExpandButton = styled(Button)`
   height: 20px;
   width: 20px;
-  margin-left: auto
+  margin-left: auto;
 `;
 
 export const TooltipValue = styled.div`

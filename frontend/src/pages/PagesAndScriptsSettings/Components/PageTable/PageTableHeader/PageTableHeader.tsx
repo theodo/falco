@@ -1,19 +1,16 @@
 import * as React from 'react';
-import { InjectedIntlProps } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { NameHeader, UrlHeader } from '../PageTable.style';
 
-export const PageRowHeader: React.FunctionComponent<InjectedIntlProps> = ({
-    intl
-}) => {
-
+export const PageRowHeader: React.FunctionComponent = () => {
   return (
     <React.Fragment>
       <NameHeader>
-        {intl.formatMessage({ id: "ProjectSettings.page_name"})}
-      </NameHeader> 
+        <FormattedMessage id="ProjectSettings.page_name" />
+      </NameHeader>
       <UrlHeader>
-        {intl.formatMessage({ id: "ProjectSettings.page_url"})}
+        <FormattedMessage id="ProjectSettings.page_url" />
       </UrlHeader>
     </React.Fragment>
-  )
-}
+  );
+};

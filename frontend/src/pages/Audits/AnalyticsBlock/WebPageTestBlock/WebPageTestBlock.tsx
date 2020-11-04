@@ -2,21 +2,35 @@ import Select from 'components/Select';
 import dayjs from 'dayjs';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { ValueType } from 'react-select/lib/types';
 import { AuditResultType } from 'redux/auditResults/types';
 
 import { getWPTAuditId } from 'services/utils';
 import { getSpacing } from 'stylesheet';
-import Style from './WebPageTestBlock.style';
+import {
+  Container,
+  DateSelectorContainer,
+  DateTitle,
+  Form,
+  FormInputs,
+  FormLabel,
+  OptionContainer,
+  RadioButton,
+  RadioButtonLabel,
+  RadioButtonText,
+  SubTitle,
+  WebPageTestLink,
+} from './WebPageTestBlock.style';
 
 export interface OwnProps {
   auditResults: AuditResultType[];
   blockMargin: string;
 }
 
-const WebPageTestBlock: React.FunctionComponent<OwnProps & InjectedIntlProps> = props => {
-  const { auditResults, blockMargin, intl } = props;
+const WebPageTestBlock: React.FunctionComponent<OwnProps> = props => {
+  const { auditResults, blockMargin } = props;
+  const intl = useIntl();
 
   const [selectedAudit, setSelectedAudit] = React.useState(auditResults[0]);
   React.useEffect(() => setSelectedAudit(auditResults[0]), [auditResults]);
@@ -31,8 +45,8 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps & InjectedIntlProps> = 
     if (!dateComparatorDisplayed) {
       return selectedAudit.WPTResultsUserUrl;
     }
-    const privateInstanceRootUrl = selectedAudit.WPTResultsUserUrl.split('/result/')[0]
-    const baseUrl = `${privateInstanceRootUrl}/video/compare.php?tests=`
+    const privateInstanceRootUrl = selectedAudit.WPTResultsUserUrl.split('/result/')[0];
+    const baseUrl = `${privateInstanceRootUrl}/video/compare.php?tests=`;
     const selectedAuditId = getWPTAuditId(selectedAudit);
     const auditToCompareId = getWPTAuditId(auditToCompare);
 
@@ -106,23 +120,24 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps & InjectedIntlProps> = 
     }
   };
 
-  const radioOptions: any = ['latest', 'dateSelector', 'dateComparator'].reduce(
-    (cummulatedOptions, radioOptionType) => {
-      return {
-        ...cummulatedOptions,
-        [radioOptionType]: {
-          value: radioOptionType,
-          label: `Audits.webpagetest_${radioOptionType}_audit`,
-        },
-      };
-    },
-    {},
-  );
+  const radioOptions: { [key: string]: { value: string; label: string } } = [
+    'latest',
+    'dateSelector',
+    'dateComparator',
+  ].reduce((cummulatedOptions, radioOptionType) => {
+    return {
+      ...cummulatedOptions,
+      [radioOptionType]: {
+        value: radioOptionType,
+        label: `Audits.webpagetest_${radioOptionType}_audit`,
+      },
+    };
+  }, {});
 
   const optionBlock = (radioOptionType: 'latest' | 'dateSelector' | 'dateComparator') => {
     return (
-      <Style.OptionContainer margin={`0 0 ${getSpacing(4)} 0`}>
-        <Style.RadioButton
+      <OptionContainer margin={`0 0 ${getSpacing(4)} 0`}>
+        <RadioButton
           checked={isOptionSelected(radioOptionType)}
           type="radio"
           value={radioOptions[radioOptionType].value}
@@ -131,47 +146,47 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps & InjectedIntlProps> = 
           style={{ cursor: 'pointer' }}
           readOnly={true}
         />
-        <Style.RadioButtonLabel margin={`0 ${getSpacing(2)} 0 0`} />
-        <Style.RadioButtonText onClick={e => handleRadioButtonChange(e, radioOptionType)}>
+        <RadioButtonLabel margin={`0 ${getSpacing(2)} 0 0`} />
+        <RadioButtonText onClick={e => handleRadioButtonChange(e, radioOptionType)}>
           <FormattedMessage id={radioOptions[radioOptionType].label} />
-        </Style.RadioButtonText>
-      </Style.OptionContainer>
+        </RadioButtonText>
+      </OptionContainer>
     );
   };
 
   return (
-    <Style.Container margin={blockMargin}>
-      <Style.SubTitle margin={`0 0 ${getSpacing(4)} 0`} data-testid="title">
+    <Container margin={blockMargin}>
+      <SubTitle margin={`0 0 ${getSpacing(4)} 0`} data-testid="title">
         <FormattedMessage id="Audits.webpagetest_detailed_results" />
-      </Style.SubTitle>
-      <Style.Form>
-        <Style.FormLabel data-testid="subtitle">
+      </SubTitle>
+      <Form>
+        <FormLabel data-testid="subtitle">
           <FormattedMessage id="Audits.webpagetest_choose_results" />
-        </Style.FormLabel>
-        <Style.FormInputs>
+        </FormLabel>
+        <FormInputs>
           {optionBlock('latest')}
           {optionBlock('dateSelector')}
           {auditResults.length > 1 && optionBlock('dateComparator')}
-        </Style.FormInputs>
-      </Style.Form>
+        </FormInputs>
+      </Form>
       {(dateSelectorDisplayed || dateComparatorDisplayed) && (
-        <Style.Form data-testid="select-dates-form">
-          <Style.FormLabel>
+        <Form data-testid="select-dates-form">
+          <FormLabel>
             {dateComparatorDisplayed ? (
               <FormattedMessage id="Audits.webpagetest_select_dates" />
             ) : (
               <FormattedMessage id="Audits.webpagetest_select_date" />
             )}
-          </Style.FormLabel>
-          <Style.FormInputs>
-            <Style.DateSelectorContainer margin={`0 0 ${getSpacing(2)} 0`}>
-              <Style.DateTitle margin={`0 0 ${getSpacing(2)} 0`}>
+          </FormLabel>
+          <FormInputs>
+            <DateSelectorContainer margin={`0 0 ${getSpacing(2)} 0`}>
+              <DateTitle margin={`0 0 ${getSpacing(2)} 0`}>
                 {dateComparatorDisplayed ? (
                   'Date 1'
                 ) : (
                   <FormattedMessage id="Audits.webpagetest_date_label" />
                 )}
-              </Style.DateTitle>
+              </DateTitle>
               <Select
                 value={auditResultsSelectOptions('FROM_SELECTED').find(
                   auditResultSelectOption =>
@@ -180,10 +195,10 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps & InjectedIntlProps> = 
                 onChange={handleSelectDateChange('FROM_SELECTED')}
                 options={auditResultsSelectOptions('FROM_SELECTED')}
               />
-            </Style.DateSelectorContainer>
+            </DateSelectorContainer>
             {dateComparatorDisplayed && (
-              <Style.DateSelectorContainer>
-                <Style.DateTitle margin={`0 0 ${getSpacing(2)} 0`}>Date 2</Style.DateTitle>
+              <DateSelectorContainer>
+                <DateTitle margin={`0 0 ${getSpacing(2)} 0`}>Date 2</DateTitle>
                 <Select
                   value={auditResultsSelectOptions('FROM_TO_COMPARE').find(
                     auditResultSelectOption =>
@@ -192,15 +207,15 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps & InjectedIntlProps> = 
                   onChange={handleSelectDateChange('FROM_TO_COMPARE')}
                   options={auditResultsSelectOptions('FROM_TO_COMPARE')}
                 />
-              </Style.DateSelectorContainer>
+              </DateSelectorContainer>
             )}
-          </Style.FormInputs>
-        </Style.Form>
+          </FormInputs>
+        </Form>
       )}
-      <Style.WebPageTestLink href={getWebPageTestUrl()} target={'_blank'}>
+      <WebPageTestLink href={getWebPageTestUrl()} target={'_blank'}>
         <FormattedMessage id="Audits.webpagetest_results" />
-      </Style.WebPageTestLink>
-    </Style.Container>
+      </WebPageTestLink>
+    </Container>
   );
 };
 

@@ -1,5 +1,13 @@
+import Button from 'components/Button';
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, getSpacing, lineHeight } from 'stylesheet';
+import {
+  colorUsage,
+  fontFamily,
+  fontSize,
+  getSpacing,
+  inheritVar,
+  lineHeight
+} from 'stylesheet';
 
 interface AddInputProps {
   isAdding: boolean;
@@ -33,8 +41,10 @@ export const Script = styled.span`
   text-overflow: ellipsis;
 `;
 
-export const EditIconContainer = styled.div`
-  cursor: pointer;
+export const EditIconContainer = styled(Button)`
+  width: ${inheritVar};
+  height: ${inheritVar};
+  margin: unset;
 `;
 
 export const NameScript = styled.div`
@@ -47,23 +57,25 @@ export const ScriptHeader = styled.div`
   width: 70%;
 `;
 
-export const AddScriptButtonContainer = styled.div`
+export const AddScriptButtonContainer = styled(Button)`
   align-items: center;
-  cursor: pointer;
   display: flex;
   justify-content: center;
   flex-grow: 1;
+  font-size: ${inheritVar};
+  font-family: ${inheritVar};
+  color: ${inheritVar};
 
   &:hover {
     opacity: 0.5;
     background: white;
     transition-duration: 0.2s;
-  };
+  }
 `;
 
 export const AddScriptButtonLabel = styled.div`
   margin-left: ${getSpacing(4)};
-`
+`;
 export const ScriptDeleteContainer = styled.div`
   width: 5%;
   display: flex;

@@ -7,14 +7,13 @@ from django.urls import path, reverse
 from django.http import HttpResponseRedirect
 from django.template.response import TemplateResponse
 
-from projects.forms import ManualAuditForm
+from projects.forms import ManualAuditForm, ScriptForm
 from projects.models import (
     ProjectMemberRole,
     Page,
     Project,
     ProjectAuditParameters,
     Script,
-    ScriptForm,
     AvailableAuditParameters,
 )
 
@@ -54,7 +53,7 @@ class ProjectAdmin(admin.ModelAdmin):
         ProjectAuditParametersInline,
     ]
     exclude = ["screenshot_url"]
-    list_filter = ("is_active",)
+    list_filter = ("is_active", "wpt_instance_url")
     list_display = ("name", "project_actions", "is_active", "created_at")
 
     def get_urls(self):

@@ -1,5 +1,6 @@
+import Button from 'components/Button';
 import styled from 'styled-components';
-import { colorUsage, fontSize, getSpacing } from 'stylesheet';
+import {colorUsage, fontSize, getSpacing, inheritVar} from 'stylesheet';
 import { MessageType } from './MessagePill';
 
 interface Props {
@@ -33,7 +34,16 @@ export const MessagePillContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const MessageCloseContainer = styled.div`
+export const MessageCloseContainer = styled(Button)`
   text-align: right;
-  cursor: pointer;
+  width: fit-content;
+  height: 100%;
+  color: ${inheritVar};
+  font-size: ${inheritVar};
+  font-family: ${inheritVar};
+`;
+
+export const MessageCloseContainerText = styled.span`
+  height: 100%;
+  display: block;
 `;

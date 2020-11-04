@@ -1,1 +1,1 @@
-export { default } from './EnvironmentSettings.wrap';
+export { default } from './EnvironmentSettings';

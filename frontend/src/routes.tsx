@@ -16,7 +16,7 @@ const EnvironmentSettings = lazy(() => import('./pages/EnvironmentSettings'));
 const PagesAndScriptsSettings = lazy(() => import('./pages/PagesAndScriptsSettings'));
 const MembersSettings = lazy(() => import('./pages/MembersSettings'));
 
-interface RouteDefinition {
+export interface RouteDefinition {
   path: string;
   component: React.FunctionComponent<any>;
   exact: boolean;
@@ -71,7 +71,7 @@ export const routeDefinitions: Record<string, RouteDefinition> = {
     exact: true,
     strict: false,
     isAuthenticated: true,
-    id: 'ProjectSettings.general_settings'
+    id: 'ProjectSettings.general_settings',
   },
   environmentSettings: {
     path: '/project/:projectId/settings/environment',
@@ -79,7 +79,7 @@ export const routeDefinitions: Record<string, RouteDefinition> = {
     exact: true,
     strict: false,
     isAuthenticated: true,
-    id: 'ProjectSettings.project_audit_parameters'
+    id: 'ProjectSettings.project_audit_parameters',
   },
   pagesAndScriptsSettings: {
     path: '/project/:projectId/settings/pages-scripts',
@@ -87,7 +87,7 @@ export const routeDefinitions: Record<string, RouteDefinition> = {
     exact: true,
     strict: false,
     isAuthenticated: true,
-    id: 'ProjectSettings.pages_and_scripts'
+    id: 'ProjectSettings.pages_and_scripts',
   },
   membersSettings: {
     path: '/project/:projectId/settings/members',
@@ -95,7 +95,7 @@ export const routeDefinitions: Record<string, RouteDefinition> = {
     exact: true,
     strict: false,
     isAuthenticated: true,
-    id: 'ProjectSettings.project_members'
+    id: 'ProjectSettings.project_members',
   },
   auditsDetails: {
     path: '/project/:projectId/audits/:pageOrScriptId/audit-parameters/:auditParametersId',
@@ -154,13 +154,13 @@ const PrivateRoute = ({ component, store, ...other }: any) => {
         getIsAuthenticated(store) ? (
           <RouteComponent {...props} />
         ) : (
-            <Redirect
-              to={{
-                pathname: routeDefinitions.landing.path,
-                state: { from: props.location.pathname },
-              }}
-            />
-          )
+          <Redirect
+            to={{
+              pathname: routeDefinitions.landing.path,
+              state: { from: props.location.pathname },
+            }}
+          />
+        )
       }
     />
   );

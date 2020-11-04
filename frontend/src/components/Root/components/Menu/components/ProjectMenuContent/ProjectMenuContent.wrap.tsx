@@ -1,4 +1,3 @@
-import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import {
   getCurrentAuditParametersId,
@@ -9,14 +8,12 @@ import {
   getCurrentScriptStepId,
 } from 'redux/parameters/selectors';
 import { RootStateWithRouter } from 'redux/types';
-import { getUser } from 'redux/user/selectors';
 
 import { Dispatch } from 'redux';
 import { launchAuditAction } from 'redux/entities/audits';
 import { ProjectMenuContent } from './ProjectMenuContent';
 
 const mapStateToProps = (state: RootStateWithRouter) => ({
-  user: getUser(state),
   auditParametersId: getCurrentAuditParametersId(state),
   currentPageId: getCurrentPageId(state),
   auditParametersList: getCurrentProjectAuditParameters(state),
@@ -32,4 +29,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(injectIntl(ProjectMenuContent));
+)(ProjectMenuContent);

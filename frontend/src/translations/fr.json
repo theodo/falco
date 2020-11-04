@@ -1,5 +1,6 @@
 {
   "Header": {
+    "go_to_admin": "Accèder à l'interface d'admin",
     "logo_title_landing": "Page d'accueil",
     "logo_title_app": "Rafraîchir la page",
     "login_link": "SE CONNECTER",
@@ -8,7 +9,8 @@
     "last_audit_intro": "Dernier audit",
     "logout_link": "Se déconnecter",
     "see_the_docs": "Voir la documentation",
-    "signup_link": "S’INSCRIRE"
+    "signup_link": "S’INSCRIRE",
+    "skip_to_content": "Accéder au contenu"
   },
   "Login": {
     "username_label": "Nom d'utilisateur",
@@ -206,11 +208,11 @@
   "Welcome": {
     "title": "Bienvenue sur Falco !",
     "no_project": "Vous n'avez pour l'instant accès à aucun projet.",
-    "create_project": "Pour créer un nouveau projet, veuillez contacter Jaafar (jaafarr@theodo.fr) ou Nicolas (nicolasgo@theodo.fr).",
+    "create_project": "Pour créer un nouveau projet, veuillez vous référer à documentation : {link}",
     "join_project": "Pour rejoindre un projet existant, veuillez contacter l'administrateur du projet."
   },
   "Toastr": {
-    "ProjectSettings":{
+    "ProjectSettings": {
       "success_title": "Succès",
       "error_title": "Échec",
       "error_message": "Une erreur est survenue, veuillez réessayer",

@@ -12,6 +12,9 @@ class Command(BaseCommand):
         schedule_2, _ = CrontabSchedule.objects.get_or_create(
             minute="0", hour="2", day_of_week="*", day_of_month="*", month_of_year="*"
         )
+        schedule_3, _ = CrontabSchedule.objects.get_or_create(
+            minute="0", hour="3", day_of_week="*", day_of_month="*", month_of_year="*"
+        )
         schedule_7, _ = CrontabSchedule.objects.get_or_create(
             minute="0", hour="7", day_of_week="*", day_of_month="*", month_of_year="*"
         )
@@ -48,6 +51,11 @@ class Command(BaseCommand):
             crontab=schedule_2,
             name="clean old audits statuses",
             task="audits.tasks.clean_old_audit_statuses",
+        )
+        PeriodicTask.objects.create(
+            crontab=schedule_3,
+            name="clean unfinished audits",
+            task="audits.tasks.clean_unfinished_audits",
         )
 
         schedule_seconds, _ = IntervalSchedule.objects.get_or_create(

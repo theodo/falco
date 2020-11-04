@@ -1,7 +1,7 @@
 import React, { MouseEvent, useState } from 'react';
 
 import Logo from 'components/Logo';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { routeDefinitions } from 'routes';
 import { colorUsage } from 'stylesheet';
 import AccountMenu from './components/AccountMenu';
@@ -15,10 +15,11 @@ import {
   HeaderContent,
   HeaderLink,
   HeaderMenu,
+  HeaderMenuItem,
+  HeaderMenuItemContent,
   LogoBlock,
   LogoContainer,
   LogoTitle,
-  MenusContainer,
   Nav,
 } from './Header.style';
 
@@ -27,54 +28,27 @@ interface Props {
   currentURL: string;
   isUserAuthenticated: boolean;
   isMenuDisplayed: boolean;
+  fetchUserRequest: () => void;
 }
 
-export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
+export const Header: React.FunctionComponent<Props> = ({
   currentURL,
+  fetchUserRequest,
   isUserAuthenticated,
   isMenuDisplayed,
-  intl,
 }) => {
+  const intl = useIntl();
+
   const [isAccountMenuVisible, setIsAccountMenuVisible] = React.useState(false);
-  const [accountMenuRight, setAccountMenuRight] = React.useState('auto');
   const [isProjectsMenuVisible, setIsProjectsMenuVisible] = React.useState(false);
-  const [projectsMenuRight, setProjectsMenuRight] = React.useState('auto');
-  const [MenuHasBeenPositionned, setMenuHasBeenPositionned] = React.useState(false);
-
-  const headerContainerRef = React.useRef<HTMLDivElement>(null);
-  const accountMenuButtonRef = React.useRef<HTMLLIElement>(null);
-  const projectsMenuButtonRef = React.useRef<HTMLLIElement>(null);
 
   React.useEffect(
     () => {
-      if (headerContainerRef.current && accountMenuButtonRef.current) {
-        setAccountMenuRight(
-          Math.floor(
-            headerContainerRef.current.getBoundingClientRect().right -
-              accountMenuButtonRef.current.getBoundingClientRect().right -
-              15,
-          ) + 'px',
-        );
-        setMenuHasBeenPositionned(true);
+      if (isUserAuthenticated) {
+        fetchUserRequest();
       }
     },
-    [isAccountMenuVisible],
-  );
-
-  React.useEffect(
-    () => {
-      if (headerContainerRef.current && projectsMenuButtonRef.current) {
-        setProjectsMenuRight(
-          Math.floor(
-            headerContainerRef.current.getBoundingClientRect().right -
-              projectsMenuButtonRef.current.getBoundingClientRect().right -
-              15,
-          ) + 'px',
-        );
-        setMenuHasBeenPositionned(true);
-      }
-    },
-    [isProjectsMenuVisible],
+    [isUserAuthenticated, fetchUserRequest],
   );
 
   const toggleAccountMenuVisibility = (event: MouseEvent) => {
@@ -118,13 +92,13 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
   const isLandingPage = currentURL === routeDefinitions.landing.path;
   const shouldDisplayConnectedUserHeader = isUserAuthenticated;
 
-  const [scrollPosition, setScrollPostition] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState(0);
   window.addEventListener('scroll', () => {
-    setScrollPostition(window.scrollY);
+    setScrollPosition(window.scrollY);
   });
 
   return (
-    <HeaderContainer ref={headerContainerRef}>
+    <HeaderContainer>
       <HeaderBlock shouldHaveShadow={isLandingPage && scrollPosition > 10}>
         <HeaderMenu isMenuDisplayed={isMenuDisplayed}>
           <LogoContainer
@@ -147,16 +121,26 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
         </HeaderMenu>
         <HeaderContent shouldHaveShadow={shouldDisplayConnectedUserHeader && scrollPosition > 10}>
           {shouldDisplayConnectedUserHeader ? (
-            <Nav>
+            <Nav role="navigation">
               <HeaderButtonsBlock>
-                <HeaderButton onClick={toggleProjectsMenuVisibility} ref={projectsMenuButtonRef}>
-                  <FormattedMessage id="Header.projects_button" />
+                <HeaderMenuItem onClick={toggleProjectsMenuVisibility} role="menu">
+                  <HeaderButton>
+                    <FormattedMessage id="Header.projects_button" />
+                  </HeaderButton>
                   <HeaderButtonArrow />
-                </HeaderButton>
-                <HeaderButton onClick={toggleAccountMenuVisibility} ref={accountMenuButtonRef}>
-                  <FormattedMessage id="Header.login_button" />
+                </HeaderMenuItem>
+                <HeaderMenuItemContent right="270">
+                  {isProjectsMenuVisible && <ProjectsMenu />}
+                </HeaderMenuItemContent>
+                <HeaderMenuItem onClick={toggleAccountMenuVisibility} role="menu">
+                  <HeaderButton>
+                    <FormattedMessage id="Header.login_button" />
+                  </HeaderButton>
                   <HeaderButtonArrow />
-                </HeaderButton>
+                </HeaderMenuItem>
+                <HeaderMenuItemContent right="100">
+                  {isAccountMenuVisible && <AccountMenu />}
+                </HeaderMenuItemContent>
               </HeaderButtonsBlock>
             </Nav>
           ) : (
@@ -171,20 +155,6 @@ export const Header: React.FunctionComponent<Props & InjectedIntlProps> = ({
           )}
         </HeaderContent>
       </HeaderBlock>
-      {shouldDisplayConnectedUserHeader && (
-        <MenusContainer>
-          <ProjectsMenu
-            isVisible={isProjectsMenuVisible && MenuHasBeenPositionned}
-            position={'absolute'}
-            right={projectsMenuRight}
-          />
-          <AccountMenu
-            isVisible={isAccountMenuVisible && MenuHasBeenPositionned}
-            position={'absolute'}
-            right={accountMenuRight}
-          />
-        </MenusContainer>
-      )}
     </HeaderContainer>
   );
 };

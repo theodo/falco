@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import React from 'react';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
 import { getSpacing } from 'stylesheet';
@@ -23,24 +23,14 @@ import {
   ProjectItemTitleBlock,
 } from './ProjectsMenu.style';
 
-interface OwnProps {
+interface StateProps {
   currentProject?: ProjectType | null;
-  isVisible: boolean;
-  position?: string;
   projects: Array<ProjectType | null> | null;
-  right?: string | null;
 }
 
-type Props = OwnProps & InjectedIntlProps;
+const ProjectsMenu: React.FunctionComponent<StateProps> = ({ currentProject, projects }) => {
+  const intl = useIntl();
 
-export const ProjectsMenu: React.FunctionComponent<Props> = ({
-  currentProject,
-  intl,
-  isVisible,
-  position,
-  projects,
-  right,
-}) => {
   const renderCurrentProjectItem = () =>
     currentProject && (
       <CurrentProjectItem>
@@ -48,6 +38,7 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
           <CurrentProjectItemSnapshot
             src={currentProject.screenshotUrl}
             margin={`0 ${getSpacing(6)} 0 0`}
+            alt=""
           />
         </ProjectItemSnapshotContainer>
         <CurrentProjectItemTitleBlock>
@@ -55,7 +46,7 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
             <CurrentProjectItemTitle>{currentProject.name}</CurrentProjectItemTitle>
           </CurrentProjectItemTitleContainer>
           <ProjectItemLastAudit>
-            {intl.formatMessage({ id: `Header.last_audit_intro` })}{' '}
+            <FormattedMessage id="Header.last_audit_intro" />{' '}
             {dayjs(currentProject.latestAuditAt)
               .locale(intl.locale)
               .fromNow()}
@@ -74,12 +65,13 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
           <ProjectItemSnapshot
             src={project.screenshotUrl}
             margin={`0 ${getSpacing(4)} 0 0`}
+            alt=""
           />
         </ProjectItemSnapshotContainer>
         <ProjectItemTitleBlock>
           <ProjectItemTitle>{project.name}</ProjectItemTitle>
           <ProjectItemLastAudit>
-            {intl.formatMessage({ id: `Header.last_audit_intro` })}{' '}
+            <FormattedMessage id="Header.last_audit_intro" />{' '}
             {dayjs(project.latestAuditAt)
               .locale(intl.locale)
               .fromNow()}
@@ -88,34 +80,33 @@ export const ProjectsMenu: React.FunctionComponent<Props> = ({
       </ProjectItem>
     );
 
-  if (isVisible) {
-    if (null === projects) {
-      return (
-        <Container position={position} right={right}>
-          <Loader minHeight={'200px'} />
-        </Container>
-      );
-    }
-
-    if (0 === projects.length) {
-      return (
-        <Container position={position} right={right}>
-          <MessagePill messageType="error">
-            <FormattedMessage id="Projects.no_project_error" />
-          </MessagePill>
-        </Container>
-      );
-    }
+  if (null === projects) {
     return (
-      <Container position={position} right={right}>
-        {renderCurrentProjectItem()}
-        <ProjectItemContainer>
-          {projects
-            .filter((project: ProjectType | null) => currentProject !== project)
-            .map((project: ProjectType | null) => renderProjectItem(project))}
-        </ProjectItemContainer>
+      <Container>
+        <Loader minHeight={'200px'} />
       </Container>
     );
   }
-  return <div />;
+
+  if (0 === projects.length) {
+    return (
+      <Container>
+        <MessagePill messageType="error">
+          <FormattedMessage id="Projects.no_project_error" />
+        </MessagePill>
+      </Container>
+    );
+  }
+  return (
+    <Container>
+      {renderCurrentProjectItem()}
+      <ProjectItemContainer>
+        {projects
+          .filter((project: ProjectType | null) => currentProject !== project)
+          .map((project: ProjectType | null) => renderProjectItem(project))}
+      </ProjectItemContainer>
+    </Container>
+  );
 };
+
+export default ProjectsMenu;

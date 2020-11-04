@@ -36,7 +36,6 @@ const Styles = {
     white-space: nowrap;
     border-radius: 6px;
     border: none;
-    outline: none;
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.button};
     font-weight: ${fontWeight.button};

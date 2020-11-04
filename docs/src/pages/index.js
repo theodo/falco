@@ -22,27 +22,28 @@ const features = [
         Falco runs performance audits several times a day, and offers a
         historical overview to monitor its evolution.
       </>
-    )
+    ),
   },
   {
     title: "Monitor key performance metrics",
     imageUrl: "img/monitoring.svg",
     description: (
       <>
-        Falco monitors key performance metrics, and lets you choose which one you want
-        to monitor—Time to Interactive, First Meaningful Paint, Speed Index…
+        Falco monitors key performance metrics, and lets you choose which one
+        you want to monitor—Time to Interactive, First Meaningful Paint, Speed
+        Index…
       </>
-    )
+    ),
   },
   {
     title: "Invite and involve your whole team",
     imageUrl: "img/team.svg",
     description: (
       <>
-        Invite your team to Falco to make collaboration around performance issues
-        better, with fine-grained user rights management.
+        Invite your team to Falco to make collaboration around performance
+        issues better, with fine-grained user rights management.
       </>
-    )
+    ),
   },
   {
     title: "Audit individual URLs or entire user journeys",
@@ -52,7 +53,7 @@ const features = [
         You can both test the performance of individual, public URLs or complete
         user journeys—it even works for Single Page Apps!
       </>
-    )
+    ),
   },
   {
     title: "View and compare WebPageTest results",
@@ -62,19 +63,18 @@ const features = [
         Compare side-by-side the WebPageTest results of your app before and
         after a specific release to see its impact on performance.
       </>
-    )
+    ),
   },
   {
     title: "Use your own WebPageTest Private Instance",
     imageUrl: "img/private.svg",
     description: (
       <>
-        You can choose to use your own WebPageTest Private Instance for more frequent audits,
-        or rely on the public one.
+        You can choose to use your own WebPageTest Private Instance for more
+        frequent audits, or rely on the public one.
       </>
-    )
-  }
-
+    ),
+  },
 ];
 
 function Home() {
@@ -106,7 +106,7 @@ function Home() {
                     "button button--primary button--lg",
                     styles.addFocus
                   )}
-                  href="https://heroku.com/deploy?template=https://github.com/theodo/falco/tree/1.1.3"
+                  href="https://heroku.com/deploy?template=https://github.com/theodo/falco/tree/1.1.5"
                   target="_blank"
                 >
                   Deploy to Heroku
@@ -125,10 +125,17 @@ function Home() {
               />
             </div>
           </div>
-            <div className={classnames("text--center", styles.infoPill)}>
-              <p>Looking for Theodo’s Falco instance? Head to its new URL: <a href="https://falco.theo.do">https://falco.theo.do</a>.</p>
-              <p>To see a demo, log in to <a href="https://falco.theo.do">https://falco.theo.do</a> with the credentials <code>demo / demodemo</code>.</p>
-            </div>
+          <div className={classnames("text--center", styles.infoPill)}>
+            <p>
+              Looking for Theodo’s Falco instance? Head to its new URL:{" "}
+              <a href="https://falco.theo.do">https://falco.theo.do</a>.
+            </p>
+            <p>
+              To see a demo, log in to{" "}
+              <a href="https://falco.theo.do">https://falco.theo.do</a> with the
+              credentials <code>demo / demodemo</code>.
+            </p>
+          </div>
         </div>
       </header>
       <main>
@@ -140,7 +147,11 @@ function Home() {
             <div className={classnames("row", styles.usersImages)}>
               <div
                 className="col col--2"
-                style={{ display: "flex", justifyContent: "center", marginBottom: "30px"}}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginBottom: "30px",
+                }}
               >
                 <img
                   src={useBaseUrl("img/bnp.png")}
@@ -149,7 +160,11 @@ function Home() {
               </div>
               <div
                 className="col col--2"
-                style={{ display: "flex", justifyContent: "center", marginBottom: "30px" }}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginBottom: "30px",
+                }}
               >
                 <img
                   src={useBaseUrl("img/choose.png")}
@@ -158,39 +173,43 @@ function Home() {
               </div>
               <div
                 className="col col--2"
-                style={{ display: "flex", justifyContent: "center", marginBottom: "30px" }}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginBottom: "30px",
+                }}
               >
-                <img
-                  src={useBaseUrl("img/tarkett.png")}
-                  alt="Tarkett logo"
-                />
+                <img src={useBaseUrl("img/tarkett.png")} alt="Tarkett logo" />
               </div>
               <div
                 className="col col--2"
-                style={{ display: "flex", justifyContent: "center", marginBottom: "30px" }}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginBottom: "30px",
+                }}
               >
-                <img
-                  src={useBaseUrl("img/voodoo.png")}
-                  alt="Voodoo logo"
-                />
+                <img src={useBaseUrl("img/voodoo.png")} alt="Voodoo logo" />
               </div>
               <div
                 className="col col--2"
-                style={{ display: "flex", justifyContent: "center", marginBottom: "30px" }}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginBottom: "30px",
+                }}
               >
-                <img
-                  src={useBaseUrl("img/evaneos.png")}
-                  alt="Evaneos logo"
-                />
+                <img src={useBaseUrl("img/evaneos.png")} alt="Evaneos logo" />
               </div>
               <div
                 className="col col--2"
-                style={{ display: "flex", justifyContent: "center", marginBottom: "30px" }}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginBottom: "30px",
+                }}
               >
-                <img
-                  src={useBaseUrl("img/oscaro.png")}
-                  alt="Oscaro logo"
-                />
+                <img src={useBaseUrl("img/oscaro.png")} alt="Oscaro logo" />
               </div>
             </div>
           </div>

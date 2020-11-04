@@ -1,3 +1,4 @@
+import Button from 'components/Button';
 import styled from 'styled-components';
 import {
   colorUsage,
@@ -8,13 +9,12 @@ import {
   zIndex,
 } from 'stylesheet';
 
-export const CloseContainer = styled.div`
+export const CloseContainer = styled(Button)`
   position: absolute;
   top: 40px;
   left: 1350px;
   width: 30px;
   height: 30px;
-  cursor: pointer;
   z-index: ${zIndex.graphModalCloseButton};
 `;
 

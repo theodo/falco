@@ -1,23 +1,25 @@
-import { InjectedFormikProps } from 'formik';
 import React from 'react';
-import { InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import Style from './Input.style';
 
-type Props = InjectedIntlProps & InjectedFormikProps<any, any>;
+interface Props {
+  field: string;
+  label: string;
+  type: string;
+  name: string;
+  error: string;
+  disabled: boolean;
+}
 
-export const Input: React.FunctionComponent<Props> = ({
-  disabled,
-  error,
-  field,
-  intl,
-  label,
-  name,
-  type,
-}) => {
+const Input: React.FunctionComponent<Props> = ({ disabled, error, field, label, name, type }) => {
+  const intl = useIntl();
+
   const [isActive, setIsActive] = React.useState(false);
   const [value, setValue] = React.useState('');
 
-  const componentsClassName = `${(!disabled  && (isActive || value || error)) ? 'active' : ''}  ${error ? ' error' : ''}`;
+  const componentsClassName = `${!disabled && (isActive || value || error) ? 'active' : ''}  ${
+    error ? ' error' : ''
+  }`;
 
   return (
     <Style.Field>
@@ -28,15 +30,17 @@ export const Input: React.FunctionComponent<Props> = ({
         onFocusCapture={() => setIsActive(true)}
         onBlurCapture={() => setIsActive(false)}
         onChangeCapture={event => {
-            setValue((event.target as HTMLInputElement).value);
+          setValue((event.target as HTMLInputElement).value);
         }}
         disabled={disabled}
         className={componentsClassName}
         {...field}
       />
       <Style.Label className={componentsClassName}>
-        {error ? intl.formatMessage({ id: error }) : intl.formatMessage({ id: label })}
+        {error ? <FormattedMessage id={error} /> : <FormattedMessage id={label} />}
       </Style.Label>
     </Style.Field>
   );
 };
+
+export default Input;

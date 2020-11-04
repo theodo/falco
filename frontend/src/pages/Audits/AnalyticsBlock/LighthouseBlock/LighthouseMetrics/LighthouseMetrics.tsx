@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { AuditResultType, LighthouseMetricType } from 'redux/auditResults/types';
-import { LIGHTHOUSE_AVERAGE_SCORE_THRESHOLD, LIGHTHOUSE_PASS_SCORE_THRESHOLD } from '../LighthouseScore/LighthouseScore';
+import {
+  LIGHTHOUSE_AVERAGE_SCORE_THRESHOLD,
+  LIGHTHOUSE_PASS_SCORE_THRESHOLD,
+} from '../LighthouseScore/LighthouseScore';
 import {
   Column,
   ColumnsContainer,
@@ -33,7 +36,11 @@ const LighthouseMetrics: React.FunctionComponent<OwnProps> = ({ auditResult }) =
   const PASS = 'PASS';
 
   const metricState = (score: number): 'FAIL' | 'AVERAGE' | 'PASS' => {
-    return score < LIGHTHOUSE_AVERAGE_SCORE_THRESHOLD ? FAIL : score < LIGHTHOUSE_PASS_SCORE_THRESHOLD ? AVERAGE : PASS;
+    return score < LIGHTHOUSE_AVERAGE_SCORE_THRESHOLD
+      ? FAIL
+      : score < LIGHTHOUSE_PASS_SCORE_THRESHOLD
+      ? AVERAGE
+      : PASS;
   };
 
   return (
@@ -42,16 +49,16 @@ const LighthouseMetrics: React.FunctionComponent<OwnProps> = ({ auditResult }) =
         <FormattedMessage id="Audits.lighthouse_header" />
       </MetricsHeader>
       <ColumnsContainer>
-        {metrics.map((column: LighthouseMetricType[]) => (
-          <Column>
+        {metrics.map((column: LighthouseMetricType[], colNum) => (
+          <Column key={colNum}>
             {column.map((metric: LighthouseMetricType) => (
-              <Metric>
+              <Metric key={metric}>
                 <MetricInnerwrap state={metricState(auditResult[metric].score)}>
                   <MetricTitle>
                     <FormattedMessage id={`Metrics.${metric}`} />
                   </MetricTitle>
                   <MetricValue state={metricState(auditResult[metric].score)}>
-                    {auditResult[metric].displayed_value}
+                    {auditResult[metric].displayedValue}
                   </MetricValue>
                 </MetricInnerwrap>
               </Metric>

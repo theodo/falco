@@ -1,5 +1,6 @@
 {
   "Header": {
+    "go_to_admin": "Go to the admin interface",
     "logo_title_landing": "Home page",
     "logo_title_app": "Refresh the page",
     "login_link": "LOG IN",
@@ -8,7 +9,8 @@
     "last_audit_intro": "Last audit",
     "logout_link": "Log out",
     "see_the_docs": "See the docs",
-    "signup_link": "SIGN UP"
+    "signup_link": "SIGN UP",
+    "skip_to_content": "Skip to content"
   },
   "Login": {
     "username_label": "Username",
@@ -190,7 +192,7 @@
     },
     "WPTMetricRepeatViewVisuallyComplete": {
       "name": "Visually Complete (Repeat View)",
-      "description": "Triggered when 100% of the pixels on the page reached their final position (for the first visit on website)"
+      "description": "Triggered when 100% of the pixels on the page reached their final position (when coming back to website)"
     },
     "WPTMetricLighthousePerformance": {
       "name": "Lighthouse Performance Score",
@@ -206,11 +208,11 @@
   "Welcome": {
     "title": "Welcome to Falco !",
     "no_project": "You don't have access to any project for now.",
-    "create_project": "To create a new project, please contact Jaafar (jaafarr@theodo.fr) or Nicolas (nicolasgo@theodo.fr).",
+    "create_project": "To create a new project, please head to the documentation at: {link}",
     "join_project": "To join an existing project, please contact the project administrator."
   },
   "Toastr": {
-    "ProjectSettings":{
+    "ProjectSettings": {
       "success_title": "Success",
       "error_title": "Failure",
       "error_message": "An error occured, please try again",

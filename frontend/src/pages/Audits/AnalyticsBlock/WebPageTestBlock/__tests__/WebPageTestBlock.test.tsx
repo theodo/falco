@@ -7,32 +7,18 @@ import {
   render,
 } from '@testing-library/react';
 import dayjs from 'dayjs';
-import 'jest-dom/extend-expect';
+import '@testing-library/jest-dom/extend-expect';
 import React from 'react';
-import { addLocaleData, IntlProvider } from 'react-intl';
-import intlfr from 'react-intl/locale-data/fr';
+import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 
 import { state } from '__fixtures__/state';
-import fr from 'translations/fr.json';
+import enMessages from 'translations/en.json';
 import WebPageTestBlock from '..';
+import { flattenMessages } from 'services/i18n/intl';
 
 afterEach(cleanup);
-addLocaleData(intlfr);
-
-// TODO: To remove once we figure out how to pass translations
-const consoleError = console.error.bind(console);
-// eslint-disable-next-line
-console.error = (message: string, ...args: any) => {
-  if (
-    message.startsWith('[React Intl] Cannot format message') ||
-    message.startsWith('[React Intl] Missing message')
-  ) {
-    return;
-  }
-  consoleError(message, ...args);
-};
 
 const mockStore = configureMockStore();
 const store = mockStore(state);
@@ -65,15 +51,14 @@ const pageAuditResult = {
   scriptStepNumber: null,
 };
 
-const pageAuditResultToCompare = pageAuditResult
-pageAuditResultToCompare.auditId ='6666'
-
+const pageAuditResultToCompare = pageAuditResult;
+pageAuditResultToCompare.auditId = '6666';
 
 describe('WebPageTestBlock', () => {
   describe('Date selection block', () => {
     const { container } = render(
       <Provider store={store}>
-        <IntlProvider locale={'fr'} messages={fr}>
+        <IntlProvider locale="en" messages={flattenMessages(enMessages)}>
           <WebPageTestBlock
             auditResults={[pageAuditResult, pageAuditResultToCompare]}
             blockMargin=""

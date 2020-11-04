@@ -1,43 +1,35 @@
 import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import ReduxToastr, { toastr } from 'react-redux-toastr';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { RouteComponentProps } from 'react-router';
-import { ProjectToastrDisplayType, ProjectType } from 'redux/entities/projects/types';
-import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
-import { UserState } from 'redux/user';
+import { useProjectById, useToastr } from 'redux/entities/projects/hooks';
+import { useCurrentUser } from 'redux/user/selectors';
 import ProjectDetailsInput from './Components/ProjectDetailsInput';
-import Style from './GeneralSettings.style';
-
-export type OwnProps = {} & RouteComponentProps<{
-  projectId: string;
-}>;
+import {
+  Container,
+  ExplanationText,
+  PageTitle,
+  SettingsFieldContainer,
+  Title,
+} from './GeneralSettings.style';
 
 type Props = {
-  currentUser: UserState;
-  fetchProjectsRequest: (projectId: string) => void;
-  project?: ProjectType | null;
-  toastrDisplay: ProjectToastrDisplayType;
-  setProjectToastrDisplay: (toastrDisplay: ProjectToastrDisplayType) => void;
   editProjectDetailsRequest: (
     projectId: string,
     payload: { name: string; wpt_api_key: string; wpt_instance_url: string },
   ) => void;
-} & OwnProps &
-  InjectedIntlProps;
+} & RouteComponentProps<{
+  projectId: string;
+}>;
 
-const GeneralSettings: React.FunctionComponent<Props> = ({
-  fetchProjectsRequest,
-  match,
-  intl,
-  project,
-  currentUser,
-  toastrDisplay,
-  setProjectToastrDisplay,
-  editProjectDetailsRequest,
-}) => {
+const GeneralSettings: React.FunctionComponent<Props> = ({ match, editProjectDetailsRequest }) => {
+  const intl = useIntl();
+  const currentUser = useCurrentUser();
+  const { currentToastrDisplay, resetToastrDisplay } = useToastr();
+
   interface UserOption {
     value: string;
     label: string;
@@ -51,7 +43,7 @@ const GeneralSettings: React.FunctionComponent<Props> = ({
     location_group: string;
   }
 
-  useFetchProjectIfUndefined(fetchProjectsRequest, match.params.projectId, project);
+  const project = useProjectById(match.params.projectId);
 
   const [projectName, setProjectName] = React.useState('');
   const [projectApiKey, setProjectApiKey] = React.useState('');
@@ -68,8 +60,8 @@ const GeneralSettings: React.FunctionComponent<Props> = ({
 
   React.useEffect(
     () => {
-      if ('' !== toastrDisplay) {
-        switch (toastrDisplay) {
+      if ('' !== currentToastrDisplay) {
+        switch (currentToastrDisplay) {
           case 'editProjectDetailsSuccess':
             toastr.success(
               intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
@@ -84,27 +76,27 @@ const GeneralSettings: React.FunctionComponent<Props> = ({
             break;
         }
 
-        setProjectToastrDisplay('');
+        resetToastrDisplay();
       }
     },
-    [toastrDisplay, setProjectToastrDisplay, intl],
+    [currentToastrDisplay, resetToastrDisplay, intl],
   );
 
   if (project === undefined) {
     return (
-      <Style.Container>
+      <Container>
         <Loader />
-      </Style.Container>
+      </Container>
     );
   }
 
   if (project === null || currentUser === null) {
     return (
-      <Style.Container>
+      <Container>
         <MessagePill messageType="error">
           <FormattedMessage id="Project.project_error" />
         </MessagePill>
-      </Style.Container>
+      </Container>
     );
   }
 
@@ -129,40 +121,40 @@ const GeneralSettings: React.FunctionComponent<Props> = ({
   };
 
   return (
-    <Style.Container>
-      <Style.PageTitle>
-        {intl.formatMessage({ id: 'ProjectSettings.settings' }) + ' - ' + project.name}
-      </Style.PageTitle>
-      <Style.Title>
+    <Container>
+      <PageTitle>
+        <FormattedMessage id="ProjectSettings.settings" /> - {project.name}
+      </PageTitle>
+      <Title>
         <FormattedMessage id="ProjectSettings.general_settings" />
-      </Style.Title>
-      <Style.SettingsFieldContainer>
+      </Title>
+      <SettingsFieldContainer>
         <ProjectDetailsInput
           label="ProjectSettings.name"
           onChange={handleNameChange}
           onBlur={sendEditRequestOnBlur}
           value={projectName}
         />
-      </Style.SettingsFieldContainer>
-      <Style.SettingsFieldContainer>
+      </SettingsFieldContainer>
+      <SettingsFieldContainer>
         <ProjectDetailsInput
           label="ProjectSettings.wpt_key"
           onChange={handleApiKeyChange}
           onBlur={sendEditRequestOnBlur}
           value={projectApiKey}
         />
-      </Style.SettingsFieldContainer>
-      <Style.SettingsFieldContainer>
+      </SettingsFieldContainer>
+      <SettingsFieldContainer>
         <ProjectDetailsInput
           label="ProjectSettings.wpt_instance_url"
           onChange={handleInstanceURLChange}
           onBlur={sendEditRequestOnBlur}
           value={projectInstanceURL}
         />
-      </Style.SettingsFieldContainer>
-      <Style.ExplanationText>
-        {intl.formatMessage({id: "ProjectSettings.wpt_instance_url_explanation"})}
-      </Style.ExplanationText>
+      </SettingsFieldContainer>
+      <ExplanationText>
+        <FormattedMessage id="ProjectSettings.wpt_instance_url_explanation" />
+      </ExplanationText>
       <ReduxToastr
         timeOut={4000}
         newestOnTop={false}
@@ -171,7 +163,7 @@ const GeneralSettings: React.FunctionComponent<Props> = ({
         transitionOut="fadeOut"
         closeOnToastrClick
       />
-    </Style.Container>
+    </Container>
   );
 };
 

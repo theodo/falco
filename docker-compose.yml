@@ -4,9 +4,14 @@ services:
   db:
     image: postgres:10
     ports:
-      - "5432:5432"
+      # We changed the default port so people having already a postgres instance running on port 5432 won't have a port conflict
+      - "5433:5432"
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
 
   backend:
     build: ./backend
@@ -22,7 +27,7 @@ services:
     env_file:
       - .env
     environment:
-      DATABASE_URL: "postgres://postgres@db:5432/postgres"
+      DATABASE_URL: "postgres://postgres:password@db:5432/postgres"
 
   redis:
     image: redis
@@ -37,7 +42,7 @@ services:
     env_file:
       - .env
     environment:
-      DATABASE_URL: "postgres://postgres@db:5432/postgres"
+      DATABASE_URL: "postgres://postgres:password@db:5432/postgres"
     command: celery worker -A root.celery -B -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler -c 4
 
 networks:

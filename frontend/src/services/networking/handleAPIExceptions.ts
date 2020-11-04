@@ -1,13 +1,13 @@
-import { SagaIterator } from 'redux-saga';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { call } from 'redux-saga/effects';
-import { ActionType } from 'typesafe-actions';
 
 export const handleAPIExceptions = (
-  saga: (action: ActionType<any>) => SagaIterator,
+  saga: any,
   handler: (error: Error, actionPayload: Record<string, any>) => void,
 ) =>
   function* wrappedSaga(...args: any[]) {
     try {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
       yield call(saga, ...args);
     } catch (error) {

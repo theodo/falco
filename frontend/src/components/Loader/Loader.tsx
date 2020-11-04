@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Style from './Loader.style';
+import { CircularProgress, LoaderContainer } from './Loader.style';
 
 interface Props {
   color?: string;
@@ -11,9 +11,9 @@ interface Props {
 const Loader: React.FunctionComponent<Props> = props => {
   const { color, margin, padding, minHeight } = props;
   return (
-    <Style.LoaderContainer color={color} margin={margin} padding={padding} minHeight={minHeight}>
-      <Style.CircularProgress><div /><div /><div /><div /></Style.CircularProgress>
-    </Style.LoaderContainer>
+    <LoaderContainer color={color} margin={margin} padding={padding} minHeight={minHeight}>
+      <CircularProgress><div /><div /><div /><div /></CircularProgress>
+    </LoaderContainer>
   );
 };
 

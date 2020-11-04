@@ -1,35 +1,28 @@
 import * as React from 'react';
-import { InjectedIntlProps } from 'react-intl';
 import { Redirect } from 'react-router';
-import { ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
 
 import Loader from 'components/Loader';
 import Welcome from 'components/Welcome';
-import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
-import Style from './Projects.style';
+import { useAllProjects } from 'redux/entities/projects/hooks';
+import { Container } from './Projects.style';
 
-type Props = {
-  fetchProjectsRequest: () => void;
-  projects: Array<ProjectType | null> | null;
-} & InjectedIntlProps;
-
-const Projects: React.FunctionComponent<Props> = ({ fetchProjectsRequest, projects }) => {
-  useFetchProjectIfUndefined(fetchProjectsRequest, "", undefined);
+const Projects: React.FunctionComponent = () => {
+  const projects = useAllProjects();
 
   if (null === projects) {
     return (
-      <Style.Container>
+      <Container>
         <Loader />
-      </Style.Container>
+      </Container>
     );
   }
 
   if (0 === projects.length) {
     return (
-      <Style.Container>
+      <Container>
         <Welcome />
-      </Style.Container>
+      </Container>
     );
   }
   const firstProject = projects[0];

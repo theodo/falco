@@ -1,16 +1,20 @@
 import dayjs from 'dayjs';
-import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { fetchAuditResultsRequest } from 'redux/auditResults';
 import { selectAuditResultsAsGraphData } from 'redux/auditResults/selectors';
-import { getCurrentAuditParametersId, getCurrentPageId, getCurrentScriptId, getMetricsToDisplay } from 'redux/parameters/selectors';
+import {
+  getCurrentAuditParametersId,
+  getCurrentPageId,
+  getCurrentScriptId,
+  getMetricsToDisplay,
+} from 'redux/parameters/selectors';
 import { RootState } from 'redux/types';
 import { GraphsBlock, OwnProps } from './GraphsBlock';
 
 const getAuditType = (state: RootState): 'page' | 'script' => {
-  return (getCurrentPageId(state) ? 'page' : 'script')
-}
+  return getCurrentPageId(state) ? 'page' : 'script';
+};
 
 const mapStateToProps = (state: RootState, props: OwnProps) => ({
   auditParametersId: getCurrentAuditParametersId(state) || '',
@@ -28,11 +32,14 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     pageOrScriptId: string,
     type: 'page' | 'script',
     fromDate?: dayjs.Dayjs,
-    toDate?: dayjs.Dayjs
-  ) => dispatch(fetchAuditResultsRequest({ auditParametersId, pageOrScriptId, type, fromDate, toDate }))
+    toDate?: dayjs.Dayjs,
+  ) =>
+    dispatch(
+      fetchAuditResultsRequest({ auditParametersId, pageOrScriptId, type, fromDate, toDate }),
+    ),
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(injectIntl(GraphsBlock));
+)(GraphsBlock);

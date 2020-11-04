@@ -4,7 +4,6 @@ import { ValueType } from 'react-select/lib/types';
 
 import { AuditParametersType } from 'redux/entities/auditParameters/types';
 import { PageType } from 'redux/entities/pages/types';
-import { ProjectType } from 'redux/entities/projects/types';
 import { ScriptType } from 'redux/entities/scripts/types';
 
 import Badge from 'components/Badge';
@@ -12,9 +11,9 @@ import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
 import Select from 'components/Select';
 import dayjs from 'dayjs';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { auditStatus, AuditStatusHistoryType } from 'redux/entities/auditStatusHistories/types';
-import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
+import { useProjectById } from 'redux/entities/projects/hooks';
 import { routeDefinitions } from 'routes';
 import { colorUsage, getSpacing } from 'stylesheet';
 import AnalyticsBlock from './AnalyticsBlock';
@@ -41,14 +40,12 @@ export type OwnProps = {} & RouteComponentProps<{
 }>;
 
 type Props = {
-  project?: ProjectType | null;
   page?: PageType | null;
   script?: ScriptType | null;
   currentAuditParameters?: AuditParametersType | null;
   scriptSteps: Record<string, string>;
   sortedPageAuditResultsIds: string[] | null;
   sortedScriptAuditResultsIds: Record<string, string[]> | null;
-  fetchProjectsRequest: (projectId: string) => void;
   pageAuditStatusHistory?: AuditStatusHistoryType | null;
   scriptAuditStatusHistory?: AuditStatusHistoryType | null;
   fetchAuditResultsRequest: (
@@ -56,22 +53,18 @@ type Props = {
     pageOrScriptId: string,
     type: 'page' | 'script',
     fromDate?: dayjs.Dayjs,
-    toDate?: dayjs.Dayjs
+    toDate?: dayjs.Dayjs,
   ) => void;
   setCurrentAuditParametersId: (auditParametersId: string | null | undefined) => void;
   setCurrentPageId: (pageId: string | null | undefined) => void;
   setCurrentScriptId: (scriptId: string | null | undefined) => void;
   setCurrentScriptStepId: (scriptStepId: string | null | undefined) => void;
-} & OwnProps &
-  InjectedIntlProps;
+} & OwnProps;
 
 export const Audits: React.FunctionComponent<Props> = ({
   currentAuditParameters,
-  fetchProjectsRequest,
   history,
-  intl,
   match,
-  project,
   page,
   script,
   scriptSteps,
@@ -85,9 +78,11 @@ export const Audits: React.FunctionComponent<Props> = ({
   setCurrentScriptId,
   setCurrentScriptStepId,
 }) => {
+  const intl = useIntl();
+
   const { projectId, pageOrScriptId, auditParametersId, scriptStepId } = match.params;
 
-  useFetchProjectIfUndefined(fetchProjectsRequest, projectId, project);
+  const project = useProjectById(projectId);
 
   React.useEffect(
     () => {
@@ -97,13 +92,13 @@ export const Audits: React.FunctionComponent<Props> = ({
         setCurrentScriptId(undefined);
         if (!sortedPageAuditResultsIds) {
           fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'page', fromDate);
-        };
+        }
       } else if (script) {
         setCurrentPageId(undefined);
         setCurrentScriptId(pageOrScriptId ? pageOrScriptId : undefined);
         if (!sortedScriptAuditResultsIds) {
           fetchAuditResultsRequest(auditParametersId, pageOrScriptId, 'script', fromDate);
-        };
+        }
       }
     },
     // eslint is disabled because the hook exhaustive-deps wants to add page and script as dependencies, but they rerender too much
@@ -240,48 +235,62 @@ export const Audits: React.FunctionComponent<Props> = ({
   };
 
   const getLastAuditMessage = (auditStatusHistory: AuditStatusHistoryType) => {
-    switch(auditStatusHistory.status) {
+    switch (auditStatusHistory.status) {
       case auditStatus.requested:
         return <FormattedMessage id="Audits.AuditStatusHistory.audit_requested" />;
       case auditStatus.queuing:
-        return auditStatusHistory.info && auditStatusHistory.info.positionInQueue 
-          ? <FormattedMessage id="Audits.AuditStatusHistory.audit_in_queue_behind" values={{ positionInQueue: auditStatusHistory.info.positionInQueue }}/>
-          : <FormattedMessage id="Audits.AuditStatusHistory.audit_in_queue" />
-      case auditStatus.running:
-        if(auditStatusHistory.info && auditStatusHistory.info.runningTime) {
-          return <FormattedMessage id="Audits.AuditStatusHistory.audit_started" values={{ runningTime: auditStatusHistory.info.runningTime }}/>
-        } else if(auditStatusHistory.info && auditStatusHistory.info.totalTests && auditStatusHistory.info.completedTests) {
-          return (
-          <FormattedMessage 
-            id="Audits.AuditStatusHistory.audit_tests_running" 
-            values={{
-              completedTests: auditStatusHistory.info.completedTests,
-              totalTests: auditStatusHistory.info.totalTests,
-            }}
+        return auditStatusHistory.info && auditStatusHistory.info.positionInQueue ? (
+          <FormattedMessage
+            id="Audits.AuditStatusHistory.audit_in_queue_behind"
+            values={{ positionInQueue: auditStatusHistory.info.positionInQueue }}
           />
-          )
-      }
+        ) : (
+          <FormattedMessage id="Audits.AuditStatusHistory.audit_in_queue" />
+        );
+      case auditStatus.running:
+        if (auditStatusHistory.info && auditStatusHistory.info.runningTime) {
+          return (
+            <FormattedMessage
+              id="Audits.AuditStatusHistory.audit_started"
+              values={{ runningTime: auditStatusHistory.info.runningTime }}
+            />
+          );
+        } else if (
+          auditStatusHistory.info &&
+          auditStatusHistory.info.totalTests &&
+          auditStatusHistory.info.completedTests
+        ) {
+          return (
+            <FormattedMessage
+              id="Audits.AuditStatusHistory.audit_tests_running"
+              values={{
+                completedTests: auditStatusHistory.info.completedTests,
+                totalTests: auditStatusHistory.info.totalTests,
+              }}
+            />
+          );
+        }
     }
-    return <FormattedMessage id="Audits.AuditStatusHistory.audit_in_queue" />
-  }
+    return <FormattedMessage id="Audits.AuditStatusHistory.audit_in_queue" />;
+  };
 
   const pageOrScriptName = page ? page.name : script ? script.name : '';
 
   const latestAuditStatusHistory = page
     ? pageAuditStatusHistory
     : script
-      ? scriptAuditStatusHistory
-      : null;
+    ? scriptAuditStatusHistory
+    : null;
 
   const badgeParams = getBadgeParams();
 
   const sortedAuditResultsIds = page
     ? sortedPageAuditResultsIds
     : script && sortedScriptAuditResultsIds
-      ? scriptStepId && sortedScriptAuditResultsIds[scriptStepId]
-        ? sortedScriptAuditResultsIds[scriptStepId]
-        : []
-      : null;
+    ? scriptStepId && sortedScriptAuditResultsIds[scriptStepId]
+      ? sortedScriptAuditResultsIds[scriptStepId]
+      : []
+    : null;
 
   const scriptStepSelectOptions = Object.keys(scriptSteps).map(scriptStepKey => ({
     value: scriptStepKey,
@@ -317,14 +326,17 @@ export const Audits: React.FunctionComponent<Props> = ({
           />
         )}
       </PageTitleBlock>
-      {
-        latestAuditStatusHistory && auditStatus.success !== latestAuditStatusHistory.status &&
-          (auditStatus.error === latestAuditStatusHistory.status
-            ? <MessagePill messageType="error">
-                <FormattedMessage id="Audits.AuditStatusHistory.audit_failure" />
-              </MessagePill>
-            : <MessagePill messageType="info">{getLastAuditMessage(latestAuditStatusHistory)}</MessagePill>)
-      }
+      {latestAuditStatusHistory &&
+        auditStatus.success !== latestAuditStatusHistory.status &&
+        (auditStatus.error === latestAuditStatusHistory.status ? (
+          <MessagePill messageType="error">
+            <FormattedMessage id="Audits.AuditStatusHistory.audit_failure" />
+          </MessagePill>
+        ) : (
+          <MessagePill messageType="info">
+            {getLastAuditMessage(latestAuditStatusHistory)}
+          </MessagePill>
+        ))}
       <Title>
         <FormattedMessage id="Audits.title" />
       </Title>

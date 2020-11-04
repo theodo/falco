@@ -1,7 +1,11 @@
 import React, { ReactNode } from 'react';
-import { MessageCloseContainer, MessagePillContainer } from './MessagePill.style';
+import {
+  MessageCloseContainer,
+  MessageCloseContainerText,
+  MessagePillContainer,
+} from './MessagePill.style';
 
-export type MessageType = "error" | "info";
+export type MessageType = 'error' | 'info';
 
 interface Props {
   children?: ReactNode;
@@ -13,27 +17,31 @@ interface Props {
   messageType: MessageType;
 }
 
-const MessagePill: React.FunctionComponent<Props> = ({ children, color, backgroundColor, fontSize, margin, padding, messageType }) => {
+const MessagePill: React.FunctionComponent<Props> = ({
+  children,
+  color,
+  backgroundColor,
+  fontSize,
+  margin,
+  padding,
+  messageType,
+}) => {
   const [showMessage, setShowMessage] = React.useState(true);
-  return showMessage
-    ? (
-      <MessagePillContainer
-        messageType={messageType}
-        color={color}
-        backgroundColor={backgroundColor}
-        fontSize={fontSize}
-        margin={margin}
-        padding={padding}
-      >
-        <>{children}</>
-        <MessageCloseContainer
-          onClick={() => setShowMessage(false)}
-        >
-          &times;
-        </MessageCloseContainer>
-      </MessagePillContainer >
-    )
-    : null;
+  return showMessage ? (
+    <MessagePillContainer
+      messageType={messageType}
+      color={color}
+      backgroundColor={backgroundColor}
+      fontSize={fontSize}
+      margin={margin}
+      padding={padding}
+    >
+      <>{children}</>
+      <MessageCloseContainer onClick={() => setShowMessage(false)}>
+        <MessageCloseContainerText>&times;</MessageCloseContainerText>
+      </MessageCloseContainer>
+    </MessagePillContainer>
+  ) : null;
 };
 
 export default MessagePill;

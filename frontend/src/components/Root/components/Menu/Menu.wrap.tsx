@@ -1,4 +1,3 @@
-import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { RootStateWithRouter } from 'redux/types';
 
@@ -10,7 +9,4 @@ const mapStateToProps = (state: RootStateWithRouter) => ({
   currentURL: getCurrentURL(state),
 });
 
-export default connect(
-  mapStateToProps,
-  null,
-)(injectIntl(Menu));
+export default connect(mapStateToProps)(Menu);

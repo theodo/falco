@@ -1,30 +1,32 @@
 import React, { ReactNode } from 'react';
-import { addLocaleData, IntlProvider } from 'react-intl';
-import en from 'react-intl/locale-data/en';
-import fr from 'react-intl/locale-data/fr';
+import { Helmet } from 'react-helmet';
+import { FormattedMessage, IntlProvider } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
 
 import { flattenMessages } from 'services/i18n/intl';
 import enMessages from 'translations/en.json';
 import frMessages from 'translations/fr.json';
 import { Header, Menu } from './components';
-import { Body, Content, Page, PageContainer } from './Root.style';
+import { Body, Content, Page, PageContainer, SkipToContent } from './Root.style';
 
-const locales: Record<string, any> = {
+const locales: Record<string, { [key: string]: string }> = {
   fr: flattenMessages(frMessages),
   en: flattenMessages(enMessages),
 };
 
-addLocaleData([...fr, ...en]);
-
 // Your component own properties
-interface Props extends RouteComponentProps<any> {
+interface Props extends RouteComponentProps {
   hasProjects: boolean;
   isUserAuthenticated: boolean;
   children: ReactNode;
 }
 
-const Root: React.FunctionComponent<Props> = ({ children, location, isUserAuthenticated, hasProjects }) => {
+const Root: React.FunctionComponent<Props> = ({
+  children,
+  location,
+  isUserAuthenticated,
+  hasProjects,
+}) => {
   const shouldDisplayMenu = isUserAuthenticated && hasProjects;
 
   const userLanguage =
@@ -35,22 +37,30 @@ const Root: React.FunctionComponent<Props> = ({ children, location, isUserAuthen
 
   // Default to english if user’s locale is not available
   if (!localizedMessages) {
-    userLanguageWithoutRegionCode = "en";
+    userLanguageWithoutRegionCode = 'en';
     localizedMessages = locales.en;
   }
 
   return (
-    <IntlProvider locale={userLanguageWithoutRegionCode} messages={localizedMessages}>
-      <PageContainer>
-        <Page>
-          <Header isUserAuthenticated={isUserAuthenticated} isMenuDisplayed={shouldDisplayMenu}/>
-          <Body>
-            {shouldDisplayMenu && <Menu />}
-            <Content shouldDisplayMenu={shouldDisplayMenu}>{children}</Content>
-          </Body>
-        </Page>
-      </PageContainer>
-    </IntlProvider>
+    <>
+      <Helmet>
+        <html lang={userLanguageWithoutRegionCode} />
+      </Helmet>
+      <IntlProvider locale={userLanguageWithoutRegionCode} messages={localizedMessages}>
+        <PageContainer>
+          <Page>
+            <SkipToContent href="#start-of-content">
+              <FormattedMessage id="Header.skip_to_content" />
+            </SkipToContent>
+            <Header isUserAuthenticated={isUserAuthenticated} isMenuDisplayed={shouldDisplayMenu} />
+            <Body id="start-of-content">
+              {shouldDisplayMenu && <Menu />}
+              <Content shouldDisplayMenu={shouldDisplayMenu}>{children}</Content>
+            </Body>
+          </Page>
+        </PageContainer>
+      </IntlProvider>
+    </>
   );
 };
 

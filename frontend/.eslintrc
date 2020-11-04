@@ -1,56 +1,65 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
   "extends": [
+    "react-app",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
     "prettier",
-    "prettier/react",
-    "react-app"
-  ],
-  "plugins": [
-    "import",
-    "jest",
-    "jsx-a11y",
-    "mysticatea",
-    "prefer-object-spread",
-    "prettier",
-    "react"
+    "prettier/@typescript-eslint",
+    "eslint-config-prettier"
   ],
   "env": {
     "browser": true,
     "es6": true,
-    "jest": true,
-    "jest/globals": true,
-    "mocha": true,
-    "node": true
+    "commonjs": true
   },
-  "globals": {
-    "alert": true,
-    "document": true,
-    "localStorage": true,
-    "navigator": true,
-    "window": true,
-    "HTMLElement": true
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaVersion": 2018,
+    "sourceType": "module"
   },
   "rules": {
-    "prettier/prettier": [
+    "@typescript-eslint/explicit-member-accessibility": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-parameter-properties": [
+      "warn",
+      { "allows": ["public", "private", "protected"] }
+    ],
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/camelcase": "warn",
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/no-unused-vars": [
       "error",
       {
-        "singleQuote": true,
-        "trailingComma": "all",
-        "bracketSpacing": true,
-        "jsxBracketSameLine": false
+        "vars": "all",
+        "args": "none",
+        "ignoreRestSiblings": false
       }
     ],
-    "import/extensions": 0,
-    "import/no-extraneous-dependencies": 0,
-    "import/no-unresolved": 0,
-    "import/prefer-default-export": 0,
-    "mysticatea/no-useless-rest-spread": "error",
-    "prefer-object-spread/prefer-object-spread": 2,
-    "react/destructuring-assignment": 0,
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/no-array-index-key": 2,
-    "react/prefer-stateless-function": 0,
-    "react/prop-types": 0,
-    "react/require-default-props": 0
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/no-empty-interface": 2,
+    "@typescript-eslint/no-non-null-assertion": 2,
+    "@typescript-eslint/unified-signatures": 2,
+    "no-case-declarations": "warn",
+    "spaced-comment": ["warn", "always"],
+    "guard-for-in": "error",
+    "no-labels": "error",
+    "no-caller": "error",
+    "no-bitwise": "error",
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "no-new-wrappers": "error",
+    "no-eval": "error",
+    "no-shadow": "error",
+    "no-new": "error",
+    "no-var": "error",
+    "radix": "error",
+    "eqeqeq": ["error", "always", { "null": "ignore" }],
+    "prefer-const": "error",
+    "object-shorthand": ["error", "always", { "avoidExplicitReturnArrows": true }],
+    "strict": "error",
+    "no-debugger": 2,
+    "no-empty": 2
   }
 }

@@ -1,6 +1,7 @@
 import { push } from 'connected-react-router';
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import { pause } from 'services/utils';
+import { SagaIterator } from 'redux-saga';
 import { ActionType, getType } from 'typesafe-actions';
 
 import { routeDefinitions } from 'routes';
@@ -14,15 +15,12 @@ import {
   logoutUserRequest,
 } from './actions';
 
-export function* loginUser(action: ActionType<typeof loginUserRequest>) {
+export function* loginUser(action: ActionType<typeof loginUserRequest>): SagaIterator {
   const endpoint = `/auth/jwt/create`;
   try {
     yield put(loginUserClearError());
     // pause function is called to let enough time to animation on button to be seen
-    const [isAuthenticated] = yield all([
-      call(login, endpoint, action.payload),
-      call(pause, 1000),
-    ]);
+    const [isAuthenticated] = yield all([call(login, endpoint, action.payload), call(pause, 1000)]);
     if (isAuthenticated) {
       yield put(loginUserSuccess());
       const urlToRedirect = action.payload.originLocation

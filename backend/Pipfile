@@ -4,10 +4,10 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-"argon2_cffi" = "==19.1.0"
+argon2-cffi = "==20.1.0"
 dj-database-url = "==0.5.0"
-django = {extras = ["argon2"],version = "==3.0.3"}
-"psycopg2-binary" = "==2.8.2"
+django = {extras = ["argon2"],version = "==3.0.7"}
+psycopg2-binary = "==2.8.2"
 ptvsd = "==4.2.8"
 pytz = "==2019.1"
 requests = "==2.21.0"
@@ -20,9 +20,12 @@ django-fernet-fields = "==0.6"
 whitenoise = "==5.0.1"
 django-heroku = "==0.3.1"
 drf-yasg = "==1.17.0"
+factory-boy = "==2.12.0"
+django-extensions = "==2.2.8"
+ipython = "==7.9.0"
 
 [dev-packages]
-"flake8" = "==3.7.7"
+flake8 = "==3.7.7"
 factory-boy = "==2.11.1"
 coverage = "==4.5.3"
 django-debug-toolbar = "==1.11"

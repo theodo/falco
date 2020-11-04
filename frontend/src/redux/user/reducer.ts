@@ -3,13 +3,16 @@ import { ActionType, getType } from 'typesafe-actions';
 
 import { fetchUserError, fetchUserRequest, fetchUserSuccess } from './actions';
 
-export type UserAction = ActionType<typeof fetchUserError | typeof fetchUserRequest | typeof fetchUserSuccess>;
+export type UserAction = ActionType<
+  typeof fetchUserError | typeof fetchUserRequest | typeof fetchUserSuccess
+>;
 
 export type UserState = Readonly<{
   firstName: string;
   lastName: string;
   emailAddress: string;
   username: string;
+  isStaff: boolean;
 } | null>;
 
 const initialState: UserState = null;

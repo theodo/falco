@@ -8,26 +8,31 @@ interface OwnProps {
   width?: string;
 }
 
-type Props = OwnProps & ReactSelectProps<any>;
+interface Value {
+  label: string;
+  value: string;
+}
+
+type Props = OwnProps & ReactSelectProps<Value>;
 
 const Select: React.FunctionComponent<Props> = props => {
   const { margin, width, ...otherProps } = props;
 
   const scriptSelectStyle = {
-    control: (provided: any) => ({
+    control: (provided: Value) => ({
       ...provided,
       borderColor: colorUsage.inputSelectBorder,
       borderRadius: '3px',
     }),
-    dropdownIndicator: (provided: any) => ({
+    dropdownIndicator: (provided: Value) => ({
       ...provided,
       color: colorUsage.inputSelectBorder,
     }),
-    indicatorSeparator: (provided: any) => ({
+    indicatorSeparator: (provided: Value) => ({
       ...provided,
       backgroundColor: colorUsage.inputSelectBorder,
     }),
-    option: (provided: any, state: any) => {
+    option(provided: Value, state: ReactSelectProps<Value>) {
       if (state.isSelected) {
         return provided;
       }
@@ -46,7 +51,7 @@ const Select: React.FunctionComponent<Props> = props => {
         color: colorUsage.inputSelectText,
       };
     },
-    singleValue: (provided: any) => ({
+    singleValue: (provided: Value) => ({
       ...provided,
       color: colorUsage.inputSelectText,
     }),

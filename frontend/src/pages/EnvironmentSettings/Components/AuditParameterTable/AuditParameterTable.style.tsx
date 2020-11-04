@@ -1,5 +1,13 @@
+import Button from 'components/Button';
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, getSpacing, lineHeight } from 'stylesheet';
+import {
+  colorUsage,
+  fontFamily,
+  fontSize,
+  getSpacing,
+  inheritVar,
+  lineHeight
+} from 'stylesheet';
 
 interface AddInputProps {
   isAdding: boolean;
@@ -46,19 +54,19 @@ const editableInputStyle = `
 
 export const AddNameInput = styled.input`
   ${addInputStyle}
-  display: ${(props: AddInputProps) => props.isAdding ? "visible" : "none"};
+  display: ${(props: AddInputProps) => (props.isAdding ? 'visible' : 'none')};
   width: 40%;
 `;
 
 export const AddBrowserInput = styled.input`
   ${addInputStyle}
-  display: ${(props: AddInputProps) => props.isAdding ? "visible" : "none"};
+  display: ${(props: AddInputProps) => (props.isAdding ? 'visible' : 'none')};
   width: 40%;
 `;
 
 export const AddNetworkShapeInput = styled.input`
   ${addInputStyle}
-  display: ${(props: AddInputProps) => props.isAdding ? "visible" : "none"};
+  display: ${(props: AddInputProps) => (props.isAdding ? 'visible' : 'none')};
   width: 20%;
 `;
 
@@ -77,22 +85,24 @@ export const EditBrowserInput = styled.input`
   width: 40%;
 `;
 
-export const AddAuditParameterButtonContainer = styled.div`
-  display: ${(props: AddInputProps) => props.isAdding ? "none" : "flex"};
+export const AddAuditParameterButtonContainer = styled(Button)`
+  display: ${(props: AddInputProps) => (props.isAdding ? 'none' : 'flex')};
   align-items: center;
-  cursor: pointer;
   margin: auto;
+  font-size: ${inheritVar};
+  font-family: ${inheritVar};
+  color: ${inheritVar};
 
   &:hover {
     opacity: 0.5;
     background: white;
     transition-duration: 0.2s;
-  };
+  }
 `;
 
 export const AddAuditParameterButtonLabel = styled.div`
   margin-left: ${getSpacing(4)};
-`
+`;
 
 export const EditButtonContainer = styled.div`
   width: 5%;
@@ -140,7 +150,7 @@ export const AuditParameterRowButton = styled.button`
 `;
 
 export const AddAuditParameterButtonsContainer = styled.div`
-  display: ${(props: AddInputProps) => props.isAdding ? "flex" : "none"};
+  display: ${(props: AddInputProps) => (props.isAdding ? 'flex' : 'none')};
   width: 60px;
   flex-direction: row;
   justify-content: flex-end;

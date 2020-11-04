@@ -15,7 +15,7 @@ interface MenuArrowContainerProps {
   height?: string;
 };
 
-export const GoBackToProjectLink = styled.a`
+export const GoBackToProjectLink = styled(Link)`
   color: ${colorUsage.metricsSettingsText};
   font-size: ${fontSize.link};
   line-height: ${lineHeight.link};

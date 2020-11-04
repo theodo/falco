@@ -6,7 +6,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         ref_name = "core.user"
         model = User
-        fields = ("id", "first_name", "last_name", "email", "username")
+        fields = ("id", "first_name", "last_name", "email", "username", "is_staff")
 
 
 class UserIdAndNameSerializer(serializers.ModelSerializer):

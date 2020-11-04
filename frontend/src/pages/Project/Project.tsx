@@ -1,39 +1,30 @@
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Redirect, RouteComponentProps } from 'react-router';
-import { ProjectType } from 'redux/entities/projects/types';
 import { routeDefinitions } from 'routes';
 
 import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
-import { useFetchProjectIfUndefined } from 'redux/entities/projects/useFetchProjectIfUndefined';
-import Style from './Project.style';
-
-export type OwnProps = {} & RouteComponentProps<{
-  projectId: string;
-}>;
+import { useProjectById } from 'redux/entities/projects/hooks';
+import { Container } from './Project.style';
 
 type Props = {
-  fetchProjectsRequest: (projectId: string) => void;
   setCurrentAuditParametersId: (auditParametersId: string | null | undefined) => void;
   setCurrentPageId: (pageId: string | null | undefined) => void;
   setCurrentScriptId: (scriptId: string | null | undefined) => void;
   setCurrentScriptStepId: (scriptStepId: string | null | undefined) => void;
-  project?: ProjectType | null;
-} & OwnProps &
-  InjectedIntlProps;
+} & RouteComponentProps<{
+  projectId: string;
+}>;
 
 const Project: React.FunctionComponent<Props> = ({
-  fetchProjectsRequest,
-  project,
   match,
   setCurrentAuditParametersId,
   setCurrentPageId,
   setCurrentScriptId,
   setCurrentScriptStepId,
 }) => {
-
-  useFetchProjectIfUndefined(fetchProjectsRequest, match.params.projectId, project);
+  const project = useProjectById(match.params.projectId);
 
   React.useEffect(
     () => {
@@ -42,29 +33,24 @@ const Project: React.FunctionComponent<Props> = ({
       setCurrentScriptId(undefined);
       setCurrentScriptStepId(undefined);
     },
-    [
-      setCurrentAuditParametersId,
-      setCurrentPageId,
-      setCurrentScriptId,
-      setCurrentScriptStepId,
-    ],
+    [setCurrentAuditParametersId, setCurrentPageId, setCurrentScriptId, setCurrentScriptStepId],
   );
 
   if (project === undefined) {
     return (
-      <Style.Container>
+      <Container>
         <Loader />
-      </Style.Container>
+      </Container>
     );
   }
 
   if (project === null) {
     return (
-      <Style.Container>
+      <Container>
         <MessagePill messageType="error">
           <FormattedMessage id="Project.project_error" />
         </MessagePill>
-      </Style.Container>
+      </Container>
     );
   }
 
@@ -85,11 +71,11 @@ const Project: React.FunctionComponent<Props> = ({
     );
   } else {
     return (
-      <Style.Container>
+      <Container>
         <MessagePill messageType="error">
           <FormattedMessage id="Project.no_page_or_script_error" />
         </MessagePill>
-      </Style.Container>
+      </Container>
     );
   }
 
@@ -100,11 +86,11 @@ const Project: React.FunctionComponent<Props> = ({
     );
   } else {
     return (
-      <Style.Container>
+      <Container>
         <MessagePill messageType="error">
           <FormattedMessage id="Project.no_audit_parameters_error" />
         </MessagePill>
-      </Style.Container>
+      </Container>
     );
   }
   return <Redirect to={firstPageOrScriptLocation} />;

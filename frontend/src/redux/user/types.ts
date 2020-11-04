@@ -4,6 +4,7 @@ export interface User {
   lastName: string;
   emailAddress: string;
   username: string;
+  isStaff: boolean;
 }
 
 export interface ApiUser {
@@ -12,4 +13,5 @@ export interface ApiUser {
   first_name: string;
   last_name: string;
   email: string;
+  is_staff: boolean;
 }

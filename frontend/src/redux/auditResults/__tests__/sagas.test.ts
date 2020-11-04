@@ -27,8 +27,9 @@ const pageAuditResultId = '5555';
 const pageAuditId = '6666';
 const pageAuditResultDate = dayjs('2019-05-11T00:00:00.000000+00:00');
 const pageAuditResultValue = 11;
-const pageAuditResultLighthouseDisplayedValue = "3,2 s";
+const pageAuditResultLighthouseDisplayedValue = '3,2 s';
 const pageAuditResultLighthouseScore = 0.6;
+/* eslint-disable @typescript-eslint/camelcase */
 const pageAuditResultAPI = [
   {
     uuid: pageAuditResultId,
@@ -101,27 +102,27 @@ const pageAuditResultModelized = {
     scriptStepName: null,
     scriptStepNumber: null,
     lighthouseTTI: {
-      displayed_value: pageAuditResultLighthouseDisplayedValue,
+      displayedValue: pageAuditResultLighthouseDisplayedValue,
       score: pageAuditResultLighthouseScore,
     },
     lighthouseSpeedIndex: {
-      displayed_value: pageAuditResultLighthouseDisplayedValue,
+      displayedValue: pageAuditResultLighthouseDisplayedValue,
       score: pageAuditResultLighthouseScore,
     },
     lighthouseFirstContentfulPaint: {
-      displayed_value: pageAuditResultLighthouseDisplayedValue,
+      displayedValue: pageAuditResultLighthouseDisplayedValue,
       score: pageAuditResultLighthouseScore,
     },
     lighthouseFirstMeaningfulPaint: {
-      displayed_value: pageAuditResultLighthouseDisplayedValue,
+      displayedValue: pageAuditResultLighthouseDisplayedValue,
       score: pageAuditResultLighthouseScore,
     },
     lighthouseFirstCPUIdle: {
-      displayed_value: pageAuditResultLighthouseDisplayedValue,
+      displayedValue: pageAuditResultLighthouseDisplayedValue,
       score: pageAuditResultLighthouseScore,
     },
     lighthouseMaxPotentialFirstInputDelay: {
-      displayed_value: pageAuditResultLighthouseDisplayedValue,
+      displayedValue: pageAuditResultLighthouseDisplayedValue,
       score: pageAuditResultLighthouseScore,
     },
   },
@@ -205,31 +206,32 @@ const scriptAuditResultModelized = {
     scriptStepName: scriptAuditStepName,
     scriptStepNumber: scriptAuditStepNumber,
     lighthouseTTI: {
-      displayed_value: null,
+      displayedValue: null,
       score: null,
     },
     lighthouseSpeedIndex: {
-      displayed_value: null,
+      displayedValue: null,
       score: null,
     },
     lighthouseFirstContentfulPaint: {
-      displayed_value: null,
+      displayedValue: null,
       score: null,
     },
     lighthouseFirstMeaningfulPaint: {
-      displayed_value: null,
+      displayedValue: null,
       score: null,
     },
     lighthouseFirstCPUIdle: {
-      displayed_value: null,
+      displayedValue: null,
       score: null,
     },
     lighthouseMaxPotentialFirstInputDelay: {
-      displayed_value: null,
+      displayedValue: null,
       score: null,
     },
   },
 };
+/* eslint-enable */
 
 describe('[Saga] Fetch Audit Results', () => {
   describe('fetchAuditResults', () => {
