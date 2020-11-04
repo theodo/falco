@@ -3,6 +3,8 @@ version: "3.1"
 services:
   db:
     image: postgres:10
+    env_file:
+      - .env.prod
 
   redis:
     image: redis:5.0-alpine
