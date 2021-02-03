@@ -133,6 +133,7 @@ def project_detail(request, project_uuid):
                 "audit_parameters_list",
                 "screenshot_url",
                 "latest_audit_at",
+                "has_siblings",
             ),
             context={"user_id": request.user.id},
         )
