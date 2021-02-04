@@ -127,93 +127,9 @@ def poll_audit_results(audit_uuid, json_url, previous_api_response="", repeat_in
                     audit=audit,
                     wpt_results_json_url=json_url,
                     wpt_results_user_url=wpt_results_user_url,
-                    wpt_metric_first_view_tti=formatted_results[
-                        "wpt_metric_first_view_tti"
-                    ],
-                    wpt_metric_repeat_view_tti=formatted_results[
-                        "wpt_metric_repeat_view_tti"
-                    ],
-                    wpt_metric_first_view_speed_index=formatted_results[
-                        "wpt_metric_first_view_speed_index"
-                    ],
-                    wpt_metric_repeat_view_speed_index=formatted_results[
-                        "wpt_metric_repeat_view_speed_index"
-                    ],
-                    wpt_metric_first_view_first_paint=formatted_results[
-                        "wpt_metric_first_view_first_paint"
-                    ],
-                    wpt_metric_repeat_view_first_paint=formatted_results[
-                        "wpt_metric_repeat_view_first_paint"
-                    ],
-                    wpt_metric_first_view_first_meaningful_paint=formatted_results[
-                        "wpt_metric_first_view_first_meaningful_paint"
-                    ],
-                    wpt_metric_repeat_view_first_meaningful_paint=formatted_results[
-                        "wpt_metric_repeat_view_first_meaningful_paint"
-                    ],
-                    wpt_metric_first_view_load_time=formatted_results[
-                        "wpt_metric_first_view_load_time"
-                    ],
-                    wpt_metric_repeat_view_load_time=formatted_results[
-                        "wpt_metric_repeat_view_load_time"
-                    ],
-                    wpt_metric_first_view_first_contentful_paint=formatted_results[
-                        "wpt_metric_first_view_first_contentful_paint"
-                    ],
-                    wpt_metric_repeat_view_first_contentful_paint=formatted_results[
-                        "wpt_metric_repeat_view_first_contentful_paint"
-                    ],
-                    wpt_metric_first_view_time_to_first_byte=formatted_results[
-                        "wpt_metric_first_view_time_to_first_byte"
-                    ],
-                    wpt_metric_repeat_view_time_to_first_byte=formatted_results[
-                        "wpt_metric_repeat_view_time_to_first_byte"
-                    ],
-                    wpt_metric_first_view_visually_complete=formatted_results[
-                        "wpt_metric_first_view_visually_complete"
-                    ],
-                    wpt_metric_repeat_view_visually_complete=formatted_results[
-                        "wpt_metric_repeat_view_visually_complete"
-                    ],
-                    wpt_metric_lighthouse_performance=formatted_results[
-                        "wpt_metric_lighthouse_performance"
-                    ],
                     script_step_name=formatted_results.get("step_name"),
                     script_step_number=formatted_results.get("step_number"),
-                    lh_metric_tti_displayed_value=formatted_results.get(
-                        "lh_metric_tti_displayed_value"
-                    ),
-                    lh_metric_tti_score=formatted_results.get("lh_metric_tti_score"),
-                    lh_metric_first_contentful_paint_displayed_value=formatted_results.get(
-                        "lh_metric_first_contentful_paint_displayed_value"
-                    ),
-                    lh_metric_first_contentful_paint_score=formatted_results.get(
-                        "lh_metric_first_contentful_paint_score"
-                    ),
-                    lh_metric_speed_index_displayed_value=formatted_results.get(
-                        "lh_metric_speed_index_displayed_value"
-                    ),
-                    lh_metric_speed_index_score=formatted_results.get(
-                        "lh_metric_speed_index_score"
-                    ),
-                    lh_metric_first_meaningful_paint_displayed_value=formatted_results.get(
-                        "lh_metric_first_meaningful_paint_displayed_value"
-                    ),
-                    lh_metric_first_meaningful_paint_score=formatted_results.get(
-                        "lh_metric_first_meaningful_paint_score"
-                    ),
-                    lh_metric_first_cpu_idle_displayed_value=formatted_results.get(
-                        "lh_metric_first_cpu_idle_displayed_value"
-                    ),
-                    lh_metric_first_cpu_idle_score=formatted_results.get(
-                        "lh_metric_first_cpu_idle_score"
-                    ),
-                    lh_metric_max_potential_first_input_delay_displayed_value=formatted_results.get(
-                        "lh_metric_max_potential_first_input_delay_displayed_value"
-                    ),
-                    lh_metric_max_potential_first_input_delay_score=formatted_results.get(
-                        "lh_metric_max_potential_first_input_delay_score"
-                    ),
+                    **formatted_results,
                 )
                 audit_results.save()
 
