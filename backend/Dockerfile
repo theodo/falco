@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM python:3.8
 ENV PYTHONPATH /code
 # This is to print directly to stdout instead of buffering output
 ENV PYTHONUNBUFFERED 1

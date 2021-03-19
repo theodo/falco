@@ -10,7 +10,9 @@ COPY ./frontend/ /code/
 RUN yarn build
 
 # Second stage: build base backend
-FROM python:3.7-alpine AS backend
+FROM python:3.8-alpine AS backend
+
+
 
 # Allow heroku exec
 RUN apk add --no-cache curl postgresql-dev openssh bash
@@ -35,9 +37,9 @@ RUN pip3 install --no-cache-dir pipenv gunicorn
 WORKDIR /code
 
 COPY ./backend/Pipfile* /code/
-RUN apk add --no-cache --virtual build-dependencies gcc musl-dev libffi-dev curl-dev openssl-dev libressl-dev && \
-    pipenv install --system --deploy && \
-    apk del build-dependencies
+RUN apk add --no-cache --virtual build-dependencies gcc musl-dev python3-dev libffi-dev openssl-dev cargo curl-dev && \
+  pipenv install --system --deploy && \
+  apk del build-dependencies
 
 RUN addgroup -S pythongroup && \
   adduser -S pythonuser -G pythongroup --uid 2000 && \
