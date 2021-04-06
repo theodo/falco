@@ -15,7 +15,7 @@ interface Value {
 
 type Props = OwnProps & ReactSelectProps<Value>;
 
-const Select: React.FunctionComponent<Props> = props => {
+const Select: React.FunctionComponent<Props> = (props) => {
   const { margin, width, ...otherProps } = props;
 
   const scriptSelectStyle = {
@@ -46,6 +46,7 @@ const Select: React.FunctionComponent<Props> = props => {
           color: colorUsage.inputDisabledSelectText,
         };
       }
+
       return {
         ...provided,
         color: colorUsage.inputSelectText,

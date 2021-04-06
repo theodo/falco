@@ -8,7 +8,7 @@ export const state = {
     isAuthenticated: false,
     loginError: 'some login error message',
     isSubmitting: false,
-    _persist: {} as PersistState
+    _persist: {} as PersistState,
   },
   signUp: {
     signUpError: 'some sign up error message',
@@ -20,7 +20,7 @@ export const state = {
     currentScriptId: null,
     currentScriptStepId: null,
     displayedMetrics: {},
-    _persist: {} as PersistState
+    _persist: {} as PersistState,
   },
   entities: {
     projects: {
@@ -28,7 +28,7 @@ export const state = {
     },
     pages: {
       byId: null,
-    }
+    },
   },
   auditResults: {
     isLoading: false,

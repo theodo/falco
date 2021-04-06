@@ -18,7 +18,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(deletePageOfProjectRequest({ projectId, pageId })),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(PageRow);
+export default connect(mapStateToProps, mapDispatchToProps)(PageRow);

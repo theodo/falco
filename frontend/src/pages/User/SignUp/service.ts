@@ -31,6 +31,7 @@ export const validateForm = (values: FormValues) => {
   if (!values.password) {
     errors.password = 'SignUp.error_password_required';
   }
+
   return errors;
 };
 

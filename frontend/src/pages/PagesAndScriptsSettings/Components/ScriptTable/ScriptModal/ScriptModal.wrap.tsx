@@ -18,7 +18,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   editScriptSuccess: (byId: Record<string, ScriptType>) => dispatch(editScriptSuccess({ byId })),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ScriptModal);
+export default connect(mapStateToProps, mapDispatchToProps)(ScriptModal);

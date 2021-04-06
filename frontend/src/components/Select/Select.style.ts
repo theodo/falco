@@ -15,7 +15,7 @@ const StyledSelect = {
     font-family: ${fontFamily.mainSans};
     font-size: ${fontSize.inputSelectText};
     line-height: ${lineHeight.inputSelectText};
-    display: ${(props: SelectProps) => (props.display ? props.display : 'visible')}
+    display: ${(props: SelectProps) => (props.display ? props.display : 'visible')};
   `,
 };
 

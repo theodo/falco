@@ -1,65 +1,152 @@
 {
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
   "extends": [
-    "react-app",
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
     "prettier",
-    "prettier/@typescript-eslint",
-    "eslint-config-prettier"
+    "eslint-config-prettier",
+    "eslint:recommended",
+    "react-app",
+    "plugin:jsx-a11y/recommended",
+    "plugin:prettier/recommended"
   ],
-  "env": {
-    "browser": true,
-    "es6": true,
-    "commonjs": true
-  },
-  "parserOptions": {
-    "project": "./tsconfig.json",
-    "ecmaVersion": 2018,
-    "sourceType": "module"
-  },
   "rules": {
-    "@typescript-eslint/explicit-member-accessibility": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-parameter-properties": [
-      "warn",
-      { "allows": ["public", "private", "protected"] }
-    ],
-    "@typescript-eslint/no-explicit-any": "warn",
-    "@typescript-eslint/camelcase": "warn",
-    "@typescript-eslint/ban-types": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      {
-        "vars": "all",
-        "args": "none",
-        "ignoreRestSiblings": false
-      }
-    ],
-    "@typescript-eslint/interface-name-prefix": "off",
-    "@typescript-eslint/no-empty-interface": 2,
-    "@typescript-eslint/no-non-null-assertion": 2,
-    "@typescript-eslint/unified-signatures": 2,
     "no-case-declarations": "warn",
-    "spaced-comment": ["warn", "always"],
+    "spaced-comment": [
+      "warn",
+      "always"
+    ],
     "guard-for-in": "error",
     "no-labels": "error",
     "no-caller": "error",
     "no-bitwise": "error",
-    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "no-console": [
+      "error",
+      {
+        "allow": [
+          "warn",
+          "error"
+        ]
+      }
+    ],
     "no-new-wrappers": "error",
     "no-eval": "error",
-    "no-shadow": "error",
+    "no-shadow": [
+      "error",
+      {
+        "hoist": "all"
+      }
+    ],
     "no-new": "error",
     "no-var": "error",
     "radix": "error",
-    "eqeqeq": ["error", "always", { "null": "ignore" }],
+    "eqeqeq": [
+      "error",
+      "smart"
+    ],
     "prefer-const": "error",
-    "object-shorthand": ["error", "always", { "avoidExplicitReturnArrows": true }],
+    "object-shorthand": [
+      "error",
+      "always",
+      {
+        "avoidExplicitReturnArrows": true
+      }
+    ],
     "strict": "error",
     "no-debugger": 2,
-    "no-empty": 2
-  }
+    "no-empty": 2,
+    "curly": [
+      "error",
+      "all"
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true,
+        "optionalDependencies": false,
+        "peerDependencies": false
+      }
+    ],
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          [
+            "external",
+            "builtin"
+          ],
+          "internal",
+          [
+            "parent",
+            "sibling",
+            "index"
+          ]
+        ]
+      }
+    ],
+    "sort-imports": [
+      "error",
+      {
+        "ignoreCase": true,
+        "ignoreDeclarationSort": true,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": [
+          "none",
+          "all",
+          "multiple",
+          "single"
+        ]
+      }
+    ],
+    "padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": "return"
+      }
+    ],
+    "react/no-string-refs": "warn",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "@typescript-eslint/explicit-function-return-type": "off"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "jsx-a11y"
+  ],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "commonjs": true,
+    "node": true
+  },
+  "root": true,
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.ts?(x)"
+      ],
+      "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": "tsconfig.json"
+      },
+      "rules": {
+        "@typescript-eslint/prefer-optional-chain": "error",
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": "error"
+      }
+    }
+  ]
 }

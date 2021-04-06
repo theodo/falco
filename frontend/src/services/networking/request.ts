@@ -47,6 +47,7 @@ const checkAccessToken = async (requestFunction: () => void) => {
       store.dispatch(logoutUserRequest({ redirectTo: routeDefinitions.landing.path }));
     }
   }
+
   return requestFunction();
 };
 
@@ -108,18 +109,17 @@ export const makeDeleteRequest = async (endpoint: string, needsAuthentication: b
 };
 
 export const makeLoginRequest = (endpoint: string, data: {}) =>
-  request
-    .post(`${backendBaseUrl}${endpoint}`)
-    .send(data)
-    .withCredentials();
+  request.post(`${backendBaseUrl}${endpoint}`).send(data).withCredentials();
 
 export const login = async (endpoint: string, data: {}): Promise<boolean> => {
   const response = await makeLoginRequest(endpoint, data);
   const token: string | undefined = response.body.token || response.body.access;
   if (token) {
     await updateToken(token);
+
     return true;
   }
+
   return false;
 };
 
@@ -129,5 +129,6 @@ export const makeLogoutRequest = (endpoint: string) =>
 export const logout = async (endpoint: string) => {
   const response = await makeLogoutRequest(endpoint);
   await updateToken(undefined);
+
   return !!response;
 };

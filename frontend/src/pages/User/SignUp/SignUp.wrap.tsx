@@ -20,9 +20,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(signUpUserRequest({ ...values, originLocation })),
 });
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )(SignUpFormContainer),
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignUpFormContainer));

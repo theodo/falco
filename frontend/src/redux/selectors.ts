@@ -7,6 +7,7 @@ export const getCurrentProject = (state: RootStateWithRouter) => {
   if (match && state.entities.projects.byId) {
     return state.entities.projects.byId[match[1]];
   }
+
   return;
 };
 
@@ -15,6 +16,7 @@ export const getCurrentProjectId = (state: RootStateWithRouter) => {
   if (undefined !== currentProject) {
     return currentProject.uuid;
   }
+
   return '';
 };
 

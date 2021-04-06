@@ -13,7 +13,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   fetchUserRequest: () => dispatch(fetchUserRequest({})),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -54,7 +54,9 @@ const reducer = (state: ParametersState = initialState, action: AnyAction) => {
     case getType(setCurrentAuditParametersId):
       return {
         ...state,
-        currentAuditParametersId: action.payload.auditParametersId ? action.payload.auditParametersId : null,
+        currentAuditParametersId: action.payload.auditParametersId
+          ? action.payload.auditParametersId
+          : null,
       };
     case getType(setCurrentPageId):
       return {

@@ -71,5 +71,5 @@ export const getSortAuditResultsId = (auditResults: AuditResultType[]) => {
       (firstAuditResult, secondAuditResult) =>
         secondAuditResult.createdAt.valueOf() - firstAuditResult.createdAt.valueOf(),
     )
-    .map(auditResult => auditResult.auditId);
+    .map((auditResult) => auditResult.auditId);
 };

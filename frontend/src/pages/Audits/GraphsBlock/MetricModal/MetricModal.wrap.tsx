@@ -16,7 +16,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(updateDisplayedMetrics({ projectId, displayedMetrics })),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(MetricModal);
+export default connect(mapStateToProps, mapDispatchToProps)(MetricModal);

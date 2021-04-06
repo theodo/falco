@@ -4,7 +4,4 @@ import MetricGraph from './MetricGraph';
 const mapStateToProps = null;
 const mapDispatchToProps = null;
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(MetricGraph);
+export default connect(mapStateToProps, mapDispatchToProps)(MetricGraph);

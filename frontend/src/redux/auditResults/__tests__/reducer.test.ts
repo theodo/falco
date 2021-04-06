@@ -280,16 +280,17 @@ describe('AuditResults reducer', () => {
 
   describe('FETCH_AUDIT_RESULTS_REQUEST case', () => {
     it('should set isLoading variable in state to true', () => {
-      const action = fetchAuditResultsRequest({  
+      const action = fetchAuditResultsRequest({
         auditParametersId: '',
         pageOrScriptId: '',
-        type: 'page'});
-  
+        type: 'page',
+      });
+
       const expectedState = {
-        ... initialState,
-        isLoading: true
-      }
-  
+        ...initialState,
+        isLoading: true,
+      };
+
       expect(reducer(initialState, action)).toEqual(expectedState);
     });
   });

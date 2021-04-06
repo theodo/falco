@@ -19,7 +19,7 @@ interface Props extends OwnProps {
   auditResults: AuditResultType[] | null;
 }
 
-export const AnalyticsBlock: React.FunctionComponent<Props> = props => {
+export const AnalyticsBlock: React.FunctionComponent<Props> = (props) => {
   const { auditResults, auditResultIds, blockMargin } = props;
 
   if (!auditResultIds || !auditResults) {
@@ -43,6 +43,7 @@ export const AnalyticsBlock: React.FunctionComponent<Props> = props => {
   const getLighthouseUrl = () => {
     const baseUrl = 'https://www.webpagetest.org/lighthouse.php?test=';
     const auditId = getWPTAuditId(auditResults[0]);
+
     return `${baseUrl}${auditId}`;
   };
 

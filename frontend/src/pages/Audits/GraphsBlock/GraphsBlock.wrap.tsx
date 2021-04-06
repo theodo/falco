@@ -39,7 +39,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     ),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(GraphsBlock);
+export default connect(mapStateToProps, mapDispatchToProps)(GraphsBlock);

@@ -55,7 +55,7 @@ export const ProjectMenuContent: React.FunctionComponent<Props> = ({
 
   const [auditCanBeLaunched, setAuditCanBeLaunched] = React.useState(true);
 
-  const auditParametersSelectOptions = auditParametersList.map(auditParameters => ({
+  const auditParametersSelectOptions = auditParametersList.map((auditParameters) => ({
     value: auditParameters.uuid,
     label: auditParameters.name,
   }));
@@ -123,7 +123,7 @@ export const ProjectMenuContent: React.FunctionComponent<Props> = ({
             <FormattedMessage id="Menu.audit_parameters_selection" />
           </AuditParametersTitle>
           <Select
-            value={auditParametersSelectOptions.find(auditParametersOption => {
+            value={auditParametersSelectOptions.find((auditParametersOption) => {
               return auditParametersOption.value === auditParametersId;
             })}
             onChange={handleAuditParametersSelection}

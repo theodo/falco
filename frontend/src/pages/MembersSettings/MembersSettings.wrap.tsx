@@ -17,7 +17,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(editMemberOfProjectRequest({ projectId, userId, isAdmin })),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(MembersSettings);
+export default connect(null, mapDispatchToProps)(MembersSettings);

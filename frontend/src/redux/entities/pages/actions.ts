@@ -1,4 +1,4 @@
-import { createAsyncAction, createAction } from 'typesafe-actions';
+import { createAction, createAsyncAction } from 'typesafe-actions';
 import { PageType } from './types';
 
 export const editPageRequest = createAction('pages/EDIT_PAGE_REQUEST')<{

@@ -38,24 +38,21 @@ export const ScriptRow: React.FunctionComponent<Props> = ({
 
   const [displayScriptModal, setDisplayScriptModal] = React.useState(false);
 
-  const [, deleteScript] = useAsyncFn(
-    async () => {
-      try {
-        const response = await makeDeleteRequest(
-          `/api/projects/${projectId}/scripts/${scriptId}`,
-          true,
-        );
-        if (!response) {
-          throw new Error('No response');
-        }
-        deleteScriptFromProjectSuccess({ projectId, scriptId });
-        setToastrDisplay('deleteScriptSuccess');
-      } catch (e) {
-        setToastrDisplay('deleteScriptError');
+  const [, deleteScript] = useAsyncFn(async () => {
+    try {
+      const response = await makeDeleteRequest(
+        `/api/projects/${projectId}/scripts/${scriptId}`,
+        true,
+      );
+      if (!response) {
+        throw new Error('No response');
       }
-    },
-    [projectId, scriptId, setToastrDisplay],
-  );
+      deleteScriptFromProjectSuccess({ projectId, scriptId });
+      setToastrDisplay('deleteScriptSuccess');
+    } catch (e) {
+      setToastrDisplay('deleteScriptError');
+    }
+  }, [projectId, scriptId, setToastrDisplay]);
 
   const openScriptModal = () => {
     setDisplayScriptModal(true);

@@ -62,6 +62,7 @@ const MetricGraph: React.FunctionComponent<Props> = ({
     if (!payload) {
       return null;
     }
+
     return payload.map((entry, index) => (
       <MetricLegend
         margin={
@@ -127,9 +128,11 @@ const MetricGraph: React.FunctionComponent<Props> = ({
     if (!payload) {
       return null;
     }
+
     return payload
       ? payload.map((entry, index) => {
           const dataType = METRICS[entry.dataKey as MetricType].type;
+
           return (
             <StyledTooltip key={index}>
               <TooltipValue>{getFormattedValue(dataType, entry.value as number)}</TooltipValue>
@@ -187,26 +190,26 @@ const MetricGraph: React.FunctionComponent<Props> = ({
   const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000;
   const sevenDaysAgo = today - oneWeekInMilliseconds;
   const oldestAuditResultWithinLastWeek = auditResults
-    ? auditResults.find(auditResult => auditResult.date >= sevenDaysAgo)
+    ? auditResults.find((auditResult) => auditResult.date >= sevenDaysAgo)
     : null;
   const dateOfOldestAuditResultWithinLastWeek = oldestAuditResultWithinLastWeek
     ? oldestAuditResultWithinLastWeek.date
     : sevenDaysAgo;
 
   const auditResultsToDisplay = auditResults
-    ? auditResults.filter(auditResult => (fullscreen ? true : auditResult.date >= sevenDaysAgo))
+    ? auditResults.filter((auditResult) => (fullscreen ? true : auditResult.date >= sevenDaysAgo))
     : null;
 
   return (
     <ResponsiveContainer width={'100%'} height={fullscreen ? window.innerHeight - 220 : '100%'}>
       <AreaChart data={auditResultsToDisplay || undefined}>
         <defs>
-          {metrics.map((metric, index) =>
+          {metrics.map((metric, index) => (
             <linearGradient key={index} id={`areaGradient_${metric}`} x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor={METRICS[metric].colorLight} stopOpacity={0.8} />
               <stop offset="95%" stopColor={METRICS[metric].colorLight} stopOpacity={0} />
             </linearGradient>
-          )}
+          ))}
         </defs>
         <Legend verticalAlign="top" align="left" iconSize={0} content={renderLegend} />
         <YAxis
@@ -220,7 +223,7 @@ const MetricGraph: React.FunctionComponent<Props> = ({
           width={30}
           type="number"
           dataKey="date"
-          tickFormatter={tickItem => dayjs(tickItem).format('DD/MM')}
+          tickFormatter={(tickItem) => dayjs(tickItem).format('DD/MM')}
           tick={axisStyle}
           axisLine={false}
           tickLine={false}
@@ -234,7 +237,7 @@ const MetricGraph: React.FunctionComponent<Props> = ({
           interval={'preserveStart'}
         />
         <Tooltip content={renderTooltip} cursor={{ stroke: colorUsage.graphTooltipCursor }} />
-        {metrics.map(metric => (
+        {metrics.map((metric) => (
           <Area
             connectNulls
             key={metric}

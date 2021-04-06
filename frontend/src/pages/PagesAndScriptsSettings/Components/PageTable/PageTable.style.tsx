@@ -1,13 +1,6 @@
 import Button from 'components/Button';
 import styled from 'styled-components';
-import {
-  colorUsage,
-  fontFamily,
-  fontSize,
-  getSpacing,
-  inheritVar,
-  lineHeight
-} from 'stylesheet';
+import { colorUsage, fontFamily, fontSize, getSpacing, inheritVar, lineHeight } from 'stylesheet';
 
 interface AddInputProps {
   isAdding: boolean;

@@ -30,6 +30,7 @@ const Projects: React.FunctionComponent = () => {
     ':projectId',
     firstProject ? firstProject.uuid : '',
   );
+
   return <Redirect to={firstProjectLocation} />;
 };
 

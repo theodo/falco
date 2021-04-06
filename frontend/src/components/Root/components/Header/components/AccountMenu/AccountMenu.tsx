@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
 import { useCurrentUser } from 'redux/user/selectors';
 import { routeDefinitions } from 'routes';
+import { DOCUMENTATION_ROOT } from 'services/constants';
 import {
   Container,
   UserActionItem,
@@ -15,7 +16,6 @@ import {
   UserInfosBlockContainer,
   UserName,
 } from './AccountMenu.style';
-import { DOCUMENTATION_ROOT } from 'services/constants';
 
 interface OwnProps {
   logoutUser: (redirectTo?: string | undefined) => void;
@@ -30,6 +30,7 @@ export const AccountMenu: React.FunctionComponent<Props> = ({ logoutUser }) => {
     if (typeof word !== 'string') {
       return '';
     }
+
     return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
   };
 
@@ -40,6 +41,7 @@ export const AccountMenu: React.FunctionComponent<Props> = ({ logoutUser }) => {
       </Container>
     );
   }
+
   return (
     <Container>
       <UserInfosBlockContainer>

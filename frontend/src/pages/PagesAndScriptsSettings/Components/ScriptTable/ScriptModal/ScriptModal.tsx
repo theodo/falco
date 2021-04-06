@@ -49,52 +49,46 @@ export const ScriptModal: React.FunctionComponent<Props> = ({
 
   const { setToastrDisplay } = useToastr();
 
-  const [state, createScript] = useAsyncFn(
-    async () => {
-      try {
-        const response = await makePostRequest(`/api/projects/${projectId}/scripts`, true, {
+  const [state, createScript] = useAsyncFn(async () => {
+    try {
+      const response = await makePostRequest(`/api/projects/${projectId}/scripts`, true, {
+        name: scriptName,
+        script: scriptContent,
+      });
+      if (!response) {
+        throw new Error('No response');
+      }
+      const modelizedScript = modelizeScript(response.body);
+      addScript({ [modelizedScript.uuid]: modelizedScript });
+      addScriptToProjectSuccess(projectId, modelizedScript.uuid);
+      setToastrDisplay('addScriptToProjectSuccess');
+      close();
+    } catch (e) {
+      setToastrDisplay('addScriptToProjectError');
+    }
+  }, [projectId, scriptContent, scriptName]);
+
+  const [editState, editScript] = useAsyncFn(async () => {
+    try {
+      const response = await makePutRequest(
+        `/api/projects/${projectId}/scripts/${scriptId}`,
+        true,
+        {
           name: scriptName,
           script: scriptContent,
-        });
-        if (!response) {
-          throw new Error('No response');
-        }
-        const modelizedScript = modelizeScript(response.body);
-        addScript({ [modelizedScript.uuid]: modelizedScript });
-        addScriptToProjectSuccess(projectId, modelizedScript.uuid);
-        setToastrDisplay('addScriptToProjectSuccess');
-        close();
-      } catch (e) {
-        setToastrDisplay('addScriptToProjectError');
+        },
+      );
+      if (!response) {
+        throw new Error('No response');
       }
-    },
-    [projectId, scriptContent, scriptName],
-  );
-
-  const [editState, editScript] = useAsyncFn(
-    async () => {
-      try {
-        const response = await makePutRequest(
-          `/api/projects/${projectId}/scripts/${scriptId}`,
-          true,
-          {
-            name: scriptName,
-            script: scriptContent,
-          },
-        );
-        if (!response) {
-          throw new Error('No response');
-        }
-        const modelizedScript = modelizeScript(response.body);
-        setToastrDisplay('editScriptSuccess');
-        editScriptSuccess({ [modelizedScript.uuid]: modelizedScript });
-        close();
-      } catch (e) {
-        setToastrDisplay('editScriptError');
-      }
-    },
-    [projectId, scriptContent, scriptName],
-  );
+      const modelizedScript = modelizeScript(response.body);
+      setToastrDisplay('editScriptSuccess');
+      editScriptSuccess({ [modelizedScript.uuid]: modelizedScript });
+      close();
+    } catch (e) {
+      setToastrDisplay('editScriptError');
+    }
+  }, [projectId, scriptContent, scriptName]);
 
   const modalStyles: ModalStyles = {
     content: {

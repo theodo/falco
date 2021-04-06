@@ -1,4 +1,4 @@
-import { createAsyncAction, createAction } from 'typesafe-actions';
+import { createAction, createAsyncAction } from 'typesafe-actions';
 import { AuditParametersType } from './types';
 
 export const fetchAuditParametersAction = createAsyncAction(

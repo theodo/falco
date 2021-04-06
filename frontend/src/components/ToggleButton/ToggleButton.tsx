@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Switch from "react-switch";
+import Switch from 'react-switch';
 import { colorUsage } from 'stylesheet';
 import { ToggleButtonContainer, ToggleButtonLabel } from './ToggleButton.style';
 
@@ -7,14 +7,14 @@ export interface OwnProps {
   onChange: () => void;
   checked: boolean;
   label: string;
-  disabled: boolean
+  disabled: boolean;
 }
 
 const ToggleButton: React.FunctionComponent<OwnProps> = ({
   onChange,
   checked,
   label,
-  disabled
+  disabled,
 }) => {
   return (
     <ToggleButtonContainer>
@@ -29,12 +29,17 @@ const ToggleButton: React.FunctionComponent<OwnProps> = ({
         disabled={disabled}
       />
       <ToggleButtonLabel
-        color={checked ? colorUsage.ToggleButtonActiveLabelColor : colorUsage.ToggleButtonDisabledLabelColor}
+        color={
+          checked
+            ? colorUsage.ToggleButtonActiveLabelColor
+            : colorUsage.ToggleButtonDisabledLabelColor
+        }
         disabled={disabled}
-      >{label}
+      >
+        {label}
       </ToggleButtonLabel>
     </ToggleButtonContainer>
-  )
+  );
 };
 
 export default ToggleButton;

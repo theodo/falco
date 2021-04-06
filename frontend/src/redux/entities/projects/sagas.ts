@@ -143,6 +143,7 @@ function* fetchProjects(action: ActionType<typeof fetchProjectsRequest>) {
     yield put(saveFetchedProjects({ projects: [firstProject] }));
   } else {
     yield put(fetchProjectError({ projectId: null, errorMessage: 'No project returned' }));
+
     return;
   }
   // if the user has no other project, do not fetch them
@@ -318,7 +319,7 @@ function* saveProjectsToStore(action: ActionType<typeof saveFetchedProjects>) {
   );
   // launch polling for all non-success and non-error auditStatusHistories
   yield all(
-    allApiAuditStatusHistories.map(apiAuditStatusHistory =>
+    allApiAuditStatusHistories.map((apiAuditStatusHistory) =>
       apiAuditStatusHistory.status === 'PENDING' || apiAuditStatusHistory.status === 'REQUESTED'
         ? put(
             pollAuditStatusAction({
@@ -402,9 +403,7 @@ function* addAuditParameterToProjectFailedHandler(
 function* deleteAuditParameterFromProject(
   action: ActionType<typeof deleteAuditParameterFromProjectRequest>,
 ) {
-  const endpoint = `/api/projects/${action.payload.projectId}/audit_parameters/${
-    action.payload.auditParameterId
-  }`;
+  const endpoint = `/api/projects/${action.payload.projectId}/audit_parameters/${action.payload.auditParameterId}`;
   yield call(makeDeleteRequest, endpoint, true);
   yield put(
     deleteAuditParameterFromProjectSuccess({

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
 export const WelcomeBlockContainer = styled.div`
-  margin: 0 200px
+  margin: 0 200px;
 `;
 
 export const WelcomeBlockTitle = styled.h1`

@@ -52,12 +52,9 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
   const [isAddingMode, setAddingMode] = React.useState(false);
   const [nameInputRef, setNameInputFocus] = useFocus();
 
-  React.useEffect(
-    () => {
-      setNameInputFocus();
-    },
-    [isAddingMode, setNameInputFocus],
-  );
+  React.useEffect(() => {
+    setNameInputFocus();
+  }, [isAddingMode, setNameInputFocus]);
 
   const cancel = () => {
     setAuditParameterName('');
@@ -101,13 +98,13 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
   const selectMargin = `0 ${getSpacing(2)} 0 0`;
 
   const formattedAvailableAuditParameters = availableAuditParameters.map(
-    availableAuditParameter => ({
+    (availableAuditParameter) => ({
       label: availableAuditParameter.label,
       value: availableAuditParameter.uuid,
     }),
   );
 
-  const foundAuditParameter = formattedAvailableAuditParameters.find(auditParametersOption => {
+  const foundAuditParameter = formattedAvailableAuditParameters.find((auditParametersOption) => {
     return auditParametersOption.value === auditParameterConfigurationId;
   });
 
@@ -138,7 +135,7 @@ export const AddAuditParameterRow: React.FunctionComponent<Props> = ({
         })}
       />
       <Select
-        value={availableNetworkShape.find(auditParametersOption => {
+        value={availableNetworkShape.find((auditParametersOption) => {
           return auditParametersOption.value === auditParameterNetworkShape;
         })}
         onChange={handleNetworkShapeChange}

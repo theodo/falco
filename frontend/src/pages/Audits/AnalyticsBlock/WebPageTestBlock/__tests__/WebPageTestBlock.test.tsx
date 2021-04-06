@@ -15,8 +15,8 @@ import configureMockStore from 'redux-mock-store';
 
 import { state } from '__fixtures__/state';
 import enMessages from 'translations/en.json';
-import WebPageTestBlock from '..';
 import { flattenMessages } from 'services/i18n/intl';
+import WebPageTestBlock from '..';
 
 afterEach(cleanup);
 

@@ -19,7 +19,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(setCurrentScriptStepId({ scriptStepId })),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(Project);
+export default connect(null, mapDispatchToProps)(Project);

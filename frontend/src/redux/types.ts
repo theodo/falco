@@ -4,7 +4,10 @@ import { PersistPartial } from 'redux-persist/lib/persistReducer';
 import { AuditResultsAction, AuditResultsState } from './auditResults';
 import { AuditParametersAction, AuditParametersState } from './entities/auditParameters';
 import { AuditsAction, AuditsState } from './entities/audits';
-import { AuditStatusHistoriesAction, AuditStatusHistoriesState } from './entities/auditStatusHistories/reducer';
+import {
+  AuditStatusHistoriesAction,
+  AuditStatusHistoriesState,
+} from './entities/auditStatusHistories/reducer';
 import { PagesAction, PagesState } from './entities/pages';
 import { ProjectsAction, ProjectsState } from './entities/projects';
 import { ScriptsAction, ScriptsState } from './entities/scripts';
@@ -43,4 +46,4 @@ export type RootAction =
   | AuditParametersAction
   | AuditStatusHistoriesAction
   | AuditResultsAction
-  | UserAction
+  | UserAction;

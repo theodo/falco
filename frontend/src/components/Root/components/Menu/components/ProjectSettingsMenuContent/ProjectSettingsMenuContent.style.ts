@@ -1,19 +1,11 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import {
-  colorUsage,
-  fontFamily,
-  fontSize,
-  fontWeight,
-  getSpacing,
-  lineHeight,
-} from 'stylesheet';
-
+import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
 interface MenuArrowContainerProps {
   margin?: string;
   height?: string;
-};
+}
 
 export const GoBackToProjectLink = styled(Link)`
   color: ${colorUsage.metricsSettingsText};
@@ -30,7 +22,7 @@ export const Settings = styled.div`
   font-size: ${fontSize.h3Text};
   font-weight: ${fontWeight.h3Text};
   padding: 0 ${getSpacing(3)} ${getSpacing(4)} ${getSpacing(3)};
-  margin-top: ${getSpacing(4)}
+  margin-top: ${getSpacing(4)};
 `;
 
 export const SettingsPageTitleBlock = styled.div`

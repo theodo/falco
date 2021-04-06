@@ -49,13 +49,13 @@ export function* fetchAuditResults(action: ActionType<typeof fetchAuditResultsRe
   );
   const modelizedAuditResults = modelizeAuditResultsForPage(auditResults);
   const sortedAuditResultsPageIds = getSortAuditResultsId(
-    Object.keys(modelizedAuditResults).map(auditId => modelizedAuditResults[auditId]),
+    Object.keys(modelizedAuditResults).map((auditId) => modelizedAuditResults[auditId]),
   );
   let sortedAuditResultsScriptIds;
   if (type === 'script') {
     sortedAuditResultsScriptIds = groupBy(
       sortedAuditResultsPageIds,
-      auditId => modelizedAuditResults[auditId].scriptStepNumber,
+      (auditId) => modelizedAuditResults[auditId].scriptStepNumber,
     );
   }
   yield put(

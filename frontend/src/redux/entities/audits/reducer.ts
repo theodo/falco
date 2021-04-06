@@ -27,6 +27,7 @@ const reducer = (state: AuditsState = initialState, action: AnyAction) => {
       };
     case getType(stopPollingAuditStatusAction):
       const lastAuditStatusHistory = typedAction.payload.lastAuditStatusHistory;
+
       return {
         ...state,
         runningAuditByPageOrScriptId: {

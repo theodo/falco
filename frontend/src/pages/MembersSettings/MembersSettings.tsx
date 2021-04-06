@@ -65,7 +65,7 @@ const MembersSettings: React.FunctionComponent<Props> = ({
 
   const fetchAllUsers = () => {
     const request = makeGetRequest('/api/core/users', true);
-    request.then(response => {
+    request.then((response) => {
       if (response) {
         setAllUsers(response.body.map((apiUser: ApiUser) => modelizeUser(apiUser)));
       }
@@ -76,36 +76,30 @@ const MembersSettings: React.FunctionComponent<Props> = ({
     fetchAllUsers();
   }, []);
 
-  React.useEffect(
-    () => {
-      setSelectOption(null);
-    },
-    [project],
-  );
+  React.useEffect(() => {
+    setSelectOption(null);
+  }, [project]);
 
-  React.useEffect(
-    () => {
-      if ('' !== currentToastrDisplay) {
-        switch (currentToastrDisplay) {
-          case 'addMemberSuccess':
-            toastr.success(
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.add_member_success_message' }),
-            );
-            break;
-          case 'addMemberError':
-            toastr.error(
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.error_title' }),
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.error_message' }),
-            );
-            break;
-        }
-
-        resetToastrDisplay();
+  React.useEffect(() => {
+    if ('' !== currentToastrDisplay) {
+      switch (currentToastrDisplay) {
+        case 'addMemberSuccess':
+          toastr.success(
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.add_member_success_message' }),
+          );
+          break;
+        case 'addMemberError':
+          toastr.error(
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.error_title' }),
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.error_message' }),
+          );
+          break;
       }
-    },
-    [currentToastrDisplay, resetToastrDisplay, intl],
-  );
+
+      resetToastrDisplay();
+    }
+  }, [currentToastrDisplay, resetToastrDisplay, intl]);
 
   const onChange = (selectedOption: ValueType<UserOption | {}>) => {
     setSelectOption(selectedOption);
@@ -178,8 +172,10 @@ const MembersSettings: React.FunctionComponent<Props> = ({
       <InviteUserLink>
         <FormattedMessage id="ProjectSettings.member_not_on_falco" />
         <a href="/sign-up">
-          {// small hack to get the page for the proper environment
-          `${window.location.href.match(/https?:\/\/[^/]+/)}/sign-up`}
+          {
+            // small hack to get the page for the proper environment
+            `${window.location.href.match(/https?:\/\/[^/]+/)}/sign-up`
+          }
         </a>
       </InviteUserLink>
       <ProjectSettingsBlock>

@@ -9,7 +9,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(addPageToProjectRequest({ projectId, pageName, pageUrl })),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(AddPageRow);
+export default connect(null, mapDispatchToProps)(AddPageRow);

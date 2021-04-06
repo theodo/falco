@@ -8,8 +8,9 @@ interface Props {
   text: string;
 }
 
-const Badge: React.FunctionComponent<Props> = props => {
+const Badge: React.FunctionComponent<Props> = (props) => {
   const { backgroundColor, color, margin, text } = props;
+
   return (
     <Style.Badge backgroundColor={backgroundColor} color={color} margin={margin}>
       {text}

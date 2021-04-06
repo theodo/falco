@@ -21,7 +21,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     ),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(AddAuditParameterRow);
+export default connect(null, mapDispatchToProps)(AddAuditParameterRow);

@@ -1,5 +1,5 @@
 const rewireStyledComponents = require('react-app-rewire-styled-components');
-const ManifestPlugin = require('webpack-manifest-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 
 module.exports = {
   webpack: function override(config, env) {
@@ -19,7 +19,7 @@ module.exports = {
     // We use this boolean later to only inject the initial chunks into the
     // app's HTML.
     config.plugins.push(
-      new ManifestPlugin({
+      new WebpackManifestPlugin({
         fileName: 'static-manifest.json', // manifest.json was already taken (PWA)
         publicPath: '',
         generate: (seed, files) =>

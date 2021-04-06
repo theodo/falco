@@ -1,11 +1,23 @@
 import { AnyAction } from 'redux';
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import { ActionType, getType } from 'typesafe-actions';
 
-import { loginUserClearError, loginUserError, loginUserRequest, loginUserSuccess, logoutUserRequest } from './actions';
+import {
+  loginUserClearError,
+  loginUserError,
+  loginUserRequest,
+  loginUserSuccess,
+  logoutUserRequest,
+} from './actions';
 
-export type LoginAction = ActionType<typeof loginUserSuccess | typeof loginUserError |  typeof loginUserRequest | typeof loginUserClearError | typeof logoutUserRequest>;
+export type LoginAction = ActionType<
+  | typeof loginUserSuccess
+  | typeof loginUserError
+  | typeof loginUserRequest
+  | typeof loginUserClearError
+  | typeof logoutUserRequest
+>;
 
 export type LoginState = Readonly<{
   isAuthenticated: boolean;

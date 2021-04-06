@@ -28,6 +28,7 @@ describe('[Saga] Login redux', () => {
     describe('when request fails', () => {
       it('should call the error action', async () => {
         const error = new Error();
+
         return expectSaga(loginUser, loginUserRequestAction)
           .provide([[matchers.call.fn(login), throwError(error)]])
           .put(loginUserError({ errorMessage: error.message }))

@@ -14,7 +14,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(deleteScriptFromProjectSuccess(payload)),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ScriptRow);
+export default connect(mapStateToProps, mapDispatchToProps)(ScriptRow);

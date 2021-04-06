@@ -20,9 +20,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(loginUserRequest({ ...values, originLocation })),
 });
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )(LoginFormContainer),
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginFormContainer));

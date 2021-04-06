@@ -11,14 +11,11 @@ export const useAllProjects = () => {
   const projects = useSelector(getAllProjects);
 
   const dispatch = useDispatch();
-  useEffect(
-    () => {
-      if (!projects) {
-        dispatch(fetchProjectsRequest({}));
-      }
-    },
-    [dispatch, projects],
-  );
+  useEffect(() => {
+    if (!projects) {
+      dispatch(fetchProjectsRequest({}));
+    }
+  }, [dispatch, projects]);
 
   return projects;
 };
@@ -27,14 +24,11 @@ export const useProjectById = (projectId: string) => {
   const project = useSelector((state: RootState) => getProject(state, projectId));
 
   const dispatch = useDispatch();
-  useEffect(
-    () => {
-      if (project === undefined) {
-        dispatch(fetchProjectsRequest({ currentProjectId: projectId }));
-      }
-    },
-    [dispatch, project, projectId],
-  );
+  useEffect(() => {
+    if (project === undefined) {
+      dispatch(fetchProjectsRequest({ currentProjectId: projectId }));
+    }
+  }, [dispatch, project, projectId]);
 
   return project;
 };
@@ -49,12 +43,9 @@ export const useToastr = () => {
     },
     [dispatch],
   );
-  const resetToastrDisplay = useCallback(
-    () => {
-      dispatch(setProjectToastrDisplay({ toastrDisplay: '' }));
-    },
-    [dispatch],
-  );
+  const resetToastrDisplay = useCallback(() => {
+    dispatch(setProjectToastrDisplay({ toastrDisplay: '' }));
+  }, [dispatch]);
 
   return { currentToastrDisplay, setToastrDisplay, resetToastrDisplay };
 };

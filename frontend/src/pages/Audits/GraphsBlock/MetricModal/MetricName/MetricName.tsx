@@ -30,7 +30,7 @@ const MetricName: React.FunctionComponent<Props> = ({ metric, modalRef, onClick 
         onMouseEnter={displayTooltip}
         onMouseLeave={hideTooltip}
         ref={metricNameRef}
-        onClick={event => onClick(event, metric)}
+        onClick={(event) => onClick(event, metric)}
       >
         <FormattedMessage id={`Metrics.${metric}.name`} />
       </MetricNameName>

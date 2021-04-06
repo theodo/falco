@@ -27,6 +27,7 @@ export const validateForm = (values: FormValues) => {
   if (!values.password) {
     errors.password = 'Login.error_password_required';
   }
+
   return errors;
 };
 

@@ -1,6 +1,12 @@
-import { PersistState } from "redux-persist";
+import { PersistState } from 'redux-persist';
 import { MetricType } from 'redux/auditResults/types';
-import { setCurrentAuditParametersId, setCurrentPageId, setCurrentScriptId, setCurrentScriptStepId, updateDisplayedMetrics } from '../actions';
+import {
+  setCurrentAuditParametersId,
+  setCurrentPageId,
+  setCurrentScriptId,
+  setCurrentScriptStepId,
+  updateDisplayedMetrics,
+} from '../actions';
 import reducer, { ParametersState } from '../reducer';
 
 const initialState: ParametersState = {
@@ -18,7 +24,7 @@ describe('Parameters reducer', () => {
 
     it('Should return an empty list when no metric is set to be displayed', () => {
       const action = updateDisplayedMetrics({ displayedMetrics: [], projectId });
-      const expectedState = {...initialState, displayedMetrics: { [projectId]: [] } };
+      const expectedState = { ...initialState, displayedMetrics: { [projectId]: [] } };
 
       expect(reducer(initialState, action)).toEqual(expectedState);
     });
@@ -35,7 +41,10 @@ describe('Parameters reducer', () => {
         projectId,
       });
 
-      const expectedState = {...initialState, displayedMetrics: { [projectId]: displayedMetrics } };
+      const expectedState = {
+        ...initialState,
+        displayedMetrics: { [projectId]: displayedMetrics },
+      };
 
       expect(reducer(initialState, action)).toEqual(expectedState);
     });
@@ -45,14 +54,14 @@ describe('Parameters reducer', () => {
     const auditParametersId = '55555-66666-77777-88888';
 
     it('Should return null when no auditParametersId is submitted', () => {
-      const action = setCurrentAuditParametersId({auditParametersId: undefined});
-      const expectedState = {...initialState, currentAuditParametersId: null };
+      const action = setCurrentAuditParametersId({ auditParametersId: undefined });
+      const expectedState = { ...initialState, currentAuditParametersId: null };
 
       expect(reducer(initialState, action)).toEqual(expectedState);
     });
     it('Should return submitted value when auditParametersId is submitted', () => {
-      const action = setCurrentAuditParametersId({auditParametersId});
-      const expectedState = {...initialState, currentAuditParametersId: auditParametersId };
+      const action = setCurrentAuditParametersId({ auditParametersId });
+      const expectedState = { ...initialState, currentAuditParametersId: auditParametersId };
 
       expect(reducer(initialState, action)).toEqual(expectedState);
     });
@@ -62,14 +71,14 @@ describe('Parameters reducer', () => {
     const pageId = 'Page-5678';
 
     it('Should return null when no pageId is submitted', () => {
-      const action = setCurrentPageId({pageId: undefined});
-      const expectedState = {...initialState, currentPageId: null };
+      const action = setCurrentPageId({ pageId: undefined });
+      const expectedState = { ...initialState, currentPageId: null };
 
       expect(reducer(initialState, action)).toEqual(expectedState);
     });
     it('Should return submitted value when pageId is submitted', () => {
-      const action = setCurrentPageId({pageId});
-      const expectedState = {...initialState, currentPageId: pageId };
+      const action = setCurrentPageId({ pageId });
+      const expectedState = { ...initialState, currentPageId: pageId };
 
       expect(reducer(initialState, action)).toEqual(expectedState);
     });
@@ -79,14 +88,14 @@ describe('Parameters reducer', () => {
     const scriptId = 'Script-5678';
 
     it('Should return null when no scriptId is submitted', () => {
-      const action = setCurrentScriptId({scriptId: undefined});
-      const expectedState = {...initialState, currentScriptId: null };
+      const action = setCurrentScriptId({ scriptId: undefined });
+      const expectedState = { ...initialState, currentScriptId: null };
 
       expect(reducer(initialState, action)).toEqual(expectedState);
     });
     it('Should return submitted value when scriptId is submitted', () => {
-      const action = setCurrentScriptId({scriptId});
-      const expectedState = {...initialState, currentScriptId: scriptId };
+      const action = setCurrentScriptId({ scriptId });
+      const expectedState = { ...initialState, currentScriptId: scriptId };
 
       expect(reducer(initialState, action)).toEqual(expectedState);
     });
@@ -96,14 +105,14 @@ describe('Parameters reducer', () => {
     const scriptStepId = 'ScriptStep-5678';
 
     it('Should return null when no scriptStepId is submitted', () => {
-      const action = setCurrentScriptStepId({scriptStepId: undefined});
-      const expectedState = {...initialState, currentScriptStepId: null };
+      const action = setCurrentScriptStepId({ scriptStepId: undefined });
+      const expectedState = { ...initialState, currentScriptStepId: null };
 
       expect(reducer(initialState, action)).toEqual(expectedState);
     });
     it('Should return submitted value when scriptStepId is submitted', () => {
-      const action = setCurrentScriptStepId({scriptStepId});
-      const expectedState = {...initialState, currentScriptStepId: scriptStepId };
+      const action = setCurrentScriptStepId({ scriptStepId });
+      const expectedState = { ...initialState, currentScriptStepId: scriptStepId };
 
       expect(reducer(initialState, action)).toEqual(expectedState);
     });

@@ -33,6 +33,7 @@ describe('[Saga] Sign Up redux', () => {
     describe('when request fails', () => {
       it('should call the error action', async () => {
         const error = new Error();
+
         return expectSaga(signUpUser, signUpUserRequestAction)
           .provide([[matchers.call.fn(makePostRequest), throwError(error)]])
           .put(signUpUserError({ errorMessage: error.message }))

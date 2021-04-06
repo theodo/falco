@@ -4,7 +4,4 @@ import { ProjectDetailsInput } from './ProjectDetailsInput';
 const mapStateToProps = null;
 const mapDispatchToProps = null;
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ProjectDetailsInput);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectDetailsInput);

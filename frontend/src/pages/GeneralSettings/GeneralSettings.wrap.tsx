@@ -11,7 +11,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   ) => dispatch(editProjectDetailsRequest({ projectId, payload })),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(GeneralSettings);
+export default connect(null, mapDispatchToProps)(GeneralSettings);
