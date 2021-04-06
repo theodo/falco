@@ -94,7 +94,7 @@ const GraphModal: React.FunctionComponent<OwnProps & Props> = ({
     >
       <>
         <PageTitle>{projectName + ' / ' + pageOrScriptName}</PageTitle>
-        {auditResults && auditResults[0] && auditResults[0].scriptStepName && (
+        {auditResults?.[0]?.scriptStepName && (
           <PageSubTitle>{auditResults[0].scriptStepName}</PageSubTitle>
         )}
         <PageSubTitle>{currentAuditParametersName}</PageSubTitle>

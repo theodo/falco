@@ -36,18 +36,13 @@ export const selectAuditScriptSteps = (
   auditParametersId: string,
   scriptId: string,
 ): Record<string, string> => {
-  if (
-    state.auditResults.sortedByScriptId[scriptId] &&
-    state.auditResults.sortedByScriptId[scriptId].byAuditParametersId &&
-    state.auditResults.sortedByScriptId[scriptId].byAuditParametersId[auditParametersId]
-  ) {
+  if (state.auditResults.sortedByScriptId[scriptId]?.byAuditParametersId?.[auditParametersId]) {
     const sortedAuditResults =
       state.auditResults.sortedByScriptId[scriptId].byAuditParametersId[auditParametersId];
 
     return Object.keys(sortedAuditResults).reduce((scriptStepNames, scriptStepKey) => {
       if (
-        sortedAuditResults[scriptStepKey] &&
-        sortedAuditResults[scriptStepKey][0] &&
+        sortedAuditResults[scriptStepKey]?.[0] &&
         state.auditResults.byAuditId[sortedAuditResults[scriptStepKey][0]]
       ) {
         return {

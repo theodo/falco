@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { call } from 'redux-saga/effects';
 
@@ -7,7 +8,7 @@ export const handleAPIExceptions = (
 ) =>
   function* wrappedSaga(...args: any[]) {
     try {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       yield call(saga, ...args);
     } catch (error) {

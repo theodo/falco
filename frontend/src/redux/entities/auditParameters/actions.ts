@@ -5,7 +5,7 @@ export const fetchAuditParametersAction = createAsyncAction(
   'auditParameters/FETCH_AUDITPARAMETERS_REQUEST',
   'auditParameters/FETCH_AUDITPARAMETERS_SUCCESS',
   'auditParameters/FETCH_AUDITPARAMETERS_FAILURE',
-)<{}, { byId: Record<string, AuditParametersType> }, { errorMessage: string }>();
+)<never, { byId: Record<string, AuditParametersType> }, { errorMessage: string }>();
 
 export const editAuditParameterRequest = createAction(
   'auditParameters/EDIT_AUDIT_PARAMETER_REQUEST',
@@ -22,10 +22,3 @@ export const editAuditParameterError = createAction('auditParameters/EDIT_AUDIT_
   projectId: string;
   errorMessage: string;
 }>();
-
-export default {
-  fetchAuditParametersAction,
-  editAuditParameterRequest,
-  editAuditParameterSuccess,
-  editAuditParameterError,
-};

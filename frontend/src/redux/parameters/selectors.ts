@@ -28,10 +28,7 @@ export const getCurrentAuditParameters = (state: RootState): AuditParametersType
     return null;
   }
 
-  return (
-    state.entities.auditParameters.byId &&
-    state.entities.auditParameters.byId[currentAuditParametersId]
-  );
+  return state.entities.auditParameters.byId?.[currentAuditParametersId] as AuditParametersType;
 };
 
 export const getCurrentPageId = (state: RootState): string | null => {

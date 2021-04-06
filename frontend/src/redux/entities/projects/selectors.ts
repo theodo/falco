@@ -25,7 +25,7 @@ export const getProject = (state: RootState, projectId: string): ProjectType | n
     return undefined;
   }
 
-  return state.entities.projects.byId && state.entities.projects.byId[projectId];
+  return state.entities.projects.byId?.[projectId];
 };
 
 export const getProjectToastrDisplay = (state: RootState): ProjectToastrDisplayType => {

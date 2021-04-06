@@ -8,7 +8,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import ReduxToastr, { toastr } from 'react-redux-toastr';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { RouteComponentProps } from 'react-router';
-import { ValueType } from 'react-select/lib/types';
+import { ValueType } from 'react-select';
 import { useProjectById, useToastr } from 'redux/entities/projects/hooks';
 import { ProjectMember } from 'redux/entities/projects/types';
 import { modelizeUser } from 'redux/user/modelizer';
@@ -58,7 +58,9 @@ const MembersSettings: React.FunctionComponent<Props> = ({
 
   const { currentToastrDisplay, resetToastrDisplay } = useToastr();
 
-  const [selectOption, setSelectOption] = React.useState<ValueType<UserOption | {}>>(null);
+  const [selectOption, setSelectOption] = React.useState<
+    ValueType<UserOption | Record<string, unknown>, false>
+  >(null);
   const [allUsers, setAllUsers] = React.useState([]);
 
   const project = useProjectById(match.params.projectId);
@@ -101,7 +103,7 @@ const MembersSettings: React.FunctionComponent<Props> = ({
     }
   }, [currentToastrDisplay, resetToastrDisplay, intl]);
 
-  const onChange = (selectedOption: ValueType<UserOption | {}>) => {
+  const onChange = (selectedOption: ValueType<UserOption, false>) => {
     setSelectOption(selectedOption);
     if (selectedOption && 'value' in selectedOption && project) {
       addMemberToProject(project.uuid, selectedOption.value);
