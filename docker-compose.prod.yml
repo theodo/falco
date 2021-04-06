@@ -7,7 +7,7 @@ services:
       - .env.prod
 
   redis:
-    image: redis:5.0-alpine
+    image: redis:6.2-alpine
 
   backend:
     image: theodofr/falco:latest
