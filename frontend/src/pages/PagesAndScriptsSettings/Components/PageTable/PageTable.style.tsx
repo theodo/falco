@@ -45,6 +45,7 @@ const editableInputStyle = `
   }
 `;
 
+/* stylelint-disable value-keyword-case */
 export const NameHeader = styled.div`
   ${genericStyle}
   width: 25%;
@@ -76,6 +77,7 @@ export const EditUrlInput = styled.input`
   ${editableInputStyle}
   width: 70%;
 `;
+/* stylelint-enable */
 
 export const AddPageButtonContainer = styled(Button)`
   display: ${(props: AddInputProps) => (props.isAdding ? 'none' : 'flex')};

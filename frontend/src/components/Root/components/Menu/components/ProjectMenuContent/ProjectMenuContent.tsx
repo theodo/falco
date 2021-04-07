@@ -2,7 +2,7 @@ import Select from 'components/Select';
 import { history } from 'index';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { ValueType } from 'react-select/lib/types';
+import { ValueType } from 'react-select';
 import { routeDefinitions } from 'routes';
 
 import MessagePill from 'components/MessagePill';
@@ -61,7 +61,7 @@ export const ProjectMenuContent: React.FunctionComponent<Props> = ({
   }));
 
   const handleAuditParametersSelection = (
-    selectedOption: ValueType<AuditParametersOption | {}>,
+    selectedOption: ValueType<AuditParametersOption, false>,
   ) => {
     // Check needed to avoid TS2339 error
     if (selectedOption && 'value' in selectedOption && auditParametersId) {

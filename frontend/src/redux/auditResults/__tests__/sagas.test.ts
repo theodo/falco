@@ -6,6 +6,7 @@ import { makeGetRequest } from 'services/networking/request';
 
 import { fetchAuditResultsRequest, fetchAuditResultsSuccess } from '../actions';
 import { fetchAuditResults } from '../sagas';
+import { AuditResultType } from '../types';
 
 const pageActionAuditParametersId = '1111';
 const pageActionPageOrScriptId = '2222';
@@ -29,7 +30,6 @@ const pageAuditResultDate = dayjs('2019-05-11T00:00:00.000000+00:00');
 const pageAuditResultValue = 11;
 const pageAuditResultLighthouseDisplayedValue = '3,2 s';
 const pageAuditResultLighthouseScore = 0.6;
-/* eslint-disable @typescript-eslint/camelcase */
 const pageAuditResultAPI = [
   {
     uuid: pageAuditResultId,
@@ -180,7 +180,7 @@ const scriptAuditResultAPI = [
   },
 ];
 
-const scriptAuditResultModelized = {
+const scriptAuditResultModelized: Record<string, AuditResultType> = {
   [scriptAuditResultId]: {
     auditId: scriptAuditResultId,
     createdAt: scriptAuditResultDate,
@@ -206,32 +206,31 @@ const scriptAuditResultModelized = {
     scriptStepName: scriptAuditStepName,
     scriptStepNumber: scriptAuditStepNumber,
     lighthouseTTI: {
-      displayedValue: null,
-      score: null,
+      displayedValue: '',
+      score: 0,
     },
     lighthouseSpeedIndex: {
-      displayedValue: null,
-      score: null,
+      displayedValue: '',
+      score: 0,
     },
     lighthouseFirstContentfulPaint: {
-      displayedValue: null,
-      score: null,
+      displayedValue: '',
+      score: 0,
     },
     lighthouseFirstMeaningfulPaint: {
-      displayedValue: null,
-      score: null,
+      displayedValue: '',
+      score: 0,
     },
     lighthouseFirstCPUIdle: {
-      displayedValue: null,
-      score: null,
+      displayedValue: '',
+      score: 0,
     },
     lighthouseMaxPotentialFirstInputDelay: {
-      displayedValue: null,
-      score: null,
+      displayedValue: '',
+      score: 0,
     },
   },
 };
-/* eslint-enable */
 
 describe('[Saga] Fetch Audit Results', () => {
   describe('fetchAuditResults', () => {

@@ -45,6 +45,7 @@ const editableInputStyle = `
   }
 `;
 
+/* stylelint-disable value-keyword-case */
 export const AddNameInput = styled.input`
   ${addInputStyle}
   display: ${(props: AddInputProps) => (props.isAdding ? 'visible' : 'none')};
@@ -78,6 +79,7 @@ export const EditBrowserInput = styled.input`
   width: 40%;
 `;
 
+/* stylelint-enable */
 export const AddAuditParameterButtonContainer = styled(Button)`
   display: ${(props: AddInputProps) => (props.isAdding ? 'none' : 'flex')};
   align-items: center;

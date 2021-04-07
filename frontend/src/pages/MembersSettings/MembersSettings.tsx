@@ -3,7 +3,7 @@ import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
 import ToggleButton from 'components/ToggleButton';
 import Close from 'icons/Close';
-import * as React from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import ReduxToastr, { toastr } from 'react-redux-toastr';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
@@ -40,7 +40,7 @@ type Props = {
   projectId: string;
 }>;
 
-const MembersSettings: React.FunctionComponent<Props> = ({
+const MembersSettings: FunctionComponent<Props> = ({
   addMemberToProject,
   removeMemberOfProjectRequest,
   editMemberOfProjectRequest,
@@ -58,10 +58,10 @@ const MembersSettings: React.FunctionComponent<Props> = ({
 
   const { currentToastrDisplay, resetToastrDisplay } = useToastr();
 
-  const [selectOption, setSelectOption] = React.useState<
+  const [selectOption, setSelectOption] = useState<
     ValueType<UserOption | Record<string, unknown>, false>
   >(null);
-  const [allUsers, setAllUsers] = React.useState([]);
+  const [allUsers, setAllUsers] = useState([]);
 
   const project = useProjectById(match.params.projectId);
 
@@ -74,15 +74,15 @@ const MembersSettings: React.FunctionComponent<Props> = ({
     });
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchAllUsers();
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setSelectOption(null);
   }, [project]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if ('' !== currentToastrDisplay) {
       switch (currentToastrDisplay) {
         case 'addMemberSuccess':

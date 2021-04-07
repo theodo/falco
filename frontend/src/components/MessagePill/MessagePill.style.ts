@@ -22,6 +22,7 @@ const messageTypesColors = {
   info: colorUsage.popinInfoText,
 };
 
+/* stylelint-disable scale-unlimited/declaration-strict-value */
 export const MessagePillContainer = styled.div`
   border-radius: ${getSpacing(1)};
   white-space: pre-wrap;
@@ -34,6 +35,7 @@ export const MessagePillContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+/* stylelint-enable */
 
 export const MessageCloseContainer = styled(Button)`
   text-align: right;

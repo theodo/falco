@@ -65,9 +65,11 @@ export const ElementContainer = styled.div`
     border-bottom-right-radius: 3px;
   }
 
+  /* stylelint-disable selector-max-specificity */
   :nth-child(odd) {
     background-color: ${colorUsage.oddProjectMemberBackground};
   }
+  /* stylelint-enable */
 `;
 export const SelectUser = styled(Select)`
   margin-top: ${getSpacing(4)};

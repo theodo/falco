@@ -36,7 +36,7 @@ function isTokenValid(token: AccessToken): boolean {
  * In case of error during the refresh process it disconnects the user and redirects him to login page
  * @param requestFunction
  */
-const checkAccessToken = async (requestFunction: () => SuperAgentRequest) => {
+const checkAccessToken = async (requestFunction: () => Promise<Response>): Promise<Response> => {
   const token = localStorage.getItem('token');
   const decodedToken = token ? jwtDecode<AccessToken>(token) : { exp: 0 };
   if (!isTokenValid(decodedToken)) {
@@ -48,14 +48,14 @@ const checkAccessToken = async (requestFunction: () => SuperAgentRequest) => {
     }
   }
 
-  return requestFunction();
+  return await requestFunction();
 };
 
 export const makeGetRequest = async (
   endpoint: string,
   needsAuthentication: boolean,
   data: Record<string, unknown> | null = null,
-): Promise<SuperAgentRequest> => {
+): Promise<Response> => {
   const getRequest = request
     .get(`${baseUrl}${endpoint}`)
     .set('Accept', 'application/json')
@@ -74,7 +74,7 @@ export const makePostRequest = async (
   endpoint: string,
   needsAuthentication: boolean,
   data: Record<string, unknown>,
-): Promise<SuperAgentRequest> => {
+): Promise<Response> => {
   const postRequest = request
     .post(`${baseUrl}${endpoint}`)
     .send(data)
@@ -92,7 +92,7 @@ export const makePutRequest = async (
   endpoint: string,
   needsAuthentication: boolean,
   data: Record<string, never>,
-): Promise<SuperAgentRequest> => {
+): Promise<Response> => {
   const putRequest = request
     .put(`${baseUrl}${endpoint}`)
     .send(data)
@@ -109,7 +109,7 @@ export const makePutRequest = async (
 export const makeDeleteRequest = async (
   endpoint: string,
   needsAuthentication: boolean,
-): Promise<SuperAgentRequest> => {
+): Promise<Response> => {
   const deleteRequest = request.delete(`${baseUrl}${endpoint}`).set('Accept', 'application/json');
   if (needsAuthentication) {
     return await checkAccessToken(() => {

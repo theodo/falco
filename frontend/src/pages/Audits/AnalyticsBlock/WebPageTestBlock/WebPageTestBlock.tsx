@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { ValueType } from 'react-select/lib/types';
+import { ValueType } from 'react-select';
 import { AuditResultType } from 'redux/auditResults/types';
 
 import { getWPTAuditId } from 'services/utils';
@@ -106,7 +106,7 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps> = (props) => {
     }));
 
   const handleSelectDateChange = (origin: 'FROM_SELECTED' | 'FROM_TO_COMPARE') => (
-    auditResultOption: ValueType<AuditResultOption | {}>,
+    auditResultOption: ValueType<AuditResultOption, false>,
   ) => {
     if (auditResultOption && 'value' in auditResultOption) {
       const correspondingAudit = auditResults.find(

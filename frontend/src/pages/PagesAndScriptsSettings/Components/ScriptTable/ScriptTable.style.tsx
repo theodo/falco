@@ -2,10 +2,6 @@ import Button from 'components/Button';
 import styled from 'styled-components';
 import { colorUsage, fontFamily, fontSize, getSpacing, inheritVar, lineHeight } from 'stylesheet';
 
-interface AddInputProps {
-  isAdding: boolean;
-}
-
 const genericStyle = `
   font-family: ${fontFamily.mainSans};
   font-size: ${fontSize.inputText};
@@ -17,10 +13,22 @@ const genericStyle = `
   text-overflow: ellipsis;
 `;
 
+/* stylelint-disable value-keyword-case */
 export const NameHeader = styled.span`
   ${genericStyle}
   width: 25%;
 `;
+
+export const NameScript = styled.div`
+  ${genericStyle}
+  width: 25%;
+`;
+
+export const ScriptHeader = styled.div`
+  ${genericStyle}
+  width: 70%;
+`;
+/* stylelint-enable */
 
 export const Script = styled.span`
   white-space: nowrap;
@@ -38,16 +46,6 @@ export const EditIconContainer = styled(Button)`
   width: ${inheritVar};
   height: ${inheritVar};
   margin: unset;
-`;
-
-export const NameScript = styled.div`
-  ${genericStyle}
-  width: 25%;
-`;
-
-export const ScriptHeader = styled.div`
-  ${genericStyle}
-  width: 70%;
 `;
 
 export const AddScriptButtonContainer = styled(Button)`
