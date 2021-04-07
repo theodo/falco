@@ -14,7 +14,7 @@ const initialState: AuditsState = {
   runningAuditByPageOrScriptId: {},
 };
 
-const reducer = (state: AuditsState = initialState, action: AnyAction) => {
+const reducer = (state: AuditsState = initialState, action: AnyAction): AuditsState => {
   const typedAction = action as AuditsAction;
   switch (typedAction.type) {
     case getType(pollAuditStatusAction):

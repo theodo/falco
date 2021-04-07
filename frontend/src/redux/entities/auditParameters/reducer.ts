@@ -16,7 +16,10 @@ const initialState: AuditParametersState = {
   byId: null,
 };
 
-const reducer = (state: AuditParametersState = initialState, action: AnyAction) => {
+const reducer = (
+  state: AuditParametersState = initialState,
+  action: AnyAction,
+): AuditParametersState => {
   const typedAction = action as AuditParametersAction;
   switch (typedAction.type) {
     case getType(fetchAuditParametersAction.success):

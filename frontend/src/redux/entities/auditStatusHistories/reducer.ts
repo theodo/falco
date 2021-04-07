@@ -15,7 +15,10 @@ const initialState: AuditStatusHistoriesState = {
   byPageOrScriptIdAndAuditParametersId: null,
 };
 
-const reducer = (state: AuditStatusHistoriesState = initialState, action: AnyAction) => {
+const reducer = (
+  state: AuditStatusHistoriesState = initialState,
+  action: AnyAction,
+): AuditStatusHistoriesState => {
   const typedAction = action as AuditStatusHistoriesAction;
   switch (typedAction.type) {
     case getType(fetchAuditStatusHistoriesAction.success):

@@ -34,7 +34,7 @@ const persistConfig = {
 
 const initialState: LoginState = { isAuthenticated: false, loginError: null, isSubmitting: false };
 
-const reducer = (state: LoginState = initialState, action: AnyAction) => {
+const reducer = (state: LoginState = initialState, action: AnyAction): LoginState => {
   const typedAction = action as LoginAction;
   switch (typedAction.type) {
     case getType(loginUserRequest):

@@ -15,7 +15,7 @@ const initialState: ScriptsState = {
   byId: null,
 };
 
-const reducer = (state: ScriptsState = initialState, action: AnyAction) => {
+const reducer = (state: ScriptsState = initialState, action: AnyAction): ScriptsState => {
   const typedAction = action as ScriptsAction;
   switch (typedAction.type) {
     case getType(fetchScriptAction.success):

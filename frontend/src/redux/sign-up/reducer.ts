@@ -23,7 +23,7 @@ export type SignUpState = Readonly<{
 
 const initialState: SignUpState = { signUpError: null, isSubmitting: false };
 
-const reducer = (state: SignUpState = initialState, action: AnyAction) => {
+const reducer = (state: SignUpState = initialState, action: AnyAction): SignUpState => {
   const typedAction = action as SignUpAction;
   switch (typedAction.type) {
     case getType(signUpUserRequest):

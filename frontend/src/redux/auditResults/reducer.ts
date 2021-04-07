@@ -22,7 +22,7 @@ const initialState: AuditResultsState = {
   sortedByScriptId: {},
 };
 
-const reducer = (state: AuditResultsState = initialState, action: AnyAction) => {
+const reducer = (state: AuditResultsState = initialState, action: AnyAction): AuditResultsState => {
   const typedAction = action as AuditResultsAction;
   switch (typedAction.type) {
     case getType(fetchAuditResultsSuccess):
