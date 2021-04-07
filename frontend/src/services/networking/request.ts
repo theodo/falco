@@ -2,7 +2,7 @@ import { store } from 'index';
 import jwtDecode from 'jwt-decode';
 import { logoutUserRequest } from 'redux/login';
 import { routeDefinitions } from 'routes';
-import request, { SuperAgentRequest } from 'superagent';
+import request, { Response, SuperAgentRequest } from 'superagent';
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL || '';
 const backendBaseUrl = process.env.REACT_APP_API_BASE_URL || '';
@@ -36,7 +36,7 @@ function isTokenValid(token: AccessToken): boolean {
  * In case of error during the refresh process it disconnects the user and redirects him to login page
  * @param requestFunction
  */
-const checkAccessToken = async (requestFunction: () => Promise<Response>): Promise<Response> => {
+const checkAccessToken = async <T>(requestFunction: () => Promise<T>): Promise<T> => {
   const token = localStorage.getItem('token');
   const decodedToken = token ? jwtDecode<AccessToken>(token) : { exp: 0 };
   if (!isTokenValid(decodedToken)) {
@@ -91,7 +91,7 @@ export const makePostRequest = async (
 export const makePutRequest = async (
   endpoint: string,
   needsAuthentication: boolean,
-  data: Record<string, never>,
+  data: Record<string, unknown>,
 ): Promise<Response> => {
   const putRequest = request
     .put(`${baseUrl}${endpoint}`)

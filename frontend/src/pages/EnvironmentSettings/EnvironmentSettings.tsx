@@ -44,25 +44,20 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({ match }) => {
     Array<{ label: string; uuid: string; wptInstanceURL: string }>
   >([]);
 
-  const modelizeAvailableAuditParameters = (
-    apiAvailableAuditParameters: ApiAvailableAuditParameters,
-  ) => ({
-    label: `${apiAvailableAuditParameters.location_label}. ${apiAvailableAuditParameters.browser}`,
-    uuid: apiAvailableAuditParameters.uuid,
-    wptInstanceURL: apiAvailableAuditParameters.wpt_instance_url,
-  });
-
   React.useEffect(() => {
     const request = makeGetRequest('/api/projects/available_audit_parameters', true);
     request.then((response) => {
       if (response) {
         setAvailableAuditParameters(
-          response.body.map((apiAvailableAuditParameters: ApiAvailableAuditParameters) =>
-            modelizeAvailableAuditParameters(apiAvailableAuditParameters),
-          ),
+          response.body.map((apiAvailableAuditParameters: ApiAvailableAuditParameters) => ({
+            label: `${apiAvailableAuditParameters.location_label}. ${apiAvailableAuditParameters.browser}`,
+            uuid: apiAvailableAuditParameters.uuid,
+            wptInstanceURL: apiAvailableAuditParameters.wpt_instance_url,
+          })),
         );
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {
