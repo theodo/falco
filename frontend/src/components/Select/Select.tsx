@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Props as ReactSelectProps } from 'react-select/lib/Select';
+import { Props as ReactSelectProps } from 'react-select';
 import { colorUsage } from 'stylesheet';
 import Style from './Select.style';
 

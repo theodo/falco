@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react';
+import React, { MouseEvent, ReactNode } from 'react';
 
 import MetricTooltip from 'components/MetricTooltip';
 import dayjs from 'dayjs';
@@ -10,7 +10,6 @@ import {
   Area,
   AreaChart,
   Legend,
-  LegendProps,
   ResponsiveContainer,
   Tooltip,
   TooltipProps,
@@ -57,7 +56,7 @@ const MetricGraph: React.FunctionComponent<Props> = ({
   const metricInfoIconContainerRef = React.useRef<HTMLButtonElement>(null);
   const expandButtonRef = React.useRef<HTMLButtonElement>(null);
 
-  const renderLegend = (props: LegendProps) => {
+  const renderLegend = (props: { payload?: { value: string }[] }): ReactNode => {
     const { payload } = props;
     if (!payload) {
       return null;
@@ -123,7 +122,7 @@ const MetricGraph: React.FunctionComponent<Props> = ({
 
   dayjs.extend(LocalizedFormat).locale(intl.locale);
 
-  const renderTooltip = (tooltipProps: TooltipProps) => {
+  const renderTooltip = (tooltipProps: TooltipProps<number, string>): ReactNode => {
     const { payload, label } = tooltipProps;
     if (!payload) {
       return null;

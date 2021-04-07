@@ -30,12 +30,6 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({ match }) => {
   const currentUser = useCurrentUser();
   const { currentToastrDisplay, resetToastrDisplay } = useToastr();
 
-  interface UserOption {
-    value: string;
-    label: string;
-    disabled: boolean;
-  }
-
   interface ApiAvailableAuditParameters {
     uuid: string;
     browser: string;
