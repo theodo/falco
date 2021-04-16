@@ -5,47 +5,47 @@ def format_wpt_json_results_for_page(data):
     lighthouse_data = data.get("lighthouse")
     lighthouse_metrics = dict()
     # lighthouse_data["audits"] only exists on Chrome browser
-    if lighthouse_data.get("audits"):
+    if lighthouse_data is not None and lighthouse_data.get("audits"):
+
+        lighthouse_audits = lighthouse_data.get("audits")
+
         lighthouse_metrics = {
-            "lh_metric_tti_displayed_value": lighthouse_data["audits"]["interactive"][
+            "lh_metric_tti_displayed_value": lighthouse_audits["interactive"][
                 "displayValue"
             ],
-            "lh_metric_tti_score": lighthouse_data["audits"]["interactive"]["score"],
-            "lh_metric_first_contentful_paint_displayed_value": lighthouse_data[
-                "audits"
-            ]["first-contentful-paint"]["displayValue"],
-            "lh_metric_first_contentful_paint_score": lighthouse_data["audits"][
+            "lh_metric_tti_score": lighthouse_audits["interactive"]["score"],
+            "lh_metric_first_contentful_paint_displayed_value": lighthouse_audits[
+                "first-contentful-paint"
+            ]["displayValue"],
+            "lh_metric_first_contentful_paint_score": lighthouse_audits[
                 "first-contentful-paint"
             ]["score"],
-            "lh_metric_speed_index_displayed_value": lighthouse_data["audits"][
-                "speed-index"
-            ]["displayValue"],
-            "lh_metric_speed_index_score": lighthouse_data["audits"]["speed-index"][
-                "score"
+            "lh_metric_speed_index_displayed_value": lighthouse_audits["speed-index"][
+                "displayValue"
             ],
-            "lh_metric_first_meaningful_paint_displayed_value": lighthouse_data[
-                "audits"
-            ]["first-meaningful-paint"]["displayValue"],
-            "lh_metric_first_meaningful_paint_score": lighthouse_data["audits"][
+            "lh_metric_speed_index_score": lighthouse_audits["speed-index"]["score"],
+            "lh_metric_first_meaningful_paint_displayed_value": lighthouse_audits[
+                "first-meaningful-paint"
+            ]["displayValue"],
+            "lh_metric_first_meaningful_paint_score": lighthouse_audits[
                 "first-meaningful-paint"
             ]["score"],
-            "lh_metric_first_cpu_idle_displayed_value": lighthouse_data["audits"][
+            "lh_metric_first_cpu_idle_displayed_value": lighthouse_audits[
                 "first-cpu-idle"
             ]["displayValue"],
-            "lh_metric_first_cpu_idle_score": lighthouse_data["audits"][
-                "first-cpu-idle"
-            ]["score"],
-            "lh_metric_max_potential_first_input_delay_displayed_value": lighthouse_data[
-                "audits"
-            ][
+            "lh_metric_first_cpu_idle_score": lighthouse_audits["first-cpu-idle"][
+                "score"
+            ],
+            "lh_metric_max_potential_first_input_delay_displayed_value": lighthouse_audits[
                 "max-potential-fid"
             ][
                 "displayValue"
             ],
-            "lh_metric_max_potential_first_input_delay_score": lighthouse_data[
-                "audits"
-            ]["max-potential-fid"]["score"],
+            "lh_metric_max_potential_first_input_delay_score": lighthouse_audits[
+                "max-potential-fid"
+            ]["score"],
         }
+
     wpt_metrics = {
         "wpt_metric_first_view_tti": data["median"]["firstView"].get(
             "TimeToInteractive"
@@ -57,14 +57,18 @@ def format_wpt_json_results_for_page(data):
         )
         or data["median"]["repeatView"].get("FirstInteractive")
         or data["median"]["repeatView"].get("LastInteractive"),
-        "wpt_metric_first_view_speed_index": data["median"]["firstView"]["SpeedIndex"],
-        "wpt_metric_repeat_view_speed_index": data["median"]["repeatView"][
+        "wpt_metric_first_view_speed_index": data["median"]["firstView"].get(
             "SpeedIndex"
-        ],
-        "wpt_metric_first_view_first_paint": data["median"]["firstView"]["firstPaint"],
-        "wpt_metric_repeat_view_first_paint": data["median"]["repeatView"][
+        ),
+        "wpt_metric_repeat_view_speed_index": data["median"]["repeatView"].get(
+            "SpeedIndex"
+        ),
+        "wpt_metric_first_view_first_paint": data["median"]["firstView"].get(
             "firstPaint"
-        ],
+        ),
+        "wpt_metric_repeat_view_first_paint": data["median"]["repeatView"].get(
+            "firstPaint"
+        ),
         "wpt_metric_first_view_first_meaningful_paint": data["median"]["firstView"].get(
             "firstMeaningfulPaint"
         ),
@@ -77,24 +81,29 @@ def format_wpt_json_results_for_page(data):
         "wpt_metric_repeat_view_first_contentful_paint": data["median"][
             "repeatView"
         ].get("firstContentfulPaint"),
-        "wpt_metric_first_view_load_time": data["median"]["firstView"]["loadTime"],
-        "wpt_metric_repeat_view_load_time": data["median"]["repeatView"]["loadTime"],
-        "wpt_metric_first_view_time_to_first_byte": data["median"]["firstView"]["TTFB"],
+        "wpt_metric_first_view_load_time": data["median"]["firstView"].get("loadTime"),
+        "wpt_metric_repeat_view_load_time": data["median"]["repeatView"].get(
+            "loadTime"
+        ),
+        "wpt_metric_first_view_time_to_first_byte": data["median"]["firstView"].get(
+            "TTFB"
+        ),
         "wpt_metric_repeat_view_time_to_first_byte": data["median"]["repeatView"][
             "TTFB"
         ],
-        "wpt_metric_first_view_visually_complete": data["median"]["firstView"][
+        "wpt_metric_first_view_visually_complete": data["median"]["firstView"].get(
             "visualComplete"
-        ],
-        "wpt_metric_repeat_view_visually_complete": data["median"]["repeatView"][
+        ),
+        "wpt_metric_repeat_view_visually_complete": data["median"]["repeatView"].get(
             "visualComplete"
-        ],
+        ),
         "wpt_metric_lighthouse_performance": data["median"]["firstView"].get(
             "lighthouse.Performance"
         ),
         "screenshot_url": data["median"]["firstView"]["images"]["screenShot"],
     }
     wpt_metrics.update(lighthouse_metrics)
+
     return [wpt_metrics]
 
 
@@ -182,8 +191,8 @@ def format_wpt_json_results_for_script(data):
                     "lighthouse.Performance"
                 ),
                 "screenshot_url": first_view_step_data["images"]["screenShot"],
-                "step_name": first_view_step_data["eventName"],
-                "step_number": first_view_step_data["step"],
+                "script_step_name": first_view_step_data["eventName"],
+                "script_step_number": first_view_step_data["step"],
             }
         )
 
