@@ -106,7 +106,7 @@ function Home() {
                     "button button--primary button--lg",
                     styles.addFocus
                   )}
-                  href="https://heroku.com/deploy?template=https://github.com/theodo/falco/tree/1.2.0"
+                  href="https://heroku.com/deploy?template=https://github.com/theodo/falco/tree/1.2.1"
                   target="_blank"
                 >
                   Deploy to Heroku
