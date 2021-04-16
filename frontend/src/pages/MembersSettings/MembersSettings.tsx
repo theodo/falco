@@ -3,12 +3,12 @@ import Loader from 'components/Loader';
 import MessagePill from 'components/MessagePill';
 import ToggleButton from 'components/ToggleButton';
 import Close from 'icons/Close';
-import * as React from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import ReduxToastr, { toastr } from 'react-redux-toastr';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { RouteComponentProps } from 'react-router';
-import { ValueType } from 'react-select/lib/types';
+import { ValueType } from 'react-select';
 import { useProjectById, useToastr } from 'redux/entities/projects/hooks';
 import { ProjectMember } from 'redux/entities/projects/types';
 import { modelizeUser } from 'redux/user/modelizer';
@@ -40,7 +40,7 @@ type Props = {
   projectId: string;
 }>;
 
-const MembersSettings: React.FunctionComponent<Props> = ({
+const MembersSettings: FunctionComponent<Props> = ({
   addMemberToProject,
   removeMemberOfProjectRequest,
   editMemberOfProjectRequest,
@@ -58,56 +58,52 @@ const MembersSettings: React.FunctionComponent<Props> = ({
 
   const { currentToastrDisplay, resetToastrDisplay } = useToastr();
 
-  const [selectOption, setSelectOption] = React.useState<ValueType<UserOption | {}>>(null);
-  const [allUsers, setAllUsers] = React.useState([]);
+  const [selectOption, setSelectOption] = useState<
+    ValueType<UserOption | Record<string, unknown>, false>
+  >(null);
+  const [allUsers, setAllUsers] = useState([]);
 
   const project = useProjectById(match.params.projectId);
 
   const fetchAllUsers = () => {
     const request = makeGetRequest('/api/core/users', true);
-    request.then(response => {
+    request.then((response) => {
       if (response) {
         setAllUsers(response.body.map((apiUser: ApiUser) => modelizeUser(apiUser)));
       }
     });
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchAllUsers();
   }, []);
 
-  React.useEffect(
-    () => {
-      setSelectOption(null);
-    },
-    [project],
-  );
+  useEffect(() => {
+    setSelectOption(null);
+  }, [project]);
 
-  React.useEffect(
-    () => {
-      if ('' !== currentToastrDisplay) {
-        switch (currentToastrDisplay) {
-          case 'addMemberSuccess':
-            toastr.success(
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.add_member_success_message' }),
-            );
-            break;
-          case 'addMemberError':
-            toastr.error(
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.error_title' }),
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.error_message' }),
-            );
-            break;
-        }
-
-        resetToastrDisplay();
+  useEffect(() => {
+    if ('' !== currentToastrDisplay) {
+      switch (currentToastrDisplay) {
+        case 'addMemberSuccess':
+          toastr.success(
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.add_member_success_message' }),
+          );
+          break;
+        case 'addMemberError':
+          toastr.error(
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.error_title' }),
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.error_message' }),
+          );
+          break;
       }
-    },
-    [currentToastrDisplay, resetToastrDisplay, intl],
-  );
 
-  const onChange = (selectedOption: ValueType<UserOption | {}>) => {
+      resetToastrDisplay();
+    }
+  }, [currentToastrDisplay, resetToastrDisplay, intl]);
+
+  const onChange = (selectedOption: ValueType<UserOption, false>) => {
     setSelectOption(selectedOption);
     if (selectedOption && 'value' in selectedOption && project) {
       addMemberToProject(project.uuid, selectedOption.value);
@@ -178,8 +174,10 @@ const MembersSettings: React.FunctionComponent<Props> = ({
       <InviteUserLink>
         <FormattedMessage id="ProjectSettings.member_not_on_falco" />
         <a href="/sign-up">
-          {// small hack to get the page for the proper environment
-          `${window.location.href.match(/https?:\/\/[^/]+/)}/sign-up`}
+          {
+            // small hack to get the page for the proper environment
+            `${window.location.href.match(/https?:\/\/[^/]+/)}/sign-up`
+          }
         </a>
       </InviteUserLink>
       <ProjectSettingsBlock>

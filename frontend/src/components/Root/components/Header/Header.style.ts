@@ -28,7 +28,7 @@ export const HeaderMenu = styled.div<MenuProps>`
   display: flex;
   padding-left: ${getSpacing(10)};
   width: 380px;
-  background-color: ${props => props.isMenuDisplayed && colorUsage.menuBackground};
+  background-color: ${(props) => props.isMenuDisplayed && colorUsage.menuBackground};
 
   @media only screen and (max-width: ${responsiveThreshold}) {
     width: 100%;
@@ -56,7 +56,8 @@ export const HeaderBlock = styled.header<HeaderProps>`
   display: flex;
   justify-content: space-between;
   transition: box-shadow 0.3s ease-in-out;
-  box-shadow: ${props => props.shouldHaveShadow && `0 10px 5px -2px ${colorUsage.headerShadowBox}`};
+  box-shadow: ${(props) =>
+    props.shouldHaveShadow && `0 10px 5px -2px ${colorUsage.headerShadowBox}`};
 
   @media only screen and (max-width: ${responsiveThreshold}) {
     box-shadow: none;
@@ -96,7 +97,8 @@ export const HeaderContent = styled.div<HeaderProps>`
   padding-left: ${getSpacing(8)};
   padding-right: ${getSpacing(22)};
   transition: box-shadow 0.3s ease-in-out;
-  box-shadow: ${props => props.shouldHaveShadow && `0 10px 5px -2px ${colorUsage.headerShadowBox}`};
+  box-shadow: ${(props) =>
+    props.shouldHaveShadow && `0 10px 5px -2px ${colorUsage.headerShadowBox}`};
   width: calc(100% - 580px);
 
   @media only screen and (max-width: ${responsiveThreshold}) {
@@ -145,7 +147,7 @@ HeaderMenuItem.displayName = 'HeaderMenuItem';
 export const HeaderMenuItemContent = styled.div<MenuItemProps>`
   position: absolute;
   top: 100px;
-  right: ${props => props.right}px;
+  right: ${(props) => props.right}px;
 `;
 HeaderMenuItemContent.displayName = 'HeaderMenuItemContent';
 

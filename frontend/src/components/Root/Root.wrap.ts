@@ -7,10 +7,8 @@ import { RootStateWithRouter } from 'redux/types';
 import Root from './Root';
 
 const mapStateToProps = (state: RootStateWithRouter) => ({
-    isUserAuthenticated: getIsAuthenticated(state),
-    hasProjects: hasProjects(state),
-  });
+  isUserAuthenticated: getIsAuthenticated(state),
+  hasProjects: hasProjects(state),
+});
 
-export default connect(
-    mapStateToProps
-  )(withRouter(Root));
+export default connect(mapStateToProps)(withRouter(Root));

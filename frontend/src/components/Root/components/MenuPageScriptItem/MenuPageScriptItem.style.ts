@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
-import { auditStatus, StatusType } from "redux/entities/auditStatusHistories/types";
-import styled from "styled-components";
-import { colorUsage, fontSize, fontWeight, getSpacing, lineHeight } from "stylesheet";
+import { auditStatus, StatusType } from 'redux/entities/auditStatusHistories/types';
+import styled from 'styled-components';
+import { colorUsage, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
 interface AuditStatusHistoryIconProps {
   status: StatusType;
-};
+}
 
 interface MenuArrowContainerProps {
   margin?: string;
   height?: string;
-};
+}
 
 export const PageScriptItem = styled(Link)`
   display: flex;
@@ -60,19 +60,19 @@ const COLOR_BY_STATUS = {
 };
 
 export const AuditStatusHistoryIcon = styled.span<AuditStatusHistoryIconProps>`
-    cursor: help;
-    height: 12px;
-    width: 12px;
-    margin-right: 5px;
-    background-color: ${(props) => COLOR_BY_STATUS[props.status]};
-    border-radius: 50%;
-    display: inline-block;
+  cursor: help;
+  height: 12px;
+  width: 12px;
+  margin-right: 5px;
+  background-color: ${(props) => COLOR_BY_STATUS[props.status]};
+  border-radius: 50%;
+  display: inline-block;
 `;
 
 export const AuditStatusHistoryIconContainer = styled.div`
   min-width: 20px;
   height: 100%;
-  display:flex;
+  display: flex;
   align-items: center;
 `;
 

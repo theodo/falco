@@ -10,10 +10,7 @@ const mapStateToProps = (state: RootStateWithRouter) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  fetchUserRequest: () => dispatch(fetchUserRequest({})),
+  fetchUserRequest: () => dispatch(fetchUserRequest()),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

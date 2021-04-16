@@ -47,9 +47,7 @@ const ProjectsMenu: React.FunctionComponent<StateProps> = ({ currentProject, pro
           </CurrentProjectItemTitleContainer>
           <ProjectItemLastAudit>
             <FormattedMessage id="Header.last_audit_intro" />{' '}
-            {dayjs(currentProject.latestAuditAt)
-              .locale(intl.locale)
-              .fromNow()}
+            {dayjs(currentProject.latestAuditAt).locale(intl.locale).fromNow()}
           </ProjectItemLastAudit>
         </CurrentProjectItemTitleBlock>
       </CurrentProjectItem>
@@ -72,9 +70,7 @@ const ProjectsMenu: React.FunctionComponent<StateProps> = ({ currentProject, pro
           <ProjectItemTitle>{project.name}</ProjectItemTitle>
           <ProjectItemLastAudit>
             <FormattedMessage id="Header.last_audit_intro" />{' '}
-            {dayjs(project.latestAuditAt)
-              .locale(intl.locale)
-              .fromNow()}
+            {dayjs(project.latestAuditAt).locale(intl.locale).fromNow()}
           </ProjectItemLastAudit>
         </ProjectItemTitleBlock>
       </ProjectItem>
@@ -97,6 +93,7 @@ const ProjectsMenu: React.FunctionComponent<StateProps> = ({ currentProject, pro
       </Container>
     );
   }
+
   return (
     <Container>
       {renderCurrentProjectItem()}

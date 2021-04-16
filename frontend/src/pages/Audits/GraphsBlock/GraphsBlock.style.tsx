@@ -54,4 +54,3 @@ export const GraphInfoLink = styled.a`
   text-decoration: none;
   margin: ${(props: ItemWithMarginProps) => (props.margin ? props.margin : '0')};
 `;
-

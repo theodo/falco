@@ -26,7 +26,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   launchAudits: (projectId: string) => dispatch(launchAuditAction.request({ projectId })),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ProjectMenuContent);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectMenuContent);

@@ -86,7 +86,6 @@ export const Loader = styled.div`
   animation: rotating 1.5s 0s linear infinite;
   z-index: ${zIndex.modalLoader};
 
-
   @keyframes rotating {
     from {
       transform: rotate(0deg);
@@ -94,5 +93,5 @@ export const Loader = styled.div`
     to {
       transform: rotate(360deg);
     }
-}
+  }
 `;

@@ -30,4 +30,3 @@ export const Container = styled.div`
   font-weight: ${fontWeight.metricTooltip};
   z-index: ${zIndex.tooltip};
 `;
-

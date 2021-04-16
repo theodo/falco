@@ -20,16 +20,13 @@ type Props = OwnProps;
 export const Menu: React.FunctionComponent<Props> = ({ project, currentURL }) => {
   const [pageType, setPageType] = React.useState(PageTypes.project);
 
-  React.useEffect(
-    () => {
-      if (null !== currentURL.match(/\/project\/[a-fA-F0-9-]*\/settings/)) {
-        setPageType(PageTypes.projectSettings);
-      } else {
-        setPageType(PageTypes.project);
-      }
-    },
-    [currentURL],
-  );
+  React.useEffect(() => {
+    if (null !== currentURL.match(/\/project\/[a-fA-F0-9-]*\/settings/)) {
+      setPageType(PageTypes.projectSettings);
+    } else {
+      setPageType(PageTypes.project);
+    }
+  }, [currentURL]);
 
   if (!project) {
     return <Container />;

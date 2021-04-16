@@ -6,10 +6,10 @@ interface ToggleButtonProps {
   disabled: boolean;
 }
 
-export const ToggleButtonContainer= styled.label`
+export const ToggleButtonContainer = styled.label`
   display: flex;
   align-items: center;
-`
+`;
 
 export const ToggleButtonLabel = styled.span`
   margin-left: ${getSpacing(1)};
@@ -17,5 +17,5 @@ export const ToggleButtonLabel = styled.span`
   text-transform: uppercase;
   color: ${(props: ToggleButtonProps) => props.color};
   transition-duration: 0.4s;
-  opacity: ${(props: ToggleButtonProps) => props.disabled ? 0.5 : 1}
-`
+  opacity: ${(props: ToggleButtonProps) => (props.disabled ? 0.5 : 1)};
+`;

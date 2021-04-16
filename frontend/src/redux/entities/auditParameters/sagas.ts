@@ -12,9 +12,7 @@ import { modelizeAuditParametersById } from './modelizer';
 import { ApiAuditParametersType } from './types';
 
 function* editAuditParameter(action: ActionType<typeof editAuditParameterRequest>) {
-  const endpoint = `/api/projects/${action.payload.projectId}/audit_parameters/${
-    action.payload.auditParameter.uuid
-  }`;
+  const endpoint = `/api/projects/${action.payload.projectId}/audit_parameters/${action.payload.auditParameter.uuid}`;
   const { body: auditParameterResponse }: { body: ApiAuditParametersType } = yield call(
     makePutRequest,
     endpoint,

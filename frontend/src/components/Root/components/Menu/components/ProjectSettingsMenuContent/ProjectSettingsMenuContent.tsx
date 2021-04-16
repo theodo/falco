@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { routeDefinitions, RouteDefinition } from 'routes';
+import { RouteDefinition, routeDefinitions } from 'routes';
 
 import { MenuArrow } from 'icons';
 import { ProjectType } from 'redux/entities/projects/types';
@@ -36,6 +36,7 @@ export const ProjectSettingsMenuContent: React.FunctionComponent<Props> = ({
 
   const linkPathMatchesUrl = (page: RouteDefinition) => {
     const pageURL = page.path.replace(':projectId', project.uuid);
+
     return pageURL.startsWith(currentURL);
   };
 
@@ -49,7 +50,7 @@ export const ProjectSettingsMenuContent: React.FunctionComponent<Props> = ({
       <Settings>
         <FormattedMessage id="Menu.project_settings" />
       </Settings>
-      {settingPages.map(page => (
+      {settingPages.map((page) => (
         <ProjectSettingsItem
           key={page.path}
           to={page.path.replace(':projectId', project.uuid)}

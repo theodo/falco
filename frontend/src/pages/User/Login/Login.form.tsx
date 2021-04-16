@@ -39,7 +39,7 @@ interface InnerLoginFormProps {
 
 const InnerLoginForm: React.FunctionComponent<
   InjectedFormikProps<InnerLoginFormProps & RouteComponentProps, FormValues>
-> = props => {
+> = (props) => {
   const { errors, touched, isUserAuthenticated, isSubmittingFromStore, loginError } = props;
 
   if (isUserAuthenticated) {
@@ -86,7 +86,11 @@ const InnerLoginForm: React.FunctionComponent<
           />
         </Styles.InputFieldContainer>
         {loginError && (
-          <MessagePill messageType="error" margin={`0 0 ${getSpacing(5)} 0`} padding={`${getSpacing(3)}`}>
+          <MessagePill
+            messageType="error"
+            margin={`0 0 ${getSpacing(5)} 0`}
+            padding={`${getSpacing(3)}`}
+          >
             <FormattedMessage id="Login.login_error" />
           </MessagePill>
         )}

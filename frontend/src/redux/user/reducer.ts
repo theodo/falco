@@ -17,7 +17,7 @@ export type UserState = Readonly<{
 
 const initialState: UserState = null;
 
-const reducer = (state: UserState = initialState, action: AnyAction) => {
+const reducer = (state: UserState = initialState, action: AnyAction): UserState => {
   const typedAction = action as UserAction;
   switch (typedAction.type) {
     case getType(fetchUserRequest):

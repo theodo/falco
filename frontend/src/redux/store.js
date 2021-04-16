@@ -1,5 +1,5 @@
 import { connectRouter, routerMiddleware } from 'connected-react-router';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux';
 import { persistStore } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
 
@@ -36,7 +36,7 @@ export default function configureStore(history) {
   /* istanbul ignore next */
   if (module.hot) {
     module.hot.accept('./reducers', () => {
-      import('./reducers').then(reducerModule => {
+      import('./reducers').then((reducerModule) => {
         const createReducers = reducerModule.default;
         const nextReducers = createReducers(store.asyncReducers);
 

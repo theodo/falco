@@ -1,13 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import {
-  colorUsage,
-  fontFamily,
-  fontSize,
-  fontWeight,
-  getSpacing,
-  lineHeight,
-} from 'stylesheet';
+import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight } from 'stylesheet';
 
 interface ItemWithMarginProps {
   margin?: string;

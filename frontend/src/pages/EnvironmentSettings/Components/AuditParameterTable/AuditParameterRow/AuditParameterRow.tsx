@@ -44,16 +44,13 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
   const [auditParameterNetworkShape, setAuditParameterNetworkShape] = React.useState('');
   const [auditParameterConfigurationId, setAuditParameterConfigurationId] = React.useState('');
 
-  React.useEffect(
-    () => {
-      if (auditParameter) {
-        setAuditParameterName(auditParameter.name);
-        setAuditParameterConfigurationId(auditParameter.configurationId);
-        setAuditParameterNetworkShape(auditParameter.networkShape);
-      }
-    },
-    [auditParameter],
-  );
+  React.useEffect(() => {
+    if (auditParameter) {
+      setAuditParameterName(auditParameter.name);
+      setAuditParameterConfigurationId(auditParameter.configurationId);
+      setAuditParameterNetworkShape(auditParameter.networkShape);
+    }
+  }, [auditParameter]);
 
   const handleBlur = () => {
     if (
@@ -103,13 +100,13 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
   const selectMargin = `0 ${getSpacing(2)} 0 0`;
 
   const formattedAvailableAuditParameters = availableAuditParameters.map(
-    availableAuditParameter => ({
+    (availableAuditParameter) => ({
       label: availableAuditParameter.label,
       value: availableAuditParameter.uuid,
     }),
   );
 
-  const foundAuditParameter = formattedAvailableAuditParameters.find(auditParametersOption => {
+  const foundAuditParameter = formattedAvailableAuditParameters.find((auditParametersOption) => {
     return auditParametersOption.value === auditParameterConfigurationId;
   });
 
@@ -133,7 +130,7 @@ export const AuditParameterRow: React.FunctionComponent<Props> = ({
         })}
       />
       <Select
-        value={availableNetworkShape.find(auditParametersOption => {
+        value={availableNetworkShape.find((auditParametersOption) => {
           return auditParametersOption.value === auditParameterNetworkShape;
         })}
         onChange={handleNetworkShapeChange}

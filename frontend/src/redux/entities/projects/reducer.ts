@@ -83,7 +83,7 @@ const getAllMembersWithUpdatedAdminStatusForTargetMember = (
   });
 };
 
-const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
+const reducer = (state: ProjectsState = initialState, action: AnyAction): ProjectsState => {
   const typedAction = action as ProjectsAction;
   switch (typedAction.type) {
     case getType(setProjectToastrDisplay):
@@ -185,14 +185,6 @@ const reducer = (state: ProjectsState = initialState, action: AnyAction) => {
             ...state.byId[typedAction.payload.projectId],
             projectMembers: updatedMembers,
           },
-        },
-      };
-    case getType(fetchProjectError):
-      return {
-        ...state,
-        byId: {
-          ...state.byId,
-          ...(typedAction.payload.projectId && { [typedAction.payload.projectId]: null }),
         },
       };
     case getType(editProjectDetailsSuccess):

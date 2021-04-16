@@ -43,64 +43,61 @@ const PagesAndScriptsSettings: React.FunctionComponent<Props> = ({ match }) => {
 
   const project = useProjectById(match.params.projectId);
 
-  React.useEffect(
-    () => {
-      if ('' !== currentToastrDisplay) {
-        switch (currentToastrDisplay) {
-          case 'addPageSuccess':
-            toastr.success(
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.add_page_success_message' }),
-            );
-            break;
-          case 'editPageSuccess':
-            toastr.success(
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.edit_page_success_message' }),
-            );
-            break;
-          case 'deletePageSuccess':
-            toastr.success(
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.delete_page_success_message' }),
-            );
-            break;
-          case 'addScriptToProjectSuccess':
-            toastr.success(
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.add_script_to_project_sucess' }),
-            );
-            break;
-          case 'editScriptSuccess':
-            toastr.success(
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.edit_script_sucess' }),
-            );
-            break;
-          case 'deleteScriptSuccess':
-            toastr.success(
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.delete_script_sucess' }),
-            );
-            break;
-          case 'addScriptToProjectError':
-          case 'editScriptError':
-          case 'deleteScriptError':
-          case 'editPageError':
-          case 'addPageError':
-          case 'deletePageError':
-            toastr.error(
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.error_title' }),
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.error_message' }),
-            );
-            break;
-        }
-
-        resetToastrDisplay();
+  React.useEffect(() => {
+    if ('' !== currentToastrDisplay) {
+      switch (currentToastrDisplay) {
+        case 'addPageSuccess':
+          toastr.success(
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.add_page_success_message' }),
+          );
+          break;
+        case 'editPageSuccess':
+          toastr.success(
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.edit_page_success_message' }),
+          );
+          break;
+        case 'deletePageSuccess':
+          toastr.success(
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.delete_page_success_message' }),
+          );
+          break;
+        case 'addScriptToProjectSuccess':
+          toastr.success(
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.add_script_to_project_sucess' }),
+          );
+          break;
+        case 'editScriptSuccess':
+          toastr.success(
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.edit_script_sucess' }),
+          );
+          break;
+        case 'deleteScriptSuccess':
+          toastr.success(
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.delete_script_sucess' }),
+          );
+          break;
+        case 'addScriptToProjectError':
+        case 'editScriptError':
+        case 'deleteScriptError':
+        case 'editPageError':
+        case 'addPageError':
+        case 'deletePageError':
+          toastr.error(
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.error_title' }),
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.error_message' }),
+          );
+          break;
       }
-    },
-    [currentToastrDisplay, resetToastrDisplay, intl],
-  );
+
+      resetToastrDisplay();
+    }
+  }, [currentToastrDisplay, resetToastrDisplay, intl]);
 
   if (project === undefined) {
     return (
@@ -132,7 +129,7 @@ const PagesAndScriptsSettings: React.FunctionComponent<Props> = ({ match }) => {
         <ElementContainer>
           <PageRowHeader />
         </ElementContainer>
-        {project.pagesIds.map(pageId => (
+        {project.pagesIds.map((pageId) => (
           <ElementContainer key={pageId}>
             <PageRow
               disabled={!isUserAdminOfProject(currentUser, project)}
@@ -154,7 +151,7 @@ const PagesAndScriptsSettings: React.FunctionComponent<Props> = ({ match }) => {
         <ElementContainer>
           <ScriptTableHeader />
         </ElementContainer>
-        {project.scriptsIds.map(scriptId => (
+        {project.scriptsIds.map((scriptId) => (
           <ElementContainer key={scriptId}>
             <ScriptRow scriptId={scriptId} projectId={project.uuid} />
           </ElementContainer>

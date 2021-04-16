@@ -66,10 +66,10 @@ const MetricModal: React.FunctionComponent<Props> = ({
 
   const updateMetrics = (event: MouseEvent, selectedValue: MetricType) => {
     if (selectedMetrics.indexOf(selectedValue) === -1) {
-      updateSelectedMetrics(currentSelectedMetrics => [...currentSelectedMetrics, selectedValue]);
+      updateSelectedMetrics((currentSelectedMetrics) => [...currentSelectedMetrics, selectedValue]);
     } else {
-      updateSelectedMetrics(currentSelectedMetrics =>
-        currentSelectedMetrics.filter(metric => selectedValue !== metric),
+      updateSelectedMetrics((currentSelectedMetrics) =>
+        currentSelectedMetrics.filter((metric) => selectedValue !== metric),
       );
     }
   };
@@ -78,6 +78,7 @@ const MetricModal: React.FunctionComponent<Props> = ({
     if (selectedMetrics.indexOf(selectedValue) === -1) {
       return false;
     }
+
     return true;
   };
 
@@ -110,7 +111,7 @@ const MetricModal: React.FunctionComponent<Props> = ({
               <MetricItem key={index} margin={`0 0 ${getSpacing(2)} 0`}>
                 <ModalCheckbox
                   type="checkbox"
-                  onClick={event => updateMetrics(event, metric)}
+                  onClick={(event) => updateMetrics(event, metric)}
                   checked={isMetricSelected(metric)}
                   readOnly={true}
                 />

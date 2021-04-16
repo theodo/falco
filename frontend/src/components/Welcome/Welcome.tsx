@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { DOCUMENTATION_ROOT } from 'services/constants';
 import {
   WelcomeBlockContainer,
   WelcomeBlockText,
   WelcomeBlockTextParagraph,
   WelcomeBlockTitle,
 } from './Welcome.style';
-import { DOCUMENTATION_ROOT } from 'services/constants';
 
 const documentationPath = `${DOCUMENTATION_ROOT}/docs/getting-started/configuring-your-first-project`;
 

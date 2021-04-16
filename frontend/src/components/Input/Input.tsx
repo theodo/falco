@@ -29,7 +29,7 @@ const Input: React.FunctionComponent<Props> = ({ disabled, error, field, label, 
         placeholder={isActive ? '' : intl.formatMessage({ id: label })}
         onFocusCapture={() => setIsActive(true)}
         onBlurCapture={() => setIsActive(false)}
-        onChangeCapture={event => {
+        onChangeCapture={(event) => {
           setValue((event.target as HTMLInputElement).value);
         }}
         disabled={disabled}

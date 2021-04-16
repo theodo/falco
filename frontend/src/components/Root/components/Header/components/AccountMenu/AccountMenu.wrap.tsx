@@ -13,7 +13,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   logoutUser: (redirectTo?: string | undefined) => dispatch(logoutUserRequest({ redirectTo })),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(withRouter(AccountMenu));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountMenu));

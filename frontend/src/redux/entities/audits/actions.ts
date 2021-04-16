@@ -1,4 +1,4 @@
-import { createAsyncAction, createAction } from 'typesafe-actions';
+import { createAction, createAsyncAction } from 'typesafe-actions';
 import { AuditStatusHistoryType } from '../auditStatusHistories/types';
 import { AuditType } from './types';
 

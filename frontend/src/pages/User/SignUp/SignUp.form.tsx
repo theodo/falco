@@ -41,7 +41,7 @@ interface InnerSignUpFormProps {
 
 const InnerSignUpForm: React.FunctionComponent<
   InjectedFormikProps<InnerSignUpFormProps & RouteComponentProps, FormValues>
-> = props => {
+> = (props) => {
   const { errors, touched, isUserAuthenticated, isSubmittingFromStore, signUpError } = props;
 
   if (isUserAuthenticated) {
@@ -98,7 +98,11 @@ const InnerSignUpForm: React.FunctionComponent<
           />
         </Styles.InputFieldContainer>
         {signUpError && (
-          <MessagePill messageType="error" margin={`0 0 ${getSpacing(5)} 0`} padding={`${getSpacing(3)}`}>
+          <MessagePill
+            messageType="error"
+            margin={`0 0 ${getSpacing(5)} 0`}
+            padding={`${getSpacing(3)}`}
+          >
             <FormattedMessage id="SignUp.sign_up_error" />
           </MessagePill>
         )}

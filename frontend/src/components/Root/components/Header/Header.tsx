@@ -42,14 +42,11 @@ export const Header: React.FunctionComponent<Props> = ({
   const [isAccountMenuVisible, setIsAccountMenuVisible] = React.useState(false);
   const [isProjectsMenuVisible, setIsProjectsMenuVisible] = React.useState(false);
 
-  React.useEffect(
-    () => {
-      if (isUserAuthenticated) {
-        fetchUserRequest();
-      }
-    },
-    [isUserAuthenticated, fetchUserRequest],
-  );
+  React.useEffect(() => {
+    if (isUserAuthenticated) {
+      fetchUserRequest();
+    }
+  }, [isUserAuthenticated, fetchUserRequest]);
 
   const toggleAccountMenuVisibility = (event: MouseEvent) => {
     event.preventDefault();

@@ -14,17 +14,18 @@ export const selectAuditResultsAsGraphData = (
 
   auditResultsAsGraphDataPerMetric = auditResultIds
     .map(
-      auditResultId =>
+      (auditResultId) =>
         state.auditResults.byAuditId[auditResultId] && {
           date: state.auditResults.byAuditId[auditResultId].createdAt.toDate().getTime(),
           scriptStepName: state.auditResults.byAuditId[auditResultId].scriptStepName,
           ...metrics.reduce<AuditResultsAsGraphDataMetric>((metricsValues, metric) => {
             metricsValues[metric] = state.auditResults.byAuditId[auditResultId][metric];
+
             return metricsValues;
           }, {}),
         },
     )
-    .filter(auditResultId => !!auditResultId)
+    .filter((auditResultId) => !!auditResultId)
     .sort((a, b) => a.date - b.date);
 
   return auditResultsAsGraphDataPerMetric;
@@ -35,17 +36,13 @@ export const selectAuditScriptSteps = (
   auditParametersId: string,
   scriptId: string,
 ): Record<string, string> => {
-  if (
-    state.auditResults.sortedByScriptId[scriptId] &&
-    state.auditResults.sortedByScriptId[scriptId].byAuditParametersId &&
-    state.auditResults.sortedByScriptId[scriptId].byAuditParametersId[auditParametersId]
-  ) {
+  if (state.auditResults.sortedByScriptId[scriptId]?.byAuditParametersId?.[auditParametersId]) {
     const sortedAuditResults =
       state.auditResults.sortedByScriptId[scriptId].byAuditParametersId[auditParametersId];
+
     return Object.keys(sortedAuditResults).reduce((scriptStepNames, scriptStepKey) => {
       if (
-        sortedAuditResults[scriptStepKey] &&
-        sortedAuditResults[scriptStepKey][0] &&
+        sortedAuditResults[scriptStepKey]?.[0] &&
         state.auditResults.byAuditId[sortedAuditResults[scriptStepKey][0]]
       ) {
         return {
@@ -54,9 +51,11 @@ export const selectAuditScriptSteps = (
             state.auditResults.byAuditId[sortedAuditResults[scriptStepKey][0]].scriptStepName,
         };
       }
+
       return scriptStepNames;
     }, {});
   }
+
   return {};
 };
 
@@ -71,6 +70,7 @@ export const selectPageAuditResultsIds = (
   ) {
     return state.auditResults.sortedByPageId[pageId].byAuditParametersId[auditParametersId];
   }
+
   return null;
 };
 
@@ -85,6 +85,7 @@ export const selectScriptAuditResultsIds = (
   ) {
     return state.auditResults.sortedByScriptId[scriptId].byAuditParametersId[auditParametersId];
   }
+
   return null;
 };
 

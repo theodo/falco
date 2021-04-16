@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { ValueType } from 'react-select/lib/types';
+import { ValueType } from 'react-select';
 import { AuditResultType } from 'redux/auditResults/types';
 
 import { getWPTAuditId } from 'services/utils';
@@ -28,7 +28,7 @@ export interface OwnProps {
   blockMargin: string;
 }
 
-const WebPageTestBlock: React.FunctionComponent<OwnProps> = props => {
+const WebPageTestBlock: React.FunctionComponent<OwnProps> = (props) => {
   const { auditResults, blockMargin } = props;
   const intl = useIntl();
 
@@ -89,7 +89,7 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps> = props => {
   dayjs.extend(LocalizedFormat).locale(intl.locale);
 
   const auditResultsSelectOptions = (origin: 'FROM_SELECTED' | 'FROM_TO_COMPARE') =>
-    auditResults.map(auditResult => ({
+    auditResults.map((auditResult) => ({
       label: intl.formatMessage(
         { id: 'Audits.webpagetest_date_format' },
         {
@@ -106,11 +106,11 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps> = props => {
     }));
 
   const handleSelectDateChange = (origin: 'FROM_SELECTED' | 'FROM_TO_COMPARE') => (
-    auditResultOption: ValueType<AuditResultOption | {}>,
+    auditResultOption: ValueType<AuditResultOption, false>,
   ) => {
     if (auditResultOption && 'value' in auditResultOption) {
       const correspondingAudit = auditResults.find(
-        auditResult => auditResult.auditId === auditResultOption.value,
+        (auditResult) => auditResult.auditId === auditResultOption.value,
       );
       if (correspondingAudit) {
         origin === 'FROM_TO_COMPARE'
@@ -142,12 +142,12 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps> = props => {
           type="radio"
           value={radioOptions[radioOptionType].value}
           name="audit"
-          onClick={e => handleRadioButtonChange(e, radioOptionType)}
+          onClick={(e) => handleRadioButtonChange(e, radioOptionType)}
           style={{ cursor: 'pointer' }}
           readOnly={true}
         />
         <RadioButtonLabel margin={`0 ${getSpacing(2)} 0 0`} />
-        <RadioButtonText onClick={e => handleRadioButtonChange(e, radioOptionType)}>
+        <RadioButtonText onClick={(e) => handleRadioButtonChange(e, radioOptionType)}>
           <FormattedMessage id={radioOptions[radioOptionType].label} />
         </RadioButtonText>
       </OptionContainer>
@@ -189,7 +189,7 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps> = props => {
               </DateTitle>
               <Select
                 value={auditResultsSelectOptions('FROM_SELECTED').find(
-                  auditResultSelectOption =>
+                  (auditResultSelectOption) =>
                     selectedAudit.auditId === auditResultSelectOption.value,
                 )}
                 onChange={handleSelectDateChange('FROM_SELECTED')}
@@ -201,7 +201,7 @@ const WebPageTestBlock: React.FunctionComponent<OwnProps> = props => {
                 <DateTitle margin={`0 0 ${getSpacing(2)} 0`}>Date 2</DateTitle>
                 <Select
                   value={auditResultsSelectOptions('FROM_TO_COMPARE').find(
-                    auditResultSelectOption =>
+                    (auditResultSelectOption) =>
                       auditToCompare.auditId === auditResultSelectOption.value,
                   )}
                   onChange={handleSelectDateChange('FROM_TO_COMPARE')}

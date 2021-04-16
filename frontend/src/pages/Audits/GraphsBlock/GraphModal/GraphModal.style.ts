@@ -1,13 +1,6 @@
 import Button from 'components/Button';
 import styled from 'styled-components';
-import {
-  colorUsage,
-  fontFamily,
-  fontSize,
-  fontWeight,
-  lineHeight,
-  zIndex,
-} from 'stylesheet';
+import { colorUsage, fontFamily, fontSize, fontWeight, lineHeight, zIndex } from 'stylesheet';
 
 export const CloseContainer = styled(Button)`
   position: absolute;

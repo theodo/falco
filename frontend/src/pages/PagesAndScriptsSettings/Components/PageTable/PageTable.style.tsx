@@ -1,13 +1,6 @@
 import Button from 'components/Button';
 import styled from 'styled-components';
-import {
-  colorUsage,
-  fontFamily,
-  fontSize,
-  getSpacing,
-  inheritVar,
-  lineHeight
-} from 'stylesheet';
+import { colorUsage, fontFamily, fontSize, getSpacing, inheritVar, lineHeight } from 'stylesheet';
 
 interface AddInputProps {
   isAdding: boolean;
@@ -52,6 +45,7 @@ const editableInputStyle = `
   }
 `;
 
+/* stylelint-disable value-keyword-case */
 export const NameHeader = styled.div`
   ${genericStyle}
   width: 25%;
@@ -83,6 +77,7 @@ export const EditUrlInput = styled.input`
   ${editableInputStyle}
   width: 70%;
 `;
+/* stylelint-enable */
 
 export const AddPageButtonContainer = styled(Button)`
   display: ${(props: AddInputProps) => (props.isAdding ? 'none' : 'flex')};

@@ -27,6 +27,7 @@ export const validateForm = (values: FormValues) => {
   if (!values.password) {
     errors.password = 'Login.error_password_required';
   }
+
   return errors;
 };
 
@@ -38,7 +39,7 @@ export const mapPropsToValues = () => ({
 export const handleSubmit = (values: FormValues, { props }: { props: LoginServiceProps }) => {
   if (!props.isSubmittingFromStore) {
     // TODO improve this
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     props.login(values, props.location.state ? props.location.state.from : undefined);
   }

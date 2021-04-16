@@ -1,13 +1,6 @@
 import Button from 'components/Button';
 import styled from 'styled-components';
-import {
-  colorUsage,
-  fontFamily,
-  fontSize,
-  getSpacing,
-  inheritVar,
-  lineHeight
-} from 'stylesheet';
+import { colorUsage, fontFamily, fontSize, getSpacing, inheritVar, lineHeight } from 'stylesheet';
 
 interface AddInputProps {
   isAdding: boolean;
@@ -52,6 +45,7 @@ const editableInputStyle = `
   }
 `;
 
+/* stylelint-disable value-keyword-case */
 export const AddNameInput = styled.input`
   ${addInputStyle}
   display: ${(props: AddInputProps) => (props.isAdding ? 'visible' : 'none')};
@@ -85,6 +79,7 @@ export const EditBrowserInput = styled.input`
   width: 40%;
 `;
 
+/* stylelint-enable */
 export const AddAuditParameterButtonContainer = styled(Button)`
   display: ${(props: AddInputProps) => (props.isAdding ? 'none' : 'flex')};
   align-items: center;

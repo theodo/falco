@@ -19,7 +19,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(deleteAuditParameterFromProjectRequest({ projectId, auditParameterId })),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AuditParameterRow);
+export default connect(mapStateToProps, mapDispatchToProps)(AuditParameterRow);

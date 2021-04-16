@@ -42,11 +42,11 @@ Body.displayName = 'Body';
 export const Content = styled.div<ContentProps>`
   position: relative;
   top: 100px;
-  left: ${props => (props.shouldDisplayMenu ? '430px' : '0')};
-  padding-left: ${props => (props.shouldDisplayMenu ? getSpacing(8) : '0')};
-  padding-right: ${props => (props.shouldDisplayMenu ? getSpacing(22) : '0')};
+  left: ${(props) => (props.shouldDisplayMenu ? '430px' : '0')};
+  padding-left: ${(props) => (props.shouldDisplayMenu ? getSpacing(8) : '0')};
+  padding-right: ${(props) => (props.shouldDisplayMenu ? getSpacing(22) : '0')};
   padding-top: ${getSpacing(4)};
-  width: ${props => (props.shouldDisplayMenu ? 'calc(100% - 580px)' : '100%')};
+  width: ${(props) => (props.shouldDisplayMenu ? 'calc(100% - 580px)' : '100%')};
   background-color: ${colorUsage.defaultContentBackground};
   display: flex;
   justify-content: center;

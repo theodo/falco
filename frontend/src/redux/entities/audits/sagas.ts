@@ -1,4 +1,4 @@
-import { all, call, fork, put, race, take, takeEvery, delay } from 'redux-saga/effects';
+import { all, call, delay, fork, put, race, take, takeEvery } from 'redux-saga/effects';
 import { fetchAuditResultsRequest } from 'redux/auditResults';
 import { handleAPIExceptions } from 'services/networking/handleAPIExceptions';
 import { makeGetRequest, makePostRequest } from 'services/networking/request';
@@ -28,7 +28,7 @@ function* launchAuditsSaga(action: ActionType<typeof launchAuditAction.request>)
 
   // launch auditsStatusHistories polling
   yield all(
-    apiAuditsList.map(apiAudit =>
+    apiAuditsList.map((apiAudit) =>
       put(
         pollAuditStatusAction({
           auditId: apiAudit.uuid,

@@ -2,7 +2,7 @@ import Select from 'components/Select';
 import { history } from 'index';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { ValueType } from 'react-select/lib/types';
+import { ValueType } from 'react-select';
 import { routeDefinitions } from 'routes';
 
 import MessagePill from 'components/MessagePill';
@@ -55,13 +55,13 @@ export const ProjectMenuContent: React.FunctionComponent<Props> = ({
 
   const [auditCanBeLaunched, setAuditCanBeLaunched] = React.useState(true);
 
-  const auditParametersSelectOptions = auditParametersList.map(auditParameters => ({
+  const auditParametersSelectOptions = auditParametersList.map((auditParameters) => ({
     value: auditParameters.uuid,
     label: auditParameters.name,
   }));
 
   const handleAuditParametersSelection = (
-    selectedOption: ValueType<AuditParametersOption | {}>,
+    selectedOption: ValueType<AuditParametersOption, false>,
   ) => {
     // Check needed to avoid TS2339 error
     if (selectedOption && 'value' in selectedOption && auditParametersId) {
@@ -123,7 +123,7 @@ export const ProjectMenuContent: React.FunctionComponent<Props> = ({
             <FormattedMessage id="Menu.audit_parameters_selection" />
           </AuditParametersTitle>
           <Select
-            value={auditParametersSelectOptions.find(auditParametersOption => {
+            value={auditParametersSelectOptions.find((auditParametersOption) => {
               return auditParametersOption.value === auditParametersId;
             })}
             onChange={handleAuditParametersSelection}

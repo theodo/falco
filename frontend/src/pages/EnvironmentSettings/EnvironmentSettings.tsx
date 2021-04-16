@@ -30,12 +30,6 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({ match }) => {
   const currentUser = useCurrentUser();
   const { currentToastrDisplay, resetToastrDisplay } = useToastr();
 
-  interface UserOption {
-    value: string;
-    label: string;
-    disabled: boolean;
-  }
-
   interface ApiAvailableAuditParameters {
     uuid: string;
     browser: string;
@@ -50,66 +44,58 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({ match }) => {
     Array<{ label: string; uuid: string; wptInstanceURL: string }>
   >([]);
 
-  const modelizeAvailableAuditParameters = (
-    apiAvailableAuditParameters: ApiAvailableAuditParameters,
-  ) => ({
-    label: `${apiAvailableAuditParameters.location_label}. ${apiAvailableAuditParameters.browser}`,
-    uuid: apiAvailableAuditParameters.uuid,
-    wptInstanceURL: apiAvailableAuditParameters.wpt_instance_url,
-  });
-
   React.useEffect(() => {
     const request = makeGetRequest('/api/projects/available_audit_parameters', true);
-    request.then(response => {
+    request.then((response) => {
       if (response) {
         setAvailableAuditParameters(
-          response.body.map((apiAvailableAuditParameters: ApiAvailableAuditParameters) =>
-            modelizeAvailableAuditParameters(apiAvailableAuditParameters),
-          ),
+          response.body.map((apiAvailableAuditParameters: ApiAvailableAuditParameters) => ({
+            label: `${apiAvailableAuditParameters.location_label}. ${apiAvailableAuditParameters.browser}`,
+            uuid: apiAvailableAuditParameters.uuid,
+            wptInstanceURL: apiAvailableAuditParameters.wpt_instance_url,
+          })),
         );
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  React.useEffect(
-    () => {
-      if ('' !== currentToastrDisplay) {
-        switch (currentToastrDisplay) {
-          case 'addAuditParameterSuccess':
-            toastr.success(
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
-              intl.formatMessage({
-                id: 'Toastr.ProjectSettings.add_audit_parameter_to_project_success',
-              }),
-            );
-            break;
-          case 'editAuditParameterSuccess':
-            toastr.success(
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.edit_audit_parameter_success' }),
-            );
-            break;
-          case 'deleteAuditParameterSuccess':
-            toastr.success(
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.delete_audit_parameter_success' }),
-            );
-            break;
-          case 'addAuditParameterError':
-          case 'deleteAuditParameterError':
-          case 'editAuditParameterError':
-            toastr.error(
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.error_title' }),
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.error_message' }),
-            );
-            break;
-        }
-
-        resetToastrDisplay();
+  React.useEffect(() => {
+    if ('' !== currentToastrDisplay) {
+      switch (currentToastrDisplay) {
+        case 'addAuditParameterSuccess':
+          toastr.success(
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+            intl.formatMessage({
+              id: 'Toastr.ProjectSettings.add_audit_parameter_to_project_success',
+            }),
+          );
+          break;
+        case 'editAuditParameterSuccess':
+          toastr.success(
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.edit_audit_parameter_success' }),
+          );
+          break;
+        case 'deleteAuditParameterSuccess':
+          toastr.success(
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.delete_audit_parameter_success' }),
+          );
+          break;
+        case 'addAuditParameterError':
+        case 'deleteAuditParameterError':
+        case 'editAuditParameterError':
+          toastr.error(
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.error_title' }),
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.error_message' }),
+          );
+          break;
       }
-    },
-    [currentToastrDisplay, resetToastrDisplay, intl],
-  );
+
+      resetToastrDisplay();
+    }
+  }, [currentToastrDisplay, resetToastrDisplay, intl]);
 
   if (project === undefined) {
     return (
@@ -130,7 +116,7 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({ match }) => {
   }
 
   const filteredAvailableProjectsParameters = availableAuditParameters.filter(
-    availableAuditParameter => availableAuditParameter.wptInstanceURL === project.wptInstanceURL,
+    (availableAuditParameter) => availableAuditParameter.wptInstanceURL === project.wptInstanceURL,
   );
 
   return (
@@ -153,7 +139,7 @@ const EnvironmentSettings: React.FunctionComponent<Props> = ({ match }) => {
             <FormattedMessage id="ProjectSettings.network_type" />
           </NetworkShape>
         </ElementContainer>
-        {project.auditParametersIds.map(auditParameterId => (
+        {project.auditParametersIds.map((auditParameterId) => (
           <ElementContainer key={auditParameterId}>
             <AuditParameterRow
               disabled={!isUserAdminOfProject(currentUser, project)}

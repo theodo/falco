@@ -124,6 +124,7 @@ export const MenuPageScriptItem: React.FunctionComponent<Props> = ({
         };
       }
     }
+
     return {
       backgroundColor: 'inherit',
       color: 'inherit',
@@ -135,6 +136,7 @@ export const MenuPageScriptItem: React.FunctionComponent<Props> = ({
   const latestAuditStatusHistoryStatus = pageOrScript.latestAuditStatusHistory
     ? pageOrScript.latestAuditStatusHistory.status
     : 'ERROR';
+
   return (
     <PageScriptItem to={pageOrScript.linkPath} className={linkPathMatchesUrl ? 'active' : ''}>
       <PageScriptTitleBlock>

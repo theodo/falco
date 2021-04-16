@@ -8,11 +8,17 @@ interface Props {
   minHeight?: string;
 }
 
-const Loader: React.FunctionComponent<Props> = props => {
+const Loader: React.FunctionComponent<Props> = (props) => {
   const { color, margin, padding, minHeight } = props;
+
   return (
     <LoaderContainer color={color} margin={margin} padding={padding} minHeight={minHeight}>
-      <CircularProgress><div /><div /><div /><div /></CircularProgress>
+      <CircularProgress>
+        <div />
+        <div />
+        <div />
+        <div />
+      </CircularProgress>
     </LoaderContainer>
   );
 };

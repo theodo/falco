@@ -12,30 +12,28 @@ const MetricTooltip: React.FunctionComponent<Props> = ({ children, parentRef, in
   const [leftPosition, setLeftPosition] = React.useState('');
   const [topPosition, setTopPosition] = React.useState('');
 
-  React.useEffect(
-    () => {
-      if (parentRef.current && initiatorRef.current) {
-        setLeftPosition(
-          `${Math.floor(
-            initiatorRef.current.getBoundingClientRect().right -
-              parentRef.current.getBoundingClientRect().left +
-              30,
-          )}px`,
-        );
-        setTopPosition(`
+  React.useEffect(() => {
+    if (parentRef.current && initiatorRef.current) {
+      setLeftPosition(
+        `${Math.floor(
+          initiatorRef.current.getBoundingClientRect().right -
+            parentRef.current.getBoundingClientRect().left +
+            30,
+        )}px`,
+      );
+      setTopPosition(`
           ${Math.floor(
             initiatorRef.current.getBoundingClientRect().top -
               parentRef.current.getBoundingClientRect().top -
               5,
           )}px`);
-      }
-    },
-    [parentRef, initiatorRef],
-  );
+    }
+  }, [parentRef, initiatorRef]);
 
   if (!(topPosition && leftPosition)) {
     return <div />;
   }
+
   return (
     <Container left={leftPosition} top={topPosition}>
       {children}

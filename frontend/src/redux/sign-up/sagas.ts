@@ -17,12 +17,9 @@ export function* signUpUser(action: ActionType<typeof signUpUserRequest>) {
   try {
     yield put(signUpUserClearError());
     // pause function is called to let enough time to animation on button to be seen
-    yield all([
-      call(makePostRequest, endpoint, false, action.payload),
-      call(pause, 1000),
-    ]);
+    yield all([call(makePostRequest, endpoint, false, action.payload), call(pause, 1000)]);
     yield put(signUpUserSuccess());
-    yield put(loginUserRequest(action.payload))
+    yield put(loginUserRequest(action.payload));
   } catch (error) {
     yield put(signUpUserError({ errorMessage: error.message }));
   }

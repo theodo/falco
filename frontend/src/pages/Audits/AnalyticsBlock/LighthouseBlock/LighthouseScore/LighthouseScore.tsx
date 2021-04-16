@@ -17,9 +17,9 @@ export interface OwnProps {
   score: number;
 }
 
-export const LIGHTHOUSE_FAIL_SCORE_THRESHOLD = 0
-export const LIGHTHOUSE_AVERAGE_SCORE_THRESHOLD = 0.5
-export const LIGHTHOUSE_PASS_SCORE_THRESHOLD = 0.9
+export const LIGHTHOUSE_FAIL_SCORE_THRESHOLD = 0;
+export const LIGHTHOUSE_AVERAGE_SCORE_THRESHOLD = 0.5;
+export const LIGHTHOUSE_PASS_SCORE_THRESHOLD = 0.9;
 
 const LighthouseScore: React.FunctionComponent<OwnProps> = ({ score }) => {
   const color =
@@ -28,6 +28,7 @@ const LighthouseScore: React.FunctionComponent<OwnProps> = ({ score }) => {
       : score < LIGHTHOUSE_PASS_SCORE_THRESHOLD
       ? colorUsage.lighthouseAverage
       : colorUsage.lighthousePass;
+
   return (
     <Container>
       <ScoreGauge>

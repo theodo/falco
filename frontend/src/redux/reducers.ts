@@ -6,7 +6,7 @@
 import { LocationChangeAction, RouterState } from 'connected-react-router';
 import { combineReducers, Reducer } from 'redux';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import toastr from 'react-redux-toastr/lib/reducer';
 import { reducer as auditResults } from './auditResults';

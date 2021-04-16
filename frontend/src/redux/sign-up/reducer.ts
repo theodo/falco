@@ -1,9 +1,20 @@
 import { AnyAction } from 'redux';
 import { ActionType, getType } from 'typesafe-actions';
 
-import { signUpUserClearError, signUpUserError, signUpUserRequest, signUpUserSuccess } from './actions';
+import {
+  signUpUserClearError,
+  signUpUserError,
+  signUpUserRequest,
+  signUpUserSuccess,
+} from './actions';
 
-export type SignUpAction = ActionType<typeof signUpUserSuccess | typeof signUpUserError |  typeof signUpUserRequest | typeof signUpUserClearError | typeof signUpUserRequest>;
+export type SignUpAction = ActionType<
+  | typeof signUpUserSuccess
+  | typeof signUpUserError
+  | typeof signUpUserRequest
+  | typeof signUpUserClearError
+  | typeof signUpUserRequest
+>;
 
 export type SignUpState = Readonly<{
   signUpError: string | null;
@@ -12,7 +23,7 @@ export type SignUpState = Readonly<{
 
 const initialState: SignUpState = { signUpError: null, isSubmitting: false };
 
-const reducer = (state: SignUpState = initialState, action: AnyAction) => {
+const reducer = (state: SignUpState = initialState, action: AnyAction): SignUpState => {
   const typedAction = action as SignUpAction;
   switch (typedAction.type) {
     case getType(signUpUserRequest):

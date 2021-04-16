@@ -48,13 +48,15 @@ const initialState: ParametersState = {
   displayedMetrics: {},
 };
 
-const reducer = (state: ParametersState = initialState, action: AnyAction) => {
+const reducer = (state: ParametersState = initialState, action: AnyAction): ParametersState => {
   const typedAction = action as ParametersAction;
   switch (typedAction.type) {
     case getType(setCurrentAuditParametersId):
       return {
         ...state,
-        currentAuditParametersId: action.payload.auditParametersId ? action.payload.auditParametersId : null,
+        currentAuditParametersId: action.payload.auditParametersId
+          ? action.payload.auditParametersId
+          : null,
       };
     case getType(setCurrentPageId):
       return {

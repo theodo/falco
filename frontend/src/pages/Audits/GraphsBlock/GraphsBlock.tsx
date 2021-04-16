@@ -53,12 +53,9 @@ export const GraphsBlock: React.FunctionComponent<Props> = ({
   const [fullScreenedMetric, setFullScreenedMetric] = React.useState('' as MetricType);
   const [hasRequestedFullData, setHasRequestedFullData] = React.useState(false);
 
-  React.useEffect(
-    () => {
-      setHasRequestedFullData(false);
-    },
-    [pageOrScriptId],
-  );
+  React.useEffect(() => {
+    setHasRequestedFullData(false);
+  }, [pageOrScriptId]);
 
   const fetchFullDataRequest = () => {
     if (!hasRequestedFullData) {
@@ -104,7 +101,7 @@ export const GraphsBlock: React.FunctionComponent<Props> = ({
   return (
     <Container margin={blockMargin}>
       {(Object.keys(METRICS) as MetricType[])
-        .filter(metric => metrics.indexOf(metric) > -1)
+        .filter((metric) => metrics.indexOf(metric) > -1)
         .map((metric, index) => {
           return (
             <GraphContainer margin={`0 0 ${getSpacing(4)} 0`} key={index}>

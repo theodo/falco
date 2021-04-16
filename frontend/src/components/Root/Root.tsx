@@ -29,8 +29,7 @@ const Root: React.FunctionComponent<Props> = ({
 }) => {
   const shouldDisplayMenu = isUserAuthenticated && hasProjects;
 
-  const userLanguage =
-    (navigator.languages && navigator.languages[0]) || navigator.language || 'fr';
+  const userLanguage = navigator.languages?.[0] || navigator.language || 'fr';
   // Split locales with a region code
   let userLanguageWithoutRegionCode = userLanguage.toLowerCase().split(/[_-]+/)[0];
   let localizedMessages = locales[userLanguage] || locales[userLanguageWithoutRegionCode];

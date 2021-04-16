@@ -14,6 +14,7 @@ export const getMetricsToDisplay = (state: RootState): MetricType[] => {
   if (!state.parameters.displayedMetrics[projectId]) {
     return ['WPTMetricFirstViewTTI', 'WPTMetricFirstViewSpeedIndex', 'WPTMetricFirstViewLoadTime'];
   }
+
   return state.parameters.displayedMetrics[projectId];
 };
 
@@ -26,7 +27,8 @@ export const getCurrentAuditParameters = (state: RootState): AuditParametersType
   if (!currentAuditParametersId) {
     return null;
   }
-  return state.entities.auditParameters.byId && state.entities.auditParameters.byId[currentAuditParametersId];
+
+  return state.entities.auditParameters.byId?.[currentAuditParametersId] as AuditParametersType;
 };
 
 export const getCurrentPageId = (state: RootState): string | null => {
@@ -38,12 +40,14 @@ export const getCurrentPage = (state: RootStateWithRouter): PageType | null | un
   if (!currentPageId) {
     return null;
   }
+
   return getPage(state, currentPageId);
 };
 
 export const getCurrentPageName = (state: RootStateWithRouter): string => {
   const currentPage = getCurrentPage(state);
-  return currentPage ? currentPage.name : "";
+
+  return currentPage ? currentPage.name : '';
 };
 
 export const getCurrentScriptId = (state: RootState): string | null => {
@@ -55,12 +59,14 @@ export const getCurrentScript = (state: RootStateWithRouter): ScriptType | null 
   if (!currentScriptId) {
     return null;
   }
+
   return getScript(state, currentScriptId);
 };
 
 export const getCurrentScriptName = (state: RootStateWithRouter): string => {
   const currentScript = getCurrentScript(state);
-  return currentScript ? currentScript.name : "";
+
+  return currentScript ? currentScript.name : '';
 };
 
 export const getCurrentScriptStepId = (state: RootState): string | null => {
@@ -69,33 +75,39 @@ export const getCurrentScriptStepId = (state: RootState): string | null => {
 
 export const getCurrentProjectName = (state: RootStateWithRouter): string => {
   const currentProject = getCurrentProject(state);
-  return currentProject ? currentProject.name : "";
+
+  return currentProject ? currentProject.name : '';
 };
 
-export const getCurrentProjectAuditParameters = (state: RootStateWithRouter): AuditParametersType[] => {
+export const getCurrentProjectAuditParameters = (
+  state: RootStateWithRouter,
+): AuditParametersType[] => {
   const currentProject = getCurrentProject(state);
   if (!currentProject) {
     return [];
-  };
+  }
+
   return getProjectAuditParameters(state, currentProject.uuid) || [];
 };
 
 export const getCurrentAuditParametersName = (state: RootStateWithRouter): string => {
   const currentAuditParameters = getCurrentAuditParameters(state);
-  return currentAuditParameters ? currentAuditParameters.name : "";
+
+  return currentAuditParameters ? currentAuditParameters.name : '';
 };
 
 export const getCurrentProjectRunningAudits = (state: RootStateWithRouter): string[] => {
   const currentProject = getCurrentProject(state);
   if (!currentProject) {
     return [];
-  };
+  }
+
   return currentProject.pagesIds
-    .map(pageId => getPageOrScriptRunningAuditId(state, pageId))
+    .map((pageId) => getPageOrScriptRunningAuditId(state, pageId))
     .filter((auditId): auditId is string => auditId !== null && auditId !== undefined)
     .concat(
       currentProject.scriptsIds
-        .map(scriptId => getPageOrScriptRunningAuditId(state, scriptId))
-        .filter((auditId): auditId is string => auditId !== null && auditId !== undefined)
-    )
+        .map((scriptId) => getPageOrScriptRunningAuditId(state, scriptId))
+        .filter((auditId): auditId is string => auditId !== null && auditId !== undefined),
+    );
 };

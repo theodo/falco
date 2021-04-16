@@ -154,35 +154,3 @@ export const deleteScriptFromProjectSuccess = createAction(
   projectId: string;
   scriptId: string;
 }>();
-
-export default {
-  addMemberToProjectRequest,
-  addMemberToProjectError,
-  addPageToProjectRequest,
-  addPageToProjectError,
-  deletePageOfProjectRequest,
-  deletePageOfProjectSuccess,
-  deletePageOfProjectError,
-  deleteMemberOfProjectRequest,
-  deleteMemberOfProjectSuccess,
-  deleteMemberOfProjectError,
-  editMemberOfProjectRequest,
-  editMemberOfProjectSuccess,
-  editMemberOfProjectError,
-  fetchProjectRequest,
-  fetchProjectsRequest,
-  fetchProjectSuccess,
-  fetchProjectError,
-  setProjectToastrDisplay,
-  editProjectDetailsRequest,
-  editProjectDetailsError,
-  editProjectDetailsSuccess,
-  addAuditParameterToProjectRequest,
-  addAuditParameterToProjectSuccess,
-  addAuditParameter,
-  deleteAuditParameterFromProjectRequest,
-  deleteAuditParameterFromProjectError,
-  deleteAuditParameterFromProjectSuccess,
-  addScriptToProjectSuccess,
-  deleteScriptFromProjectSuccess,
-};

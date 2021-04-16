@@ -1,7 +1,5 @@
 import { connect } from 'react-redux';
 
-import GraphModal from './GraphModal';
-
 import {
   getCurrentAuditParametersName,
   getCurrentPageName,
@@ -11,6 +9,7 @@ import {
 
 import { isAuditResultLoading } from 'redux/auditResults/selectors';
 import { RootStateWithRouter } from 'redux/types';
+import GraphModal from './GraphModal';
 
 const mapStateToProps = (state: RootStateWithRouter) => ({
   currentAuditParametersName: getCurrentAuditParametersName(state),

@@ -11,10 +11,30 @@ import reducer from '../reducer';
 const username = 'MyUser';
 const password = 'AwsomeP@sSw0rd';
 const originLocation = undefined;
-const initialState = { isAuthenticated: false, loginError: null, isSubmitting: false, _persist: {} as PersistState };
-const stateDuringLogin = { isAuthenticated: false, loginError: null, isSubmitting: true, _persist: {} as PersistState  };
-const stateAfterLogin = { isAuthenticated: true, loginError: null, isSubmitting: false, _persist: {} as PersistState };
-const stateAfterLoginError = { isAuthenticated: false, loginError: 'OUPS', isSubmitting: false, _persist: {} as PersistState };
+const initialState = {
+  isAuthenticated: false,
+  loginError: null,
+  isSubmitting: false,
+  _persist: {} as PersistState,
+};
+const stateDuringLogin = {
+  isAuthenticated: false,
+  loginError: null,
+  isSubmitting: true,
+  _persist: {} as PersistState,
+};
+const stateAfterLogin = {
+  isAuthenticated: true,
+  loginError: null,
+  isSubmitting: false,
+  _persist: {} as PersistState,
+};
+const stateAfterLoginError = {
+  isAuthenticated: false,
+  loginError: 'OUPS',
+  isSubmitting: false,
+  _persist: {} as PersistState,
+};
 
 describe('Login reducer', () => {
   describe('USER_LOGIN_REQUEST case', () => {
@@ -43,7 +63,12 @@ describe('Login reducer', () => {
     it('Should return an initial state with an error in the loginError field and isSubmitting field set to false and isAuthenticated field set to false', () => {
       const errorMessage = 'User not logged in';
       const action = loginUserError({ errorMessage });
-      const expectedState = { ...stateDuringLogin, loginError: errorMessage, isSubmitting: false, isAuthenticated: false };
+      const expectedState = {
+        ...stateDuringLogin,
+        loginError: errorMessage,
+        isSubmitting: false,
+        isAuthenticated: false,
+      };
 
       expect(reducer(stateDuringLogin, action)).toEqual(expectedState);
     });

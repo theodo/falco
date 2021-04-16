@@ -109,8 +109,7 @@ export const ModalCheckbox = styled.input`
   * Simulates outline css property for accessibility stakes
   */
   &:focus + ${ModalCheckboxLabel} {
-    box-shadow: 0 0 0 2px rgb(77, 144, 254, .6);
+    box-shadow: 0 0 0 2px rgb(77, 144, 254, 0.6);
   }
 `;
 /* stylelint-enable */
-

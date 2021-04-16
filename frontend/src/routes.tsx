@@ -114,10 +114,10 @@ export const routeDefinitions: Record<string, RouteDefinition> = {
   },
 };
 
-const routes: React.FunctionComponent<RouteProps> = props => (
+const routes: React.FunctionComponent<RouteProps> = (props) => (
   <Suspense fallback={<Loader />}>
     <Switch>
-      {Object.keys(routeDefinitions).map(key => {
+      {Object.keys(routeDefinitions).map((key) => {
         if (routeDefinitions[key].isAuthenticated) {
           return (
             <PrivateRoute
@@ -130,6 +130,7 @@ const routes: React.FunctionComponent<RouteProps> = props => (
             />
           );
         }
+
         return (
           <Route
             key={key}
@@ -147,10 +148,11 @@ const routes: React.FunctionComponent<RouteProps> = props => (
 
 const PrivateRoute = ({ component, store, ...other }: any) => {
   const RouteComponent = component;
+
   return (
     <Route
       {...other}
-      render={props =>
+      render={(props) =>
         getIsAuthenticated(store) ? (
           <RouteComponent {...props} />
         ) : (

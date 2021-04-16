@@ -31,15 +31,12 @@ export const PageRow: React.FunctionComponent<Props> = ({
   const [pageName, setPageName] = React.useState('');
   const [pageUrl, setPageUrl] = React.useState('');
 
-  React.useEffect(
-    () => {
-      if (page) {
-        setPageName(page.name);
-        setPageUrl(page.url);
-      }
-    },
-    [page],
-  );
+  React.useEffect(() => {
+    if (page) {
+      setPageName(page.name);
+      setPageUrl(page.url);
+    }
+  }, [page]);
 
   const handleBlur = () => {
     if (page && (pageName !== page.name || pageUrl !== page.url)) {

@@ -49,38 +49,32 @@ const GeneralSettings: React.FunctionComponent<Props> = ({ match, editProjectDet
   const [projectApiKey, setProjectApiKey] = React.useState('');
   const [projectInstanceURL, setProjectInstanceURL] = React.useState('');
 
-  React.useEffect(
-    () => {
-      setProjectName(project ? project.name : '');
-      setProjectApiKey(project ? project.wptApiKey : '');
-      setProjectInstanceURL(project ? project.wptInstanceURL : '');
-    },
-    [project],
-  );
+  React.useEffect(() => {
+    setProjectName(project ? project.name : '');
+    setProjectApiKey(project ? project.wptApiKey : '');
+    setProjectInstanceURL(project ? project.wptInstanceURL : '');
+  }, [project]);
 
-  React.useEffect(
-    () => {
-      if ('' !== currentToastrDisplay) {
-        switch (currentToastrDisplay) {
-          case 'editProjectDetailsSuccess':
-            toastr.success(
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.edit_project_details_success' }),
-            );
-            break;
-          case 'editProjectDetailsError':
-            toastr.error(
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.error_title' }),
-              intl.formatMessage({ id: 'Toastr.ProjectSettings.error_message' }),
-            );
-            break;
-        }
-
-        resetToastrDisplay();
+  React.useEffect(() => {
+    if ('' !== currentToastrDisplay) {
+      switch (currentToastrDisplay) {
+        case 'editProjectDetailsSuccess':
+          toastr.success(
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.success_title' }),
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.edit_project_details_success' }),
+          );
+          break;
+        case 'editProjectDetailsError':
+          toastr.error(
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.error_title' }),
+            intl.formatMessage({ id: 'Toastr.ProjectSettings.error_message' }),
+          );
+          break;
       }
-    },
-    [currentToastrDisplay, resetToastrDisplay, intl],
-  );
+
+      resetToastrDisplay();
+    }
+  }, [currentToastrDisplay, resetToastrDisplay, intl]);
 
   if (project === undefined) {
     return (

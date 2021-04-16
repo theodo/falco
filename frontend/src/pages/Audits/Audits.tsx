@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Redirect, RouteComponentProps } from 'react-router';
-import { ValueType } from 'react-select/lib/types';
+import { ValueType } from 'react-select';
 
 import { AuditParametersType } from 'redux/entities/auditParameters/types';
 import { PageType } from 'redux/entities/pages/types';
@@ -32,7 +32,7 @@ interface ScriptStepOption {
   label: string;
 }
 
-export type OwnProps = {} & RouteComponentProps<{
+export type OwnProps = RouteComponentProps<{
   projectId: string;
   pageOrScriptId: string;
   auditParametersId: string;
@@ -118,12 +118,9 @@ export const Audits: React.FunctionComponent<Props> = ({
     ],
   );
 
-  React.useEffect(
-    () => {
-      setCurrentAuditParametersId(auditParametersId);
-    },
-    [auditParametersId, setCurrentAuditParametersId],
-  );
+  React.useEffect(() => {
+    setCurrentAuditParametersId(auditParametersId);
+  }, [auditParametersId, setCurrentAuditParametersId]);
 
   React.useEffect(
     () => {
@@ -227,6 +224,7 @@ export const Audits: React.FunctionComponent<Props> = ({
         text: intl.formatMessage({ id: `Menu.script_badge` }),
       };
     }
+
     return {
       backgroundColor: '',
       color: '',
@@ -239,7 +237,7 @@ export const Audits: React.FunctionComponent<Props> = ({
       case auditStatus.requested:
         return <FormattedMessage id="Audits.AuditStatusHistory.audit_requested" />;
       case auditStatus.queuing:
-        return auditStatusHistory.info && auditStatusHistory.info.positionInQueue ? (
+        return auditStatusHistory.info?.positionInQueue ? (
           <FormattedMessage
             id="Audits.AuditStatusHistory.audit_in_queue_behind"
             values={{ positionInQueue: auditStatusHistory.info.positionInQueue }}
@@ -248,18 +246,14 @@ export const Audits: React.FunctionComponent<Props> = ({
           <FormattedMessage id="Audits.AuditStatusHistory.audit_in_queue" />
         );
       case auditStatus.running:
-        if (auditStatusHistory.info && auditStatusHistory.info.runningTime) {
+        if (auditStatusHistory.info?.runningTime) {
           return (
             <FormattedMessage
               id="Audits.AuditStatusHistory.audit_started"
               values={{ runningTime: auditStatusHistory.info.runningTime }}
             />
           );
-        } else if (
-          auditStatusHistory.info &&
-          auditStatusHistory.info.totalTests &&
-          auditStatusHistory.info.completedTests
-        ) {
+        } else if (auditStatusHistory.info?.totalTests && auditStatusHistory.info.completedTests) {
           return (
             <FormattedMessage
               id="Audits.AuditStatusHistory.audit_tests_running"
@@ -271,6 +265,7 @@ export const Audits: React.FunctionComponent<Props> = ({
           );
         }
     }
+
     return <FormattedMessage id="Audits.AuditStatusHistory.audit_in_queue" />;
   };
 
@@ -292,7 +287,7 @@ export const Audits: React.FunctionComponent<Props> = ({
       : []
     : null;
 
-  const scriptStepSelectOptions = Object.keys(scriptSteps).map(scriptStepKey => ({
+  const scriptStepSelectOptions = Object.keys(scriptSteps).map((scriptStepKey) => ({
     value: scriptStepKey,
     label:
       (scriptStepKey !== 'null' ? scriptStepKey : 0) +
@@ -300,8 +295,9 @@ export const Audits: React.FunctionComponent<Props> = ({
       (scriptSteps[scriptStepKey] || 'Unknown step'),
   }));
 
-  const handleScriptStepSelection = (selectedOption: ValueType<ScriptStepOption | {}>) => {
-    // Check needed to avoid TS2339 error
+  const handleScriptStepSelection = (
+    selectedOption: ValueType<ScriptStepOption | Record<string, never>, false>,
+  ) => {
     if (selectedOption && 'value' in selectedOption) {
       history.push(
         routeDefinitions.auditsScriptDetails.path
@@ -346,7 +342,7 @@ export const Audits: React.FunctionComponent<Props> = ({
             <FormattedMessage id="Audits.script_step_selection" />
           </ScriptStepBlockTitle>
           <Select
-            defaultValue={scriptStepSelectOptions.find(scriptStepOption => {
+            defaultValue={scriptStepSelectOptions.find((scriptStepOption) => {
               return scriptStepOption.value === scriptStepId;
             })}
             onChange={handleScriptStepSelection}

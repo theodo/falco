@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Props as ReactSelectProps } from 'react-select/lib/Select';
+import { Props as ReactSelectProps } from 'react-select';
 import { colorUsage } from 'stylesheet';
 import Style from './Select.style';
 
@@ -15,7 +15,7 @@ interface Value {
 
 type Props = OwnProps & ReactSelectProps<Value>;
 
-const Select: React.FunctionComponent<Props> = props => {
+const Select: React.FunctionComponent<Props> = (props) => {
   const { margin, width, ...otherProps } = props;
 
   const scriptSelectStyle = {
@@ -46,6 +46,7 @@ const Select: React.FunctionComponent<Props> = props => {
           color: colorUsage.inputDisabledSelectText,
         };
       }
+
       return {
         ...provided,
         color: colorUsage.inputSelectText,

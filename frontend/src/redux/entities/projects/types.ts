@@ -1,7 +1,6 @@
-import { ApiAuditParametersType } from "../auditParameters/types";
-import { ApiPageType } from "../pages/types";
-import { ApiScriptType } from "../scripts/types";
-
+import { ApiAuditParametersType } from '../auditParameters/types';
+import { ApiPageType } from '../pages/types';
+import { ApiScriptType } from '../scripts/types';
 
 export interface ProjectType {
   uuid: string;
@@ -14,7 +13,7 @@ export interface ProjectType {
   projectMembers: ProjectMember[];
   wptApiKey: string;
   wptInstanceURL: string;
-};
+}
 
 export interface ApiProjectType {
   uuid: string;
@@ -28,7 +27,7 @@ export interface ApiProjectType {
   wpt_api_key: string;
   wpt_instance_url: string;
   has_siblings: boolean;
-};
+}
 
 export interface ProjectMember {
   id: string;
@@ -45,26 +44,26 @@ export interface ApiProjectMember {
 }
 
 export type ProjectToastrDisplayType =
-| ''
-| 'addMemberSuccess'
-| 'addMemberError'
-| 'editPageSuccess'
-| 'editPageError'
-| 'addAuditParameterSuccess'
-| 'addAuditParameterError'
-| 'addPageSuccess'
-| 'addPageError'
-| 'deletePageSuccess'
-| 'deletePageError'
-| 'editProjectDetailsSuccess'
-| 'editProjectDetailsError'
-| 'editAuditParameterError'
-| 'editAuditParameterSuccess'
-| 'deleteAuditParameterSuccess'
-| 'deleteAuditParameterError'
-| 'addScriptToProjectSuccess'
-| 'addScriptToProjectError'
-| 'editScriptError'
-| 'editScriptSuccess'
-| 'deleteScriptError'
-| 'deleteScriptSuccess'
+  | ''
+  | 'addMemberSuccess'
+  | 'addMemberError'
+  | 'editPageSuccess'
+  | 'editPageError'
+  | 'addAuditParameterSuccess'
+  | 'addAuditParameterError'
+  | 'addPageSuccess'
+  | 'addPageError'
+  | 'deletePageSuccess'
+  | 'deletePageError'
+  | 'editProjectDetailsSuccess'
+  | 'editProjectDetailsError'
+  | 'editAuditParameterError'
+  | 'editAuditParameterSuccess'
+  | 'deleteAuditParameterSuccess'
+  | 'deleteAuditParameterError'
+  | 'addScriptToProjectSuccess'
+  | 'addScriptToProjectError'
+  | 'editScriptError'
+  | 'editScriptSuccess'
+  | 'deleteScriptError'
+  | 'deleteScriptSuccess';

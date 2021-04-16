@@ -14,12 +14,7 @@ function* fetchUserFailedHandler(error: Error) {
 
 export function* fetchUser() {
   const endpoint = '/api/core/user';
-  const { body: user }: { body: ApiUser } = yield call(
-    makeGetRequest,
-    endpoint,
-    true,
-    null,
-  );
+  const { body: user }: { body: ApiUser } = yield call(makeGetRequest, endpoint, true, null);
   yield put(fetchUserSuccess(modelizeUser(user)));
 }
 

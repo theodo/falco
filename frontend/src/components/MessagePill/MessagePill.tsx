@@ -27,6 +27,7 @@ const MessagePill: React.FunctionComponent<Props> = ({
   messageType,
 }) => {
   const [showMessage, setShowMessage] = React.useState(true);
+
   return showMessage ? (
     <MessagePillContainer
       messageType={messageType}

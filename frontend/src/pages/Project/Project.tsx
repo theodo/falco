@@ -26,15 +26,12 @@ const Project: React.FunctionComponent<Props> = ({
 }) => {
   const project = useProjectById(match.params.projectId);
 
-  React.useEffect(
-    () => {
-      setCurrentAuditParametersId(undefined);
-      setCurrentPageId(undefined);
-      setCurrentScriptId(undefined);
-      setCurrentScriptStepId(undefined);
-    },
-    [setCurrentAuditParametersId, setCurrentPageId, setCurrentScriptId, setCurrentScriptStepId],
-  );
+  React.useEffect(() => {
+    setCurrentAuditParametersId(undefined);
+    setCurrentPageId(undefined);
+    setCurrentScriptId(undefined);
+    setCurrentScriptStepId(undefined);
+  }, [setCurrentAuditParametersId, setCurrentPageId, setCurrentScriptId, setCurrentScriptStepId]);
 
   if (project === undefined) {
     return (
@@ -93,6 +90,7 @@ const Project: React.FunctionComponent<Props> = ({
       </Container>
     );
   }
+
   return <Redirect to={firstPageOrScriptLocation} />;
 };
 

@@ -343,7 +343,7 @@ export const fontWeight = {
   logoText: 'bold',
   linkText: 'bold',
   button: 'bold',
-  inputErrorMessage: 'bold' as 'bold',
+  inputErrorMessage: 'bold' as const,
   inputTextLabel: 'bold',
 
   // Header

@@ -1,7 +1,16 @@
 import { toasterButtonsCss } from 'pages/sharedStyle.style';
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, fontWeight, getSpacing, lineHeight, settingsContainerSize } from 'stylesheet';
+import {
+  colorUsage,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  getSpacing,
+  lineHeight,
+  settingsContainerSize,
+} from 'stylesheet';
 
+/* stylelint-disable value-keyword-case */
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -10,6 +19,7 @@ export const Container = styled.div`
   width: ${settingsContainerSize};
   ${toasterButtonsCss}
 `;
+/* stylelint-enable */
 
 export const PageTitle = styled.h1`
   line-height: ${lineHeight.h1Text};
@@ -61,8 +71,9 @@ export const ElementContainer = styled.div`
     border-bottom-right-radius: 3px;
   }
 
+  /* stylelint-disable selector-max-specificity */
   :nth-child(odd) {
     background-color: ${colorUsage.oddProjectMemberBackground};
   }
+  /* stylelint-enable */
 `;
-
