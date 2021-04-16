@@ -122,18 +122,19 @@ def poll_audit_results(audit_uuid, json_url, previous_api_response="", repeat_in
                 formatted_results_array = format_wpt_json_results_for_script(
                     response["data"]
                 )
+
             for formatted_results in formatted_results_array:
+                screenshot_url = formatted_results.pop("screenshot_url")
+
                 audit_results = AuditResults(
                     audit=audit,
                     wpt_results_json_url=json_url,
                     wpt_results_user_url=wpt_results_user_url,
-                    script_step_name=formatted_results.get("step_name"),
-                    script_step_number=formatted_results.get("step_number"),
                     **formatted_results,
                 )
                 audit_results.save()
 
-            project.screenshot_url = formatted_results["screenshot_url"]
+            project.screenshot_url = screenshot_url
             project.save()
 
             AuditStatusHistory.objects.create(
