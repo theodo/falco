@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] — 2021-04-16
+
+- [Security] : Bump Python version to 3.8 (@fargito)
+- [Security] : Bump Django version to 3.2 (@fargito)
+- [Security] : Update all frontend packages (@fargito)
+- [Security] : Bump Redis version to 6.2 (@fargito)
+- [Bugfix]: add environment to postgresql (@MParvin)
+
 ## [1.1.5] — 2020-07-04
 
 - [Accessibility] : improve accessibility
@@ -70,7 +78,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 🎉Initial release! 🎉
 
-[unreleased]: https://github.com/theodo/falco/compare/1.1.5...HEAD
+[unreleased]: https://github.com/theodo/falco/compare/1.2.0...HEAD
+[1.2.0]: https://github.com/theodo/falco/compare/1.2.0...1.1.5
 [1.1.5]: https://github.com/theodo/falco/compare/1.1.5...1.1.4
 [1.1.4]: https://github.com/theodo/falco/compare/1.1.4...1.1.3
 [1.1.3]: https://github.com/theodo/falco/compare/1.1.3...1.1.2
