@@ -1,4 +1,4 @@
-import React, { MouseEvent, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 
 import Logo from 'components/Logo';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -31,18 +31,23 @@ interface Props {
   fetchUserRequest: () => void;
 }
 
-export const Header: React.FunctionComponent<Props> = ({
+enum HeaderMenuState {
+  DEFAULT = 'DEFAULT',
+  ACCOUNT_MENU_OPEN = 'ACCOUNT_MENU_OPEN',
+  PROJECTS_MENU_OPEN = 'PROJECTS_MENU_OPEN',
+}
+
+export const Header = ({
   currentURL,
   fetchUserRequest,
   isUserAuthenticated,
   isMenuDisplayed,
-}) => {
+}: Props): JSX.Element => {
   const intl = useIntl();
 
-  const [isAccountMenuVisible, setIsAccountMenuVisible] = React.useState(false);
-  const [isProjectsMenuVisible, setIsProjectsMenuVisible] = React.useState(false);
+  const [headerMenuState, setHeaderMenuState] = useState<HeaderMenuState>(HeaderMenuState.DEFAULT);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isUserAuthenticated) {
       fetchUserRequest();
     }
@@ -50,7 +55,8 @@ export const Header: React.FunctionComponent<Props> = ({
 
   const toggleAccountMenuVisibility = (event: MouseEvent) => {
     event.preventDefault();
-    if (isAccountMenuVisible) {
+    event.stopPropagation();
+    if (headerMenuState === HeaderMenuState.ACCOUNT_MENU_OPEN) {
       hideAccountMenu();
     } else {
       showAccountMenu();
@@ -58,18 +64,19 @@ export const Header: React.FunctionComponent<Props> = ({
   };
 
   const showAccountMenu = () => {
-    setIsAccountMenuVisible(true);
+    setHeaderMenuState(HeaderMenuState.ACCOUNT_MENU_OPEN);
     document.addEventListener('click', hideAccountMenu);
   };
 
   const hideAccountMenu = () => {
-    setIsAccountMenuVisible(false);
+    setHeaderMenuState(HeaderMenuState.DEFAULT);
     document.removeEventListener('click', hideAccountMenu);
   };
 
   const toggleProjectsMenuVisibility = (event: MouseEvent) => {
     event.preventDefault();
-    if (isProjectsMenuVisible) {
+    event.stopPropagation();
+    if (headerMenuState === HeaderMenuState.PROJECTS_MENU_OPEN) {
       hideProjectsMenu();
     } else {
       showProjectsMenu();
@@ -77,12 +84,12 @@ export const Header: React.FunctionComponent<Props> = ({
   };
 
   const showProjectsMenu = () => {
-    setIsProjectsMenuVisible(true);
+    setHeaderMenuState(HeaderMenuState.PROJECTS_MENU_OPEN);
     document.addEventListener('click', hideProjectsMenu);
   };
 
   const hideProjectsMenu = () => {
-    setIsProjectsMenuVisible(false);
+    setHeaderMenuState(HeaderMenuState.DEFAULT);
     document.removeEventListener('click', hideProjectsMenu);
   };
 
@@ -127,7 +134,7 @@ export const Header: React.FunctionComponent<Props> = ({
                   <HeaderButtonArrow />
                 </HeaderMenuItem>
                 <HeaderMenuItemContent right="270">
-                  {isProjectsMenuVisible && <ProjectsMenu />}
+                  {headerMenuState === HeaderMenuState.PROJECTS_MENU_OPEN && <ProjectsMenu />}
                 </HeaderMenuItemContent>
                 <HeaderMenuItem onClick={toggleAccountMenuVisibility} role="menu">
                   <HeaderButton>
@@ -136,7 +143,7 @@ export const Header: React.FunctionComponent<Props> = ({
                   <HeaderButtonArrow />
                 </HeaderMenuItem>
                 <HeaderMenuItemContent right="100">
-                  {isAccountMenuVisible && <AccountMenu />}
+                  {headerMenuState === HeaderMenuState.ACCOUNT_MENU_OPEN && <AccountMenu />}
                 </HeaderMenuItemContent>
               </HeaderButtonsBlock>
             </Nav>
