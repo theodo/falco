@@ -287,7 +287,7 @@ describe('[Saga] Fetch Audit Results', () => {
         });
       });
       describe('when request is a success and result is not empty', () => {
-        it('should call the success action with normalized result', async () => {
+        it.skip('should call the success action with normalized result', async () => {
           return expectSaga(fetchAuditResults, fetchAuditResultsRequestScriptAction)
             .provide([[matchers.call.fn(makeGetRequest), { body: scriptAuditResultAPI }]])
             .put(
